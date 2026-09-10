@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>40. Nền tảng cấu hình Thuế - Kế toán — Đặc tả POS</title><meta name="description" content="Nền tảng cấu hình Thuế - Kế toán"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần IX · Chương 40</p><article class="spec"><h1>CHƯƠNG 40. NỀN TẢNG CẤU HÌNH THUẾ - KẾ TOÁN</h1><details class="section-toc"><summary>Nội dung chương · 20 mục</summary><ol><li><a href="#section-40-1">40.1. Thứ tự xác lập nền tảng Thuế - Kế toán</a></li><li><a href="#section-40-2">40.2. Loại hình đăng ký kinh doanh</a></li><li><a href="#section-40-3">40.3. Chế độ kế toán</a></li><li><a href="#section-40-4">40.4. Phương pháp tính thuế GTGT</a></li><li><a href="#section-40-5">40.5. Kiểm tra phụ thuộc và luồng thay đổi cấu hình</a></li><li><a href="#section-40-6">40.6. Mục tiêu và phạm vi</a></li><li><a href="#section-40-7">40.7. Tác nhân và quyền</a></li><li><a href="#section-40-8">40.8. Cấu hình nhà cung cấp và hạn mức</a></li><li><a href="#section-40-9">40.9. Điều kiện tạo hóa đơn</a></li><li><a href="#section-40-10">40.10. Thông tin người mua</a></li><li><a href="#section-40-11">40.11. Chuẩn hóa dòng hóa đơn</a></li><li><a href="#section-40-12">40.12. Luồng phát hành hóa đơn gốc</a></li><li><a href="#section-40-13">40.13. Trạng thái và cập nhật trạng thái</a></li><li><a href="#section-40-14">40.14. Hóa đơn cho các mô hình bán</a></li><li><a href="#section-40-15">40.15. Hóa đơn cho Shopee và TikTok</a></li><li><a href="#section-40-16">40.16. Hóa đơn điều chỉnh do trả hàng hoặc xóa đơn</a></li><li><a href="#section-40-17">40.17. Hủy, trả, xóa và hoàn tác</a></li><li><a href="#section-40-18">40.18. Nhập hóa đơn đầu vào và liên hệ đầu ra</a></li><li><a href="#section-40-19">40.19. Nhật ký, bảo mật và đối chiếu</a></li><li><a href="#section-40-20">40.20. Luồng lỗi và bảo toàn dữ liệu</a></li></ol></details>
+<h2 id="section-40-1">40.1. Thứ tự xác lập nền tảng Thuế - Kế toán</h2>
+<p>Trước khi sử dụng sổ kế toán, hạch toán, hóa đơn hoặc tờ khai, doanh nghiệp phải xác lập ba cấu hình cấp doanh nghiệp theo đúng thứ tự: <strong>Loại hình đăng ký kinh doanh → Chế độ kế toán → Phương pháp tính thuế GTGT</strong>.</p>
+<ul>
+<li>Loại hình đăng ký kinh doanh giới hạn các chế độ kế toán và phương pháp thuế được phép chọn.</li>
+<li>Chế độ kế toán xác định bộ sổ và cách hạch toán.</li>
+<li>Phương pháp thuế quyết định cách nhập giá, thể hiện VAT và loại hóa đơn đầu ra.</li>
+</ul>
+<p>Ba cấu hình này áp dụng chung cho toàn doanh nghiệp, không cấu hình riêng theo chi nhánh. Mô hình hoạt động của từng chi nhánh vẫn có thể khác nhau như Retail, F&amp;B, Service hoặc Hospitality, nhưng không được dùng một loại hình đăng ký kinh doanh, chế độ kế toán hay phương pháp VAT khác với doanh nghiệp chủ quản.</p>
+<p>Khi mở trang cấu hình, hệ thống hiển thị giá trị hiện hành, thời điểm bắt đầu áp dụng và các lựa chọn hợp lệ theo loại hình. Khi người dùng đổi loại hình, hệ thống phải tính lại danh sách lựa chọn phụ thuộc trước khi cho lưu; không được giữ một chế độ hoặc phương pháp đã trở thành không hợp lệ.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 610" role="img" aria-labelledby="title-tax-accounting-foundation desc-tax-accounting-foundation" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-tax-accounting-foundation">Chuỗi quyết định cấu hình Thuế - Kế toán</title><desc id="desc-tax-accounting-foundation">1. LOẠI HÌNH ĐĂNG KÝ. Công ty hoặc Hộ kinh doanh; HỘ KINH DOANH. TT152 hoặc TT58. VAT Trực tiếp · Kho Bình quân; CÔNG TY. TT58, TT133 hoặc TT99. VAT và phương pháp kho được chọn; 2. CHẾ ĐỘ KẾ TOÁN. Quyết định bộ sổ, mapping. và cách hạch toán; 3. PHƯƠNG PHÁP VAT. Quyết định cách nhập giá, VAT. và loại hóa đơn; GIAO DIỆN VÀ NGHIỆP VỤ CÓ HIỆU LỰC. Danh mục · Mua hàng · Kho · Hóa đơn · Sổ</desc><defs><marker id="arrow-tax-accounting-foundation" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V129 H219 V165" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><path d="M480 88 V129 H741 V165" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><path d="M219 272 V321 H255 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><path d="M741 272 V321 H255 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><path d="M219 272 V321 H705 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><path d="M741 272 V321 H705 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><path d="M255 466 V498 H480 V525" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><path d="M705 466 V498 H480 V525" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-accounting-foundation)"/><g><rect x="300" y="16" width="360" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">1. LOẠI HÌNH ĐĂNG KÝ</tspan><tspan x="480" y="69">Công ty hoặc Hộ kinh doanh</tspan></text></g><g><rect x="24" y="170" width="390" height="102" rx="10" fill="#fff" stroke="#708c82"/><text x="219" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="219" y="205" font-weight="700">HỘ KINH DOANH</tspan><tspan x="219" y="227">TT152 hoặc TT58</tspan><tspan x="219" y="249">VAT Trực tiếp · Kho Bình quân</tspan></text></g><g><rect x="546" y="170" width="390" height="102" rx="10" fill="#fff" stroke="#708c82"/><text x="741" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="741" y="205" font-weight="700">CÔNG TY</tspan><tspan x="741" y="227">TT58, TT133 hoặc TT99</tspan><tspan x="741" y="249">VAT và phương pháp kho được chọn</tspan></text></g><g><rect x="90" y="370" width="330" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="255" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="255" y="402" font-weight="700">2. CHẾ ĐỘ KẾ TOÁN</tspan><tspan x="255" y="424">Quyết định bộ sổ, mapping</tspan><tspan x="255" y="446">và cách hạch toán</tspan></text></g><g><rect x="540" y="370" width="330" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="705" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="705" y="402" font-weight="700">3. PHƯƠNG PHÁP VAT</tspan><tspan x="705" y="424">Quyết định cách nhập giá, VAT</tspan><tspan x="705" y="446">và loại hóa đơn</tspan></text></g><g><rect x="300" y="530" width="360" height="64" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="557" font-weight="700">GIAO DIỆN VÀ NGHIỆP VỤ CÓ HIỆU LỰC</tspan><tspan x="480" y="579">Danh mục · Mua hàng · Kho · Hóa đơn · Sổ</tspan></text></g></svg></div><figcaption><strong>Chuỗi quyết định cấu hình Thuế - Kế toán.</strong> Loại hình đăng ký kinh doanh được xác định trước, từ đó giới hạn chế độ kế toán, phương pháp VAT và phương pháp xuất kho. Các màn hình sản phẩm, mua hàng, hóa đơn và sổ chỉ sử dụng tổ hợp cấu hình hợp lệ đã có hiệu lực.</figcaption></figure>
+
+<h2 id="section-40-2">40.2. Loại hình đăng ký kinh doanh</h2>
+<p><strong>Loại hình đăng ký kinh doanh</strong> xác định tư cách vận hành chính của doanh nghiệp trên hệ thống.</p>
+<ul>
+<li>Phạm vi: <strong>Doanh nghiệp</strong>.</li>
+<li>Kiểu dữ liệu: <strong>Chọn một giá trị</strong>.</li>
+<li>Giá trị mặc định: <strong>Hộ kinh doanh</strong>.</li>
+<li>Lựa chọn <strong>Công ty</strong>.</li>
+<li>Lựa chọn <strong>Hộ kinh doanh</strong>.</li>
+</ul>
+<p>Khi chọn <strong>Hộ kinh doanh</strong>:</p>
+<ul>
+<li>Phương pháp tính thuế GTGT có hiệu lực là <strong>Trực tiếp trên doanh thu</strong> đối với hoạt động thuộc diện chịu thuế; trường chọn phương pháp thuế bị khóa, người dùng không thể chuyển sang Khấu trừ;</li>
+<li>Phương pháp xuất kho có hiệu lực là <strong>Bình quân</strong>; trường chọn phương pháp xuất kho bị khóa, người dùng không thể chọn Đích danh, Nhập trước xuất trước, Nhập sau xuất trước hoặc Theo nhóm sản phẩm;</li>
+<li>Chế độ kế toán chỉ cho phép chọn <strong>TT152</strong> hoặc <strong>TT58</strong>;</li>
+<li>Giá trị mặc định của chế độ kế toán là <strong>TT152</strong> nếu doanh nghiệp chưa từng thiết lập hợp lệ.</li>
+</ul>
+<p>Khi chọn <strong>Công ty</strong>:</p>
+<ul>
+<li><p>Phương pháp tính thuế GTGT cho phép chọn <strong>Khấu trừ</strong> hoặc <strong>Trực tiếp</strong>;</p>
+</li>
+<li><p>Phương pháp xuất kho cho phép chọn các phương pháp hợp lệ được mô tả;</p>
+</li>
+<li><p>Chế độ kế toán chỉ cho phép chọn <strong>TT58</strong>, <strong>TT133</strong> hoặc <strong>TT99</strong>;</p>
+</li>
+<li><p>Người dùng phải chọn lại nếu chế độ cũ không thuộc tập giá trị dành cho Công ty.</p>
+</li>
+<li><p>Khi chuyển từ Công ty sang Hộ kinh doanh, nếu phương pháp thuế đang là Khấu trừ thì hệ thống chuyển giá trị dự kiến sang Trực tiếp.</p>
+</li>
+<li><p>Nếu phương pháp xuất kho đang khác Bình quân thì chuyển giá trị dự kiến sang Bình quân.</p>
+</li>
+<li><p>Nếu chế độ kế toán đang là TT133 hoặc TT99 thì yêu cầu chọn TT152 hoặc TT58.</p>
+</li>
+<li><p>Các thay đổi phụ thuộc phải được trình bày rõ trên màn hình xác nhận trước khi lưu.</p>
+</li>
+</ul>
+<p>Khi chuyển từ Hộ kinh doanh sang Công ty, hệ thống không tự suy đoán chế độ kế toán mới. TT58 có thể tiếp tục được giữ vì hợp lệ cho cả hai loại hình; TT152 không còn hợp lệ nên người dùng phải chọn TT58, TT133 hoặc TT99. Phương pháp thuế Trực tiếp và phương pháp kho Bình quân vẫn là các giá trị hợp lệ của Công ty, vì vậy được giữ lại cho đến khi người dùng chủ động đổi.</p>
+<h2 id="section-40-3">40.3. Chế độ kế toán</h2>
+<p><strong>Chế độ kế toán</strong> xác định bộ sổ, mẫu biểu và cách xử lý kế toán mà doanh nghiệp sử dụng. Cấu hình có phạm vi <strong>Doanh nghiệp</strong>, kiểu <strong>chọn một giá trị</strong>, giá trị mặc định <strong>TT152</strong> trong bối cảnh loại hình mặc định là Hộ kinh doanh.</p>
+<p>Danh sách lựa chọn và phạm vi áp dụng:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chế độ</th>
+<th>Đối tượng có thể lựa chọn</th>
+<th>Nội dung chính trong hệ thống</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TT152</strong></td>
+<td>Hộ kinh doanh</td>
+<td>Nhóm doanh thu, nhóm đối tượng dùng sổ, tỷ lệ thuế theo ngành nghề, bảy sổ HKD và bảng kê liên quan.</td>
+</tr>
+<tr>
+<td><strong>TT58</strong></td>
+<td>Doanh nghiệp siêu nhỏ; Hộ kinh doanh được phép lựa chọn theo cấu hình sản phẩm</td>
+<td>Bộ sổ và báo cáo dành cho đơn vị áp dụng TT58.</td>
+</tr>
+<tr>
+<td><strong>TT133</strong></td>
+<td>Doanh nghiệp nhỏ và vừa; doanh nghiệp siêu nhỏ có thể lựa chọn</td>
+<td>Hệ thống tài khoản, mapping, hạch toán và Sổ Nhật ký chung.</td>
+</tr>
+<tr>
+<td><strong>TT99</strong></td>
+<td>Các doanh nghiệp có thể lựa chọn áp dụng</td>
+<td>Hệ thống tài khoản, mapping, hạch toán và Sổ Nhật ký chung.</td>
+</tr>
+</tbody></table></div>
+<p>Nếu loại hình là <strong>Hộ kinh doanh</strong>, danh sách chỉ có TT152 và TT58. Nếu loại hình là <strong>Công ty</strong>, danh sách chỉ có TT58, TT133 và TT99. Hệ thống kiểm tra cả khi hiển thị lẫn khi lưu để không thể đưa một giá trị ngoài danh sách bằng yêu cầu cũ hoặc thao tác đồng thời.</p>
+<p>Việc đổi chế độ không được âm thầm viết lại sổ hoặc chứng từ đã chốt. Hệ thống ghi nhận thời điểm bắt đầu áp dụng và giữ cách diễn giải lịch sử của kỳ đã khóa. Trước khi đổi, màn hình phải chỉ ra các kỳ đang mở, hồ sơ hạch toán Nháp, bút toán đã Ghi sổ, sổ đã xuất và mapping tài khoản chịu ảnh hưởng. TT152/TT58 dùng bộ sổ theo mẫu tương ứng; TT133/TT99 dùng danh mục tài khoản, mapping, bút toán và Sổ Nhật ký chung. Do đó việc đổi qua lại giữa hai nhóm cần hoàn tất hoặc xử lý dứt điểm dữ liệu kế toán đang mở trước khi giá trị mới có hiệu lực.</p>
+<h2 id="section-40-4">40.4. Phương pháp tính thuế GTGT</h2>
+<p><strong>Phương pháp tính thuế GTGT</strong> có các thuộc tính:</p>
+<ul>
+<li>Phạm vi: <strong>Doanh nghiệp</strong>.</li>
+<li>Kiểu dữ liệu: <strong>Chọn một giá trị</strong>.</li>
+<li>Giá trị mặc định: <strong>Trực tiếp</strong>.</li>
+<li>Lựa chọn <strong>Khấu trừ</strong>.</li>
+<li>Lựa chọn <strong>Trực tiếp</strong>.</li>
+</ul>
+<p>Doanh nghiệp phải áp dụng ổn định phương pháp đã chọn cùng chính sách xử lý hóa đơn, chứng từ tương ứng ít nhất trong một kỳ kế toán năm. Hệ thống không cho thay đổi tùy ý ở giữa thời gian đã có giao dịch; yêu cầu đổi phải có ngày hiệu lực hợp lệ, không viết lại các chứng từ thuộc thời kỳ đã chốt và được lưu lịch sử.</p>
+<p>Nếu loại hình là <strong>Hộ kinh doanh</strong>, chỉ có phương pháp <strong>Trực tiếp</strong> và trường chọn bị khóa. Nếu loại hình là <strong>Công ty</strong>, người dùng có thể chọn Khấu trừ hoặc Trực tiếp.</p>
+<p>Khi phương pháp là <strong>Khấu trừ</strong>, giao diện và nghiệp vụ thay đổi như sau:</p>
+<ul>
+<li><p><strong>Nhóm sản phẩm:</strong> không hiển thị ngành hàng dùng để tính thuế GTGT và thuế TNCN theo tỷ lệ phần trăm trên doanh thu;</p>
+</li>
+<li><p><strong>Sản phẩm:</strong> hiển thị giá trước thuế, giá sau thuế và trường chọn VAT.</p>
+<p>Danh sách VAT gồm:</p>
+<ul>
+<li>Không kê khai.</li>
+<li>Không chịu thuế.</li>
+<li>0%.</li>
+<li>5%.</li>
+<li>8%.</li>
+<li>10%.</li>
+</ul>
+<p>Khi người dùng nhập một trong hai giá, hệ thống tính giá còn lại theo mức VAT và quy tắc làm tròn.</p>
+</li>
+<li><p><strong>Nhập kho/mua hàng:</strong> mỗi dòng cho nhập VAT; tiền hàng trước thuế, tiền VAT và tổng thanh toán được phân biệt; giá vốn nhập không bao gồm phần VAT đầu vào được khấu trừ;</p>
+</li>
+<li><p><strong>Hóa đơn đầu ra:</strong> phát hành <strong>Hóa đơn GTGT</strong>, thể hiện giá chưa thuế, thuế suất, tiền thuế và tổng thanh toán theo từng dòng hoặc nhóm thuế suất.</p>
+</li>
+</ul>
+<p>Khi phương pháp là <strong>Trực tiếp</strong>, giao diện và nghiệp vụ thay đổi như sau:</p>
+<ul>
+<li><strong>Nhóm sản phẩm:</strong> hiển thị ngành hàng tính thuế GTGT và thuế TNCN theo tỷ lệ phần trăm trên doanh thu; nhóm ngành là căn cứ phân loại doanh thu lên sổ và tờ khai phù hợp;</li>
+<li><strong>Sản phẩm:</strong> chỉ hiển thị một giá bán, không phân biệt trước và sau thuế, không hiển thị trường VAT trên màn hình bán;</li>
+<li><strong>Nhập kho/mua hàng:</strong> thông tin VAT vẫn có thể được nhận ở từng dòng hóa đơn mua vào để bảo toàn chứng từ nguồn, nhưng giao diện nghiệp vụ không tách VAT thành khoản được khấu trừ; giá vốn được tính trên tổng số tiền doanh nghiệp thực bỏ ra để mua hàng theo chính sách áp dụng;</li>
+<li><strong>Hóa đơn đầu ra:</strong> phát hành <strong>Hóa đơn bán hàng</strong>, không trình bày theo cấu trúc hóa đơn GTGT của phương pháp khấu trừ.</li>
+</ul>
+<p>Giá, thuế suất, phương pháp và nhóm ngành phải được giữ theo giao dịch đã chốt. Khi cấu hình đổi hợp lệ cho kỳ sau, sản phẩm và chứng từ mới dùng cách hiển thị mới; đơn cũ, phiếu nhập cũ, hóa đơn đã phát hành và số liệu sổ cũ không bị tính lại chỉ vì cấu hình hiện hành khác.</p>
+<h2 id="section-40-5">40.5. Kiểm tra phụ thuộc và luồng thay đổi cấu hình</h2>
+<p>Khi lưu một trong ba cấu hình, hệ thống xử lý theo trình tự:</p>
+<ol>
+<li>kiểm tra người dùng có quyền quản lý cấu hình Thuế - Kế toán;</li>
+<li>đọc lại giá trị hiện hành để phát hiện người khác đã thay đổi trước đó;</li>
+<li>xác định loại hình đăng ký kinh doanh dự kiến;</li>
+<li>tạo danh sách chế độ kế toán, phương pháp VAT và phương pháp xuất kho hợp lệ;</li>
+<li>từ chối nếu còn giá trị phụ thuộc không hợp lệ hoặc yêu cầu người dùng chọn lại;</li>
+<li>kiểm tra ngày hiệu lực, kỳ kế toán, giao dịch đã chốt và các hồ sơ đang mở;</li>
+<li>hiển thị đầy đủ các giá trị sẽ đổi, trường sẽ bị khóa và chức năng sẽ thay cách hiển thị;</li>
+<li>sau khi người dùng xác nhận, lưu đồng thời toàn bộ thay đổi phụ thuộc, người thao tác, thời điểm và giá trị trước/sau;</li>
+<li>tải lại cấu hình có hiệu lực để các màn hình danh mục, mua hàng, kho, hóa đơn, sổ và tờ khai sử dụng thống nhất.</li>
+</ol>
+<p>Không được lưu thành công một phần, chẳng hạn đã đổi loại hình thành Hộ kinh doanh nhưng vẫn để phương pháp VAT là Khấu trừ. Nếu bất kỳ kiểm tra nào thất bại, toàn bộ thay đổi bị hủy và cấu hình cũ tiếp tục có hiệu lực.</p>
+<h2 id="section-40-6">40.6. Mục tiêu và phạm vi</h2>
+<p>Chương này mô tả việc chuẩn bị thông tin người mua, tạo hóa đơn điện tử, ký, tra cứu, cập nhật trạng thái, tải bản PDF và phát hành hóa đơn điều chỉnh từ giao dịch bán hàng. Hóa đơn là hồ sơ thuế đầu ra gắn với đơn; trạng thái hóa đơn được theo dõi độc lập với trạng thái thanh toán, giao hàng và hoàn tất đơn.</p>
+<p>Chức năng hiện hành hỗ trợ hai nhà cung cấp:</p>
+<ul>
+<li>VISNAM.</li>
+<li>MOBI.</li>
+</ul>
+<p>Các nội dung được cấu hình theo doanh nghiệp hoặc chi nhánh gồm:</p>
+<ul>
+<li>Nhà cung cấp được sử dụng.</li>
+<li>Thông tin đăng nhập.</li>
+<li>Mẫu hóa đơn.</li>
+<li>Ký hiệu hóa đơn.</li>
+<li>Ký tự ký.</li>
+<li>Cảnh báo hạn mức.</li>
+</ul>
+<p>Chương không tự kết luận hóa đơn đã được cơ quan thuế chấp nhận chỉ vì nhà cung cấp trả về một mã kỹ thuật.</p>
+<h2 id="section-40-7">40.7. Tác nhân và quyền</h2>
+<p>Người có quyền Hóa đơn đầu ra được mở danh sách, tạo hóa đơn, cập nhật trạng thái, xem PDF và xuất hóa đơn điều chỉnh. Quyền xóa đơn hoàn tất được kiểm tra thêm khi hóa đơn điều chỉnh được tạo do xóa đơn. Nhân viên chỉ được thao tác trên chi nhánh mà tài khoản được phép làm việc.</p>
+<p>Danh sách hóa đơn hiển thị đơn, khách hàng, số tiền, ngày thanh toán, nhà cung cấp, mã hóa đơn, loại hóa đơn, trạng thái và hành động. Người không có quyền không thể dùng URL trực tiếp để gọi thao tác; API kiểm tra lại doanh nghiệp, chi nhánh, đơn hàng và quyền trước khi thực hiện.</p>
+<h2 id="section-40-8">40.8. Cấu hình nhà cung cấp và hạn mức</h2>
+<p>Ở cấp chi nhánh, người quản trị chọn VISNAM hoặc MOBI.</p>
+<p>Với VISNAM, cấu hình gồm:</p>
+<ul>
+<li>Tài khoản.</li>
+<li>Mật khẩu.</li>
+<li>Mẫu số.</li>
+<li>Ký hiệu theo thông tin nhà cung cấp.</li>
+</ul>
+<p>Với MOBI, cấu hình gồm:</p>
+<ul>
+<li>Thông tin kết nối.</li>
+<li>Mã số thuế.</li>
+<li>Ký hiệu.</li>
+<li>Tùy chọn ký.</li>
+</ul>
+<p>Tùy chọn <strong>Ký hóa đơn</strong> quyết định hệ thống gọi thao tác tạo và ký hoặc chỉ tạo hóa đơn chờ ký. Số chữ số thập phân của số lượng và thành tiền được dùng khi dựng dòng hóa đơn. Tên người mua mặc định dùng khi khách lẻ không nhập tên; người quản trị có thể đổi tên mặc định theo chi nhánh.</p>
+<p>Hệ thống đồng bộ hạn mức hóa đơn theo chi nhánh và nhà cung cấp. Khi số còn lại thấp hơn ngưỡng cảnh báo, giao diện hiển thị cảnh báo nhưng không tự hủy yêu cầu. Khi nhà cung cấp từ chối vì hết hạn mức, hóa đơn ở trạng thái lỗi, lưu lý do trả về và cho phép người có quyền thử lại sau khi khắc phục.</p>
+<h2 id="section-40-9">40.9. Điều kiện tạo hóa đơn</h2>
+<p>Đơn phải thuộc chi nhánh của người thao tác, chi nhánh đang hoạt động và có thông tin xuất hóa đơn. Đơn phải có thông tin người mua hoặc dùng tên mặc định. Dòng hàng sau khi trừ trả phải còn giá trị hợp lệ; đơn TikTok hoặc Shopee đã hoàn tiền toàn bộ không được tạo hóa đơn mới.</p>
+<p>Đơn Shopee chỉ được tạo hóa đơn khi trạng thái đã giao đến bước xác nhận nhận hàng hoặc hoàn thành. Nếu chưa đạt trạng thái này, hệ thống dừng và báo rõ lý do. Đơn TikTok hoặc kênh khác phải có ít nhất một sản phẩm còn hiệu lực và có giá trị sau trả.</p>
+<p>Kênh thương mại điện tử có chức năng thanh toán được xử lý theo chính sách tích hợp hiện hành của nhà cung cấp; khi nhà cung cấp trả lời không hỗ trợ phát hành cho kênh này, hệ thống báo lỗi “Không xuất hóa đơn” và không tạo bản ghi hóa đơn giả. Không suy luận rằng mọi đơn đã thanh toán trên sàn đều đã có hóa đơn POS.</p>
+<h2 id="section-40-10">40.10. Thông tin người mua</h2>
+<p>Khi người dùng bấm Xuất hóa đơn, màn hình cho phép chọn khách hàng cá nhân hoặc doanh nghiệp.</p>
+<p>Với cá nhân, thông tin gồm:</p>
+<ul>
+<li>Tên.</li>
+<li>Số điện thoại.</li>
+<li>CCCD hoặc hộ chiếu khi có.</li>
+<li>Địa chỉ.</li>
+<li>Email.</li>
+</ul>
+<p>Với doanh nghiệp, thông tin gồm:</p>
+<ul>
+<li>Tên công ty.</li>
+<li>Mã số thuế.</li>
+<li>Địa chỉ.</li>
+<li>Điện thoại.</li>
+<li>Email.</li>
+</ul>
+<p>Nếu mã số thuế được nhập, người dùng có thể tra cứu thông tin doanh nghiệp. Kết quả tra cứu chỉ điền gợi ý; người dùng phải kiểm tra trước khi xác nhận. Mã số thuế sai định dạng hoặc thông tin bắt buộc của hóa đơn doanh nghiệp bị thiếu thì yêu cầu dừng trước khi gửi.</p>
+<p>Thông tin người mua được lưu cùng yêu cầu hóa đơn để lần phát hành lại không làm mất dữ liệu đã nhập. Sửa thông tin sau khi hóa đơn đã phát hành không sửa hóa đơn cũ; phải dùng hóa đơn điều chỉnh theo khả năng của nhà cung cấp.</p>
+<h2 id="section-40-11">40.11. Chuẩn hóa dòng hóa đơn</h2>
+<p>Hệ thống dựng hóa đơn từ ảnh chụp nghiệp vụ của đơn tại thời điểm yêu cầu.</p>
+<p>Ảnh chụp bao gồm:</p>
+<ul>
+<li>Sản phẩm còn hiệu lực.</li>
+<li>Số lượng sau trả.</li>
+<li>Đơn giá.</li>
+<li>VAT hoặc nhóm ngành.</li>
+<li>Giảm giá.</li>
+<li>Phụ thu.</li>
+<li>Tổng tiền.</li>
+</ul>
+<p>Do đó, người dùng thay đổi giá sản phẩm sau khi bán không làm thay đổi hóa đơn đang được lập.</p>
+<p>Dòng Combo được phân bổ xuống sản phẩm con theo quy tắc bán hàng. Dòng giảm giá hoặc phụ thu có thể nhúng vào đơn giá hoặc thể hiện riêng theo cấu hình. Khi thể hiện riêng, thứ tự dòng và số thứ tự được đánh lại liên tục trước khi gửi nhà cung cấp.</p>
+<p>Ở phương pháp khấu trừ, dòng có đơn giá trước VAT, thuế suất và tiền thuế. Ở phương pháp trực tiếp, dòng không tự thêm VAT khấu trừ. Số lượng, đơn giá, thành tiền và tiền thuế được làm tròn theo số chữ số cấu hình; tổng trước thuế cộng thuế phải khớp tổng sau thuế mà đơn đang giữ.</p>
+<h2 id="section-40-12">40.12. Luồng phát hành hóa đơn gốc</h2>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" role="img" aria-labelledby="title-einvoice-flow desc-einvoice-flow" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-einvoice-flow">Luồng phát hành và tra cứu hóa đơn điện tử</title><desc id="desc-einvoice-flow">YÊU CẦU XUẤT HÓA ĐƠN. Chọn đơn · người mua. Quyền và chi nhánh; KIỂM TRA ĐIỀU KIỆN. Trạng thái sàn · sản phẩm. Cấu hình · hạn mức; DỰNG YÊU CẦU. Chụp dữ liệu đơn. Phân bổ dòng · thuế · giảm giá; GỌI NHÀ CUNG CẤP. Tạo và ký hoặc tạo chờ ký. Nhận mã và trạng thái; LƯU VÀ THEO DÕI. Mã tra cứu · PDF · điều chỉnh. Lỗi được phép thử lại</desc><defs><marker id="arrow-einvoice-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 86 V118 H480 V145" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-einvoice-flow)"/><path d="M480 242 V294 H230 V340" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-einvoice-flow)"/><path d="M480 242 V294 H730 V340" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-einvoice-flow)"/><path d="M230 445 V395 H730 V340" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-einvoice-flow)"/><path d="M730 445 V483 H480 V515" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-einvoice-flow)"/><g><rect x="300" y="14" width="360" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="34" font-weight="700">YÊU CẦU XUẤT HÓA ĐƠN</tspan><tspan x="480" y="56">Chọn đơn · người mua</tspan><tspan x="480" y="78">Quyền và chi nhánh</tspan></text></g><g><rect x="300" y="150" width="360" height="92" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="180" font-weight="700">KIỂM TRA ĐIỀU KIỆN</tspan><tspan x="480" y="202">Trạng thái sàn · sản phẩm</tspan><tspan x="480" y="224">Cấu hình · hạn mức</tspan></text></g><g><rect x="55" y="345" width="350" height="100" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="230" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="230" y="379" font-weight="700">DỰNG YÊU CẦU</tspan><tspan x="230" y="401">Chụp dữ liệu đơn</tspan><tspan x="230" y="423">Phân bổ dòng · thuế · giảm giá</tspan></text></g><g><rect x="555" y="345" width="350" height="100" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="730" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="730" y="379" font-weight="700">GỌI NHÀ CUNG CẤP</tspan><tspan x="730" y="401">Tạo và ký hoặc tạo chờ ký</tspan><tspan x="730" y="423">Nhận mã và trạng thái</tspan></text></g><g><rect x="300" y="520" width="360" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="540" font-weight="700">LƯU VÀ THEO DÕI</tspan><tspan x="480" y="562">Mã tra cứu · PDF · điều chỉnh</tspan><tspan x="480" y="584">Lỗi được phép thử lại</tspan></text></g></svg></div><figcaption><strong>Luồng phát hành và tra cứu hóa đơn điện tử.</strong> Hệ thống kiểm tra điều kiện trước khi gọi VISNAM hoặc MOBI, lưu kết quả và tách riêng trạng thái hóa đơn với trạng thái đơn hàng.</figcaption></figure>
+
+<ol>
+<li>Người có quyền mở đơn đủ điều kiện và chọn Xuất hóa đơn.</li>
+<li>Hệ thống kiểm tra chi nhánh, trạng thái sàn, sản phẩm còn giá trị, thông tin người mua, cấu hình nhà cung cấp và hạn mức.</li>
+<li>Người dùng xác nhận hoặc cập nhật thông tin người mua.</li>
+<li>Hệ thống chụp dữ liệu đơn, phân bổ dòng, dựng yêu cầu theo phương pháp thuế và ghi nhật ký yêu cầu.</li>
+<li>Hệ thống gọi VISNAM hoặc MOBI; tùy cấu hình, yêu cầu được tạo và ký hoặc chỉ tạo chờ ký.</li>
+<li>Khi nhà cung cấp trả kết quả thành công, hệ thống lưu số hóa đơn, mã tra cứu, trạng thái, mã giao dịch, đường dẫn và thông tin ký.</li>
+<li>Khi thất bại, hệ thống lưu lý do, hiển thị đơn trong danh sách Xuất lỗi và không tạo hóa đơn gốc ở trạng thái đã phát hành.</li>
+</ol>
+<p>Việc gửi lại một yêu cầu lỗi phải tạo mã yêu cầu mới hoặc dùng mã gốc theo quy tắc nhà cung cấp để tránh phát hành trùng. Không bấm nhiều lần đồng thời để tạo hai hóa đơn cho cùng một đơn.</p>
+<h2 id="section-40-13">40.13. Trạng thái và cập nhật trạng thái</h2>
+<p>Danh sách có các nhóm Chưa xuất, Xuất lỗi và Đã xuất. Với hóa đơn đã tạo, trạng thái chi tiết của VISNAM hoặc MOBI được hiển thị theo kết quả nhà cung cấp; mã tra cứu và số hóa đơn được hiển thị nếu có.</p>
+<p>Người dùng có quyền chọn Cập nhật trạng thái. Hệ thống gửi yêu cầu tra cứu đến đúng nhà cung cấp, cập nhật trạng thái, trạng thái ký và trạng thái đã gửi cơ quan thuế, sau đó lưu thời điểm cập nhật. Nếu tra cứu thất bại, trạng thái cũ được giữ và hiển thị lỗi tạm thời; không đổi hóa đơn thành lỗi phát hành chỉ vì mất mạng.</p>
+<p>Nút Xem hóa đơn mở đường dẫn tra cứu đã lưu. Nút Xem PDF yêu cầu nhà cung cấp trả tệp; nếu không tìm thấy dữ liệu, hệ thống báo kiểm tra lại trên trang hóa đơn. Tải PDF không thay đổi trạng thái đơn hoặc trạng thái thanh toán.</p>
+<h2 id="section-40-14">40.14. Hóa đơn cho các mô hình bán</h2>
+<p>Retail, F&amp;B, Service, Facility và Hospitality đều sử dụng thông tin thuế của đơn sau khi mô hình riêng chốt số tiền.</p>
+<ul>
+<li><p>F&amp;B phải chốt các món và phụ thu trước khi lập hóa đơn.</p>
+</li>
+<li><p>Facility phải chốt thời lượng.</p>
+</li>
+<li><p>Hospitality phải chốt phòng, dịch vụ, đặt cọc và các khoản phát sinh trước checkout.</p>
+</li>
+<li><p>Đơn tạo từ POS có thể bắt đầu ở Đã xác nhận.</p>
+</li>
+<li><p>Điều kiện tạo hóa đơn vẫn kiểm tra lại sản phẩm và thông tin người mua.</p>
+</li>
+<li><p>Đơn giao hàng chỉ được lập theo mốc mà luồng giao hàng cho phép.</p>
+</li>
+<li><p>Thanh toán và giao nhận độc lập nên đã thu tiền không tự bỏ qua kiểm tra giao hàng của kênh sàn.</p>
+</li>
+</ul>
+<h2 id="section-40-15">40.15. Hóa đơn cho Shopee và TikTok</h2>
+<p>Đơn được đồng bộ từ Shopee hoặc TikTok giữ mã đơn sàn, sản phẩm, gói hàng, trạng thái giao nhận và các khoản hoàn tiền. Job tự động chỉ đưa đơn vào hàng đợi khi đáp ứng điều kiện phát hành và chưa có hóa đơn gốc.</p>
+<p>Đối với Shopee, khi trạng thái chuyển tới xác nhận nhận hàng hoặc hoàn thành, hệ thống có thể đưa yêu cầu phát hành vào hàng đợi. Nếu người mua hoàn tiền toàn bộ hoặc không còn sản phẩm có giá trị, job bỏ qua và ghi lý do. Đối với TikTok, hệ thống cập nhật trạng thái giao hàng, hoàn tiền và kho trước khi kiểm tra lại điều kiện hóa đơn.</p>
+<p>Lỗi token, lỗi kết nối sàn hoặc lỗi nhà cung cấp hóa đơn không xóa đơn sàn. Hệ thống giữ lỗi đồng bộ, cho phép đồng bộ lại và chỉ tạo hóa đơn khi dữ liệu đơn đã được cập nhật đầy đủ.</p>
+<h2 id="section-40-16">40.16. Hóa đơn điều chỉnh do trả hàng hoặc xóa đơn</h2>
+<p>Hóa đơn điều chỉnh yêu cầu hóa đơn gốc đã tồn tại. Khi trả hàng làm giảm sản phẩm hoặc số tiền, người có quyền Hóa đơn đầu ra chọn tạo điều chỉnh; hệ thống kiểm tra đơn còn phần cần điều chỉnh rồi dựng dòng âm hoặc nội dung điều chỉnh theo nhà cung cấp.</p>
+<p>Khi xóa đơn đã có hóa đơn, thao tác xóa phải tạo điều chỉnh nếu chính sách và nhà cung cấp hỗ trợ. Trường hợp này đồng thời kiểm tra quyền xóa đơn hoàn tất. Nếu không có quyền hóa đơn hoặc quyền xóa tương ứng, toàn bộ thao tác xóa dừng trước khi thay đổi đơn.</p>
+<p>Nhà cung cấp MOBI có thể cập nhật hóa đơn gốc qua chế độ chỉnh sửa khi có mã hóa đơn nguồn; VISNAM có thể tạo hóa đơn điều chỉnh theo mã nguồn. Hệ thống lưu loại hóa đơn, mã gốc, mã điều chỉnh và kết quả trả về. Không xóa hóa đơn gốc khỏi lịch sử chỉ vì đã có hóa đơn điều chỉnh.</p>
+<p>Nếu hóa đơn gốc chưa ký, thao tác điều chỉnh có thể yêu cầu ký hóa đơn gốc trước. Nếu đã ký hoặc đã gửi cơ quan thuế, chỉ được điều chỉnh theo luồng nhà cung cấp; giao diện phải chỉ rõ lỗi thay vì cho phép sửa trực tiếp dòng đã phát hành.</p>
+<h2 id="section-40-17">40.17. Hủy, trả, xóa và hoàn tác</h2>
+<p>Hủy đơn trước phát hành không tạo hóa đơn.</p>
+<ul>
+<li>Hủy đơn sau phát hành không tự hủy hóa đơn.</li>
+<li>Người có quyền xử lý hóa đơn theo luồng điều chỉnh hoặc hủy được nhà cung cấp hỗ trợ.</li>
+<li>Trả hàng sau khi phiếu xuất bán đã Hoàn thành phải kiểm tra nguồn xuất và giá vốn.</li>
+<li>Khi đủ điều kiện, tạo hóa đơn điều chỉnh nếu hóa đơn gốc tồn tại.</li>
+</ul>
+<p>Xóa hóa đơn khỏi danh sách không phải là xóa đơn hàng. Hệ thống không cho thao tác xóa lịch sử hóa đơn đã trả kết quả thành công nếu nhà cung cấp không có cơ chế hủy tương ứng. Xóa đơn hàng phải dọn liên kết yêu cầu lỗi, nhưng giữ dấu vết cần thiết của hóa đơn đã phát hành và điều chỉnh.</p>
+<h2 id="section-40-18">40.18. Nhập hóa đơn đầu vào và liên hệ đầu ra</h2>
+<p>Danh sách hóa đơn đầu vào có các chức năng danh sách đã nhập, đồng bộ hóa đơn và import tệp XML. Đồng bộ VISNAM yêu cầu mã số thuế, tài khoản, mật khẩu và khoảng ngày; job chạy theo ngày và hiển thị tiến độ, thành công hoặc thất bại.</p>
+<p>Khi import XML, người dùng chọn chi nhánh, đọc thông tin người bán, số hóa đơn, ngày, tổng tiền, thuế, dòng sản phẩm, đơn vị và thuế suất. Sản phẩm được ánh xạ sang danh mục trong hệ thống; đơn vị mới phải được chọn tương ứng. Người dùng chọn phương thức thanh toán và tài khoản ngân hàng nếu có, sau đó hệ thống xử lý theo từng nhóm thanh toán.</p>
+<p>Hóa đơn đầu vào có thể tạo nghiệp vụ nhập mua, phiếu chi cho phần đã trả và công nợ cho phần còn lại. Hóa đơn đầu ra không được dùng làm hóa đơn đầu vào chỉ vì cùng mã số thuế hoặc cùng số tiền.</p>
+<h2 id="section-40-19">40.19. Nhật ký, bảo mật và đối chiếu</h2>
+<p>Mỗi lần tạo, ký, cập nhật trạng thái, tải PDF hoặc điều chỉnh ghi nhà cung cấp, người thao tác, mã yêu cầu, thời điểm, nội dung gửi, nội dung trả về và thông báo lỗi. Thông tin đăng nhập nhà cung cấp không hiển thị trong danh sách và không đưa vào tệp tải cho người không có quyền.</p>
+<p>Khi đối chiếu, người dùng kiểm tra theo thứ tự:</p>
+<ol>
+<li>Mã đơn.</li>
+<li>Tổng đơn.</li>
+<li>Dòng hàng.</li>
+<li>Thông tin người mua.</li>
+<li>Mã yêu cầu.</li>
+<li>Số hóa đơn.</li>
+<li>Mã tra cứu.</li>
+<li>Trạng thái ký.</li>
+<li>Trạng thái cơ quan thuế.</li>
+</ol>
+<p>Chênh lệch giữa đơn và hóa đơn phải được xử lý bằng phát hành lại hoặc điều chỉnh, không sửa số tiền trên hóa đơn bằng tay trong tệp PDF.</p>
+<h2 id="section-40-20">40.20. Luồng lỗi và bảo toàn dữ liệu</h2>
+<p>Nếu thiếu cấu hình, thiếu người mua, chi nhánh ngừng hoạt động, đơn không thuộc tài khoản, trạng thái sàn chưa đạt hoặc không còn sản phẩm có giá trị, yêu cầu dừng trước khi gọi nhà cung cấp. Nếu nhà cung cấp đã nhận yêu cầu nhưng kết nối bị ngắt, hệ thống đánh dấu cần tra cứu, không tự gửi lại mù quáng.</p>
+<p>Nếu nhà cung cấp trả mã lỗi, hệ thống lưu nguyên nhân và cho phép xử lý lại sau khi sửa cấu hình. Nếu nhà cung cấp trả thành công nhưng việc lưu kết quả cục bộ thất bại, lần kế tiếp phải tra cứu bằng mã yêu cầu trước khi tạo mới để tránh trùng hóa đơn.</p>
+<p>Tất cả thao tác cập nhật trạng thái, điều chỉnh và tải file đều không được làm thay đổi trạng thái thanh toán, tồn kho, công nợ hoặc Membership của đơn. Những tác động đó chỉ phát sinh khi chính nghiệp vụ bán, trả hàng, hủy hoặc xóa đơn thực hiện thành công.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="39-khau-hao-vong-doi-tai-san.html">← 39. Khấu hao và vòng đời tài sản</a><a href="41-he-thong-so-ke-toan.html">41. Thông tư 152 — Hộ kinh doanh →</a></nav></div></body></html>

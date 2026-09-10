@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>15. Trả hàng, hủy, xóa và hoàn tác — Đặc tả POS</title><meta name="description" content="Trả hàng, hủy, xóa và hoàn tác"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần IV · Chương 15</p><article class="spec"><h1>CHƯƠNG 15. TRẢ HÀNG, HỦY, XÓA VÀ HOÀN TÁC GIAO DỊCH</h1><details class="section-toc"><summary>Nội dung chương · 41 mục</summary><ol><li><a href="#section-15-1">15.1. Mục tiêu và phạm vi</a></li><li><a href="#section-15-2">15.2. Nguyên tắc chung của hoàn tác</a></li><li><a href="#section-15-3">15.3. Hủy đơn đang hoạt động</a></li><li><a href="#section-15-4">15.4. Hủy theo từng mô hình</a></li><li><a href="#section-15-5">15.5. Trả hàng sau bán</a></li><li><a href="#section-15-6">15.6. Điều kiện trả hàng</a></li><li><a href="#section-15-7">15.7. Xác định giá trị hàng trả</a></li><li><a href="#section-15-8">15.8. Phân bổ chiết khấu khi trả một phần</a></li><li><a href="#section-15-9">15.9. Phân bổ phụ thu khi trả một phần</a></li><li><a href="#section-15-10">15.10. Phạm vi sản phẩm được chọn trả</a></li><li><a href="#section-15-11">15.11. Hoàn tiền</a></li><li><a href="#section-15-12">15.12. Điều chỉnh công nợ khi trả hàng</a></li><li><a href="#section-15-13">15.13. Nhập lại kho khi trả hàng</a></li><li><a href="#section-15-14">15.14. Membership khi trả hàng hoặc khách không nhận</a></li><li><a href="#section-15-15">15.15. Quyền sử dụng Combo dịch vụ khi hoàn tác</a></li><li><a href="#section-15-16">15.16. Hóa đơn khi trả hàng</a></li><li><a href="#section-15-17">15.17. Tính nguyên tử của một lần trả</a></li><li><a href="#section-15-18">15.18. Xóa đơn ở mọi trạng thái sau xác nhận</a></li><li><a href="#section-15-19">15.19. Quyền và điều kiện xóa</a></li><li><a href="#section-15-20">15.20. Xác nhận ban đầu khi xóa</a></li><li><a href="#section-15-21">15.21. Kiểm tra hóa đơn trước khi xóa</a></li><li><a href="#section-15-22">15.22. Đơn có hóa đơn gốc đã ký</a></li><li><a href="#section-15-23">15.23. Các trường hợp hóa đơn khác khi xóa</a></li><li><a href="#section-15-24">15.24. Công nợ đã có thanh toán phụ thuộc</a></li><li><a href="#section-15-25">15.25. Hoàn tác công nợ khi xóa</a></li><li><a href="#section-15-26">15.26. Hoàn tác thanh toán và Sổ tiền khi xóa</a></li><li><a href="#section-15-27">15.27. Hoàn tác kho khi xóa</a></li><li><a href="#section-15-28">15.28. Hoàn tác Membership khi xóa</a></li><li><a href="#section-15-29">15.29. Hoàn tác quyền Combo dịch vụ khi xóa</a></li><li><a href="#section-15-30">15.30. Hoàn tác lịch đặt khi xóa</a></li><li><a href="#section-15-31">15.31. Hoàn tác hạch toán khi xóa</a></li><li><a href="#section-15-32">15.32. Loại bỏ nội dung chi tiết của đơn</a></li><li><a href="#section-15-33">15.33. Lịch sử xóa đơn</a></li><li><a href="#section-15-34">15.34. Trình tự xóa đơn sau xác nhận</a></li><li><a href="#section-15-35">15.35. Tính nguyên tử của quy trình xóa</a></li><li><a href="#section-15-36">15.36. Xử lý sau khi xóa đã cam kết</a></li><li><a href="#section-15-37">15.37. Giao diện nút Xóa</a></li><li><a href="#section-15-38">15.38. Kiểm soát đồng thời</a></li><li><a href="#section-15-39">15.39. Nhật ký và lý do</a></li><li><a href="#section-15-40">15.40. Các nguyên tắc không được vi phạm</a></li><li><a href="#section-15-41">15.41. Tình huống lỗi và cách xử lý</a></li></ol></details>
+<h2 id="section-15-1">15.1. Mục tiêu và phạm vi</h2>
+<p>Chương này quy định cách hệ thống xử lý một giao dịch không tiếp tục hoặc cần đảo ngược sau khi đã phát sinh ảnh hưởng.</p>
+<p>Bốn nhóm thao tác phải được phân biệt rõ:</p>
+<ul>
+<li><strong>Từ chối đơn Mới:</strong> nhân viên từ chối đơn chưa xác nhận; hệ thống xóa đơn, không yêu cầu quyền xóa đặc biệt.</li>
+<li><strong>Hủy đơn đã xác nhận:</strong> người tạo dừng đơn trước mốc thanh toán tại cửa hàng hoặc gửi hàng tận nơi, không cần quyền hủy riêng; hệ thống giữ đơn ở trạng thái Đã hủy.</li>
+<li><strong>Trả hàng hoặc hoàn tiền:</strong> tạo nghiệp vụ đảo ngược một phần hoặc toàn bộ giá trị của đơn đã bán nhưng vẫn giữ giao dịch gốc.</li>
+<li><strong>Xóa đơn sau xác nhận:</strong> người có quyền xóa được thực hiện ở mọi trạng thái sau xác nhận, bao gồm:<ul>
+<li>Đang xử lý.</li>
+<li>Đang giao.</li>
+<li>Đã hủy.</li>
+<li>Đã thanh toán.</li>
+<li>Đã hoàn tất.</li>
+<li>Khách không nhận hàng.</li>
+<li>Khách đã trả hàng.</li>
+<li>Hệ thống loại bỏ đơn và xử lý toàn bộ chứng từ liên quan, đồng thời giữ lịch sử xóa độc lập.</li>
+</ul>
+</li>
+</ul>
+<p>Mỗi thao tác có điều kiện, quyền, tác động tài chính và yêu cầu truy vết khác nhau. Người dùng không được dùng xóa thay cho trả hàng chỉ để bỏ qua quy trình hoàn tiền hoặc hóa đơn.</p>
+<h2 id="section-15-2">15.2. Nguyên tắc chung của hoàn tác</h2>
+<p>Mọi thao tác hoàn tác phải tuân thủ:</p>
+<ul>
+<li>Xác định đúng đơn nguồn và phạm vi ảnh hưởng.</li>
+<li>Kiểm tra trạng thái hiện tại cho phép thao tác.</li>
+<li>Kiểm tra quyền của người thực hiện.</li>
+<li>Không hoàn tác vượt số lượng hoặc giá trị còn hiệu lực.</li>
+<li>Dùng thông tin đã chốt của giao dịch gốc, không tính lại theo danh mục hiện tại.</li>
+<li>Hoàn tác các ảnh hưởng phụ thuộc trước khi loại bỏ nguồn.</li>
+<li>Chặn thao tác nếu một kết quả của đơn đã được giao dịch sau sử dụng và chưa thể đảo ngược an toàn.</li>
+<li>Giữ dấu vết người thực hiện, thời điểm, lý do và kết quả.</li>
+</ul>
+<h2 id="section-15-3">15.3. Hủy đơn đang hoạt động</h2>
+<p>Hủy được sử dụng khi đơn đã xác nhận nhưng chưa thanh toán tại cửa hàng hoặc chưa gửi hàng tận nơi. Đơn Mới chưa xác nhận dùng Từ chối, không dùng Hủy. Đơn đã gửi sử dụng kết quả Khách không nhận hàng hoặc Khách trả hàng; đơn cửa hàng đã thanh toán sử dụng Khách trả hàng.</p>
+<p>Trước khi hủy, hệ thống kiểm tra:</p>
+<ul>
+<li>Đơn thuộc đúng doanh nghiệp và chi nhánh.</li>
+<li>Người thực hiện là người tạo đơn; người tạo không phải có thêm quyền hủy riêng.</li>
+<li>Quy tắc này không cấp quyền hủy đơn của người khác.</li>
+<li>Trạng thái chưa hoàn tất và chưa bị hủy trước đó.</li>
+<li>Không có bước phụ thuộc khiến việc hủy bị cấm.</li>
+</ul>
+<p>Khi hủy thành công:</p>
+<ul>
+<li>Đơn chuyển sang Đã hủy, không bị xóa.</li>
+<li>Phiếu xuất kho Nháp của đơn bị xóa; vì phiếu chưa hoàn thành nên không có số tồn đã xuất cần cộng trả ở bước này.</li>
+<li>Các giữ chỗ, phân công, KDS hoặc trạng thái tài nguyên được giải phóng theo phạm vi đã phát sinh.</li>
+<li>Những ảnh hưởng chưa cam kết không tiếp tục được thực hiện.</li>
+<li>Lý do hủy được ghi nhận khi mô hình yêu cầu.</li>
+</ul>
+<p>Hủy không đồng nghĩa xóa. Đơn đã hủy vẫn được giữ để tra cứu và báo cáo theo quy tắc của mô hình.</p>
+<p>Việc đã in hay chưa in phiếu chế biến không quyết định Hủy hoặc Xóa. Không còn nhánh xóa đơn đã xác nhận bằng quyền tạo đơn chỉ vì chưa in chế biến. Đơn đã hủy chỉ còn hành động Xóa trong luồng xử lý chính, và hành động đó yêu cầu quyền xóa.</p>
+<h3 id="section-15-3-1">15.3.1. Từ chối đơn Mới</h3>
+<p>Đơn đặt từ ngoài POS bắt đầu ở trạng thái Mới. Trước xác nhận, chưa tạo phiếu xuất, Phiếu thu, Phiếu chi hoặc công nợ. Nhân viên được tiếp nhận đơn có thể Xác nhận hoặc Từ chối. Từ chối xóa đơn khỏi hệ thống mà không cần quyền xóa đặc biệt; không giữ lại một đơn ở trạng thái Đã hủy.</p>
+<p>Đơn do nhân viên lập trực tiếp trong POS bắt đầu tại Đã xác nhận, không được xem như đơn Mới để dùng nhánh từ chối. Trước khi từ chối, hệ thống kiểm tra đơn vẫn chưa được người khác xác nhận; nếu đã xác nhận thì áp dụng quy tắc Hủy/Xóa sau xác nhận.</p>
+<h2 id="section-15-4">15.4. Hủy theo từng mô hình</h2>
+<h3 id="section-15-4-1">15.4.1. Retail</h3>
+<p>Từ chối chỉ áp dụng cho Mới. Hủy giữ Đã hủy và xóa phiếu xuất Nháp của đơn đã xác nhận trước thanh toán hoặc gửi hàng. Sau gửi hoặc thanh toán, dùng quy trình không nhận/trả hàng để xử lý kho, tiền và công nợ. Người có quyền xóa có thể yêu cầu xóa ở mọi trạng thái sau xác nhận.</p>
+<h3 id="section-15-4-2">15.4.2. F&amp;B</h3>
+<p>Người tạo hủy đơn đã xác nhận trong giai đoạn còn cho phép hủy mà không cần quyền riêng, bất kể đã in chế biến hay chưa. Hủy đơn giữ Đã hủy; không chuyển thành Xóa vì chưa in. Việc dừng món phải phản ánh đúng trạng thái gọi món và KDS. Món đã gửi bếp giữ lịch sử hủy, số lượng, người thực hiện và lý do theo quy tắc hủy món. Quyền hủy món riêng không được dùng để ngăn người tạo hủy toàn đơn trong phạm vi nói trên.</p>
+<h3 id="section-15-4-3">15.4.3. Service</h3>
+<p>Đơn dịch vụ chưa hoàn tất có thể được hủy theo trạng thái thực hiện. Nếu đã dùng quyền Combo hoặc phát sinh vật tư, hệ thống xử lý theo các bước đã thực sự xảy ra trước khi kết thúc đơn.</p>
+<h3 id="section-15-4-4">15.4.4. Facility</h3>
+<p>Hủy phải kết thúc hoặc giải phóng phiên sử dụng tài nguyên theo trạng thái cho phép. Tài nguyên chỉ trở lại khả dụng khi không còn phiên hoạt động hoặc chưa thanh toán chiếm dụng.</p>
+<h3 id="section-15-4-5">15.4.5. Hospitality</h3>
+<p>Hủy đặt phòng, no-show, kết thúc lưu trú và checkout tuân theo vòng đời Hospitality và không đồng nghĩa xóa đơn. Người tạo hủy đơn lưu trú đã xác nhận trước thanh toán giữ đơn Đã hủy, xóa phiếu xuất nháp và xử lý trạng thái phòng. Xóa đơn lưu trú có quyền áp dụng từ sau xác nhận theo nguyên tắc chung, đồng thời bảo toàn phần booking và cọc của các phòng khác.</p>
+<h2 id="section-15-5">15.5. Trả hàng sau bán</h2>
+<h3 id="section-15-5-1">15.5.1. Đơn mua tại cửa hàng</h3>
+<p>Khi xác nhận Khách trả hàng, đơn chuyển sang không hoàn tất. Hệ thống tạo và hoàn thành phiếu nhập trả đối với hàng theo dõi kho, tạo Phiếu chi hoàn số tiền phải trả lại và giảm công nợ nếu đơn còn nợ. Đơn gốc và lần trả vẫn được giữ để tra cứu; thao tác tiếp theo trong luồng chính là Xóa bằng quyền xóa.</p>
+<h3 id="section-15-5-2">15.5.2. Đơn giao tận nơi: khách không nhận</h3>
+<p>Khách không nhận áp dụng sau Gửi hàng, khác hoàn toàn với Từ chối đơn Mới. Hệ thống thực hiện:</p>
+<ol>
+<li>Đặt đơn ở tình trạng không hoàn tất.</li>
+<li>Tạo và hoàn thành phiếu nhập lại hàng đã xuất trong phạm vi nhận về.</li>
+<li>Giảm công nợ đơn vị vận chuyển nếu có.</li>
+<li>Xóa các khoản giảm công nợ khách hàng còn Nháp đã được lập thủ công cho đơn.</li>
+<li>Tạo Phiếu chi hoàn tiền cho phần đã thanh toán còn phải hoàn; căn cứ là khoản giảm nợ đã có hiệu lực do thực thu, không phải khoản giảm nợ Nháp hoặc khoản cấn trừ không thu tiền.</li>
+<li>Sau khi đối chiếu các khoản giảm đã có hiệu lực, nếu tổng nợ tăng còn lớn hơn tổng nợ giảm thì tạo giảm nợ phần chênh lệch để công nợ của đơn về không.</li>
+<li>Thực hiện bước xuất hóa đơn theo trạng thái hóa đơn của đơn; nếu đã có hóa đơn thì áp dụng nhánh điều chỉnh phù hợp, không phát hành lặp một hóa đơn bán hàng mới.</li>
+</ol>
+<p>Sau xử lý, người dùng có thể In hoặc Xóa theo quyền. Không thể quay lại thanh toán khoản nợ đã được tất toán do không nhận hàng.</p>
+<h3 id="section-15-5-3">15.5.3. Đơn giao tận nơi: khách trả sau khi đã nhận</h3>
+<p>Khách đã nhận làm đơn hoàn tất về giao nhận. Khi xác nhận Khách trả hàng, hệ thống chuyển đơn sang không hoàn tất, tạo và hoàn thành phiếu nhập trả, xóa giảm nợ khách hàng Nháp nếu có, tạo Phiếu chi cho phần đã thực thu còn phải hoàn và tạo giảm nợ phần còn lại để công nợ thuộc phạm vi trả về không. Người dùng có thể In, Xem danh sách trả hàng hoặc Xóa theo quyền.</p>
+<p>Các quy tắc về số lượng, phân bổ giá trị và từng lần trả dưới đây áp dụng khi chọn trả một phần. Với việc tất toán toàn đơn, phải xác định đủ toàn bộ phần hàng, tiền và nợ còn hiệu lực, không hoàn lặp những phần đã trả ở lần trước.</p>
+<h3 id="section-15-5-4">15.5.4. Tác động không được đánh đồng</h3>
+<p>Một khoản giảm nợ không nhất thiết là tiền đã thu. Chỉ khoản giảm do thanh toán đã có hiệu lực mới làm căn cứ hoàn tiền; khoản Nháp bị xóa trước khi tính. Sau hoàn tiền, khoản giảm nợ tất toán phần chưa thu không tạo thêm một Phiếu chi. Như vậy đơn có nợ tăng 1.000.000 đồng, đã thực thu 400.000 đồng sẽ hoàn 400.000 đồng và xử lý nợ còn lại 600.000 đồng, không chi hoàn đủ 1.000.000 đồng.</p>
+<h3 id="section-15-5-5">15.5.5. Nguyên tắc cho các lần trả</h3>
+<p>Trả hàng giữ nguyên giao dịch bán gốc và ghi nhận phần hàng được trả. Số lần được trả phụ thuộc mô hình bán hàng:</p>
+<ul>
+<li>Retail có thể trả toàn bộ hoặc một phần qua nhiều lần; màn hình lần sau chỉ đưa ra phần hàng trực tiếp còn hiệu lực.</li>
+<li>Service chỉ thực hiện một lượt trả hàng; trong lượt đó người dùng có thể chọn một phần số lượng hàng hóa trực tiếp đủ điều kiện.</li>
+<li>Các mô hình không có luồng trả hàng riêng không tự sử dụng quy tắc nhiều lần của Retail.</li>
+</ul>
+<p>Mỗi lần trả phải xác định:</p>
+<ul>
+<li>Đơn bán gốc.</li>
+<li>Dòng hàng hóa trực tiếp được trả.</li>
+<li>Số lượng trả.</li>
+<li>Giá, thuế, chiết khấu và phụ thu của phần trả.</li>
+<li>Số tiền cần hoàn hoặc bù trừ.</li>
+<li>Hình thức hoàn tiền hoặc điều chỉnh công nợ.</li>
+<li>Lý do và người thực hiện.</li>
+</ul>
+<p>Không tạo nghiệp vụ trả bằng cách sửa số lượng hoặc tổng tiền của đơn gốc.</p>
+<h2 id="section-15-6">15.6. Điều kiện trả hàng</h2>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 610" role="img" aria-labelledby="title-return-eligibility desc-return-eligibility" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-return-eligibility">Điều kiện kho trước khi xử lý trả hàng</title><desc id="desc-return-eligibility">YÊU CẦU TRẢ HÀNG. Chọn phần hàng của đơn; Phiếu xuất bán đã Hoàn thành?; CHƯA. Chặn toàn bộ lần trả. Bổ sung tồn và Hoàn thành. chính Phiếu xuất đang Nháp; RỒI. Phần hàng trả đã đủ nguồn. và xác định giá vốn gốc?; CHƯA. Nhập bổ sung đúng thời điểm. Phân bổ đủ nguồn trước; ĐỦ. Cho xử lý trả. Giá nhập = giá vốn xuất gốc</desc><defs><marker id="arrow-return-eligibility" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 82 V114 H480 V140" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-return-eligibility)"/><path d="M480 221 V266 H168 V305" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-return-eligibility)"/><text x="324" y="257" text-anchor="middle" font-size="15" fill="#4e615b">Chưa</text><path d="M480 221 V266 H792 V305" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-return-eligibility)"/><text x="636" y="257" text-anchor="middle" font-size="15" fill="#4e615b">Rồi</text><path d="M792 414 V453 H520 V487" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-return-eligibility)"/><text x="656" y="444" text-anchor="middle" font-size="15" fill="#4e615b">Chưa</text><path d="M792 414 V453 H815 V487" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-return-eligibility)"/><text x="803.5" y="444" text-anchor="middle" font-size="15" fill="#4e615b">Đủ</text><g><rect x="300" y="16" width="360" height="66" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="44" font-weight="700">YÊU CẦU TRẢ HÀNG</tspan><tspan x="480" y="66">Chọn phần hàng của đơn</tspan></text></g><g><rect x="300" y="145" width="360" height="76" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="189" font-weight="700">Phiếu xuất bán đã Hoàn thành?</tspan></text></g><g><rect x="18" y="310" width="300" height="104" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="168" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="168" y="335" font-weight="700">CHƯA</tspan><tspan x="168" y="357">Chặn toàn bộ lần trả</tspan><tspan x="168" y="379">Bổ sung tồn và Hoàn thành</tspan><tspan x="168" y="401">chính Phiếu xuất đang Nháp</tspan></text></g><g><rect x="642" y="310" width="300" height="104" rx="10" fill="#fff" stroke="#708c82"/><text x="792" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="792" y="346" font-weight="700">RỒI</tspan><tspan x="792" y="368">Phần hàng trả đã đủ nguồn</tspan><tspan x="792" y="390">và xác định giá vốn gốc?</tspan></text></g><g><rect x="370" y="492" width="300" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="520" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="520" y="524" font-weight="700">CHƯA</tspan><tspan x="520" y="546">Nhập bổ sung đúng thời điểm</tspan><tspan x="520" y="568">Phân bổ đủ nguồn trước</tspan></text></g><g><rect x="688" y="492" width="254" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="815" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="815" y="524" font-weight="700">ĐỦ</tspan><tspan x="815" y="546">Cho xử lý trả</tspan><tspan x="815" y="568">Giá nhập = giá vốn xuất gốc</tspan></text></g></svg></div><figcaption><strong>Điều kiện kho trước khi xử lý trả hàng.</strong> Kiểm tra theo đúng phần hàng được chọn trả. Giá vốn bằng 0 vẫn hợp lệ nếu nguồn xuất đã được xác định đầy đủ; chỉ trạng thái chưa xác định hoặc còn thiếu nguồn mới chặn trả.</figcaption></figure>
+
+<p>Hệ thống chỉ cho trả khi:</p>
+<ul>
+<li>Đơn gốc tồn tại, thuộc đúng doanh nghiệp và chi nhánh.</li>
+<li>Đơn đã đạt trạng thái cho phép trả.</li>
+<li>Phiếu xuất bán hàng của đơn đã Hoàn thành.</li>
+<li>Nếu phiếu còn Nháp vì doanh nghiệp chọn <strong>Không xử lý hoàn thành phiếu xuất</strong>, hệ thống chưa cho mở hoặc xác nhận trả hàng; người dùng phải bổ sung tồn và Hoàn thành chính phiếu xuất đó trước.</li>
+<li>Với Retail, người dùng có quyền Tạo đơn hàng; với Service, người dùng có quyền Quản lý danh sách đơn hàng.</li>
+<li>Dòng hàng thuộc đơn gốc.</li>
+<li>Số lượng yêu cầu lớn hơn 0.</li>
+<li>Dòng được đưa ra trên màn hình là dòng trực tiếp còn hiệu lực và số lượng yêu cầu không vượt số lượng của dòng đang chọn.</li>
+<li>Serial, lô hoặc đơn vị trả phù hợp với giao dịch gốc khi sản phẩm có quản lý tương ứng.</li>
+<li>Phần hàng được chọn trả đã xác định đầy đủ nguồn xuất và giá vốn xuất bán gốc.</li>
+<li>Nếu Phiếu xuất đã Hoàn thành theo cách Trừ âm nhưng phần hàng này còn thiếu nguồn, hệ thống yêu cầu nhập bổ sung và hoàn tất phân bổ nguồn trước khi trả.</li>
+</ul>
+<p>Giá vốn xuất bán gốc bằng 0 không tự làm yêu cầu bị từ chối. Hệ thống chỉ chặn khi chưa xác định được giá vốn hoặc còn thiếu nguồn xuất; một giá trị 0 đã được tính từ nguồn hợp lệ vẫn là giá vốn xác định.</p>
+<p>Service kiểm tra lại điều kiện chỉ được trả một lượt ở thời điểm xác nhận. Retail tìm lại dòng trực tiếp của đơn và so số lượng gửi lên với số lượng của dòng đó; bước xác nhận hiện không có một phép đối chiếu riêng với tổng số lượng đã trả ở các lần trước ngoài cách màn hình chỉ cung cấp phần còn hiệu lực.</p>
+<h2 id="section-15-7">15.7. Xác định giá trị hàng trả</h2>
+<p>Giá trị trả được tính từ thông tin đã chốt trên giao dịch gốc.</p>
+<p>Hệ thống không dùng:</p>
+<ul>
+<li>Giá bán hiện tại của sản phẩm.</li>
+<li>Thuế hiện tại nếu khác giao dịch gốc.</li>
+<li>Tỷ lệ chiết khấu hoặc phụ thu đang được cấu hình ở thời điểm trả.</li>
+<li>Giá hoặc chính sách hiện tại nếu đã thay đổi sau giao dịch.</li>
+</ul>
+<p>Đối với mỗi phần hàng trả, hệ thống xác định:</p>
+<ol>
+<li>Giá trị bán gốc tương ứng với số lượng trả.</li>
+<li>Phần chiết khấu hoặc Voucher đã phân bổ.</li>
+<li>Phần phụ thu đã phân bổ.</li>
+<li>Thuế tương ứng.</li>
+<li>Phần ưu đãi hoặc phụ thu đã được ghi nhận hoàn ở các lần trước khi nội dung đó có theo dõi lũy kế.</li>
+<li>Phần còn lại được phép hoàn theo giới hạn đang được áp dụng.</li>
+</ol>
+<p>Tổng hoàn qua nhiều lần không được vượt tổng giá trị có thể hoàn của đơn.</p>
+<h2 id="section-15-8">15.8. Phân bổ chiết khấu khi trả một phần</h2>
+<p>Khi một phần hàng được trả, hệ thống sử dụng phần chiết khấu đã phân bổ cho dòng và số lượng đó.</p>
+<p>Các nguyên tắc:</p>
+<ul>
+<li>Không phân bổ lại toàn bộ đơn bằng giá hoặc tỷ lệ hiện tại.</li>
+<li>Không hoàn vượt phần chiết khấu thuộc số lượng trả.</li>
+<li>Với nội dung có theo dõi giá trị đã hoàn, lần trả sau bị giới hạn bởi phần còn lại.</li>
+<li>Giá trị sau thuế được tính từ phần trước thuế và thuế của dòng hàng trả.</li>
+</ul>
+<p>Với đơn có nhiều nhóm thuế, phần chiết khấu trả lại giữ đúng nhóm thuế của hàng được trả.</p>
+<h2 id="section-15-9">15.9. Phân bổ phụ thu khi trả một phần</h2>
+<p>Phần phụ thu được hoàn cùng hàng trả theo kết quả phân bổ của đơn gốc.</p>
+<ul>
+<li>Phụ thu cố định sử dụng phần đã được phân bổ cho hàng trả.</li>
+<li>Phụ thu phần trăm không được tính lại trên giá hiện tại.</li>
+<li>Không hoàn vượt phần phụ thu còn lại đang được theo dõi cho đơn.</li>
+</ul>
+<p>Phần phụ thu trả lại giữ đúng cách xử lý thuế đã sử dụng ở giao dịch gốc.</p>
+<h2 id="section-15-10">15.10. Phạm vi sản phẩm được chọn trả</h2>
+<p>Luồng trả hàng hiện chỉ nhận các dòng hàng hóa trực tiếp của đơn. Combo và các thành phần nằm trong Combo không xuất hiện như một đối tượng có thể chọn trả. Giá trị Combo vẫn tham gia tổng giao dịch gốc và các phép phân bổ dùng để xác định giá trị của dòng hàng trực tiếp, nhưng hệ thống không tạo một lần trả riêng cho Combo hoặc sản phẩm con.</p>
+<p>Retail đưa ra các dòng trực tiếp còn hiệu lực có chính sách trả. Service thu hẹp thêm phạm vi vào hàng hóa trực tiếp và chỉ cho một lượt trả. Dịch vụ đã cung cấp, quyền sử dụng Combo và các thành phần Combo không được đưa vào danh sách hàng trả.</p>
+<h2 id="section-15-11">15.11. Hoàn tiền</h2>
+<p>Sau khi xác định giá trị trả, hệ thống xử lý tiền theo thực tế giao dịch:</p>
+<ul>
+<li>Nếu đơn đã thu tiền, tạo khoản hoàn bằng phương thức được phép.</li>
+<li>Nếu đơn còn công nợ, có thể giảm nghĩa vụ công nợ trước khi phát sinh chi tiền.</li>
+<li>Nếu vừa có tiền đã thu vừa có công nợ, việc bù trừ và hoàn tiền phải khớp tổng giá trị trả.</li>
+</ul>
+<p>Khoản hoàn phải truy vết về lần trả hàng và đơn gốc. Không ghi một khoản chi rời rạc không có nguồn giao dịch.</p>
+<p>Người dùng chọn hoàn bằng tiền mặt hoặc qua tài khoản ngân hàng hợp lệ. Nếu chọn ngân hàng, phải chỉ rõ tài khoản nhận ảnh hưởng. Khoản chi hoàn được tạo trong lần xử lý trả hàng; nếu bước bắt buộc này thất bại, lần trả không được hoàn tất.</p>
+<h2 id="section-15-12">15.12. Điều chỉnh công nợ khi trả hàng</h2>
+<p>Khi đơn có công nợ, giá trị trả làm giảm nghĩa vụ còn lại theo thứ tự nghiệp vụ công nợ.</p>
+<p>Hệ thống phải bảo đảm:</p>
+<ul>
+<li>Không giảm công nợ xuống dưới mức hợp lệ.</li>
+<li>Không hoàn tiền mặt cho phần giá trị chưa từng được khách thanh toán nếu chưa có quy tắc bù trừ tương ứng.</li>
+<li>Số dư công nợ sau lần trả và các phát sinh tiếp theo được tính đúng theo thời gian.</li>
+<li>Khoản thanh toán công nợ đã phát sinh vẫn truy vết được tới nghĩa vụ ban đầu và phần điều chỉnh.</li>
+</ul>
+<h2 id="section-15-13">15.13. Nhập lại kho khi trả hàng</h2>
+<p>Khi người dùng xác nhận Khách trả hàng hoặc Khách không nhận, hệ thống tạo và hoàn thành phiếu nhập trả cho các dòng hàng thuộc phạm vi nhận lại và có theo dõi tồn kho. Đây là kết quả bắt buộc của hành động xác nhận hiện tại, không có lựa chọn giữ lần trả đã hoàn tất nhưng không nhập hàng.</p>
+<p>Phiếu nhập trả chỉ được tạo sau khi Phiếu xuất bán đã Hoàn thành và phần hàng trả đã có đủ chi tiết nguồn xuất cùng giá vốn gốc. Giá nhập của phần hàng trả lấy từ giá vốn xuất bán gốc tương ứng, không lấy giá bán, số tiền hoàn hoặc giá hiện tại. Nếu Phiếu xuất còn Nháp, toàn bộ nghiệp vụ trả bị chặn. Nếu Phiếu xuất đã Hoàn thành theo cách Trừ âm nhưng sản phẩm được chọn còn thiếu nguồn, riêng sản phẩm đó bị chặn đến khi nguồn được bổ sung đầy đủ.</p>
+<p>Việc nhập lại phải xử lý phù hợp:</p>
+<ul>
+<li>Kho của giao dịch.</li>
+<li>Đơn vị và hệ số quy đổi.</li>
+<li>Số lượng trả đã xác nhận.</li>
+<li>Lô hàng.</li>
+<li>Serial.</li>
+<li>Giá vốn và ảnh hưởng đến các giao dịch kho sau đó.</li>
+</ul>
+<p>Các dòng không theo dõi tồn như dịch vụ không tạo phiếu nhập hàng. Giao diện trả hiện không có lựa chọn riêng cho hàng hỏng, mất hoặc không thu hồi; nếu doanh nghiệp cần quản lý các tình trạng này thì phải thực hiện bằng nghiệp vụ kho khác ngoài lần trả đang mô tả.</p>
+<p>Không được chỉ tăng số lượng tồn mà bỏ qua lô, serial hoặc giá vốn.</p>
+<h2 id="section-15-14">15.14. Membership khi trả hàng hoặc khách không nhận</h2>
+<p>Trong luồng trả hàng hoặc khách không nhận, hệ thống gọi xử lý Membership sau khi xác định giá trị tiền hoàn của phần hàng. Cách tính số điểm thu hồi, giới hạn hiện có và sự khác nhau giữa tích theo tổng đơn với tích theo sản phẩm được quy định đầy đủ.</p>
+<p>Luồng này chỉ thu hồi điểm đã tích. Điểm khách từng tiêu để giảm tiền không được cộng lại; phần ưu đãi Membership của hàng trả chỉ tham gia tính tiền hoàn. Xóa đơn có quyền là nhánh khác: hệ thống đảo ảnh hưởng ròng của mọi biến động điểm thuộc đơn, nên điểm đã tiêu được phục hồi khi toàn bộ đơn bị xóa.</p>
+<p>Điểm Membership và số lượt Combo dịch vụ là hai quyền lợi riêng. Xử lý điểm không tự thay đổi số lượt dịch vụ. Khi hoàn trả quyền sử dụng dịch vụ, hệ thống chỉ khôi phục số lượt chưa được tiêu dùng và còn gắn được với giao dịch gốc; lượt đã sử dụng không tự được cộng lại.</p>
+<h2 id="section-15-15">15.15. Quyền sử dụng Combo dịch vụ khi hoàn tác</h2>
+<p>Đơn có thể là nguồn mua quyền hoặc là một lần sử dụng quyền đã mua.</p>
+<p>Nếu hoàn tác một lần sử dụng:</p>
+<ul>
+<li>Giảm số lượt đã dùng tương ứng.</li>
+<li>Loại bỏ lịch sử sử dụng thuộc giao dịch được hoàn tác.</li>
+</ul>
+<p>Nếu hoàn tác đơn đã tạo quyền:</p>
+<ul>
+<li>Kiểm tra quyền đã được dùng trong đơn khác hay chưa.</li>
+<li>Nếu đã được dùng, chặn thao tác xóa đơn nguồn.</li>
+<li>Nếu chưa được dùng tiếp, quyền được hoàn tác cùng đơn.</li>
+</ul>
+<p>Không được xóa nguồn tạo quyền trong khi vẫn giữ các lần sử dụng phụ thuộc.</p>
+<h2 id="section-15-16">15.16. Hóa đơn khi trả hàng</h2>
+<p>Việc trả hàng phải đánh giá trạng thái hóa đơn của đơn gốc:</p>
+<ul>
+<li>Nếu chưa có hóa đơn, lần trả cập nhật giá trị còn hiệu lực của giao dịch theo quy trình nội bộ.</li>
+<li>Nếu đã có hóa đơn, người dùng thực hiện chứng từ điều chỉnh hoặc thay thế theo nghiệp vụ hóa đơn.</li>
+<li>Giá trị, thuế và hàng hóa trên chứng từ điều chỉnh phải dựa trên phần thực tế được trả.</li>
+</ul>
+<p>Không được xóa dấu vết hóa đơn gốc chỉ vì hàng đã trả. Việc điều chỉnh hóa đơn điện tử phải hoàn tất theo quy định của nhà cung cấp và được đối soát độc lập với khoản hoàn tiền.</p>
+<h2 id="section-15-17">15.17. Tính nguyên tử của một lần trả</h2>
+<p>Một lần trả có thể ảnh hưởng đồng thời đến:</p>
+<ul>
+<li>Số lượng và giá trị còn lại của đơn.</li>
+<li>Kho và giá vốn.</li>
+<li>Thanh toán hoặc khoản chi hoàn tiền.</li>
+<li>Công nợ.</li>
+<li>Điểm Membership đã tích.</li>
+<li>Hóa đơn và hạch toán.</li>
+<li>Báo cáo doanh thu.</li>
+</ul>
+<p>Các thay đổi nội bộ bắt buộc phải thành công hoặc thất bại cùng nhau. Không được ghi nhận đã trả hàng nếu kho, tiền hoặc công nợ bắt buộc mới chỉ xử lý một phần.</p>
+<p>Nếu một tích hợp bên ngoài được thực hiện sau khi lần trả đã cam kết, lỗi phải được ghi nhận và xử lý lại mà không lặp các bước nội bộ đã thành công.</p>
+<h2 id="section-15-18">15.18. Xóa đơn ở mọi trạng thái sau xác nhận</h2>
+<p>Xóa đơn sau xác nhận là thao tác kiểm soát đặc biệt để loại giao dịch khỏi dữ liệu vận hành và đảo ngược các kết quả do giao dịch tạo ra. Không yêu cầu đơn phải hoàn tất hoặc phải hủy trước khi xóa.</p>
+<p>Chức năng được cung cấp cho các luồng:</p>
+<ul>
+<li>Retail.</li>
+<li>F&amp;B.</li>
+<li>Service.</li>
+<li>Facility.</li>
+<li>FromPayment.</li>
+</ul>
+<p>Xóa đơn không phải thao tác sửa nhanh. Người dùng phải hiểu hệ thống sẽ xử lý thanh toán, công nợ, sản xuất, xuất/nhập kho, Membership, quyền dịch vụ, lịch đặt, hóa đơn, hạch toán và báo cáo tùy ảnh hưởng thực tế của đơn. Với đơn Đã hủy, hệ thống kiểm tra các chứng từ còn lại; không giả định hủy trước đó đã xóa mọi quan hệ.</p>
+<h2 id="section-15-19">15.19. Quyền và điều kiện xóa</h2>
+<p>Người dùng phải có quyền xóa riêng từ thời điểm đơn đã xác nhận. Người tạo đơn không được miễn quyền này.</p>
+<p>Hệ thống kiểm tra:</p>
+<ul>
+<li>Đơn thuộc doanh nghiệp hiện tại.</li>
+<li>Đơn thuộc chi nhánh người dùng được phép thao tác.</li>
+<li>Đơn đã qua mốc xác nhận; trạng thái sau mốc đó không tự tạo thêm rào cản phải hoàn tất trước.</li>
+<li>Quan hệ hóa đơn đã được người dùng xác nhận đúng nhánh.</li>
+<li>Toàn bộ công nợ và các phân bổ thanh toán liên quan được xác định để hoàn tác cùng đơn.</li>
+<li>Quyền Combo do đơn tạo chưa được sử dụng bởi đơn khác.</li>
+<li>Các phụ thuộc khác có thể hoàn tác an toàn.</li>
+</ul>
+<p>Không dùng thời điểm thanh toán, hoàn tất, hủy hoặc in chế biến làm điều kiện bắt buộc để được yêu cầu xóa. Các kiểm tra phụ thuộc nhằm bảo đảm hoàn tác đầy đủ, không nhằm thu hẹp phạm vi trạng thái đã cho phép.</p>
+<h2 id="section-15-20">15.20. Xác nhận ban đầu khi xóa</h2>
+<p>Trước khi gửi yêu cầu, giao diện hiển thị cảnh báo phù hợp với ảnh hưởng của mô hình.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+</blockquote>
+<ul>
+<li>Facility cảnh báo lịch nguồn sẽ trở về trạng thái chưa check-in.</li>
+<li>FromPayment cảnh báo thanh toán, công nợ, tồn kho, điểm, quyền dịch vụ và lịch đặt sẽ được hoàn tác.</li>
+<li>Service hiển thị xác nhận xóa giao dịch.</li>
+<li>Retail và F&amp;B hiển thị cảnh báo gắn với trạng thái nhận, giao hàng hoặc phục vụ.</li>
+</ul>
+<p>Nội dung xác nhận phải đủ để người dùng nhận biết đây là thao tác không thể khôi phục trực tiếp từ màn hình.</p>
+<h2 id="section-15-21">15.21. Kiểm tra hóa đơn trước khi xóa</h2>
+<p>Sau xác nhận ban đầu, hệ thống kiểm tra thông tin người mua, yêu cầu hóa đơn và hóa đơn đã phát sinh.</p>
+<p>Nếu đơn có quan hệ hóa đơn, hệ thống yêu cầu một bước xác nhận riêng trước khi tiếp tục. Xác nhận ở bước đầu không tự được coi là chấp thuận xử lý hóa đơn.</p>
+<h2 id="section-15-22">15.22. Đơn có hóa đơn gốc đã ký</h2>
+<p>Nếu đơn có hóa đơn gốc đã ký và chưa có hóa đơn điều chỉnh, người dùng được chọn:</p>
+<ul>
+<li><strong>Xóa và xuất hóa đơn điều chỉnh.</strong></li>
+<li><strong>Chỉ xóa đơn.</strong></li>
+<li><strong>Đóng.</strong></li>
+</ul>
+<p>Khi chọn Xóa và xuất hóa đơn điều chỉnh:</p>
+<ol>
+<li>Hệ thống lập hóa đơn điều chỉnh trước.</li>
+<li>Chỉ tiếp tục xóa khi bước lập điều chỉnh thành công.</li>
+<li>Nếu nhà cung cấp trả lỗi, dừng quy trình và giữ nguyên đơn.</li>
+</ol>
+<p>Khi chọn Chỉ xóa đơn:</p>
+<ul>
+<li>Hệ thống tiếp tục theo xác nhận của người dùng.</li>
+<li>Việc loại thông tin hóa đơn nội bộ không xóa hóa đơn đã tồn tại tại nhà cung cấp.</li>
+<li>Người dùng chịu trách nhiệm đối soát trạng thái pháp lý của hóa đơn bên ngoài.</li>
+</ul>
+<h2 id="section-15-23">15.23. Các trường hợp hóa đơn khác khi xóa</h2>
+<p>Nếu đơn đã có thông tin hoặc yêu cầu hóa đơn nhưng không thuộc trường hợp hóa đơn gốc đã ký chưa điều chỉnh, hệ thống cảnh báo “Đơn hàng đã phát sinh hóa đơn”.</p>
+<p>Sau khi người dùng xác nhận:</p>
+<ul>
+<li>Thông tin hóa đơn liên quan được loại khỏi phạm vi vận hành cùng đơn.</li>
+<li>Nội dung hóa đơn bị loại được giữ trong lịch sử xóa.</li>
+<li>Thông tin người mua dùng cho hóa đơn được xử lý cùng đơn.</li>
+</ul>
+<p>Hệ thống không mặc định gửi yêu cầu xóa hóa đơn tại nhà cung cấp. Chỉ nhánh người dùng chủ động chọn xuất hóa đơn điều chỉnh thực hiện giao tiếp bên ngoài trước khi xóa.</p>
+<h2 id="section-15-24">15.24. Công nợ đã có thanh toán phụ thuộc</h2>
+<p>Thanh toán công nợ đã hoàn tất không tự loại đơn khỏi phạm vi được xóa. Hệ thống phải xác định và hoàn tác các phân bổ, Phiếu thu hoặc Phiếu chi và nghĩa vụ liên quan trước khi loại đơn. Không yêu cầu người dùng xóa công nợ riêng như điều kiện mặc định cho mọi đơn đã thu nợ.</p>
+<p>Nếu một thanh toán dùng chung cho nhiều đơn, chỉ phần thuộc đơn bị xóa được hoàn tác; phần của đơn khác phải được giữ và đối chiếu lại. Không xóa nguyên chứng từ dùng chung làm mất tiền hoặc nghĩa vụ của đơn ngoài phạm vi. Nếu chưa thể xử lý phần dùng chung an toàn, hệ thống dừng toàn bộ lần xóa và nêu rõ quan hệ phải xử lý.</p>
+<h2 id="section-15-25">15.25. Hoàn tác công nợ khi xóa</h2>
+<p>Trong quy trình xóa toàn bộ đơn:</p>
+<ul>
+<li>Các yêu cầu thanh toán công nợ Nháp thuộc đơn được loại bỏ; khoản đã hoàn tất được hoàn tác đúng phần phân bổ liên quan.</li>
+<li>Nghĩa vụ công nợ do đơn tạo được hoàn tác.</li>
+<li>Số dư của các phát sinh sau thời điểm đơn được tính lại theo thứ tự thời gian.</li>
+</ul>
+<p>Không chỉ điều chỉnh một số tổng hiện tại. Khi một phát sinh ở giữa lịch sử bị loại, toàn bộ chuỗi số dư phía sau phải phản ánh đúng việc nguồn đã không còn.</p>
+<h2 id="section-15-26">15.26. Hoàn tác thanh toán và Sổ tiền khi xóa</h2>
+<p>Hệ thống xác định các nội dung tiền do đơn tạo ra, gồm:</p>
+<ul>
+<li>Thanh toán trực tiếp.</li>
+<li>Thông tin thanh toán ngân hàng.</li>
+<li>Yêu cầu chi do trả hàng.</li>
+<li>Phiếu thu hoặc phiếu chi tương ứng.</li>
+<li>Biến động Sổ tiền phát sinh từ các phiếu đó.</li>
+</ul>
+<p>Các nội dung được hoàn tác theo đúng thứ tự phụ thuộc. Nếu một biến động trong quá khứ bị loại, số dư sau giao dịch của các biến động phía sau phải được tính lại.</p>
+<p>Không được loại khoản thanh toán nhưng để phiếu tiền hoặc số dư nguồn tiền tiếp tục phản ánh giao dịch đã xóa.</p>
+<h2 id="section-15-27">15.27. Hoàn tác kho khi xóa</h2>
+<h3 id="section-15-27-1">15.27.1. Phiếu chưa hoàn thành và phiếu đã hoàn thành</h3>
+<p>Phiếu xuất chưa hoàn thành, bao gồm phiếu được giữ lại do thiếu tồn theo cấu hình, bị xóa mà không cộng tồn ngược vì chưa trừ tồn. Phiếu đã hoàn thành phải đảo số lượng, lô, số sê-ri và giá vốn trước khi xóa. Nếu đơn có cả xuất bán và nhập trả, hệ thống xử lý cả hai theo chuỗi thực tế, không cộng lại hàng hai lần.</p>
+<h3 id="section-15-27-2">15.27.2. Sản xuất gắn với đơn</h3>
+<p>Nếu đơn tạo sản xuất hoặc chế biến, quy trình xóa phải xác định phiếu sản xuất, xuất nguyên liệu, nhập thành phẩm và chi phí liên quan. Các chứng từ chỉ thuộc đơn được hoàn tác và xóa cùng chuỗi. Thành phẩm, nguyên liệu hoặc thanh toán đã được chứng từ khác sử dụng phải được kiểm tra để bảo toàn giao dịch ngoài phạm vi; không tự xóa sản xuất dùng chung cho đơn khác.</p>
+<h3 id="section-15-27-3">15.27.3. Kết quả kho sau xóa</h3>
+<p>Nếu đơn đã tạo phiếu xuất bán hoặc phiếu nhập trả hàng, hệ thống phải thực hiện nghiệp vụ hoàn tác kho trước khi xóa quan hệ với đơn.</p>
+<p>Hoàn tác có thể ảnh hưởng:</p>
+<ul>
+<li>Tồn kho.</li>
+<li>Lô nhập và lô xuất.</li>
+<li>Serial.</li>
+<li>Giá vốn.</li>
+<li>Các giao dịch kho phía sau khi có xuất hoặc nhập lùi ngày.</li>
+</ul>
+<p>Hệ thống không được chỉ loại chứng từ kho mà bỏ qua việc cộng hoặc trừ ngược số lượng. Khi phương pháp tính giá vốn yêu cầu chọn lại lô hoặc tính lại chuỗi giao dịch, việc đó phải hoàn thành trước khi xóa đơn.</p>
+<h2 id="section-15-28">15.28. Hoàn tác Membership khi xóa</h2>
+<p>Hệ thống tổng hợp các biến động điểm thuộc đơn và tính ngược ảnh hưởng lên khách hàng:</p>
+<ul>
+<li>Đảo ngược tổng điểm tăng hoặc giảm do đơn tạo ra.</li>
+<li>Cập nhật điểm hiện tại và các mốc điểm liên quan.</li>
+<li>Loại các chi tiết tích điểm và lịch sử của đơn trong phạm vi xóa.</li>
+</ul>
+<p>Sau khi đơn bị xóa, số dư điểm không được tiếp tục chứa ảnh hưởng của giao dịch đó.</p>
+<h2 id="section-15-29">15.29. Hoàn tác quyền Combo dịch vụ khi xóa</h2>
+<p>Nếu đơn là một lần sử dụng quyền:</p>
+<ul>
+<li>Giảm số lượt đã dùng.</li>
+<li>Loại lịch sử sử dụng thuộc đơn.</li>
+</ul>
+<p>Nếu đơn là nguồn tạo quyền:</p>
+<ul>
+<li>Kiểm tra quyền có được dùng trong đơn khác không.</li>
+<li>Nếu đã dùng, chặn xóa đơn nguồn.</li>
+<li>Nếu chưa dùng, hoàn tác quyền cùng đơn.</li>
+</ul>
+<p>Đây là điều kiện được kiểm tra lại ngay trước khi xóa để tránh một lượt sử dụng mới phát sinh sau khi người dùng mở popup xác nhận.</p>
+<h2 id="section-15-30">15.30. Hoàn tác lịch đặt khi xóa</h2>
+<p>Nếu đơn được tạo từ một lịch thuộc cùng doanh nghiệp và chi nhánh, và lịch đang ở trạng thái Đã xử lý:</p>
+<ul>
+<li>Chuyển lịch về Mới.</li>
+<li>Không xóa lịch.</li>
+<li>Cho phép lịch được check-in lại sau khi kiểm tra tài nguyên thực tế.</li>
+</ul>
+<p>Không được để lịch tiếp tục thể hiện đã check-in khi đơn được tạo từ lần check-in đó đã bị xóa.</p>
+<h2 id="section-15-31">15.31. Hoàn tác hạch toán khi xóa</h2>
+<p>Trước khi xóa đơn, hệ thống đánh dấu giao dịch bán hoặc trả tương ứng không còn là nguồn hợp lệ cho hạch toán.</p>
+<p>Nếu nghiệp vụ đã có bút toán Đã ghi sổ, việc xóa đơn không tự xóa hoặc Bỏ ghi bút toán đó. Hồ sơ hạch toán được đánh dấu nghiệp vụ đã xóa; người có quyền kế toán xử lý bút toán.</p>
+<h2 id="section-15-32">15.32. Loại bỏ nội dung chi tiết của đơn</h2>
+<p>Sau khi các phụ thuộc đã được kiểm tra và hoàn tác, hệ thống loại bỏ các nội dung thuộc đơn, gồm những nhóm phù hợp với giao dịch:</p>
+<ul>
+<li>Sản phẩm, thuộc tính và serial trên đơn.</li>
+<li>Lịch sử đổi giá.</li>
+<li>Trạng thái món và dấu vết KDS.</li>
+<li>Combo, nhóm lựa chọn, sản phẩm con và lịch sử hủy thành phần.</li>
+<li>Chiết khấu và kết quả phân bổ.</li>
+<li>Phụ thu và kết quả phân bổ.</li>
+<li>Voucher đã áp dụng.</li>
+<li>Thông tin giao hàng.</li>
+<li>Thông báo vận hành liên quan.</li>
+<li>Dữ liệu tổng hợp trực tiếp của đơn.</li>
+<li>Nội dung mở rộng của Retail, F&amp;B, Service, Facility hoặc FromPayment.</li>
+</ul>
+<p>Việc loại bỏ phải theo thứ tự phụ thuộc để không để lại nội dung rời rạc tham chiếu một đơn không còn tồn tại.</p>
+<h2 id="section-15-33">15.33. Lịch sử xóa đơn</h2>
+<p>Trước khi đơn bị loại bỏ, hệ thống tạo một lịch sử độc lập gồm:</p>
+<ul>
+<li>Doanh nghiệp và chi nhánh.</li>
+<li>Mã đơn.</li>
+<li>Mô hình bán hàng.</li>
+<li>Khách hàng nếu có.</li>
+<li>Tổng tiền.</li>
+<li>Người xóa.</li>
+<li>Thời điểm xóa.</li>
+<li>Tóm tắt dữ liệu đã bị xóa hoặc hoàn tác, bao gồm thông tin hóa đơn và các ảnh hưởng liên quan.</li>
+</ul>
+<p>Lịch sử này được giữ sau khi đơn không còn trong dữ liệu vận hành và là căn cứ cho kiểm tra nội bộ.</p>
+<h2 id="section-15-34">15.34. Trình tự xóa đơn sau xác nhận</h2>
+<p>Quy trình tổng quát:</p>
+<ol>
+<li>Kiểm tra quyền.</li>
+<li>Tải lại đơn, xác minh đã qua xác nhận và kiểm tra xung đột với các thao tác khác.</li>
+<li>Kiểm tra và xử lý bước xác nhận hóa đơn.</li>
+<li>Xác định toàn bộ công nợ, thanh toán và phần dùng chung với đơn khác.</li>
+<li>Chuẩn bị lịch sử xóa và đánh dấu nguồn hạch toán không còn hiệu lực.</li>
+<li>Hoàn tác sản xuất và toàn bộ phiếu xuất/nhập kho liên quan, theo đúng thứ tự phụ thuộc.</li>
+<li>Hoàn tác công nợ.</li>
+<li>Hoàn tác thanh toán, yêu cầu chi, phiếu thu chi và Sổ tiền.</li>
+<li>Hoàn tác Membership.</li>
+<li>Hoàn tác quyền sử dụng dịch vụ.</li>
+<li>Hoàn tác lịch đặt.</li>
+<li>Xử lý thông tin hóa đơn và dấu vết tích hợp liên quan.</li>
+<li>Loại bỏ nội dung chi tiết của đơn.</li>
+<li>Loại bỏ đơn.</li>
+<li>Cam kết toàn bộ thay đổi.</li>
+</ol>
+<p>Thứ tự có thể được triển khai thành các bước nhỏ hơn theo mô hình nhưng không được vi phạm nguyên tắc hoàn tác phụ thuộc trước khi xóa nguồn.</p>
+<h2 id="section-15-35">15.35. Tính nguyên tử của quy trình xóa</h2>
+<p>Các bước hoàn tác và xóa nội bộ chính phải nằm trong một giao dịch nguyên tử.</p>
+<p>Nếu một bước bắt buộc thất bại:</p>
+<ul>
+<li>Toàn bộ thay đổi của lần xóa được hoàn lại.</li>
+<li>Đơn vẫn tồn tại.</li>
+<li>Không có trạng thái nửa xóa, nửa còn.</li>
+<li>Người dùng nhận thông báo về nguyên nhân chặn hoặc lỗi.</li>
+</ul>
+<p>Riêng việc lập hóa đơn điều chỉnh được thực hiện trước khi bắt đầu phần xóa nội bộ. Nếu bước này thất bại, quy trình dừng trước khi thay đổi đơn.</p>
+<h2 id="section-15-36">15.36. Xử lý sau khi xóa đã cam kết</h2>
+<p>Sau khi xóa thành công, hệ thống cập nhật lại dữ liệu doanh thu ngày cho ngày hoàn tất của đơn và các sản phẩm liên quan.</p>
+<p>Công việc tổng hợp này chạy sau mốc cam kết. Nếu thất bại:</p>
+<ul>
+<li>Đơn không được tự khôi phục.</li>
+<li>Lỗi được ghi nhận để xử lý hậu kỳ.</li>
+<li>Việc chạy lại chỉ cập nhật dữ liệu tổng hợp, không lặp quá trình xóa.</li>
+</ul>
+<h2 id="section-15-37">15.37. Giao diện nút Xóa</h2>
+<p>Nút Xóa chỉ xuất hiện trên màn hình đã cung cấp chức năng và khi:</p>
+<ul>
+<li>Người dùng có quyền đặc biệt.</li>
+<li>Đơn thỏa điều kiện của mô hình.</li>
+</ul>
+<p>Từ sau xác nhận, nút Xóa không bị giới hạn ở đơn đã thanh toán hoặc đã hoàn tất. Người có quyền có thể xóa đơn đã xác nhận, đã gửi, đã nhận, đã hủy, không nhận hoặc đã trả. Đơn Mới dùng Từ chối, không dùng nút Xóa đặc biệt. Người tạo thấy Hủy ở giai đoạn được phép và không tự có nút Xóa chỉ vì là người tạo.</p>
+<p>Giao diện chỉ hỗ trợ người dùng; hệ thống luôn kiểm tra lại quyền, chi nhánh, trạng thái, hóa đơn, công nợ, quyền dịch vụ và các phụ thuộc khác.</p>
+<h2 id="section-15-38">15.38. Kiểm soát đồng thời</h2>
+<p>Trong lúc người dùng xác nhận trả hoặc xóa, dữ liệu có thể thay đổi do thao tác khác. Ngay trước khi cam kết, hệ thống phải kiểm tra lại:</p>
+<ul>
+<li>Số lượng còn có thể trả.</li>
+<li>Số tiền đã hoàn.</li>
+<li>Trạng thái đơn.</li>
+<li>Thanh toán công nợ mới phát sinh.</li>
+<li>Hóa đơn mới được lập.</li>
+<li>Lượt sử dụng mới của quyền Combo.</li>
+<li>Trạng thái tài nguyên hoặc lịch đặt liên quan.</li>
+</ul>
+<p>Hai yêu cầu trả cùng một số lượng không thể cùng thành công nếu tổng vượt số đã bán. Hai yêu cầu xóa cùng một đơn chỉ cho phép một yêu cầu hoàn thành.</p>
+<h2 id="section-15-39">15.39. Nhật ký và lý do</h2>
+<p>Các thao tác hoàn tác phải ghi nhận tối thiểu:</p>
+<ul>
+<li>Đơn nguồn.</li>
+<li>Loại thao tác: hủy, trả, hoàn tiền hoặc xóa.</li>
+<li>Người thực hiện.</li>
+<li>Thời điểm.</li>
+<li>Lý do khi nghiệp vụ yêu cầu.</li>
+<li>Sản phẩm, số lượng và giá trị bị ảnh hưởng.</li>
+<li>Kết quả tiền, công nợ, kho, điểm, quyền dịch vụ và hóa đơn.</li>
+<li>Thông báo lỗi nếu quy trình dừng.</li>
+</ul>
+<p>Lịch sử đổi giá, hủy món, trả hàng và xóa đơn phải giữ đúng ngữ cảnh để người kiểm tra có thể tái dựng lý do số liệu thay đổi.</p>
+<h2 id="section-15-40">15.40. Các nguyên tắc không được vi phạm</h2>
+<ul>
+<li>Không xóa đơn trước rồi mới cố hoàn tác các ảnh hưởng.</li>
+<li>Không trả vượt số lượng đã bán hoặc phần còn lại chưa trả.</li>
+<li>Không hoàn tiền vượt giá trị có thể hoàn.</li>
+<li>Không tính lại giao dịch cũ bằng giá, thuế hoặc cấu hình hiện tại.</li>
+<li>Không xóa công nợ nguồn khi đã có khoản trả nợ hoàn tất chưa được xử lý.</li>
+<li>Không xóa quyền Combo nguồn khi quyền đã được dùng ở đơn khác.</li>
+<li>Không loại chứng từ kho mà bỏ qua tồn, lô, serial và giá vốn.</li>
+<li>Không loại thanh toán nhưng để phiếu tiền hoặc số dư nguồn tiền còn ảnh hưởng.</li>
+<li>Không để điểm Membership tiếp tục phản ánh đơn đã xóa.</li>
+<li>Không để lịch ở trạng thái Đã xử lý khi đơn check-in đã bị xóa.</li>
+<li>Không để hạch toán coi một đơn đã xóa là nguồn còn hiệu lực.</li>
+<li>Không làm mất hoàn toàn dấu vết của đơn đã xóa.</li>
+</ul>
+<h2 id="section-15-41">15.41. Tình huống lỗi và cách xử lý</h2>
+<ul>
+<li>Đơn không thuộc chi nhánh hiện tại: từ chối.</li>
+<li>Người dùng thiếu quyền: từ chối và không thay đổi dữ liệu.</li>
+<li>Đơn không ở trạng thái cho phép hủy, trả hoặc xóa: trả trạng thái mới nhất.</li>
+<li>Số lượng trả vượt số còn lại: từ chối toàn bộ lần trả.</li>
+<li>Serial không thuộc giao dịch gốc hoặc đã trả: từ chối serial đó.</li>
+<li>Giá trị hoàn vượt mức còn lại: tính lại và từ chối yêu cầu sai.</li>
+<li>Không thể nhập lại kho do lô hoặc serial không hợp lệ: không hoàn tất lần trả có yêu cầu nhập kho.</li>
+<li>Công nợ có thanh toán dùng chung: xác định phần thuộc đơn; dừng toàn bộ nếu chưa thể hoàn tác phần đó mà vẫn giữ phần của đơn khác.</li>
+<li>Quyền Combo nguồn đã được sử dụng: chặn xóa đơn mua quyền.</li>
+<li>Xuất hóa đơn điều chỉnh thất bại: giữ nguyên đơn và dừng xóa.</li>
+<li>Hoàn tác một bước nội bộ thất bại: quay lại toàn bộ lần xóa.</li>
+<li>Cập nhật báo cáo sau cam kết thất bại: giữ kết quả xóa, ghi lỗi và chạy lại phần tổng hợp.</li>
+<li>Yêu cầu bị gửi lặp: không trả hàng, hoàn tiền hoặc xóa lần thứ hai.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="14-tinh-tien-va-hoan-tat.html">← 14. Tính tiền và hoàn tất giao dịch</a><a href="16-retail-ban-le.html">16. Retail - Bán lẻ →</a></nav></div></body></html>

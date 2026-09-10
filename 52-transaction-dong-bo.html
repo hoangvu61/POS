@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>52. Transaction, đồng bộ và độ tin cậy — Đặc tả POS</title><meta name="description" content="Transaction, đồng bộ và độ tin cậy"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần XI · Chương 52</p><article class="spec"><h1>CHƯƠNG 52. TRANSACTION, ĐỒNG BỘ VÀ ĐỘ TIN CẬY</h1><details class="section-toc"><summary>Nội dung chương · 13 mục</summary><ol><li><a href="#section-52-1">52.1. Mục tiêu</a></li><li><a href="#section-52-2">52.2. Transaction nội bộ</a></li><li><a href="#section-52-3">52.3. Idempotency</a></li><li><a href="#section-52-4">52.4. Đồng bộ sàn</a></li><li><a href="#section-52-5">52.5. Đồng bộ hóa đơn</a></li><li><a href="#section-52-6">52.6. Hangfire và job nền</a></li><li><a href="#section-52-7">52.7. Outbox và event nghiệp vụ</a></li><li><a href="#section-52-8">52.8. Cache và dữ liệu tổng hợp</a></li><li><a href="#section-52-9">52.9. Xử lý lỗi</a></li><li><a href="#section-52-10">52.10. Luồng tin cậy</a></li><li><a href="#section-52-11">52.11. Đồng thời và khóa</a></li><li><a href="#section-52-12">52.12. Giám sát</a></li><li><a href="#section-52-13">52.13. Kiểm thử phục hồi</a></li></ol></details>
+<h2 id="section-52-1">52.1. Mục tiêu</h2>
+<ul>
+<li>Chương này quy định cách bảo đảm một thao tác nghiệp vụ hoặc hoàn thành trọn vẹn, hoặc không để lại trạng thái sai.</li>
+<li>Cách retry tích hợp ngoài không tạo trùng.</li>
+<li>Và cách job nền phục hồi sau mất kết nối.</li>
+<li>Mục tiêu là bảo toàn tiền, tồn, công nợ, điểm, hóa đơn và lịch sử.</li>
+</ul>
+<h2 id="section-52-2">52.2. Transaction nội bộ</h2>
+<p>Các thao tác chốt đơn, thanh toán, hoàn thành phiếu kho, nhập mua, trả hàng, xóa đơn, ghi bút toán và tạo tờ khai dùng transaction phù hợp. Các bước cập nhật aggregate liên quan commit cùng nhau khi có thể; nếu thất bại rollback phần chưa commit.</p>
+<p>Transaction không được mở quá lâu trong khi chờ HTTP nhà cung cấp. Dữ liệu nội bộ được chuẩn bị và ghi trạng thái đang xử lý, sau đó gọi bên ngoài; kết quả được commit bằng transaction ngắn riêng.</p>
+<h2 id="section-52-3">52.3. Idempotency</h2>
+<p>Mỗi thao tác có thể retry phải có idempotency key gắn tenant, loại thao tác, nguồn và mã nghiệp vụ. Trước khi tạo chứng từ mới, service tra key đã thành công hoặc đang xử lý. Cùng key trả lại kết quả cũ hoặc trạng thái đang chờ, không tạo thêm.</p>
+<p>Đối với đơn sàn, shop id và mã đơn sàn là khóa idempotency đồng bộ. Đối với hóa đơn, mã yêu cầu và mã hóa đơn gốc được dùng trước khi phát hành lại. Đối với import XML, hash tệp, nhà cung cấp và số hóa đơn giúp chặn import trùng.</p>
+<h2 id="section-52-4">52.4. Đồng bộ sàn</h2>
+<p>Job Shopee/TikTok lấy dữ liệu theo trang hoặc khoảng thời gian, lưu mốc đồng bộ và trạng thái từng shop. Khi một trang lỗi, job ghi LastError, giữ mốc thành công gần nhất và retry từ trang lỗi hoặc khoảng chồng lấn có kiểm soát.</p>
+<p>Đồng bộ lại một đơn cập nhật sản phẩm, trạng thái giao nhận, hoàn tiền và phiếu kho theo diff; không reset đơn về Mới nếu đã xử lý trong POS. Dữ liệu sàn bị thiếu được đánh dấu cần kiểm tra, không xóa dữ liệu nội bộ.</p>
+<h2 id="section-52-5">52.5. Đồng bộ hóa đơn</h2>
+<p>Job đồng bộ hạn mức và danh sách hóa đơn theo chi nhánh, nhà cung cấp, mã số thuế và khoảng ngày. Job hiển thị số ngày đã xử lý, tổng ngày, trạng thái đang chạy, hoàn thành hoặc thất bại.</p>
+<p>Nếu provider trả thành công nhưng client mất mạng, job tra cứu bằng mã request trước khi retry. Nếu provider trả lỗi nghiệp vụ, giữ thông báo và không retry vô hạn; lỗi tạm thời dùng backoff. Hạn mức thấp tạo cảnh báo, hết hạn mức tạo lỗi phát hành.</p>
+<h2 id="section-52-6">52.6. Hangfire và job nền</h2>
+<p>Job có payload tối thiểu gồm:</p>
+<ul>
+<li>Tenant/database id.</li>
+<li>Company id.</li>
+<li>Branch id.</li>
+<li>Nguồn.</li>
+<li>Correlation id.</li>
+</ul>
+<p>Job không lấy tenant từ context tĩnh của request trước.</p>
+<p>Mỗi job ghi bắt đầu, kết thúc, số lượng xử lý, lỗi và mốc tiếp theo.</p>
+<p>Job phải an toàn khi chạy hai instance: lock theo shop/ngày/nguồn hoặc idempotency. Job chết giữa chừng có thể chạy lại mà không nhân đôi chứng từ. Job quá nhiều lỗi chuyển failed và cần người xử lý, không tiếp tục tạo tải.</p>
+<h2 id="section-52-7">52.7. Outbox và event nghiệp vụ</h2>
+<p>Khi cần gửi notification, đồng bộ, phát hành hóa đơn hoặc cập nhật cache sau commit, service ghi outbox event cùng transaction nguồn. Worker đọc event, xử lý và đánh dấu đã gửi. Event có aggregate id, version, type, createdAt và retry count.</p>
+<p>Consumer phải idempotent; nhận lại event cùng version không áp dụng hai lần. Event ngoài thứ tự phải kiểm tra version và chờ hoặc bỏ qua khi đã có phiên bản mới hơn.</p>
+<h2 id="section-52-8">52.8. Cache và dữ liệu tổng hợp</h2>
+<p>Cache doanh thu, tồn, hạng hoặc danh sách sàn phải có key tenant, branch và phạm vi. Khi nguồn đổi, event hoặc service invalidation đánh dấu cache cũ. Cache miss tính lại từ nguồn; cache lỗi không trả số của tenant khác.</p>
+<p>Dữ liệu tổng hợp chỉ là bản đọc nhanh, không thay thế chứng từ gốc. Khi reconciliation phát hiện lệch, rebuild từ nguồn theo khoảng ngày và ghi phiên bản rebuild.</p>
+<h2 id="section-52-9">52.9. Xử lý lỗi</h2>
+<p>Lỗi validation trả 4xx, lỗi quyền trả 403, không tồn tại trả 404, lỗi provider hoặc phụ thuộc trả trạng thái cần retry, lỗi bất ngờ ghi log và trả mã correlation. API không trả stack trace hoặc bí mật kết nối.</p>
+<p>Lỗi sau khi commit một phần phải có thao tác bù trừ hoặc trạng thái chờ xử lý; không giả vờ hoàn tác nếu nhà cung cấp bên ngoài đã phát hành kết quả. Mỗi nghiệp vụ phải nêu trực tiếp tác động đã có hiệu lực, phần còn chờ và cách tiếp tục an toàn.</p>
+<h2 id="section-52-10">52.10. Luồng tin cậy</h2>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title-reliability-flow desc-reliability-flow" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-reliability-flow">Giao dịch tin cậy và xử lý lại an toàn</title><desc id="desc-reliability-flow">YÊU CẦU NGHIỆP VỤ. Mã thao tác · người dùng. Phạm vi tenant; TRANSACTION NỘI BỘ. Kiểm tra · ghi nguồn · commit. Rollback khi lỗi; TÍCH HỢP NGOÀI. Idempotency key · request log. Chờ phản hồi nhà cung cấp; LỖI / MẤT KẾT NỐI. Tra cứu mã cũ trước retry. Không tạo bản ghi trùng; KẾT QUẢ CUỐI. Commit hoặc trạng thái cần xử lý. Có thể đối chiếu lịch sử</desc><defs><marker id="arrow-reliability-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 86 V123 H480 V155" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-reliability-flow)"/><path d="M480 244 V297 H230 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-reliability-flow)"/><path d="M480 244 V297 H730 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-reliability-flow)"/><path d="M230 448 V484 H480 V515" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-reliability-flow)"/><path d="M730 448 V484 H480 V515" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-reliability-flow)"/><g><rect x="300" y="14" width="360" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="34" font-weight="700">YÊU CẦU NGHIỆP VỤ</tspan><tspan x="480" y="56">Mã thao tác · người dùng</tspan><tspan x="480" y="78">Phạm vi tenant</tspan></text></g><g><rect x="300" y="160" width="360" height="84" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="186" font-weight="700">TRANSACTION NỘI BỘ</tspan><tspan x="480" y="208">Kiểm tra · ghi nguồn · commit</tspan><tspan x="480" y="230">Rollback khi lỗi</tspan></text></g><g><rect x="55" y="350" width="350" height="98" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="230" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="230" y="383" font-weight="700">TÍCH HỢP NGOÀI</tspan><tspan x="230" y="405">Idempotency key · request log</tspan><tspan x="230" y="427">Chờ phản hồi nhà cung cấp</tspan></text></g><g><rect x="555" y="350" width="350" height="98" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="730" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="730" y="383" font-weight="700">LỖI / MẤT KẾT NỐI</tspan><tspan x="730" y="405">Tra cứu mã cũ trước retry</tspan><tspan x="730" y="427">Không tạo bản ghi trùng</tspan></text></g><g><rect x="300" y="520" width="360" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="540" font-weight="700">KẾT QUẢ CUỐI</tspan><tspan x="480" y="562">Commit hoặc trạng thái cần xử lý</tspan><tspan x="480" y="584">Có thể đối chiếu lịch sử</tspan></text></g></svg></div><figcaption><strong>Giao dịch tin cậy và xử lý lại an toàn.</strong> Giao dịch nội bộ dùng transaction; tích hợp ngoài dùng mã idempotency, nhật ký yêu cầu và tra cứu kết quả trước khi thử lại.</figcaption></figure>
+
+<ol>
+<li>Tiếp nhận request, xác thực tenant và quyền.</li>
+<li>Kiểm tra idempotency và trạng thái nguồn.</li>
+<li>Ghi dữ liệu nội bộ trong transaction.</li>
+<li>Gửi event hoặc gọi provider ngoài bằng request log.</li>
+<li>Commit kết quả hoặc ghi trạng thái cần xử lý.</li>
+<li>Retry sau khi tra cứu kết quả cũ; không tạo trùng.</li>
+</ol>
+<h2 id="section-52-11">52.11. Đồng thời và khóa</h2>
+<p>Thao tác tồn kho khóa phạm vi warehouse/product/lô hoặc dùng concurrency token để hai người không cùng hoàn thành vượt tồn. Thanh toán khóa đơn hoặc version để không ghi hai phiếu thu cho cùng số tiền. Sinh mã chứng từ dùng counter nguyên tử.</p>
+<p>Khi xung đột, service trả lỗi thử lại và giữ dữ liệu người dùng. Không tự ghi đè giá, số lượng hoặc trạng thái mới nhất mà không cho biết có người khác đã cập nhật.</p>
+<h2 id="section-52-12">52.12. Giám sát</h2>
+<p>Metric cần theo dõi gồm:</p>
+<ul>
+<li>Tỷ lệ lỗi API.</li>
+<li>Transaction rollback.</li>
+<li>Job retry.</li>
+<li>Thời gian đồng bộ.</li>
+<li>Số hóa đơn lỗi.</li>
+<li>Số phiếu xuất Nháp lâu.</li>
+<li>Tồn âm chưa xử lý.</li>
+<li>Event tồn đọng.</li>
+</ul>
+<p>Alert có ngưỡng, tenant, branch và correlation id.</p>
+<h2 id="section-52-13">52.13. Kiểm thử phục hồi</h2>
+<p>Kiểm thử mất mạng trước/sau commit, timeout provider, job dừng giữa trang, retry cùng key, hai request đồng thời, rollback phần chi tiền, bổ sung lô sau xuất âm và rebuild cache. Kết quả phải chứng minh không tạo trùng hoặc mất tiền/tồn.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="51-trang-thai-enum.html">← 51. Trạng thái và Enum toàn hệ thống</a><a href="53-audit-lich-su-du-lieu-qua-khu.html">53. Audit, lịch sử và dữ liệu quá khứ →</a></nav></div></body></html>

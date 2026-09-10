@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>6. Cấu hình hệ thống — Đặc tả POS</title><meta name="description" content="Cấu hình hệ thống"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần II · Chương 6</p><article class="spec"><h1>CHƯƠNG 6. CẤU HÌNH HỆ THỐNG</h1><details class="section-toc"><summary>Nội dung chương · 19 mục</summary><ol><li><a href="#section-6-1">6.1. Vai trò của cấu hình trong toàn hệ thống</a></li><li><a href="#section-6-2">6.2. Phạm vi áp dụng</a></li><li><a href="#section-6-3">6.3. Vai trò và quyền thao tác</a></li><li><a href="#section-6-4">6.4. Cách hiển thị và cập nhật một thiết lập</a></li><li><a href="#section-6-5">6.5. Thiết lập nền của hệ thống</a></li><li><a href="#section-6-6">6.6. Cấu hình chung của doanh nghiệp</a></li><li><a href="#section-6-7">6.7. Cấu hình bán hàng</a></li><li><a href="#section-6-8">6.8. Cấu hình hóa đơn</a></li><li><a href="#section-6-9">6.9. Cấu hình quản lý ca</a></li><li><a href="#section-6-10">6.10. Cấu hình giao hàng tận nơi</a></li><li><a href="#section-6-11">6.11. Cấu hình công nợ</a></li><li><a href="#section-6-12">6.12. Cấu hình thanh toán tại chi nhánh</a></li><li><a href="#section-6-13">6.13. Cấu hình in ấn</a></li><li><a href="#section-6-14">6.14. Cấu hình nhà bếp</a></li><li><a href="#section-6-15">6.15. Điều kiện hiển thị và khóa giá trị</a></li><li><a href="#section-6-16">6.16. Thời điểm hiệu lực và bảo toàn lịch sử</a></li><li><a href="#section-6-17">6.17. Lỗi, hủy thao tác và gửi lại</a></li><li><a href="#section-6-18">6.18. Nhật ký thay đổi và khả năng đối chiếu</a></li><li><a href="#section-6-19">6.19. Tác động xuyên phân hệ</a></li></ol></details>
+<h2 id="section-6-1">6.1. Vai trò của cấu hình trong toàn hệ thống</h2>
+<p>Cấu hình hệ thống là tập hợp các lựa chọn quyết định cách doanh nghiệp và từng chi nhánh vận hành POS. Một cấu hình có thể làm thay đổi menu được nhìn thấy, nội dung phải nhập, cách tính tiền, cách lập chứng từ, cách kiểm soát kho, phương thức thanh toán được phép dùng, thiết bị nhận lệnh in và những bước mà người dùng phải hoàn thành trước khi tiếp tục.</p>
+<p>Cấu hình không chỉ phục vụ việc trình bày giao diện. Mọi chức năng chịu ảnh hưởng phải dùng cùng một giá trị có hiệu lực. Nếu chi nhánh đang được cấu hình không cho phép bán thiếu tồn, màn hình bán hàng, xử lý đơn, phiếu xuất và báo cáo tồn đều phải tuân theo lựa chọn đó. Nếu chi nhánh chưa có tài khoản nhận tiền cho một phương thức thanh toán, người dùng không được lách qua màn hình để ghi nhận phương thức ấy bằng một đường xử lý khác.</p>
+<p>Chương này quy định:</p>
+<ul>
+<li>Phạm vi áp dụng của từng thiết lập;</li>
+<li>Vai trò được xem hoặc thay đổi;</li>
+<li>Kiểu thông tin cần nhập, giá trị ban đầu và tập lựa chọn;</li>
+<li>Điều kiện làm một thiết lập xuất hiện, bị ẩn hoặc bị khóa;</li>
+<li>Thời điểm giá trị mới bắt đầu có hiệu lực;</li>
+<li>Cách xử lý khi cấu hình thiếu, sai hoặc mâu thuẫn;</li>
+<li>Ảnh hưởng của thay đổi cấu hình đến các phân hệ liên quan.</li>
+</ul>
+<p>Chương này xác định cấu hình điều khiển tính giá vốn, trả hàng, kết ca, công nợ và phát hành hóa đơn, cùng ý nghĩa của từng giá trị cấu hình. Mỗi quy trình phải đọc đúng giá trị có hiệu lực tại thời điểm nghiệp vụ.</p>
+<h2 id="section-6-2">6.2. Phạm vi áp dụng</h2>
+<h3 id="section-6-2-1">6.2.1. Thiết lập nền của hệ thống</h3>
+<p>Thiết lập nền xác định cách một chi nhánh được tổ chức ngay từ đầu, tiêu biểu là loại hình kinh doanh. Đây là thông tin dùng để quyết định nhóm chức năng nào được mở và nhóm cấu hình nào có ý nghĩa đối với chi nhánh.</p>
+<p>Giá trị nền do người có trách nhiệm quản trị hệ thống duy trì. Người dùng doanh nghiệp chỉ nhìn thấy và lựa chọn trong phạm vi đã được cung cấp; họ không tự tạo thêm một loại cấu hình mới hoặc tự sửa ý nghĩa của một lựa chọn.</p>
+<h3 id="section-6-2-2">6.2.2. Thiết lập cấp doanh nghiệp</h3>
+<p>Thiết lập cấp doanh nghiệp có hiệu lực thống nhất cho mọi chi nhánh trực thuộc. Những nội dung liên quan đến loại hình đăng ký kinh doanh, phương pháp thuế, chế độ kế toán, kỳ kế toán, quản lý tồn kho, phương pháp tính giá xuất, cách sinh mã đơn, cho phép khách nợ, cho phép trả hàng và cách phân bổ trả nợ thuộc cấp này.</p>
+<p>Khi giá trị cấp doanh nghiệp thay đổi, mọi chi nhánh sử dụng giá trị mới cho nghiệp vụ phát sinh sau thời điểm lưu thành công. Giao dịch đã chốt trước đó không bị thay đổi chỉ vì cấu hình hiện tại khác với lúc giao dịch được lập.</p>
+<h3 id="section-6-2-3">6.2.3. Thiết lập cấp chi nhánh</h3>
+<p>Thiết lập cấp chi nhánh chỉ có hiệu lực tại địa điểm được chọn.</p>
+<p>Nhóm này gồm:</p>
+<ul>
+<li>Loại hình kinh doanh của chi nhánh.</li>
+<li>Hình ảnh sản phẩm mặc định.</li>
+<li>Màn hình phụ cho khách.</li>
+<li>Kết nối hóa đơn.</li>
+<li>Phương thức nhận tiền.</li>
+<li>Quản lý ca.</li>
+<li>Máy in.</li>
+<li>Mẫu in.</li>
+<li>Nhà bếp.</li>
+<li>Những thông số vận hành riêng tại quầy.</li>
+</ul>
+<p>Người dùng phải biết rõ mình đang cấu hình chi nhánh nào. Khi đổi chi nhánh đang làm việc, hệ thống tải lại các giá trị tương ứng, không giữ nhầm lựa chọn của chi nhánh trước trên biểu mẫu.</p>
+<h3 id="section-6-2-4">6.2.4. Giá trị có hiệu lực</h3>
+<p>Mỗi thiết lập luôn có một giá trị có hiệu lực được xác định theo thứ tự sau:</p>
+<ol>
+<li>Nếu thiết lập thuộc cấp chi nhánh và chi nhánh đã có giá trị hợp lệ, dùng giá trị của chi nhánh đó.</li>
+<li>Nếu thiết lập thuộc cấp doanh nghiệp và doanh nghiệp đã có giá trị hợp lệ, dùng giá trị của doanh nghiệp.</li>
+<li>Nếu chưa từng lưu giá trị riêng, dùng giá trị ban đầu đã quy định cho thiết lập.</li>
+<li>Nếu không có giá trị ban đầu và thông tin là bắt buộc để thực hiện nghiệp vụ, dừng nghiệp vụ và chỉ rõ nội dung cần cấu hình.</li>
+</ol>
+<p>Không được tự lấy cấu hình của một chi nhánh khác làm giá trị thay thế. Không được dùng giá trị cũ đang còn trên trình duyệt sau khi người dùng đã chuyển doanh nghiệp hoặc chi nhánh.</p>
+<h2 id="section-6-3">6.3. Vai trò và quyền thao tác</h2>
+<h3 id="section-6-3-1">6.3.1. Quản trị hệ thống</h3>
+<p>Quản trị hệ thống duy trì các thuộc tính của danh mục thiết lập nền:</p>
+<ul>
+<li>Tên gọi.</li>
+<li>Kiểu nhập.</li>
+<li>Tập lựa chọn.</li>
+<li>Giá trị ban đầu.</li>
+<li>Thứ tự hiển thị.</li>
+<li>Phạm vi áp dụng.</li>
+<li>Nhóm người được nhìn thấy.</li>
+</ul>
+<p>Vai trò này có thể kiểm tra cấu hình ở phạm vi toàn hệ thống nhưng không được làm thay nghiệp vụ hằng ngày của doanh nghiệp nếu không đồng thời có quyền tại doanh nghiệp đó.</p>
+<h3 id="section-6-3-2">6.3.2. Merchant</h3>
+<p>Merchant được xem cấu hình cấp doanh nghiệp để hỗ trợ vận hành và đối chiếu. Vai trò Merchant không tự thay đổi giá trị nghiệp vụ của doanh nghiệp. Nút lưu và thao tác thay đổi phải bị ẩn hoặc khóa; yêu cầu gửi trực tiếp nhằm thay đổi cũng bị từ chối.</p>
+<h3 id="section-6-3-3">6.3.3. Tài khoản chủ của khách hàng</h3>
+<p>Tài khoản chủ của khách hàng được cấu hình các nội dung cấp doanh nghiệp và cấp chi nhánh thuộc doanh nghiệp mình. Khi thao tác cấp chi nhánh, tài khoản vẫn phải chọn đúng chi nhánh và đáp ứng các điều kiện riêng của thiết lập.</p>
+<h3 id="section-6-3-4">6.3.4. Nhân viên của khách hàng</h3>
+<p>Nhân viên thông thường chỉ được cấu hình chi nhánh hiện tại khi đã được cấp quyền tương ứng. Quyền xem không tự bao gồm quyền sửa. Quyền sửa một nhóm cấu hình không tự mở quyền sửa các nhóm nhạy cảm khác như thuế, hóa đơn, thanh toán hoặc kho.</p>
+<p>Nếu nhân viên được điều chuyển hoặc bị gỡ khỏi chi nhánh, quyền thay đổi cấu hình tại chi nhánh đó chấm dứt ngay. Một màn hình đã mở từ trước không được dùng để lưu thay đổi sau khi quyền không còn hiệu lực.</p>
+<h3 id="section-6-3-5">6.3.5. Kiểm tra quyền tại thời điểm lưu</h3>
+<p>Hệ thống kiểm tra quyền khi mở màn hình và kiểm tra lại khi lưu. Việc giao diện từng hiển thị nút sửa không phải là căn cứ đủ để chấp nhận yêu cầu. Nếu quyền đã thay đổi trong lúc người dùng đang thao tác, hệ thống từ chối lưu, giữ nguyên giá trị đang có và thông báo rằng quyền hiện tại không còn phù hợp.</p>
+<h2 id="section-6-4">6.4. Cách hiển thị và cập nhật một thiết lập</h2>
+<p>Mỗi thiết lập phải có tên dễ hiểu, phần giải thích tác động, phạm vi doanh nghiệp hoặc chi nhánh, giá trị hiện hành và điều kiện xuất hiện. Kiểu nhập được thể hiện phù hợp với bản chất của giá trị:</p>
+<ul>
+<li>Lựa chọn một phương án đối với các quy tắc có tập giá trị xác định;</li>
+<li>Bật hoặc tắt đối với quy tắc đúng hoặc sai;</li>
+<li>Nhập số đối với số chữ số, số phút, kích thước hoặc ngưỡng cảnh báo;</li>
+<li>Nhập một dòng đối với tài khoản, ký hiệu, đường dẫn hoặc tên;</li>
+<li>Nhập nhiều dòng đối với nội dung nhúng;</li>
+<li>Tải một ảnh hoặc một danh sách ảnh đối với cấu hình hình ảnh;</li>
+<li>Chọn tài khoản ngân hàng, máy in hoặc mẫu in từ danh sách hợp lệ.</li>
+</ul>
+<p>Khi một thiết lập phụ thuộc thiết lập khác, giao diện chỉ hiển thị khi điều kiện đã thỏa. Giá trị đã lưu trước đó có thể được giữ để dùng lại khi người dùng bật lại tính năng, nhưng không được âm thầm có hiệu lực trong thời gian thiết lập cha đang tắt.</p>
+<p>Khi người dùng bấm lưu, hệ thống thực hiện lần lượt:</p>
+<ol>
+<li>Kiểm tra quyền.</li>
+<li>Kiểm tra phạm vi.</li>
+<li>Kiểm tra kiểu giá trị.</li>
+<li>Kiểm tra tập lựa chọn.</li>
+<li>Kiểm tra đối tượng liên quan.</li>
+<li>Kiểm tra tổ hợp phụ thuộc.</li>
+<li>Kiểm tra có thay đổi đồng thời hay không.</li>
+</ol>
+<p>Chỉ khi tất cả điều kiện đạt thì giá trị mới được áp dụng.</p>
+<p>Nếu hai người cùng mở một nhóm cấu hình, người lưu sau không được ghi đè âm thầm thay đổi của người lưu trước. Hệ thống yêu cầu tải lại giá trị hiện hành, sau đó người dùng chủ động xác nhận nội dung cần sửa.</p>
+<h2 id="section-6-5">6.5. Thiết lập nền của hệ thống</h2>
+<h3 id="section-6-5-1">6.5.1. Loại hình kinh doanh của chi nhánh</h3>
+<p>Đây là lựa chọn một phương án ở cấp chi nhánh. Giá trị ban đầu là <strong>Retail</strong>. Các lựa chọn được cung cấp trong nhóm cấu hình này gồm:</p>
+<ul>
+<li><strong>Retail</strong> cho quy trình bán lẻ hàng hóa;</li>
+<li><strong>F&amp;B</strong> cho quy trình bàn, món và chế biến.</li>
+</ul>
+<p>Loại hình kinh doanh quyết định các menu, danh mục và cấu hình chuyên biệt được hiển thị. Khi chọn Retail, hệ thống mới hiển thị thiết lập <strong>Cho phép trả hàng sau khi khách nhận hàng</strong>. Khi chọn F&amp;B, hệ thống hiển thị các thiết lập liên quan đến nhà bếp và in chế biến.</p>
+<p>Thay đổi loại hình không xóa đơn, sản phẩm, khu vực, bàn, phiếu chế biến hoặc lịch sử đã phát sinh. Trước khi đổi, hệ thống phải cảnh báo những chức năng sẽ bị ẩn và ngăn đổi nếu còn quy trình đang mở không thể hoàn tất trong loại hình mới.</p>
+<h3 id="section-6-5-2">6.5.2. Kỳ kế toán</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Tháng</strong>. Người dùng được chọn:</p>
+<ul>
+<li>Tháng;</li>
+<li>Quý;</li>
+<li>Năm.</li>
+</ul>
+<p>Kỳ kế toán là căn cứ chia khoảng thời gian cho báo cáo doanh thu, tồn kho, báo cáo tài chính và các phép tổng hợp theo kỳ. Nếu phương pháp bình quân được chọn là Theo từng kỳ, cấu hình này đồng thời xác định ranh giới của mỗi lần tính bình quân.</p>
+<p>Thiết lập này xác định độ dài kỳ, không tạo trạng thái Mở hoặc Khóa cho từng kỳ. Khi thay đổi cách chia kỳ, hệ thống phải tính lại các số tổng hợp chịu ảnh hưởng và thông báo phạm vi thay đổi; không dùng một trạng thái khóa kỳ chưa được quản lý để chặn nghiệp vụ vận hành.</p>
+<h2 id="section-6-6">6.6. Cấu hình chung của doanh nghiệp</h2>
+<h3 id="section-6-6-1">6.6.1. Loại hình đăng ký kinh doanh</h3>
+<p>Đây là cấu hình xác định mô hình hoạt động chính của chi nhánh, nhưng giá trị được quản lý thống nhất ở phạm vi <strong>Doanh nghiệp (Company)</strong> để các chi nhánh không rơi vào những bộ thuế/kế toán khác nhau ngoài ý muốn. Kiểu dữ liệu là <strong>Option (chọn từ danh sách)</strong>; giá trị mặc định là <strong>Hộ kinh doanh</strong>. Hai lựa chọn hiển thị là <strong>Công ty</strong> và <strong>Hộ kinh doanh</strong>.</p>
+<p>Loại hình này điều khiển trực tiếp phương pháp thuế, phương pháp tính giá xuất và danh sách chế độ kế toán có thể chọn.</p>
+<p>Khi là Hộ kinh doanh:</p>
+<ul>
+<li>Phương pháp tính thuế GTGT được cố định ở Trực tiếp và không cho sửa;</li>
+<li>Phương pháp tính giá xuất kho được cố định ở Bình quân và lựa chọn phương pháp có thể được ẩn;</li>
+<li>Chế độ kế toán chỉ cho chọn TT152 hoặc TT58;</li>
+<li>Giá trị ban đầu của chế độ kế toán là TT152.</li>
+</ul>
+<p>Khi là Công ty:</p>
+<ul>
+<li>Phương pháp tính thuế GTGT cho phép chọn Khấu trừ hoặc Trực tiếp;</li>
+<li>Phương pháp tính giá xuất kho cho phép chọn trong danh sách được hỗ trợ nếu quản lý tồn kho đang bật;</li>
+<li>Chế độ kế toán cho phép chọn TT58, TT133 hoặc TT99.</li>
+</ul>
+<p>Nếu người dùng đổi loại hình và giá trị hiện hành của một thiết lập phụ không còn hợp lệ, hệ thống không được lưu một tổ hợp mâu thuẫn. Giao diện phải yêu cầu chọn lại chế độ kế toán phù hợp hoặc thông báo rõ giá trị nào sẽ được cố định trước khi người dùng xác nhận.</p>
+<h3 id="section-6-6-2">6.6.2. Phương pháp tính thuế GTGT</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Trực tiếp</strong>. Hai lựa chọn là <strong>Khấu trừ</strong> và <strong>Trực tiếp</strong>.</p>
+<p>Phương pháp này phải được áp dụng ổn định ít nhất trong một kỳ kế toán năm cùng các chính sách xử lý hóa đơn, chứng từ tương ứng. Hệ thống không cho thay đổi tùy ý khi đã có giao dịch trong kỳ nếu thay đổi làm các chứng từ cùng kỳ sử dụng hai cách tính không tương thích. Khi được phép đổi cho kỳ sau, phương pháp mới chỉ áp dụng từ ngày hiệu lực; chứng từ đã phát sinh giữ cách hiểu tại thời điểm lập.</p>
+<p>Khi chọn Khấu trừ:</p>
+<ul>
+<li>Danh mục ngành hàng không yêu cầu nhập tỷ lệ thuế GTGT và thuế thu nhập cá nhân tính theo doanh thu;</li>
+<li>Sản phẩm hiển thị giá trước thuế, giá sau thuế và lựa chọn mức thuế GTGT;</li>
+<li>Mức thuế GTGT cho sản phẩm được chọn từ danh sách:<ul>
+<li>Không kê khai.</li>
+<li>Không chịu thuế.</li>
+<li>0%.</li>
+<li>5%.</li>
+<li>8%.</li>
+<li>10%.</li>
+</ul>
+</li>
+<li>Chứng từ nhập hiển thị riêng tiền thuế GTGT;</li>
+<li>Thuế GTGT của hàng mua được tách khỏi giá trị dùng để xác định giá vốn;</li>
+<li>Bán hàng sử dụng loại hóa đơn GTGT và thể hiện tiền trước thuế, tiền thuế, tiền sau thuế theo quy tắc của phân hệ hóa đơn.</li>
+</ul>
+<p>Khi chọn Trực tiếp:</p>
+<ul>
+<li>Danh mục ngành hàng hiển thị ngành nghề và tỷ lệ tính thuế trên doanh thu;</li>
+<li>Sản phẩm sử dụng một giá bán duy nhất, không hiển thị lựa chọn mức thuế GTGT riêng trên sản phẩm;</li>
+<li>Chứng từ nhập không hiển thị VAT riêng trên từng dòng hàng hoặc từng khoản Chi phí mua hàng;</li>
+<li>Toàn bộ khoản phải trả cho hàng mua được tính vào giá trị dùng để xác định giá vốn;</li>
+<li>Bán hàng sử dụng hóa đơn bán hàng và phân bổ doanh thu theo nhóm ngành khi một đơn có nhiều tỷ lệ.</li>
+</ul>
+<p>Phương pháp thuế ảnh hưởng đồng thời đến danh mục, nhập hàng, bán hàng, chiết khấu, phụ thu, hóa đơn, báo cáo thuế và kế toán. Mọi màn hình phải đọc giá trị hiện hành theo cùng phạm vi doanh nghiệp.</p>
+<h3 id="section-6-6-3">6.6.3. Chế độ kế toán</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp. Giá trị ban đầu là <strong>TT152</strong> vì loại hình đăng ký kinh doanh ban đầu là Hộ kinh doanh.</p>
+<p>Danh sách lựa chọn được lọc theo loại hình đăng ký kinh doanh:</p>
+<ul>
+<li>Hộ kinh doanh: TT152 hoặc TT58;</li>
+<li>Công ty: TT58, TT133 hoặc TT99.</li>
+</ul>
+<p>Chế độ kế toán quyết định hệ thống sổ, mẫu báo cáo và cách phân loại nghiệp vụ được mở cho doanh nghiệp. Việc chọn chế độ không tự thay đổi nội dung kinh tế của đơn hàng, phiếu nhập, phiếu xuất hoặc khoản thanh toán. Nghiệp vụ đã hoàn tất được phản ánh theo chế độ có hiệu lực tại ngày hạch toán và không bị đổi ngược khi cấu hình sau này thay đổi.</p>
+<p>Nếu người dùng chuyển sang loại hình mà chế độ hiện tại không còn nằm trong danh sách, hệ thống yêu cầu chọn chế độ mới trước khi lưu. Không được tự chọn một chế độ khác mà không cho người dùng biết.</p>
+<h3 id="section-6-6-4">6.6.4. Sử dụng kho và quản lý tồn kho</h3>
+<p>Đây là thiết lập bật hoặc tắt ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Tắt</strong>.</p>
+<p>Khi bật:</p>
+<ul>
+<li>Màn hình thêm hoặc sửa chi nhánh bắt buộc chọn kho cho chi nhánh;</li>
+<li>Trên sản phẩm xuất hiện lựa chọn quản lý tồn;</li>
+<li>Các chức năng nhập, xuất, tồn, điều chuyển, kiểm kê, lô và serial được mở theo quyền;</li>
+<li>Hệ thống hiển thị phương pháp tính giá xuất kho, cách tính bình quân, giá nhập mặc định và xử lý khi tồn không đủ;</li>
+<li>Bán hàng, trả hàng, sản xuất và mua hàng có thể tạo nghiệp vụ kho tương ứng.</li>
+</ul>
+<p>Khi tắt:</p>
+<ul>
+<li>Thêm chi nhánh không bắt buộc chọn kho;</li>
+<li>Các menu và thao tác kho không cần thiết được ẩn hoặc khóa;</li>
+<li>Sản phẩm mới không bị yêu cầu khai báo quản lý tồn;</li>
+<li>Bán hàng không tạo biến động tồn;</li>
+<li>Lịch sử kho đã có vẫn được bảo toàn.</li>
+</ul>
+<p>Không cho tắt nếu còn phiếu kho, đơn hàng hoặc lệnh sản xuất đang mở mà việc tắt làm chúng không thể hoàn tất. Nếu được tắt, thay đổi chỉ tác động nghiệp vụ mới, không xóa các lần nhập xuất trước đó.</p>
+<h3 id="section-6-6-5">6.6.5. Phương pháp tính giá xuất kho</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp, chỉ hiển thị khi quản lý tồn kho đang bật. Giá trị ban đầu là <strong>Bình quân</strong> (phương pháp bình quân gia quyền).</p>
+<p>Các lựa chọn gồm:</p>
+<ul>
+<li><strong>Bình quân</strong>: dùng đơn giá bình quân theo cách tính đã chọn;</li>
+<li><strong>Đích danh</strong>: lấy đúng giá của lô được chỉ định cho lần xuất;</li>
+<li><strong>FIFO</strong>: ưu tiên lô nhập sớm hơn;</li>
+<li><strong>LIFO</strong>: ưu tiên lô nhập muộn hơn;</li>
+<li><strong>Theo nhóm sản phẩm</strong>: mỗi nhóm sản phẩm có thể dùng một phương pháp riêng.</li>
+</ul>
+<p>Với Hộ kinh doanh, giá trị luôn là Bình quân và lựa chọn phương pháp bị khóa hoặc ẩn. Với Công ty, người dùng được chọn trong danh sách trên.</p>
+<p>Khi chọn Theo nhóm sản phẩm, nhóm chưa có phương pháp riêng không được để kết quả xuất hàng rơi vào trạng thái không xác định. Hệ thống dùng phương pháp mặc định đã quy định cho nhóm hoặc yêu cầu hoàn thiện cấu hình trước khi xuất. Những nhóm chọn Bình quân tiếp tục chịu điều khiển của cấu hình <strong>Cách tính bình quân</strong>.</p>
+<p>Thay đổi phương pháp không tự viết lại giá vốn của phiếu đã hoàn thành. Nếu đang có phiếu nháp, phiếu xuất chờ đủ hàng hoặc lần tính lại chưa kết thúc, hệ thống phải yêu cầu xử lý xong trước khi đổi.</p>
+<h3 id="section-6-6-6">6.6.6. Cách tính bình quân</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Sau từng lô nhập</strong>. Thiết lập chỉ hiển thị khi quản lý tồn kho đang bật và phương pháp tính giá xuất là Bình quân hoặc Theo nhóm sản phẩm có nhóm dùng Bình quân.</p>
+<p>Lựa chọn <strong>Theo từng kỳ</strong> dùng số lượng và giá trị tồn đầu kỳ cộng với toàn bộ số lượng và giá trị nhập đã hoàn thành trong kỳ. Đơn giá bình quân của kỳ được xác định bằng tổng giá trị có thể phân bổ chia cho tổng số lượng có thể phân bổ. Các lần xuất trong cùng kỳ dùng đơn giá của kỳ sau khi hệ thống tính lại các phát sinh có hiệu lực trong kỳ.</p>
+<p>Lựa chọn <strong>Sau từng lô nhập</strong> tính lại bình quân ngay sau mỗi lô nhập đã hoàn thành. Giá trị tồn ngay trước lần nhập cộng giá trị của lần nhập được chia cho số lượng tồn ngay trước lần nhập cộng số lượng nhập. Lần xuất dùng mức bình quân gần nhất đã có hiệu lực trước thời điểm xuất.</p>
+<p>Khi người dùng nhập lùi ngày hoặc điều chỉnh một lần nhập cũ, hệ thống xác định mốc chịu ảnh hưởng và tính lại các lần xuất liên quan theo đúng phương pháp. Một lần nhập có thời điểm nghiệp vụ sau lần xuất không được dùng để thay đổi giá vốn của lần xuất trước chỉ vì hiện tại hàng đã về kho.</p>
+<p>Nếu mẫu số bằng không hoặc dữ liệu không đủ để xác định bình quân, hệ thống không tự đặt một giá trị tùy ý. Phiếu chịu ảnh hưởng được giữ ở trạng thái cần xử lý theo quy tắc kho và người dùng nhận thông báo cụ thể.</p>
+<h3 id="section-6-6-7">6.6.7. Giá nhập mặc định</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp, chỉ hiển thị khi quản lý tồn kho đang bật. Giá trị ban đầu là <strong>Không tự điền</strong>, tương ứng giá gợi ý bằng 0.</p>
+<p>Người dùng được chọn:</p>
+<ul>
+<li>Không tự điền, dùng giá 0 để người lập nhập;</li>
+<li>Lấy giá nhập gần nhất của sản phẩm;</li>
+<li>Lấy giá bình quân của sản phẩm tại kho đang chọn.</li>
+</ul>
+<p>Giá được điền chỉ là gợi ý ban đầu. Người có quyền vẫn được sửa trước khi hoàn thành phiếu nhập. Với lựa chọn Giá nhập lần cuối, hệ thống ưu tiên lần nhập gần nhất tại kho đang chọn; nếu kho này chưa có dữ liệu thì tìm lần nhập gần nhất ở kho khác trong cùng doanh nghiệp, và chỉ dùng 0 khi toàn doanh nghiệp chưa có dữ liệu. Với lựa chọn Giá trung bình trong kho, nếu kho đang chọn chưa xác định được bình quân thì dùng 0, không mượn bình quân của kho khác.</p>
+<p>Khi lập phiếu lùi ngày, giá gợi ý phải được xác định theo kho và thời điểm nghiệp vụ phù hợp, không dùng một giá hiện tại hình thành sau ngày nhập để làm như thể đó là giá đã biết tại thời điểm cũ.</p>
+<h3 id="section-6-6-8">6.6.8. Xử lý khi hàng tồn không đủ để xuất kho</h3>
+<p>Đây là cấu hình kiểu lựa chọn ở phạm vi <strong>Doanh nghiệp (Company)</strong>, chỉ hiển thị khi bật <strong>Có sử dụng kho và quản lý tồn kho không</strong>. Giá trị mặc định là <strong>Không xử lý hoàn thành phiếu xuất</strong>.</p>
+<p>Người dùng được chọn một trong ba cách:</p>
+<ul>
+<li><strong>Thông báo lỗi</strong>: hệ thống báo không đủ tồn và dừng thao tác đang yêu cầu xuất;</li>
+<li><strong>Không xử lý hoàn thành phiếu xuất</strong>: hệ thống tạo và lưu phiếu xuất nhưng giữ phiếu ở trạng thái Nháp, chưa hoàn thành và chưa trừ tồn;</li>
+<li><strong>Trừ âm tồn kho</strong>: hệ thống hoàn thành phiếu, ghi đủ số lượng xuất và cho phép tồn sau giao dịch âm.</li>
+</ul>
+<p>Ở lựa chọn <strong>Không xử lý hoàn thành phiếu xuất</strong>, phiếu tự sinh từ bán hàng, giao hàng hoặc sản xuất không được sửa hay xóa thủ công. Người dùng phải thay đổi hoặc hủy từ nghiệp vụ gốc. Phiếu chỉ được hoàn thành khi có đủ hàng đáp ứng tại thời điểm nghiệp vụ của lần xuất. Đơn hàng có Phiếu xuất bán hàng chưa hoàn thành chưa được xử lý trả hàng; người dùng phải hoàn thành Phiếu xuất trước để xác định nguồn xuất và giá vốn bán gốc.</p>
+<p>Ở lựa chọn <strong>Trừ âm tồn kho</strong>, hệ thống phân bổ phần có lô hợp lệ trước và theo dõi phần còn thiếu để bổ sung sau.</p>
+<ul>
+<li>Khi có nhập bổ sung, chỉ lô có thời điểm phù hợp trước lần xuất mới được dùng để bù cho phần thiếu của lần xuất đó.</li>
+<li>Hệ thống không ghi thêm một lần xuất mới cho cùng số lượng.</li>
+<li>Giá vốn và lịch sử chịu ảnh hưởng được tính lại theo phương pháp hiện hành.</li>
+<li>Trên đơn có Phiếu xuất đang thiếu nguồn, sản phẩm nào chưa xác định đủ nguồn xuất và giá vốn gốc thì chưa được trả.</li>
+<li>Doanh nghiệp phải nhập bổ sung và hoàn tất phân bổ nguồn của phần hàng đó trước.</li>
+</ul>
+<p>Giá vốn xuất bằng 0 vẫn là một giá trị hợp lệ nếu hệ thống đã xác định đầy đủ nguồn xuất và tính ra kết quả bằng 0. Điều kiện chặn trả hàng dựa trên việc còn thiếu nguồn hoặc chưa xác định được giá vốn, không dựa trên phép so sánh giá vốn lớn hơn 0.</p>
+<p>Sản phẩm quản lý serial luôn phải có serial hợp lệ đang ở đúng kho. Không cho âm serial trong bất kỳ lựa chọn nào.</p>
+<h3 id="section-6-6-9">6.6.9. Số chữ số thập phân</h3>
+<p>Đây là giá trị số ở cấp doanh nghiệp. Giá trị ban đầu là <strong>2</strong>. Cấu hình quy định kết quả được làm tròn đến bao nhiêu chữ số sau dấu thập phân tại những vị trí sử dụng chung.</p>
+<p>Giá trị phải là số nguyên không âm và nằm trong giới hạn hệ thống cho phép. Cùng một phép tính phải dùng thống nhất giữa màn hình, bản in, hóa đơn và báo cáo. Không được chỉ làm tròn phần hiển thị trong khi số dùng để cộng tổng lại có độ chính xác khác mà người dùng không nhìn thấy.</p>
+<h2 id="section-6-7">6.7. Cấu hình bán hàng</h2>
+<h3 id="section-6-7-1">6.7.1. Cách sinh mã đơn hàng</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Ngẫu nhiên</strong>.</p>
+<p>Ba lựa chọn gồm:</p>
+<ul>
+<li>Mã ngẫu nhiên;</li>
+<li>Số tăng dần liên tục;</li>
+<li>Số tăng dần và bắt đầu lại theo từng ngày nghiệp vụ.</li>
+</ul>
+<p>Mã được cấp theo quy trình tạo đơn và phải duy nhất trong phạm vi áp dụng. Khi nhiều quầy tạo đơn cùng lúc, hệ thống không được cấp trùng. Đổi phương pháp chỉ ảnh hưởng đơn mới; mã đã cấp không bị sửa. Với phương pháp theo ngày, ranh giới ngày dùng ngày nghiệp vụ của doanh nghiệp, không phụ thuộc tùy ý vào đồng hồ trên thiết bị người dùng.</p>
+<h3 id="section-6-7-2">6.7.2. Ảnh mặc định cho sản phẩm</h3>
+<p>Đây là thiết lập tải một ảnh ở cấp chi nhánh. Giá trị ban đầu để trống.</p>
+<p>Ảnh được dùng khi sản phẩm chưa có ảnh riêng trên các màn hình bán hàng của chi nhánh. Ảnh riêng của sản phẩm luôn được ưu tiên. Xóa ảnh mặc định không xóa ảnh sản phẩm và không làm thay đổi hình ảnh đã được lưu trên nội dung lịch sử.</p>
+<p>Tệp tải lên phải đúng định dạng và giới hạn kích thước được hỗ trợ. Nếu tải thất bại, hệ thống giữ ảnh cũ và thông báo lỗi; không lưu một liên kết ảnh chưa hoàn tất.</p>
+<h3 id="section-6-7-3">6.7.3. Màn hình phụ cho khách xem</h3>
+<p>Nhóm này áp dụng theo chi nhánh và điều khiển nội dung xuất hiện trên màn hình khách hàng trước khi có hóa đơn tạm tính.</p>
+<p><strong>Cách hiển thị màn hình phụ</strong> là lựa chọn một phương án, giá trị ban đầu là <strong>Trình chiếu ảnh</strong>. Người dùng chọn Video hoặc Trình chiếu ảnh.</p>
+<p>Khi chọn Video, hệ thống hiển thị <strong>Nguồn video</strong>. Đây là lựa chọn một phương án, giá trị ban đầu là <strong>URL</strong>.</p>
+<p>Các lựa chọn gồm:</p>
+<ul>
+<li>URL.</li>
+<li>Nội dung nhúng.</li>
+</ul>
+<p>Khi nguồn là URL, hệ thống hiển thị ô nhập đường dẫn video. Giá trị ban đầu để trống. Đường dẫn phải có định dạng hợp lệ và có thể được trình phát hỗ trợ.</p>
+<p>Khi nguồn là nội dung nhúng, hệ thống hiển thị vùng nhập nhiều dòng cho nội dung nhúng. Giá trị ban đầu để trống. Hệ thống kiểm tra và loại bỏ nội dung không an toàn trước khi hiển thị.</p>
+<p>Khi cách hiển thị là Trình chiếu ảnh, hệ thống hiển thị chức năng chọn một hoặc nhiều ảnh. Giá trị ban đầu là danh sách trống. Người dùng được sắp xếp thứ tự ảnh; màn hình phụ phát theo thứ tự đã lưu.</p>
+<p>Nếu nội dung được chọn không hợp lệ hoặc không tải được, màn hình phụ dùng trạng thái chờ an toàn, không hiển thị mã lỗi kỹ thuật hoặc nội dung của chi nhánh khác.</p>
+<h3 id="section-6-7-4">6.7.4. Cách áp dụng chiết khấu</h3>
+<p>Đây là lựa chọn một phương án ở cấp chi nhánh. Giá trị ban đầu là <strong>Thể hiện thành dòng chiết khấu riêng</strong>.</p>
+<p>Ở cách mặc định, giá sản phẩm giữ nguyên và khoản chiết khấu được trình bày riêng để người dùng, khách hàng, hóa đơn và báo cáo nhận biết rõ giá trị điều chỉnh. Nếu phiên bản được triển khai cho phép cách gộp chiết khấu vào đơn giá, lựa chọn đó chỉ thay đổi cách trình bày và phân bổ theo quy tắc đã xác định; tổng tiền cuối cùng không được thay đổi chỉ vì đổi cách thể hiện.</p>
+<p>Đơn đã chốt giữ cách trình bày tại thời điểm lập. Thay đổi cấu hình không viết lại đơn cũ hoặc bản in cũ.</p>
+<h3 id="section-6-7-5">6.7.5. Cách thể hiện phụ thu</h3>
+<p>Đây là lựa chọn một phương án ở cấp chi nhánh. Giá trị ban đầu là <strong>Gộp vào đơn giá</strong>. Khi chọn gộp, phần phụ thu được phân bổ vào giá của dòng hàng theo quy tắc bán hàng. Khi chọn thể hiện riêng, đơn và bản in có một khoản phụ thu riêng.</p>
+<p>Cách thể hiện không thay đổi bản chất số tiền khách phải trả, nghĩa vụ thuế hoặc khoản đã thu. Đơn đã hoàn tất không bị đổi cách trình bày khi cấu hình thay đổi.</p>
+<h3 id="section-6-7-6">6.7.6. Cho phép trả hàng sau khi khách nhận hàng</h3>
+<p>Đây là thiết lập bật hoặc tắt ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Tắt</strong>. Thiết lập chỉ hiển thị khi loại hình kinh doanh là Retail.</p>
+<p>Khi bật:</p>
+<ul>
+<li>Hệ thống hiển thị hành động trả hàng trên đơn đủ điều kiện sau khi khách đã nhận;</li>
+<li>Danh mục sản phẩm hiển thị nội dung chính sách trả hàng;</li>
+<li>Người có quyền có thể lập trả một phần hoặc toàn bộ theo số lượng còn được trả;</li>
+<li>Quy trình trả xử lý trực tiếp tiền hoàn, giảm công nợ, nhập kho trả, thu hồi điểm đã tích, hóa đơn điều chỉnh và số liệu báo cáo bị ảnh hưởng.</li>
+</ul>
+<p>Khi tắt:</p>
+<ul>
+<li>Hành động trả và nội dung chính sách không còn xuất hiện cho nghiệp vụ mới;</li>
+<li>Yêu cầu trả gửi trực tiếp vẫn bị từ chối;</li>
+<li>Lịch sử các lần trả đã hoàn thành được giữ nguyên.</li>
+</ul>
+<p>Thiết lập này chỉ mở khả năng dùng chức năng. Quyền trả hàng và điều kiện của từng đơn vẫn được kiểm tra riêng.</p>
+<h3 id="section-6-7-7">6.7.7. Cho phép khách nợ</h3>
+<p>Đây là thiết lập bật hoặc tắt ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Tắt</strong>.</p>
+<p>Khi tắt, số tiền thanh toán phải bằng toàn bộ số phải trả tại bước bắt buộc thanh toán. Người dùng không được hoàn tất với số tiền thấp hơn bằng cách bỏ qua kiểm tra trên giao diện.</p>
+<p>Khi bật, hệ thống cho phép số tiền thanh toán thấp hơn tổng phải trả và ghi nhận phần còn lại là công nợ theo đúng thời điểm của quy trình bán hoặc giao hàng. Lịch sử thanh toán được hiển thị trong lịch sử đơn để người dùng theo dõi số đã thu, số còn nợ và các lần phân bổ tiếp theo.</p>
+<p>Tắt cấu hình không xóa công nợ đang tồn tại. Doanh nghiệp vẫn phải thu, điều chỉnh hoặc xử lý các khoản cũ theo quy trình công nợ.</p>
+<h2 id="section-6-8">6.8. Cấu hình hóa đơn</h2>
+<h3 id="section-6-8-1">6.8.1. Phạm vi và điều kiện chung</h3>
+<p>Thông tin kết nối hóa đơn được cấu hình theo chi nhánh vì mỗi địa điểm có thể dùng tài khoản, mẫu số và ký hiệu riêng. Người dùng chỉ được chọn nhà cung cấp và thông tin thuộc chi nhánh đang thao tác.</p>
+<p>Mật khẩu được nhập bằng ô che nội dung và không hiển thị lại nguyên văn sau khi lưu. Khi người dùng không thay mật khẩu, hệ thống giữ giá trị đang có. Một chuỗi che sẵn trên giao diện không được hiểu là mật khẩu mới.</p>
+<h3 id="section-6-8-2">6.8.2. Tài khoản và mật khẩu hóa đơn đầu ra</h3>
+<p><strong>Tài khoản</strong> là nội dung một dòng cấp chi nhánh, ban đầu để trống. <strong>Mật khẩu</strong> là nội dung bí mật cấp chi nhánh, ban đầu để trống.</p>
+<p>Nếu một trong hai thông tin bắt buộc còn thiếu, hành động gửi hóa đơn bị chặn và người dùng được hướng dẫn hoàn tất cấu hình. Sai thông tin đăng nhập được ghi nhận là lỗi kết nối; giao dịch bán hàng đã hoàn thành không vì lỗi này mà tự quay về chưa thanh toán.</p>
+<h3 id="section-6-8-3">6.8.3. Mẫu số và ký hiệu</h3>
+<p><strong>Mẫu số</strong> và <strong>Ký hiệu</strong> là nội dung một dòng cấp chi nhánh, ban đầu để trống. Hai giá trị được dùng khi lập hóa đơn mới và phải phù hợp với nhà cung cấp đã chọn.</p>
+<p>Thay đổi mẫu số hoặc ký hiệu chỉ áp dụng cho lần lập mới. Hóa đơn đã phát hành giữ thông tin ban đầu. Nếu giá trị không được nhà cung cấp chấp nhận, hệ thống giữ trạng thái lỗi rõ ràng và cho gửi lại sau khi sửa cấu hình, không tạo nhiều hóa đơn cho cùng một yêu cầu.</p>
+<h3 id="section-6-8-4">6.8.4. Xuất ký ngay</h3>
+<p>Đây là thiết lập bật hoặc tắt cấp chi nhánh, giá trị ban đầu là <strong>Tắt</strong>.</p>
+<p>Khi bật, hệ thống yêu cầu phát hành và ký hóa đơn ngay sau khi giao dịch đạt điều kiện thanh toán. Khi tắt, hóa đơn được tạo hoặc xử lý theo bước ký riêng của quy trình.</p>
+<p>Nếu gửi lặp do mất kết nối, hệ thống phải nhận diện yêu cầu cũ và kiểm tra trạng thái trước khi phát hành lại. Không được sinh hai hóa đơn chỉ vì người dùng bấm lại.</p>
+<h3 id="section-6-8-5">6.8.5. Loại hóa đơn mặc định</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp, giá trị ban đầu là <strong>Hóa đơn bán hàng</strong>.</p>
+<p>Giá trị có hiệu lực phải phù hợp phương pháp tính thuế GTGT. Phương pháp Trực tiếp sử dụng hóa đơn bán hàng; phương pháp Khấu trừ sử dụng hóa đơn GTGT. Nếu người dùng đổi phương pháp thuế, hệ thống kiểm tra và điều chỉnh lựa chọn hóa đơn theo xác nhận rõ ràng, không để tổ hợp trái nhau.</p>
+<h3 id="section-6-8-6">6.8.6. Làm tròn thành tiền hóa đơn</h3>
+<p>Đây là giá trị số ở cấp doanh nghiệp, giá trị ban đầu là <strong>-1</strong>. Giá trị này biểu thị mức làm tròn thành tiền theo quy ước của chức năng hóa đơn. Ngay tại nơi cấu hình, hệ thống phải minh họa cụ thể để người dùng hiểu mức âm, bằng không và dương ảnh hưởng đến hàng chục, đơn vị hay phần thập phân như thế nào.</p>
+<p>Kết quả làm tròn phải thống nhất giữa nội dung gửi đi, bản xem trước, bản in và số tiền được phản ánh sau khi hóa đơn phát hành. Nếu làm tròn tạo chênh lệch, chênh lệch được xử lý theo quy tắc hóa đơn và kế toán, không âm thầm sửa giá sản phẩm.</p>
+<h3 id="section-6-8-7">6.8.7. Nhà cung cấp và thông tin bổ sung</h3>
+<p>Nhà cung cấp hóa đơn là lựa chọn theo chi nhánh, giá trị ban đầu là VISNAM. Khi chọn một nhà cung cấp khác được hỗ trợ, giao diện chỉ hiển thị nhóm thông tin cần cho nhà cung cấp đó. Cấu hình kết nối MobiFone Invoice là nội dung một dòng theo chi nhánh, ban đầu để trống và chỉ có ý nghĩa khi nhà cung cấp tương ứng được chọn.</p>
+<p><strong>Ngưỡng cảnh báo số lượng hóa đơn</strong> là giá trị số theo chi nhánh, ban đầu là 50. Khi số lượng khả dụng chạm hoặc thấp hơn ngưỡng, hệ thống cảnh báo người có trách nhiệm nhưng không tự khẳng định hóa đơn đã hết nếu chưa nhận được trạng thái xác nhận từ dịch vụ.</p>
+<p><strong>Tên khách hàng mặc định trên hóa đơn</strong> là nội dung một dòng cấp doanh nghiệp. Giá trị này được dùng khi giao dịch hợp lệ không có tên người mua riêng. Người dùng vẫn có thể thay bằng tên thực tế trước khi phát hành nếu quy trình cho phép.</p>
+<h3 id="section-6-8-8">6.8.8. Hóa đơn đầu vào</h3>
+<p>Tài khoản và mật khẩu dùng để lấy hóa đơn đầu vào được cấu hình theo chi nhánh, ban đầu để trống. Mật khẩu được che và xử lý như thông tin bí mật. Thiếu hoặc sai thông tin chỉ làm gián đoạn việc lấy hóa đơn đầu vào; không tự làm thay đổi phiếu nhập đã hoàn thành.</p>
+<h2 id="section-6-9">6.9. Cấu hình quản lý ca</h2>
+<h3 id="section-6-9-1">6.9.1. Chế độ quản lý ca</h3>
+<p>Đây là lựa chọn một phương án ở cấp chi nhánh. Giá trị ban đầu là <strong>Không quản lý ca</strong>. Ba lựa chọn gồm:</p>
+<ul>
+<li>Không quản lý ca;</li>
+<li>Quản lý ca theo chi nhánh;</li>
+<li>Quản lý ca theo nhân viên.</li>
+</ul>
+<p>Không quản lý ca nghĩa là bán hàng không phụ thuộc phiên ca. Theo chi nhánh nghĩa là các giao dịch trong cùng chi nhánh được tổng hợp vào ca đang mở của chi nhánh. Theo nhân viên nghĩa là mỗi nhân viên chịu trách nhiệm ca của mình và không được dùng ca của người khác.</p>
+<p>Đổi chế độ khi còn ca mở có thể làm thay đổi phạm vi tổng hợp. Hệ thống yêu cầu đóng hoặc xử lý các ca đang mở trước khi chuyển chế độ.</p>
+<h3 id="section-6-9-2">6.9.2. Bắt buộc mở ca trước khi bán hàng</h3>
+<p>Đây là thiết lập bật hoặc tắt theo chi nhánh, giá trị ban đầu là <strong>Tắt</strong>.</p>
+<p>Khi bật, người dùng không được bắt đầu hoặc hoàn tất giao dịch bán hàng nếu chưa có ca phù hợp với chế độ quản lý. Hệ thống dẫn người dùng đến thao tác mở ca. Khi tắt, bán hàng không bị chặn vì chưa mở ca, nhưng các giao dịch vẫn được ghi nhận thời gian và người thực hiện để phục vụ báo cáo.</p>
+<p>Thiết lập chỉ có tác dụng khi chi nhánh đang dùng một chế độ quản lý ca. Nếu chế độ là Không quản lý ca, lựa chọn này bị ẩn hoặc khóa.</p>
+<h3 id="section-6-9-3">6.9.3. Bắt buộc nhập tiền đầu ca</h3>
+<p>Đây là thiết lập bật hoặc tắt theo chi nhánh, giá trị ban đầu là <strong>Tắt</strong>.</p>
+<p>Khi bật, thao tác mở ca chỉ hoàn tất sau khi người dùng nhập số tiền đầu ca hợp lệ. Khi tắt, tiền đầu ca có thể để bằng 0 hoặc được nhập không bắt buộc tùy màn hình.</p>
+<p>Thiết lập bị ẩn hoặc không có hiệu lực khi chi nhánh không quản lý ca.</p>
+<h3 id="section-6-9-4">6.9.4. Số phút cho phép sửa tiền đầu ca</h3>
+<p>Đây là giá trị số theo chi nhánh, giá trị ban đầu là <strong>5 phút</strong>. Thời gian được tính từ lúc ca mở thành công.</p>
+<p>Trong khoảng cho phép, người có quyền có thể sửa tiền đầu ca và hệ thống lưu dấu vết trước, sau. Hết thời gian, việc sửa bị từ chối; chênh lệch phải được xử lý bằng nghiệp vụ thu, chi hoặc điều chỉnh ca phù hợp. Giá trị phải là số nguyên không âm.</p>
+<h2 id="section-6-10">6.10. Cấu hình giao hàng tận nơi</h2>
+<p>Mỗi đơn vị giao hàng có thể được gắn một tài khoản ngân hàng nhận tiền ở cấp doanh nghiệp. Tài khoản được chọn từ danh sách tài khoản ngân hàng đang hoạt động của doanh nghiệp, giá trị ban đầu để trống.</p>
+<p>Nhóm nhà vận chuyển được hỗ trợ gồm:</p>
+<ul>
+<li>Tự giao hàng;</li>
+<li>Giao Hàng Tiết Kiệm;</li>
+<li>Giao Hàng Nhanh;</li>
+<li>Viettel Post;</li>
+<li>VNPost.</li>
+</ul>
+<p>Tài khoản nhận tiền giúp xác định nơi ghi nhận khoản thu liên quan đến giao hàng và đối soát. Không có tài khoản không được hiểu là tiền đã thu vào một tài khoản mặc định khác. Nếu phương thức giao hàng yêu cầu ghi nhận tiền ngay mà chưa có tài khoản hợp lệ, hệ thống chặn bước thu và hướng dẫn cấu hình.</p>
+<p>Khi tài khoản bị ngừng sử dụng, nó không còn xuất hiện cho cấu hình mới. Giao dịch lịch sử vẫn giữ tài khoản đã dùng. Nếu cấu hình đang trỏ đến tài khoản bị ngừng, hệ thống cảnh báo và yêu cầu chọn lại trước giao dịch tiếp theo có phát sinh nhận tiền.</p>
+<h2 id="section-6-11">6.11. Cấu hình công nợ</h2>
+<h3 id="section-6-11-1">6.11.1. Phương thức phân bổ trả nợ</h3>
+<p>Đây là lựa chọn một phương án ở cấp doanh nghiệp. Giá trị ban đầu là <strong>Tự động</strong>. Hai lựa chọn là Tự động và Thủ công.</p>
+<p>Ở chế độ Tự động, tiền trả nợ được phân bổ lần lượt vào khoản nợ cũ hơn trước, căn cứ ngày phát sinh và thứ tự ổn định khi có cùng ngày. Người dùng xem được kết quả phân bổ nhưng không tùy ý đổi thứ tự trong lần thu đó.</p>
+<p>Ở chế độ Thủ công, người dùng chọn từng khoản nợ và nhập số tiền muốn phân bổ cho mỗi khoản. Tổng phân bổ không được lớn hơn số tiền thu và số phân bổ cho một khoản không được lớn hơn số còn nợ của khoản đó.</p>
+<p>Đổi phương thức chỉ ảnh hưởng lần trả nợ mới. Các lần phân bổ đã hoàn tất không bị sắp xếp lại. Khi một lần thu đang ở trạng thái nháp, hệ thống phải tải lại cấu hình trước lúc hoàn thành để tránh dùng một cách phân bổ đã hết hiệu lực mà người dùng không biết.</p>
+<h2 id="section-6-12">6.12. Cấu hình thanh toán tại chi nhánh</h2>
+<h3 id="section-6-12-1">6.12.1. Nguyên tắc chung</h3>
+<p>Các phương thức tích hợp được bật hoặc tắt theo chi nhánh. Khi bật một phương thức, giao diện hiển thị các thông tin phụ thuộc để người dùng chọn hoặc nhập. Khi tắt, phương thức không xuất hiện ở bước thanh toán mới và thông tin phụ thuộc không có hiệu lực.</p>
+<p>Tài khoản nhận tiền phải thuộc doanh nghiệp, đang hoạt động và được phép sử dụng tại chi nhánh. Một tài khoản của chi nhánh khác không được chọn. Việc xóa hoặc ngừng tài khoản đang được dùng phải được cảnh báo và xử lý liên kết trước.</p>
+<h3 id="section-6-12-2">6.12.2. Thanh toán bằng mã QR ngân hàng</h3>
+<p><strong>Bật thanh toán QR ngân hàng</strong> là thiết lập đúng hoặc sai theo chi nhánh, giá trị ban đầu là <strong>Bật</strong>.</p>
+<p>Khi bật, hệ thống hiển thị <strong>Tài khoản nhận tiền QR</strong>. Đây là lựa chọn một tài khoản ngân hàng hợp lệ, giá trị ban đầu chưa chọn. Nếu chưa chọn tài khoản, phương thức QR chưa sẵn sàng và không được dùng để hoàn tất thanh toán.</p>
+<p>Khi tạo mã QR, nội dung số tiền và thông tin giao dịch phải khớp đơn đang thanh toán. Tùy chọn <strong>In QR kèm thông tin đơn hàng</strong> áp dụng theo chi nhánh, ban đầu là Tắt. Khi bật, bản in có thêm nội dung nhận diện đơn nhưng không được lộ thông tin không cần thiết của khách hàng.</p>
+<h3 id="section-6-12-3">6.12.3. Thanh toán Visa</h3>
+<p><strong>Bật thanh toán Visa</strong> là thiết lập đúng hoặc sai theo chi nhánh, giá trị ban đầu là <strong>Tắt</strong>.</p>
+<p>Khi bật, hệ thống hiển thị <strong>Tài khoản nhận tiền Visa</strong>. Đây là lựa chọn một tài khoản ngân hàng hợp lệ, giá trị ban đầu chưa chọn. Phương thức chỉ sẵn sàng khi tài khoản đã được chọn.</p>
+<p>Tắt Visa không xóa lịch sử các giao dịch Visa đã có. Các khoản đang chờ đối soát tiếp tục được theo dõi theo tài khoản từng ghi nhận.</p>
+<h3 id="section-6-12-4">6.12.4. Thanh toán VPBank</h3>
+<p><strong>Bật thanh toán VPBank</strong> là thiết lập đúng hoặc sai theo chi nhánh, giá trị ban đầu là <strong>Tắt</strong>.</p>
+<p>Khi bật, hệ thống hiển thị bốn thông tin phụ thuộc:</p>
+<ul>
+<li>Mã thiết bị đầu cuối, nhập một dòng và ban đầu để trống;</li>
+<li>Mã đơn vị chấp nhận thanh toán, nhập một dòng và ban đầu để trống;</li>
+<li>Tên đơn vị chấp nhận thanh toán, nhập một dòng và ban đầu để trống;</li>
+<li>Tài khoản VPBank nhận tiền, chọn từ danh sách hợp lệ và ban đầu chưa chọn.</li>
+</ul>
+<p>Phương thức chỉ sẵn sàng khi toàn bộ thông tin bắt buộc hợp lệ. Nếu thông tin kết nối sai, hệ thống báo giao dịch chưa được xác nhận và không tự ghi nhận tiền đã thu. Gửi lại cùng một yêu cầu phải kiểm tra trạng thái trước để tránh thu hai lần.</p>
+<h3 id="section-6-12-5">6.12.5. Phương thức ngân hàng tích hợp khác</h3>
+<p>Khi chi nhánh được cung cấp kết nối Momo hoặc VietinBank, mỗi phương thức được cấu hình bằng lựa chọn tài khoản nhận tiền theo chi nhánh, ban đầu để trống. Phương thức chỉ xuất hiện tại thanh toán khi tài khoản hợp lệ đã được chọn và kết nối đang hoạt động.</p>
+<p>Lỗi kết nối không được tự chuyển giao dịch thành tiền mặt. Người dùng phải biết rõ giao dịch đang chờ, thất bại hay đã được xác nhận trước khi thử lại hoặc chọn phương thức khác.</p>
+<h2 id="section-6-13">6.13. Cấu hình in ấn</h2>
+<h3 id="section-6-13-1">6.13.1. Mẫu in thanh toán</h3>
+<p>Mẫu in thanh toán là lựa chọn theo chi nhánh. Giá trị ban đầu là <strong>K58</strong>. Người dùng được chọn K58 hoặc K80 theo khổ giấy của thiết bị.</p>
+<p>Máy in thanh toán là lựa chọn từ danh sách máy in được kết nối tại chi nhánh, giá trị ban đầu chưa chọn. Khi chưa có máy in nhưng in không phải điều kiện bắt buộc, giao dịch vẫn hoàn tất và hệ thống cho phép in lại sau. Khi quy trình yêu cầu phải in, hệ thống kiểm tra thiết bị trước khi xác nhận bước đó.</p>
+<h3 id="section-6-13-2">6.13.2. In chế biến và nhà bếp</h3>
+<p>Máy in chế biến hoặc máy in bếp được chọn theo chi nhánh, ban đầu chưa chọn. Thiết bị phải đúng khu vực hoặc bộ phận nhận món.</p>
+<p>Mẫu in chế biến là lựa chọn theo chi nhánh. Khi chưa chọn mẫu riêng, hệ thống dùng cách trình bày được hỗ trợ chung của chi nhánh. Nếu danh sách cho phép K58 và K80, giá trị khởi đầu là K58.</p>
+<p><strong>Gộp phiếu in chế biến</strong> là thiết lập bật hoặc tắt theo chi nhánh, giá trị ban đầu là <strong>Bật</strong>. Khi bật, các món đủ điều kiện của cùng lượt gửi được gộp theo quy tắc bếp. Khi tắt, hệ thống tách phiếu theo cấu hình khu vực, món hoặc trạm. Việc gộp không được làm mất thông tin số lượng, ghi chú, bàn, thời gian hoặc người gửi.</p>
+<p>Lỗi in không làm gửi món thêm lần nữa. Thao tác in lại phải ghi rõ đây là bản in lại để bếp không chế biến trùng.</p>
+<h3 id="section-6-13-3">6.13.3. In tem</h3>
+<p>Máy in tem là lựa chọn theo chi nhánh, ban đầu chưa chọn. Mẫu in tem cũng là lựa chọn theo chi nhánh, ban đầu chưa chọn.</p>
+<p>Chiều cao tem là giá trị số theo chi nhánh, mặc định <strong>30 mm</strong>. Chiều rộng tem là giá trị số theo chi nhánh, mặc định <strong>50 mm</strong>. Hai giá trị phải lớn hơn 0 và nằm trong khả năng của mẫu cùng thiết bị. Nếu kích thước không phù hợp, hệ thống cảnh báo trước khi in hàng loạt.</p>
+<h3 id="section-6-13-4">6.13.4. In kết ca</h3>
+<p>Mẫu in kết ca là lựa chọn theo chi nhánh, ban đầu chưa chọn. Nội dung phải phản ánh đúng chế độ quản lý ca của chi nhánh. Nếu quản lý theo nhân viên, bản in không được vô tình tổng hợp giao dịch của nhân viên khác; nếu quản lý theo chi nhánh, bản in thể hiện phạm vi toàn ca chi nhánh.</p>
+<h3 id="section-6-13-5">6.13.5. Logo trên bản in</h3>
+<p>Logo là một ảnh theo chi nhánh, ban đầu để trống. Chiều rộng và chiều cao logo được nhập bằng milimét, ban đầu để trống để dùng kích thước mặc định của mẫu.</p>
+<p>Khi chỉ nhập một chiều, hệ thống ưu tiên giữ tỷ lệ ảnh nếu chức năng hỗ trợ. Giá trị kích thước phải dương. Logo lỗi hoặc không tải được không được làm mất nội dung bắt buộc của chứng từ.</p>
+<h3 id="section-6-13-6">6.13.6. Ứng dụng và mẫu in chung</h3>
+<p>Đường dẫn ứng dụng đọc tệp PDF là nội dung một dòng theo chi nhánh, ban đầu để trống. Đường dẫn phải trỏ đến ứng dụng được phép dùng trên thiết bị thực hiện in. Nếu đường dẫn sai hoặc ứng dụng không tồn tại, hệ thống thông báo và cho người dùng chọn lại; không đánh dấu đã in khi lệnh chưa được gửi thành công.</p>
+<p>Mẫu in chung là nội dung theo chi nhánh, ban đầu để trống. Mẫu riêng của từng nghiệp vụ được ưu tiên hơn mẫu chung. Khi sửa mẫu, hệ thống kiểm tra các biến nội dung bắt buộc và không cho lưu mẫu khiến số chứng từ, thời gian, tổng tiền hoặc thông tin nhận diện cần thiết bị mất.</p>
+<h2 id="section-6-14">6.14. Cấu hình nhà bếp</h2>
+<p><strong>Có sử dụng nhà bếp</strong> là thiết lập bật hoặc tắt theo chi nhánh, giá trị ban đầu là <strong>Tắt</strong>. Thiết lập chỉ có ý nghĩa với chi nhánh sử dụng quy trình F&amp;B.</p>
+<p>Khi bật:</p>
+<ul>
+<li>Menu và màn hình nhà bếp được mở theo quyền;</li>
+<li>Cấu hình máy in, mẫu in và gộp phiếu chế biến có hiệu lực;</li>
+<li>Thao tác gửi món tạo yêu cầu chế biến;</li>
+<li>Trạng thái món và bản in lại được kiểm soát để tránh làm trùng.</li>
+</ul>
+<p>Khi tắt:</p>
+<ul>
+<li>Chức năng gửi bếp và màn hình bếp không được dùng cho yêu cầu mới;</li>
+<li>Món đã gửi trước đó vẫn phải được xử lý đến trạng thái kết thúc;</li>
+<li>Lịch sử chế biến và bản in không bị xóa.</li>
+</ul>
+<p>Không cho tắt khi còn yêu cầu chế biến đang mở mà không có cách kết thúc an toàn.</p>
+<h2 id="section-6-15">6.15. Điều kiện hiển thị và khóa giá trị</h2>
+<p>Giao diện cấu hình phải áp dụng đầy đủ các quan hệ sau:</p>
+<ul>
+<li>Loại hình Retail mới hiển thị cấu hình cho phép trả hàng;</li>
+<li>Loại hình F&amp;B mới hiển thị nhóm nhà bếp và in chế biến;</li>
+<li>Hộ kinh doanh khóa phương pháp thuế ở Trực tiếp và phương pháp xuất ở Bình quân;</li>
+<li>Danh sách chế độ kế toán thay đổi theo loại hình đăng ký kinh doanh;</li>
+<li>Chỉ khi quản lý tồn kho bật mới hiển thị phương pháp xuất, cách tính bình quân, giá nhập mặc định và xử lý thiếu tồn;</li>
+<li>Chỉ khi phương pháp xuất là Bình quân hoặc Theo nhóm có nhóm Bình quân mới hiển thị cách tính bình quân;</li>
+<li>Chỉ khi màn hình phụ là Video mới hiển thị nguồn video;</li>
+<li>Nguồn video URL chỉ hiển thị ô đường dẫn;</li>
+<li>Nguồn video nhúng chỉ hiển thị vùng nội dung nhúng;</li>
+<li>Màn hình phụ là Trình chiếu ảnh mới hiển thị danh sách ảnh;</li>
+<li>Chỉ khi cho phép khách nợ bật mới cho thanh toán thấp hơn số phải trả;</li>
+<li>Chỉ khi QR ngân hàng bật mới hiển thị tài khoản QR;</li>
+<li>Chỉ khi Visa bật mới hiển thị tài khoản Visa;</li>
+<li>Chỉ khi VPBank bật mới hiển thị mã thiết bị, mã đơn vị, tên đơn vị và tài khoản VPBank;</li>
+<li>Chỉ khi chi nhánh quản lý ca mới áp dụng bắt buộc mở ca, bắt buộc tiền đầu ca và thời hạn sửa tiền đầu ca;</li>
+<li>Chỉ khi dùng nhà bếp mới áp dụng máy in và mẫu in chế biến.</li>
+</ul>
+<p>Khi một thiết lập cha đổi làm thiết lập con mất điều kiện hiển thị, hệ thống phải giải thích tác động trước khi lưu. Giá trị con cũ không còn hiệu lực trong thời gian bị ẩn. Nếu người dùng bật lại và giá trị cũ vẫn hợp lệ, hệ thống có thể khôi phục; nếu không còn hợp lệ, yêu cầu chọn lại.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="title-config-dependency desc-config-dependency" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-config-dependency">Cấu hình điều khiển hành vi nghiệp vụ</title><desc id="desc-config-dependency">CẤP DOANH NGHIỆP. Thuế · Kế toán · Kho · Công nợ; CẤP CHI NHÁNH. Mô hình · Thanh toán · Ca · In; GIÁ TRỊ CÓ HIỆU LỰC. Đúng phạm vi · Đúng điều kiện hiển thị. Được kiểm tra lại khi lưu và khi dùng; NGHIỆP VỤ MỚI. Áp dụng cấu hình hiện hành. Dừng nếu thiếu thiết lập bắt buộc; GIAO DỊCH ĐÃ CHỐT. Giữ giá, thuế và chính sách lịch sử. Không bị viết lại ngoài quy tắc tính lại</desc><defs><marker id="arrow-config-dependency" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M245 98 V142 H480 V180" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-config-dependency)"/><path d="M715 98 V142 H480 V180" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-config-dependency)"/><path d="M480 273 V329 H240 V380" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-config-dependency)"/><path d="M480 273 V329 H720 V380" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-config-dependency)"/><g><rect x="80" y="20" width="330" height="78" rx="10" fill="#183d36" stroke="#708c82"/><text x="245" fill="#fff" text-anchor="middle" font-size="16"><tspan x="245" y="54" font-weight="700">CẤP DOANH NGHIỆP</tspan><tspan x="245" y="76">Thuế · Kế toán · Kho · Công nợ</tspan></text></g><g><rect x="550" y="20" width="330" height="78" rx="10" fill="#183d36" stroke="#708c82"/><text x="715" fill="#fff" text-anchor="middle" font-size="16"><tspan x="715" y="54" font-weight="700">CẤP CHI NHÁNH</tspan><tspan x="715" y="76">Mô hình · Thanh toán · Ca · In</tspan></text></g><g><rect x="300" y="185" width="360" height="88" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="213" font-weight="700">GIÁ TRỊ CÓ HIỆU LỰC</tspan><tspan x="480" y="235">Đúng phạm vi · Đúng điều kiện hiển thị</tspan><tspan x="480" y="257">Được kiểm tra lại khi lưu và khi dùng</tspan></text></g><g><rect x="60" y="385" width="360" height="82" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="240" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="240" y="410" font-weight="700">NGHIỆP VỤ MỚI</tspan><tspan x="240" y="432">Áp dụng cấu hình hiện hành</tspan><tspan x="240" y="454">Dừng nếu thiếu thiết lập bắt buộc</tspan></text></g><g><rect x="540" y="385" width="360" height="82" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="720" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="720" y="410" font-weight="700">GIAO DỊCH ĐÃ CHỐT</tspan><tspan x="720" y="432">Giữ giá, thuế và chính sách lịch sử</tspan><tspan x="720" y="454">Không bị viết lại ngoài quy tắc tính lại</tspan></text></g></svg></div><figcaption><strong>Cấu hình điều khiển hành vi nghiệp vụ.</strong> Giá trị cấp doanh nghiệp hoặc chi nhánh được kiểm tra tại thời điểm xử lý. Giao dịch mới dùng giá trị có hiệu lực; giao dịch đã chốt giữ nguyên cách hiểu lịch sử.</figcaption></figure>
+
+<h2 id="section-6-16">6.16. Thời điểm hiệu lực và bảo toàn lịch sử</h2>
+<p>Cấu hình mới có hiệu lực sau khi lưu thành công. Tác động mặc định dành cho nghiệp vụ mới hoặc bước nghiệp vụ chưa chốt. Các nguyên tắc bảo toàn gồm:</p>
+<ul>
+<li>Không đổi mã đơn đã sinh;</li>
+<li>Không đổi giá, thuế hoặc cách thể hiện chiết khấu trên đơn đã hoàn tất;</li>
+<li>Không thay hóa đơn đã phát hành;</li>
+<li>Không thay cách phân bổ của lần trả nợ đã hoàn thành;</li>
+<li>Không chuyển giao dịch đã thu sang tài khoản ngân hàng mới;</li>
+<li>Không xóa biến động kho khi tắt quản lý tồn;</li>
+<li>Không thay khổ, logo hoặc mẫu trên bản in lịch sử đã được lưu;</li>
+<li>Không chuyển giao dịch từ ca cũ sang chế độ ca mới;</li>
+<li>Không xóa món đã gửi bếp khi tắt nhà bếp.</li>
+</ul>
+<p>Một số thay đổi chỉ được thực hiện khi không còn nghiệp vụ đang mở, gồm:</p>
+<ul>
+<li>Đổi phương pháp tính giá xuất.</li>
+<li>Đổi cách tính bình quân.</li>
+<li>Tắt quản lý tồn.</li>
+<li>Đổi chế độ ca.</li>
+<li>Đổi loại hình kinh doanh.</li>
+<li>Tắt nhà bếp.</li>
+</ul>
+<p>Nếu chưa đạt điều kiện, hệ thống từ chối và liệt kê nhóm nghiệp vụ cần xử lý trước.</p>
+<h2 id="section-6-17">6.17. Lỗi, hủy thao tác và gửi lại</h2>
+<h3 id="section-6-17-1">6.17.1. Giá trị không hợp lệ</h3>
+<p>Nếu giá trị sai kiểu, ngoài tập lựa chọn, không đủ thông tin phụ thuộc hoặc vượt giới hạn, hệ thống không lưu bất kỳ phần nào của nhóm thay đổi có liên quan. Giá trị đang có tiếp tục có hiệu lực. Thông báo nêu rõ thiết lập sai và cách sửa, không chỉ hiển thị lỗi chung.</p>
+<h3 id="section-6-17-2">6.17.2. Đối tượng được chọn không còn hợp lệ</h3>
+<p>Nếu tài khoản ngân hàng, máy in, mẫu in, kho hoặc chi nhánh đã ngừng hoạt động trong lúc người dùng đang chỉnh, thao tác lưu bị từ chối. Người dùng tải lại danh sách và chọn giá trị khác. Không tự thay bằng lựa chọn đầu tiên.</p>
+<h3 id="section-6-17-3">6.17.3. Hủy khi chưa lưu</h3>
+<p>Khi người dùng rời màn hình có thay đổi chưa lưu, hệ thống cảnh báo. Chọn hủy thay đổi sẽ khôi phục giá trị hiện hành. Không tạo lịch sử thay đổi cho nội dung chưa từng lưu thành công.</p>
+<h3 id="section-6-17-4">6.17.4. Lỗi kết nối trong lúc lưu</h3>
+<p>Nếu người dùng không biết yêu cầu lưu đã thành công hay chưa, lần gửi lại phải kiểm tra giá trị hiện hành trước. Hệ thống không tạo nhiều lần thay đổi giống nhau hoặc đảo giá trị ngoài ý muốn. Giao diện tải lại và thông báo kết quả cuối cùng.</p>
+<h3 id="section-6-17-5">6.17.5. Xung đột thay đổi đồng thời</h3>
+<p>Khi một người khác đã lưu giá trị mới, yêu cầu dựa trên bản cũ bị từ chối. Hệ thống hiển thị giá trị mới nhất và yêu cầu người dùng chủ động thực hiện lại thay đổi cần thiết. Không hợp nhất tự động hai lựa chọn có thể làm phát sinh tổ hợp chưa được kiểm tra.</p>
+<h3 id="section-6-17-6">6.17.6. Lỗi của dịch vụ bên ngoài</h3>
+<p>Lỗi hóa đơn, thanh toán hoặc máy in không tự hoàn tác một giao dịch bán hàng đã hoàn thành nếu dịch vụ đó là bước sau. Hệ thống lưu trạng thái chờ hoặc thất bại của riêng yêu cầu bên ngoài, cho phép gửi lại an toàn và không nhân đôi hóa đơn, khoản thu hoặc lệnh in.</p>
+<h2 id="section-6-18">6.18. Nhật ký thay đổi và khả năng đối chiếu</h2>
+<p>Mỗi lần thay đổi thành công phải xác định được:</p>
+<ul>
+<li>Tên thiết lập;</li>
+<li>Phạm vi doanh nghiệp hoặc chi nhánh;</li>
+<li>Giá trị trước và sau;</li>
+<li>Người thực hiện;</li>
+<li>Thời điểm thực hiện;</li>
+<li>Lý do nếu nhóm cấu hình yêu cầu;</li>
+<li>Kết quả áp dụng.</li>
+</ul>
+<p>Thông tin bí mật không được ghi nguyên văn vào lịch sử. Với mật khẩu, nhật ký chỉ ghi nhận rằng thông tin đã được thay đổi.</p>
+<p>Người có quyền xem lịch sử có thể lọc theo doanh nghiệp, chi nhánh, nhóm cấu hình, người thay đổi và khoảng thời gian. Việc xem lịch sử không đồng nghĩa được xem giá trị bí mật.</p>
+<h2 id="section-6-19">6.19. Tác động xuyên phân hệ</h2>
+<p>Loại hình đăng ký kinh doanh, phương pháp thuế và chế độ kế toán tác động đến danh mục, giá, nhập hàng, hóa đơn, sổ và báo cáo. Quản lý tồn kho, phương pháp xuất, cách tính bình quân và xử lý thiếu tồn tác động đến chi nhánh, sản phẩm, mua hàng, bán hàng, trả hàng, sản xuất và giá vốn.</p>
+<p>Cách sinh mã, chiết khấu, phụ thu, trả hàng và cho phép khách nợ tác động đến đơn hàng, thanh toán, công nợ, thu chi, hóa đơn và báo cáo bán hàng. Cấu hình tài khoản nhận tiền tác động đến thanh toán, đối soát, kết ca và sổ tiền. Cấu hình giao hàng tác động đến khoản thu qua đơn vị vận chuyển và công nợ giao hàng.</p>
+<p>Cấu hình ca điều khiển điều kiện được bán, tiền đầu ca, phạm vi tổng hợp và kết ca. Cấu hình nhà bếp và in ấn điều khiển luồng gửi món, thiết bị nhận lệnh, nội dung bản in và khả năng in lại. Cấu hình hóa đơn điều khiển loại hóa đơn, thông tin kết nối, ký, làm tròn và cảnh báo số lượng.</p>
+<p>Mỗi phân hệ khi sử dụng cấu hình phải nhận đúng giá trị có hiệu lực tại thời điểm thực hiện, lưu đủ thông tin cần thiết để giải thích kết quả lịch sử và từ chối tổ hợp không hợp lệ thay vì tự suy đoán.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="05-doanh-nghiep-chi-nhanh-nhan-vien.html">← 5. Doanh nghiệp, chi nhánh và nhân viên</a><a href="07-tai-khoan-ngan-hang-nguon-tien.html">7. Tài khoản ngân hàng và nguồn tiền →</a></nav></div></body></html>

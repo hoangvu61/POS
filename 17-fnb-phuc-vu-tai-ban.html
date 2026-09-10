@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>17. F&amp;B - Phục vụ tại bàn — Đặc tả POS</title><meta name="description" content="F&amp;B - Phục vụ tại bàn"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần V · Chương 17</p><article class="spec"><h1>CHƯƠNG 17. F&amp;B - PHỤC VỤ TẠI BÀN</h1><details class="section-toc"><summary>Nội dung chương · 31 mục</summary><ol><li><a href="#section-17-1">17.1. Mục tiêu và phạm vi</a></li><li><a href="#section-17-2">17.2. Vai trò tham gia</a></li><li><a href="#section-17-3">17.3. Điều kiện và cấu hình vận hành</a></li><li><a href="#section-17-4">17.4. Khu vực, bàn và kênh phục vụ</a></li><li><a href="#section-17-5">17.5. Cấu trúc và vòng đời đơn F&amp;B</a></li><li><a href="#section-17-6">17.6. Tạo đơn tại POS</a></li><li><a href="#section-17-7">17.7. Thêm và chỉnh sửa món</a></li><li><a href="#section-17-8">17.8. Combo trong F&amp;B</a></li><li><a href="#section-17-9">17.9. Chọn khách hàng và thuộc tính đơn</a></li><li><a href="#section-17-10">17.10. Gửi chế biến khi sử dụng nhà bếp</a></li><li><a href="#section-17-11">17.11. In chế biến khi không sử dụng nhà bếp</a></li><li><a href="#section-17-12">17.12. E-Menu theo mã QR của bàn</a></li><li><a href="#section-17-13">17.13. Yêu cầu gọi nhân viên và yêu cầu thanh toán từ E-Menu</a></li><li><a href="#section-17-14">17.14. Cập nhật theo thời gian thực</a></li><li><a href="#section-17-15">17.15. Chuyển toàn bộ sang bàn trống</a></li><li><a href="#section-17-16">17.16. Tách một phần sang bàn trống</a></li><li><a href="#section-17-17">17.17. Gộp toàn bộ vào bàn đang phục vụ</a></li><li><a href="#section-17-18">17.18. Chuyển một phần vào bàn đang phục vụ</a></li><li><a href="#section-17-19">17.19. Tính toàn vẹn khi chuyển, tách và gộp</a></li><li><a href="#section-17-20">17.20. Hủy món chưa xác nhận</a></li><li><a href="#section-17-21">17.21. Hủy món đã xác nhận</a></li><li><a href="#section-17-22">17.22. Hủy đơn đang phục vụ</a></li><li><a href="#section-17-23">17.23. Thanh toán và đóng bàn</a></li><li><a href="#section-17-24">17.24. Hóa đơn, Membership và in hóa đơn bán hàng</a></li><li><a href="#section-17-25">17.25. Giao diện bán hàng F&amp;B</a></li><li><a href="#section-17-26">17.26. Quyền và kiểm soát truy cập</a></li><li><a href="#section-17-27">17.27. Tác động liên phân hệ</a></li><li><a href="#section-17-28">17.28. Hoàn tác và xử lý lỗi</a></li><li><a href="#section-17-29">17.29. Đồng thời và truy vết</a></li><li><a href="#section-17-30">17.30. Dashboard và giám sát vận hành</a></li><li><a href="#section-17-31">17.31. Tình huống ngoại lệ bắt buộc xử lý</a></li></ol></details>
+<h2 id="section-17-1">17.1. Mục tiêu và phạm vi</h2>
+<p>F&amp;B điều hành quá trình phục vụ từ lúc khách chọn bàn hoặc kênh phục vụ, gọi món, bổ sung món, chuyển bàn, tách hoặc gộp đơn, gửi chế biến, phục vụ, tính tiền đến khi bàn được giải phóng.</p>
+<p>Đặc trưng của mô hình là đơn hàng có thể tồn tại trong thời gian dài và được cập nhật nhiều lần. Trạng thái từng món không nhất thiết giống nhau: món mới gọi có thể đang chờ, món khác đang chế biến, món khác đã phục vụ hoặc đã hủy. Tổng tiền luôn được tính từ phần còn hiệu lực của đơn.</p>
+<p>Phạm vi bao gồm:</p>
+<ul>
+<li>Sơ đồ khu vực và bàn của chi nhánh.</li>
+<li>Đơn theo bàn và đơn theo kênh bán không gắn bàn.</li>
+<li>Món hàng hóa, món chế biến, món kèm, ghi chú, thuộc tính, nhiều đơn vị và Combo.</li>
+<li>Đơn do nhân viên lập và yêu cầu gọi món từ E-Menu.</li>
+<li>Gửi nhà bếp hoặc xác nhận chế biến khi không sử dụng màn hình bếp.</li>
+<li>Chuyển toàn bộ bàn, tách một phần và gộp đơn.</li>
+<li>Hủy món, hủy Combo, hủy đơn và in phiếu hủy.</li>
+<li>Thanh toán, công nợ, hóa đơn, in hóa đơn bán hàng và đóng bàn.</li>
+</ul>
+<p>Món đã xác nhận được gửi vào hàng đợi bếp, theo dõi qua các trạng thái Chờ chế biến, Đang chế biến, Đã chế biến và Đã phục vụ. Thanh toán chỉ sử dụng các dòng món còn hiệu lực; hoàn tác phải xử lý lại tiền, công nợ, kho, chế biến và hóa đơn theo phần thực tế bị ảnh hưởng.</p>
+<h2 id="section-17-2">17.2. Vai trò tham gia</h2>
+<h3 id="section-17-2-1">17.2.1. Nhân viên phục vụ</h3>
+<p>Nhân viên phục vụ chọn bàn, tạo đơn, thêm món, nhận yêu cầu E-Menu, gửi bếp, theo dõi thông báo hoàn thành, đánh dấu đã phục vụ, chuyển bàn, tách hoặc gộp đơn và ghi nhận yêu cầu hỗ trợ của khách.</p>
+<h3 id="section-17-2-2">17.2.2. Nhân viên bếp hoặc quầy pha chế</h3>
+<p>Nhân viên bếp tiếp nhận món đã gửi, bắt đầu chế biến, báo không thể chế biến, hoàn thành món và phát thông báo cho khu vực phục vụ. Phạm vi thao tác phụ thuộc quyền và cấu hình nhà bếp.</p>
+<h3 id="section-17-2-3">17.2.3. Thu ngân</h3>
+<p>Thu ngân kiểm tra món còn hiệu lực, áp dụng quyền lợi, nhập thông tin hóa đơn, thu tiền hoặc ghi nợ, hoàn tất đơn và giải phóng bàn.</p>
+<h3 id="section-17-2-4">17.2.4. Quản lý chi nhánh</h3>
+<p>Quản lý theo dõi tình trạng bàn, thời gian chờ, món hủy, doanh thu và hoạt động nhân viên. Điều chỉnh giá, chiết khấu, hủy từng món đã gửi và xóa đơn cần quyền tương ứng. Người tạo được hủy đơn đã xác nhận còn trong giai đoạn phục vụ, chưa thanh toán, mà không cần quyền hủy đơn riêng. Quyền xóa đơn áp dụng ở mọi trạng thái từ sau xác nhận.</p>
+<h3 id="section-17-2-5">17.2.5. Khách hàng sử dụng E-Menu</h3>
+<p>Khách quét mã QR của bàn để xem thực đơn, tạo giỏ, gửi từng lượt gọi món, theo dõi yêu cầu, gọi nhân viên hoặc yêu cầu thanh toán. Khách không trực tiếp xác nhận món vào đơn và không tự hủy món đã gửi.</p>
+<h3 id="section-17-2-6">17.2.6. Hệ thống</h3>
+<p>Hệ thống bảo đảm một bàn không có hai đơn đang phục vụ, chốt giá, chuyển yêu cầu giữa E-Menu, POS và nhà bếp, quản lý ảnh hưởng kho và chế biến, ghi nhận tiền, công nợ, hóa đơn, Membership, lịch sử và báo cáo.</p>
+<h2 id="section-17-3">17.3. Điều kiện và cấu hình vận hành</h2>
+<p>Người dùng được thao tác khi tài khoản, doanh nghiệp và chi nhánh còn hoạt động. Nếu bật quản lý tồn kho, chi nhánh phải có kho đang hoạt động.</p>
+<p>Các cấu hình trực tiếp chi phối F&amp;B:</p>
+<ul>
+<li>Có hoặc không sử dụng nhà bếp.</li>
+<li>Quản lý tồn kho và cách xử lý khi hàng hoặc nguyên vật liệu không đủ.</li>
+<li>Khu vực, bàn và trạng thái hoạt động của từng bàn.</li>
+<li>Kênh bán dùng cho đơn không gắn bàn.</li>
+<li>Danh mục món, hàng hóa, đơn vị, thuộc tính, món kèm, Combo và công thức định lượng.</li>
+<li>Giá bán, giá theo kênh, giá theo khu vực nếu được áp dụng, Flash Sale, Voucher và Membership.</li>
+<li>Kiểu in chế biến của món, máy in và mẫu in.</li>
+<li>Hóa đơn điện tử, phương thức thanh toán và tài khoản nhận tiền.</li>
+<li>E-Menu và mã QR của bàn.</li>
+</ul>
+<p>Nếu cấu hình <strong>có sử dụng nhà bếp</strong> được bật, món được gửi đến màn hình bếp. Nếu tắt, nhân viên dùng hành động <strong>In chế biến</strong> để xác nhận các món mới và tạo phiếu in theo cấu hình. Hai cơ chế không được dùng đồng thời cho cùng một lượt món.</p>
+<h2 id="section-17-4">17.4. Khu vực, bàn và kênh phục vụ</h2>
+<h3 id="section-17-4-1">17.4.1. Khu vực</h3>
+<p>Khu vực nhóm các bàn theo không gian phục vụ như tầng, phòng, sân hoặc khu VIP. Màn hình bán hàng cho phép lọc theo khu vực để nhân viên nhận biết nhanh bàn trống và bàn đang phục vụ.</p>
+<h3 id="section-17-4-2">17.4.2. Bàn</h3>
+<p>Một bàn có hai tình trạng vận hành cơ bản:</p>
+<ul>
+<li><strong>Trống:</strong> không có đơn F&amp;B đang hoạt động.</li>
+<li><strong>Đang phục vụ:</strong> đang gắn với một đơn chưa thanh toán và chưa hủy.</li>
+</ul>
+<p>Một bàn chỉ có tối đa một đơn đang phục vụ tại một thời điểm. Đơn đã thanh toán, bị hủy hoặc được chuyển toàn bộ sang bàn khác phải giải phóng bàn cũ.</p>
+<p>Việc ngừng sử dụng hoặc xóa một bàn đang có đơn bị chặn. Đổi tên hoặc sắp xếp khu vực không được làm mất quan hệ với đơn đang phục vụ.</p>
+<h3 id="section-17-4-3">17.4.3. Đơn theo kênh bán</h3>
+<p>F&amp;B có thể tạo đơn không gắn bàn, chẳng hạn đơn mang đi hoặc đơn theo kênh bán. Trong trường hợp đó, kênh bán thay cho tên khu vực - bàn trên một số màn hình điều phối. Đơn vẫn tuân thủ quy tắc món, chế biến, thanh toán và hủy như một đơn F&amp;B.</p>
+<p>Thay bàn hoặc kênh trước khi đơn bị khóa có thể làm giá theo kênh thay đổi. Hệ thống phải tính lại theo chính sách hợp lệ và ghi lịch sử thay đổi; không âm thầm giữ giá của kênh cũ nếu chính sách yêu cầu đổi.</p>
+<h2 id="section-17-5">17.5. Cấu trúc và vòng đời đơn F&amp;B</h2>
+<h3 id="section-17-5-1">17.5.1. Trạng thái cấp đơn</h3>
+<p>Đơn F&amp;B có các mốc chính:</p>
+<ol>
+<li><strong>Mới:</strong> đơn đầu tiên do khách gửi từ E-Menu, đang chờ nhân viên tiếp nhận.</li>
+<li><strong>Đã xác nhận:</strong> đơn đã được nhân viên chấp nhận hoặc được nhân viên tạo trực tiếp.</li>
+<li><strong>Đang phục vụ:</strong> tên vận hành của đơn đã xác nhận còn ít nhất một món hiệu lực và chưa thanh toán.</li>
+<li><strong>Đã thanh toán/hoàn tất:</strong> tiền và công nợ đã được ghi nhận, ảnh hưởng kho được hoàn thành, bàn được giải phóng.</li>
+<li><strong>Đã hủy:</strong> đơn kết thúc trước thanh toán, giữ lý do và lịch sử.</li>
+</ol>
+<p>Đơn không đổi trạng thái cấp đơn mỗi lần thêm món. Một đơn đã xác nhận vẫn là đã xác nhận khi nhận thêm một lượt gọi món; lượt mới có trạng thái tiếp nhận riêng.</p>
+<h3 id="section-17-5-2">17.5.2. Trạng thái cấp món</h3>
+<p>Mỗi món hoặc thành phần Combo có vòng đời chế biến riêng:</p>
+<ul>
+<li>Chưa xác nhận chế biến.</li>
+<li>Chờ bếp tiếp nhận.</li>
+<li>Đang chế biến.</li>
+<li>Đã hoàn thành.</li>
+<li>Đã phục vụ.</li>
+<li>Đã hủy.</li>
+</ul>
+<p>Khi không dùng màn hình bếp, hành động In chế biến thay thế các mốc chờ và chế biến bằng việc xác nhận món đã được chuyển đến nơi thực hiện. Dù theo cơ chế nào, món chưa xác nhận còn được sửa hoặc xóa; món đã xác nhận phải dùng luồng hủy.</p>
+<h3 id="section-17-5-3">17.5.3. Các bất biến</h3>
+<ul>
+<li>Tổng tiền chỉ gồm món và Combo còn hiệu lực.</li>
+<li>Món kèm đi theo món cha khi sửa, tách, chuyển hoặc hủy.</li>
+<li>Không sửa âm thầm món đã gửi bếp; mọi thay đổi phải có hành động và lịch sử phù hợp.</li>
+<li>Một lượt E-Menu chưa được nhân viên chấp nhận không tự đi vào bếp.</li>
+<li>Đánh dấu đã xử lý yêu cầu thanh toán E-Menu không đồng nghĩa đơn đã được thanh toán.</li>
+<li>Chuyển, tách hoặc gộp không làm thay đổi tổng giá trị các món chỉ vì đổi vị trí phục vụ.</li>
+<li>Thanh toán chỉ xảy ra một lần cho đơn; lần thu công nợ sau đó là giao dịch công nợ riêng.</li>
+</ul>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 610" role="img" aria-labelledby="title-fnb-table-flow desc-fnb-table-flow" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-fnb-table-flow">Luồng phục vụ F&amp;B tại bàn</title><desc id="desc-fnb-table-flow">MỞ BÀN / TẠO ĐƠN. Chọn khu vực, bàn và khách; CHỌN MÓN. Giá · Combo · Thuộc tính. Ghi chú và số lượng; GỬI CHẾ BIẾN. Chốt lượt gửi. In/KDS theo cấu hình; PHỤC VỤ &amp; ĐIỀU CHỈNH. Theo dõi món; hủy có lý do. Chuyển · Tách · Gộp có kiểm soát; TÍNH TIỀN &amp; ĐÓNG BÀN. Thanh toán/công nợ · Kho. Membership · Hóa đơn · In</desc><defs><marker id="arrow-fnb-table-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 82 V124 H245 V160" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-fnb-table-flow)"/><path d="M480 82 V124 H715 V160" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-fnb-table-flow)"/><path d="M245 247 V311 H245 V370" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-fnb-table-flow)"/><path d="M715 247 V311 H245 V370" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-fnb-table-flow)"/><path d="M245 471 V423 H715 V370" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-fnb-table-flow)"/><g><rect x="310" y="14" width="340" height="68" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="43" font-weight="700">MỞ BÀN / TẠO ĐƠN</tspan><tspan x="480" y="65">Chọn khu vực, bàn và khách</tspan></text></g><g><rect x="80" y="165" width="330" height="82" rx="10" fill="#fff" stroke="#708c82"/><text x="245" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="245" y="190" font-weight="700">CHỌN MÓN</tspan><tspan x="245" y="212">Giá · Combo · Thuộc tính</tspan><tspan x="245" y="234">Ghi chú và số lượng</tspan></text></g><g><rect x="550" y="165" width="330" height="82" rx="10" fill="#fff" stroke="#708c82"/><text x="715" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="715" y="190" font-weight="700">GỬI CHẾ BIẾN</tspan><tspan x="715" y="212">Chốt lượt gửi</tspan><tspan x="715" y="234">In/KDS theo cấu hình</tspan></text></g><g><rect x="80" y="375" width="330" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="245" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="245" y="407" font-weight="700">PHỤC VỤ &amp; ĐIỀU CHỈNH</tspan><tspan x="245" y="429">Theo dõi món; hủy có lý do</tspan><tspan x="245" y="451">Chuyển · Tách · Gộp có kiểm soát</tspan></text></g><g><rect x="550" y="375" width="330" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="715" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="715" y="407" font-weight="700">TÍNH TIỀN &amp; ĐÓNG BÀN</tspan><tspan x="715" y="429">Thanh toán/công nợ · Kho</tspan><tspan x="715" y="451">Membership · Hóa đơn · In</tspan></text></g></svg></div><figcaption><strong>Luồng phục vụ F&amp;B tại bàn.</strong> Bàn chỉ đóng sau khi giao dịch được xử lý theo quy tắc thanh toán. Gửi món là mốc tạo yêu cầu chế biến; chuyển, tách và gộp phải giữ nguyên số lượng, trạng thái món và dấu vết.</figcaption></figure>
+
+<h2 id="section-17-6">17.6. Tạo đơn tại POS</h2>
+<p>Luồng chính theo bàn:</p>
+<ol>
+<li>Nhân viên mở khu vực và chọn một bàn trống.</li>
+<li>Hệ thống kiểm tra lại bàn chưa có đơn hoạt động.</li>
+<li>Nhân viên thêm ít nhất một món hoặc Combo, trừ trường hợp chức năng cho phép khởi tạo đơn rỗng có mục đích rõ ràng.</li>
+<li>Có thể gắn khách hàng, kênh bán, thuộc tính đơn và ghi chú.</li>
+<li>Nhân viên lưu đơn.</li>
+<li>Đơn được tạo ở trạng thái đã xác nhận và bàn chuyển sang đang phục vụ.</li>
+<li>Nếu quản lý tồn kho được bật, hệ thống chuẩn bị nghiệp vụ xuất bán theo hàng tồn còn hiệu lực.</li>
+<li>Màn hình khu vực, chi tiết đơn và các thiết bị khác nhận cập nhật.</li>
+</ol>
+<p>Nếu hai nhân viên đồng thời chọn cùng một bàn trống, chỉ thao tác kiểm tra cuối cùng hợp lệ được tạo đơn. Người còn lại nhận thông báo bàn đã được sử dụng và phải tải lại sơ đồ.</p>
+<p>Với đơn theo kênh bán, nhân viên chọn kênh thay cho bàn. Nhiều đơn có thể cùng kênh nếu mô hình kênh cho phép, nhưng mỗi đơn vẫn có mã và vòng đời riêng.</p>
+<h2 id="section-17-7">17.7. Thêm và chỉnh sửa món</h2>
+<h3 id="section-17-7-1">17.7.1. Hàng hóa bán trực tiếp</h3>
+<p>Hàng hóa có thể dùng đơn vị bán, thuộc tính và Flash Sale. Khi thêm, hệ thống xác định giá theo kênh hoặc khu vực đang áp dụng, thuế, ưu đãi và số lượng. Nếu có quản lý đích danh, serial phải được chọn theo quy tắc kho.</p>
+<h3 id="section-17-7-2">17.7.2. Món chế biến</h3>
+<p>Món chế biến có thể có:</p>
+<ul>
+<li>Số lượng.</li>
+<li>Ghi chú cho bếp.</li>
+<li>Thuộc tính như mức cay, độ chín hoặc lựa chọn phục vụ.</li>
+<li>Món kèm hoặc topping.</li>
+<li>Kiểu in phiếu hoặc tem.</li>
+<li>Công thức định lượng dùng để kiểm tra và tiêu hao nguyên vật liệu.</li>
+</ul>
+<p>Món cha và món kèm được hiển thị theo cấu trúc phân cấp để nhân viên và bếp nhận biết đúng yêu cầu.</p>
+<h3 id="section-17-7-3">17.7.3. Gộp dòng món</h3>
+<p>Hai lượt thêm chỉ gộp khi sản phẩm, đơn vị, thuộc tính, món kèm, ghi chú có ảnh hưởng chế biến, giá, Flash Sale và quan hệ Combo giống nhau hoàn toàn. Khác một lựa chọn phải tạo dòng riêng.</p>
+<p>Gộp dòng không được làm mất nguồn lượt gọi. Trên E-Menu, các lượt gửi khác nhau vẫn phải truy vết được dù giao diện tổng hợp có thể trình bày gọn.</p>
+<h3 id="section-17-7-4">17.7.4. Sửa trước khi gửi chế biến</h3>
+<p>Món chưa xác nhận có thể đổi số lượng, đơn vị, thuộc tính, món kèm, ghi chú hoặc bị xóa. Mỗi thay đổi phải tính lại tổng tiền và đồng bộ ảnh hưởng kho chưa hoàn thành.</p>
+<p>Không được xóa hết món cuối cùng bằng thao tác xóa dòng nếu điều đó làm tồn tại một đơn không có nội dung mà không có quyết định hủy. Giao diện yêu cầu hủy đơn hoặc thêm món khác.</p>
+<h3 id="section-17-7-5">17.7.5. Món đã xác nhận</h3>
+<p>Sau khi gửi bếp hoặc In chế biến, món bị khóa khỏi thao tác sửa và xóa thông thường. Nếu khách đổi ý, nhân viên phải hủy toàn bộ hoặc một phần với số lượng và lý do. Cách này giữ được số món đã gọi, số còn phục vụ và phần bị hủy.</p>
+<h2 id="section-17-8">17.8. Combo trong F&amp;B</h2>
+<p>Combo hiển thị tên Combo cha, số lượng Combo, nhóm lựa chọn và các món con thực tế. Các quy tắc Fixed, Mix&amp;Match, Common và SumOfProducts áp dụng.</p>
+<p>Khi thêm Combo:</p>
+<ul>
+<li>Số lựa chọn từng nhóm phải nằm trong giới hạn.</li>
+<li>Chỉ món còn hiệu lực và thuộc nhóm hợp lệ được chọn.</li>
+<li>Số lượng món con được nhân theo số lượng Combo.</li>
+<li>Giá và thuế dùng cách định giá của Combo.</li>
+<li>Ghi chú hoặc lựa chọn chế biến của từng món con được giữ khi gửi bếp.</li>
+</ul>
+<p>Khi tách, chuyển hoặc gộp bàn, Combo được xem là một cấu trúc nghiệp vụ. Không tách rời tùy ý món con làm mất ý nghĩa Combo. Khi hủy Combo đã xác nhận, trạng thái hủy phải lan tới các món con liên quan và nhà bếp nhận được cập nhật.</p>
+<h2 id="section-17-9">17.9. Chọn khách hàng và thuộc tính đơn</h2>
+<p>Khách hàng không bắt buộc cho một đơn phục vụ tại bàn thanh toán đủ ngay. Khách hàng trở thành bắt buộc khi dùng điểm Membership, áp dụng quyền lợi cá nhân, lập công nợ hoặc yêu cầu nghiệp vụ cần nhận diện.</p>
+<p>Nhân viên có thể tìm, chọn, bỏ chọn hoặc tạo nhanh khách theo quyền. Thay khách trước thanh toán phải làm mới quyền lợi phụ thuộc. Thuộc tính đơn như số khách, loại phục vụ hoặc thông tin nội bộ được nhập theo cấu hình và hiển thị trên chi tiết khi có giá trị.</p>
+<p>Nếu đơn được tạo từ một lịch check-in đã hoàn thành, thông tin khách có thể được điền từ lịch; thông tin nhân viên nhập trực tiếp được ưu tiên khi có.</p>
+<h2 id="section-17-10">17.10. Gửi chế biến khi sử dụng nhà bếp</h2>
+<p>Hành động <strong>Gửi chế biến</strong> chỉ lấy các món và món con chưa từng được gửi. Các món đã có trong luồng bếp không được tạo lại.</p>
+<p>Quy trình:</p>
+<ol>
+<li>Nhân viên rà soát món mới, số lượng, món kèm và ghi chú.</li>
+<li>Với đơn E-Menu, tất cả lượt gọi đang chờ phải được chấp nhận hoặc từ chối trước.</li>
+<li>Hệ thống kiểm tra đơn còn hoạt động và món chưa được gửi.</li>
+<li>Mỗi món hợp lệ chuyển sang chờ bếp, ghi thời điểm gửi và người gửi.</li>
+<li>Tên khu vực - bàn hoặc tên kênh bán được đưa vào nội dung điều phối.</li>
+<li>Màn hình bếp nhận cập nhật theo thời gian thực.</li>
+</ol>
+<p>Việc gửi không tự bắt đầu chế biến, không tự hoàn thành xuất kho và không tự thanh toán. Nếu một món đã được gửi bởi thiết bị khác, thao tác lặp bỏ qua món đó thay vì tạo hai yêu cầu bếp.</p>
+<h2 id="section-17-11">17.11. In chế biến khi không sử dụng nhà bếp</h2>
+<p>Khi cấu hình không dùng nhà bếp, hành động <strong>In chế biến</strong> xử lý các món mới chưa xác nhận:</p>
+<ol>
+<li>Kiểm tra chi nhánh và kho nếu quản lý tồn được bật.</li>
+<li>Kiểm tra tồn của hàng bán trực tiếp và nguyên vật liệu của món có công thức theo cấu hình thiếu tồn.</li>
+<li>Đánh dấu món đã xác nhận để khóa sửa thông thường.</li>
+<li>Với hàng quản lý tồn, đồng bộ nghiệp vụ xuất bán chưa hoàn thành.</li>
+<li>Với món không quản lý như thành phẩm tồn nhưng có công thức, ghi nhận chế biến và tiêu hao nguyên vật liệu theo số lượng món.</li>
+<li>In phiếu chế biến hoặc tem theo kiểu in của từng món.</li>
+<li>Ghi lịch sử lượt xác nhận chế biến.</li>
+</ol>
+<p>Món không có cấu hình in vẫn được xác nhận và xử lý kho hoặc chế biến; việc thiếu mẫu in không khiến món quay về trạng thái chưa xác nhận. Lỗi máy in sau khi phần nghiệp vụ đã cam kết được báo riêng và cho phép in lại.</p>
+<h2 id="section-17-12">17.12. E-Menu theo mã QR của bàn</h2>
+<h3 id="section-17-12-1">17.12.1. Nguyên tắc QR</h3>
+<p>Mã QR được gắn cố định với bàn và có thể dùng lại qua nhiều lượt khách. QR không chứa mã đơn cụ thể. Khi khách mở E-Menu, hệ thống kiểm tra doanh nghiệp, chi nhánh, bàn và trạng thái phục vụ tại thời điểm truy cập.</p>
+<p>Nhiều thiết bị có thể quét cùng một QR. Các thiết bị cùng gửi yêu cầu đến đơn đang hoạt động của bàn, nhưng mỗi lần gửi giỏ là một lượt yêu cầu riêng để nhân viên xử lý độc lập.</p>
+<h3 id="section-17-12-2">17.12.2. Xem thực đơn</h3>
+<p>Khách chỉ thấy nhóm, sản phẩm, dịch vụ hoặc Combo đang được phép hiển thị và bán. Thực đơn hiển thị tên, hình ảnh, giá, đơn vị, mô tả và lựa chọn liên quan. Khách có thể tìm theo tên hoặc mã mà không phụ thuộc chữ hoa, chữ thường hay dấu tiếng Việt; có thể lọc theo nhóm.</p>
+<p>Giá hiển thị là thông tin tại lúc xem. Khi gửi giỏ, hệ thống kiểm tra và tính lại giá, thuế, Flash Sale, đơn vị, món kèm, Combo và tình trạng bán để tránh dùng dữ liệu đã cũ.</p>
+<h3 id="section-17-12-3">17.12.3. Giỏ gọi món</h3>
+<p>Khách chọn số lượng, đơn vị, thuộc tính, món kèm, ghi chú và lựa chọn Combo. Hai dòng trong giỏ chỉ gộp khi mọi lựa chọn giống nhau. Giỏ rỗng, số lượng không hợp lệ hoặc lựa chọn Combo vượt giới hạn bị từ chối.</p>
+<p>Khách có thể chỉnh giỏ trước khi gửi. Sau khi gửi, khách không tự sửa hoặc hủy lượt đã gửi; thay đổi phải được nhân viên xử lý tại POS để giữ lịch sử.</p>
+<h3 id="section-17-12-4">17.12.4. Lượt gọi đầu tiên</h3>
+<p>Nếu bàn chưa có đơn hoạt động:</p>
+<ol>
+<li>Khách gửi giỏ hợp lệ.</li>
+<li>Hệ thống tạo đơn F&amp;B mới ở trạng thái mới và gắn với bàn.</li>
+<li>Một yêu cầu gọi món chờ xác nhận được tạo.</li>
+<li>POS nhận thông báo có đơn E-Menu mới.</li>
+<li>Nhân viên xác nhận hoặc từ chối lượt gọi.</li>
+</ol>
+<p>Khi xác nhận, đơn chuyển sang đã xác nhận và lượt yêu cầu được đóng ở kết quả chấp nhận. Món vẫn chưa tự đi vào bếp; nhân viên tiếp tục gửi chế biến theo quy trình của chi nhánh.</p>
+<p>Nếu từ chối toàn bộ lượt đầu khi đơn vẫn ở trạng thái Mới, hệ thống xóa đơn và giải phóng bàn. Nhân viên không cần quyền xóa đơn riêng để từ chối đơn chưa xác nhận. Lý do từ chối được gửi lại cho khách. Đơn đã được xác nhận trong lúc nhân viên đang mở yêu cầu không còn được xử lý theo ngoại lệ này.</p>
+<h3 id="section-17-12-5">17.12.5. Lượt gọi bổ sung</h3>
+<p>Nếu bàn đã có đơn hoạt động, giỏ mới được thêm vào chính đơn đó và tạo một yêu cầu chờ riêng. Đơn cấp trên vẫn ở trạng thái đã xác nhận.</p>
+<p>Nhân viên chấp nhận chỉ các món thuộc lượt đang xét; các món trước đó không bị xác nhận hoặc gửi bếp lại. Từ chối một lượt bổ sung không ảnh hưởng các lượt đã chấp nhận. Nếu một phần nội dung của đơn đã phục vụ, phần đó vẫn giữ nguyên.</p>
+<h3 id="section-17-12-6">17.12.6. Kiểm tra đồng thời</h3>
+<p>Ngay khi khách gửi, hệ thống kiểm tra bàn còn hoạt động, đơn hiện tại chưa kết thúc và nội dung giỏ vẫn bán được. Nếu đơn vừa thanh toán trong lúc khách đang soạn, yêu cầu không được gắn vào đơn đã đóng. Nếu bàn vẫn hợp lệ và không có đơn hoạt động, một lượt hợp lệ có thể bắt đầu phiên phục vụ mới theo quy tắc lượt đầu.</p>
+<h2 id="section-17-13">17.13. Yêu cầu gọi nhân viên và yêu cầu thanh toán từ E-Menu</h2>
+<p>Khách có thể gửi:</p>
+<ul>
+<li><strong>Gọi nhân viên:</strong> báo bàn cần hỗ trợ.</li>
+<li><strong>Yêu cầu thanh toán:</strong> báo khách muốn thu ngân kiểm tra và tính tiền.</li>
+</ul>
+<p>Mỗi loại yêu cầu không được tạo lặp khi cùng bàn đã có một yêu cầu đang chờ cùng loại. POS hiển thị loại yêu cầu, bàn, thời điểm và trạng thái xử lý. Nhân viên đánh dấu đã xử lý sau khi thực sự tiếp nhận.</p>
+<p>Đánh dấu yêu cầu thanh toán đã xử lý chỉ đóng thông báo; nó không thu tiền, không đóng đơn và không giải phóng bàn. Thu ngân vẫn phải thực hiện luồng thanh toán chính thức.</p>
+<h2 id="section-17-14">17.14. Cập nhật theo thời gian thực</h2>
+<p>POS, E-Menu và màn hình bếp nhận các sự kiện sau khi thay đổi đã cam kết:</p>
+<ul>
+<li>Có lượt gọi mới.</li>
+<li>Lượt gọi được chấp nhận hoặc từ chối.</li>
+<li>Món bị điều chỉnh hoặc hủy.</li>
+<li>Bếp bắt đầu chế biến.</li>
+<li>Bếp báo thiếu món.</li>
+<li>Món đã hoàn thành.</li>
+<li>Món đã được phục vụ.</li>
+<li>Khách yêu cầu gọi nhân viên.</li>
+<li>Khách yêu cầu thanh toán.</li>
+<li>Đơn đã kết thúc.</li>
+</ul>
+<p>Nếu thiết bị mất kết nối, tải lại phải trả về trạng thái có hiệu lực gần nhất. Thông báo thời gian thực chỉ giúp cập nhật nhanh, không phải căn cứ duy nhất để quyết định trạng thái.</p>
+<h2 id="section-17-15">17.15. Chuyển toàn bộ sang bàn trống</h2>
+<p>Khi chọn một bàn nguồn đang phục vụ và một bàn đích trống, thao tác được hiểu là chuyển bàn toàn bộ.</p>
+<p>Điều kiện:</p>
+<ul>
+<li>Đơn nguồn chưa thanh toán và chưa hủy.</li>
+<li>Bàn đích còn hoạt động và vẫn trống tại thời điểm xác nhận.</li>
+<li>Không có thao tác khác đang khóa đơn.</li>
+</ul>
+<p>Kết quả:</p>
+<ul>
+<li>Chính đơn nguồn được gắn sang bàn đích; mã đơn và toàn bộ lịch sử giữ nguyên.</li>
+<li>Bàn nguồn trở thành trống, bàn đích trở thành đang phục vụ.</li>
+<li>Món, lượt bếp, tiền tạm tính và ảnh hưởng kho không bị tạo lại vì đơn không đổi.</li>
+<li>Tên bàn hiển thị tại các màn hình được cập nhật.</li>
+<li>Lịch sử ghi bàn cũ, bàn mới, người và thời điểm chuyển.</li>
+</ul>
+<h2 id="section-17-16">17.16. Tách một phần sang bàn trống</h2>
+<p>Khi chỉ chọn một phần món để chuyển đến bàn trống, hệ thống tạo một đơn mới cho bàn đích.</p>
+<p>Quy trình:</p>
+<ol>
+<li>Chọn món, Combo và số lượng cần tách.</li>
+<li>Kiểm tra số lượng không vượt phần còn hiệu lực.</li>
+<li>Giữ cấu trúc món cha - món kèm và Combo.</li>
+<li>Tạo đơn mới tại bàn đích, chuyển phần đã chọn và giữ phần còn lại ở đơn nguồn.</li>
+<li>Chuyển hoặc tạo lại quan hệ điều phối chế biến và kho cho đúng đơn mới.</li>
+<li>Tính lại tổng của hai đơn mà không làm đổi tổng chung.</li>
+<li>Ghi lịch sử trên cả đơn nguồn và đơn đích.</li>
+</ol>
+<p>Món đã có tiến trình bếp phải giữ trạng thái, số lượng và thời điểm tương ứng sau khi tách. Không được tạo lượt chế biến thứ hai. Nếu chỉ tách một phần của một dòng đã gửi, hệ thống chia số lượng nhưng tổng đã gửi vẫn không đổi.</p>
+<h2 id="section-17-17">17.17. Gộp toàn bộ vào bàn đang phục vụ</h2>
+<p>Khi bàn đích đã có đơn hoạt động và chọn toàn bộ nội dung bàn nguồn, thao tác được hiểu là gộp bàn.</p>
+<p>Kết quả:</p>
+<ul>
+<li>Đơn đích được giữ làm đơn tiếp tục phục vụ.</li>
+<li>Toàn bộ món, Combo, món hủy cần giữ, lịch sử bếp và quan hệ kho của đơn nguồn được chuyển về đơn đích.</li>
+<li>Các ảnh hưởng xuất bán chưa hoàn thành được hợp nhất hoặc chuyển tham chiếu mà không làm tăng số lượng.</li>
+<li>Các hoạt động chế biến đã phát sinh tiếp tục gắn với mã đơn đích để theo dõi.</li>
+<li>Bàn nguồn được giải phóng; bàn đích vẫn đang phục vụ.</li>
+<li>Tổng giá trị chung trước và sau gộp không đổi, trừ việc giá phải được tính lại vì kênh hoặc chính sách vị trí thay đổi theo quy định rõ ràng.</li>
+<li>Lịch sử gộp được ghi ở cả hai phía.</li>
+</ul>
+<p>Các dòng giống nhau không bắt buộc tự gộp nếu việc gộp có thể làm mất nguồn lượt gọi, ghi chú hoặc trạng thái bếp.</p>
+<h2 id="section-17-18">17.18. Chuyển một phần vào bàn đang phục vụ</h2>
+<p>Đây là thao tác tách món từ đơn nguồn rồi nhập vào đơn đích hiện có. Hệ thống thực hiện các kiểm tra giống tách một phần và gộp bàn, nhưng đơn nguồn vẫn tồn tại nếu còn món hiệu lực.</p>
+<p>Nếu đơn nguồn không còn món hiệu lực sau chuyển, hệ thống kết thúc đơn nguồn theo quy tắc an toàn, giải phóng bàn và giữ các món hủy cần truy vết. Nếu hóa đơn, thanh toán hoặc quan hệ bị khóa đã phát sinh, thao tác bị từ chối.</p>
+<h2 id="section-17-19">17.19. Tính toàn vẹn khi chuyển, tách và gộp</h2>
+<p>Toàn bộ thay đổi phải được xử lý như một giao dịch thống nhất. Nếu bất kỳ bước nào không thể chuyển món, quan hệ bếp, ảnh hưởng kho hoặc trạng thái bàn, hệ thống khôi phục trạng thái ban đầu.</p>
+<p>Ngay trước khi xác nhận, hệ thống kiểm tra lại:</p>
+<ul>
+<li>Đơn nguồn và đích chưa thanh toán, chưa hủy.</li>
+<li>Bàn đích còn đúng tình trạng mà người dùng đã chọn.</li>
+<li>Món và số lượng được chọn vẫn còn hiệu lực.</li>
+<li>Không có một thao tác chuyển khác vừa thực hiện.</li>
+<li>Tổng tiền của các đơn sau thao tác bằng tổng hợp lệ trước thao tác, ngoại trừ thay đổi giá được giải thích rõ.</li>
+</ul>
+<h2 id="section-17-20">17.20. Hủy món chưa xác nhận</h2>
+<p>Món chưa gửi bếp hoặc chưa In chế biến có thể được xóa khỏi đơn. Hệ thống đồng thời loại bỏ món kèm, lựa chọn liên quan và dấu vết điều phối chưa cam kết. Nếu món đến từ E-Menu, khách nhận cập nhật nhà hàng đã loại bỏ hoặc từ chối món.</p>
+<p>Nếu đây là món cuối cùng, giao diện không để lại đơn rỗng không rõ trạng thái. Nhân viên phải hủy đơn hoặc thực hiện luồng từ chối lượt E-Menu; bàn được giải phóng khi đơn thực sự kết thúc.</p>
+<h2 id="section-17-21">17.21. Hủy món đã xác nhận</h2>
+<p>Món đã gửi bếp hoặc đã In chế biến không được xóa. Nhân viên thực hiện hủy với:</p>
+<ul>
+<li>Số lượng hủy lớn hơn không và không vượt số đang còn hiệu lực.</li>
+<li>Lý do bắt buộc.</li>
+<li>Quyền hủy trong phạm vi chi nhánh.</li>
+</ul>
+<p>Nếu hủy một phần, hệ thống tách phần hủy để giữ số còn phục vụ. Món kèm của phần hủy được phân bổ theo đúng tỷ lệ. Phần hủy chuyển sang trạng thái đã hủy, ghi người, thời điểm và lý do; phần còn lại giữ tiến trình bếp hiện tại.</p>
+<p>Nhà bếp nhận cập nhật hủy. Món hủy được loại khỏi tổng tiền, doanh thu và số lượng cần phục vụ nhưng vẫn hiện trong lịch sử với cách trình bày phân biệt. Có thể in phiếu hủy cho các món chưa từng in phiếu hủy theo quy trình vận hành.</p>
+<p>Nếu món đã được chế biến và nguyên vật liệu đã tiêu hao, việc hủy không tự phục hồi nguyên vật liệu như chưa từng chế biến. Phần hao hụt thực tế vẫn được ghi nhận. Với hàng bán trực tiếp còn ở nghiệp vụ xuất chưa hoàn thành, số lượng xuất được đồng bộ lại theo phần còn hiệu lực.</p>
+<h2 id="section-17-22">17.22. Hủy đơn đang phục vụ</h2>
+<p>Người tạo được hủy đơn đã xác nhận khi đơn chưa thanh toán và chưa bị hủy, không cần quyền hủy đơn riêng. Người thực hiện nhập lý do. Việc đã gửi bếp hoặc đã in chế biến không quyết định phải xóa hay hủy toàn bộ đơn; quy tắc hủy từng món vẫn được kiểm soát riêng.</p>
+<p>Khi hủy:</p>
+<ol>
+<li>Món chưa xác nhận được loại bỏ.</li>
+<li>Món và Combo đã xác nhận chuyển sang đã hủy và giữ lịch sử.</li>
+<li>Thông tin hủy được chuyển tới nhà bếp và E-Menu.</li>
+<li>Phiếu xuất bán nháp liên quan được xóa.</li>
+<li>Nguyên vật liệu đã thực sự tiêu hao không tự được hoàn lại.</li>
+<li>Đơn được giữ ở trạng thái <strong>Đã hủy</strong>, ghi người, thời điểm, lý do hủy và không được tính doanh thu.</li>
+<li>Bàn trở về trống.</li>
+<li>Quản lý nhận thông báo hủy theo cấu hình.</li>
+</ol>
+<p>Đơn đã thanh toán không dùng hành động hủy thông thường. Nếu cần đảo giao dịch, áp dụng quy trình hoàn trả hoặc xóa đơn có quyền. Quyền xóa không chỉ dành cho đơn hoàn tất mà còn áp dụng cho đơn đang phục vụ và đơn đã hủy.</p>
+<h2 id="section-17-23">17.23. Thanh toán và đóng bàn</h2>
+<p>Điều kiện thanh toán:</p>
+<ul>
+<li>Đơn đang hoạt động, chưa hủy và chưa thanh toán.</li>
+<li>Không còn lượt E-Menu chờ xác nhận.</li>
+<li>Các món mới đã được nhân viên xử lý theo cơ chế nhà bếp hoặc In chế biến; không có món bị bỏ quên ngoài tổng.</li>
+<li>Tổng tiền từ món và Combo còn hiệu lực đã được chốt.</li>
+<li>Khách hàng hợp lệ nếu dùng điểm hoặc ghi nợ.</li>
+<li>Tồn và nguyên vật liệu đáp ứng cấu hình tại bước hoàn tất.</li>
+</ul>
+<p>Luồng chính:</p>
+<ol>
+<li>Thu ngân mở đơn và kiểm tra món phục vụ, món hủy, Voucher, chiết khấu, phụ thu và thuế.</li>
+<li>Nhập thông tin người mua hóa đơn khi cần.</li>
+<li>Chọn phương thức thanh toán và số tiền thực thu.</li>
+<li>Nếu còn thiếu, hệ thống chỉ ghi công nợ khi có khách hàng cụ thể.</li>
+<li>Hệ thống ghi nhận thanh toán, đánh dấu đơn hoàn tất và đóng các yêu cầu E-Menu còn chờ.</li>
+<li>Xuất bán được đồng bộ theo món còn hiệu lực. Phiếu được hoàn thành nếu đủ hàng hoặc cho phép trừ âm; nếu cấu hình giữ phiếu chưa hoàn thành khi thiếu, phiếu được lưu nhưng chưa trừ tồn.</li>
+<li>Khoản thu và công nợ được tạo đúng số tiền.</li>
+<li>Bàn được giải phóng.</li>
+<li>Điểm đã dùng được trừ trong thanh toán. Điểm tích, hóa đơn, in, kế toán và báo cáo được xử lý theo thời điểm của từng nghiệp vụ; lỗi tích điểm sau giao dịch không làm lùi thanh toán hoặc đóng bàn.</li>
+</ol>
+<p>Nếu bước cốt lõi thất bại, đơn vẫn đang phục vụ và bàn chưa được giải phóng. Không tạo tiền, nợ hoặc kho hoàn thành từng phần.</p>
+<h2 id="section-17-24">17.24. Hóa đơn, Membership và in hóa đơn bán hàng</h2>
+<p>F&amp;B dùng cách tính tiền. Chỉ một trong Voucher, chiết khấu đơn hoặc dùng điểm được áp dụng ở cấp đơn theo quy tắc loại trừ; phụ thu được chuẩn hóa trên giá trị còn hiệu lực.</p>
+<p>Hóa đơn được xử lý sau khi thanh toán thành công. Hóa đơn doanh nghiệp yêu cầu tên và mã số thuế; thông tin liên hệ phải hợp lệ. Lỗi phát hành không được làm thu tiền hoặc đóng bàn lần thứ hai khi thử lại.</p>
+<ul>
+<li>Điểm dùng được trừ cùng giao dịch thanh toán.</li>
+<li>Điểm tích được xử lý sau khi đơn đã ghi nhận.</li>
+<li>Nếu tích điểm lỗi, đơn vẫn giữ trạng thái thanh toán và có thể chưa có biến động tích điểm.</li>
+<li>Hủy món trước thanh toán chỉ làm thay đổi giá trị dùng để tính quyền lợi.</li>
+<li>Trả hàng chỉ thu hồi điểm đã tích theo cách tính hiện tại, không hoàn điểm đã tiêu.</li>
+<li>Xóa đơn có quyền đảo ảnh hưởng ròng của mọi biến động Membership.</li>
+</ul>
+<p>Hệ thống có thể tự in hóa đơn bán hàng sau thanh toán theo cấu hình. Lỗi máy in được báo riêng và cho in lại từ chi tiết đơn.</p>
+<h2 id="section-17-25">17.25. Giao diện bán hàng F&amp;B</h2>
+<h3 id="section-17-25-1">17.25.1. Sơ đồ bàn</h3>
+<p>Màn hình có bộ chọn khu vực và các thẻ bàn. Mỗi thẻ thể hiện tên bàn, tình trạng trống hoặc đang phục vụ, thời gian mở và thông tin tổng quát cần thiết. Nhãn chữ luôn đi kèm màu trạng thái.</p>
+<p>Các thông báo E-Menu, bếp hoàn thành hoặc yêu cầu thanh toán được gắn với đúng bàn và có chỉ báo chưa xử lý.</p>
+<h3 id="section-17-25-2">17.25.2. Chi tiết đơn</h3>
+<p>Chi tiết hiển thị:</p>
+<ul>
+<li>Khu vực - bàn hoặc kênh bán.</li>
+<li>Mã đơn, thời gian mở, nhân viên và khách hàng.</li>
+<li>Các lượt gọi theo thứ tự mới nhất hoặc cũ nhất theo lựa chọn.</li>
+<li>Cấu trúc món cha, món kèm, Combo, ghi chú và số lượng.</li>
+<li>Trạng thái chế biến từng món bằng chữ và màu.</li>
+<li>Món hủy, lý do, số lượng và người hủy.</li>
+<li>Tổng tiền tạm tính, thuế, ưu đãi, phụ thu và số phải trả.</li>
+<li>Lịch sử thanh toán, hóa đơn và hoạt động đơn.</li>
+</ul>
+<p>Nút thêm món, gửi bếp, In chế biến, chuyển, tách, gộp, hủy, thanh toán và in chỉ xuất hiện khi trạng thái và quyền cho phép.</p>
+<h3 id="section-17-25-3">17.25.3. Hộp thoại chuyển, tách và gộp</h3>
+<p>Hộp thoại cho phép chọn bàn nguồn, bàn đích, món hoặc Combo, số lượng và xem trước kết quả. Khi bàn đích trống, hành động toàn bộ được ghi là chuyển bàn; khi bàn đích đang phục vụ, hành động toàn bộ được ghi là gộp bàn. Người dùng phải thấy rõ đơn nào được giữ sau thao tác.</p>
+<h3 id="section-17-25-4">17.25.4. Danh sách đơn</h3>
+<p>Danh sách cho phép tìm theo mã, bàn, kênh, khách hàng và lọc theo thời gian, trạng thái, thanh toán. Đơn đang phục vụ, chờ xử lý, đã thanh toán và đã hủy được phân biệt rõ.</p>
+<h2 id="section-17-26">17.26. Quyền và kiểm soát truy cập</h2>
+<ul>
+<li>Quyền tạo đơn cho phép lập đơn, thêm món, gửi chế biến và thao tác phục vụ thông thường.</li>
+<li>Quyền quản lý khu vực - bàn kiểm soát tạo, sửa, ngừng sử dụng và tạo QR bàn.</li>
+<li>Quyền chiết khấu hoặc đổi giá được kiểm tra riêng.</li>
+<li>Hủy từng món đã xác nhận phải kiểm tra quyền hủy món tại thời điểm thực hiện.</li>
+<li>Người tạo hủy đơn đã xác nhận trước thanh toán không cần quyền hủy đơn riêng.</li>
+<li>Từ chối đơn Mới chưa xác nhận làm xóa đơn, không cần quyền xóa riêng.</li>
+<li>Xóa đơn ở bất kỳ trạng thái nào từ sau xác nhận yêu cầu quyền xóa chuyên biệt, kể cả khi người thực hiện là người tạo.</li>
+<li>Phát hành hoặc điều chỉnh hóa đơn yêu cầu quyền hóa đơn phù hợp.</li>
+<li>Người dùng thông thường chỉ thao tác đơn thuộc chi nhánh; quyền xem rộng hơn không tự cấp quyền sửa.</li>
+</ul>
+<h2 id="section-17-27">17.27. Tác động liên phân hệ</h2>
+<ul>
+<li><strong>Khu vực và bàn:</strong> chiếm dụng, chuyển và giải phóng bàn.</li>
+<li><strong>E-Menu:</strong> thực đơn, lượt gọi, gọi nhân viên, yêu cầu thanh toán và phản hồi trạng thái.</li>
+<li><strong>Nhà bếp:</strong> món chờ, đang làm, hoàn thành, đã phục vụ, báo thiếu và hủy.</li>
+<li><strong>Danh mục và giá:</strong> món, món kèm, Combo, đơn vị, giá kênh, Flash Sale và thuế.</li>
+<li><strong>Kho và chế biến:</strong> hàng xuất bán, công thức, nguyên vật liệu và hao hụt món hủy.</li>
+<li><strong>Khách hàng và Membership:</strong> nhận diện khách, dùng điểm, tích điểm và lịch sử mua.</li>
+<li><strong>Tài chính và công nợ:</strong> khoản thu, thanh toán ngân hàng và phần khách còn nợ.</li>
+<li><strong>Hóa đơn và kế toán:</strong> phát hành hóa đơn, ghi nhận giao dịch bán và xuất kho.</li>
+<li><strong>Báo cáo:</strong> doanh thu, số khách, tình trạng bàn, thời gian bếp, món hủy và năng suất nhân viên.</li>
+</ul>
+<h2 id="section-17-28">17.28. Hoàn tác và xử lý lỗi</h2>
+<ul>
+<li>Ba cách kết thúc phải được phân biệt: nhân viên từ chối đơn Mới thì xóa đơn chưa xác nhận.</li>
+<li>Người tạo hủy đơn đã xác nhận trước thanh toán thì giữ đơn Đã hủy và xóa phiếu xuất nháp.</li>
+<li>Người có quyền xóa được xóa ở mọi trạng thái từ sau xác nhận.</li>
+<li>Xóa có quyền xử lý toàn bộ phiếu thu, chi, công nợ, sản xuất và xuất nhập liên quan.</li>
+<li>Tình trạng từng món đã gửi bếp hay chưa không tạo ngoại lệ về quyền xóa toàn bộ đơn.</li>
+</ul>
+<p>Các lỗi được xử lý như sau:</p>
+<ul>
+<li>E-Menu gửi nội dung hết hiệu lực: từ chối lượt, không thêm một phần không rõ ràng.</li>
+<li>Bàn vừa bị chiếm: không tạo đơn thứ hai.</li>
+<li>Gửi bếp lặp: không tạo mục bếp trùng.</li>
+<li>Tách hoặc gộp thất bại: giữ nguyên cả đơn nguồn, đơn đích và trạng thái bàn.</li>
+<li>Thiếu tồn theo cấu hình chặn: không xác nhận chế biến hoặc thanh toán.</li>
+<li>Lỗi in: giữ trạng thái đã cam kết và cho in lại.</li>
+<li>Lỗi hóa đơn sau thanh toán: giữ đơn đã hoàn tất, hiển thị lỗi hóa đơn riêng.</li>
+<li>Mất kết nối thời gian thực: tải lại trạng thái hiện tại trước khi thao tác tiếp.</li>
+</ul>
+<h2 id="section-17-29">17.29. Đồng thời và truy vết</h2>
+<p>Mọi thao tác trạng thái phải kiểm tra phiên bản hiện tại của đơn. Hai nhân viên không thể cùng chiếm một bàn, cùng thanh toán một đơn, cùng gửi một món hoặc chuyển cùng số lượng sang hai nơi.</p>
+<p>Lịch sử phải ghi tối thiểu:</p>
+<ul>
+<li>Tạo đơn.</li>
+<li>Xác nhận E-Menu.</li>
+<li>Gửi hoặc In chế biến.</li>
+<li>Đổi bàn/kênh.</li>
+<li>Chuyển/tách/gộp.</li>
+<li>Đổi giá.</li>
+<li>Hủy món.</li>
+<li>Hủy đơn.</li>
+<li>Thanh toán.</li>
+<li>Xóa.</li>
+</ul>
+<p>Với hủy hoặc từ chối, lý do bắt buộc được lưu và hiển thị.</p>
+<h2 id="section-17-30">17.30. Dashboard và giám sát vận hành</h2>
+<p>F&amp;B cung cấp dữ liệu cho dashboard gồm:</p>
+<ul>
+<li>Tổng đơn.</li>
+<li>Đơn hoàn tất.</li>
+<li>Bàn đang phục vụ.</li>
+<li>Yêu cầu thanh toán.</li>
+<li>Món chờ bếp.</li>
+<li>Món đã phục vụ.</li>
+<li>Món hủy.</li>
+<li>Số khách.</li>
+<li>Doanh thu.</li>
+<li>Thời gian chế biến.</li>
+<li>Món chậm.</li>
+<li>Hàng tồn thấp.</li>
+<li>Món bán chạy.</li>
+<li>Phân tích hủy.</li>
+</ul>
+<p>Các chỉ số dùng định nghĩa thống nhất.</p>
+<ul>
+<li>Món hủy không được tính như món bán.</li>
+<li>Yêu cầu thanh toán E-Menu không được tính như đơn đã thu.</li>
+<li>Bàn đang phục vụ không được tính là doanh thu hoàn tất.</li>
+</ul>
+<h2 id="section-17-31">17.31. Tình huống ngoại lệ bắt buộc xử lý</h2>
+<ul>
+<li>Hai nhân viên chọn cùng bàn trống.</li>
+<li>Hai thiết bị khách cùng gửi giỏ qua một QR.</li>
+<li>Đơn được thanh toán trong lúc khách đang soạn lượt mới.</li>
+<li>Giá, món kèm hoặc Combo thay đổi trước khi khách gửi giỏ.</li>
+<li>Nhân viên từ chối lượt E-Menu đầu hoặc một lượt bổ sung.</li>
+<li>Gửi bếp khi còn lượt E-Menu chờ xác nhận.</li>
+<li>Hủy một phần món đã gửi có món kèm.</li>
+<li>Hủy món sau khi nguyên vật liệu đã tiêu hao.</li>
+<li>Chuyển một phần món đang chế biến sang bàn khác.</li>
+<li>Gộp hai bàn có các dòng cùng tên nhưng khác ghi chú hoặc trạng thái bếp.</li>
+<li>Bàn đích đổi trạng thái trong lúc hộp thoại chuyển đang mở.</li>
+<li>Thanh toán khi còn món chưa được xử lý.</li>
+<li>Máy in hoặc kết nối hóa đơn lỗi sau khi đơn đã hoàn tất.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="16-retail-ban-le.html">← 16. Retail - Bán lẻ</a><a href="18-nha-bep-dieu-phoi-che-bien.html">18. Nhà bếp và điều phối chế biến →</a></nav></div></body></html>

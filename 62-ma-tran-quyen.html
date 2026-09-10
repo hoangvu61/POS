@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>62. Ma trận quyền đặc biệt — Đặc tả POS</title><meta name="description" content="Ma trận quyền đặc biệt"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần XII · Chương 62</p><article class="spec"><h1>CHƯƠNG 62. MA TRẬN QUYỀN ĐẶC BIỆT</h1><details class="section-toc"><summary>Nội dung chương · 13 mục</summary><ol><li><a href="#section-62-1">62.1. Mục đích</a></li><li><a href="#section-62-2">62.2. Ma trận hành động</a></li><li><a href="#section-62-3">62.3. Phạm vi chi nhánh</a></li><li><a href="#section-62-4">62.4. Kiểm soát tăng cường</a></li><li><a href="#section-62-5">62.5. Nhật ký quyền</a></li><li><a href="#section-62-6">62.6. Xung đột quyền</a></li><li><a href="#section-62-7">62.7. Quyền theo trạng thái</a></li><li><a href="#section-62-8">62.8. Quyền job và tài khoản hệ thống</a></li><li><a href="#section-62-9">62.9. Rà soát định kỳ</a></li><li><a href="#section-62-10">62.10. Quyền trên dữ liệu đã chốt</a></li><li><a href="#section-62-11">62.11. Quyền đối với dữ liệu liên chi nhánh</a></li><li><a href="#section-62-12">62.12. Quyền export và API</a></li><li><a href="#section-62-13">62.13. Rà soát sau thay đổi</a></li></ol></details>
+<h2 id="section-62-1">62.1. Mục đích</h2>
+<p>Ma trận tập trung các hành động nhạy cảm có thể làm thay đổi tiền, tồn, công nợ, điểm, hóa đơn, bút toán hoặc dữ liệu lịch sử. Quyền được kiểm tra ở API và service; UI chỉ hỗ trợ hiển thị.</p>
+<h2 id="section-62-2">62.2. Ma trận hành động</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Hành động</th>
+<th>Quyền chính</th>
+<th>Điều kiện bổ sung</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tạo/sửa đơn</td>
+<td>Bán hàng</td>
+<td>Đúng chi nhánh và trạng thái</td>
+</tr>
+<tr>
+<td>Từ chối đơn Mới</td>
+<td>Bán hàng</td>
+<td>Xóa đơn theo luồng Mới, không cần quyền xóa riêng</td>
+</tr>
+<tr>
+<td>Hủy đơn đã xác nhận</td>
+<td>Bán hàng/người tạo</td>
+<td>Trước thanh toán hoặc gửi theo mô hình</td>
+</tr>
+<tr>
+<td>Xóa đơn sau xác nhận</td>
+<td>Xóa đơn</td>
+<td>Mọi trạng thái sau xác nhận</td>
+</tr>
+<tr>
+<td>Hoàn thành phiếu kho</td>
+<td>Kho</td>
+<td>Đủ điều kiện tồn, lô, serial</td>
+</tr>
+<tr>
+<td>Cho âm tồn</td>
+<td>Cấu hình DN</td>
+<td>Không áp dụng serial</td>
+</tr>
+<tr>
+<td>Thanh toán/hoàn tiền</td>
+<td>Thu chi/Bán hàng</td>
+<td>Phương thức và nguồn hợp lệ</td>
+</tr>
+<tr>
+<td>Điều chỉnh công nợ</td>
+<td>Công nợ</td>
+<td>Không vượt số gốc/đã phân bổ</td>
+</tr>
+<tr>
+<td>Xuất hóa đơn</td>
+<td>Hóa đơn đầu ra</td>
+<td>Cấu hình, hạn mức, trạng thái đơn/sàn</td>
+</tr>
+<tr>
+<td>Điều chỉnh do xóa đơn</td>
+<td>Hóa đơn + Xóa đơn</td>
+<td>Có hóa đơn gốc</td>
+</tr>
+<tr>
+<td>Ghi sổ bút toán</td>
+<td>Kế toán</td>
+<td>Cân Nợ/Có và kỳ mở</td>
+</tr>
+<tr>
+<td>Xóa tờ khai</td>
+<td>Thuế/Kế toán</td>
+<td>Kiểm tra trạng thái và tham chiếu</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-62-3">62.3. Phạm vi chi nhánh</h2>
+<p>Mỗi quyền kết hợp phạm vi doanh nghiệp và chi nhánh. Quyền toàn doanh nghiệp cho phép xem nhiều chi nhánh; quyền chi nhánh chỉ thao tác branch được gắn. Job hệ thống dùng service account nhưng vẫn truyền tenant và branch.</p>
+<h2 id="section-62-4">62.4. Kiểm soát tăng cường</h2>
+<p>Xóa, hoàn tác, hoàn tiền lớn, thay đổi cấu hình thuế/giá vốn, phát hành điều chỉnh và ghi sổ yêu cầu xác nhận, lý do hoặc approval nếu policy bật. Approval không thay thế quyền; người duyệt cũng phải có quyền tương ứng.</p>
+<h2 id="section-62-5">62.5. Nhật ký quyền</h2>
+<p>Mỗi lần cho phép hoặc từ chối hành động nhạy cảm ghi user, role, branch, action, entity, reason, result và correlation id. Log từ chối không được làm lộ dữ liệu ngoài phạm vi.</p>
+<h2 id="section-62-6">62.6. Xung đột quyền</h2>
+<p>Deny hoặc không có quyền ưu tiên hơn quyền xem chung. Quyền xóa đơn không tự cấp quyền xóa hóa đơn đã phát hành; quyền hóa đơn không tự cấp quyền xóa đơn. Khi nhiều role cho phép, service lấy quyền hợp lệ cao nhất nhưng vẫn kiểm tra điều kiện dữ liệu.</p>
+<h2 id="section-62-7">62.7. Quyền theo trạng thái</h2>
+<ul>
+<li>Nút sửa đơn chỉ mở khi trạng thái cho phép.</li>
+<li>Nút hủy kiểm tra người tạo và mốc thanh toán/gửi hàng.</li>
+<li>Nút xóa kiểm tra quyền ở mọi trạng thái sau xác nhận.</li>
+<li>Hoàn thành phiếu kho kiểm tra tồn, lô, serial và phương pháp giá vốn.</li>
+<li>Điều chỉnh hóa đơn kiểm tra hóa đơn gốc và quyền tương ứng.</li>
+</ul>
+<h2 id="section-62-8">62.8. Quyền job và tài khoản hệ thống</h2>
+<p>Job nền dùng service identity được giới hạn theo loại tác vụ và tenant. Service identity không được dùng để đăng nhập UI hoặc xuất dữ liệu tùy ý. Mỗi job ghi nguồn kích hoạt và người yêu cầu nếu chạy từ thao tác người dùng.</p>
+<h2 id="section-62-9">62.9. Rà soát định kỳ</h2>
+<p>Định kỳ rà role không còn dùng, quyền cấp dư, tài khoản inactive, quyền chi nhánh sai và log từ chối tăng bất thường. Thu hồi quyền không xóa lịch sử thao tác trước đó. Thay đổi ma trận phải được kiểm tra regression toàn bộ endpoint nhạy cảm.</p>
+<h2 id="section-62-10">62.10. Quyền trên dữ liệu đã chốt</h2>
+<p>Đơn đã thanh toán, phiếu đã hoàn thành, hóa đơn đã phát hành, bút toán đã ghi sổ và tờ khai đã hoàn tất không mở sửa tự do. Người dùng phải đi qua luồng điều chỉnh, đảo hoặc lập bổ sung. Quyền xem lịch sử không biến thành quyền chỉnh sửa snapshot.</p>
+<h2 id="section-62-11">62.11. Quyền đối với dữ liệu liên chi nhánh</h2>
+<p>Thao tác chuyển kho, chuyển tiền, điều chuyển tài sản hoặc xem công nợ nhiều chi nhánh yêu cầu quyền trên cả nơi đi và nơi đến. Nếu chỉ có quyền một phía, service dừng trước khi tạo giao dịch. Báo cáo tổng chỉ trả phần mà người dùng có quyền ở tất cả thành phần.</p>
+<h2 id="section-62-12">62.12. Quyền export và API</h2>
+<p>Nút export, endpoint export và job export kiểm tra cùng policy. Tệp kết quả gắn bộ lọc và người xuất; request thay đổi bộ lọc sau khi tải không mở rộng tệp đã tạo. API không nhận role từ client để tự nâng quyền.</p>
+<h2 id="section-62-13">62.13. Rà soát sau thay đổi</h2>
+<p>Sau khi thêm role hoặc endpoint, chạy ma trận quyền tự động cho user không quyền, quyền chi nhánh, quyền toàn doanh nghiệp và quyền quản trị. Kiểm tra cả đường dẫn trực tiếp, retry, job nền, webhook và tệp xuất.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="61-ma-tran-cau-hinh.html">← 61. Ma trận cấu hình ảnh hưởng nghiệp vụ</a><a href="63-danh-muc-loi.html">63. Danh mục lỗi và thông báo chuẩn →</a></nav></div></body></html>

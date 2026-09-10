@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>14. Tính tiền và hoàn tất giao dịch — Đặc tả POS</title><meta name="description" content="Tính tiền và hoàn tất giao dịch"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần IV · Chương 14</p><article class="spec"><h1>CHƯƠNG 14. TÍNH TIỀN, THANH TOÁN VÀ HOÀN TẤT GIAO DỊCH</h1><details class="section-toc"><summary>Nội dung chương · 38 mục</summary><ol><li><a href="#section-14-1">14.1. Mục tiêu và phạm vi</a></li><li><a href="#section-14-2">14.2. Nguyên tắc tính tiền</a></li><li><a href="#section-14-3">14.3. Xác định giá bán</a></li><li><a href="#section-14-4">14.4. Tiền hàng của sản phẩm và Combo</a></li><li><a href="#section-14-5">14.5. Một ưu đãi chính tại một thời điểm</a></li><li><a href="#section-14-6">14.6. Chiết khấu trực tiếp</a></li><li><a href="#section-14-7">14.7. Chiết khấu theo phương pháp thuế Khấu trừ</a></li><li><a href="#section-14-8">14.8. Ví dụ chiết khấu theo phương pháp Khấu trừ</a></li><li><a href="#section-14-9">14.9. Chiết khấu theo phương pháp thuế Trực tiếp</a></li><li><a href="#section-14-10">14.10. Ví dụ chiết khấu theo phương pháp Trực tiếp</a></li><li><a href="#section-14-11">14.11. Voucher</a></li><li><a href="#section-14-12">14.12. Membership trong thanh toán</a></li><li><a href="#section-14-13">14.13. Phụ thu</a></li><li><a href="#section-14-14">14.14. Nền tính phụ thu phần trăm</a></li><li><a href="#section-14-15">14.15. Phụ thu theo phương pháp thuế Khấu trừ</a></li><li><a href="#section-14-16">14.16. Phụ thu theo phương pháp thuế Trực tiếp</a></li><li><a href="#section-14-17">14.17. Thứ tự tính lại đơn</a></li><li><a href="#section-14-18">14.18. Popup thanh toán</a></li><li><a href="#section-14-19">14.19. Phương thức thanh toán</a></li><li><a href="#section-14-20">14.20. Thanh toán đủ</a></li><li><a href="#section-14-21">14.21. Thanh toán một phần và công nợ</a></li><li><a href="#section-14-22">14.22. Kiểm tra thanh toán</a></li><li><a href="#section-14-23">14.23. Thông tin người mua để lập hóa đơn</a></li><li><a href="#section-14-24">14.24. Trình tự hoàn tất giao dịch</a></li><li><a href="#section-14-25">14.25. Các nghiệp vụ được kích hoạt khi hoàn tất</a></li><li><a href="#section-14-26">14.26. Tính nguyên tử trước thời điểm cam kết</a></li><li><a href="#section-14-27">14.27. Lập hóa đơn tự động sau khi hoàn tất</a></li><li><a href="#section-14-28">14.28. Trạng thái hóa đơn của đơn</a></li><li><a href="#section-14-29">14.29. Xuất hóa đơn thủ công và xuất lại</a></li><li><a href="#section-14-30">14.30. Hóa đơn cho đơn TikTok</a></li><li><a href="#section-14-31">14.31. Hóa đơn cho đơn Shopee</a></li><li><a href="#section-14-32">14.32. Dấu vết yêu cầu hóa đơn</a></li><li><a href="#section-14-33">14.33. Thể hiện chiết khấu và phụ thu trên hóa đơn</a></li><li><a href="#section-14-34">14.34. Hóa đơn của Combo</a></li><li><a href="#section-14-35">14.35. Xử lý lỗi sau cam kết</a></li><li><a href="#section-14-36">14.36. Kiểm soát đồng thời và chống xử lý lặp</a></li><li><a href="#section-14-37">14.37. Nhật ký kiểm soát</a></li><li><a href="#section-14-38">14.38. Tình huống lỗi và cách xử lý</a></li></ol></details>
+<h2 id="section-14-1">14.1. Mục tiêu và phạm vi</h2>
+<p>Chương này quy định cách hệ thống chuyển một đơn đang phục vụ thành giao dịch có giá trị tài chính, bao gồm:</p>
+<ul>
+<li>Xác định giá sản phẩm.</li>
+<li>Tính tiền hàng và thuế.</li>
+<li>Áp dụng chiết khấu, Voucher hoặc Membership.</li>
+<li>Tính phụ thu.</li>
+<li>Nhận thanh toán hoặc ghi nhận công nợ.</li>
+<li>Thu thập thông tin người mua để lập hóa đơn.</li>
+<li>Hoàn tất giao dịch và kích hoạt các nghiệp vụ liên quan.</li>
+<li>Xử lý lỗi trước và sau thời điểm giao dịch được cam kết.</li>
+</ul>
+<p>Các mô hình Retail, F&amp;B, Service, Facility và Hospitality có giao diện và điều kiện hoàn tất riêng, nhưng các quy tắc tiền, ưu đãi, thuế và kiểm soát cuối cùng trong chương này được áp dụng thống nhất.</p>
+<h2 id="section-14-2">14.2. Nguyên tắc tính tiền</h2>
+<p>Tổng tiền được hình thành từ các thành phần:</p>
+<p><strong>Tổng phải thanh toán = Tiền hàng + Phụ thu − Chiết khấu − Voucher − Giá trị giảm từ Membership − Số tiền đã hoàn</strong></p>
+<p>Trong đó:</p>
+<ul>
+<li>Tiền hàng là tổng giá trị của các dòng bán hợp lệ.</li>
+<li>Phụ thu làm tăng nghĩa vụ thanh toán.</li>
+<li>Chiết khấu trực tiếp, Voucher và Membership làm giảm nghĩa vụ thanh toán nhưng loại trừ lẫn nhau.</li>
+<li>Số tiền đã hoàn phản ánh phần giao dịch đã được trả lại theo nghiệp vụ sau bán.</li>
+</ul>
+<p>Mọi thành phần phải dùng cùng phương pháp thuế, quy tắc làm tròn và độ chính xác tiền tệ của doanh nghiệp. Tổng của các phần phân bổ phải khớp với tổng của đơn sau khi làm tròn.</p>
+<h2 id="section-14-3">14.3. Xác định giá bán</h2>
+<p>Khi thêm sản phẩm hoặc tính lại đơn, hệ thống xác định giá theo thứ tự:</p>
+<ol>
+<li>Giá Flash Sale đang có hiệu lực và phù hợp điều kiện.</li>
+<li>Giá riêng của kênh bán.</li>
+<li>Giá bán cơ bản.</li>
+</ol>
+<p>Giá được chốt trên giao dịch. Việc chương trình giá kết thúc hoặc danh mục giá thay đổi sau đó không làm thay đổi đơn lịch sử.</p>
+<p>Nếu người dùng đổi kênh bán khi đơn còn được chỉnh sửa, hệ thống:</p>
+<ol>
+<li>Cảnh báo rằng giá có thể thay đổi.</li>
+<li>Tính lại giá các dòng theo kênh mới.</li>
+<li>Tính lại ưu đãi và phụ thu phụ thuộc giá.</li>
+<li>Hiển thị tổng mới trước khi người dùng tiếp tục.</li>
+</ol>
+<p>Sau mốc khóa của mô hình, việc đổi kênh hoặc tính lại giá bị từ chối.</p>
+<h2 id="section-14-4">14.4. Tiền hàng của sản phẩm và Combo</h2>
+<p>Tiền hàng của sản phẩm được xác định từ số lượng, giá bán và thuế của dòng.</p>
+<p>Với Combo:</p>
+<ul>
+<li>Combo Common ghi nhận giá ở Combo cha; các thành phần không được cộng thêm giá bán lần nữa.</li>
+<li>Combo SumOfProducts lấy tổng giá trị của các thành phần thực tế.</li>
+<li>Combo Mix&amp;Match chỉ tính các lựa chọn khách đã chọn.</li>
+<li>Combo được sử dụng từ quyền dịch vụ đã mua có giá bằng 0 cho lần sử dụng đó.</li>
+</ul>
+<p>Sản phẩm bị hủy trước khi chốt hoặc đã được trả không tiếp tục tham gia phần giá trị còn hiệu lực của đơn.</p>
+<h2 id="section-14-5">14.5. Một ưu đãi chính tại một thời điểm</h2>
+<p>Đơn chỉ sử dụng một trong ba hình thức ưu đãi chính:</p>
+<ul>
+<li>Voucher.</li>
+<li>Chiết khấu trực tiếp.</li>
+<li>Tiêu điểm Membership.</li>
+</ul>
+<p>Khi người dùng chọn hình thức mới, giao diện loại bỏ hình thức cũ và tính lại đơn. Trước khi hoàn tất, hệ thống kiểm tra lại để không chấp nhận một yêu cầu còn đồng thời hai hoặc ba ưu đãi chính.</p>
+<p>Phụ thu không phải ưu đãi và có thể tồn tại cùng một hình thức ưu đãi chính.</p>
+<h2 id="section-14-6">14.6. Chiết khấu trực tiếp</h2>
+<h3 id="section-14-6-1">14.6.1. Quyền</h3>
+<p>Người dùng cần quyền chiết khấu đơn hàng. Quyền tạo đơn hoặc thanh toán không tự bao gồm quyền này.</p>
+<p>Hệ thống kiểm tra quyền ở thời điểm áp dụng và khi hoàn tất. Nếu quyền đã bị thu hồi trong lúc popup đang mở, yêu cầu không được tiếp tục chỉ vì giao diện trước đó đã cho nhập chiết khấu.</p>
+<h3 id="section-14-6-2">14.6.2. Hình thức</h3>
+<p>Chiết khấu có thể là:</p>
+<ul>
+<li>Tỷ lệ phần trăm.</li>
+<li>Số tiền cố định.</li>
+</ul>
+<p>Điều kiện chung:</p>
+<ul>
+<li>Đơn có ít nhất một dòng hàng hợp lệ với giá trị lớn hơn 0.</li>
+<li>Giá trị nhập lớn hơn 0.</li>
+<li>Tỷ lệ phần trăm không vượt 100%.</li>
+<li>Số tiền cố định không vượt nền tính chiết khấu.</li>
+<li>Đơn không đồng thời có Voucher hoặc Membership.</li>
+</ul>
+<h3 id="section-14-6-3">14.6.3. Cố định kết quả chiết khấu</h3>
+<p>Hệ thống giữ cả nội dung người dùng chọn và kết quả phân bổ của lần áp dụng. Khi trả hàng hoặc lập hóa đơn, hệ thống dùng kết quả đã chốt thay vì tính lại bằng giá hoặc cấu hình hiện tại.</p>
+<h2 id="section-14-7">14.7. Chiết khấu theo phương pháp thuế Khấu trừ</h2>
+<p>Người dùng có thể chọn chiết khấu trên giá trước thuế hoặc giá sau thuế.</p>
+<p>Nếu áp dụng trên giá trước thuế:</p>
+<p><strong>Nền chiết khấu = Tổng giá trị trước VAT của các dòng hợp lệ</strong></p>
+<p>Nếu áp dụng trên giá sau thuế:</p>
+<p><strong>Nền chiết khấu = Tổng giá trị sau VAT của các dòng hợp lệ</strong></p>
+<p>Chiết khấu phần trăm:</p>
+<p><strong>Tiền chiết khấu = Nền chiết khấu × Tỷ lệ / 100</strong></p>
+<p>Chiết khấu số tiền:</p>
+<p><strong>Tiền chiết khấu = Giá trị người dùng nhập</strong></p>
+<p>Khi đơn có nhiều mức VAT, hệ thống phân bổ chiết khấu theo tỷ trọng giá trị của từng nhóm thuế trên tổng nền tính.</p>
+<p>Nếu chiết khấu được nhập theo giá trước VAT, hệ thống xác định phần giảm trước thuế của từng nhóm rồi tính phần sau thuế theo VAT tương ứng.</p>
+<p>Nếu chiết khấu được nhập theo giá sau VAT, hệ thống phân bổ phần giảm sau thuế rồi quy đổi về phần trước thuế của từng nhóm bằng công thức:</p>
+<p><strong>Phần giảm trước VAT = Phần giảm sau VAT / (1 + VAT / 100)</strong></p>
+<p>Chênh lệch do làm tròn được điều chỉnh có kiểm soát để tổng các nhóm bằng đúng tổng chiết khấu của đơn.</p>
+<h2 id="section-14-8">14.8. Ví dụ chiết khấu theo phương pháp Khấu trừ</h2>
+<p>Đơn gồm:</p>
+<ul>
+<li>Nhóm VAT 8% có giá trị trước VAT là 1.000.000 đồng.</li>
+<li>Nhóm VAT 10% có giá trị trước VAT là 500.000 đồng.</li>
+</ul>
+<p>Chiết khấu 10% trên giá trước thuế:</p>
+<ul>
+<li>Tổng nền là 1.500.000 đồng.</li>
+<li>Tổng chiết khấu là 150.000 đồng.</li>
+<li>Nhóm VAT 8% nhận 100.000 đồng chiết khấu.</li>
+<li>Nhóm VAT 10% nhận 50.000 đồng chiết khấu.</li>
+</ul>
+<p>Kết quả phân bổ này được dùng thống nhất cho tổng tiền, thuế, hóa đơn và xử lý trả hàng.</p>
+<h2 id="section-14-9">14.9. Chiết khấu theo phương pháp thuế Trực tiếp</h2>
+<p>Phương pháp Trực tiếp không có lựa chọn trước VAT hoặc sau VAT.</p>
+<p><strong>Nền chiết khấu = Tổng giá bán của các dòng hợp lệ</strong></p>
+<p>Nếu chiết khấu theo phần trăm:</p>
+<p><strong>Tiền chiết khấu = Nền chiết khấu × Tỷ lệ / 100</strong></p>
+<p>Nếu chiết khấu theo số tiền, hệ thống dùng giá trị người dùng nhập.</p>
+<p>Khi đơn có nhiều nhóm ngành hàng với tỷ lệ thuế trên doanh thu khác nhau, chiết khấu được phân bổ theo tỷ trọng doanh thu của từng nhóm:</p>
+<p><strong>Doanh thu tính thuế sau điều chỉnh = Doanh thu nhóm − Chiết khấu phân bổ của nhóm</strong></p>
+<p>Hệ thống không quy đổi phần chiết khấu bằng phép chia cho <code>1 + VAT/100</code> trong phương pháp này.</p>
+<h2 id="section-14-10">14.10. Ví dụ chiết khấu theo phương pháp Trực tiếp</h2>
+<p>Đơn gồm:</p>
+<ul>
+<li>Hàng hóa chịu tỷ lệ 1% với doanh thu 600.000 đồng.</li>
+<li>Dịch vụ chịu tỷ lệ 5% với doanh thu 400.000 đồng.</li>
+</ul>
+<p>Chiết khấu 10% trên tổng 1.000.000 đồng là 100.000 đồng:</p>
+<ul>
+<li>Hàng hóa nhận 60.000 đồng chiết khấu, còn doanh thu tính thuế 540.000 đồng.</li>
+<li>Dịch vụ nhận 40.000 đồng chiết khấu, còn doanh thu tính thuế 360.000 đồng.</li>
+</ul>
+<h2 id="section-14-11">14.11. Voucher</h2>
+<p>Voucher chỉ được áp dụng khi:</p>
+<ul>
+<li>Voucher còn hiệu lực.</li>
+<li>Thỏa phạm vi doanh nghiệp, chi nhánh, kênh và điều kiện đơn hàng.</li>
+<li>Chưa vượt giới hạn sử dụng.</li>
+<li>Đơn không có chiết khấu trực tiếp hoặc tiêu điểm Membership.</li>
+</ul>
+<p>Khi người dùng thay đổi nội dung đơn, khách hàng hoặc kênh bán, hệ thống phải đánh giá lại điều kiện Voucher. Voucher không còn hợp lệ bị loại bỏ trước khi tính tổng cuối.</p>
+<p>Đơn dùng Voucher không được tích điểm Membership.</p>
+<h2 id="section-14-12">14.12. Membership trong thanh toán</h2>
+<p>Tiêu điểm được thực hiện trực tiếp trong popup thanh toán.</p>
+<p>Hệ thống hiển thị số điểm có thể dùng và giá trị giảm tối đa sau khi đã xác định khách hàng và hạng. Khi người dùng áp dụng điểm:</p>
+<ul>
+<li>Voucher và chiết khấu trực tiếp được loại bỏ.</li>
+<li>Tổng tiền và phụ thu phần trăm được tính lại.</li>
+<li>Số điểm, tỷ lệ quy đổi và giá trị giảm được giữ trên đơn.</li>
+</ul>
+<p>Ngay trước khi hoàn tất, hệ thống kiểm tra lại số dư điểm, hạng và giới hạn. Đơn đã tiêu điểm không được tích thêm điểm khi hoàn tất.</p>
+<h2 id="section-14-13">14.13. Phụ thu</h2>
+<h3 id="section-14-13-1">14.13.1. Mục đích và thông tin bắt buộc</h3>
+<p>Phụ thu là khoản làm tăng số tiền phải trả. Phụ thu có thể là:</p>
+<ul>
+<li>Tỷ lệ phần trăm.</li>
+<li>Số tiền cố định.</li>
+</ul>
+<p>Người dùng bắt buộc nhập lý do. Lý do được loại bỏ khoảng trắng ở đầu và cuối và không dài quá 200 ký tự.</p>
+<h3 id="section-14-13-2">14.13.2. Điều kiện giá trị</h3>
+<ul>
+<li>Giá trị phải lớn hơn 0.</li>
+<li>Tỷ lệ phần trăm không vượt 100%.</li>
+<li>Số tiền cố định có thể lớn hơn nền tính nếu người dùng nhập hợp lệ.</li>
+</ul>
+<h3 id="section-14-13-3">14.13.3. Quyền thao tác</h3>
+<p>Phụ thu được áp dụng trong phạm vi quyền xử lý đơn hiện hành. Hệ thống không dùng quyền chiết khấu để quyết định quyền phụ thu.</p>
+<h2 id="section-14-14">14.14. Nền tính phụ thu phần trăm</h2>
+<p>Phụ thu phần trăm được tính trên giá trị ròng sau ưu đãi:</p>
+<p><strong>Nền phụ thu = Tiền hàng − Ưu đãi chính đang áp dụng</strong></p>
+<p><strong>Tiền phụ thu = Nền phụ thu × Tỷ lệ / 100</strong></p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Nền sau ưu đãi là 900.000 đồng và phụ thu 5% thì tiền phụ thu là 45.000 đồng.</li>
+<li>Nếu ưu đãi thay đổi làm nền còn 800.000 đồng, phụ thu được tính lại thành 40.000 đồng.</li>
+</ul>
+</blockquote>
+<p>Một phụ thu có bản chất phần trăm không được giữ như số tiền cố định sau khi nền tính thay đổi.</p>
+<h2 id="section-14-15">14.15. Phụ thu theo phương pháp thuế Khấu trừ</h2>
+<p>Với từng nhóm VAT:</p>
+<p><strong>Nền ròng của nhóm = Tiền hàng nhóm − Ưu đãi phân bổ cho nhóm</strong></p>
+<p>Người dùng có thể chọn phụ thu trên giá trước VAT hoặc sau VAT.</p>
+<p>Phụ thu được phân bổ theo tỷ trọng nền ròng của từng nhóm. Nếu nhập trên giá sau VAT, hệ thống quy đổi phần phụ thu của nhóm về trước VAT theo mức thuế tương ứng để sử dụng thống nhất khi lập hóa đơn.</p>
+<p>Sau làm tròn, tổng phần phân bổ phải bằng tổng phụ thu của đơn.</p>
+<h2 id="section-14-16">14.16. Phụ thu theo phương pháp thuế Trực tiếp</h2>
+<p>Phương pháp Trực tiếp không phân biệt trước hoặc sau VAT.</p>
+<p>Với từng nhóm ngành hàng:</p>
+<p><strong>Doanh thu ròng nhóm = Giá bán nhóm − Ưu đãi phân bổ</strong></p>
+<p>Phụ thu được phân bổ theo tỷ trọng doanh thu ròng. Doanh thu tính thuế của nhóm sau phụ thu bằng doanh thu ròng cộng phần phụ thu của nhóm.</p>
+<p>Không sử dụng phép quy đổi theo <code>1 + VAT/100</code>.</p>
+<h2 id="section-14-17">14.17. Thứ tự tính lại đơn</h2>
+<p>Mỗi khi dữ liệu ảnh hưởng đến tiền thay đổi, hệ thống tính lại theo trình tự:</p>
+<ol>
+<li>Xác định các dòng hàng còn hiệu lực.</li>
+<li>Xác định giá và thuế của từng dòng.</li>
+<li>Tính tiền hàng.</li>
+<li>Kiểm tra và áp dụng một ưu đãi chính.</li>
+<li>Phân bổ ưu đãi theo phương pháp thuế.</li>
+<li>Tính nền ròng.</li>
+<li>Tính và phân bổ phụ thu.</li>
+<li>Trừ số tiền đã hoàn nếu đơn đã có trả hàng.</li>
+<li>Làm tròn và xử lý chênh lệch.</li>
+<li>Xác định tổng phải thanh toán.</li>
+</ol>
+<p>Tổng hiển thị trên giao diện, số tiền được chấp nhận khi thanh toán và tổng dùng để lập hóa đơn phải xuất phát từ cùng một kết quả tính.</p>
+<h2 id="section-14-18">14.18. Popup thanh toán</h2>
+<p>Popup thanh toán là điểm hội tụ của các thông tin:</p>
+<ul>
+<li>Tiền hàng, ưu đãi, phụ thu và tổng phải thanh toán.</li>
+<li>Khách hàng và Membership.</li>
+<li>Phương thức thanh toán.</li>
+<li>Số tiền khách đưa hoặc số tiền cần ghi nợ.</li>
+<li>Tài khoản nhận tiền đối với phương thức ngân hàng.</li>
+<li>Tiền thừa nếu có.</li>
+<li>Thông tin người mua để lập hóa đơn.</li>
+</ul>
+<p>Giao diện có thể khác theo mô hình nhưng không được thay đổi quy tắc kiểm tra tiền và ưu đãi.</p>
+<p>Khi popup mở lâu, hệ thống phải kiểm tra lại trạng thái đơn, tổng tiền, quyền, điểm, Voucher và nguồn tiền trước khi hoàn tất.</p>
+<h2 id="section-14-19">14.19. Phương thức thanh toán</h2>
+<p>Người dùng chọn phương thức được phép tại chi nhánh và mô hình, chẳng hạn tiền mặt, chuyển khoản, thẻ hoặc hình thức khác đã cấu hình.</p>
+<p>Với nguồn tiền hoặc tài khoản ngân hàng:</p>
+<ul>
+<li>Chỉ hiển thị lựa chọn hợp lệ cho chi nhánh.</li>
+<li>Không cho sử dụng tài khoản đã ngừng hoạt động.</li>
+<li>Số tiền nhận phải được ghi đúng nguồn để phục vụ Sổ tiền và đối soát.</li>
+</ul>
+<p>Đơn từ sàn đã thu tiền không được ghi nhận thêm một lần thu tiền tại POS. Khoản tiền của sàn được xử lý theo phương thức và luồng đối soát của kênh.</p>
+<h2 id="section-14-20">14.20. Thanh toán đủ</h2>
+<h3 id="section-14-20-1">14.20.1. Điều kiện riêng của Retail</h3>
+<p>Đơn cửa hàng đã xác nhận được Thanh toán để hoàn tất đơn, đánh dấu Đã thanh toán, xử lý xuất kho, tạo Phiếu thu và công nợ nếu có.</p>
+<ul>
+<li>Phiếu xuất hoàn thành khi đủ điều kiện.</li>
+<li>Nếu thiếu hàng thì áp dụng lựa chọn dừng thao tác, giữ phiếu chưa hoàn thành hoặc trừ âm.</li>
+<li>Không coi thanh toán thành công là bằng chứng phiếu xuất đã hoàn thành trong lựa chọn giữ phiếu chờ.</li>
+<li>Nếu chưa thanh toán, người tạo có thể Hủy để giữ Đã hủy và xóa phiếu xuất Nháp.</li>
+<li>Không xóa miễn quyền theo trạng thái in chế biến.</li>
+</ul>
+<p>Đơn giao tận nơi chỉ dùng chức năng Thanh toán sau Gửi hàng. Bước gửi xử lý xuất kho theo cấu hình tồn thiếu, tạo Phiếu thu tạm ứng nếu có và hoàn thành nợ tăng. Nếu cấu hình giữ xuất chưa hoàn thành được áp dụng, trạng thái phiếu kho phải được theo dõi riêng. Thanh toán về sau tạo giảm công nợ khách cùng Phiếu thu thanh toán giảm nợ, không tạo lại nợ tăng hoặc ghi thêm một lần xuất cho lượng hàng đã xuất. Thanh toán không tự xác nhận khách đã nhận; nhận hàng cũng không tự giả lập đã thu tiền.</p>
+<h3 id="section-14-20-2">14.20.2. Đổi phương thức thanh toán</h3>
+<p>Đổi phương thức cập nhật Phiếu thu đã có cùng tác động tại nguồn tiền cũ và mới. Tổng thực thu và phần nghĩa vụ đã thanh toán không đổi; không tạo thêm một khoản thu hoặc giảm nợ. Sau thay đổi, quyền Xóa và quy trình xử lý toàn bộ chứng từ vẫn áp dụng.</p>
+<h3 id="section-14-20-3">14.20.3. Thanh toán đủ theo mô hình</h3>
+<p>Khi khách thanh toán toàn bộ số phải trả:</p>
+<ol>
+<li>Người dùng chọn phương thức và nhập thông tin cần thiết.</li>
+<li>Hệ thống kiểm tra số tiền.</li>
+<li>Ghi nhận thanh toán gắn với đơn.</li>
+<li>Cập nhật nguồn tiền tương ứng.</li>
+<li>Hoàn tất đơn nếu các điều kiện khác của mô hình đều đáp ứng.</li>
+</ol>
+<p>Với tiền mặt, giao diện có thể hiển thị tiền khách đưa và tiền thừa. Tiền thừa không làm tăng số tiền doanh nghiệp thực thu.</p>
+<h2 id="section-14-21">14.21. Thanh toán một phần và công nợ</h2>
+<p>Nếu mô hình và quyền cho phép ghi nợ, người dùng có thể thanh toán một phần. Phần còn thiếu trở thành công nợ của khách hoặc đối tượng chịu trách nhiệm thanh toán.</p>
+<p>Điều kiện:</p>
+<ul>
+<li>Đơn được phép ghi nợ.</li>
+<li>Có đối tượng công nợ cụ thể.</li>
+<li>Số tiền đã thanh toán không vượt tổng phải trả ngoài các trường hợp có xử lý tiền thừa rõ ràng.</li>
+<li>Phần còn nợ được xác định chính xác sau khi áp dụng ưu đãi và phụ thu.</li>
+</ul>
+<p>Khi hoàn tất:</p>
+<ul>
+<li>Phần đã thu đi vào nguồn tiền tương ứng.</li>
+<li>Phần chưa thu tạo nghĩa vụ công nợ.</li>
+<li>Tổng đã thu cộng công nợ phải bằng tổng phải thanh toán.</li>
+</ul>
+<p>Thanh toán công nợ về sau là một giao dịch riêng và phải truy vết về khoản nợ sinh từ đơn.</p>
+<h2 id="section-14-22">14.22. Kiểm tra thanh toán</h2>
+<p>Trước khi chấp nhận, hệ thống kiểm tra:</p>
+<ul>
+<li>Đơn còn ở trạng thái cho phép thanh toán.</li>
+<li>Tổng tiền chưa thay đổi so với kết quả mới nhất.</li>
+<li>Phương thức thanh toán hợp lệ.</li>
+<li>Nguồn tiền hoặc tài khoản ngân hàng thuộc đúng chi nhánh.</li>
+<li>Số tiền nhập hợp lệ và không âm.</li>
+<li>Công nợ có đối tượng chịu nợ hợp lệ.</li>
+<li>Điểm, Voucher và quyền ưu đãi vẫn hợp lệ.</li>
+<li>Lần thanh toán yêu cầu chưa được ghi nhận trước đó.</li>
+<li>Với giao tận nơi, đơn đã Gửi hàng và còn nghĩa vụ được phép thu; đơn có thể đã hoàn tất giao nhận nhưng chưa thanh toán.</li>
+</ul>
+<p>Nếu một điều kiện thay đổi, popup phải hiển thị lại tổng hoặc thông báo để người dùng xử lý, không dùng dữ liệu đã cũ.</p>
+<h2 id="section-14-23">14.23. Thông tin người mua để lập hóa đơn</h2>
+<p>Người dùng có thể khai báo người mua là cá nhân hoặc doanh nghiệp trong bước thanh toán.</p>
+<p>Thông tin cá nhân gồm:</p>
+<ul>
+<li>Tên.</li>
+<li>Số điện thoại.</li>
+<li>Địa chỉ.</li>
+<li>Căn cước công dân hoặc mã số thuế cá nhân.</li>
+<li>Hộ chiếu trên các luồng Retail, F&amp;B, Facility và Hospitality.</li>
+</ul>
+<p>Nếu tên cá nhân để trống, hệ thống sử dụng tên khách lẻ mặc định.</p>
+<p>Thông tin doanh nghiệp gồm:</p>
+<ul>
+<li>Mã số thuế, bắt buộc.</li>
+<li>Tên doanh nghiệp, bắt buộc.</li>
+<li>Địa chỉ.</li>
+<li>Số điện thoại, tối đa 20 ký tự.</li>
+</ul>
+<p>Chức năng tra cứu mã số thuế có thể hỗ trợ điền tên và địa chỉ. Người dùng vẫn phải kiểm tra nội dung trước khi hoàn tất.</p>
+<p>Thông tin người mua được giữ cùng giao dịch để việc xuất hoặc xuất lại hóa đơn không phụ thuộc vào hồ sơ khách hàng đã thay đổi sau đó.</p>
+<h2 id="section-14-24">14.24. Trình tự hoàn tất giao dịch</h2>
+<p>Trình tự tổng quát:</p>
+<p>Trình tự này áp dụng khi Thanh toán là mốc hoàn tất của mô hình. Riêng giao tận nơi, xuất kho và nợ tăng được chốt tại Gửi hàng; Thanh toán chỉ ghi tiền và giảm nợ, còn Khách nhận hàng quyết định hoàn tất giao nhận. Không dùng bước ghi thời điểm hoàn tất dưới đây để làm đơn giao hàng hoàn tất chỉ vì đã thu tiền.</p>
+<ol>
+<li>Tải lại đơn và kiểm tra trạng thái.</li>
+<li>Kiểm tra người dùng, quyền và phạm vi chi nhánh.</li>
+<li>Kiểm tra dòng hàng, giá, thuế và tổng tiền.</li>
+<li>Kiểm tra xung đột ưu đãi.</li>
+<li>Kiểm tra Voucher hoặc số dư Membership nếu sử dụng.</li>
+<li>Kiểm tra phương thức thanh toán và thông tin công nợ.</li>
+<li>Kiểm tra thông tin người mua dùng cho hóa đơn.</li>
+<li>Ghi nhận thanh toán và công nợ.</li>
+<li>Ghi nhận các ảnh hưởng bắt buộc của mô hình.</li>
+<li>Ghi thời điểm hoàn tất.</li>
+<li>Cam kết toàn bộ thay đổi nội bộ.</li>
+<li>Thực hiện các tích hợp sau cam kết, bao gồm lập hóa đơn tự động khi đủ điều kiện.</li>
+</ol>
+<p>Nếu một bước bắt buộc trước khi cam kết thất bại, toàn bộ lần hoàn tất bị hủy và đơn không được ở trạng thái nửa hoàn tất.</p>
+<h2 id="section-14-25">14.25. Các nghiệp vụ được kích hoạt khi hoàn tất</h2>
+<p>Tùy nội dung đơn, việc hoàn tất có thể ghi nhận thanh toán, tạo công nợ, xử lý xuất hàng, trừ điểm đã sử dụng, tạo hoặc tiêu quyền Combo dịch vụ, chuyển lịch đặt, cung cấp thông tin cho hạch toán và cập nhật báo cáo. Điểm đã dùng được trừ trong bước thanh toán. Điểm tích được xử lý sau khi giao dịch bán đã ghi nhận; nếu bước tích điểm lỗi, thanh toán và trạng thái đơn không bị lùi. Phiếu xuất được hoàn thành khi đủ hàng hoặc khi doanh nghiệp cho phép trừ âm. Nếu doanh nghiệp chọn giữ phiếu chưa hoàn thành khi thiếu hàng, giao dịch bán vẫn có thể cam kết còn phiếu xuất đã lưu nhưng chưa trừ tồn. Hóa đơn điện tử cũng là bước sau cam kết và lỗi hóa đơn không hoàn tác giao dịch bán.</p>
+<p>Mỗi nghiệp vụ chỉ chạy khi đơn thỏa điều kiện riêng.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Đơn không có khách không xử lý Membership.</li>
+<li>Sản phẩm không quản lý tồn không làm thay đổi tồn kho.</li>
+<li>Đơn dùng quyền dịch vụ đã mua không tạo doanh thu mới cho quyền đó.</li>
+</ul>
+</blockquote>
+<h2 id="section-14-26">14.26. Tính nguyên tử trước thời điểm cam kết</h2>
+<p>Các thay đổi bắt buộc bên trong bước thanh toán, gồm:</p>
+<ul>
+<li>Khoản thu.</li>
+<li>Công nợ và điểm đã tiêu nếu có.</li>
+<li>Được xử lý như một đơn vị thống nhất.</li>
+</ul>
+<p>Phạm vi này không bao gồm bước tích điểm sau giao dịch, hóa đơn điện tử hoặc phiếu xuất được phép giữ chưa hoàn thành do thiếu tồn.</p>
+<p>Không được tồn tại các trạng thái như:</p>
+<ul>
+<li>Đơn báo hoàn tất nhưng chưa ghi nhận khoản thanh toán bắt buộc.</li>
+<li>Điểm khách đã bị trừ nhưng đơn chưa hoàn tất.</li>
+<li>Quyền dịch vụ đã được cấp trong khi đơn mua chưa thanh toán thành công.</li>
+<li>Công nợ đã phát sinh nhưng tổng đơn chưa được chốt.</li>
+</ul>
+<p>Khi lỗi xảy ra trước cam kết, hệ thống khôi phục các thay đổi của lần xử lý và cho phép người dùng thử lại sau khi sửa nguyên nhân.</p>
+<h2 id="section-14-27">14.27. Lập hóa đơn tự động sau khi hoàn tất</h2>
+<p>Thông tin người mua được ghi nhận trong quá trình thanh toán. Chỉ sau khi giao dịch nội bộ cam kết thành công, hệ thống mới gửi yêu cầu lập hóa đơn điện tử.</p>
+<p>Ranh giới xử lý:</p>
+<ul>
+<li>Thanh toán và hoàn tất thành công trước.</li>
+<li>Yêu cầu hóa đơn được gửi sau cam kết.</li>
+<li>Nếu lập hóa đơn lỗi, giao dịch bán hàng không bị hoàn tác.</li>
+<li>Lỗi được ghi nhận và thông báo để người có trách nhiệm xử lý lại.</li>
+</ul>
+<p>Với Service, yêu cầu tự động chỉ được gửi khi tổng giá trị sau thuế lớn hơn 0 và nhánh hoàn tất đáp ứng điều kiện.</p>
+<h2 id="section-14-28">14.28. Trạng thái hóa đơn của đơn</h2>
+<h3 id="section-14-28-1">14.28.1. Chưa xuất</h3>
+<p>Đơn chưa có hóa đơn thành công và chưa có lần gửi yêu cầu được ghi nhận.</p>
+<h3 id="section-14-28-2">14.28.2. Lỗi hóa đơn</h3>
+<p>Đơn chưa có hóa đơn thành công nhưng đã có ít nhất một lần gửi yêu cầu được ghi nhận.</p>
+<p>Lỗi xảy ra trước khi bắt đầu gửi yêu cầu có thể vẫn hiển thị ở nhóm Chưa xuất. Vì vậy thông báo lỗi tại thao tác cần được lưu để người dùng biết nguyên nhân, kể cả khi chưa hình thành một lần gửi đầy đủ.</p>
+<h3 id="section-14-28-3">14.28.3. Đã xuất</h3>
+<p>Đơn có ít nhất một hóa đơn được lập thành công.</p>
+<p>Trạng thái được dùng để lọc danh sách và xác định hành động xuất, xuất lại hoặc xem hóa đơn.</p>
+<h2 id="section-14-29">14.29. Xuất hóa đơn thủ công và xuất lại</h2>
+<p>Người có quyền Hóa đơn đầu ra có thể:</p>
+<ol>
+<li>Mở danh sách Hóa đơn đầu ra.</li>
+<li>Lọc đơn Chưa xuất hoặc Lỗi.</li>
+<li>Chọn Xuất hóa đơn.</li>
+<li>Kiểm tra hoặc cập nhật thông tin người mua.</li>
+<li>Gửi yêu cầu đến nhà cung cấp hóa đơn.</li>
+</ol>
+<p>Hệ thống kiểm tra:</p>
+<ul>
+<li>Quyền của người dùng.</li>
+<li>Chi nhánh còn hoạt động.</li>
+<li>Đơn thuộc đúng chi nhánh.</li>
+<li>Đơn đủ điều kiện xuất.</li>
+<li>Thông tin người mua hợp lệ.</li>
+<li>Cấu hình dịch vụ hóa đơn.</li>
+<li>Điều kiện của kênh bán.</li>
+</ul>
+<p>Khi thành công, người dùng có thể xem nội dung hoặc tệp hóa đơn theo khả năng của nhà cung cấp. Khi thất bại, hệ thống hiển thị lỗi và giữ dấu vết của lần gửi đã thực hiện.</p>
+<p>Luồng tự động sau thanh toán sử dụng ngữ cảnh của người hoàn tất giao dịch và không yêu cầu kiểm tra thêm quyền xuất hóa đơn thủ công.</p>
+<h2 id="section-14-30">14.30. Hóa đơn cho đơn TikTok</h2>
+<p>Đơn TikTok chỉ được lập hóa đơn khi còn ít nhất một sản phẩm hợp lệ có giá trị sau thuế lớn hơn 0. Đơn đã hoàn trả toàn bộ không được đưa đi lập hóa đơn mới.</p>
+<p>Tác vụ tự động xử lý đơn ở trạng thái <code>DELIVERED</code> hoặc <code>COMPLETED</code>. Nếu chưa có thông tin người mua, hệ thống dùng thông tin cá nhân mặc định phù hợp trước khi gửi yêu cầu.</p>
+<h2 id="section-14-31">14.31. Hóa đơn cho đơn Shopee</h2>
+<p>Đơn Shopee được lập hóa đơn khi đồng thời:</p>
+<ul>
+<li>Shop đã bật tự động xuất hóa đơn.</li>
+<li>Đơn ở trạng thái <code>TO_CONFIRM_RECEIVE</code> hoặc <code>COMPLETED</code>.</li>
+<li>Còn sản phẩm hợp lệ có giá trị sau thuế lớn hơn 0.</li>
+<li>Chưa có hóa đơn gốc thành công.</li>
+</ul>
+<p>Nếu chưa có thông tin người mua, hệ thống tạo thông tin cá nhân mặc định trước khi gửi.</p>
+<p>Mỗi lần tác vụ chạy thực hiện theo trạng thái hiện có. Lỗi được ghi nhận để tra cứu và xử lý qua chức năng xuất lại; không phát sinh thêm một lần thu tiền tại POS đối với đơn sàn đã thanh toán.</p>
+<h2 id="section-14-32">14.32. Dấu vết yêu cầu hóa đơn</h2>
+<p>Khi hệ thống bắt đầu dựng và gửi yêu cầu đến nhà cung cấp, mỗi lần thực hiện cần giữ:</p>
+<ul>
+<li>Nhà cung cấp được sử dụng.</li>
+<li>Nội dung yêu cầu.</li>
+<li>Nội dung phản hồi.</li>
+<li>Thời điểm gửi và nhận.</li>
+<li>Kết quả thành công hoặc thông báo lỗi.</li>
+</ul>
+<p>Những lỗi được phát hiện trước bước gửi, chẳng hạn không tìm thấy đơn, thiếu thông tin người mua hoặc thiếu cấu hình, phải được trả về rõ ràng cho người dùng hoặc tác vụ gọi.</p>
+<h2 id="section-14-33">14.33. Thể hiện chiết khấu và phụ thu trên hóa đơn</h2>
+<p>Hóa đơn sử dụng kết quả phân bổ đã chốt trên đơn. Tùy cấu hình, khoản điều chỉnh có thể được thể hiện bằng cách:</p>
+<ul>
+<li>Gộp vào đơn giá.</li>
+<li>Thể hiện thành dòng riêng.</li>
+<li>Phân bổ vào từng dòng hàng.</li>
+</ul>
+<p>Dù cách trình bày khác nhau, tổng hóa đơn phải khớp tổng giao dịch theo đúng phương pháp thuế. Không tính lại bằng giá, tỷ lệ hoặc cấu hình hiện tại của doanh nghiệp.</p>
+<h2 id="section-14-34">14.34. Hóa đơn của Combo</h2>
+<p>Với Combo Common, hóa đơn thể hiện một dòng Combo với tên, đơn vị, số lượng, giá và thuế đã chốt của Combo. Các thành phần vẫn phục vụ kho hoặc KDS nhưng không trở thành dòng doanh thu riêng.</p>
+<p>Với Combo SumOfProducts, hóa đơn thể hiện các sản phẩm con thực tế với số lượng, đơn vị, giá và thuế tương ứng.</p>
+<p>Combo được dùng từ quyền dịch vụ đã mua có giá bằng 0 và không được đưa vào hóa đơn điện tử của lần sử dụng.</p>
+<h2 id="section-14-35">14.35. Xử lý lỗi sau cam kết</h2>
+<p>Các công việc với hệ thống ngoài hoặc dữ liệu tổng hợp có thể chạy sau khi giao dịch đã hoàn tất. Khi một bước này thất bại:</p>
+<ul>
+<li>Không hoàn tác khoản thanh toán đã thành công.</li>
+<li>Không đưa đơn trở lại trạng thái chưa hoàn tất.</li>
+<li>Ghi rõ bước nào thất bại và dữ liệu liên quan.</li>
+<li>Thông báo cho người hoặc tài khoản chịu trách nhiệm khi chức năng hỗ trợ.</li>
+<li>Cho phép xử lý lại theo nghiệp vụ tương ứng mà không lặp thanh toán hoặc các ảnh hưởng đã thành công.</li>
+</ul>
+<h2 id="section-14-36">14.36. Kiểm soát đồng thời và chống xử lý lặp</h2>
+<p>Trước khi hoàn tất, hệ thống phải ngăn các tình huống:</p>
+<ul>
+<li>Hai người cùng thanh toán một đơn.</li>
+<li>Một yêu cầu bị gửi lại làm ghi nhận hai khoản thu.</li>
+<li>Hai đơn cùng tiêu vượt số điểm của một khách.</li>
+<li>Hai giao dịch cùng dùng một quyền dịch vụ đã hết lượt.</li>
+<li>Voucher vượt giới hạn do nhiều yêu cầu đồng thời.</li>
+<li>Tổng tiền thay đổi sau khi popup đã mở nhưng vẫn thanh toán theo số cũ.</li>
+</ul>
+<p>Một yêu cầu hoàn tất được nhận lặp phải trả về kết quả đã có hoặc bị từ chối; không chạy lại các tác động kho, tiền, điểm, quyền dịch vụ và hóa đơn.</p>
+<h2 id="section-14-37">14.37. Nhật ký kiểm soát</h2>
+<p>Hệ thống phải truy vết được:</p>
+<ul>
+<li>Người áp dụng hoặc gỡ ưu đãi.</li>
+<li>Người thay đổi giá và lý do khi nghiệp vụ yêu cầu.</li>
+<li>Loại, giá trị và kết quả phân bổ chiết khấu.</li>
+<li>Loại, giá trị và lý do phụ thu.</li>
+<li>Voucher hoặc Membership đã sử dụng.</li>
+<li>Phương thức, nguồn tiền, số tiền và thời điểm thanh toán.</li>
+<li>Khoản công nợ hình thành.</li>
+<li>Người hoàn tất đơn và thời điểm hoàn tất.</li>
+<li>Các lần gửi hóa đơn cùng kết quả.</li>
+</ul>
+<p>Thông tin đã chốt của giao dịch không bị thay đổi bởi cấu hình mới.</p>
+<h2 id="section-14-38">14.38. Tình huống lỗi và cách xử lý</h2>
+<ul>
+<li>Không có dòng hàng hợp lệ: không cho hoàn tất đơn bán thông thường.</li>
+<li>Giá hoặc thuế không hợp lệ: yêu cầu sửa trước khi thanh toán.</li>
+<li>Chiết khấu bằng 0, âm hoặc vượt nền: từ chối.</li>
+<li>Chiết khấu phần trăm vượt 100%: từ chối.</li>
+<li>Phụ thu thiếu lý do hoặc lý do quá 200 ký tự: từ chối.</li>
+<li>Đồng thời có Voucher, chiết khấu và Membership: từ chối cho đến khi chỉ còn một ưu đãi chính.</li>
+<li>Voucher hết hạn sau khi popup mở: loại Voucher và tính lại tổng.</li>
+<li>Điểm khách đã thay đổi: kiểm tra lại và giới hạn theo số dư mới.</li>
+<li>Nguồn tiền ngừng hoạt động hoặc sai chi nhánh: từ chối phương thức đã chọn.</li>
+<li>Thanh toán một phần nhưng không có đối tượng công nợ: từ chối.</li>
+<li>Tổng tiền thay đổi: hiển thị tổng mới và yêu cầu xác nhận lại.</li>
+<li>Yêu cầu hoàn tất bị gửi lặp: không tạo khoản thu hoặc ảnh hưởng lặp.</li>
+<li>Lập hóa đơn sau cam kết thất bại: giữ giao dịch bán, ghi lỗi và cho phép xuất lại.</li>
+<li>Đơn sàn đã thanh toán: không thu tiền thêm tại POS.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="13-don-hang-loi-va-vong-doi.html">← 13. Đơn hàng - cấu trúc, trạng thái và vòng đời</a><a href="15-tra-huy-xoa-hoan-tac.html">15. Trả hàng, hủy, xóa và hoàn tác →</a></nav></div></body></html>

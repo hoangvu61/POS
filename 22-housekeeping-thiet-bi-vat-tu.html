@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>22. Housekeeping, thiết bị và vật tư lưu trú — Đặc tả POS</title><meta name="description" content="Housekeeping, thiết bị và vật tư lưu trú"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần V · Chương 22</p><article class="spec"><h1>CHƯƠNG 22. HOUSEKEEPING, THIẾT BỊ VÀ VẬT TƯ LƯU TRÚ</h1><details class="section-toc"><summary>Nội dung chương · 13 mục</summary><ol><li><a href="#section-22-1">22.1. Mục đích</a></li><li><a href="#section-22-2">22.2. Phạm vi nghiệp vụ</a></li><li><a href="#section-22-3">22.3. Vai trò và trách nhiệm</a></li><li><a href="#section-22-4">22.4. Khái niệm và phân loại</a></li><li><a href="#section-22-5">22.5. Cấu hình định mức theo loại phòng</a></li><li><a href="#section-22-6">22.6. Trạng thái housekeeping của phòng</a></li><li><a href="#section-22-7">22.7. Tác động từ vòng đời lưu trú</a></li><li><a href="#section-22-8">22.8. Kiểm kê phòng</a></li><li><a href="#section-22-9">22.9. Quản lý sự cố thiết bị</a></li><li><a href="#section-22-10">22.10. Quyền và phạm vi truy cập</a></li><li><a href="#section-22-11">22.11. Liên phân hệ</a></li><li><a href="#section-22-12">22.12. Tính toàn vẹn, hoàn tác và xử lý lỗi</a></li><li><a href="#section-22-13">22.13. Dấu vết vận hành</a></li></ol></details>
+<h2 id="section-22-1">22.1. Mục đích</h2>
+<p>Phân hệ housekeeping kiểm soát khả năng đưa phòng vào kinh doanh sau mỗi lượt lưu trú, đồng thời ghi nhận vật tư đã dùng, hàng minibar cần tính tiền và thiết bị hư hỏng. Mục tiêu là bảo đảm ba kết quả xảy ra nhất quán:</p>
+<ul>
+<li>Lễ tân biết chính xác phòng nào có thể nhận khách, phòng nào đang chờ dọn và phòng nào phải ngừng bán;</li>
+<li>Khoản sử dụng phát sinh trong phòng được phản ánh vào tiền phòng hoặc tiêu hao nội bộ đúng loại;</li>
+<li>Sự cố thiết bị được theo dõi từ lúc phát hiện đến lúc xử lý xong, không mở bán nhầm phòng còn sự cố cản trở kinh doanh.</li>
+</ul>
+<p>Housekeeping không thay thế quản lý tài sản cố định, mua hàng hoặc sửa chữa chuyên sâu. Phạm vi của chương này tập trung vào định mức đồ dùng theo loại phòng, kiểm kê tại phòng, trạng thái vệ sinh, sự cố thiết bị và các tác động trực tiếp tới đơn lưu trú, kho và khả năng bán phòng.</p>
+<h2 id="section-22-2">22.2. Phạm vi nghiệp vụ</h2>
+<p>Phân hệ bao phủ các công việc sau:</p>
+<ol>
+<li>Thiết lập danh sách thiết bị và vật tư tiêu chuẩn cho từng loại phòng.</li>
+<li>Hiển thị danh sách kiểm kê phù hợp khi nhân viên thao tác tại một phòng cụ thể.</li>
+<li>Ghi nhận số lượng còn lại và suy ra số lượng đã sử dụng hoặc thiếu hụt.</li>
+<li>Cộng vật tư tính tiền vào đơn lưu trú đang phục vụ.</li>
+<li>Ghi nhận tiêu hao nội bộ đối với vật tư miễn phí và hàng cần theo dõi tồn.</li>
+<li>Báo hỏng thiết bị cố định và xác định sự cố có làm phòng ngừng bán hay không.</li>
+<li>Chuyển trạng thái phòng giữa Sẵn sàng, Chờ dọn và Ngừng bán.</li>
+<li>Tự động cập nhật trạng thái phòng khi trả phòng, chuyển phòng, phát sinh hoặc xử lý sự cố.</li>
+<li>Lưu dấu người thực hiện và thời điểm đối với sự cố, xử lý sự cố và tiêu hao phát sinh.</li>
+</ol>
+<p>Housekeeping cung cấp trạng thái vệ sinh, kết quả kiểm kê vật tư, minibar và tình trạng sự cố để hệ thống quyết định phòng có sẵn sàng nhận khách, có phát sinh hàng tính tiền hoặc có phải chặn bán hay không. Màn hình housekeeping không tự tạo booking, nhận phòng, thanh toán hoặc kết thúc lưu trú.</p>
+<h2 id="section-22-3">22.3. Vai trò và trách nhiệm</h2>
+<h3 id="section-22-3-1">22.3.1. Nhân viên lễ tân hoặc nhân viên vận hành lưu trú</h3>
+<p>Nhân viên vận hành thực hiện các công việc tại phòng trong phạm vi chi nhánh được phân công:</p>
+<ul>
+<li>Xem trạng thái hiện tại của phòng;</li>
+<li>Mở danh sách kiểm kê;</li>
+<li>Nhập số lượng còn lại;</li>
+<li>Xác nhận vật tư đã dùng;</li>
+<li>Cộng hàng tính tiền vào đơn lưu trú;</li>
+<li>Báo sự cố thiết bị;</li>
+<li>Đánh dấu phòng đã sạch;</li>
+<li>Đưa phòng về trạng thái chờ dọn sau khi mở bán lại.</li>
+</ul>
+<p>Nhân viên chỉ thao tác trên phòng thuộc chi nhánh hiện tại. Nếu tài khoản chưa được gắn chi nhánh, các nghiệp vụ cần xác định phòng, kho hoặc sự cố phải dừng và thông báo rõ nguyên nhân.</p>
+<h3 id="section-22-3-2">22.3.2. Quản lý cơ sở lưu trú</h3>
+<p>Quản lý chịu trách nhiệm:</p>
+<ul>
+<li>Thiết lập định mức thiết bị, vật tư và hàng tính tiền cho từng loại phòng;</li>
+<li>Quy định số lượng chuẩn, giá tính phí hoặc giá đền bù;</li>
+<li>Kiểm tra danh sách sự cố chưa xử lý;</li>
+<li>Xác nhận việc xử lý sự cố;</li>
+<li>Quyết định mở bán lại phòng trong trường hợp vẫn còn cảnh báo cần lưu ý;</li>
+<li>Kiểm soát tiêu hao, thất thoát và khoản đã cộng vào đơn khách.</li>
+</ul>
+<h3 id="section-22-3-3">22.3.3. Nhân viên kho</h3>
+<p>Nhân viên kho tiếp nhận các chứng từ tiêu hao được tạo từ kiểm kê phòng, theo dõi hàng xuất khỏi kho của chi nhánh và xử lý sai lệch theo quy trình kho. Phiếu tiêu hao sinh từ housekeeping được hoàn tất ngay tại thời điểm xác nhận, vì vậy người vận hành phải kiểm tra đúng phòng và đúng số lượng trước khi xác nhận.</p>
+<h3 id="section-22-3-4">22.3.4. Người quản trị cấu hình</h3>
+<ul>
+<li>Người quản trị bảo đảm chi nhánh đã chọn kho khi doanh nghiệp sử dụng quản lý kho.</li>
+<li>Sản phẩm dùng trong định mức vẫn còn hiệu lực.</li>
+<li>Loại phòng và phòng được khai báo đúng.</li>
+<li>Nhân viên có quyền bán hàng hoặc vận hành phù hợp.</li>
+</ul>
+<h2 id="section-22-4">22.4. Khái niệm và phân loại</h2>
+<h3 id="section-22-4-1">22.4.1. Định mức phòng</h3>
+<p>Định mức phòng là danh sách đồ dùng chuẩn gắn với một loại phòng. Mỗi mục xác định sản phẩm, nhóm sử dụng, số lượng chuẩn, mức giá áp dụng và tình trạng ban đầu nếu đó là thiết bị cố định.</p>
+<p>Khi mở kiểm kê một phòng, hệ thống lấy định mức của loại phòng mà phòng đó đang thuộc về. Một sản phẩm không được xuất hiện lặp lại trong cùng một phạm vi định mức; nếu đã có, người dùng phải sửa mục hiện hữu thay vì thêm mục mới.</p>
+<h3 id="section-22-4-2">22.4.2. Thiết bị cố định</h3>
+<p>Thiết bị cố định là đồ dùng cần theo dõi tình trạng sử dụng lâu dài</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Tivi, điều hòa, tủ lạnh hoặc máy sấy.</li>
+<li>Số lượng thiếu trong màn hình kiểm kê không tự động cộng tiền vào đơn và không tự động ghi nhận tiêu hao.</li>
+<li>Khi thiết bị hỏng, nhân viên tạo sự cố để theo dõi việc sửa chữa hoặc thay thế.</li>
+</ul>
+</blockquote>
+<p>Giá khai báo cho thiết bị cố định được hiểu là mức tham chiếu phục vụ bồi thường hoặc xử lý tổn thất khi nghiệp vụ liên quan sử dụng đến. Việc nhập số lượng còn lại thấp hơn chuẩn không tự động biến giá này thành khoản phải thu của khách.</p>
+<h3 id="section-22-4-3">22.4.3. Vật tư tiêu hao</h3>
+<p>Vật tư tiêu hao là đồ dùng được cung cấp trong giá phòng và không thu thêm của khách</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Nước uống miễn phí, bàn chải, dầu gội hoặc khăn giấy.</li>
+<li>Số lượng đã dùng tạo tiêu hao nội bộ tại kho của chi nhánh.</li>
+</ul>
+</blockquote>
+<h3 id="section-22-4-4">22.4.4. Vật tư tính tiền</h3>
+<p>Vật tư tính tiền là hàng khách sử dụng và phải trả thêm, điển hình là minibar. Khi kiểm kê trong thời gian đơn lưu trú còn hoạt động, số lượng đã dùng được đề xuất thành khoản tính tiền và được cộng vào đơn sau khi nhân viên xác nhận.</p>
+<p>Vật tư tính tiền vẫn có thể là hàng được quản lý tồn. Tác động tồn kho của mặt hàng này được thực hiện theo luồng xử lý hàng hóa của đơn lưu trú; khi kiểm kê ngoài một đơn đang hoạt động, lượng sử dụng được ghi nhận theo luồng tiêu hao phòng.</p>
+<h3 id="section-22-4-5">22.4.5. Sự cố phòng</h3>
+<p>Sự cố phòng là việc một thiết bị cố định bị hỏng hoặc không bảo đảm điều kiện sử dụng. Mỗi sự cố có phòng, thiết bị, ghi chú, người báo, thời điểm báo, dấu hiệu có chặn bán phòng hay không, và thông tin xử lý khi đã hoàn tất.</p>
+<p>Sự cố chỉ được lập cho thiết bị cố định đang thuộc danh sách chuẩn của phòng. Vật tư tiêu hao và vật tư tính tiền không được chọn làm thiết bị trong luồng báo hỏng.</p>
+<h2 id="section-22-5">22.5. Cấu hình định mức theo loại phòng</h2>
+<h3 id="section-22-5-1">22.5.1. Điều kiện trước khi cấu hình</h3>
+<p>Trước khi thêm định mức, cần có:</p>
+<ul>
+<li>Loại phòng hợp lệ;</li>
+<li>Sản phẩm hoặc vật tư hợp lệ;</li>
+<li>Phân loại sử dụng: thiết bị cố định, vật tư tiêu hao hoặc vật tư tính tiền;</li>
+<li>Số lượng chuẩn;</li>
+<li>Giá tính phí hoặc giá đền bù;</li>
+<li>Tình trạng thiết bị nếu mục được phân loại là thiết bị cố định.</li>
+</ul>
+<h3 id="section-22-5-2">22.5.2. Quy tắc nhập liệu</h3>
+<p>Hệ thống áp dụng các quy tắc sau:</p>
+<ul>
+<li>Phải chọn đúng một loại phòng làm phạm vi áp dụng;</li>
+<li>Phải chọn sản phẩm;</li>
+<li>Số lượng chuẩn không được âm;</li>
+<li>Giá tính phí hoặc giá đền bù không được âm;</li>
+<li>Loại vật tư phải thuộc một trong ba nhóm hợp lệ;</li>
+<li>Tình trạng thiết bị phải là một giá trị hợp lệ;</li>
+<li>Một sản phẩm chỉ có một mục định mức trong cùng loại phòng;</li>
+<li>Khi phân loại là vật tư tiêu hao hoặc vật tư tính tiền, tình trạng được hiểu là Tốt và không dùng để theo dõi hư hỏng;</li>
+<li>Khi phân loại là thiết bị cố định, tình trạng đã chọn được giữ để phục vụ vận hành.</li>
+</ul>
+<p>Số lượng bằng 0 và giá bằng 0 được phép lưu. Giá bằng 0 của vật tư tính tiền sẽ tạo cảnh báo khi thực tế phát sinh sử dụng và người dùng muốn cộng vào đơn.</p>
+<h3 id="section-22-5-3">22.5.3. Thêm định mức</h3>
+<p>Luồng thêm định mức:</p>
+<ol>
+<li>Quản lý chọn loại phòng.</li>
+<li>Chọn sản phẩm.</li>
+<li>Chọn nhóm sử dụng.</li>
+<li>Nhập số lượng chuẩn và giá.</li>
+<li>Nếu là thiết bị cố định, chọn tình trạng.</li>
+<li>Xác nhận lưu.</li>
+<li>Hệ thống kiểm tra trùng sản phẩm và các giới hạn số lượng, giá.</li>
+<li>Nếu hợp lệ, mục mới xuất hiện trong danh sách kiểm kê của mọi phòng thuộc loại phòng đó.</li>
+</ol>
+<p>Nếu sản phẩm đã có trong định mức, thao tác bị từ chối và người dùng được hướng dẫn sửa mục đang có.</p>
+<h3 id="section-22-5-4">22.5.4. Sửa định mức</h3>
+<p>Khi sửa, người dùng có thể thay đổi sản phẩm, nhóm sử dụng, số lượng chuẩn, giá và tình trạng phù hợp. Hệ thống kiểm tra trùng lặp sau khi thay đổi; không cho phép một mục được sửa thành sản phẩm đã tồn tại trong cùng loại phòng.</p>
+<p>Thay đổi số lượng chuẩn có hiệu lực cho những lần mở kiểm kê tiếp theo. Màn hình kiểm kê luôn khởi tạo số lượng còn lại bằng số lượng chuẩn mới và không kế thừa số lượng người dùng đã nhập ở một lần kiểm kê trước.</p>
+<h3 id="section-22-5-5">22.5.5. Xóa định mức</h3>
+<p>Xóa định mức loại bỏ sản phẩm khỏi danh sách kiểm kê của các phòng thuộc loại phòng tương ứng. Nếu đang có sự cố chưa xử lý gắn với chính sản phẩm đó tại các phòng liên quan, hệ thống tự đánh dấu các sự cố này đã xử lý, ghi người và thời điểm thực hiện, đồng thời bổ sung lý do rằng thiết bị đã bị loại khỏi cấu hình phòng.</p>
+<p>Nếu sự cố vừa được đóng là sự cố cuối cùng đang chặn bán một phòng, phòng chuyển từ Ngừng bán về Chờ dọn. Phòng không tự chuyển thẳng sang Sẵn sàng, vì sau thay đổi thiết bị vẫn cần được kiểm tra và xác nhận vệ sinh trước khi nhận khách.</p>
+<p>Việc xóa chỉ hoàn tất sau khi các tác động phụ thuộc nói trên được xử lý. Nếu thao tác không hoàn tất, định mức vẫn được giữ và người dùng cần kiểm tra thông báo lỗi trước khi thực hiện lại.</p>
+<h3 id="section-22-5-6">22.5.6. Quan hệ với danh mục sản phẩm</h3>
+<p>Một sản phẩm đang được sử dụng làm định mức phòng phải được giữ ổn định để lịch sử kiểm kê, khoản tính tiền và sự cố có thể nhận diện đúng mặt hàng. Khi thay đổi mã, tên, đơn vị, ảnh hoặc thuế của sản phẩm, các lần sử dụng sau lấy thông tin hiện hành. Các khoản đã được đưa vào đơn lưu trú giữ thông tin tại thời điểm được thêm vào đơn.</p>
+<h2 id="section-22-6">22.6. Trạng thái housekeeping của phòng</h2>
+<h3 id="section-22-6-1">22.6.1. Sẵn sàng</h3>
+<p>Sẵn sàng cho biết phòng đã sạch và đủ điều kiện vận hành. Phòng có thể được nhận khách trực tiếp và được tính vào khả năng cung ứng phòng.</p>
+<h3 id="section-22-6-2">22.6.2. Chờ dọn</h3>
+<p>Chờ dọn cho biết phòng chưa được xác nhận sạch sau trả phòng, chuyển phòng hoặc xử lý sự cố. Không được nhận khách trực tiếp vào phòng ở trạng thái này. Khi đặt phòng, hệ thống vẫn có thể cho phép chọn phòng nhưng phải cảnh báo để người dùng chủ động xác nhận tình trạng vận hành.</p>
+<h3 id="section-22-6-3">22.6.3. Ngừng bán</h3>
+<p>Ngừng bán cho biết phòng có sự cố hoặc đang được chủ động khóa khỏi khả năng kinh doanh. Phòng không được nhận khách trực tiếp và không được tính vào số phòng sẵn có. Khi thao tác đặt phòng có chọn phòng này, hệ thống hiển thị cảnh báo để người dùng nhận biết phòng không ở trạng thái phục vụ bình thường.</p>
+<h3 id="section-22-6-4">22.6.4. Các chuyển trạng thái hợp lệ</h3>
+<p>Các chuyển trạng thái chính gồm:</p>
+<ul>
+<li>Chờ dọn sang Sẵn sàng: nhân viên chọn xác nhận phòng sạch; chỉ thực hiện khi phòng không có khách đang lưu trú.</li>
+<li>Sẵn sàng hoặc Chờ dọn sang Ngừng bán: nhân viên chủ động khóa phòng; chỉ thực hiện khi phòng không có khách đang lưu trú.</li>
+<li>Sẵn sàng, Chờ dọn hoặc phòng đang có khách sang Ngừng bán: xảy ra tự động khi lập sự cố có chặn bán phòng.</li>
+<li>Trường hợp đang có khách, lượt lưu trú hiện tại vẫn tiếp tục nhưng phòng bị giữ ở trạng thái Ngừng bán cho giai đoạn sau.</li>
+<li>Ngừng bán sang trạng thái hoạt động: hệ thống luôn đưa về Chờ dọn trước.</li>
+<li>Nhân viên phải xác nhận phòng sạch ở bước riêng để chuyển tiếp sang Sẵn sàng.</li>
+</ul>
+<p>Yêu cầu chuyển trực tiếp từ Ngừng bán sang Sẵn sàng được chuẩn hóa thành Chờ dọn. Quy tắc này ngăn việc bỏ qua bước kiểm tra phòng sau sửa chữa.</p>
+<h2 id="section-22-7">22.7. Tác động từ vòng đời lưu trú</h2>
+<h3 id="section-22-7-1">22.7.1. Khi nhận phòng</h3>
+<p>Nhận phòng trực tiếp chỉ được thực hiện với phòng Sẵn sàng. Phòng Chờ dọn hoặc Ngừng bán làm thao tác nhận phòng bị chặn. Người dùng phải xử lý trạng thái phòng trước khi tiếp tục.</p>
+<h3 id="section-22-7-2">22.7.2. Khi đặt phòng</h3>
+<p>Đặt phòng vẫn có thể chọn phòng Chờ dọn hoặc Ngừng bán sau cảnh báo. Việc chấp nhận cảnh báo không làm thay đổi trạng thái housekeeping. Trước thời điểm nhận khách, phòng vẫn phải đáp ứng điều kiện nhận phòng.</p>
+<h3 id="section-22-7-3">22.7.3. Khi trả phòng</h3>
+<p>Sau khi hoàn tất trả phòng, phòng chuyển về Chờ dọn để bắt đầu chu kỳ vệ sinh mới. Nếu phòng đang Ngừng bán do sự cố chặn bán, trạng thái Ngừng bán được giữ nguyên; trả phòng không được phép vô tình mở bán lại phòng có sự cố.</p>
+<h3 id="section-22-7-4">22.7.4. Khi chuyển phòng</h3>
+<p>Sau chuyển phòng:</p>
+<ul>
+<li>Phòng cũ chuyển về Chờ dọn, trừ khi phòng đã ở trạng thái Ngừng bán;</li>
+<li>Phòng mới tiếp tục là phòng đang phục vụ lượt lưu trú;</li>
+<li>Sự cố gắn với phòng cũ vẫn thuộc phòng cũ và không di chuyển theo khách;</li>
+<li>Khoản vật tư đã cộng vào đơn tiếp tục thuộc cùng đơn lưu trú.</li>
+</ul>
+<h2 id="section-22-8">22.8. Kiểm kê phòng</h2>
+<h3 id="section-22-8-1">22.8.1. Mở kiểm kê</h3>
+<p>Người dùng mở kiểm kê từ phòng cần kiểm tra. Hệ thống hiển thị các mục theo định mức của loại phòng, sắp xếp theo nhóm sử dụng và tên sản phẩm. Mỗi mục thể hiện tối thiểu:</p>
+<ul>
+<li>Hình ảnh, tên và mã sản phẩm;</li>
+<li>Nhóm sử dụng;</li>
+<li>Số lượng chuẩn;</li>
+<li>Số lượng còn lại để nhân viên nhập;</li>
+<li>Số lượng đã dùng được tính tự động;</li>
+<li>Giá và số tiền đề xuất đối với vật tư tính tiền;</li>
+<li>Tình trạng báo hỏng đối với thiết bị cố định.</li>
+</ul>
+<p>Khi mở, số lượng còn lại của mọi mục bằng số lượng chuẩn. Số lượng đã dùng được xác định theo công thức:</p>
+<p><strong>Số lượng đã dùng = Số lượng chuẩn - Số lượng còn lại</strong></p>
+<p>Kết quả nhỏ hơn 0 được đưa về 0.</p>
+<h3 id="section-22-8-2">22.8.2. Giới hạn số lượng</h3>
+<p>Số lượng còn lại phải nằm từ 0 đến số lượng chuẩn. Nếu người dùng nhập số âm, giá trị được đưa về 0. Nếu nhập lớn hơn số lượng chuẩn, giá trị được đưa về mức chuẩn, hệ thống cảnh báo và chưa xác nhận ngay; người dùng phải kiểm tra rồi xác nhận lại.</p>
+<p>Số lượng kiểm kê sử dụng đơn vị của sản phẩm. Trên giao diện hiện hành, nhân viên nhập số nguyên cho lượng còn lại; vì vậy định mức vận hành nên được khai báo phù hợp với cách đếm thực tế của phòng.</p>
+<h3 id="section-22-8-3">22.8.3. Không có phát sinh</h3>
+<p>Nếu mọi mục đều có số lượng còn lại bằng số lượng chuẩn, hệ thống thông báo không có vật tư phát sinh và đóng kiểm kê. Không tạo khoản tính tiền hoặc tiêu hao.</p>
+<h3 id="section-22-8-4">22.8.4. Kiểm kê khi có đơn lưu trú đang hoạt động</h3>
+<p>Khi kiểm kê gắn với một đơn lưu trú:</p>
+<ol>
+<li>Hệ thống gom các vật tư tính tiền có số lượng đã dùng lớn hơn 0.</li>
+<li>Hiển thị tên, số lượng, đơn giá, thành tiền từng mục và tổng đề xuất.</li>
+<li>Nhân viên kiểm tra và xác nhận.</li>
+<li>Các vật tư tính tiền được cộng vào đơn dưới dạng các khoản đang hoạt động và đã xác nhận, kèm ghi chú nhận diện phòng kiểm kê.</li>
+<li>Các vật tư tiêu hao được ghi nhận thành tiêu hao nội bộ của phòng.</li>
+<li>Thiết bị cố định không được cộng tiền hoặc ghi tiêu hao từ thao tác này.</li>
+</ol>
+<p>Khoản cộng vào đơn giữ tên, đơn vị, ảnh, số lượng, đơn giá và thuế của sản phẩm tại thời điểm kiểm kê. Giá trị được tính theo:</p>
+<p><strong>Thành tiền đề xuất = Số lượng đã dùng × Giá tính phí</strong></p>
+<p>Nếu có ít nhất một vật tư tính tiền đang có giá bằng 0, hệ thống cảnh báo trước khi cộng vào đơn. Người dùng có thể quay lại kiểm tra hoặc xác nhận tiếp tục. Khi tiếp tục, mặt hàng vẫn được thêm với giá 0 để đơn phản ánh rằng khách đã sử dụng hàng.</p>
+<h3 id="section-22-8-5">22.8.5. Kiểm kê không gắn với đơn lưu trú</h3>
+<p>Khi không có đơn lưu trú đang hoạt động, các mục tiêu hao hoặc tính tiền có số lượng đã dùng lớn hơn 0 được ghi nhận theo luồng tiêu hao phòng. Không tạo khoản phải thu cho khách vì không có đơn để tiếp nhận.</p>
+<h3 id="section-22-8-6">22.8.6. Điều kiện kho</h3>
+<p>Khi doanh nghiệp bật quản lý kho, chi nhánh phải có kho được chọn trước khi ghi nhận tiêu hao. Nếu cấu hình này đang bật mà chi nhánh chưa có kho, thao tác bị dừng với thông báo yêu cầu bổ sung kho. Khi doanh nghiệp không sử dụng quản lý kho, việc kiểm kê phòng không yêu cầu chọn kho và không tạo ảnh hưởng tồn. Các sản phẩm trùng nhau trong cùng lần xác nhận được gộp số lượng trước khi lập tiêu hao.</p>
+<p>Tiêu hao được ghi nhận với nội dung nhận diện phòng và được hoàn tất ngay. Việc hoàn tất không chặn theo số tồn hiện có; mục tiêu của luồng là phản ánh đủ lượng vật tư đã sử dụng trong phòng, kể cả khi sổ theo dõi tồn cần được đối chiếu bổ sung.</p>
+<h3 id="section-22-8-7">22.8.7. Thứ tự xử lý và ngoại lệ</h3>
+<p>Khi kiểm kê có cả hàng tính tiền và vật tư tiêu hao, hệ thống xử lý khoản tính tiền trước, sau đó ghi nhận tiêu hao miễn phí.</p>
+<ul>
+<li>Nếu không cộng được hàng tính tiền, thao tác dừng và chưa ghi nhận tiêu hao.</li>
+<li>Nếu hàng tính tiền đã được cộng nhưng bước ghi nhận tiêu hao thất bại, các khoản vừa cộng vẫn còn trong đơn.</li>
+<li>Nhân viên phải xử lý nguyên nhân kho rồi xác nhận lại phần tiêu hao; nếu khoản tính tiền đã bị cộng sai, cần xóa hoặc điều chỉnh trên đơn theo quyền được cấp.</li>
+<li>Nếu người dùng đóng cửa sổ trước khi xác nhận, không có phát sinh nào được tạo.</li>
+<li>Nếu gửi lặp cùng một lần kiểm kê, mỗi lần xác nhận được coi là một phát sinh riêng.</li>
+<li>Người dùng phải tránh xác nhận lại cùng lượng đã dùng.</li>
+</ul>
+<h3 id="section-22-8-8">22.8.8. Báo hỏng ngay trong kiểm kê</h3>
+<p>Với thiết bị cố định, nhân viên có thể mở phần báo hỏng ngay tại dòng thiết bị:</p>
+<ol>
+<li>Chọn thiết bị.</li>
+<li>Nhập ghi chú hoặc để trống.</li>
+<li>Chọn có chặn bán phòng hay không.</li>
+<li>Xác nhận báo hỏng.</li>
+</ol>
+<p>Nếu ghi chú để trống, hệ thống tự tạo nội dung mô tả rằng thiết bị được phát hiện hỏng khi kiểm kê phòng. Sau khi ghi nhận thành công, thiết bị được đánh dấu đã báo và nút báo hỏng bị vô hiệu hóa trong phiên kiểm kê, giúp tránh tạo trùng.</p>
+<p>Khi mở lại kiểm kê, thiết bị đã có sự cố chưa xử lý cũng được nhận diện là đã báo. Sau khi sự cố được xử lý, thiết bị có thể được báo lại nếu phát sinh một sự cố mới.</p>
+<h2 id="section-22-9">22.9. Quản lý sự cố thiết bị</h2>
+<h3 id="section-22-9-1">22.9.1. Lập sự cố</h3>
+<p>Ngoài luồng kiểm kê, nhân viên có thể mở danh sách sự cố của phòng và lập mới. Điều kiện bắt buộc:</p>
+<ul>
+<li>Người dùng đã được gắn chi nhánh;</li>
+<li>Phòng tồn tại trong chi nhánh hiện tại;</li>
+<li>Đã chọn thiết bị cố định thuộc định mức của phòng;</li>
+<li>Ghi chú không dài quá 1.000 ký tự.</li>
+</ul>
+<p>Sự cố có thể liên kết với lượt lưu trú đang diễn ra để xác định bối cảnh phát hiện. Người báo và thời điểm báo được ghi tự động.</p>
+<h3 id="section-22-9-2">22.9.2. Sự cố không chặn bán</h3>
+<p>Sự cố không chặn bán dùng cho hư hỏng nhẹ hoặc thiết bị chưa ảnh hưởng đến khả năng phục vụ. Phòng giữ nguyên trạng thái housekeeping. Quản lý vẫn phải theo dõi và xác nhận xử lý khi công việc hoàn tất.</p>
+<h3 id="section-22-9-3">22.9.3. Sự cố chặn bán</h3>
+<p>Khi chọn chặn bán:</p>
+<ul>
+<li>Phòng lập tức chuyển sang Ngừng bán;</li>
+<li>Phòng bị loại khỏi số lượng sẵn có;</li>
+<li>Không thể nhận khách mới trực tiếp;</li>
+<li>Lượt lưu trú đang có không bị kết thúc;</li>
+<li>Sau khi khách trả phòng, phòng vẫn Ngừng bán cho đến khi các sự cố chặn bán được xử lý hoặc người có trách nhiệm mở bán lại theo đúng luồng.</li>
+</ul>
+<p>Khác với thao tác khóa phòng thủ công, sự cố chặn bán có thể được lập khi phòng đang có khách. Đây là cơ chế bảo vệ lần bán tiếp theo mà không làm gián đoạn tự động lượt ở hiện tại.</p>
+<h3 id="section-22-9-4">22.9.4. Danh sách sự cố</h3>
+<p>Danh sách theo phòng hiển thị thiết bị, ghi chú, thời điểm báo, trạng thái xử lý và thời điểm xử lý. Sự cố không bị xóa khỏi lịch sử. Giao diện tập trung vào danh sách của phòng đang xem và không áp dụng bộ lọc phức tạp.</p>
+<h3 id="section-22-9-5">22.9.5. Xử lý sự cố</h3>
+<p>Khi thiết bị đã được sửa, thay hoặc xác nhận không còn ảnh hưởng, người dùng chọn xử lý sự cố. Hệ thống ghi người xử lý và thời điểm xử lý. Nếu thao tác được gửi lại cho một sự cố đã xử lý, thông tin xử lý ban đầu được giữ nguyên.</p>
+<p>Đối với sự cố chặn bán:</p>
+<ul>
+<li>Nếu vẫn còn ít nhất một sự cố chặn bán chưa xử lý của cùng phòng, phòng tiếp tục Ngừng bán;</li>
+<li>Nếu đây là sự cố chặn bán cuối cùng, phòng chuyển về Chờ dọn;</li>
+<li>Sau đó housekeeping phải kiểm tra và đánh dấu phòng sạch trước khi phòng trở lại Sẵn sàng.</li>
+</ul>
+<h3 id="section-22-9-6">22.9.6. Mở bán lại khi còn cảnh báo</h3>
+<p>Người dùng có thể yêu cầu đưa phòng Ngừng bán về hoạt động. Trạng thái đích luôn là Chờ dọn. Khi vẫn còn sự cố chưa xử lý, giao diện phải cảnh báo để người dùng cân nhắc; nếu người dùng xác nhận tiếp tục, phòng được đưa về Chờ dọn nhưng các sự cố vẫn giữ trạng thái chưa xử lý.</p>
+<p>Mở bán lại không đồng nghĩa xử lý sự cố. Hai thao tác có ý nghĩa độc lập:</p>
+<ul>
+<li>Xử lý sự cố xác nhận công việc trên thiết bị đã hoàn tất;</li>
+<li>Mở bán lại thay đổi khả năng vận hành của phòng;</li>
+<li>Xác nhận phòng sạch hoàn tất chu kỳ housekeeping và đưa phòng về Sẵn sàng.</li>
+</ul>
+<h2 id="section-22-10">22.10. Quyền và phạm vi truy cập</h2>
+<ol>
+<li>Người dùng phải đăng nhập để xem hoặc thao tác housekeeping.</li>
+<li>Các thao tác theo phòng chỉ áp dụng cho phòng thuộc chi nhánh hiện tại của người dùng.</li>
+<li>Người dùng chưa được gắn chi nhánh không được đổi trạng thái, ghi tiêu hao hoặc quản lý sự cố.</li>
+<li>Thiết lập định mức dành cho vai trò quản lý hoặc người được giao quyền cấu hình lưu trú.</li>
+<li>Kiểm kê, báo hỏng và xác nhận phòng sạch dành cho nhân viên vận hành được giao quyền bán hàng/lưu trú.</li>
+<li>Xem và xác nhận xử lý sự cố phải tuân theo phạm vi doanh nghiệp và chi nhánh; không được dùng mã phòng hoặc mã sự cố của đơn vị khác để thao tác.</li>
+<li>Xử lý các khoản đã cộng sai vào đơn hoặc chứng từ kho phải tuân theo quyền sửa, hủy tương ứng của phân hệ nhận tác động.</li>
+</ol>
+<h2 id="section-22-11">22.11. Liên phân hệ</h2>
+<h3 id="section-22-11-1">22.11.1. Với lưu trú</h3>
+<p>Trạng thái housekeeping quyết định phòng có thể nhận khách và có được tính là sẵn có hay không. Kiểm kê có đơn đang hoạt động tạo khoản phát sinh ngay trên đơn lưu trú. Trả phòng và chuyển phòng tạo trạng thái chờ dọn cho phòng vừa ngừng phục vụ.</p>
+<h3 id="section-22-11-2">22.11.2. Với kho</h3>
+<p>Vật tư tiêu hao được xuất theo mục đích tiêu hao nội bộ tại kho của chi nhánh. Hàng tính tiền đi theo luồng hàng hóa của đơn lưu trú hoặc theo tiêu hao phòng khi không có đơn. Ghi chú phát sinh luôn nhận diện phòng để phục vụ đối chiếu.</p>
+<h3 id="section-22-11-3">22.11.3. Với danh mục sản phẩm</h3>
+<p>Định mức dùng sản phẩm làm đơn vị nhận diện thiết bị và vật tư. Tên, đơn vị, hình ảnh, thuế và trạng thái quản lý tồn của sản phẩm ảnh hưởng đến cách hiển thị và cách tạo khoản phát sinh.</p>
+<h3 id="section-22-11-4">22.11.4. Với giá và thuế</h3>
+<p>Giá tính phí lấy từ định mức phòng, không lấy lại từ giá bán thông thường tại thời điểm kiểm kê. Thuế của khoản cộng vào đơn lấy theo sản phẩm. Các quy tắc làm tròn và tổng tiền sau đó tuân theo đơn lưu trú.</p>
+<h3 id="section-22-11-5">22.11.5. Với báo cáo vận hành</h3>
+<p>Quản lý có thể đối chiếu sự cố theo phòng, khoản vật tư đã cộng vào đơn, và tiêu hao nội bộ theo ghi chú phòng. Trạng thái phòng hiện tại phản ánh khả năng bán; lịch sử sự cố phản ánh trách nhiệm báo và xử lý.</p>
+<h2 id="section-22-12">22.12. Tính toàn vẹn, hoàn tác và xử lý lỗi</h2>
+<h3 id="section-22-12-1">22.12.1. Đổi trạng thái phòng</h3>
+<p>Nếu phòng không tồn tại trong chi nhánh hiện tại, trạng thái không thay đổi. Nếu phòng đang có khách, yêu cầu chuyển thủ công sang Sẵn sàng hoặc Ngừng bán bị từ chối. Không có thao tác hoàn tác riêng; người dùng thực hiện một chuyển trạng thái hợp lệ mới nếu cần sửa.</p>
+<h3 id="section-22-12-2">22.12.2. Ghi nhận sự cố</h3>
+<p>Sự cố chỉ được coi là đã tạo khi hệ thống trả về thành công. Nếu tạo sự cố chặn bán thành công, trạng thái Ngừng bán được áp dụng cùng lần ghi nhận. Nếu thất bại, không được hiển thị thiết bị là đã báo.</p>
+<p>Sự cố đã xử lý không bị xóa và không được đưa về chưa xử lý bằng thao tác thông thường. Nếu thiết bị hỏng lại, cần lập sự cố mới.</p>
+<h3 id="section-22-12-3">22.12.3. Kiểm kê và phát sinh tiền</h3>
+<p>Việc đóng kiểm kê hoặc hủy xác nhận không tạo phát sinh. Sau khi đã cộng vào đơn, hoàn tác thực hiện bằng nghiệp vụ điều chỉnh hoặc hủy dòng hàng trên đơn. Sau khi tiêu hao đã hoàn tất, điều chỉnh thực hiện theo nghiệp vụ kho; việc xóa dòng trên đơn không tự động xóa chứng từ tiêu hao đã tạo độc lập.</p>
+<h3 id="section-22-12-4">22.12.4. Xóa định mức</h3>
+<p>Xóa định mức có thể tự đóng các sự cố liên quan và chuyển phòng về Chờ dọn. Vì vậy người dùng phải xem danh sách sự cố trước khi xóa. Sau khi xóa thành công, muốn khôi phục phải thêm lại định mức và lập sự cố mới nếu thiết bị vẫn hỏng.</p>
+<h3 id="section-22-12-5">22.12.5. Mất kết nối hoặc gửi lặp</h3>
+<p>Khi không chắc thao tác đã thành công do mất kết nối, người dùng phải tải lại đơn, danh sách sự cố và lịch sử kho trước khi gửi lại. Đặc biệt, kiểm kê được hiểu là một phát sinh mới ở mỗi lần xác nhận; gửi lại không tự động gộp với lần trước.</p>
+<h2 id="section-22-13">22.13. Dấu vết vận hành</h2>
+<p>Các thông tin cần được giữ để truy vết gồm:</p>
+<ul>
+<li>Người báo và thời điểm báo sự cố;</li>
+<li>Người xử lý và thời điểm xử lý sự cố;</li>
+<li>Ghi chú ban đầu và lý do tự đóng khi xóa định mức;</li>
+<li>Liên hệ với lượt lưu trú khi sự cố phát sinh trong thời gian khách ở;</li>
+<li>Phòng được nêu trong nội dung tiêu hao;</li>
+<li>Người thực hiện và thời điểm của chứng từ tiêu hao;</li>
+<li>Thông tin dòng hàng được cộng vào đơn cùng ghi chú phòng kiểm kê;</li>
+<li>Trạng thái hiện tại của phòng sau từng tác động nghiệp vụ.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="21-hospitality-luu-tru.html">← 21. Hospitality - Lưu trú</a><a href="23-trai-nghiem-ban-hang-thiet-bi.html">23. Trải nghiệm bán hàng và thiết bị ngoại vi →</a></nav></div></body></html>

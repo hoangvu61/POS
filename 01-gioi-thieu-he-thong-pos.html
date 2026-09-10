@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1. Giới thiệu hệ thống POS — Đặc tả POS</title><meta name="description" content="Giới thiệu hệ thống POS"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần I · Chương 1</p><article class="spec"><h1>CHƯƠNG 1. GIỚI THIỆU HỆ THỐNG POS</h1><details class="section-toc"><summary>Nội dung chương · 6 mục</summary><ol><li><a href="#section-1-1">1.1. Mục tiêu của hệ thống</a></li><li><a href="#section-1-2">1.2. Phạm vi vận hành</a></li><li><a href="#section-1-3">1.3. Các lớp nghiệp vụ chính</a></li><li><a href="#section-1-4">1.4. Tác nhân sử dụng hệ thống</a></li><li><a href="#section-1-5">1.5. Phạm vi trách nhiệm của hệ thống</a></li><li><a href="#section-1-6">1.6. Nguyên tắc trình bày trong quyển đặc tả</a></li></ol></details>
+<h2 id="section-1-1">1.1. Mục tiêu của hệ thống</h2>
+<p>Hệ thống POS là nền tảng quản lý tập trung hoạt động bán hàng và vận hành doanh nghiệp. Phạm vi của hệ thống không dừng ở việc tạo đơn và thu tiền tại quầy mà bao phủ toàn bộ chuỗi công việc từ tổ chức doanh nghiệp, quản lý danh mục kinh doanh, phục vụ khách hàng, quản lý hàng hóa, sản xuất hoặc chế biến, theo dõi dòng tiền, công nợ, tài sản cố định, kế toán, thuế đến báo cáo quản trị.</p>
+<p>Hệ thống hướng tới các mục tiêu sau:</p>
+<ul>
+<li>Giúp doanh nghiệp vận hành nhiều mô hình kinh doanh trên cùng một nền tảng.</li>
+<li>Ghi nhận nghiệp vụ tại đúng nơi phát sinh và hạn chế việc nhập lại cùng một thông tin ở nhiều chức năng.</li>
+<li>Tạo mối liên hệ xuyên suốt giữa giao dịch bán hàng, hàng hóa, thanh toán, công nợ, Membership, hóa đơn, kế toán và báo cáo.</li>
+<li>Kiểm soát quyền sử dụng theo người dùng, doanh nghiệp, chi nhánh và loại thao tác.</li>
+<li>Bảo toàn lịch sử để mỗi giao dịch có thể được giải thích, đối chiếu và kiểm tra về sau.</li>
+<li>Cho phép thay đổi cấu hình cho hoạt động tương lai mà không làm biến đổi giao dịch đã hoàn tất.</li>
+<li>Hỗ trợ người quản lý theo dõi hoạt động kinh doanh bằng số liệu được tổng hợp từ nghiệp vụ thực tế.</li>
+</ul>
+<p>Nguyên tắc cốt lõi là một sự kiện kinh doanh chỉ được ghi nhận một lần tại chức năng chịu trách nhiệm cho sự kiện đó. Các kết quả liên quan được hệ thống tạo hoặc cập nhật từ nghiệp vụ ban đầu.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Khi một đơn bán hàng được xử lý, tùy nội dung và trạng thái của đơn, hệ thống có thể đồng thời:</li>
+</ul>
+</blockquote>
+<ul>
+<li>Ghi nhận việc xuất hàng hoặc tiêu hao nguyên vật liệu;</li>
+<li>Ghi nhận số tiền khách đã thanh toán;</li>
+<li>Hình thành khoản khách còn phải trả;</li>
+<li>Cộng hoặc sử dụng điểm Membership;</li>
+<li>Ghi nhận quyền sử dụng dịch vụ thuộc Combo;</li>
+<li>Lập hóa đơn;</li>
+<li>Chuyển thông tin sang quy trình kế toán;</li>
+<li>Cập nhật số liệu trên dashboard và báo cáo.</li>
+</ul>
+<p>Tương tự, khi hoàn tất một lần nhập mua ngoài, hệ thống có thể làm tăng hàng tồn, xác định giá trị nhập, ghi nhận nghĩa vụ phải trả nhà cung cấp, ghi nhận tiền đã chi và cung cấp thông tin cho kế toán. Người dùng không phải tạo lại độc lập từng kết quả nếu chúng là hệ quả trực tiếp của nghiệp vụ nhập mua.</p>
+<h2 id="section-1-2">1.2. Phạm vi vận hành</h2>
+<p>Hệ thống hỗ trợ năm nhóm mô hình vận hành chính. Các mô hình dùng chung nền tảng tổ chức, danh mục, đơn hàng, thanh toán, tài chính và báo cáo, đồng thời có quy trình đặc thù riêng.</p>
+<h3 id="section-1-2-1">1.2.1. Retail – Bán lẻ</h3>
+<p>Retail phục vụ cửa hàng bán hàng hóa như cửa hàng tiện lợi, siêu thị mini, thời trang, mỹ phẩm, tạp hóa và các mô hình bán lẻ tương tự.</p>
+<p>Hệ thống hỗ trợ bán trực tiếp tại cửa hàng và bán giao hàng. Đơn có thể được thanh toán ngay, thanh toán một phần, thanh toán sau hoặc thu tiền khi giao. Trong quá trình thực hiện, đơn có thể chuyển qua các trạng thái xác nhận, chuẩn bị hàng, giao hàng, khách từ chối nhận, hoàn tất hoặc trả hàng.</p>
+<p>Khi sản phẩm có quản lý tồn kho, bán hàng liên kết với kho để kiểm soát số lượng và ghi nhận hàng xuất. Khi khách chưa thanh toán đủ, phần còn lại được theo dõi như công nợ. Khi có khách hàng và chính sách Membership phù hợp, đơn có thể làm phát sinh tích điểm hoặc tiêu điểm.</p>
+<h3 id="section-1-2-2">1.2.2. F&amp;B – Nhà hàng, quán ăn và đồ uống</h3>
+<p>F&amp;B phục vụ nhà hàng, quán ăn, quán cà phê, quầy bar và các mô hình có quy trình gọi món, chế biến và phục vụ.</p>
+<p>Ngoài chức năng đơn hàng và thanh toán, mô hình này quản lý khu vực, bàn, món ăn, topping hoặc add-on, trạng thái món, yêu cầu chế biến, nhà bếp, chuyển bàn, gộp bàn, tách đơn và hủy món. Một món đã gửi chế biến có mức độ ràng buộc cao hơn món mới chọn nhưng chưa gửi.</p>
+<p>Các món có định lượng có thể làm phát sinh tiêu hao nguyên vật liệu. Việc hủy món, sửa số lượng hoặc hoàn tác đơn phải xét đến trạng thái chế biến và những ảnh hưởng đã phát sinh.</p>
+<h3 id="section-1-2-3">1.2.3. Service – Dịch vụ theo lần</h3>
+<p>Service phục vụ các mô hình bán dịch vụ theo từng lần sử dụng như spa, massage, chăm sóc, gym, nha khoa, hớt tóc, sửa chữa hoặc bảo trì theo lần.</p>
+<p>Dịch vụ có thể được bán đơn lẻ, nằm trong Combo hoặc nằm trong gói được sử dụng nhiều lần. Hệ thống theo dõi việc bán, thanh toán, lịch hẹn, nhân viên thực hiện và số lần khách còn được sử dụng khi áp dụng.</p>
+<p>Một số dịch vụ có công thức định lượng để ghi nhận vật tư tiêu hao trong quá trình thực hiện. Việc ghi nhận dịch vụ hoàn thành và việc tiêu hao vật tư phải phản ánh đúng cùng một lần phục vụ khách hàng.</p>
+<h3 id="section-1-2-4">1.2.4. Facility – Dịch vụ theo thời gian</h3>
+<p>Facility phục vụ mô hình cho khách sử dụng một tài nguyên vật lý trong một khoảng thời gian, chẳng hạn bàn bida, sân thể thao, phòng karaoke, máy chơi game hoặc phòng họp.</p>
+<p>Nghiệp vụ trọng tâm gồm:</p>
+<ul>
+<li>Quản lý tài nguyên.</li>
+<li>Đặt lịch.</li>
+<li>Bắt đầu phiên sử dụng.</li>
+<li>Theo dõi thời gian.</li>
+<li>Đổi tài nguyên.</li>
+<li>Kết thúc phiên.</li>
+<li>Tính tiền theo thời lượng hoặc khung giờ.</li>
+</ul>
+<p>Một phiên sử dụng có thể phát sinh thêm sản phẩm hoặc dịch vụ trong quá trình khách sử dụng tài nguyên.</p>
+<p>Hệ thống phải bảo đảm một tài nguyên không được sử dụng đồng thời bởi các phiên xung đột, đồng thời giữ được lịch sử khi khách đổi từ tài nguyên này sang tài nguyên khác.</p>
+<h3 id="section-1-2-5">1.2.5. Hospitality – Lưu trú</h3>
+<p>Hospitality phục vụ khách sạn, nhà nghỉ, homestay, căn hộ dịch vụ và các mô hình lưu trú.</p>
+<p>Quy trình bao gồm:</p>
+<ul>
+<li>Quản lý loại phòng.</li>
+<li>Phòng.</li>
+<li>Đặt phòng.</li>
+<li>Đặt cọc.</li>
+<li>Nhận phòng.</li>
+<li>Thời gian lưu trú.</li>
+<li>Phát sinh thêm sản phẩm hoặc dịch vụ.</li>
+<li>Đổi phòng.</li>
+<li>Trả phòng.</li>
+<li>Tính tiền.</li>
+<li>Thanh toán.</li>
+</ul>
+<p>Việc xếp phòng phải xét tình trạng phòng và các khoảng đặt đã tồn tại.</p>
+<p>Housekeeping, thiết bị phòng và vật tư phòng hỗ trợ hoạt động chuẩn bị, bàn giao và duy trì phòng trong suốt thời gian lưu trú. Các phát sinh của khách trong thời gian ở được quy về giao dịch lưu trú để tính tiền và đối soát.</p>
+<h2 id="section-1-3">1.3. Các lớp nghiệp vụ chính</h2>
+<h3 id="section-1-3-1">1.3.1. Nền tảng tổ chức</h3>
+<p>Lớp nền tảng xác định doanh nghiệp nào sở hữu hoạt động, chi nhánh nào vận hành, ai đang sử dụng hệ thống, người đó được phép làm gì và cấu hình nào đang có hiệu lực.</p>
+<p>Các chức năng chính gồm:</p>
+<ul>
+<li>Người dùng.</li>
+<li>Nhóm quyền.</li>
+<li>Quyền riêng.</li>
+<li>Doanh nghiệp.</li>
+<li>Chi nhánh.</li>
+<li>Nhân viên.</li>
+<li>Cấu hình.</li>
+<li>Tài khoản ngân hàng.</li>
+<li>Các danh mục dùng chung.</li>
+</ul>
+<p>Đây là lớp điều kiện cho mọi nghiệp vụ phía sau.</p>
+<h3 id="section-1-3-2">1.3.2. Danh mục kinh doanh và chính sách bán</h3>
+<p>Lớp này quản lý sản phẩm, dịch vụ, nhóm sản phẩm, đơn vị tính, thuộc tính, giá bán, kênh bán, Combo, khách hàng, Membership và lịch biểu.</p>
+<p>Danh mục xác định những gì doanh nghiệp có thể bán và các điều kiện áp dụng khi bán. Thay đổi danh mục hiện tại không được làm mất khả năng đọc và giải thích giao dịch lịch sử.</p>
+<h3 id="section-1-3-3">1.3.3. Bán hàng và phục vụ khách hàng</h3>
+<p>Đơn hàng là giao dịch trung tâm. Retail, F&amp;B, Service, Facility và Hospitality cùng sử dụng các nguyên tắc chung về khách hàng, sản phẩm, giá, chiết khấu, phụ thu, thanh toán, công nợ và hóa đơn, sau đó bổ sung quy trình riêng cho từng mô hình.</p>
+<p>Các hoạt động phục vụ khách như đặt lịch, gọi món, sử dụng dịch vụ, sử dụng tài nguyên hoặc lưu trú phải có thể liên kết với giao dịch thu tiền tương ứng.</p>
+<h3 id="section-1-3-4">1.3.4. Hàng hóa, kho và sản xuất</h3>
+<p>Lớp này quản lý chuyển động vật lý của hàng hóa từ lúc nhập, lưu giữ, bán, điều chuyển, tiêu hao, sản xuất, kiểm kê đến khi đưa hàng hóa vào sử dụng như tài sản cố định.</p>
+<p>Công thức – Định lượng mô tả nguyên liệu cần dùng và kết quả tạo ra. Sản xuất – Chế biến ghi nhận lần thực hiện cụ thể. Kho phản ánh lượng hàng thực tế được nhập hoặc xuất và giá trị liên quan.</p>
+<h3 id="section-1-3-5">1.3.5. Tài chính vận hành</h3>
+<p>Tài chính vận hành phân biệt rõ nghĩa vụ thanh toán với dòng tiền thực tế:</p>
+<ul>
+<li>Công nợ cho biết doanh nghiệp còn phải thu hoặc còn phải trả bao nhiêu.</li>
+<li>Thu Chi xác nhận một khoản tiền thực tế đã vào hoặc ra.</li>
+<li>Sổ tiền theo dõi biến động và số dư của từng nguồn tiền.</li>
+<li>Chuyển tiền nội bộ chỉ dịch chuyển tiền giữa các nguồn tiền của doanh nghiệp.</li>
+<li>Góp vốn và rút vốn phản ánh quan hệ giữa chủ sở hữu và doanh nghiệp.</li>
+</ul>
+<p>Doanh thu, chi phí, công nợ và tiền không được coi là cùng một khái niệm chỉ vì chúng có thể cùng xuất hiện trong một nghiệp vụ.</p>
+<h3 id="section-1-3-6">1.3.6. Tài sản cố định</h3>
+<p>Hàng hóa đủ điều kiện có thể được xuất khỏi kho để đưa vào sử dụng như tài sản cố định. Từ thời điểm đó, hệ thống theo dõi nguyên giá, nơi sử dụng, thời gian khấu hao, hao mòn lũy kế, giá trị còn lại và các thay đổi trong vòng đời tài sản.</p>
+<h3 id="section-1-3-7">1.3.7. Kế toán và thuế</h3>
+<p>Các chức năng vận hành ghi nhận sự kiện kinh doanh thực tế. Kế toán tiếp nhận thông tin của các sự kiện đó, xác định cách hạch toán, lập bút toán và ghi sổ.</p>
+<p>Thông tin đã ghi sổ được sử dụng để lập sổ kế toán, báo cáo tài chính và các biểu mẫu thuế trong phạm vi doanh nghiệp áp dụng. Người dùng bán hàng hoặc kho không phải chọn tài khoản Nợ/Có trong công việc vận hành thông thường.</p>
+<h3 id="section-1-3-8">1.3.8. Dashboard và báo cáo</h3>
+<p>Dashboard và báo cáo tổng hợp kết quả từ các nghiệp vụ đã phát sinh. Đây là lớp đọc và phân tích, không phải nơi sửa bản chất giao dịch.</p>
+<p>Mỗi chỉ số phải xác định rõ phạm vi, thời điểm, trạng thái được tính và cách xử lý giao dịch bị hủy, trả hoặc hoàn tác. Khi nghiệp vụ ban đầu thay đổi hợp lệ, chỉ số liên quan phải phản ánh lại kết quả theo cùng quy tắc.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 610" role="img" aria-labelledby="title-system-landscape desc-system-landscape" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-system-landscape">Bức tranh toàn hệ thống POS</title><desc id="desc-system-landscape">TỔ CHỨC &amp; CẤU HÌNH. Doanh nghiệp · Chi nhánh. Quyền · Kênh · Chính sách; DANH MỤC KINH DOANH. Sản phẩm · Combo · Giá. Khách hàng · Lịch đặt; TRẢI NGHIỆM BÁN. POS · E-Menu · Thiết bị. Retail · F&amp;B · Dịch vụ; ĐƠN HÀNG &amp; PHỤC VỤ. Tính tiền · Thanh toán · Giao nhận. Hủy · Trả · Xóa · Hoàn tác; HÀNG HÓA &amp; TÀI SẢN. Nhập · Xuất · Tồn · Kiểm kê. Sản xuất · Giá vốn · TSCĐ; TÀI CHÍNH VẬN HÀNH. Thu chi · Sổ tiền · Công nợ. Chuyển tiền · Vốn; KẾ TOÁN &amp; BÁO CÁO. Hạch toán · Sổ kế toán. Thuế · Dashboard · Đối soát</desc><defs><marker id="arrow-system-landscape" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M165 118 V172 H480 V220" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-system-landscape)"/><path d="M480 118 V172 H480 V220" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-system-landscape)"/><path d="M795 118 V172 H480 V220" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-system-landscape)"/><path d="M480 317 V384 H155 V445" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-system-landscape)"/><path d="M480 317 V384 H480 V445" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-system-landscape)"/><path d="M480 317 V384 H805 V445" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-system-landscape)"/><g><rect x="30" y="30" width="270" height="88" rx="10" fill="#183d36" stroke="#708c82"/><text x="165" fill="#fff" text-anchor="middle" font-size="16"><tspan x="165" y="58" font-weight="700">TỔ CHỨC &amp; CẤU HÌNH</tspan><tspan x="165" y="80">Doanh nghiệp · Chi nhánh</tspan><tspan x="165" y="102">Quyền · Kênh · Chính sách</tspan></text></g><g><rect x="345" y="30" width="270" height="88" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="58" font-weight="700">DANH MỤC KINH DOANH</tspan><tspan x="480" y="80">Sản phẩm · Combo · Giá</tspan><tspan x="480" y="102">Khách hàng · Lịch đặt</tspan></text></g><g><rect x="660" y="30" width="270" height="88" rx="10" fill="#183d36" stroke="#708c82"/><text x="795" fill="#fff" text-anchor="middle" font-size="16"><tspan x="795" y="58" font-weight="700">TRẢI NGHIỆM BÁN</tspan><tspan x="795" y="80">POS · E-Menu · Thiết bị</tspan><tspan x="795" y="102">Retail · F&amp;B · Dịch vụ</tspan></text></g><g><rect x="300" y="225" width="360" height="92" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="255" font-weight="700">ĐƠN HÀNG &amp; PHỤC VỤ</tspan><tspan x="480" y="277">Tính tiền · Thanh toán · Giao nhận</tspan><tspan x="480" y="299">Hủy · Trả · Xóa · Hoàn tác</tspan></text></g><g><rect x="20" y="450" width="270" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="482" font-weight="700">HÀNG HÓA &amp; TÀI SẢN</tspan><tspan x="155" y="504">Nhập · Xuất · Tồn · Kiểm kê</tspan><tspan x="155" y="526">Sản xuất · Giá vốn · TSCĐ</tspan></text></g><g><rect x="345" y="450" width="270" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="482" font-weight="700">TÀI CHÍNH VẬN HÀNH</tspan><tspan x="480" y="504">Thu chi · Sổ tiền · Công nợ</tspan><tspan x="480" y="526">Chuyển tiền · Vốn</tspan></text></g><g><rect x="670" y="450" width="270" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="482" font-weight="700">KẾ TOÁN &amp; BÁO CÁO</tspan><tspan x="805" y="504">Hạch toán · Sổ kế toán</tspan><tspan x="805" y="526">Thuế · Dashboard · Đối soát</tspan></text></g></svg></div><figcaption><strong>Bức tranh toàn hệ thống POS.</strong> Đơn hàng và hoạt động phục vụ nằm ở trung tâm. Danh mục, tổ chức và cấu hình cung cấp đầu vào; kho, tiền, công nợ, tài sản và kế toán nhận kết quả nghiệp vụ; báo cáo chỉ đọc các kết quả đã ghi nhận.</figcaption></figure>
+
+<h2 id="section-1-4">1.4. Tác nhân sử dụng hệ thống</h2>
+<p>Tùy mô hình kinh doanh và quyền được cấp, các tác nhân có thể gồm:</p>
+<ul>
+<li>Chủ doanh nghiệp hoặc chủ cửa hàng: theo dõi toàn cảnh, quyết định cấu hình và kiểm soát các nghiệp vụ nhạy cảm.</li>
+<li>Quản lý chi nhánh: tổ chức hoạt động tại địa điểm được giao, theo dõi nhân viên và xử lý ngoại lệ trong phạm vi quyền.</li>
+<li>Nhân viên bán hàng hoặc thu ngân: tạo đơn, nhận thanh toán, in chứng từ và hỗ trợ khách hàng.</li>
+<li>Nhân viên phục vụ: tiếp nhận yêu cầu, gọi món, cập nhật quá trình phục vụ và phối hợp với bếp.</li>
+<li>Nhân viên bếp hoặc quầy chế biến: tiếp nhận món, cập nhật trạng thái chế biến và hoàn thành món.</li>
+<li>Nhân viên dịch vụ hoặc kỹ thuật viên: thực hiện dịch vụ, cập nhật kết quả và vật tư tiêu hao.</li>
+<li>Nhân viên kho: nhập, xuất, điều chuyển, kiểm kê và tra cứu hàng hóa.</li>
+<li>Nhân viên tài chính: xử lý thu, chi, công nợ, chuyển tiền, nguồn tiền và kết ca.</li>
+<li>Kế toán: lập và kiểm tra bút toán, ghi sổ, quản lý hóa đơn, thuế và báo cáo kế toán.</li>
+<li>Quản trị viên: quản lý người dùng, quyền, tổ chức, cấu hình và tích hợp.</li>
+</ul>
+<p>Tên vai trò chỉ mô tả trách nhiệm thường gặp. Quyền thực tế luôn được xác định từ quyền của tài khoản đang sử dụng; chức danh không tự tạo quyền.</p>
+<h2 id="section-1-5">1.5. Phạm vi trách nhiệm của hệ thống</h2>
+<p>Hệ thống chịu trách nhiệm:</p>
+<ul>
+<li>Kiểm tra người dùng, quyền và phạm vi tổ chức trước khi thực hiện hành động;</li>
+<li>Áp dụng đúng cấu hình đang có hiệu lực;</li>
+<li>Kiểm tra điều kiện nghiệp vụ trước khi thay đổi trạng thái;</li>
+<li>Thực hiện đầy đủ các kết quả bắt buộc của một nghiệp vụ;</li>
+<li>Ngăn trạng thái nửa hoàn tất khi các bước bắt buộc không thể hoàn thành cùng nhau;</li>
+<li>Giữ liên kết giữa nghiệp vụ ban đầu và các kết quả liên quan;</li>
+<li>Bảo toàn lịch sử của dữ liệu đã có hiệu lực;</li>
+<li>Ghi nhận dấu vết đối với hành động quan trọng;</li>
+<li>Thông báo rõ khi thao tác bị từ chối hoặc chỉ hoàn thành một phần ở khâu tích hợp ngoài.</li>
+</ul>
+<p>Người dùng chịu trách nhiệm cung cấp thông tin đúng với giao dịch thực tế, lựa chọn đúng khách hàng, sản phẩm, phương thức thanh toán, lý do điều chỉnh và xác nhận các thao tác có ảnh hưởng lớn khi được yêu cầu.</p>
+<h2 id="section-1-6">1.6. Nguyên tắc trình bày trong quyển đặc tả</h2>
+<p>Phần chức năng và nghiệp vụ được diễn giải bằng ngôn ngữ tự nhiên, tập trung vào mục đích, điều kiện, diễn biến, kết quả, ngoại lệ và ảnh hưởng liên quan. Người đọc có thể hiểu cách hệ thống vận hành mà không cần biết cách phần mềm lưu trữ nội bộ.</p>
+<p>Mỗi chương nghiệp vụ ưu tiên trả lời các câu hỏi:</p>
+<ul>
+<li>Chức năng phục vụ mục tiêu nào?</li>
+<li>Ai được sử dụng và trong phạm vi nào?</li>
+<li>Cần cấu hình hoặc điều kiện gì trước khi thực hiện?</li>
+<li>Đối tượng nghiệp vụ có những trạng thái nào?</li>
+<li>Luồng chính diễn ra theo thứ tự nào?</li>
+<li>Có những luồng thay thế, lỗi hoặc ngoại lệ nào?</li>
+<li>Khi hủy, trả, xóa hoặc hoàn tác thì những kết quả nào phải được đảo lại?</li>
+<li>Nghiệp vụ ảnh hưởng đến bán hàng, kho, tiền, công nợ, Membership, hóa đơn, kế toán và báo cáo như thế nào?</li>
+<li>Giao diện phải hỗ trợ và cảnh báo người dùng ra sao?</li>
+<li>Hành động nào cần lưu dấu vết?</li>
+<li>Điều kiện nào chứng minh chức năng đã hoạt động đúng?</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><span></span><a href="02-kien-truc-nghiep-vu-toan-he-thong.html">2. Kiến trúc nghiệp vụ toàn hệ thống →</a></nav></div></body></html>

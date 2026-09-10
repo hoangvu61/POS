@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>55. Bảo mật và riêng tư dữ liệu — Đặc tả POS</title><meta name="description" content="Bảo mật và riêng tư dữ liệu"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần XI · Chương 55</p><article class="spec"><h1>CHƯƠNG 55. BẢO MẬT VÀ RIÊNG TƯ DỮ LIỆU</h1><details class="section-toc"><summary>Nội dung chương · 14 mục</summary><ol><li><a href="#section-55-1">55.1. Mục tiêu</a></li><li><a href="#section-55-2">55.2. Xác thực và phiên</a></li><li><a href="#section-55-3">55.3. Phân quyền</a></li><li><a href="#section-55-4">55.4. Tenant isolation</a></li><li><a href="#section-55-5">55.5. Bảo vệ bí mật</a></li><li><a href="#section-55-6">55.6. Dữ liệu khách hàng</a></li><li><a href="#section-55-7">55.7. Hóa đơn và thanh toán</a></li><li><a href="#section-55-8">55.8. Input validation</a></li><li><a href="#section-55-9">55.9. Chống lặp và CSRF</a></li><li><a href="#section-55-10">55.10. Audit an toàn</a></li><li><a href="#section-55-11">55.11. Sao lưu và khôi phục</a></li><li><a href="#section-55-12">55.12. Sự cố và phản hồi</a></li><li><a href="#section-55-13">55.13. Sơ đồ biên bảo mật</a></li><li><a href="#section-55-14">55.14. Kiểm thử bảo mật</a></li></ol></details>
+<h2 id="section-55-1">55.1. Mục tiêu</h2>
+<p>Bảo mật bảo vệ dữ liệu tenant, thông tin khách, tiền, hóa đơn, credential, token sàn và lịch sử nghiệp vụ. Mọi lớp từ UI, API, service, job, truy vấn đến tệp xuất phải thực thi cùng nguyên tắc tenant và quyền.</p>
+<h2 id="section-55-2">55.2. Xác thực và phiên</h2>
+<p>Người dùng đăng nhập bằng tài khoản Identity, mật khẩu được băm, hỗ trợ khóa khi đăng nhập sai và token/phiên có thời hạn. Đăng xuất hoặc đổi mật khẩu vô hiệu hóa phiên cũ theo chính sách. Tài khoản ngừng hoạt động không được gọi API dù còn token.</p>
+<h2 id="section-55-3">55.3. Phân quyền</h2>
+<p>Role và policy kiểm tra từng hành động cụ thể:</p>
+<ul>
+<li>Xem.</li>
+<li>Tạo.</li>
+<li>Sửa.</li>
+<li>Hoàn tất.</li>
+<li>Hủy.</li>
+<li>Xóa.</li>
+<li>Hóa đơn.</li>
+<li>Kho.</li>
+<li>Kế toán.</li>
+<li>Membership.</li>
+<li>Báo cáo.</li>
+</ul>
+<p>API dùng <code>RequiredRoles</code> hoặc kiểm tra tại service. Giao diện chỉ là lớp tiện ích để ẩn nút.</p>
+<h2 id="section-55-4">55.4. Tenant isolation</h2>
+<p>Mọi truy vấn POS phải có CompanyId từ context đã xác thực; không nhận CompanyId tùy ý từ client nếu không đối chiếu quyền. BranchId được kiểm tra thuộc company và tài khoản. Job nhận tenant/database id rõ ràng và không dùng context tĩnh.</p>
+<h2 id="section-55-5">55.5. Bảo vệ bí mật</h2>
+<p>Password nhà cung cấp hóa đơn, access token/refresh token sàn, khóa API và chuỗi kết nối được lưu secret store hoặc mã hóa. Log, exception, tệp export và response API che bí mật. Không đưa secret vào source code, commit hoặc sơ đồ đặc tả.</p>
+<h2 id="section-55-6">55.6. Dữ liệu khách hàng</h2>
+<p>Tên, điện thoại, địa chỉ, CCCD, hộ chiếu, mã số thuế và email là dữ liệu cần hạn chế. Chỉ màn hình cần thiết mới hiển thị đầy đủ; tìm kiếm và log dùng giá trị che hoặc hash khi có thể. Tệp xuất phải tuân quyền và ghi người xuất.</p>
+<h2 id="section-55-7">55.7. Hóa đơn và thanh toán</h2>
+<p>Thông tin người mua trên hóa đơn, raw provider response và mã tra cứu chỉ cấp cho người có quyền. QR thanh toán không chứa secret. Phiếu thu/chi hiển thị nguồn và số tiền cần thiết, không hiển thị credential ngân hàng.</p>
+<h2 id="section-55-8">55.8. Input validation</h2>
+<p>API kiểm tra kiểu, độ dài, range, enum, mã HTML/script, tệp, XML và JSON. Truy vấn dùng parameterization/ORM; không ghép SQL từ input. Tên tệp được chuẩn hóa, content type và kích thước kiểm tra trước lưu.</p>
+<h2 id="section-55-9">55.9. Chống lặp và CSRF</h2>
+<p>Thao tác POST/PUT/DELETE cần token chống CSRF hoặc cơ chế tương đương. Các thao tác thanh toán, xóa, hoàn tác và phát hành hóa đơn cần idempotency. Rate limit áp dụng login, tra cứu, import và provider.</p>
+<h2 id="section-55-10">55.10. Audit an toàn</h2>
+<p>Audit ghi ai, khi nào, hành động, đối tượng, kết quả và correlation id; không ghi password/token. Mở dữ liệu nhạy cảm cũng có thể ghi audit. Log được phân quyền và lưu giữ theo chính sách.</p>
+<h2 id="section-55-11">55.11. Sao lưu và khôi phục</h2>
+<p>Backup mã hóa, kiểm tra restore định kỳ, tách quyền backup khỏi quyền vận hành. Khôi phục tenant phải bảo đảm CompanyId, migration version, counter mã và job không chạy lại gây trùng.</p>
+<h2 id="section-55-12">55.12. Sự cố và phản hồi</h2>
+<p>Khi phát hiện lộ secret, khóa bị thu hồi, token đổi, xác định phạm vi và thông báo người phụ trách. Khi có truy cập sai tenant, khóa request, ghi correlation và rà audit. Không xóa log sự cố để che dấu.</p>
+<h2 id="section-55-13">55.13. Sơ đồ biên bảo mật</h2>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title-security-boundary desc-security-boundary" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-security-boundary">Biên bảo mật từ người dùng đến dữ liệu tenant</title><desc id="desc-security-boundary">NGƯỜI DÙNG / CLIENT. Token · phiên · thiết bị; XÁC THỰC &amp; TENANT. Tài khoản · doanh nghiệp. Chi nhánh · trạng thái; PHÂN QUYỀN. Role · phạm vi · hành động. Che dữ liệu nhạy cảm; TRUY CẬP NGHIỆP VỤ. Query có CompanyId. Audit thao tác; NHẬT KÝ AN TOÀN. Không lưu mật khẩu/token thô</desc><defs><marker id="arrow-security-boundary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 84 V117 H480 V145" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-security-boundary)"/><path d="M480 232 V286 H230 V335" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-security-boundary)"/><path d="M480 232 V286 H730 V335" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-security-boundary)"/><path d="M230 428 V384 H730 V335" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-security-boundary)"/><path d="M730 428 V459 H480 V485" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-security-boundary)"/><g><rect x="300" y="14" width="360" height="70" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="44" font-weight="700">NGƯỜI DÙNG / CLIENT</tspan><tspan x="480" y="66">Token · phiên · thiết bị</tspan></text></g><g><rect x="300" y="150" width="360" height="82" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="175" font-weight="700">XÁC THỰC &amp; TENANT</tspan><tspan x="480" y="197">Tài khoản · doanh nghiệp</tspan><tspan x="480" y="219">Chi nhánh · trạng thái</tspan></text></g><g><rect x="55" y="340" width="350" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="230" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="230" y="368" font-weight="700">PHÂN QUYỀN</tspan><tspan x="230" y="390">Role · phạm vi · hành động</tspan><tspan x="230" y="412">Che dữ liệu nhạy cảm</tspan></text></g><g><rect x="555" y="340" width="350" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="730" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="730" y="368" font-weight="700">TRUY CẬP NGHIỆP VỤ</tspan><tspan x="730" y="390">Query có CompanyId</tspan><tspan x="730" y="412">Audit thao tác</tspan></text></g><g><rect x="300" y="490" width="360" height="52" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="511" font-weight="700">NHẬT KÝ AN TOÀN</tspan><tspan x="480" y="533">Không lưu mật khẩu/token thô</tspan></text></g></svg></div><figcaption><strong>Biên bảo mật từ người dùng đến dữ liệu tenant.</strong> Mỗi request xác thực người dùng, xác định tenant, kiểm tra quyền và phạm vi trước khi truy cập nghiệp vụ. Log không được làm lộ bí mật.</figcaption></figure>
+
+<ol>
+<li>Client gửi request với phiên xác thực.</li>
+<li>Middleware xác định người dùng và tenant.</li>
+<li>Policy kiểm tra role, branch và hành động.</li>
+<li>Service truy vấn dữ liệu với CompanyId, ghi audit.</li>
+<li>Response che dữ liệu nhạy cảm theo quyền.</li>
+</ol>
+<h2 id="section-55-14">55.14. Kiểm thử bảo mật</h2>
+<p>Kiểm thử truy cập chéo tenant, chi nhánh ngoài quyền, endpoint ẩn, sửa giá trị bằng request thủ công, replay thanh toán, upload XML độc hại, lộ stack trace, secret trong log và export vượt quyền. Kiểm thử phải chạy ở API, không chỉ UI.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="54-hop-dong-tich-hop-ngoai.html">← 54. Hợp đồng tích hợp ngoài</a><a href="56-phi-chuc-nang-van-hanh.html">56. Yêu cầu phi chức năng và vận hành hệ thống →</a></nav></div></body></html>

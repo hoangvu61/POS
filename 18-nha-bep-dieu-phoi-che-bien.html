@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>18. Nhà bếp và điều phối chế biến — Đặc tả POS</title><meta name="description" content="Nhà bếp và điều phối chế biến"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần V · Chương 18</p><article class="spec"><h1>CHƯƠNG 18. NHÀ BẾP VÀ ĐIỀU PHỐI CHẾ BIẾN</h1><details class="section-toc"><summary>Nội dung chương · 19 mục</summary><ol><li><a href="#section-18-1">18.1. Mục đích</a></li><li><a href="#section-18-2">18.2. Phạm vi</a></li><li><a href="#section-18-3">18.3. Vai trò và trách nhiệm</a></li><li><a href="#section-18-4">18.4. Điều kiện và cấu hình vận hành</a></li><li><a href="#section-18-5">18.5. Nguyên tắc bất biến</a></li><li><a href="#section-18-6">18.6. Vòng đời trạng thái món</a></li><li><a href="#section-18-7">18.7. Gửi món từ điểm bán</a></li><li><a href="#section-18-8">18.8. Tiếp nhận và bắt đầu chế biến</a></li><li><a href="#section-18-9">18.9. Hoàn tất chế biến</a></li><li><a href="#section-18-10">18.10. Báo không thể chế biến</a></li><li><a href="#section-18-11">18.11. Hủy món và giới hạn hoàn tác</a></li><li><a href="#section-18-12">18.12. In phiếu chế biến và in tem</a></li><li><a href="#section-18-13">18.13. Màn hình nhà bếp</a></li><li><a href="#section-18-14">18.14. Cập nhật thời gian thực và xử lý đồng thời</a></li><li><a href="#section-18-15">18.15. Liên phân hệ</a></li><li><a href="#section-18-16">18.16. Nhật ký và truy vết</a></li><li><a href="#section-18-17">18.17. Theo dõi vận hành và dashboard</a></li><li><a href="#section-18-18">18.18. Luồng ngoại lệ</a></li><li><a href="#section-18-19">18.19. Kết quả nghiệp vụ phải nhất quán</a></li></ol></details>
+<h2 id="section-18-1">18.1. Mục đích</h2>
+<p>Phân hệ nhà bếp điều phối món từ điểm bán tới khu vực chế biến và trở lại khu vực phục vụ. Mục tiêu là để mỗi bên luôn biết món nào đang chờ, món nào đã bắt đầu làm, món nào hoàn thành, món nào không thể làm và món nào đã được giao cho khách.</p>
+<p>Đơn vị theo dõi là từng dòng món. Một đơn có thể đồng thời có món đang chờ, món đang chế biến, món hoàn thành, món đã phục vụ và món đã hủy. Trạng thái chế biến không thay thế trạng thái đơn hoặc trạng thái thanh toán.</p>
+<p>Phân hệ bảo đảm các kết quả sau:</p>
+<ul>
+<li>Món chỉ xuất hiện tại bếp sau khi khu vực bán hàng gửi chế biến;</li>
+<li>Một lần gửi không tạo trùng cùng một món đã được tiếp nhận;</li>
+<li>Bếp xử lý đúng thứ tự trạng thái và có thể thao tác từng món hoặc theo lô;</li>
+<li>Nhân viên phục vụ nhận được thông báo khi món hoàn thành hoặc khi bếp báo không thể chế biến;</li>
+<li>Việc in phiếu chế biến hoặc tem không làm thay đổi tiến độ;</li>
+<li>Nguyên vật liệu được kiểm tra và xử lý tại đúng thời điểm bắt đầu hoặc hoàn tất chế biến theo cấu hình chi nhánh;</li>
+<li>Các thay đổi quan trọng đều gắn với người thực hiện và thời điểm thực hiện.</li>
+</ul>
+<h2 id="section-18-2">18.2. Phạm vi</h2>
+<p>Chương này bao gồm:</p>
+<ol>
+<li>Điều kiện sử dụng màn hình nhà bếp tại chi nhánh.</li>
+<li>Gửi món thường, món trong Combo và món kèm từ điểm bán tới bếp.</li>
+<li>Tiếp nhận, bắt đầu chế biến, hoàn tất, báo không thể chế biến, hủy và xác nhận đã phục vụ.</li>
+<li>Chọn một hoặc nhiều món để xử lý theo lô.</li>
+<li>In phiếu chế biến hoặc tem cho từng món và theo lô.</li>
+<li>Cảnh báo thiếu hàng hóa, nguyên vật liệu và cách ứng xử theo chính sách tồn.</li>
+<li>Thông báo thời gian thực giữa điểm bán, bếp và nhân viên phục vụ.</li>
+<li>Theo dõi số lượng món theo trạng thái trên màn hình vận hành.</li>
+<li>Giới hạn sửa, hủy và hoàn tác khi món đã đi vào chế biến.</li>
+</ol>
+<p>Phạm vi của chương là tiếp nhận món đã xác nhận, điều phối hàng đợi, chế biến, phục vụ, hủy món và ghi nhận các tác động trực tiếp của tiến độ bếp. Màn hình bếp không tự lập đơn, chuyển bàn, tách hoặc gộp đơn, thu tiền hay đóng bàn.</p>
+<h2 id="section-18-3">18.3. Vai trò và trách nhiệm</h2>
+<h3 id="section-18-3-1">18.3.1. Nhân viên bán hàng hoặc phục vụ</h3>
+<ul>
+<li>Nhân viên bán hàng ghi nhận món, số lượng, lựa chọn, món kèm và ghi chú.</li>
+<li>Gửi món tới bếp.</li>
+<li>Nhận thông báo món hoàn thành hoặc không thể chế biến.</li>
+<li>Quyết định trao đổi với khách, hủy món hoặc chọn món thay thế.</li>
+<li>Giao món và xác nhận đã phục vụ.</li>
+</ul>
+<p>Nhân viên phục vụ không dùng hành động báo không thể chế biến thay cho quyết định hủy. Khi bếp báo không thể làm, món vẫn thuộc đơn cho đến khi phía phục vụ xử lý tiếp.</p>
+<h3 id="section-18-3-2">18.3.2. Nhân viên bếp hoặc quầy pha chế</h3>
+<p>Nhân viên bếp xem món thuộc chi nhánh đang làm việc, chọn món cần xử lý, bắt đầu chế biến, in phiếu hoặc tem, hoàn tất món và báo không thể chế biến kèm lý do. Người dùng chỉ được vào màn hình bếp khi có quyền nhà bếp và chỉ được thực hiện chuyển trạng thái khi đồng thời có quyền thao tác đơn bán hàng theo quy định.</p>
+<h3 id="section-18-3-3">18.3.3. Thu ngân</h3>
+<p>Thu ngân theo dõi tiến độ trước khi thanh toán, kiểm tra các món đã hủy hoặc còn chưa phục vụ và phối hợp với nhân viên phục vụ khi đơn có chênh lệch. Thanh toán không tự động biến món đang chờ thành món hoàn thành hoặc đã phục vụ.</p>
+<h3 id="section-18-3-4">18.3.4. Quản lý chi nhánh</h3>
+<ul>
+<li>Quản lý thiết lập việc có sử dụng nhà bếp, chính sách xử lý thiếu tồn, máy in và mẫu in.</li>
+<li>Phân quyền.</li>
+<li>Theo dõi thời gian chờ, món bị báo không thể chế biến, món hủy và các thao tác bất thường.</li>
+</ul>
+<h3 id="section-18-3-5">18.3.5. Hệ thống</h3>
+<p>Hệ thống chống tiếp nhận trùng, kiểm tra điều kiện chuyển trạng thái, ghi nhận người và thời điểm, đồng bộ tiến độ tới các màn hình liên quan, xử lý nguyên vật liệu, đồng thời bảo đảm một thao tác theo lô chỉ công bố kết quả sau khi phần bắt buộc đã hoàn tất.</p>
+<h2 id="section-18-4">18.4. Điều kiện và cấu hình vận hành</h2>
+<h3 id="section-18-4-1">18.4.1. Chi nhánh làm việc</h3>
+<p>Mọi món trên màn hình bếp được giới hạn theo chi nhánh của người dùng. Người dùng không có chi nhánh làm việc hợp lệ không thể nhận danh sách hoặc thay đổi tiến độ. Chi nhánh phải đang hoạt động.</p>
+<h3 id="section-18-4-2">18.4.2. Cấu hình sử dụng nhà bếp</h3>
+<p>Khi tùy chọn <strong>Có sử dụng nhà bếp</strong> được bật:</p>
+<ul>
+<li>Điểm bán hiển thị hành động <strong>Gửi chế biến</strong>;</li>
+<li>Món được chuyển tới màn hình bếp;</li>
+<li>Nhân viên bếp thực hiện các bước bắt đầu và hoàn tất;</li>
+<li>Khu vực phục vụ nhận thông báo để xác nhận đã phục vụ.</li>
+</ul>
+<p>Khi tùy chọn này không được bật, điểm bán dùng hành động <strong>In chế biến</strong>. Phiếu được in trực tiếp theo luồng bán hàng và không tạo hàng đợi điều phối trên màn hình bếp.</p>
+<p>Thay đổi cấu hình chỉ chi phối cách xử lý các lượt tiếp theo. Quản lý phải xử lý dứt điểm các món còn trên màn hình trước khi tắt chế độ nhà bếp để tránh mất điểm theo dõi vận hành.</p>
+<h3 id="section-18-4-3">18.4.3. Cấu hình quản lý tồn</h3>
+<p>Nếu chi nhánh không quản lý tồn, tiến độ bếp không phát sinh kiểm tra số lượng hàng hóa hoặc nguyên vật liệu.</p>
+<p>Nếu chi nhánh quản lý tồn, chính sách thiếu tồn quyết định kết quả:</p>
+<ul>
+<li><strong>Thông báo lỗi</strong>: món chế biến theo công thức không đủ nguyên vật liệu không được bắt đầu; trong thao tác theo lô, các món đủ điều kiện vẫn có thể bắt đầu và danh sách món không đạt được trả lại cho người dùng.</li>
+<li>Với hàng hóa quản lý tồn trực tiếp, hệ thống hiển thị cảnh báo để người dùng nhận biết tình trạng thiếu.</li>
+<li><strong>Không hoàn thành phiếu xuất</strong>: nghiệp vụ bán hàng có thể tiếp tục nhưng chứng từ xuất liên quan được giữ ở trạng thái chưa hoàn thành để xử lý sau.</li>
+<li><strong>Cho phép trừ âm</strong>: nghiệp vụ tiếp tục và số lượng khả dụng có thể xuống dưới không.</li>
+</ul>
+<p>Món dịch vụ hoặc món chế biến có công thức đang hiệu lực được kiểm tra theo nguyên vật liệu của công thức. Món hàng hóa quản lý trực tiếp được kiểm tra theo chính món đó.</p>
+<h3 id="section-18-4-4">18.4.4. Cấu hình in</h3>
+<p>Mỗi món có thể được thiết lập kiểu in chế biến hoặc in tem. Máy in, khổ in và mẫu in phải sẵn sàng tại thiết bị đang thao tác. Không có cấu hình in hợp lệ thì tiến độ món vẫn được phép tiếp tục; người dùng được thông báo để xử lý việc in riêng.</p>
+<h3 id="section-18-4-5">18.4.5. Dữ liệu tối thiểu của món gửi bếp</h3>
+<p>Một món gửi bếp phải xác định được chi nhánh, đơn, tên món, số lượng và kiểu trình bày tại bếp.</p>
+<p>Thông tin đi kèm có thể gồm:</p>
+<ul>
+<li>Khu vực/bàn hoặc kênh bán.</li>
+<li>Ghi chú.</li>
+<li>Lựa chọn thuộc tính.</li>
+<li>Tên Combo.</li>
+<li>Quan hệ món kèm.</li>
+<li>Đơn giá dùng trên tem.</li>
+</ul>
+<h2 id="section-18-5">18.5. Nguyên tắc bất biến</h2>
+<ol>
+<li>Trạng thái chế biến được quản lý riêng cho từng dòng món.</li>
+<li>Cùng một dòng món chỉ được tiếp nhận một lần; gửi lại đơn không nhân đôi món đã có trên màn hình bếp.</li>
+<li>Món chỉ tiến theo chiều được phép; không bỏ qua bước và không chuyển ngược bằng thao tác vận hành thông thường.</li>
+<li>In hoặc in lại không làm thay đổi trạng thái, số lượng hay thời điểm bắt đầu/hoàn thành.</li>
+<li>Báo không thể chế biến không đồng nghĩa với hủy món.</li>
+<li>Món bị báo không thể chế biến được giữ nguyên trạng thái hiện tại cho đến khi phía phục vụ quyết định cách xử lý.</li>
+<li>Món đã hủy không được bắt đầu, hoàn tất hoặc xác nhận đã phục vụ.</li>
+<li>Món đã phục vụ không còn nằm trong hàng đợi bếp.</li>
+<li>Trạng thái thanh toán không được suy diễn thành trạng thái chế biến, và ngược lại.</li>
+<li>Món kèm đi theo món cha khi người dùng chọn món cha cho thao tác theo lô; hệ thống vẫn lưu tiến độ riêng để tránh bỏ sót.</li>
+<li>Một thao tác hoàn tất theo lô phải nhất quán: nếu một phần bắt buộc không thể hoàn thành thì toàn bộ lượt hoàn tất đó không được công bố.</li>
+<li>Mọi thông báo thời gian thực chỉ được phát sau khi thay đổi tương ứng đã được ghi nhận thành công.</li>
+</ol>
+<h2 id="section-18-6">18.6. Vòng đời trạng thái món</h2>
+<h3 id="section-18-6-1">18.6.1. Mới</h3>
+<p><strong>Mới</strong> là trạng thái khởi đầu trong quá trình tiếp nhận. Trạng thái này có thể tồn tại rất ngắn trước khi món được xác lập là đang chờ. Trên màn hình vận hành, món mới được xếp cùng nhóm ưu tiên đầu với món chờ.</p>
+<h3 id="section-18-6-2">18.6.2. Chờ chế biến</h3>
+<p>Món đã được điểm bán gửi thành công và đang đợi bếp tiếp nhận. Trên giao diện hiện hành, nhóm này được hiển thị là <strong>Chờ xử lý</strong>. Đây là trạng thái hợp lệ để chọn hành động <strong>Chế biến</strong> hoặc <strong>Báo không thể chế biến</strong>.</p>
+<h3 id="section-18-6-3">18.6.3. Đang chế biến</h3>
+<p>Nhân viên bếp đã nhận làm món. Hệ thống ghi thời điểm bắt đầu và người bắt đầu. Nếu món có công thức đang hiệu lực, phần chuẩn bị tiêu hao được khởi tạo tại bước này. Món có thể được hoàn tất hoặc được báo không thể chế biến.</p>
+<h3 id="section-18-6-4">18.6.4. Đã chế biến</h3>
+<p>Trên giao diện, trạng thái này được hiển thị là <strong>Hoàn thành</strong>. Hệ thống ghi thời điểm hoàn thành và người hoàn thành, xử lý phần nguyên vật liệu tương ứng, sau đó gửi thông báo cho phía phục vụ. Món chờ nhân viên phục vụ giao cho khách.</p>
+<h3 id="section-18-6-5">18.6.5. Đã phục vụ</h3>
+<p>Nhân viên phục vụ xác nhận món đã được giao. Món được loại khỏi hàng đợi bếp ngay sau khi xác nhận thành công. Trạng thái này không có hành động quay lại <strong>Hoàn thành</strong> trên luồng thông thường.</p>
+<h3 id="section-18-6-6">18.6.6. Đã hủy</h3>
+<p>Món đã bị hủy từ quá trình xử lý đơn. Món không còn được chế biến hoặc phục vụ. Màn hình bếp vẫn có thể hiển thị món hủy trong tối đa 24 giờ để đối chiếu ca làm việc; quá thời hạn đó món không còn xuất hiện trong danh sách vận hành.</p>
+<h3 id="section-18-6-7">18.6.7. Chuyển trạng thái hợp lệ</h3>
+<p>Luồng chuẩn là:</p>
+<p><code>Mới → Chờ chế biến → Đang chế biến → Đã chế biến → Đã phục vụ</code></p>
+<p>Nhánh hủy có thể kết thúc món tại <strong>Đã hủy</strong> khi phía bán hàng thực hiện hủy hợp lệ. Báo không thể chế biến là một dấu hiệu vận hành gắn với món, không phải một trạng thái thay thế trong chuỗi trên.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title-kitchen-flow desc-kitchen-flow" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-kitchen-flow">Vòng đời một món trên màn hình bếp</title><desc id="desc-kitchen-flow">ĐÃ GỬI. Nhận một yêu cầu chế biến; ĐANG CHẾ BIẾN. Một người/điểm bếp nhận xử lý; HOÀN THÀNH. Thông báo phía phục vụ. Rời hàng đợi khi đã phục vụ; KHÔNG THỂ CHẾ BIẾN. Bắt buộc lý do. POS quyết định đổi hoặc hủy</desc><defs><marker id="arrow-kitchen-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 80 V115 H480 V145" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-kitchen-flow)"/><path d="M480 220 V285 H230 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-kitchen-flow)"/><text x="355" y="276" text-anchor="middle" font-size="15" fill="#4e615b">Xong</text><path d="M480 220 V285 H730 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-kitchen-flow)"/><text x="605" y="276" text-anchor="middle" font-size="15" fill="#4e615b">Không thể</text><g><rect x="320" y="14" width="320" height="66" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="42" font-weight="700">ĐÃ GỬI</tspan><tspan x="480" y="64">Nhận một yêu cầu chế biến</tspan></text></g><g><rect x="320" y="150" width="320" height="70" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="180" font-weight="700">ĐANG CHẾ BIẾN</tspan><tspan x="480" y="202">Một người/điểm bếp nhận xử lý</tspan></text></g><g><rect x="65" y="350" width="330" height="92" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="230" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="230" y="380" font-weight="700">HOÀN THÀNH</tspan><tspan x="230" y="402">Thông báo phía phục vụ</tspan><tspan x="230" y="424">Rời hàng đợi khi đã phục vụ</tspan></text></g><g><rect x="565" y="350" width="330" height="92" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="730" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="730" y="380" font-weight="700">KHÔNG THỂ CHẾ BIẾN</tspan><tspan x="730" y="402">Bắt buộc lý do</tspan><tspan x="730" y="424">POS quyết định đổi hoặc hủy</tspan></text></g></svg></div><figcaption><strong>Vòng đời một món trên màn hình bếp.</strong> Mỗi lần chuyển trạng thái được ghi một lần. In lại không gửi món lại; món không thể chế biến phải có lý do và phản hồi về điểm bán.</figcaption></figure>
+
+<h2 id="section-18-7">18.7. Gửi món từ điểm bán</h2>
+<h3 id="section-18-7-1">18.7.1. Điều kiện gửi</h3>
+<p>Hành động gửi chỉ xuất hiện khi chi nhánh dùng nhà bếp. Đơn phải còn hiệu lực và có ít nhất một món chưa từng được gửi. Món đã hủy hoặc không còn thuộc đơn không được gửi.</p>
+<h3 id="section-18-7-2">18.7.2. Phạm vi một lượt gửi</h3>
+<p>Một lượt gửi bao gồm các món mới phát sinh kể từ lần gửi trước. Các món đã được tiếp nhận được bỏ qua. Vì vậy, nhân viên có thể bổ sung món vào đơn đang phục vụ và gửi lần nữa mà không làm xuất hiện lại các món cũ.</p>
+<p>Đối với Combo, từng món thành phần được đưa vào hàng đợi với tên Combo để bếp nhận biết ngữ cảnh. Đối với món kèm, quan hệ với món cha được hiển thị để tránh chế biến hoặc đóng gói rời sai mục đích.</p>
+<h3 id="section-18-7-3">18.7.3. Thông tin hiển thị sau khi gửi</h3>
+<p>Mỗi dòng tại bếp thể hiện:</p>
+<ul>
+<li>Khu vực và bàn nếu là đơn tại bàn; nếu không có bàn thì thể hiện kênh bán;</li>
+<li>Tên món;</li>
+<li>Số lượng;</li>
+<li>Ghi chú, lựa chọn và thông tin món kèm;</li>
+<li>Tên Combo nếu món thuộc Combo;</li>
+<li>Trạng thái và mốc thời gian gần nhất;</li>
+<li>Các hành động đang hợp lệ.</li>
+</ul>
+<h3 id="section-18-7-4">18.7.4. Kết quả gửi</h3>
+<p>Sau khi gửi thành công, món vào nhóm <strong>Chờ xử lý</strong>, số đếm nhóm được cập nhật và các màn hình bếp trong cùng chi nhánh nhận món mới. Nếu một màn hình đã có đúng món đó, thông báo lặp không tạo thêm dòng.</p>
+<h2 id="section-18-8">18.8. Tiếp nhận và bắt đầu chế biến</h2>
+<h3 id="section-18-8-1">18.8.1. Bắt đầu một món</h3>
+<p>Nhân viên chọn <strong>Chế biến</strong> tại món đang chờ. Hệ thống kiểm tra lại trạng thái hiện tại, quyền, chi nhánh, tình trạng báo không thể chế biến và điều kiện tồn.</p>
+<p>Nếu đạt điều kiện:</p>
+<ol>
+<li>món chuyển sang <strong>Đang chế biến</strong>;</li>
+<li>người và thời điểm bắt đầu được ghi nhận;</li>
+<li>món được đánh dấu đã xác nhận trong đơn;</li>
+<li>phần chuẩn bị tiêu hao được tạo nếu món có công thức đang hiệu lực;</li>
+<li>các màn hình liên quan được cập nhật.</li>
+</ol>
+<h3 id="section-18-8-2">18.8.2. Bắt đầu theo lô</h3>
+<p>Người dùng đánh dấu nhiều món đang chờ và chọn chế biến. Khi đánh dấu món cha, các món kèm thuộc món đó được chọn cùng. Món đã báo không thể chế biến không tham gia lựa chọn.</p>
+<p>Hệ thống đánh giá từng món:</p>
+<ul>
+<li>Món đủ điều kiện được chuyển sang <strong>Đang chế biến</strong>;</li>
+<li>Món thiếu điều kiện được giữ nguyên;</li>
+<li>Kết quả nêu rõ số món thành công và số món không thể bắt đầu;</li>
+<li>Danh sách món không đạt được hiển thị để bếp phối hợp xử lý.</li>
+</ul>
+<p>Việc một món không đạt không làm mất kết quả của các món khác đã đủ điều kiện trong lượt bắt đầu theo lô.</p>
+<h3 id="section-18-8-3">18.8.3. Món không có công thức</h3>
+<p>Món không có công thức đang hiệu lực chỉ thay đổi tiến độ. Không phát sinh chuẩn bị tiêu hao nguyên vật liệu ở bước bắt đầu.</p>
+<h3 id="section-18-8-4">18.8.4. Xử lý khi thiếu nguyên vật liệu</h3>
+<p>Nếu chính sách là thông báo lỗi và món công thức không đủ nguyên vật liệu, món ở lại <strong>Chờ chế biến</strong>. Không ghi thời điểm bắt đầu và không tạo phần chuẩn bị tiêu hao. Người dùng nhận nội dung cảnh báo đủ để nhận biết món không thể bắt đầu.</p>
+<p>Nếu chính sách cho phép tiếp tục, món chuyển trạng thái bình thường; phần tồn được xử lý theo chính sách chi nhánh.</p>
+<h2 id="section-18-9">18.9. Hoàn tất chế biến</h2>
+<h3 id="section-18-9-1">18.9.1. Hoàn tất một món</h3>
+<p>Chỉ món <strong>Đang chế biến</strong> mới có hành động <strong>Hoàn tất</strong>. Khi thao tác thành công:</p>
+<ol>
+<li>món chuyển sang <strong>Đã chế biến</strong>;</li>
+<li>người và thời điểm hoàn thành được ghi nhận;</li>
+<li>phần chế biến và tiêu hao liên quan được hoàn tất;</li>
+<li>nhân viên phụ trách đơn nhận thông báo món đã sẵn sàng;</li>
+<li>nhóm đếm trên màn hình bếp được cập nhật.</li>
+</ol>
+<h3 id="section-18-9-2">18.9.2. Hoàn tất theo lô</h3>
+<p>Nhân viên có thể chọn nhiều món đang chế biến để hoàn tất cùng lượt. Trước khi công bố kết quả, hệ thống kiểm tra toàn bộ phần xử lý bắt buộc của các món đã chọn.</p>
+<p>Nếu tất cả thành công, toàn bộ món chuyển sang <strong>Hoàn thành</strong> và thông báo được phát. Nếu bất kỳ món nào không thể hoàn tất, toàn bộ lượt hoàn tất được khôi phục về trạng thái trước thao tác; không món nào trong lượt được công bố hoàn thành và không gửi thông báo sai cho phía phục vụ.</p>
+<h3 id="section-18-9-3">18.9.3. Giao món cho khách</h3>
+<p>Món hoàn thành xuất hiện trong danh sách thông báo của phía phục vụ. Nhân viên phục vụ xác nhận <strong>Đã phục vụ</strong> sau khi giao món thực tế. Xác nhận thành công ghi nhận người, thời điểm, cập nhật đơn và làm món biến mất khỏi màn hình bếp.</p>
+<h2 id="section-18-10">18.10. Báo không thể chế biến</h2>
+<h3 id="section-18-10-1">18.10.1. Điều kiện</h3>
+<p>Hành động báo không thể chế biến áp dụng cho món chưa hoàn thành, chưa phục vụ và chưa hủy. Món đã được báo trước đó không được báo lặp.</p>
+<h3 id="section-18-10-2">18.10.2. Lý do bắt buộc</h3>
+<p>Người dùng phải nhập lý do, chẳng hạn hết nguyên liệu, thiết bị hỏng hoặc món tạm ngừng bán. Nút xác nhận không hoạt động khi lý do để trống. Một lượt có thể áp dụng cho một hoặc nhiều món.</p>
+<h3 id="section-18-10-3">18.10.3. Kết quả</h3>
+<p>Sau khi xác nhận:</p>
+<ul>
+<li>Lý do, người báo và thời điểm được ghi nhận;</li>
+<li>Phía phục vụ nhận thông báo;</li>
+<li>Trạng thái chế biến hiện tại của món không đổi;</li>
+<li>Món được trình bày gạch ngang trên màn hình bếp;</li>
+<li>Món không còn được chọn để bắt đầu, hoàn tất hoặc báo lặp;</li>
+<li>Bếp chờ quyết định từ phía phục vụ.</li>
+</ul>
+<h3 id="section-18-10-4">18.10.4. Quyết định của phía phục vụ</h3>
+<p>Nhân viên phục vụ trao đổi với khách và chọn một trong các cách:</p>
+<ul>
+<li>Hủy món theo quyền và quy tắc của đơn;</li>
+<li>Bổ sung món thay thế rồi gửi lượt mới;</li>
+<li>Giữ món để chờ khi bếp có thể đáp ứng, nếu quy trình vận hành cho phép.</li>
+</ul>
+<p>Không được coi thông báo của bếp là căn cứ tự động giảm số lượng hoặc giảm tiền đơn.</p>
+<h2 id="section-18-11">18.11. Hủy món và giới hạn hoàn tác</h2>
+<h3 id="section-18-11-1">18.11.1. Hủy trước khi bắt đầu</h3>
+<p>Món đang chờ có thể được hủy từ điểm bán theo quyền hiện hành. Sau khi hủy, màn hình bếp nhận cập nhật, dừng mọi hành động chế biến và giữ món trong nhóm <strong>Đã hủy</strong> để đối chiếu ngắn hạn.</p>
+<h3 id="section-18-11-2">18.11.2. Hủy sau khi đã bắt đầu</h3>
+<p>Món đã bắt đầu có dấu vết vận hành và có thể đã phát sinh chuẩn bị nguyên vật liệu. Việc hủy phải dùng luồng hủy món của đơn, nhập lý do khi được yêu cầu và xử lý phần liên quan theo quy tắc F&amp;B. Không dùng chuyển ngược trạng thái bếp để thay thế cho hủy.</p>
+<h3 id="section-18-11-3">18.11.3. Món đã hoàn thành hoặc đã phục vụ</h3>
+<p>Món hoàn thành hoặc đã phục vụ không được quay lại <strong>Đang chế biến</strong> bằng thao tác thông thường. Nếu khách từ chối hoặc cần thay món, nhân viên xử lý bằng nghiệp vụ hủy/điều chỉnh trên đơn với quyền tương ứng; mọi thay đổi tiền, tồn và lịch sử áp dụng.</p>
+<h3 id="section-18-11-4">18.11.4. Đơn đã thanh toán</h3>
+<p>Không hoàn tác tiến độ bếp để đảo một giao dịch đã thanh toán. Điều chỉnh sau thanh toán hoặc xóa đơn có quyền thực hiện. Khi xóa đơn, các chứng từ sản xuất và xuất nhập liên quan được xử lý cùng đơn; dấu vết kiểm tra thao tác được phân biệt với chứng từ vận hành đã bị xóa. Quyền xóa này cũng áp dụng trước thanh toán từ sau xác nhận, không phụ thuộc món đã bắt đầu chế biến hay chưa.</p>
+<h2 id="section-18-12">18.12. In phiếu chế biến và in tem</h2>
+<h3 id="section-18-12-1">18.12.1. In phiếu chế biến</h3>
+<p>Phiếu chế biến có thể gồm:</p>
+<ul>
+<li>Mã đơn.</li>
+<li>Khu vực/bàn hoặc kênh bán.</li>
+<li>Nhân viên.</li>
+<li>Thời điểm in.</li>
+<li>Tên món.</li>
+<li>Số lượng.</li>
+<li>Ghi chú đơn.</li>
+<li>Tên Combo.</li>
+<li>Món kèm.</li>
+</ul>
+<p>Phiếu giúp bếp tổ chức chế biến nhưng không xác nhận rằng món đã bắt đầu.</p>
+<h3 id="section-18-12-2">18.12.2. In tem</h3>
+<p>Tem có thể gồm:</p>
+<ul>
+<li>Tên món.</li>
+<li>Khu vực/bàn hoặc kênh bán.</li>
+<li>Đơn giá.</li>
+<li>Ghi chú Combo/món kèm.</li>
+</ul>
+<p>Tem dùng cho đóng gói hoặc nhận diện từng phần món.</p>
+<h3 id="section-18-12-3">18.12.3. In theo lô và in lại</h3>
+<p>Người dùng có thể in một món hoặc nhiều món đã chọn. In lại được phép khi cần thay tem hoặc phiếu bị hỏng. Mỗi lượt in độc lập với tiến độ; in thành công hay thất bại không tự động chuyển món sang trạng thái khác.</p>
+<h2 id="section-18-13">18.13. Màn hình nhà bếp</h2>
+<h3 id="section-18-13-1">18.13.1. Nhóm lọc và số đếm</h3>
+<p>Màn hình có các nhóm:</p>
+<ul>
+<li><strong>Chờ chế biến</strong>: giao diện thể hiện <strong>Chờ xử lý</strong>;</li>
+<li><strong>Đang chế biến</strong>;</li>
+<li><strong>Hoàn thành</strong>;</li>
+<li><strong>Đã hủy</strong>;</li>
+<li><strong>Tất cả</strong>.</li>
+</ul>
+<p>Mặc định mở nhóm đang chờ. Mỗi nhóm có số đếm để nhân viên nhận biết khối lượng công việc. Món đã phục vụ bị loại khỏi hàng đợi nên không có nhóm vận hành riêng.</p>
+<h3 id="section-18-13-2">18.13.2. Nội dung từng dòng</h3>
+<p>Các cột hiển thị gồm:</p>
+<ul>
+<li>Ô chọn.</li>
+<li>Khu vực/bàn.</li>
+<li>Món ăn.</li>
+<li>Số lượng.</li>
+<li>Ghi chú.</li>
+<li>Trạng thái.</li>
+<li>Thời gian.</li>
+<li>Thao tác.</li>
+</ul>
+<p>Món thuộc Combo hoặc có món kèm được trình bày theo quan hệ cha-con để bếp nhận biết đầy đủ một phần phục vụ.</p>
+<h3 id="section-18-13-3">18.13.3. Thứ tự ưu tiên</h3>
+<p>Trong danh sách tổng hợp, món được xếp theo thứ tự nhóm trạng thái:</p>
+<ol>
+<li>Mới hoặc chờ chế biến.</li>
+<li>Đang chế biến.</li>
+<li>Hoàn thành.</li>
+<li>Đã phục vụ.</li>
+<li>Đã hủy.</li>
+</ol>
+<p>Trong cùng nhóm, món có mốc tiếp nhận sớm hơn được hiển thị trước. Cách xếp này hỗ trợ nguyên tắc phục vụ theo thời gian chờ nhưng không tự thay đổi ưu tiên do quản lý vận hành quyết định.</p>
+<h3 id="section-18-13-4">18.13.4. Màu trạng thái</h3>
+<ul>
+<li>Mới: đỏ.</li>
+<li>Chờ chế biến: cam.</li>
+<li>Đang chế biến: xanh dương.</li>
+<li>Đã chế biến: xanh lá.</li>
+<li>Đã phục vụ: đen.</li>
+<li>Đã hủy: xám.</li>
+</ul>
+<p>Màu là dấu hiệu hỗ trợ nhìn nhanh; nhãn chữ vẫn là căn cứ chính.</p>
+<h3 id="section-18-13-5">18.13.5. Mốc thời gian</h3>
+<p>Tùy trạng thái, màn hình hiển thị <strong>Đã gửi lúc</strong>, <strong>Bắt đầu lúc</strong>, <strong>Hoàn thành lúc</strong> hoặc <strong>Đã hủy lúc</strong>. Thời gian giúp theo dõi độ trễ của từng công đoạn và xác định món cần ưu tiên.</p>
+<h3 id="section-18-13-6">18.13.6. Thiết bị sử dụng</h3>
+<p>Màn hình phù hợp với máy tính hoặc thiết bị cảm ứng đặt tại bếp/quầy. Thiết bị cần kết nối ổn định để nhận cập nhật thời gian thực. Khi mất kết nối, người dùng phải tải lại danh sách trước khi thao tác để tránh dựa trên trạng thái cũ. Máy in chế biến hoặc máy in tem được chọn theo cấu hình tại điểm vận hành.</p>
+<h2 id="section-18-14">18.14. Cập nhật thời gian thực và xử lý đồng thời</h2>
+<h3 id="section-18-14-1">18.14.1. Phạm vi đồng bộ</h3>
+<p>Các màn hình trong cùng chi nhánh nhận cập nhật khi có món mới, món đổi trạng thái, món bị hủy, món được phục vụ hoặc bị loại khỏi hàng đợi. Màn hình bán hàng cũng nhận thông báo để cập nhật đơn và danh sách món cần phục vụ.</p>
+<h3 id="section-18-14-2">18.14.2. Chống trùng</h3>
+<p>Mỗi dòng món chỉ có một nhận diện duy nhất trong hàng đợi. Khi cùng thông báo được nhận nhiều lần, màn hình chỉ giữ một dòng. Khi người dùng gửi lại đơn, hệ thống chỉ bổ sung món chưa từng được tiếp nhận.</p>
+<h3 id="section-18-14-3">18.14.3. Hai người thao tác cùng món</h3>
+<p>Nếu hai người cùng mở một món, thao tác được chấp nhận đầu tiên quyết định trạng thái mới. Thao tác đến sau phải kiểm tra lại trạng thái; nếu hành động không còn hợp lệ thì bị từ chối và màn hình được làm mới. Không được ghi đè mốc thời gian hoặc người thao tác trước bằng dữ liệu đã cũ.</p>
+<h3 id="section-18-14-4">18.14.4. Thao tác theo lô trong khi có cập nhật mới</h3>
+<p>Danh sách được chọn chỉ là đề nghị thao tác. Trước khi xử lý, từng món được kiểm tra lại. Món đã bị người khác thay đổi được bỏ khỏi phần hợp lệ hoặc làm lượt hoàn tất không thành công theo nguyên tắc nhất quán.</p>
+<h3 id="section-18-14-5">18.14.5. Mất kết nối</h3>
+<p>Nếu yêu cầu chưa có kết quả rõ ràng do mất kết nối, người dùng không lặp thao tác liên tục. Cần tải lại danh sách để xác định trạng thái hiện tại. Việc tải lại không tạo thêm món và không thay đổi tiến độ.</p>
+<h2 id="section-18-15">18.15. Liên phân hệ</h2>
+<h3 id="section-18-15-1">18.15.1. F&amp;B và điểm bán</h3>
+<ul>
+<li>Điểm bán tạo món và gửi bếp.</li>
+<li>Bếp trả tiến độ và thông báo.</li>
+<li>Phía phục vụ hủy hoặc xác nhận đã phục vụ.</li>
+<li>Chuyển bàn, tách/gộp đơn và thanh toán phải giữ nguyên liên kết của từng món với tiến độ đã phát sinh.</li>
+</ul>
+<h3 id="section-18-15-2">18.15.2. Sản phẩm, Combo và món kèm</h3>
+<p>Tên, đơn vị, lựa chọn, ghi chú, cấu trúc Combo, quan hệ món kèm và kiểu in quyết định cách món được trình bày tại bếp. Việc thay đổi danh mục không được làm sai thông tin của món đã gửi trong đơn đang phục vụ.</p>
+<h3 id="section-18-15-3">18.15.3. Kho và chế biến</h3>
+<p>Hàng hóa bán trực tiếp tác động tới tồn theo chính sách bán hàng. Món có công thức tạo phần chuẩn bị khi bắt đầu và hoàn tất tiêu hao khi hoàn thành. Nếu hoàn tất thất bại, tiến độ và phần liên quan phải được giữ ở trạng thái trước lượt thao tác.</p>
+<h3 id="section-18-15-4">18.15.4. Thông báo</h3>
+<p>Thông báo hoàn thành và báo không thể chế biến được gửi tới người phụ trách phục vụ. Thông báo hỗ trợ phản ứng nhanh nhưng không thay thế việc kiểm tra trạng thái trên đơn.</p>
+<h3 id="section-18-15-5">18.15.5. Thanh toán và kế toán</h3>
+<p>Tiến độ bếp không tự sinh thu hoặc chi. Giá trị đơn chỉ thay đổi khi dòng món bị sửa hoặc hủy hợp lệ tại điểm bán. Thanh toán chỉ tạo Phiếu thu cho số thực thu và công nợ cho phần còn lại; hóa đơn sử dụng các dòng món còn hiệu lực sau khi xử lý hủy.</p>
+<h2 id="section-18-16">18.16. Nhật ký và truy vết</h2>
+<p>Tối thiểu phải truy vết được:</p>
+<ul>
+<li>Món thuộc đơn nào, bàn/kênh bán nào;</li>
+<li>Thời điểm gửi;</li>
+<li>Người và thời điểm bắt đầu;</li>
+<li>Người và thời điểm hoàn thành;</li>
+<li>Người và thời điểm xác nhận đã phục vụ;</li>
+<li>Người, thời điểm và lý do báo không thể chế biến;</li>
+<li>Người, thời điểm và lý do hủy nếu món bị hủy;</li>
+<li>Các lượt in cần đối chiếu tại thiết bị vận hành;</li>
+<li>Kết quả thành công hoặc thất bại của thao tác theo lô.</li>
+</ul>
+<p>Nhật ký phải đủ để phân biệt chậm ở khâu gửi, khâu chế biến hay khâu giao món.</p>
+<h2 id="section-18-17">18.17. Theo dõi vận hành và dashboard</h2>
+<h3 id="section-18-17-1">18.17.1. Theo dõi tức thời tại bếp</h3>
+<p>Các số đếm <strong>Chờ xử lý</strong>, <strong>Đang chế biến</strong>, <strong>Hoàn thành</strong> và <strong>Đã hủy</strong> phản ánh tải công việc hiện tại của chi nhánh. Quản lý có thể dùng mốc thời gian để nhận biết món chờ lâu hoặc món hoàn thành chưa được phục vụ.</p>
+<h3 id="section-18-17-2">18.17.2. Chỉ số cần đối chiếu</h3>
+<p>Trong phạm vi ca hoặc khoảng thời gian, quản lý cần đối chiếu được:</p>
+<ul>
+<li>Số món được gửi;</li>
+<li>Số món đã bắt đầu;</li>
+<li>Số món hoàn thành;</li>
+<li>Số món đã phục vụ;</li>
+<li>Số món bị báo không thể chế biến;</li>
+<li>Số món đã hủy;</li>
+<li>Thời gian từ gửi tới bắt đầu;</li>
+<li>Thời gian từ bắt đầu tới hoàn thành;</li>
+<li>Thời gian từ hoàn thành tới phục vụ.</li>
+</ul>
+<p>Dashboard F&amp;B tổng hợp đơn, món đang phục vụ, món chờ thanh toán và doanh thu. Màn hình bếp chỉ chịu trách nhiệm cho hàng đợi và tiến độ tức thời, không tự tính lại doanh thu hoặc trạng thái thanh toán.</p>
+<h3 id="section-18-17-3">18.17.3. Đối chiếu cuối ca</h3>
+<p>Cuối ca, món còn <strong>Chờ xử lý</strong>, <strong>Đang chế biến</strong> hoặc <strong>Hoàn thành</strong> phải được rà soát với đơn đang mở. Món bị báo không thể chế biến phải có quyết định phía phục vụ. Món hủy còn trong thời hạn hiển thị được dùng để đối chiếu với phiếu hủy và lý do.</p>
+<h2 id="section-18-18">18.18. Luồng ngoại lệ</h2>
+<h3 id="section-18-18-1">18.18.1. Gửi lại cùng đơn</h3>
+<p>Nếu người dùng gửi lại khi không có món mới, hệ thống không tạo thêm dòng. Nếu có món bổ sung, chỉ món bổ sung được tiếp nhận.</p>
+<h3 id="section-18-18-2">18.18.2. Món đã bị hủy trước khi bếp thao tác</h3>
+<p>Màn hình nhận cập nhật hủy, vô hiệu hóa thao tác và chuyển món sang nhóm <strong>Đã hủy</strong>. Nếu người dùng đang chọn món trong một lô, món đó không còn hợp lệ khi xử lý.</p>
+<h3 id="section-18-18-3">18.18.3. Không đủ nguyên vật liệu giữa lúc chế biến</h3>
+<p>Bếp dùng <strong>Báo không thể chế biến</strong> và nhập lý do. Không tự hủy hoặc tự giảm số lượng. Phía phục vụ quyết định với khách; phần chuẩn bị đã phát sinh được xử lý theo luồng hủy món.</p>
+<h3 id="section-18-18-4">18.18.4. Hoàn tất thất bại</h3>
+<p>Nếu không thể hoàn tất phần tiêu hao hoặc một điều kiện bắt buộc khác, món vẫn <strong>Đang chế biến</strong>. Với lượt theo lô, toàn bộ món trong lượt giữ nguyên. Không phát thông báo hoàn thành.</p>
+<h3 id="section-18-18-5">18.18.5. Máy in lỗi</h3>
+<p>Hệ thống thông báo lỗi in; trạng thái món không đổi. Người dùng có thể chọn đúng thiết bị rồi in lại. Không bắt đầu hoặc hoàn tất món chỉ để khắc phục lỗi in.</p>
+<h3 id="section-18-18-6">18.18.6. Món hoàn thành nhưng chưa giao</h3>
+<p>Món tiếp tục ở nhóm <strong>Hoàn thành</strong> cho đến khi phía phục vụ xác nhận. Thanh toán đơn không tự xác nhận đã phục vụ.</p>
+<h3 id="section-18-18-7">18.18.7. Thông báo chậm hoặc bị bỏ lỡ</h3>
+<p>Nhân viên phục vụ tải lại đơn hoặc danh sách thông báo; nhân viên bếp tải lại hàng đợi. Trạng thái đã ghi nhận là căn cứ, không dựa duy nhất vào thông báo bật lên.</p>
+<h2 id="section-18-19">18.19. Kết quả nghiệp vụ phải nhất quán</h2>
+<p>Sau mỗi lượt điều phối, hệ thống phải bảo toàn các kết quả sau:</p>
+<ul>
+<li>Mọi món đã gửi có trạng thái cuối phù hợp hoặc còn ở một trạng thái đang được phụ trách rõ ràng;</li>
+<li>Món hoàn thành đã được phía phục vụ nhận biết;</li>
+<li>Món không thể chế biến đã có lý do và quyết định xử lý;</li>
+<li>Món đã phục vụ không còn trong hàng đợi;</li>
+<li>Món hủy không còn khả năng chế biến;</li>
+<li>Phần nguyên vật liệu phù hợp với kết quả hoàn tất hoặc hủy;</li>
+<li>Số đếm, đơn bán hàng và các thiết bị trong cùng chi nhánh hiển thị nhất quán;</li>
+<li>Người thực hiện và các mốc thời gian quan trọng có thể truy vết.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="17-fnb-phuc-vu-tai-ban.html">← 17. F&amp;B - Phục vụ tại bàn</a><a href="19-service-dich-vu-theo-lan.html">19. Service - Dịch vụ theo lần →</a></nav></div></body></html>

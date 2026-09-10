@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>60. Ma trận quan hệ giữa các chức năng — Đặc tả POS</title><meta name="description" content="Ma trận quan hệ giữa các chức năng"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần XII · Chương 60</p><article class="spec"><h1>CHƯƠNG 60. MA TRẬN QUAN HỆ GIỮA CÁC CHỨC NĂNG</h1><details class="section-toc"><summary>Nội dung chương · 14 mục</summary><ol><li><a href="#section-60-1">60.1. Mục đích</a></li><li><a href="#section-60-2">60.2. Quy ước</a></li><li><a href="#section-60-3">60.3. Ma trận lõi</a></li><li><a href="#section-60-4">60.4. Bán hàng và nguồn tiền</a></li><li><a href="#section-60-5">60.5. Bán hàng và kho</a></li><li><a href="#section-60-6">60.6. Bán hàng và Membership</a></li><li><a href="#section-60-7">60.7. Bán hàng và hóa đơn</a></li><li><a href="#section-60-8">60.8. Kho và kế toán</a></li><li><a href="#section-60-9">60.9. Tài chính và công nợ</a></li><li><a href="#section-60-10">60.10. Báo cáo và tờ khai</a></li><li><a href="#section-60-11">60.11. Điểm kiểm soát</a></li><li><a href="#section-60-12">60.12. Quan hệ với tài sản</a></li><li><a href="#section-60-13">60.13. Quan hệ với lịch và phục vụ</a></li><li><a href="#section-60-14">60.14. Cách dùng khi rà soát thay đổi</a></li></ol></details>
+<h2 id="section-60-1">60.1. Mục đích</h2>
+<p>Ma trận này giúp xác định chức năng nào tạo dữ liệu, chức năng nào sử dụng và chức năng nào hoàn tác. Mỗi ô phải ghi rõ vai trò Tạo, Sử dụng hoặc Hoàn tác và không được dùng thay cho điều kiện xử lý chi tiết của chức năng.</p>
+<h2 id="section-60-2">60.2. Quy ước</h2>
+<ul>
+<li>Ký hiệu <strong>T</strong> là tạo hoặc chốt kết quả.</li>
+<li><strong>S</strong> là sử dụng kết quả để tính hoặc hiển thị.</li>
+<li><strong>H</strong> là hoàn tác/điều chỉnh.</li>
+<li><strong>K</strong> là kiểm soát quyền hoặc điều kiện.</li>
+<li><strong>–</strong> là không có quan hệ trực tiếp.</li>
+<li>Quan hệ gián tiếp qua một chứng từ trung gian vẫn phải ghi ở chương liên phân hệ.</li>
+</ul>
+<h2 id="section-60-3">60.3. Ma trận lõi</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chức năng</th>
+<th>Bán hàng</th>
+<th>Kho</th>
+<th>Tiền</th>
+<th>Công nợ</th>
+<th>Membership</th>
+<th>Hóa đơn</th>
+<th>Kế toán</th>
+<th>Báo cáo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tạo/xác nhận đơn</td>
+<td>T</td>
+<td>K</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>Thanh toán đơn</td>
+<td>S</td>
+<td>K</td>
+<td>T</td>
+<td>H</td>
+<td>S/H</td>
+<td>–</td>
+<td>S</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Hoàn thành phiếu xuất</td>
+<td>S</td>
+<td>T</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>S</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Trả hàng</td>
+<td>H</td>
+<td>H/T</td>
+<td>H/T</td>
+<td>H</td>
+<td>H</td>
+<td>H</td>
+<td>H</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Xóa đơn</td>
+<td>H</td>
+<td>H</td>
+<td>H</td>
+<td>H</td>
+<td>H</td>
+<td>H</td>
+<td>H</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Nhập mua</td>
+<td>–</td>
+<td>T</td>
+<td>–</td>
+<td>T/H</td>
+<td>–</td>
+<td>S</td>
+<td>S</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Kiểm kê</td>
+<td>–</td>
+<td>T/H</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>S</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Sản xuất</td>
+<td>S</td>
+<td>T</td>
+<td>S</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>S</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Xuất hóa đơn</td>
+<td>S</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>T/H</td>
+<td>S</td>
+<td>S</td>
+</tr>
+<tr>
+<td>Tờ khai</td>
+<td>S</td>
+<td>S</td>
+<td>S</td>
+<td>S</td>
+<td>–</td>
+<td>S</td>
+<td>S</td>
+<td>S</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-60-4">60.4. Bán hàng và nguồn tiền</h2>
+<ul>
+<li>Đơn tạo yêu cầu thanh toán.</li>
+<li>Thanh toán tạo phiếu thu hoặc giảm công nợ.</li>
+<li>Thu chi cập nhật sổ tiền.</li>
+<li>Hủy/xóa/hoàn tiền đi ngược theo source id.</li>
+<li>Báo cáo dùng cả đơn và phiếu tiền nhưng không đánh đồng.</li>
+</ul>
+<h2 id="section-60-5">60.5. Bán hàng và kho</h2>
+<p>Đơn xác nhận có thể tạo phiếu xuất Nháp. Thanh toán/gửi hàng/khách nhận kích hoạt hoàn thành theo mô hình và cấu hình thiếu tồn. Trả hàng tạo phiếu nhập trả sau khi phiếu xuất bán đủ điều kiện. Xóa đơn dọn phiếu liên quan.</p>
+<h2 id="section-60-6">60.6. Bán hàng và Membership</h2>
+<p>Đơn chốt tạo điểm thưởng, thanh toán có thể dùng điểm, trả hàng thu hồi điểm thưởng, xóa đảo toàn bộ nếu có quyền. Báo cáo điểm đọc lịch sử; thay đổi hạng chạy theo cấu hình/job.</p>
+<h2 id="section-60-7">60.7. Bán hàng và hóa đơn</h2>
+<p>Đơn cung cấp snapshot dòng, thuế và thông tin người mua. Hóa đơn gốc tạo từ đơn đủ điều kiện; trả/xóa sau phát hành tạo điều chỉnh. Trạng thái provider độc lập trạng thái đơn.</p>
+<h2 id="section-60-8">60.8. Kho và kế toán</h2>
+<p>Nhập, xuất, kiểm kê, sản xuất và giá vốn tạo hồ sơ nguồn. Kế toán mapping tài khoản, lập bút toán và ghi sổ. Nhập lùi ngày hoặc bổ sung nguồn có thể làm lại giá vốn và bút toán phụ thuộc.</p>
+<h2 id="section-60-9">60.9. Tài chính và công nợ</h2>
+<ul>
+<li>Mua chưa trả tạo nợ phải trả.</li>
+<li>Bán chưa thu tạo nợ phải thu.</li>
+<li>Thanh toán phân bổ giảm nợ.</li>
+<li>Trả/hủy/xóa tạo điều chỉnh.</li>
+<li>Chuyển tiền nội bộ chỉ dịch chuyển nguồn, không tạo doanh thu/chi phí.</li>
+</ul>
+<h2 id="section-60-10">60.10. Báo cáo và tờ khai</h2>
+<p>Báo cáo đọc kết quả chốt theo ngày và phạm vi. Tờ khai đọc doanh thu, chi phí, tồn và thuế theo mẫu; phần nhập tay chỉ thuộc hồ sơ tờ khai. Xuất báo cáo/tờ khai không làm thay đổi chức năng nguồn.</p>
+<h2 id="section-60-11">60.11. Điểm kiểm soát</h2>
+<p>Mọi ô <strong>H</strong> phải có quyền, lý do, trạng thái trước và tác động sau. Mọi ô <strong>T</strong> phải có idempotency hoặc transaction. Mọi ô <strong>S</strong> phải công bố ngày và trạng thái đủ điều kiện. Ma trận được rà khi thêm module hoặc thay đổi luồng hủy/xóa/trả.</p>
+<h2 id="section-60-12">60.12. Quan hệ với tài sản</h2>
+<p>Xuất hình thành tài sản là <strong>T</strong> ở kho, <strong>T</strong> ở tài sản và <strong>S</strong> ở kế toán. Khấu hao là <strong>T</strong> ở tài sản/kế toán và <strong>S</strong> ở báo cáo chi phí. Điều chuyển là <strong>H</strong> đối với phân bổ chi nhánh nhưng không đảo nguyên giá.</p>
+<h2 id="section-60-13">60.13. Quan hệ với lịch và phục vụ</h2>
+<ul>
+<li>Booking/lịch tạo nhu cầu và giữ tài nguyên.</li>
+<li>Check-in hoặc mở phiên tạo liên kết đơn.</li>
+<li>Checkout chốt doanh thu, tiền, nợ, kho và hóa đơn.</li>
+<li>Hủy lịch không tạo đơn.</li>
+<li>Xóa đơn nguồn không mặc định xóa lịch đã có lịch sử.</li>
+</ul>
+<h2 id="section-60-14">60.14. Cách dùng khi rà soát thay đổi</h2>
+<p>Người phân tích đánh dấu ô tạo, sử dụng và hoàn tác bị ảnh hưởng, sau đó kiểm tra API, dịch vụ, tác vụ nền, báo cáo và lịch sử. Nếu một thay đổi làm phát sinh ô mới mà ma trận chưa có, phải cập nhật ma trận trước khi hợp nhất mã nguồn.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="59-glossary.html">← 59. Glossary toàn hệ thống</a><a href="61-ma-tran-cau-hinh.html">61. Ma trận cấu hình ảnh hưởng nghiệp vụ →</a></nav></div></body></html>

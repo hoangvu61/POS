@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>24. Ca bán hàng và đối soát ca — Đặc tả POS</title><meta name="description" content="Ca bán hàng và đối soát ca"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần V · Chương 24</p><article class="spec"><h1>CHƯƠNG 24. CA BÁN HÀNG VÀ ĐỐI SOÁT CA</h1><details class="section-toc"><summary>Nội dung chương · 17 mục</summary><ol><li><a href="#section-24-1">24.1. Mục đích và phạm vi</a></li><li><a href="#section-24-2">24.2. Vai trò tham gia</a></li><li><a href="#section-24-3">24.3. Khái niệm dùng trong ca</a></li><li><a href="#section-24-4">24.4. Cấu hình quản lý ca</a></li><li><a href="#section-24-5">24.5. Trạng thái và vòng đời ca</a></li><li><a href="#section-24-6">24.6. Mở ca</a></li><li><a href="#section-24-7">24.7. Điều chỉnh tiền đầu ca</a></li><li><a href="#section-24-8">24.8. Gắn giao dịch vào ca</a></li><li><a href="#section-24-9">24.9. Theo dõi trong ca</a></li><li><a href="#section-24-10">24.10. Kết ca</a></li><li><a href="#section-24-11">24.11. Đối soát tiền và chênh lệch</a></li><li><a href="#section-24-12">24.12. Báo cáo và tra cứu</a></li><li><a href="#section-24-13">24.13. Giao diện vận hành</a></li><li><a href="#section-24-14">24.14. Quyền và phạm vi</a></li><li><a href="#section-24-15">24.15. Đồng thời, chống lặp và truy vết</a></li><li><a href="#section-24-16">24.16. Tác động liên phân hệ</a></li><li><a href="#section-24-17">24.17. Ngoại lệ bắt buộc xử lý</a></li></ol></details>
+<h2 id="section-24-1">24.1. Mục đích và phạm vi</h2>
+<p>Ca bán hàng là khoảng thời gian vận hành được mở để tiếp nhận giao dịch, theo dõi dòng tiền tại điểm bán và chốt trách nhiệm khi kết thúc. Nghiệp vụ ca giúp doanh nghiệp biết ai đã mở ca, ai kết ca, ca hoạt động trong khoảng nào, tiền mặt đầu ca bao nhiêu, giao dịch nào phát sinh trong ca và số tiền dự kiến phải còn lại khi đóng ca.</p>
+<p>Phạm vi của chương bao gồm:</p>
+<ul>
+<li>Lựa chọn không quản lý ca, quản lý theo chi nhánh hoặc quản lý theo từng nhân viên;</li>
+<li>Kiểm tra điều kiện bán hàng theo cấu hình bắt buộc mở ca;</li>
+<li>Mở ca, khai báo tiền đầu ca và điều chỉnh trong thời hạn cho phép;</li>
+<li>Gắn giao dịch bán hàng, thanh toán và khoản chi vào đúng ca;</li>
+<li>Tính số tiền kết ca dự kiến, kết ca và in phiếu đối soát;</li>
+<li>Tra cứu ca theo chi nhánh, nhân viên và thời gian;</li>
+<li>Phân biệt thống kê theo ca với thống kê theo ngày;</li>
+<li>Xử lý ca kéo dài qua ngày, hóa đơn đang treo, thao tác đồng thời và trường hợp quên kết ca.</li>
+</ul>
+<p>Nghiệp vụ ca kiểm soát hoạt động tại quầy nhưng không tự thay đổi kết quả kho, công nợ, hóa đơn hay kế toán của từng giao dịch. Mỗi phân hệ vẫn chịu trách nhiệm về nghiệp vụ do mình tạo ra. Ca chỉ tập hợp các kết quả có thời điểm phù hợp để phục vụ đối soát.</p>
+<h2 id="section-24-2">24.2. Vai trò tham gia</h2>
+<h3 id="section-24-2-1">24.2.1. Thu ngân hoặc nhân viên bán hàng</h3>
+<p>Người vận hành trực tiếp có thể mở ca, nhập tiền đầu ca, thực hiện bán hàng trong ca, xem thông tin ca của mình và kết ca nếu có quyền. Khi quản lý theo nhân viên, người đã mở ca chịu trách nhiệm kết thúc chính ca đó.</p>
+<h3 id="section-24-2-2">24.2.2. Quản lý chi nhánh</h3>
+<p>Quản lý theo dõi ca đang mở, xem báo cáo, đối chiếu tiền và có thể mở hoặc kết ca chung của chi nhánh khi được cấp quyền. Trong chế độ quản lý theo chi nhánh, người mở và người kết ca có thể khác nhau nhưng đều phải thuộc đúng phạm vi chi nhánh.</p>
+<h3 id="section-24-2-3">24.2.3. Quản trị viên</h3>
+<p>Quản trị viên lựa chọn chế độ quản lý ca, quyết định có bắt buộc mở ca trước khi bán hay không, có yêu cầu khai báo tiền đầu ca hay không và thời gian cho phép sửa tiền đầu ca. Thay đổi cấu hình chỉ chi phối thao tác mới; không làm viết lại nội dung của ca đã kết thúc.</p>
+<h3 id="section-24-2-4">24.2.4. Hệ thống</h3>
+<p>Hệ thống kiểm tra ca đang mở, xác định phạm vi theo cấu hình, gắn giao dịch vào ca, tính các số tổng hợp, khóa các hành động không còn hợp lệ và giữ dấu vết của người cùng thời điểm thực hiện.</p>
+<h2 id="section-24-3">24.3. Khái niệm dùng trong ca</h2>
+<h3 id="section-24-3-1">24.3.1. Ca đang mở</h3>
+<p>Ca đang mở là ca đã được khởi tạo nhưng chưa kết thúc. Đây là ca tiếp nhận giao dịch mới khi cấu hình yêu cầu quản lý ca.</p>
+<h3 id="section-24-3-2">24.3.2. Tiền đầu ca</h3>
+<p>Tiền đầu ca là số tiền mặt có sẵn trong két tại lúc bắt đầu. Khoản này không phải doanh thu. Nếu doanh nghiệp yêu cầu khai báo tiền đầu ca, người mở ca phải nhập số tiền hợp lệ trước khi xác nhận.</p>
+<h3 id="section-24-3-3">24.3.3. Tiền kết ca dự kiến</h3>
+<p>Tiền kết ca dự kiến được tính theo nguyên tắc:</p>
+<p><strong>Tiền kết ca dự kiến = Tiền đầu ca + Tiền mặt thu trong ca - Khoản chi tiền mặt thuộc ca.</strong></p>
+<p>Các khoản thanh toán bằng thẻ, chuyển khoản hoặc phương thức phi tiền mặt vẫn được tổng hợp để đối soát doanh thu nhưng không làm tăng số tiền mặt dự kiến trong két.</p>
+<h3 id="section-24-3-4">24.3.4. Thống kê theo ca</h3>
+<p>Thống kê theo ca tập hợp những giao dịch được xác định thuộc khoảng hoạt động của một ca. Ca có thể bắt đầu ở ngày này và kết thúc ở ngày khác.</p>
+<h3 id="section-24-3-5">24.3.5. Thống kê theo ngày</h3>
+<p>Thống kê theo ngày tập hợp giao dịch theo ngày thanh toán hoặc ngày phát sinh được quy định cho chỉ số, không phụ thuộc ranh giới mở và kết ca. Vì vậy tổng theo ngày và tổng theo ca có thể khác nhau khi ca đi qua nửa đêm hoặc giao dịch được hoàn tất ngoài khoảng ca thông thường.</p>
+<h2 id="section-24-4">24.4. Cấu hình quản lý ca</h2>
+<p>Hệ thống hỗ trợ ba chế độ loại trừ nhau.</p>
+<h3 id="section-24-4-1">24.4.1. Không quản lý ca</h3>
+<p>Khi chọn chế độ này:</p>
+<ul>
+<li>Chức năng mở ca, kết ca và danh sách ca không xuất hiện trong luồng bán hàng;</li>
+<li>Người dùng vào bán hàng mà không cần kiểm tra ca;</li>
+<li>Báo cáo theo ca không được sử dụng;</li>
+<li>Giao dịch vẫn giữ đầy đủ người thực hiện, chi nhánh và thời điểm để phục vụ báo cáo theo ngày.</li>
+</ul>
+<h3 id="section-24-4-2">24.4.2. Quản lý theo chi nhánh</h3>
+<p>Mỗi chi nhánh chỉ có tối đa một ca đang mở tại một thời điểm. Nhiều nhân viên trong chi nhánh có thể bán hàng trong ca chung. Người mở và người kết ca có thể khác nhau nếu cả hai đều có quyền.</p>
+<p>Ca của chi nhánh này không tiếp nhận giao dịch của chi nhánh khác. Người dùng đổi chi nhánh làm việc phải sử dụng ca phù hợp với chi nhánh vừa chọn.</p>
+<h3 id="section-24-4-3">24.4.3. Quản lý theo nhân viên</h3>
+<p>Mỗi nhân viên có ca riêng trong chi nhánh làm việc. Nhiều nhân viên có thể đồng thời có ca đang mở nhưng giao dịch của mỗi người được gắn với ca của chính người đó. Người mở ca phải là người kết ca.</p>
+<p>Tài khoản khác, kể cả cùng chi nhánh, không được kết ca thay nếu không có một cơ chế quyền đặc biệt được hệ thống hỗ trợ rõ ràng. Việc biết mã ca không làm phát sinh quyền thao tác.</p>
+<h3 id="section-24-4-4">24.4.4. Bắt buộc mở ca trước khi bán</h3>
+<p>Khi bật yêu cầu này, người dùng không được tạo thanh toán bán hàng nếu chưa có ca phù hợp đang mở. Thời điểm mở ca được lấy tại lúc người dùng xác nhận mở và không được nhập lùi theo ý muốn.</p>
+<p>Khi không bắt buộc, người dùng có thể vào luồng bán hàng mà chưa mở ca. Nếu sau đó mở ca, thời điểm bắt đầu có thể được nhập thủ công nhưng phải muộn hơn thời điểm kết thúc của ca gần nhất trong cùng phạm vi.</p>
+<h3 id="section-24-4-5">24.4.5. Tiền đầu ca và thời hạn chỉnh sửa</h3>
+<p>Doanh nghiệp có thể yêu cầu bắt buộc nhập tiền đầu ca. Số tiền không được âm và được hiểu theo đơn vị tiền tệ vận hành của chi nhánh.</p>
+<p>Thời hạn chỉnh sửa được tính từ lúc ca được tạo, không tính từ thời điểm mở do người dùng nhập. Hết thời hạn, tiền đầu ca bị khóa. Mỗi lần sửa trong thời hạn phải có lý do và giữ được số cũ, số mới, người sửa cùng thời điểm sửa.</p>
+<h2 id="section-24-5">24.5. Trạng thái và vòng đời ca</h2>
+<p>Ca có hai trạng thái nghiệp vụ chính:</p>
+<ul>
+<li><strong>Đang mở:</strong> có thể tiếp nhận giao dịch và khoản chi phù hợp;</li>
+<li><strong>Đã kết thúc:</strong> đã chốt người kết, thời điểm kết và số tiền dự kiến; không tiếp nhận giao dịch mới.</li>
+</ul>
+<p>Vòng đời thông thường là <strong>chưa có ca → mở ca → vận hành trong ca → kết ca</strong>. Ca đã kết thúc không được mở lại hoặc sửa trực tiếp các số tổng hợp. Nếu một giao dịch cũ được hoàn tác sau đó, báo cáo phải phản ánh nghiệp vụ điều chỉnh theo quy tắc của giao dịch, không âm thầm viết lại lịch sử ca.</p>
+<h2 id="section-24-6">24.6. Mở ca</h2>
+<h3 id="section-24-6-1">24.6.1. Điều kiện</h3>
+<p>Người dùng phải đăng nhập, thuộc chi nhánh đang hoạt động và có quyền mở ca. Hệ thống xác định phạm vi cần kiểm tra theo chế độ quản lý:</p>
+<ul>
+<li>Theo chi nhánh: kiểm tra ca đang mở của chi nhánh;</li>
+<li>Theo nhân viên: kiểm tra ca đang mở của chính nhân viên tại chi nhánh.</li>
+</ul>
+<p>Nếu đã có ca đang mở trong cùng phạm vi, hệ thống không tạo ca mới và yêu cầu xử lý ca cũ trước.</p>
+<h3 id="section-24-6-2">24.6.2. Luồng mở ca bắt buộc</h3>
+<ol>
+<li>Người dùng mở chức năng bán hàng hoặc chọn <strong>Mở ca</strong>.</li>
+<li>Hệ thống kiểm tra cấu hình và ca hiện hữu.</li>
+<li>Người dùng nhập tiền đầu ca nếu được yêu cầu.</li>
+<li>Hệ thống kiểm tra số tiền và quyền.</li>
+<li>Thời điểm mở được ghi nhận bằng thời điểm xác nhận.</li>
+<li>Ca chuyển sang <strong>Đang mở</strong>.</li>
+<li>Người dùng được tiếp tục vào điểm bán.</li>
+</ol>
+<h3 id="section-24-6-3">24.6.3. Luồng mở ca không bắt buộc trước khi bán</h3>
+<p>Người dùng được chọn thời điểm mở. Hệ thống từ chối nếu thời điểm này không muộn hơn ca gần nhất đã kết thúc trong cùng phạm vi, nằm ở tương lai không hợp lệ hoặc làm chồng lấn với một ca khác.</p>
+<p>Sau khi mở, các giao dịch có thời điểm phù hợp được xác định theo quy tắc gắn ca. Không được dùng thời điểm nhập lùi để chiếm giao dịch đã thuộc một ca khác.</p>
+<h3 id="section-24-6-4">24.6.4. Kết quả</h3>
+<p>Ca mới phải giữ được người mở, chi nhánh, phạm vi quản lý, thời điểm mở, thời điểm tạo và tiền đầu ca. Việc gửi lặp yêu cầu mở ca không được tạo hai ca đang mở.</p>
+<h2 id="section-24-7">24.7. Điều chỉnh tiền đầu ca</h2>
+<h3 id="section-24-7-1">24.7.1. Điều kiện</h3>
+<p>Chỉ ca đang mở mới được điều chỉnh. Người dùng phải còn quyền, còn trong thời hạn cấu hình và nhập lý do. Số tiền mới không được âm.</p>
+<h3 id="section-24-7-2">24.7.2. Luồng xử lý</h3>
+<ol>
+<li>Người dùng mở thông tin ca đang hoạt động.</li>
+<li>Hệ thống hiển thị tiền đầu ca hiện tại và thời gian còn được sửa.</li>
+<li>Người dùng nhập số mới cùng lý do.</li>
+<li>Hệ thống kiểm tra trạng thái ca và thời hạn tại thời điểm xác nhận.</li>
+<li>Nếu hợp lệ, hệ thống thay số tiền đầu ca, tính lại tiền kết dự kiến và ghi lịch sử thay đổi.</li>
+</ol>
+<p>Nếu ca vừa bị kết thúc hoặc thời hạn vừa hết trong lúc cửa sổ sửa đang mở, thao tác bị từ chối và nội dung hiện hành được tải lại.</p>
+<h2 id="section-24-8">24.8. Gắn giao dịch vào ca</h2>
+<h3 id="section-24-8-1">24.8.1. Giao dịch bán hàng và thanh toán</h3>
+<p>Giao dịch được xác định theo thời điểm thanh toán thực tế. Một đơn có thể được tạo trong ca này nhưng thanh toán ở ca sau; doanh thu và dòng tiền thuộc ca tiếp nhận lần thanh toán, không mặc nhiên thuộc ca lúc tạo đơn.</p>
+<p>Thanh toán nhiều lần được xem theo từng lần phát sinh. Mỗi lần chỉ thuộc một ca. Phương thức thanh toán được giữ để tách tiền mặt và phi tiền mặt.</p>
+<h3 id="section-24-8-2">24.8.2. Khoản chi</h3>
+<p>Khoản chi có thời điểm thanh toán được gắn vào ca phù hợp. Chỉ khoản thực sự chi bằng tiền mặt mới làm giảm tiền mặt kết ca dự kiến; khoản chi qua phương thức khác được tổng hợp riêng.</p>
+<h3 id="section-24-8-3">24.8.3. Đơn treo</h3>
+<p>Đơn chưa thanh toán khi kết ca vẫn tồn tại. Việc kết ca không tự hủy, hoàn tất hoặc chuyển đơn treo sang doanh thu. Đơn chỉ được thanh toán khi có ca mới phù hợp hoặc khi doanh nghiệp không quản lý ca.</p>
+<h3 id="section-24-8-4">24.8.4. Ca kéo dài qua ngày</h3>
+<p>Mọi giao dịch trong khoảng ca vẫn thuộc cùng ca dù lịch đã sang ngày mới. Báo cáo theo ngày sử dụng ngày giao dịch nên có thể phân bổ những giao dịch này vào hai ngày khác nhau.</p>
+<h2 id="section-24-9">24.9. Theo dõi trong ca</h2>
+<p>Người dùng được xem tối thiểu:</p>
+<ul>
+<li>Người và thời điểm mở ca;</li>
+<li>Tiền đầu ca hiện hành;</li>
+<li>Doanh thu tiền mặt;</li>
+<li>Doanh thu theo từng phương thức phi tiền mặt;</li>
+<li>Các khoản chi trong ca;</li>
+<li>Tiền mặt kết ca dự kiến;</li>
+<li>Số giao dịch đã thanh toán;</li>
+<li>Số đơn còn treo nếu giao diện hỗ trợ.</li>
+</ul>
+<p>Số liệu đang theo dõi có thể thay đổi khi giao dịch mới hoàn tất. Người dùng không được sửa trực tiếp số tổng hợp; mọi chênh lệch phải được xử lý tại nghiệp vụ phát sinh hoặc được ghi nhận khi đối soát.</p>
+<h2 id="section-24-10">24.10. Kết ca</h2>
+<h3 id="section-24-10-1">24.10.1. Điều kiện</h3>
+<p>Ca phải đang mở, người dùng có quyền và thuộc đúng phạm vi. Trong chế độ theo nhân viên, chỉ người mở được kết ca. Trong chế độ theo chi nhánh, người có quyền tại chi nhánh có thể kết ca chung.</p>
+<h3 id="section-24-10-2">24.10.2. Luồng chính</h3>
+<ol>
+<li>Người dùng chọn <strong>Kết ca</strong>.</li>
+<li>Hệ thống cập nhật số liệu đến thời điểm hiện tại.</li>
+<li>Hệ thống trình bày tiền đầu ca, các khoản thu theo phương thức, khoản chi và tiền mặt kết dự kiến.</li>
+<li>Người dùng kiểm tra và xác nhận.</li>
+<li>Hệ thống kiểm tra lại trạng thái để tránh hai người cùng kết.</li>
+<li>Hệ thống ghi người kết, thời điểm kết và kết quả tổng hợp.</li>
+<li>Ca chuyển sang <strong>Đã kết thúc</strong>.</li>
+<li>Người dùng có thể in phiếu kết ca.</li>
+</ol>
+<h3 id="section-24-10-3">24.10.3. Ca cũ bị quên</h3>
+<p>Trong chế độ theo chi nhánh, nếu chính sách vận hành cho phép tự đóng ca cũ khi một nhân viên khác mở ca mới, hệ thống kết thúc ca cũ tại thời điểm bắt đầu ca mới rồi mới tạo ca mới. Việc tự đóng phải được nhận diện rõ, giữ người thực hiện hành động mở ca mới và không tạo khoảng chồng lấn.</p>
+<p>Nếu chính sách không cho tự đóng, hệ thống yêu cầu kết ca cũ trước. Trong chế độ theo nhân viên, người khác mở ca riêng không làm đóng ca của nhân viên trước.</p>
+<h3 id="section-24-10-4">24.10.4. Kết ca và đơn treo</h3>
+<p>Đơn treo không chặn kết ca. Hệ thống phải nêu rõ số đơn còn treo để người dùng hiểu chúng chưa nằm trong doanh thu đã thanh toán. Khi được thanh toán ở ca mới, chúng thuộc ca mới.</p>
+<h3 id="section-24-10-5">24.10.5. Lỗi trong lúc kết ca</h3>
+<p>Nếu chưa chuyển được ca sang trạng thái kết thúc, hệ thống giữ ca đang mở và cho phép thử lại. Nếu ca đã kết thúc nhưng in thất bại, ca không bị mở lại; người dùng chỉ thực hiện in lại phiếu.</p>
+<h2 id="section-24-11">24.11. Đối soát tiền và chênh lệch</h2>
+<p>Tiền kết dự kiến là số hệ thống tính từ giao dịch. Nếu giao diện yêu cầu người dùng nhập tiền kiểm đếm thực tế, hệ thống so sánh hai số và hiển thị thừa hoặc thiếu. Chênh lệch không được tự tạo thêm doanh thu hay tự sửa giao dịch gốc.</p>
+<p>Người dùng phải có khả năng phân biệt:</p>
+<ul>
+<li>Tiền mặt đầu ca;</li>
+<li>Tiền mặt thu từ bán hàng;</li>
+<li>Tiền mặt hoàn cho khách nếu được tính trong kỳ;</li>
+<li>Tiền mặt chi trong ca;</li>
+<li>Tiền mặt dự kiến;</li>
+<li>Tiền kiểm đếm thực tế nếu có;</li>
+<li>Chênh lệch cần giải trình.</li>
+</ul>
+<p>Một khoản hoàn tiền hoặc điều chỉnh phát sinh sau khi ca cũ đã đóng được ghi nhận theo thời điểm thực hiện và xuất hiện trong ca tiếp nhận thao tác, đồng thời vẫn liên hệ được với giao dịch gốc.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title-shift-close desc-shift-close" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-shift-close">Đối soát một ca bán hàng</title><desc id="desc-shift-close">MỞ CA. Xác định chi nhánh/người phụ trách. Ghi tiền đầu ca theo cấu hình; VẬN HÀNH TRONG CA. Gắn thu, chi và giao dịch bán. Theo dõi số dự kiến; KIỂM ĐẾM THỰC TẾ. Tiền mặt và nguồn cần đối soát. Ghi nhận giải trình chênh lệch; ĐÓNG CA. Chốt phạm vi và kết quả. Không nhận giao dịch mới</desc><defs><marker id="arrow-shift-close" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 86 V123 H480 V155" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-shift-close)"/><path d="M480 242 V301 H215 V355" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-shift-close)"/><path d="M215 448 V404 H745 V355" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-shift-close)"/><g><rect x="315" y="14" width="330" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="34" font-weight="700">MỞ CA</tspan><tspan x="480" y="56">Xác định chi nhánh/người phụ trách</tspan><tspan x="480" y="78">Ghi tiền đầu ca theo cấu hình</tspan></text></g><g><rect x="315" y="160" width="330" height="82" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="185" font-weight="700">VẬN HÀNH TRONG CA</tspan><tspan x="480" y="207">Gắn thu, chi và giao dịch bán</tspan><tspan x="480" y="229">Theo dõi số dự kiến</tspan></text></g><g><rect x="45" y="360" width="340" height="88" rx="10" fill="#fff" stroke="#708c82"/><text x="215" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="215" y="388" font-weight="700">KIỂM ĐẾM THỰC TẾ</tspan><tspan x="215" y="410">Tiền mặt và nguồn cần đối soát</tspan><tspan x="215" y="432">Ghi nhận giải trình chênh lệch</tspan></text></g><g><rect x="575" y="360" width="340" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="745" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="745" y="388" font-weight="700">ĐÓNG CA</tspan><tspan x="745" y="410">Chốt phạm vi và kết quả</tspan><tspan x="745" y="432">Không nhận giao dịch mới</tspan></text></g></svg></div><figcaption><strong>Đối soát một ca bán hàng.</strong> Ca xác định phạm vi giao dịch và người chịu trách nhiệm. Kết ca so sánh số hệ thống với số thực đếm, lưu chênh lệch và khóa việc ghi thêm giao dịch vào ca đã đóng.</figcaption></figure>
+
+<h2 id="section-24-12">24.12. Báo cáo và tra cứu</h2>
+<p>Danh sách ca cho phép lọc theo chi nhánh, nhân viên, trạng thái và khoảng thời gian. Mỗi ca hiển thị người mở, thời điểm mở, tiền đầu ca, doanh thu theo phương thức, khoản chi, tiền kết dự kiến, người kết và thời điểm kết.</p>
+<h3 id="section-24-12-1">24.12.1. Xem theo ca</h3>
+<p>Chế độ này phục vụ bàn giao két và trách nhiệm vận hành. Khoảng tổng hợp theo thời gian mở đến thời gian kết của từng ca.</p>
+<h3 id="section-24-12-2">24.12.2. Xem theo ngày</h3>
+<p>Chế độ này phục vụ tổng hợp kết quả kinh doanh trong ngày. Giao dịch được nhóm theo ngày thanh toán, không buộc theo ranh giới ca.</p>
+<h3 id="section-24-12-3">24.12.3. Đối chiếu liên phân hệ</h3>
+<p>Báo cáo ca phải cho phép đối chiếu tới giao dịch bán hàng, lần thanh toán và khoản chi cấu thành số tổng. Số liệu không được trở thành một tổng độc lập mà không truy ngược được nguồn phát sinh nghiệp vụ.</p>
+<h2 id="section-24-13">24.13. Giao diện vận hành</h2>
+<h3 id="section-24-13-1">24.13.1. Cửa sổ mở ca</h3>
+<p>Cửa sổ nêu chi nhánh, người mở, thời điểm mở và tiền đầu ca khi áp dụng. Trong chế độ bắt buộc mở trước khi bán, thời điểm chỉ hiển thị để người dùng biết và không cho sửa.</p>
+<h3 id="section-24-13-2">24.13.2. Cửa sổ sửa tiền đầu ca</h3>
+<p>Giao diện hiển thị số hiện tại, số mới, lý do và thời hạn còn lại. Nút xác nhận bị từ chối nếu lý do trống, số không hợp lệ, ca đã kết thúc hoặc thời hạn đã hết.</p>
+<h3 id="section-24-13-3">24.13.3. Cửa sổ kết ca</h3>
+<p>Cửa sổ trình bày số liệu theo nhóm tiền mặt, phi tiền mặt và khoản chi; nêu rõ tiền kết dự kiến và đơn treo. Các số tổng hợp chỉ đọc. Hành động xác nhận cần đủ nổi bật để tránh nhầm với in tạm hoặc đóng cửa sổ.</p>
+<h3 id="section-24-13-4">24.13.4. Danh sách ca</h3>
+<p>Trạng thái đang mở phải dễ nhận biết. Người dùng chỉ thấy ca thuộc phạm vi được cấp. Từ danh sách có thể mở chi tiết và in lại phiếu kết ca nếu có quyền.</p>
+<h2 id="section-24-14">24.14. Quyền và phạm vi</h2>
+<ul>
+<li>Quyền mở ca không tự bao gồm quyền kết ca.</li>
+<li>Quyền xem danh sách không tự bao gồm quyền sửa tiền đầu ca.</li>
+<li>Người dùng chỉ thao tác trên chi nhánh hiện tại và phạm vi nhân viên phù hợp với chế độ.</li>
+<li>Quản lý xem nhiều nhân viên trong chi nhánh phải có quyền báo cáo tương ứng.</li>
+<li>Quản trị viên thay đổi cấu hình ca không được sửa kết quả lịch sử.</li>
+<li>Mọi yêu cầu phải kiểm tra lại quyền tại lúc xác nhận, kể cả khi cửa sổ đã mở trước đó.</li>
+</ul>
+<h2 id="section-24-15">24.15. Đồng thời, chống lặp và truy vết</h2>
+<p>Khi hai người cùng mở ca chi nhánh, chỉ một ca được tạo; người còn lại nhận thông báo ca đã được mở. Khi hai người cùng kết ca, chỉ yêu cầu đầu tiên hợp lệ làm chuyển trạng thái.</p>
+<p>Mỗi ca phải truy vết được:</p>
+<ul>
+<li>Chế độ quản lý áp dụng;</li>
+<li>Người mở và thời điểm mở;</li>
+<li>Thời điểm tạo;</li>
+<li>Tiền đầu ca ban đầu và lịch sử điều chỉnh;</li>
+<li>Lý do, người và thời điểm của từng lần sửa;</li>
+<li>Người kết và thời điểm kết;</li>
+<li>Trường hợp kết tự động nếu có;</li>
+<li>Các số tổng hợp tại lúc kết;</li>
+<li>Trạng thái thành công hoặc lỗi của lần in.</li>
+</ul>
+<p>Gửi lại yêu cầu do mất kết nối không được tạo ca, kết ca hay ghi lịch sử sửa tiền hai lần.</p>
+<h2 id="section-24-16">24.16. Tác động liên phân hệ</h2>
+<ul>
+<li><strong>Bán hàng:</strong> kiểm tra ca trước thanh toán và xác định ca của lần thu tiền.</li>
+<li><strong>Thanh toán:</strong> cung cấp số tiền theo từng phương thức để tổng hợp.</li>
+<li><strong>Thu Chi:</strong> cung cấp khoản chi tiền mặt và phi tiền mặt trong khoảng ca.</li>
+<li><strong>Đơn hàng:</strong> giữ đơn treo qua thời điểm kết ca mà không thay đổi trạng thái.</li>
+<li><strong>Phân quyền:</strong> quyết định người được mở, sửa, kết, xem và in.</li>
+<li><strong>Báo cáo:</strong> cung cấp góc nhìn theo ca nhưng không thay thế báo cáo theo ngày.</li>
+<li><strong>In ấn:</strong> tạo và in lại phiếu kết ca mà không làm thay đổi số liệu.</li>
+</ul>
+<h2 id="section-24-17">24.17. Ngoại lệ bắt buộc xử lý</h2>
+<ul>
+<li>Người dùng mở ca khi đã có ca hợp lệ đang mở.</li>
+<li>Hai người cùng mở ca chi nhánh.</li>
+<li>Thời điểm mở nhập tay không muộn hơn ca gần nhất.</li>
+<li>Tiền đầu ca âm, sai định dạng hoặc vượt giới hạn nhập liệu.</li>
+<li>Người dùng sửa tiền khi thời hạn vừa hết.</li>
+<li>Người dùng mất quyền trong lúc cửa sổ xác nhận đang mở.</li>
+<li>Ca bị người khác kết thúc trước khi thao tác hiện tại hoàn thành.</li>
+<li>Ca đi qua nửa đêm.</li>
+<li>Đơn được tạo trong ca trước nhưng thanh toán ở ca sau.</li>
+<li>Một đơn có nhiều lần thanh toán thuộc những ca khác nhau.</li>
+<li>Có đơn treo khi kết ca.</li>
+<li>Giao dịch hoàn tiền phát sinh sau khi ca gốc đã đóng.</li>
+<li>Máy in lỗi sau khi ca đã kết thúc.</li>
+<li>Mất kết nối sau khi gửi yêu cầu mở hoặc kết ca.</li>
+<li>Cấu hình quản lý ca thay đổi khi vẫn còn ca đang mở.</li>
+</ul>
+<p>Mỗi trường hợp phải có thông báo rõ, bảo toàn trạng thái đã cam kết và đưa người dùng về hành động tiếp theo an toàn.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="23-trai-nghiem-ban-hang-thiet-bi.html">← 23. Trải nghiệm bán hàng và thiết bị ngoại vi</a><a href="25-kien-truc-quan-ly-kho.html">25. Kiến trúc quản lý kho →</a></nav></div></body></html>

@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5. Doanh nghiệp, chi nhánh và nhân viên — Đặc tả POS</title><meta name="description" content="Doanh nghiệp, chi nhánh và nhân viên"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần II · Chương 5</p><article class="spec"><h1>CHƯƠNG 5. DOANH NGHIỆP, CHI NHÁNH VÀ NHÂN VIÊN</h1><details class="section-toc"><summary>Nội dung chương · 12 mục</summary><ol><li><a href="#section-5-1">5.1. Mục tiêu và phạm vi</a></li><li><a href="#section-5-2">5.2. Tác nhân và quyền</a></li><li><a href="#section-5-3">5.3. Mô hình tổ chức</a></li><li><a href="#section-5-4">5.4. Quản lý doanh nghiệp</a></li><li><a href="#section-5-5">5.5. Phạm vi và cách ly doanh nghiệp</a></li><li><a href="#section-5-6">5.6. Quản lý chi nhánh</a></li><li><a href="#section-5-7">5.7. Quản lý nhân viên</a></li><li><a href="#section-5-8">5.8. Quan hệ giữa tổ chức và phân quyền</a></li><li><a href="#section-5-9">5.9. Quan hệ với cấu hình</a></li><li><a href="#section-5-10">5.10. Tác động xuyên phân hệ</a></li><li><a href="#section-5-11">5.11. Giao diện</a></li><li><a href="#section-5-12">5.12. Audit</a></li></ol></details>
+<h2 id="section-5-1">5.1. Mục tiêu và phạm vi</h2>
+<p>Doanh nghiệp, chi nhánh và nhân viên tạo thành cấu trúc tổ chức nền tảng của toàn bộ hệ thống. Mỗi hoạt động phải xác định được doanh nghiệp sở hữu và, khi phát sinh tại một địa điểm vận hành, chi nhánh tương ứng.</p>
+<p>Chức năng đáp ứng các mục tiêu:</p>
+<ul>
+<li>Quản lý hồ sơ pháp lý và vận hành của doanh nghiệp;</li>
+<li>Tổ chức doanh nghiệp thành một hoặc nhiều chi nhánh;</li>
+<li>Quản lý nhân viên và tài khoản làm việc;</li>
+<li>Xác định phạm vi cho bán hàng, kho, thanh toán, hóa đơn, kế toán và báo cáo;</li>
+<li>Ngăn truy cập hoặc liên kết dữ liệu giữa các doanh nghiệp khác nhau;</li>
+<li>Giữ được lịch sử người và địa điểm đã tham gia giao dịch;</li>
+<li>Cho phép ngừng hoạt động đối tượng tổ chức mà không làm mất lịch sử.</li>
+</ul>
+<h2 id="section-5-2">5.2. Tác nhân và quyền</h2>
+<h3 id="section-5-2-1">5.2.1. Quản trị viên doanh nghiệp</h3>
+<p>Quản trị viên có thể xem và cập nhật hồ sơ doanh nghiệp, quản lý chi nhánh, nhân viên và tài khoản trong phạm vi quyền được cấp.</p>
+<h3 id="section-5-2-2">5.2.2. Quản lý chi nhánh</h3>
+<p>Quản lý chi nhánh theo dõi thông tin địa điểm, nhân viên và các cấu hình được phép trong phạm vi chi nhánh. Quyền quản lý một chi nhánh không tự mở rộng sang chi nhánh khác.</p>
+<h3 id="section-5-2-3">5.2.3. Người quản lý nhân sự hoặc tài khoản</h3>
+<ul>
+<li>Người được giao trách nhiệm có thể tạo, cập nhật, điều chuyển hoặc ngừng hoạt động hồ sơ nhân viên.</li>
+<li>Tạo và khóa tài khoản.</li>
+<li>Gán chi nhánh và nhóm quyền theo phạm vi cho phép.</li>
+</ul>
+<h3 id="section-5-2-4">5.2.4. Người dùng nghiệp vụ</h3>
+<p>Người dùng thực hiện bán hàng, kho, dịch vụ, tài chính hoặc kế toán bằng tài khoản gắn với doanh nghiệp và chi nhánh. Hệ thống sử dụng phạm vi của tài khoản để kiểm soát giao dịch.</p>
+<p>Các hành động tạo, sửa, ngừng hoạt động hoặc xóa doanh nghiệp, chi nhánh, nhân viên và tài khoản phải có quyền tương ứng. Quyền không thay thế kiểm tra phạm vi và điều kiện nghiệp vụ.</p>
+<h2 id="section-5-3">5.3. Mô hình tổ chức</h2>
+<p>Hệ thống tổ chức hoạt động theo ba lớp:</p>
+<ul>
+<li>Doanh nghiệp là phạm vi quản lý cao nhất của một khách hàng sử dụng hệ thống.</li>
+<li>Chi nhánh là địa điểm hoặc đơn vị vận hành trực thuộc doanh nghiệp.</li>
+<li>Nhân viên là người tham gia vận hành; tài khoản cho phép người đó đăng nhập và thao tác trong phạm vi được giao.</li>
+</ul>
+<p>Một doanh nghiệp có thể có nhiều chi nhánh. Một chi nhánh chỉ thuộc một doanh nghiệp. Một nhân viên thuộc một doanh nghiệp và có thể có nhiều tài khoản để làm việc tại những chi nhánh khác nhau.</p>
+<p>Mọi giao dịch phải giữ được doanh nghiệp và chi nhánh tại thời điểm phát sinh. Khi nhân viên chuyển nơi làm việc hoặc chi nhánh ngừng hoạt động, giao dịch cũ vẫn phải hiển thị đúng người và địa điểm ban đầu.</p>
+<h2 id="section-5-4">5.4. Quản lý doanh nghiệp</h2>
+<h3 id="section-5-4-1">5.4.1. Ý nghĩa nghiệp vụ</h3>
+<p>Doanh nghiệp là hồ sơ gốc đại diện cho đơn vị kinh doanh sử dụng POS. Thông tin doanh nghiệp được sử dụng trong cấu hình, hóa đơn, thuế, báo cáo và nhận diện của đơn vị.</p>
+<p>Mỗi doanh nghiệp có phạm vi người dùng, chi nhánh, danh mục, giao dịch và cấu hình riêng. Người dùng của doanh nghiệp này không được truy cập hoạt động của doanh nghiệp khác nếu không có một chức năng quản trị được cấp phép rõ ràng.</p>
+<h3 id="section-5-4-2">5.4.2. Nội dung hồ sơ doanh nghiệp</h3>
+<p>Hồ sơ doanh nghiệp bao gồm các nhóm thông tin phù hợp với phạm vi sử dụng:</p>
+<ul>
+<li>Tên doanh nghiệp hoặc tên cơ sở kinh doanh;</li>
+<li>Thông tin đăng ký kinh doanh;</li>
+<li>Mã số thuế;</li>
+<li>Người đại diện;</li>
+<li>Địa chỉ và thông tin liên hệ;</li>
+<li>Website, tên miền và logo;</li>
+<li>Thông tin phục vụ hóa đơn điện tử;</li>
+<li>Loại hình hoặc mô hình kinh doanh;</li>
+<li>Thời điểm khởi tạo và thời hạn sử dụng hệ thống nếu áp dụng;</li>
+<li>Các tài khoản ngân hàng của doanh nghiệp.</li>
+</ul>
+<p>Thông tin doanh nghiệp có thể được dùng làm mặc định cho chi nhánh hoặc chứng từ mới. Thay đổi hồ sơ hiện tại không tự sửa nội dung pháp lý đã được chốt trên hóa đơn hoặc giao dịch lịch sử.</p>
+<h3 id="section-5-4-3">5.4.3. Xem doanh nghiệp</h3>
+<p>Người có quyền truy cập hồ sơ doanh nghiệp trong phạm vi đang sử dụng. Giao diện nhóm thông tin theo nội dung chung, pháp lý, liên hệ, nhận diện, hóa đơn và ngân hàng để người dùng dễ kiểm tra.</p>
+<p>Thông tin nhạy cảm hoặc khu vực cấu hình chỉ hiển thị cho người có quyền tương ứng.</p>
+<h3 id="section-5-4-4">5.4.4. Cập nhật doanh nghiệp</h3>
+<p>Luồng chính:</p>
+<ol>
+<li>Người dùng mở hồ sơ doanh nghiệp.</li>
+<li>Hệ thống kiểm tra quyền xem và quyền chỉnh sửa.</li>
+<li>Người dùng thay đổi nội dung được phép.</li>
+<li>Hệ thống kiểm tra thông tin bắt buộc, định dạng, phạm vi và các ràng buộc liên quan.</li>
+<li>Nếu hợp lệ, hệ thống lưu và thông báo thành công.</li>
+<li>Giá trị mới được sử dụng cho hoạt động phát sinh sau đó theo quy tắc của từng chức năng.</li>
+</ol>
+<p>Lỗi và ngoại lệ:</p>
+<ul>
+<li>Người dùng không có quyền chỉnh sửa: chỉ được xem.</li>
+<li>Mã số thuế, thông tin liên hệ hoặc định dạng khác không hợp lệ: từ chối và chỉ rõ nội dung cần sửa.</li>
+<li>Thông tin đã thay đổi bởi người khác trong lúc màn hình đang mở: yêu cầu tải lại trước khi ghi đè.</li>
+<li>Thay đổi thông tin pháp lý: không làm thay đổi chứng từ đã phát hành.</li>
+</ul>
+<h3 id="section-5-4-5">5.4.5. Tài khoản ngân hàng của doanh nghiệp</h3>
+<p>Tài khoản ngân hàng được khai báo tập trung cho doanh nghiệp. Hồ sơ doanh nghiệp có thể hiển thị khu vực Thông tin ngân hàng để người dùng xem cùng danh sách được quản lý trong chức năng tài khoản ngân hàng.</p>
+<p>Chi nhánh chỉ được sử dụng tài khoản đã thuộc doanh nghiệp và đã được phân bổ cho chi nhánh đó. Không tạo một danh sách ngân hàng riêng không đồng bộ trong hồ sơ chi nhánh.</p>
+<h2 id="section-5-5">5.5. Phạm vi và cách ly doanh nghiệp</h2>
+<p>Hệ thống phải kiểm tra phạm vi doanh nghiệp khi:</p>
+<ul>
+<li>Tạo hoặc cập nhật thông tin;</li>
+<li>Mở chi tiết theo mã nhận diện;</li>
+<li>Gán chi nhánh, kho, tài khoản ngân hàng, nhân viên hoặc danh mục;</li>
+<li>Tạo giao dịch xuyên nhiều chức năng;</li>
+<li>Tổng hợp báo cáo;</li>
+<li>Thực hiện hoàn tác hoặc điều chỉnh.</li>
+</ul>
+<p>Không được chấp nhận một liên kết giữa hai đối tượng thuộc hai doanh nghiệp khác nhau. Việc người dùng biết mã nhận diện của đối tượng không tạo quyền truy cập đối tượng đó.</p>
+<p>Nếu yêu cầu chứa doanh nghiệp khác với phạm vi của tài khoản, hệ thống từ chối và không tiết lộ thêm thông tin nhạy cảm về đối tượng ngoài phạm vi.</p>
+<h2 id="section-5-6">5.6. Quản lý chi nhánh</h2>
+<h3 id="section-5-6-1">5.6.1. Ý nghĩa nghiệp vụ</h3>
+<p>Chi nhánh đại diện cho địa điểm hoặc đơn vị vận hành trực thuộc doanh nghiệp, chẳng hạn cửa hàng, nhà hàng, cơ sở dịch vụ, khách sạn, văn phòng hoặc điểm kinh doanh.</p>
+<p>Chi nhánh thường xác định nơi phát sinh bán hàng, nơi nhân viên làm việc, kho phục vụ, tài khoản ngân hàng được phép dùng, lịch đặt, bàn, tài nguyên, phòng và phạm vi báo cáo.</p>
+<h3 id="section-5-6-2">5.6.2. Nội dung hồ sơ chi nhánh</h3>
+<p>Hồ sơ chi nhánh bao gồm:</p>
+<ul>
+<li>Tên chi nhánh;</li>
+<li>Địa chỉ và thông tin liên hệ;</li>
+<li>Thông tin sử dụng trên hóa đơn nếu chi nhánh có nội dung riêng;</li>
+<li>Kho liên kết khi doanh nghiệp sử dụng kho;</li>
+<li>Tài khoản ngân hàng được doanh nghiệp cho phép sử dụng;</li>
+<li>Mô hình kinh doanh và cấu hình được áp dụng;</li>
+<li>Trạng thái hoạt động.</li>
+</ul>
+<p>Tên chi nhánh là thông tin bắt buộc. Kho được xử lý theo cấu hình sử dụng kho của doanh nghiệp.</p>
+<h3 id="section-5-6-3">5.6.3. Tạo chi nhánh</h3>
+<p>Điều kiện tiên quyết:</p>
+<ul>
+<li>Người dùng có quyền quản lý chi nhánh.</li>
+<li>Doanh nghiệp đang hoạt động.</li>
+<li>Các kho hoặc tài khoản ngân hàng cần liên kết thuộc doanh nghiệp và còn được phép sử dụng.</li>
+</ul>
+<p>Luồng chính:</p>
+<ol>
+<li>Người dùng mở danh sách chi nhánh và chọn thêm mới.</li>
+<li>Người dùng nhập tên, địa chỉ, thông tin liên hệ và các nội dung cần thiết.</li>
+<li>Hệ thống đọc cấu hình sử dụng kho của doanh nghiệp.</li>
+<li>Nếu doanh nghiệp cấu hình sử dụng kho, người dùng bắt buộc chọn một kho cho chi nhánh.</li>
+<li>Nếu doanh nghiệp không sử dụng kho, việc chọn kho không phải điều kiện tạo chi nhánh và giao diện không yêu cầu người dùng nhập nội dung này.</li>
+<li>Người dùng lựa chọn các tài khoản ngân hàng hoặc cấu hình liên quan nếu áp dụng.</li>
+<li>Hệ thống kiểm tra toàn bộ đối tượng được chọn thuộc cùng doanh nghiệp và đang hợp lệ.</li>
+<li>Hệ thống tạo chi nhánh ở trạng thái hoạt động và thông báo thành công.</li>
+</ol>
+<p>Lỗi và ngoại lệ:</p>
+<ul>
+<li>Thiếu tên chi nhánh: từ chối và yêu cầu bổ sung.</li>
+<li>Doanh nghiệp sử dụng kho nhưng chưa chọn kho: từ chối lưu và chỉ rõ kho là bắt buộc.</li>
+<li>Kho không thuộc doanh nghiệp hoặc đã ngừng sử dụng: từ chối.</li>
+<li>Tài khoản ngân hàng không thuộc doanh nghiệp hoặc không còn hợp lệ: từ chối.</li>
+<li>Người dùng mất quyền trong lúc nhập: từ chối khi lưu.</li>
+<li>Người dùng hủy trước khi lưu: không tạo chi nhánh.</li>
+</ul>
+<h3 id="section-5-6-4">5.6.4. Quan hệ giữa chi nhánh và kho</h3>
+<p>Khi doanh nghiệp sử dụng kho, mỗi chi nhánh mới phải được gắn với một kho để có thể xác định nơi phát sinh biến động hàng hóa trong hoạt động bán hàng và vận hành.</p>
+<p>Nhiều chi nhánh có thể dùng chung một kho. Vì vậy hệ thống luôn phân biệt:</p>
+<ul>
+<li>Chi nhánh là nơi giao dịch được thực hiện;</li>
+<li>Kho là nơi hàng hóa thực tế được quản lý.</li>
+</ul>
+<p>Khi chi nhánh đổi kho phục vụ, thay đổi chỉ áp dụng cho nghiệp vụ mới theo cấu hình có hiệu lực. Các giao dịch cũ tiếp tục hiển thị đúng kho đã được sử dụng tại thời điểm phát sinh.</p>
+<p>Không cho phép gắn kho thuộc doanh nghiệp khác. Không cho phép chi nhánh hoạt động trong chế độ sử dụng kho mà không có kho hợp lệ.</p>
+<h3 id="section-5-6-5">5.6.5. Quan hệ giữa chi nhánh và tài khoản ngân hàng</h3>
+<p>Chi nhánh lựa chọn tài khoản ngân hàng từ danh sách của doanh nghiệp. Một tài khoản có thể áp dụng cho nhiều chi nhánh; một chi nhánh có thể sử dụng nhiều tài khoản.</p>
+<p>Khi thêm tài khoản cho chi nhánh:</p>
+<ul>
+<li>Chỉ hiển thị tài khoản thuộc doanh nghiệp;</li>
+<li>Không hiển thị lại tài khoản đã được gán;</li>
+<li>Tài khoản phải đang được phép sử dụng;</li>
+<li>Hệ thống áp dụng các kiểm tra an toàn của tài khoản;</li>
+<li>Không cho phép gán trùng.</li>
+</ul>
+<p>Khi gỡ tài khoản khỏi chi nhánh, hệ thống kiểm tra xem tài khoản có đang được sử dụng trong cấu hình thanh toán hay không. Nếu còn ràng buộc, thao tác bị từ chối cho đến khi cấu hình liên quan được xử lý.</p>
+<p>Việc gỡ chỉ ngăn sử dụng cho giao dịch mới. Giao dịch lịch sử đã thanh toán qua tài khoản đó vẫn giữ nguyên để tra cứu và đối soát.</p>
+<h3 id="section-5-6-6">5.6.6. Kế thừa mô hình kinh doanh khi tạo chi nhánh</h3>
+<p>Chi nhánh mới có thể nhận mô hình kinh doanh từ chi nhánh chuẩn gắn với tài khoản Master. Mục tiêu là giúp khởi tạo địa điểm mới có cách vận hành tương tự.</p>
+<p>Việc kế thừa chỉ áp dụng cho những nội dung cấu hình được chức năng hỗ trợ. Giao dịch, doanh thu, tồn kho, công nợ và lịch sử của chi nhánh chuẩn không được sao chép sang chi nhánh mới.</p>
+<h3 id="section-5-6-7">5.6.7. Cập nhật chi nhánh</h3>
+<p>Người có quyền có thể cập nhật thông tin liên hệ, nội dung hóa đơn, kho, tài khoản ngân hàng và các cấu hình được phép.</p>
+<p>Trước khi lưu, hệ thống kiểm tra:</p>
+<ul>
+<li>Chi nhánh thuộc doanh nghiệp hiện tại;</li>
+<li>Chi nhánh và đối tượng liên quan còn hợp lệ;</li>
+<li>Nếu doanh nghiệp đang sử dụng kho, chi nhánh vẫn có một kho hợp lệ sau thay đổi;</li>
+<li>Việc gỡ hoặc thay đổi không vi phạm ràng buộc đang được sử dụng;</li>
+<li>Thay đổi không làm sửa ngược giao dịch lịch sử.</li>
+</ul>
+<h3 id="section-5-6-8">5.6.8. Ngừng hoạt động chi nhánh</h3>
+<p>Khi chi nhánh không còn vận hành, người có quyền chuyển chi nhánh sang ngừng hoạt động.</p>
+<p>Chi nhánh ngừng hoạt động:</p>
+<ul>
+<li>Không được chọn cho giao dịch mới;</li>
+<li>Tài khoản gắn với chi nhánh không được tiếp tục tạo nghiệp vụ mới trong phạm vi đó;</li>
+<li>Vẫn hiển thị trên đơn, chứng từ, báo cáo và lịch sử;</li>
+<li>Không làm mất liên kết với kho, tiền, hóa đơn hoặc kế toán đã phát sinh.</li>
+</ul>
+<p>Trước khi ngừng hoạt động, giao diện cần cảnh báo ảnh hưởng và hệ thống kiểm tra các quy trình đang mở cần được xử lý.</p>
+<h3 id="section-5-6-9">5.6.9. Xóa chi nhánh</h3>
+<p>Chi nhánh chỉ được xóa khi chưa phát sinh giao dịch và không còn quan hệ làm việc cần bảo toàn. Nếu đã có đơn hàng, nghiệp vụ kho, tài chính, nhân viên hoặc lịch sử khác, hệ thống không xóa mà sử dụng trạng thái ngừng hoạt động.</p>
+<p>Khi xóa hợp lệ, các liên kết cấu hình thuần túy được xử lý đồng bộ để không còn tham chiếu không sử dụng được.</p>
+<h2 id="section-5-7">5.7. Quản lý nhân viên</h2>
+<h3 id="section-5-7-1">5.7.1. Ý nghĩa nghiệp vụ</h3>
+<p>Nhân viên là hồ sơ của người lao động hoặc người tham gia vận hành. Hồ sơ này giúp doanh nghiệp quản lý thông tin con người và liên kết đến tài khoản, chi nhánh, quyền cùng các giao dịch có ghi nhận người thực hiện.</p>
+<h3 id="section-5-7-2">5.7.2. Nội dung hồ sơ nhân viên</h3>
+<p>Tùy phạm vi sử dụng, hồ sơ nhân viên bao gồm:</p>
+<ul>
+<li>Thông tin cá nhân;</li>
+<li>Thông tin liên hệ;</li>
+<li>Giấy tờ định danh và hình ảnh giấy tờ;</li>
+<li>Chức danh hoặc vị trí công việc;</li>
+<li>Thông tin tuyển dụng và làm việc;</li>
+<li>Doanh nghiệp và chi nhánh làm việc;</li>
+<li>Tài khoản hệ thống;</li>
+<li>Nhóm quyền và quyền bổ sung;</li>
+<li>Thông tin lương, ca làm hoặc chấm công khi doanh nghiệp sử dụng các chức năng tương ứng;</li>
+<li>Trạng thái làm việc.</li>
+</ul>
+<p>Hồ sơ nhân viên là căn cứ xác định người thao tác và phục vụ audit. Không phải mọi nội dung nhân sự đều được sử dụng trong bán hàng.</p>
+<h3 id="section-5-7-3">5.7.3. Tạo nhân viên</h3>
+<p>Luồng chính:</p>
+<ol>
+<li>Người có quyền chọn thêm nhân viên.</li>
+<li>Người dùng nhập thông tin cá nhân và công việc cần thiết.</li>
+<li>Người dùng chọn chi nhánh hoặc phạm vi làm việc.</li>
+<li>Người dùng tạo hoặc gắn tài khoản khi nhân viên cần sử dụng hệ thống.</li>
+<li>Người dùng chọn nhóm quyền và quyền bổ sung phù hợp.</li>
+<li>Hệ thống kiểm tra tất cả nội dung thuộc cùng doanh nghiệp.</li>
+<li>Hệ thống tạo nhân viên và tài khoản theo trạng thái được chọn.</li>
+</ol>
+<p>Lỗi và ngoại lệ:</p>
+<ul>
+<li>Thiếu nội dung bắt buộc hoặc định dạng liên hệ không hợp lệ: từ chối lưu.</li>
+<li>Chi nhánh thuộc doanh nghiệp khác hoặc đã ngừng hoạt động: không cho chọn.</li>
+<li>Tên đăng nhập hoặc thông tin định danh tài khoản bị trùng: từ chối tạo tài khoản.</li>
+<li>Người tạo không có quyền cấp một quyền nhạy cảm: từ chối phần gán quyền tương ứng.</li>
+</ul>
+<h3 id="section-5-7-4">5.7.4. Một nhân viên có nhiều tài khoản</h3>
+<p>Một nhân viên có thể có nhiều tài khoản để làm việc tại nhiều chi nhánh. Mỗi tài khoản được kiểm soát theo chi nhánh và quyền riêng của tài khoản đó.</p>
+<p>Hệ thống không dùng việc các tài khoản cùng thuộc một nhân viên để bỏ qua kiểm tra phạm vi. Giao dịch phải ghi nhận tài khoản và chi nhánh thực tế tại thời điểm thao tác.</p>
+<h3 id="section-5-7-5">5.7.5. Xác định chi nhánh của giao dịch</h3>
+<p>Trong hoạt động bán hàng thông thường, chi nhánh của đơn được xác định từ tài khoản nhân viên đang đăng nhập, trừ khi chức năng cụ thể cho phép người có quyền chọn một chi nhánh khác.</p>
+<p>Hệ quả:</p>
+<ul>
+<li>Tài khoản phải gắn đúng chi nhánh trước khi tạo giao dịch;</li>
+<li>Hệ thống kiểm tra lại chi nhánh thay vì tin nội dung giao diện gửi lên;</li>
+<li>Báo cáo dùng chi nhánh đã chốt trên giao dịch;</li>
+<li>Khi nhân viên chuyển nơi làm việc, giao dịch cũ không đổi sang chi nhánh mới.</li>
+</ul>
+<h3 id="section-5-7-6">5.7.6. Tài khoản Admin và Master</h3>
+<p>Tài khoản Admin hoặc Master có phạm vi quản trị rộng hơn tài khoản nhân viên thông thường theo quyền được cấp. Các tài khoản này có thể quản trị ở cấp doanh nghiệp và tham gia những quy trình khởi tạo hoặc cấu hình đặc biệt.</p>
+<p>Quyền rộng không cho phép bỏ qua doanh nghiệp sở hữu, trạng thái giao dịch, điều kiện kho, tính hợp lệ của thanh toán hoặc các ràng buộc nghiệp vụ khác.</p>
+<h3 id="section-5-7-7">5.7.7. Điều chuyển nhân viên</h3>
+<p>Khi nhân viên chuyển chi nhánh trong cùng doanh nghiệp:</p>
+<ol>
+<li>Người có quyền cập nhật phạm vi làm việc hoặc tạo tài khoản phù hợp cho chi nhánh mới.</li>
+<li>Hệ thống kiểm tra chi nhánh mới đang hoạt động.</li>
+<li>Tài khoản cũ được giữ, điều chỉnh hoặc khóa theo quyết định vận hành.</li>
+<li>Quyền của tài khoản mới được xác định riêng.</li>
+<li>Giao dịch trước ngày điều chuyển tiếp tục gắn với chi nhánh và tài khoản cũ.</li>
+</ol>
+<h3 id="section-5-7-8">5.7.8. Nhân viên nghỉ việc hoặc ngừng hoạt động</h3>
+<p>Khi nhân viên không còn làm việc:</p>
+<ul>
+<li>Hồ sơ được chuyển sang ngừng hoạt động;</li>
+<li>Các tài khoản liên quan bị khóa;</li>
+<li>Không cho đăng nhập hoặc tạo nghiệp vụ mới;</li>
+<li>Lịch sử đơn hàng, kho, tài chính, kế toán và audit vẫn giữ đúng người thực hiện;</li>
+<li>Trách nhiệm đối với quy trình đang mở cần được bàn giao trước khi ngừng hoạt động nếu chức năng yêu cầu.</li>
+</ul>
+<h3 id="section-5-7-9">5.7.9. Xóa nhân viên</h3>
+<p>Nhân viên chỉ được xóa khi chưa tham gia giao dịch, chưa có lịch sử cần bảo toàn và không còn quan hệ đang sử dụng. Nếu đã phát sinh hoạt động, hệ thống chuyển sang ngừng hoạt động và khóa tài khoản thay vì xóa.</p>
+<h2 id="section-5-8">5.8. Quan hệ giữa tổ chức và phân quyền</h2>
+<p>Tổ chức xác định người dùng thuộc doanh nghiệp và chi nhánh nào. Phân quyền xác định người dùng được làm gì. Hai điều kiện phải được kiểm tra cùng nhau.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Một người có quyền tạo đơn nhưng tài khoản thuộc Chi nhánh A không được tự tạo đơn cho Chi nhánh B.</li>
+<li>Một người có quyền xem tài chính vẫn phải bị giới hạn theo phạm vi doanh nghiệp và chi nhánh được phép.</li>
+</ul>
+</blockquote>
+<p>Khi tài khoản chuyển chi nhánh hoặc thay đổi quyền, các thao tác tiếp theo áp dụng thông tin hiện hành. Giao dịch lịch sử không đổi theo.</p>
+<h2 id="section-5-9">5.9. Quan hệ với cấu hình</h2>
+<p>Cấu hình doanh nghiệp là thiết lập mặc định. Một số cấu hình cho phép chi nhánh có giá trị riêng.</p>
+<p>Khi xử lý nghiệp vụ tại chi nhánh, hệ thống xác định:</p>
+<ol>
+<li>Doanh nghiệp sở hữu giao dịch.</li>
+<li>Chi nhánh phát sinh.</li>
+<li>Cấu hình đó có cho phép thiết lập riêng theo chi nhánh hay không.</li>
+<li>Chi nhánh có giá trị riêng hay đang dùng mặc định doanh nghiệp.</li>
+<li>Giá trị nào đang có hiệu lực tại thời điểm thao tác.</li>
+</ol>
+<h2 id="section-5-10">5.10. Tác động xuyên phân hệ</h2>
+<h3 id="section-5-10-1">5.10.1. Bán hàng</h3>
+<p>Chi nhánh xác định kho phục vụ, tài khoản ngân hàng được phép nhận tiền, cấu hình bán hàng, nhân viên thực hiện và phạm vi báo cáo. Các dữ liệu đặc thù như khu vực, bàn, tài nguyên hoặc phòng cũng thuộc phạm vi chi nhánh.</p>
+<h3 id="section-5-10-2">5.10.2. Kho</h3>
+<p>Chi nhánh và kho được kiểm soát độc lập. Khi doanh nghiệp sử dụng kho, chi nhánh phải có kho hợp lệ. Nhiều chi nhánh có thể dùng chung kho nhưng mỗi biến động vẫn phân biệt địa điểm phát sinh và kho chịu ảnh hưởng.</p>
+<h3 id="section-5-10-3">5.10.3. Tài chính</h3>
+<p>Tài khoản ngân hàng thuộc doanh nghiệp và được phân bổ cho chi nhánh. Nghiệp vụ thu, chi hoặc thanh toán tại chi nhánh chỉ được sử dụng tài khoản hợp lệ cho chi nhánh đó.</p>
+<h3 id="section-5-10-4">5.10.4. Hóa đơn, kế toán và thuế</h3>
+<p>Thông tin pháp lý của doanh nghiệp và chi nhánh được sử dụng khi lập hóa đơn, xác định đơn vị bán và tổng hợp báo cáo. Thay đổi hồ sơ hiện tại không sửa chứng từ đã phát hành hoặc nội dung đã ghi sổ.</p>
+<h3 id="section-5-10-5">5.10.5. Báo cáo</h3>
+<p>Báo cáo theo doanh nghiệp và chi nhánh sử dụng phạm vi đã được chốt trên giao dịch, không lấy lại nơi làm việc hiện tại của nhân viên hoặc thông tin chi nhánh mới sau khi điều chuyển.</p>
+<h2 id="section-5-11">5.11. Giao diện</h2>
+<p>Danh sách doanh nghiệp, chi nhánh và nhân viên phải hỗ trợ tìm kiếm, lọc theo trạng thái và mở chi tiết trong phạm vi người dùng được phép.</p>
+<p>Màn hình chi nhánh phải thay đổi theo cấu hình kho:</p>
+<ul>
+<li>Khi doanh nghiệp sử dụng kho, ô chọn kho được hiển thị là bắt buộc và không cho lưu nếu chưa chọn;</li>
+<li>Khi doanh nghiệp không sử dụng kho, ô chọn kho không phải điều kiện bắt buộc và có thể được ẩn hoặc vô hiệu hóa.</li>
+</ul>
+<p>Danh sách chọn chỉ hiển thị đối tượng còn hoạt động và thuộc đúng doanh nghiệp. Đối tượng đã được gán không xuất hiện lại trong thao tác thêm.</p>
+<p>Trước khi ngừng hoạt động hoặc xóa, giao diện phải thông báo ảnh hưởng. Khi không thể thực hiện do có giao dịch hoặc cấu hình liên quan, thông báo phải chỉ rõ quan hệ cần xử lý.</p>
+<h2 id="section-5-12">5.12. Audit</h2>
+<p>Các thay đổi quan trọng cần truy vết gồm:</p>
+<ul>
+<li>Cập nhật thông tin pháp lý của doanh nghiệp;</li>
+<li>Tạo, sửa, ngừng hoạt động hoặc xóa chi nhánh;</li>
+<li>Thay đổi kho của chi nhánh;</li>
+<li>Thêm hoặc gỡ tài khoản ngân hàng khỏi chi nhánh;</li>
+<li>Tạo, sửa, điều chuyển hoặc ngừng hoạt động nhân viên;</li>
+<li>Tạo, khóa hoặc khôi phục tài khoản;</li>
+<li>Thay đổi chi nhánh, nhóm quyền hoặc quyền riêng của tài khoản.</li>
+</ul>
+<p>Dấu vết phải xác định được người thực hiện, thời điểm, phạm vi, hành động, nội dung trước và sau, cùng lý do nếu nghiệp vụ yêu cầu.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="04-nguoi-dung-quyen-phan-quyen.html">← 4. Người dùng, quyền và phân quyền</a><a href="06-cau-hinh-he-thong.html">6. Cấu hình hệ thống →</a></nav></div></body></html>

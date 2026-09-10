@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>58. Luồng liên phân hệ và xử lý ngoại lệ — Đặc tả POS</title><meta name="description" content="Luồng liên phân hệ và xử lý ngoại lệ"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần XI · Chương 58</p><article class="spec"><h1>CHƯƠNG 58. LUỒNG LIÊN PHÂN HỆ VÀ XỬ LÝ NGOẠI LỆ</h1><details class="section-toc"><summary>Nội dung chương · 15 mục</summary><ol><li><a href="#section-58-1">58.1. Mục tiêu</a></li><li><a href="#section-58-2">58.2. Bán tại cửa hàng</a></li><li><a href="#section-58-3">58.3. Đơn giao tận nơi</a></li><li><a href="#section-58-4">58.4. Nhập mua và thanh toán</a></li><li><a href="#section-58-5">58.5. Bán thiếu và trả hàng</a></li><li><a href="#section-58-6">58.6. Hủy, xóa và hoàn tác</a></li><li><a href="#section-58-7">58.7. Hóa đơn và trả hàng</a></li><li><a href="#section-58-8">58.8. Sản xuất và bán thành phẩm</a></li><li><a href="#section-58-9">58.9. Tài sản và khấu hao</a></li><li><a href="#section-58-10">58.10. Thanh toán và công nợ</a></li><li><a href="#section-58-11">58.11. Kế toán và báo cáo</a></li><li><a href="#section-58-12">58.12. Đồng bộ sàn và job</a></li><li><a href="#section-58-13">58.13. Phân giải ngoại lệ</a></li><li><a href="#section-58-14">58.14. Ma trận tác động</a></li><li><a href="#section-58-15">58.15. Điểm kiểm soát cuối</a></li></ol></details>
+<h2 id="section-58-1">58.1. Mục tiêu</h2>
+<p>Chương này gom các luồng đi qua nhiều phân hệ để bảo đảm mọi bên cùng dùng một kết quả: bán hàng–kho–tiền–nợ–Membership–hóa đơn–kế toán–báo cáo. Mỗi luồng nêu điểm chốt, nhánh lỗi, hoàn tác và dữ liệu cần đối chiếu.</p>
+<h2 id="section-58-2">58.2. Bán tại cửa hàng</h2>
+<p>Tạo đơn, chọn hàng, áp dụng giảm, xác nhận, tạo phiếu xuất, thanh toán, hoàn tất, thu tiền, công nợ, Membership, hóa đơn và kế toán theo thứ tự.</p>
+<ul>
+<li>Thiếu tồn xử lý theo cấu hình.</li>
+<li>Phiếu Nháp không trừ tồn hoặc ghi giá vốn.</li>
+<li>Người tạo được hủy trước thanh toán.</li>
+<li>Người có quyền xóa sau xác nhận.</li>
+</ul>
+<h2 id="section-58-3">58.3. Đơn giao tận nơi</h2>
+<p>Đơn xác nhận tạo phiếu xuất.</p>
+<ul>
+<li>Gửi hàng hoàn thành xuất, thu tạm ứng và tăng nợ.</li>
+<li>Thanh toán sau gửi giảm nợ và tạo phiếu thu.</li>
+<li>Khách nhận làm đơn hoàn tất.</li>
+<li>Không nhận nhập lại, hoàn tiền, giảm nợ và xử lý hóa đơn theo điều kiện.</li>
+<li>Thanh toán và giao nhận là hai trạng thái độc lập.</li>
+</ul>
+<h2 id="section-58-4">58.4. Nhập mua và thanh toán</h2>
+<p>Chọn nhà cung cấp, nhập hàng, lô/serial, giá và thuế, hoàn thành phiếu nhập rồi thanh toán.</p>
+<ul>
+<li>Trả đủ tạo phiếu chi đủ và không nợ.</li>
+<li>Trả một phần tạo phiếu chi phần trả và nợ phần còn lại.</li>
+<li>Trả 0 không tạo phiếu chi và nợ toàn bộ.</li>
+<li>Hủy hộp thoại không tạo chứng từ.</li>
+</ul>
+<h2 id="section-58-5">58.5. Bán thiếu và trả hàng</h2>
+<p>Nếu cấu hình không hoàn thành, phiếu xuất Nháp chặn trả toàn bộ. Nếu cho âm, phần thiếu nguồn chặn trả sản phẩm đó cho đến khi nhập lô trước thời điểm xuất và tính lại giá vốn. Giá vốn bằng 0 hợp lệ nếu nguồn đầy đủ. Khi đủ điều kiện, phiếu nhập trả dùng giá vốn xuất gốc.</p>
+<h2 id="section-58-6">58.6. Hủy, xóa và hoàn tác</h2>
+<p>Hủy giữ dấu vết và xóa phiếu tự động Nháp; xóa sau xác nhận cần quyền và dọn thu/chi, nợ, kho, sản xuất, hóa đơn điều chỉnh, Membership, lịch và liên kết sàn. Dọn theo nguồn để không xóa phần chứng từ dùng chung.</p>
+<h2 id="section-58-7">58.7. Hóa đơn và trả hàng</h2>
+<p>Xuất hóa đơn chụp dữ liệu đơn sau trả, kiểm tra provider, ký và hạn mức. Trả sau phát hành cần hóa đơn điều chỉnh nếu nhà cung cấp hỗ trợ. Cập nhật trạng thái hoặc tải PDF không đổi thanh toán, kho hoặc doanh thu.</p>
+<h2 id="section-58-8">58.8. Sản xuất và bán thành phẩm</h2>
+<p>Công thức xác định nguyên liệu, phiếu xuất nguyên liệu kiểm tra tồn/lô/serial, chi phí liên quan phân biệt vốn hóa và chi kỳ, phiếu nhập thành phẩm tăng tồn. Nếu đầu vào Nháp hoặc thiếu nguồn, đầu ra không hoàn thành.</p>
+<h2 id="section-58-9">58.9. Tài sản và khấu hao</h2>
+<ul>
+<li>Xuất TSCĐ hoàn thành hình thành tài sản.</li>
+<li>Tài sản được gắn chi nhánh, nguyên giá và ngày sử dụng.</li>
+<li>Khấu hao tạo chi phí kế toán và báo cáo.</li>
+<li>Điều chuyển đổi địa điểm, ghi giảm giảm giá trị, xóa nguồn chỉ khi đủ quyền và không còn phụ thuộc.</li>
+</ul>
+<h2 id="section-58-10">58.10. Thanh toán và công nợ</h2>
+<p>Mỗi khoản thu/chi có thể thanh toán một hay nhiều nghĩa vụ. Phân bổ tự động ưu tiên khoản cũ theo quy tắc; thủ công không vượt số thu hoặc số còn nợ. Hoàn tác phải tính lại số dư và không làm mất chứng từ nguồn.</p>
+<h2 id="section-58-11">58.11. Kế toán và báo cáo</h2>
+<ul>
+<li>Nghiệp vụ chốt tạo hồ sơ nguồn hạch toán.</li>
+<li>Mapping gợi ý tài khoản.</li>
+<li>Kế toán kiểm tra và ghi bút toán.</li>
+<li>Sổ và báo cáo chỉ đọc bản đã ghi hoặc phát sinh đủ điều kiện.</li>
+<li>Sửa nguồn tạo phiên bản/đảo, không sửa số đã ghi trực tiếp.</li>
+</ul>
+<h2 id="section-58-12">58.12. Đồng bộ sàn và job</h2>
+<p>Job nhận đơn, cập nhật trạng thái, sản phẩm, hoàn tiền, kho và hóa đơn theo mốc. Lỗi token hoặc provider giữ đơn nội bộ, ghi lỗi và retry; không xóa đơn hoặc tạo lại trùng.</p>
+<h2 id="section-58-13">58.13. Phân giải ngoại lệ</h2>
+<p>Ngoại lệ quyền dừng trước thay đổi. Ngoại lệ dữ liệu thiếu chỉ dừng phần phụ thuộc và ghi cần xử lý. Ngoại lệ provider dùng trạng thái chờ/tra cứu. Ngoại lệ transaction rollback phần chưa commit. Ngoại lệ đã commit một phần dùng compensating action và audit.</p>
+<h2 id="section-58-14">58.14. Ma trận tác động</h2>
+<p>Khi thay đổi bán hàng, kiểm tra kho, tiền, nợ, Membership, hóa đơn, kế toán và báo cáo. Khi thay đổi kho, kiểm tra giá vốn, lợi nhuận, tài sản và trả hàng. Khi thay đổi thuế, kiểm tra giá, hóa đơn, tờ khai và sổ. Khi thay đổi quyền, kiểm tra UI, API, job và export.</p>
+<h2 id="section-58-15">58.15. Điểm kiểm soát cuối</h2>
+<p>Trước khi đóng một luồng, hệ thống phải xác định trạng thái đơn, trạng thái phiếu kho, số tiền đã thu, công nợ còn lại, điểm, hóa đơn, bút toán và báo cáo bị ảnh hưởng. Nếu một thành phần chưa chốt, hiển thị trạng thái chờ thay vì đánh dấu hoàn tất toàn bộ.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="57-khoi-tao-chuyen-doi-du-lieu.html">← 57. Khởi tạo và chuyển đổi dữ liệu</a><a href="59-glossary.html">59. Glossary toàn hệ thống →</a></nav></div></body></html>
