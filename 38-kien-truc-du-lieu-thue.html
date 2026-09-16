@@ -1,0 +1,2196 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>38. Thông tư 58 — Hộ kinh doanh và doanh nghiệp siêu nhỏ — Đặc tả POS</title><meta name="description" content="Thông tư 58 — Hộ kinh doanh và doanh nghiệp siêu nhỏ"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần IX · Chương 38</p><article class="spec"><h1>CHƯƠNG 38. HỘ KINH DOANH VÀ DOANH NGHIỆP SIÊU NHỎ — SỔ KẾ TOÁN THEO THÔNG TƯ 58/2026/TT-BTC</h1><details class="section-toc"><summary>Nội dung chương · 7 mục</summary><ol><li><a href="#section-38-1">38.1. Mục đích và phạm vi</a></li><li><a href="#section-38-2">38.2. Nhóm doanh thu</a></li><li><a href="#section-38-3">38.3. Nhóm đối tượng sử dụng sổ kế toán</a></li><li><a href="#section-38-4">38.4. Tỷ lệ tính thuế theo từng ngành nghề</a></li><li><a href="#section-38-5">38.5. Sổ kế toán</a></li><li><a href="#section-38-6">38.6. Bảng kê</a></li><li><a href="#section-38-7">38.7. Báo cáo</a></li></ol></details>
+<h2 id="section-38-1">38.1. Mục đích và phạm vi</h2>
+<p>Chương này mô tả chức năng lập sổ kế toán, bảng kê và báo cáo tài chính theo Thông tư 58/2026/TT-BTC. Hệ thống hỗ trợ:</p>
+<ul>
+<li>Doanh nghiệp siêu nhỏ được xác định theo pháp luật về hỗ trợ doanh nghiệp nhỏ và vừa.</li>
+<li>Hộ kinh doanh hoặc cá nhân kinh doanh tự nguyện lựa chọn áp dụng chế độ này cho công tác kế toán.</li>
+</ul>
+<p>Thông tư 58 có hiệu lực từ ngày 01/07/2026 và áp dụng cho năm tài chính bắt đầu từ ngày đó hoặc sau ngày đó. Khi người dùng chọn một kỳ bắt đầu trước mốc hiệu lực, hệ thống không được gắn kỳ đó với bộ biểu mẫu TT58.</p>
+<p>Sổ và báo cáo được hình thành từ các giao dịch đã đạt đúng mốc nghiệp vụ. Việc mở, xem hoặc xuất biểu mẫu không tự tạo đơn hàng, nhập xuất kho, thu chi, công nợ, tài sản, nghĩa vụ thuế hoặc vốn chủ sở hữu. Nếu số liệu nguồn sai, người dùng xử lý tại nghiệp vụ tạo ra số liệu rồi lập lại biểu mẫu.</p>
+<h4>Điều kiện mở bộ TT58</h4>
+<p>Hệ thống chỉ mở bộ biểu mẫu khi:</p>
+<ul>
+<li>Đơn vị đã chọn chế độ kế toán TT58.</li>
+<li>Ngày áp dụng nằm trong năm tài chính hợp lệ.</li>
+<li>Phương pháp tính GTGT đã được xác định.</li>
+<li>Phương pháp xác định TNDN đã được xác định.</li>
+<li>Người dùng có quyền xem hoặc lập sổ, bảng kê và báo cáo tương ứng.</li>
+</ul>
+<p>Doanh nghiệp siêu nhỏ căn cứ vào hai phương pháp thuế để xác định bộ sổ:</p>
+<ul>
+<li>GTGT theo tỷ lệ phần trăm trên doanh thu hoặc theo phương pháp khấu trừ.</li>
+<li>TNDN theo tỷ lệ phần trăm trên doanh thu hoặc trên thu nhập tính thuế.</li>
+</ul>
+<p>Hộ kinh doanh, cá nhân kinh doanh tự nguyện áp dụng phải giữ nguyên lựa chọn trong suốt năm tài chính.</p>
+<h4>Tổ chức công tác kế toán</h4>
+<p>Doanh nghiệp siêu nhỏ có thể bố trí người làm kế toán hoặc thuê dịch vụ kế toán phù hợp với nhu cầu. Người làm kế toán có thể thuộc các nhóm được pháp luật cho phép, bao gồm người thân của người đại diện theo pháp luật hoặc người điều hành và người đang đảm nhiệm vai trò quản lý, thủ kho, thủ quỹ hoặc thường xuyên mua bán tài sản.</p>
+<p>Doanh nghiệp siêu nhỏ không bắt buộc bố trí Kế toán trưởng. Nếu có người phụ trách kế toán thay cho Kế toán trưởng, người này được ký tại vị trí Kế toán trưởng trên chứng từ, sổ và báo cáo theo phạm vi được phép.</p>
+<p>Hệ thống phải lưu rõ:</p>
+<ul>
+<li>Người lập biểu.</li>
+<li>Người phụ trách kế toán hoặc Kế toán trưởng.</li>
+<li>Người đại diện theo pháp luật.</li>
+<li>Ngày lập.</li>
+<li>Ngày phê duyệt.</li>
+<li>Trạng thái của biểu mẫu.</li>
+</ul>
+<p>Không tự lấy tên người đang xem để thay cho người lập hoặc người ký.</p>
+<h4>Quyền và phạm vi dữ liệu</h4>
+<p>Người dùng chỉ được xem số liệu của doanh nghiệp và các chi nhánh nằm trong phạm vi quyền. Quyền xem không tự cho phép:</p>
+<ul>
+<li>Sửa giao dịch nguồn.</li>
+<li>Xóa chứng từ.</li>
+<li>Thay đổi phương pháp thuế.</li>
+<li>Thay đổi kỳ kế toán.</li>
+<li>Phê duyệt báo cáo.</li>
+<li>Sửa thông tin chữ ký.</li>
+</ul>
+<p>Sổ chi tiết có thể lọc theo chi nhánh, kho, sản phẩm, nguồn tiền, đối tượng công nợ, tài sản hoặc loại vốn tùy mẫu. Báo cáo tài chính được lập cho toàn doanh nghiệp; hệ thống không cộng một chi nhánh ngoài phạm vi doanh nghiệp và không bỏ sót chi nhánh đang hoạt động trong năm.</p>
+<h4>Tính nhất quán trong năm tài chính</h4>
+<p>Chế độ kế toán phải được áp dụng nhất quán trong một năm tài chính. Thay đổi chế độ chỉ được thực hiện tại <strong>ngày đầu của kỳ kế toán năm tiếp theo</strong>.</p>
+<p>Nếu trong năm doanh nghiệp không còn đáp ứng tiêu chí siêu nhỏ:</p>
+<ul>
+<li>Tiếp tục sử dụng TT58 đến hết năm tài chính hiện tại.</li>
+<li>Chọn chế độ phù hợp từ đầu năm tài chính tiếp theo.</li>
+<li>Không viết lại các sổ đã khóa của năm đang áp dụng.</li>
+</ul>
+<p>Khi phương pháp GTGT hoặc TNDN thay đổi hợp lệ, hệ thống xác định lại bộ sổ từ ngày hiệu lực. Số dư cuối kỳ của bộ cũ phải được chuyển sang đúng chỉ tiêu đầu kỳ của bộ mới, có người thực hiện, người phê duyệt và biên bản đối chiếu.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title-tt58-opening-balance-flow-31 desc-tt58-opening-balance-flow-31" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-tt58-opening-balance-flow-31">Luồng chuyển số dư đầu kỳ khi áp dụng TT58</title><desc id="desc-tt58-opening-balance-flow-31">SỐ DƯ CUỐI KỲ NGUỒN. Đúng chế độ · đúng kỳ · có căn cứ; PHÂN LOẠI VÀ XEM TRƯỚC. Tiền · Nợ · Kho · Tài sản. Thuế · Vốn chủ sở hữu; S2d / S4a. Tiền theo nguồn. Công nợ theo đối tượng; S2c / S4b. Tồn theo mặt hàng. TSCĐ và hao mòn; S3b / S4c / S4d. Thuế theo nghĩa vụ. Vốn theo từng phần; KIỂM TRA VÀ XÁC NHẬN. Không trùng · kỳ chưa khóa. Cân đối nguồn và đích</desc><defs><marker id="arrow-tt58-opening-balance-flow-31" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 90 V115 H480 V135" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-opening-balance-flow-31)"/><path d="M480 216 V258 H155 V295" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-opening-balance-flow-31)"/><path d="M480 216 V258 H480 V295" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-opening-balance-flow-31)"/><path d="M480 216 V258 H805 V295" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-opening-balance-flow-31)"/><path d="M155 382 V441 H480 V495" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-opening-balance-flow-31)"/><path d="M480 382 V441 H480 V495" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-opening-balance-flow-31)"/><path d="M805 382 V441 H480 V495" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-opening-balance-flow-31)"/><g><rect x="300" y="14" width="360" height="76" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">SỐ DƯ CUỐI KỲ NGUỒN</tspan><tspan x="480" y="69">Đúng chế độ · đúng kỳ · có căn cứ</tspan></text></g><g><rect x="300" y="140" width="360" height="76" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="162" font-weight="700">PHÂN LOẠI VÀ XEM TRƯỚC</tspan><tspan x="480" y="184">Tiền · Nợ · Kho · Tài sản</tspan><tspan x="480" y="206">Thuế · Vốn chủ sở hữu</tspan></text></g><g><rect x="20" y="300" width="270" height="82" rx="10" fill="#fff" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="325" font-weight="700">S2d / S4a</tspan><tspan x="155" y="347">Tiền theo nguồn</tspan><tspan x="155" y="369">Công nợ theo đối tượng</tspan></text></g><g><rect x="345" y="300" width="270" height="82" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="325" font-weight="700">S2c / S4b</tspan><tspan x="480" y="347">Tồn theo mặt hàng</tspan><tspan x="480" y="369">TSCĐ và hao mòn</tspan></text></g><g><rect x="670" y="300" width="270" height="82" rx="10" fill="#fff" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="325" font-weight="700">S3b / S4c / S4d</tspan><tspan x="805" y="347">Thuế theo nghĩa vụ</tspan><tspan x="805" y="369">Vốn theo từng phần</tspan></text></g><g><rect x="300" y="500" width="360" height="76" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="522" font-weight="700">KIỂM TRA VÀ XÁC NHẬN</tspan><tspan x="480" y="544">Không trùng · kỳ chưa khóa</tspan><tspan x="480" y="566">Cân đối nguồn và đích</tspan></text></g></svg></div><figcaption><strong>Luồng chuyển số dư đầu kỳ khi áp dụng TT58.</strong> Nguồn cuối kỳ được phân loại trước khi chuyển vào đúng sổ TT58. Hệ thống kiểm tra trùng, kỳ khóa và cân đối; khoản chưa có đích phải được người có trách nhiệm xử lý thay vì tự bỏ qua.</figcaption></figure>
+
+<p>Luồng chuyển số dư:</p>
+<ol>
+<li>Người dùng chọn năm tài chính bắt đầu áp dụng và nguồn số dư đã khóa.</li>
+<li>Hệ thống xác định tiền, công nợ, GTGT, hàng tồn kho, tài sản cố định, TNDN, thuế khác và vốn cần chuyển.</li>
+<li>Hệ thống hiển thị chỉ tiêu nguồn, giá trị nguồn và vị trí nhận đầu kỳ.</li>
+<li>Người dùng xử lý khoản thiếu đối tượng, thiếu sản phẩm, thiếu nguồn tiền hoặc không cân bằng.</li>
+<li>Người có quyền phê duyệt lần chuyển.</li>
+<li>Hệ thống ghi số đầu kỳ một lần và lưu dấu vết đối chiếu.</li>
+</ol>
+<p>Các vị trí nhận số dư gồm:</p>
+<ul>
+<li>Tiền mặt chuyển vào số dư đầu kỳ phần tiền mặt của S2d-DNSN.</li>
+<li>Tiền gửi thanh toán chuyển vào phần tiền gửi không kỳ hạn tương ứng.</li>
+<li>Phải thu và phải trả chuyển theo từng đối tượng công nợ.</li>
+<li>GTGT được khấu trừ hoặc phải nộp chuyển theo đúng chiều nghĩa vụ.</li>
+<li>Vật liệu, dụng cụ, sản phẩm và hàng hóa chuyển theo từng loại và từng kho.</li>
+<li>Nguyên giá, khấu hao lũy kế, thuế khác, vốn góp và lợi nhuận chưa phân phối chuyển vào đúng nhóm đầu kỳ.</li>
+</ul>
+<p>Không cho chuyển khi kỳ đích đã khóa, khi chỉ tiêu đầu kỳ đã có số không được thay thế hoặc khi tổng nguồn không khớp với số cuối kỳ đã phê duyệt. Chạy lại cùng một lần chuyển không được tạo số dư lần thứ hai.</p>
+<h4>Sửa đổi hoặc bổ sung biểu mẫu nội bộ</h4>
+<p>Doanh nghiệp có thể bổ sung hoặc điều chỉnh biểu mẫu để phục vụ quản lý nếu vẫn bảo đảm đầy đủ, kịp thời, trung thực, minh bạch và có thể kiểm tra, đối chiếu tài sản cùng nguồn vốn.</p>
+<p>Phiên bản nội bộ phải giữ:</p>
+<ul>
+<li>Mã mẫu chuẩn.</li>
+<li>Các cột và chỉ tiêu bắt buộc.</li>
+<li>Công thức tổng.</li>
+<li>Kỳ áp dụng.</li>
+<li>Nội dung doanh nghiệp bổ sung.</li>
+<li>Lịch sử phiên bản.</li>
+</ul>
+<p>Không cho phép xóa cột bắt buộc, thay đổi ý nghĩa chỉ tiêu hoặc sửa công thức chuẩn rồi phát hành như mẫu nguyên bản. Chứng từ thuộc phạm vi điều chỉnh của pháp luật chuyên ngành khác vẫn phải tuân theo yêu cầu của pháp luật đó.</p>
+<h4>Đối chiếu thông báo thuế điện tử</h4>
+<p>Khi hệ thống thông tin quản lý thuế cung cấp số thuế GTGT, TNDN hoặc thuế khác phải nộp, hệ thống hiển thị song song:</p>
+<ul>
+<li>Số theo sổ.</li>
+<li>Số do cơ quan thuế thông báo.</li>
+<li>Chênh lệch.</li>
+<li>Kỳ thông báo.</li>
+<li>Thời điểm nhận.</li>
+<li>Trạng thái đã kiểm tra.</li>
+</ul>
+<p>Số được thông báo không tự ghi đè số đã lập trên sổ. Khi có chênh lệch, người dùng kiểm tra hóa đơn, doanh thu, chi phí, số thuế đã nộp, số đã hoàn và số chuyển kỳ. Mất kết nối hoặc chưa nhận được thông báo không được hiểu là nghĩa vụ bằng 0.</p>
+<h2 id="section-38-2">38.2. Nhóm doanh thu</h2>
+<p>Doanh thu được phân thành các nhóm phục vụ từng bộ sổ:</p>
+<ol>
+<li><strong>Doanh thu tính GTGT trực tiếp và TNDN/TNCN theo tỷ lệ trên doanh thu:</strong> dùng sổ doanh thu theo nhóm tỷ lệ; mỗi ngành nghề giữ tỷ lệ riêng.</li>
+<li><strong>Doanh thu tính GTGT trực tiếp nhưng thuế thu nhập xác định trên thu nhập tính thuế:</strong> dùng bộ doanh thu–chi phí, hàng hóa và tiền để xác định chênh lệch.</li>
+<li><strong>Doanh thu theo phương pháp GTGT khấu trừ và thuế thu nhập theo tỷ lệ doanh thu:</strong> theo dõi riêng doanh thu tính thuế thu nhập và VAT đầu vào/đầu ra.</li>
+<li><strong>Doanh thu theo phương pháp GTGT khấu trừ và thuế thu nhập trên thu nhập tính thuế:</strong> kết hợp sổ doanh thu–chi phí, hàng hóa, tiền và sổ VAT.</li>
+<li><strong>Khoản không phải doanh thu bán hàng:</strong> vốn góp, tiền vay, chuyển tiền nội bộ, thu hồi công nợ gốc và khoản thu hộ không được cộng vào doanh thu chỉ vì làm tăng tiền.</li>
+</ol>
+<p>Một đơn có thể đóng góp vào nhiều nhóm ngành nhưng chỉ một lần vào tổng doanh thu. Giá trị được phân bổ sau Voucher, giảm giá, phụ thu và trả hàng; tiền đã thu và công nợ chỉ phục vụ sổ tiền hoặc sổ đối tượng, không cộng thêm vào doanh thu.</p>
+<h2 id="section-38-3">38.3. Nhóm đối tượng sử dụng sổ kế toán</h2>
+<p>Hệ thống xác định sổ sử dụng theo phương pháp tính thuế GTGT, phương pháp tính thuế TNDN và nhu cầu quản lý thực tế của đơn vị.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Mẫu</th>
+<th>Đối tượng sử dụng</th>
+<th>Nội dung theo dõi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S1-DNSN</strong></td>
+<td>GTGT và TNDN cùng tính theo tỷ lệ phần trăm trên doanh thu</td>
+<td>Doanh thu theo nhóm có cùng tỷ lệ GTGT hoặc TNDN và số thuế tương ứng.</td>
+</tr>
+<tr>
+<td><strong>S2a-DNSN</strong></td>
+<td>GTGT theo tỷ lệ phần trăm trên doanh thu; TNDN trên thu nhập tính thuế</td>
+<td>Doanh thu theo nhóm tỷ lệ GTGT, số thuế phát sinh, đã nộp và còn phải nộp.</td>
+</tr>
+<tr>
+<td><strong>S2b-DNSN</strong></td>
+<td>TNDN tính trên thu nhập tính thuế</td>
+<td>Doanh thu, thu nhập, chi phí và nghĩa vụ TNDN.</td>
+</tr>
+<tr>
+<td><strong>S2c-DNSN</strong></td>
+<td>Có vật liệu, dụng cụ, sản phẩm hoặc hàng hóa cần quản lý</td>
+<td>Nhập, xuất, tồn theo từng loại hàng và từng kho.</td>
+</tr>
+<tr>
+<td><strong>S2d-DNSN</strong></td>
+<td>Có tiền mặt hoặc tiền gửi không kỳ hạn</td>
+<td>Thu, chi, gửi vào, rút ra và số dư của từng nguồn tiền.</td>
+</tr>
+<tr>
+<td><strong>S3a-DNSN</strong></td>
+<td>GTGT theo phương pháp khấu trừ; TNDN theo tỷ lệ phần trăm trên doanh thu</td>
+<td>Doanh thu theo nhóm có cùng tỷ lệ TNDN và nghĩa vụ TNDN.</td>
+</tr>
+<tr>
+<td><strong>S3b-DNSN</strong></td>
+<td>GTGT theo phương pháp khấu trừ</td>
+<td>GTGT đầu vào, đầu ra, đã nộp, đã hoàn và số dư cuối kỳ.</td>
+</tr>
+<tr>
+<td><strong>S4a-DNSN</strong></td>
+<td>Có khoản phải thu hoặc phải trả cần theo dõi theo đối tượng</td>
+<td>Phát sinh và thanh toán công nợ.</td>
+</tr>
+<tr>
+<td><strong>S4b-DNSN</strong></td>
+<td>Có tài sản cố định</td>
+<td>Tăng, sử dụng, khấu hao và ghi giảm tài sản.</td>
+</tr>
+<tr>
+<td><strong>S4c-DNSN</strong></td>
+<td>Có thuế xuất khẩu, nhập khẩu, TTĐB, tài nguyên, bảo vệ môi trường, sử dụng đất hoặc thuế khác</td>
+<td>Lượng chịu thuế, căn cứ tính và nghĩa vụ từng loại thuế.</td>
+</tr>
+<tr>
+<td><strong>S4d-DNSN</strong></td>
+<td>Có vốn góp, lợi nhuận chưa phân phối hoặc quỹ thuộc vốn chủ sở hữu</td>
+<td>Tăng, giảm và số dư từng loại vốn.</td>
+</tr>
+</tbody></table></div>
+<p>Bộ sổ theo bốn tổ hợp thuế:</p>
+<ol>
+<li>GTGT và TNDN cùng theo tỷ lệ trên doanh thu: sử dụng S1-DNSN.</li>
+<li>GTGT theo tỷ lệ trên doanh thu, TNDN trên thu nhập tính thuế: sử dụng S2a-DNSN, S2b-DNSN, S2c-DNSN và S2d-DNSN.</li>
+<li>GTGT khấu trừ, TNDN theo tỷ lệ trên doanh thu: sử dụng S3a-DNSN và S3b-DNSN.</li>
+<li>GTGT khấu trừ, TNDN trên thu nhập tính thuế: sử dụng S2b-DNSN, S2c-DNSN, S2d-DNSN và S3b-DNSN.</li>
+</ol>
+<p>S4a-DNSN đến S4d-DNSN được mở theo nghiệp vụ phát sinh và nhu cầu quản lý. Việc một mẫu không thuộc tổ hợp bắt buộc không cho phép bỏ theo dõi tài sản, công nợ, thuế hoặc vốn khi doanh nghiệp có nhu cầu kiểm soát các nội dung đó.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" role="img" aria-labelledby="title-tt58-book-map-32 desc-tt58-book-map-32" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-tt58-book-map-32">Bảy sổ cốt lõi TT58 theo tổ hợp phương pháp thuế</title><desc id="desc-tt58-book-map-32">TT58 · LOẠI HÌNH · PHƯƠNG PHÁP THUẾ. Chọn đúng tổ hợp trước khi mở sổ; S1-DNSN. Doanh thu theo ngành/tỷ lệ. GTGT và thuế thu nhập; S2a-DNSN. Doanh thu. Nghĩa vụ GTGT trực tiếp; S2b-DNSN. Doanh thu · chi phí. Thu nhập tính thuế; S2c-DNSN. Vật liệu · hàng hóa. Nhập · xuất · tồn; S2d-DNSN. Tiền mặt · tiền gửi. Thu · chi · số dư; S3a-DNSN. Doanh thu theo tỷ lệ TNDN. Dùng với GTGT khấu trừ; S3b-DNSN. GTGT đầu vào · đầu ra. Đã nộp · đã hoàn · số dư</desc><defs><marker id="arrow-tt58-book-map-32" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 90 V128 H153 V160" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-book-map-32)"/><path d="M480 90 V128 H480 V160" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-book-map-32)"/><path d="M480 90 V128 H807 V160" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-book-map-32)"/><path d="M480 90 V230 H153 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-book-map-32)"/><path d="M480 90 V230 H480 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-book-map-32)"/><path d="M480 90 V230 H807 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-book-map-32)"/><path d="M480 90 V333 H480 V570" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt58-book-map-32)"/><g><rect x="300" y="14" width="360" height="76" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">TT58 · LOẠI HÌNH · PHƯƠNG PHÁP THUẾ</tspan><tspan x="480" y="69">Chọn đúng tổ hợp trước khi mở sổ</tspan></text></g><g><rect x="18" y="165" width="270" height="96" rx="10" fill="#fff" stroke="#708c82"/><text x="153" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="153" y="197" font-weight="700">S1-DNSN</tspan><tspan x="153" y="219">Doanh thu theo ngành/tỷ lệ</tspan><tspan x="153" y="241">GTGT và thuế thu nhập</tspan></text></g><g><rect x="345" y="165" width="270" height="96" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="197" font-weight="700">S2a-DNSN</tspan><tspan x="480" y="219">Doanh thu</tspan><tspan x="480" y="241">Nghĩa vụ GTGT trực tiếp</tspan></text></g><g><rect x="672" y="165" width="270" height="96" rx="10" fill="#fff" stroke="#708c82"/><text x="807" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="807" y="197" font-weight="700">S2b-DNSN</tspan><tspan x="807" y="219">Doanh thu · chi phí</tspan><tspan x="807" y="241">Thu nhập tính thuế</tspan></text></g><g><rect x="18" y="370" width="270" height="96" rx="10" fill="#fff" stroke="#708c82"/><text x="153" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="153" y="402" font-weight="700">S2c-DNSN</tspan><tspan x="153" y="424">Vật liệu · hàng hóa</tspan><tspan x="153" y="446">Nhập · xuất · tồn</tspan></text></g><g><rect x="345" y="370" width="270" height="96" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="402" font-weight="700">S2d-DNSN</tspan><tspan x="480" y="424">Tiền mặt · tiền gửi</tspan><tspan x="480" y="446">Thu · chi · số dư</tspan></text></g><g><rect x="672" y="370" width="270" height="96" rx="10" fill="#fff" stroke="#708c82"/><text x="807" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="807" y="402" font-weight="700">S3a-DNSN</tspan><tspan x="807" y="424">Doanh thu theo tỷ lệ TNDN</tspan><tspan x="807" y="446">Dùng với GTGT khấu trừ</tspan></text></g><g><rect x="300" y="575" width="360" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="607" font-weight="700">S3b-DNSN</tspan><tspan x="480" y="629">GTGT đầu vào · đầu ra</tspan><tspan x="480" y="651">Đã nộp · đã hoàn · số dư</tspan></text></g></svg></div><figcaption><strong>Bảy sổ cốt lõi TT58 theo tổ hợp phương pháp thuế.</strong> Không phải đơn vị nào cũng dùng đồng thời cả bảy sổ. S1 dành cho tỷ lệ doanh thu; bộ S2 dùng khi theo dõi doanh thu–chi phí, hàng hóa và tiền; bộ S3 dùng với phương pháp GTGT khấu trừ. S4a–S4d và B01/B02 là sổ, báo cáo bổ sung được mô tả riêng.</figcaption></figure>
+
+<h2 id="section-38-4">38.4. Tỷ lệ tính thuế theo từng ngành nghề</h2>
+<p>Thông tư 58 quy định cách tổ chức sổ theo các nhóm hàng hóa, dịch vụ hoặc ngành nghề có cùng tỷ lệ thuế; Thông tư không ấn định một bảng tỷ lệ cố định để hệ thống sử dụng cho mọi doanh nghiệp và mọi thời kỳ. Tỷ lệ GTGT và TNDN phải được lấy từ chính sách thuế có hiệu lực đối với doanh nghiệp, ngành nghề và giao dịch đang ghi nhận.</p>
+<p>Hệ thống quản lý tỷ lệ theo các thuộc tính:</p>
+<ul>
+<li>Loại thuế.</li>
+<li>Phương pháp tính thuế.</li>
+<li>Nhóm hàng hóa, dịch vụ hoặc ngành nghề.</li>
+<li>Tỷ lệ phần trăm.</li>
+<li>Ngày bắt đầu và ngày kết thúc hiệu lực.</li>
+<li>Căn cứ áp dụng.</li>
+<li>Phạm vi doanh nghiệp nếu có chính sách riêng được chấp thuận.</li>
+</ul>
+<p>Cách sử dụng tỷ lệ:</p>
+<ul>
+<li>Với doanh thu tính GTGT theo tỷ lệ, doanh thu được tách theo nhóm có cùng tỷ lệ GTGT trước khi tính thuế.</li>
+<li>Với TNDN tính theo tỷ lệ trên doanh thu, doanh thu được tách theo nhóm có cùng tỷ lệ TNDN trước khi tính thuế.</li>
+<li>Với GTGT theo phương pháp khấu trừ, hệ thống theo dõi thuế đầu vào đủ điều kiện và thuế đầu ra; không nhân doanh thu với tỷ lệ trực tiếp.</li>
+<li>Với TNDN trên thu nhập tính thuế, nghĩa vụ được xác định từ thu nhập tính thuế và thuế suất áp dụng; không dùng tỷ lệ TNDN trên doanh thu.</li>
+</ul>
+<p>Một giao dịch có nhiều nhóm ngành được phân bổ thành nhiều phần. Combo được phân bổ về sản phẩm thành phần; giảm giá, voucher, phụ thu và trả hàng được phân bổ xuống dòng trước khi gom theo tỷ lệ. Tổng doanh thu sau phân bổ phải bằng doanh thu còn hiệu lực của giao dịch.</p>
+<p>Tỷ lệ được giữ cùng kết quả đã chốt. Khi chính sách thay đổi, tỷ lệ mới chỉ áp dụng từ ngày có hiệu lực; hệ thống không tính lại giao dịch lịch sử bằng tỷ lệ hiện tại. Nếu sản phẩm thiếu nhóm hoặc không tìm được tỷ lệ có hiệu lực, sổ hiển thị dòng chưa phân loại và không tự gán một tỷ lệ mặc định.</p>
+<p>Trên màn hình và tệp xuất, mỗi nhóm phải thể hiện rõ:</p>
+<ul>
+<li>Tên nhóm.</li>
+<li>Tỷ lệ GTGT nếu áp dụng.</li>
+<li>Tỷ lệ TNDN nếu áp dụng.</li>
+<li>Doanh thu làm căn cứ.</li>
+<li>Số thuế tính ra.</li>
+<li>Kỳ hiệu lực của tỷ lệ.</li>
+</ul>
+<h2 id="section-38-5">38.5. Sổ kế toán</h2>
+<p>Khi cấu hình <strong>Chế độ kế toán = TT58</strong>, hệ thống mở bộ biểu mẫu phù hợp với phương pháp thuế của đơn vị. Với Hộ kinh doanh tự nguyện áp dụng, phương pháp GTGT và phương pháp kho tuân theo cấu hình hợp lệ của loại hình. Với doanh nghiệp siêu nhỏ, phương pháp GTGT, phương pháp xác định TNDN và phương pháp kho lấy theo cấu hình có hiệu lực.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Phương pháp GTGT</th>
+<th>Phương pháp TNDN</th>
+<th>Sổ sử dụng</th>
+<th>Sổ quản lý khác có thể mở theo nghiệp vụ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Trực tiếp theo tỷ lệ doanh thu</td>
+<td>Theo tỷ lệ % doanh thu</td>
+<td>S1-DNSN</td>
+<td>S4a, S4b, S4c, S4d.</td>
+</tr>
+<tr>
+<td>Trực tiếp theo tỷ lệ doanh thu</td>
+<td>Trên thu nhập tính thuế</td>
+<td>S2a, S2b, S2c, S2d</td>
+<td>S4a, S4b, S4c, S4d.</td>
+</tr>
+<tr>
+<td>Khấu trừ</td>
+<td>Theo tỷ lệ % doanh thu</td>
+<td>S3a, S3b</td>
+<td>S4a, S4b, S4c, S4d.</td>
+</tr>
+<tr>
+<td>Khấu trừ</td>
+<td>Trên thu nhập tính thuế</td>
+<td>S2b, S2c, S2d, S3b</td>
+<td>S4a, S4b, S4c, S4d.</td>
+</tr>
+</tbody></table></div>
+<p>Hệ thống phải xác định tổ hợp trước khi mở ô sổ. Khi người dùng đổi phương pháp làm bộ sổ hiện tại không còn hợp lệ, phải yêu cầu chọn lại chế độ/sổ trước khi lưu; không tự lấy mẫu của Hộ kinh doanh hoặc giữ lại tỷ lệ cũ.</p>
+<h4>Quy trình tải dữ liệu và kiểm tra chéo</h4>
+<ul>
+<li>Mọi mẫu TT58 dùng cùng quy trình sáu bước: (1) đọc loại hình, chế độ TT58, phương pháp thuế và kỳ.</li>
+<li>(2) lấy danh sách chứng từ đã đạt mốc hoàn tất.</li>
+<li>(3) loại phần hủy/trả/xóa và giữ giá trị còn lại của giao dịch.</li>
+<li>(4) phân loại sản phẩm, nhóm ngành, chi phí, kho, đối tượng hoặc tài khoản.</li>
+<li>(5) tính từng dòng, làm tròn theo mẫu rồi cộng tổng.</li>
+<li>(6) lưu phiên bản phạm vi, thời điểm tải và cảnh báo.</li>
+<li>Thay bộ lọc phải chạy lại toàn bộ quy trình, không cộng thêm trên kết quả cũ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chỉ tiêu cần tải</th>
+<th>Nguồn nghiệp vụ</th>
+<th>Điều kiện bắt buộc</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Doanh thu</td>
+<td>Đơn đã hoàn tất và dòng còn hiệu lực</td>
+<td>Ngày hoàn tất trong kỳ; phân bổ Combo/giảm/trả xong.</td>
+</tr>
+<tr>
+<td>GTGT đầu ra</td>
+<td>Dòng bán có VAT và hóa đơn/đơn hợp lệ</td>
+<td>Đúng phương pháp khấu trừ; không lấy khoản thu tiền.</td>
+</tr>
+<tr>
+<td>GTGT đầu vào</td>
+<td>Hóa đơn mua/phiếu nhập có VAT được khấu trừ</td>
+<td>Đã chuẩn hóa nhà cung cấp, dòng hàng và thuế suất.</td>
+</tr>
+<tr>
+<td>Giá vốn/xuất kho</td>
+<td>Phiếu xuất hoàn thành, nguồn lô/serial</td>
+<td>Lô nhập trước xuất; giá vốn 0 chỉ hợp lệ khi nguồn đã đủ.</td>
+</tr>
+<tr>
+<td>Chi phí</td>
+<td>Phiếu chi/đề nghị chi, lương, khấu hao, tiêu hao</td>
+<td>Đã hoàn tất, có loại chi phí, không trùng nguồn.</td>
+</tr>
+<tr>
+<td>Tiền</td>
+<td>Sổ tiền và biến động thu/chi</td>
+<td>Chỉ biến động tiền thật; bù trừ không tiền không đưa vào.</td>
+</tr>
+<tr>
+<td>Công nợ</td>
+<td>Tăng/giảm nợ đã hoàn tất</td>
+<td>Giữ riêng phải thu/phải trả và đối tượng.</td>
+</tr>
+</tbody></table></div>
+<p>Kết quả mỗi sổ phải có liên kết ngược đến chứng từ nguồn. Nếu nguồn bị thay đổi sau khi sổ đã lưu, bản nháp được đánh dấu cần tải lại; bản đã khóa giữ nguyên nội dung đã chốt và chỉ thay bằng bản bổ sung có lý do.</p>
+<h4>Nguyên tắc không tạo số liệu giả</h4>
+<p>Khi một mẫu không có đủ nguồn tự động, hệ thống phải cho tải biểu trống hoặc chỉ rõ chỉ tiêu cần người dùng hoàn thiện; không tự điền số 0 để làm người đọc hiểu rằng nghiệp vụ không phát sinh. Khi đã hỗ trợ tải tự động, mã mẫu, cột, công thức, nguồn nghiệp vụ và lịch sử phiên bản phải giữ đúng quy tắc của chương này.</p>
+<h3 id="section-38-5-1">38.5.1. Sổ doanh thu bán hàng hóa, dịch vụ: Mẫu S1-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị áp dụng TT58, tính GTGT và thuế thu nhập cùng theo tỷ lệ phần trăm trên doanh thu.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu gồm:</p>
+<ul>
+<li>Phần nhận diện đơn vị và kỳ.</li>
+<li>Tiếp theo là bảng chi tiết chứng từ.</li>
+<li>Ngày.</li>
+<li>Diễn giải.</li>
+<li>Doanh thu.</li>
+<li>Các khối ngành nghề.</li>
+<li>Dòng thuế của từng khối.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S1-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ DOANH THU BÁN HÀNG HÓA, DỊCH VỤ</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu chứng từ [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Số tiền [1]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nhóm hàng hóa, dịch vụ, ngành nghề …</td>
+<td></td>
+<td></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng cộng nhóm</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Thuế GTGT</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Thuế TNDN</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế GTGT phải nộp</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế TNDN phải nộp</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ul>
+<li>Hệ thống lấy đơn đã hoàn tất còn doanh thu.</li>
+<li>Phân bổ mọi giảm trừ và Combo về đúng ngành nghề.</li>
+<li>Tính GTGT cùng thuế thu nhập theo tỷ lệ của từng nhóm rồi cộng tổng.</li>
+</ul>
+<p>Tiền đã thu và công nợ không được cộng thêm vào doanh thu.</p>
+<h4>Bố cục biểu mẫu</h4>
+<p>Phần đầu biểu mẫu gồm:</p>
+<ul>
+<li>Tên đơn vị.</li>
+<li>Địa chỉ.</li>
+<li>Mã <strong>S1-DNSN</strong>.</li>
+<li>Dòng “Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026”.</li>
+<li>Tiêu đề sổ.</li>
+<li>Năm.</li>
+<li>Đơn vị tính.</li>
+</ul>
+<p>Bảng có các cột:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>Số hiệu hóa đơn/chứng từ.</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Ngày, tháng của hóa đơn/chứng từ.</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Diễn giải nghiệp vụ doanh thu.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Số tiền doanh thu của nhóm.</td>
+</tr>
+</tbody></table></div>
+<p>Mỗi nhóm hàng hóa, dịch vụ hoặc ngành nghề có cùng tỷ lệ GTGT/TNDN có dòng chi tiết, <strong>Tổng cộng (n)</strong>, <strong>Thuế GTGT</strong>, <strong>Thuế TNDN</strong>; cuối biểu có tổng số thuế GTGT và TNDN phải nộp cùng khu vực ký.</p>
+<h4>Cách tải dữ liệu</h4>
+<p>Hệ thống lấy đơn đã hoàn tất trong khoảng năm/kỳ, thuộc doanh nghiệp và chi nhánh người dùng được phép xem, còn doanh thu sau hủy/trả. Ngày đưa vào cột B là ngày chứng từ/doanh thu theo quy tắc sổ; số hiệu lấy mã hóa đơn/chứng từ hoặc mã đơn nếu chưa phát hành hóa đơn. Cột C ghép tên nhóm, sản phẩm/dịch vụ và diễn giải đơn.</p>
+<ul>
+<li>Doanh thu lấy từ giá trị dòng đơn sau phân bổ giảm giá, voucher, phụ thu và trả hàng.</li>
+<li>Không lấy số tiền đã thu hoặc số công nợ.</li>
+<li>Combo được phân bổ về sản phẩm con trước khi gom nhóm.</li>
+<li>Mỗi nhóm có tỷ lệ riêng.</li>
+<li>GTGT nhóm = doanh thu nhóm × tỷ lệ GTGT, TNDN nhóm = doanh thu nhóm × tỷ lệ TNDN.</li>
+<li>Dòng tổng toàn sổ cộng các dòng nhóm sau khi làm tròn theo mẫu.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Doanh thu nhóm hàng hóa: 80.000.000 đồng.</li>
+<li>Tỷ lệ GTGT của nhóm hàng hóa: 1%.</li>
+<li>Tỷ lệ TNDN của nhóm hàng hóa: 0,5%.</li>
+<li>Doanh thu nhóm dịch vụ: 20.000.000 đồng.</li>
+<li>Tỷ lệ GTGT của nhóm dịch vụ: 5%.</li>
+<li>Tỷ lệ TNDN của nhóm dịch vụ: 2%.</li>
+<li>Thuế GTGT: <code>80.000.000 × 1% + 20.000.000 × 5% = 1.800.000 đồng</code>.</li>
+<li>Thuế TNDN: <code>80.000.000 × 0,5% + 20.000.000 × 2% = 800.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-2">38.5.2. Sổ doanh thu bán hàng hóa, dịch vụ: Mẫu S2a-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị áp dụng TT58, tính GTGT trực tiếp trên doanh thu và xác định thuế thu nhập trên thu nhập tính thuế.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Khung mẫu gồm:</p>
+<ul>
+<li>Số GTGT còn phải nộp đầu kỳ.</li>
+<li>Các khối doanh thu theo ngành.</li>
+<li>GTGT phát sinh.</li>
+<li>Số đã nộp.</li>
+<li>Số còn phải nộp cuối kỳ.</li>
+<li>Cột A — số hiệu chứng từ.</li>
+<li>Cột B — ngày tháng.</li>
+<li>Cột C — diễn giải.</li>
+<li>Cột 1 — số tiền.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S2a-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ DOANH THU BÁN HÀNG HÓA, DỊCH VỤ</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu chứng từ [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Số tiền [1]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td>Số thuế GTGT còn phải nộp đầu kỳ (1)</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh theo nhóm hàng hóa, dịch vụ, ngành nghề</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Tổng cộng nhóm</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Thuế GTGT</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế GTGT phải nộp trong kỳ (2)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Số thuế GTGT đã nộp trong kỳ (3)</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số thuế GTGT còn phải nộp cuối kỳ (4) = (1) + (2) - (3)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ul>
+<li>Doanh thu lấy từ đơn đã hoàn tất và được phân nhóm theo tỷ lệ GTGT.</li>
+<li>Số đã nộp lấy từ chứng từ nộp GTGT đã hoàn tất.</li>
+<li>Số đầu kỳ lấy từ kết quả cuối kỳ trước hoặc số chuyển đổi có thẩm quyền.</li>
+<li>Phiếu chi chỉ có chữ “thuế” nhưng không xác định đúng nghĩa vụ GTGT không được coi là khoản GTGT đã nộp.</li>
+</ul>
+<h4>Bố cục và công thức</h4>
+<p>Mẫu có các cột:</p>
+<ul>
+<li>A — số hiệu chứng từ.</li>
+<li>B — ngày tháng.</li>
+<li>C — diễn giải.</li>
+<li>1 — số tiền.</li>
+<li>Phía trước phần phát sinh có <strong>Số thuế GTGT còn phải nộp đầu kỳ (1)</strong>.</li>
+<li>Mỗi nhóm có tổng doanh thu và dòng Thuế GTGT.
+Cuối sổ có:</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Dòng</th>
+<th>Công thức</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tổng số thuế GTGT phải nộp trong kỳ (2)</td>
+<td>Tổng GTGT của các nhóm theo tỷ lệ trực tiếp.</td>
+</tr>
+<tr>
+<td>Số thuế GTGT đã nộp trong kỳ (3)</td>
+<td>Tổng khoản nộp thuế đã hoàn tất trong kỳ.</td>
+</tr>
+<tr>
+<td>Số thuế GTGT còn phải nộp cuối kỳ (4)</td>
+<td><code>(1) + (2) − (3)</code>.</td>
+</tr>
+</tbody></table></div>
+<h4>Tải doanh thu và số đã nộp</h4>
+<ul>
+<li>Doanh thu lấy từ đơn đã hoàn tất, phân nhóm theo tỷ lệ GTGT.</li>
+<li>Không lấy đơn mới, phiếu xuất Nháp hoặc khoản thanh toán riêng.</li>
+<li>Khoản đã nộp lấy từ chứng từ thuế đã hoàn tất và được nhận diện là nộp GTGT, không lấy mọi phiếu chi có chữ “thuế”.</li>
+<li>Đầu kỳ lấy số cuối kỳ trước trong cùng phạm vi công ty và phương pháp.</li>
+<li>Nếu chưa có, hiển thị 0 và cho phép người có quyền nhập số chuyển đổi.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Số thuế GTGT còn phải nộp đầu kỳ: 1.200.000 đồng.</li>
+<li>Thuế GTGT phát sinh của nhóm hàng hóa: 600.000 đồng.</li>
+<li>Thuế GTGT phát sinh của nhóm dịch vụ: 4.200.000 đồng.</li>
+<li>Số thuế GTGT đã nộp trong kỳ: 3.000.000 đồng.</li>
+<li>Tổng số thuế GTGT phải nộp trong kỳ: <code>600.000 + 4.200.000 = 4.800.000 đồng</code>.</li>
+<li>Số thuế GTGT còn phải nộp cuối kỳ: <code>1.200.000 + 4.800.000 − 3.000.000 = 3.000.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-3">38.5.3. Sổ chi tiết doanh thu, chi phí: Mẫu S2b-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị áp dụng TT58 và xác định thuế thu nhập trên thu nhập tính thuế, bất kể GTGT đang là Trực tiếp hay Khấu trừ khi tổ hợp chế độ cho phép.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu có bốn lớp số liệu:</p>
+<ul>
+<li>Số thuế TNDN còn phải nộp đầu kỳ.</li>
+<li>Doanh thu và thu nhập.</li>
+<li>Chi phí theo nhóm.</li>
+<li>Thuế TNDN phát sinh, đã nộp và còn phải nộp cuối kỳ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S2b-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ CHI TIẾT DOANH THU, CHI PHÍ</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu chứng từ [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Số tiền [1]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td>Số thuế TNDN còn phải nộp đầu kỳ (1)</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>1. Doanh thu và thu nhập</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>2. Chi phí nguyên liệu, vật liệu, nhiên liệu, năng lượng, hàng hóa</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Chi phí tiền lương, phụ cấp, bảo hiểm và khoản chi cho người lao động</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Chi phí khấu hao tài sản cố định</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Chi phí dịch vụ mua ngoài</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Chi phí lãi vay</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Chi phí khác phục vụ trực tiếp hoạt động kinh doanh</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế TNDN phải nộp trong kỳ (2)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Số thuế TNDN đã nộp trong kỳ (3)</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số thuế TNDN còn phải nộp cuối kỳ (4) = (1) + (2) - (3)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ol>
+<li>Hệ thống lấy doanh thu, thu nhập và từng khoản chi đã hoàn tất trong kỳ.</li>
+<li>Hệ thống trừ các khoản giảm trừ và hoàn tác đã có hiệu lực.</li>
+<li>Hệ thống loại nguồn bị trùng để mỗi khoản chỉ được tính một lần.</li>
+<li>Giá vốn chỉ được lấy từ phiếu xuất đã hoàn thành.</li>
+<li>Thuế GTGT đầu vào được khấu trừ không được cộng vào chi phí.</li>
+<li>Chênh lệch dương giữa doanh thu, thu nhập và chi phí được dùng để tính thuế TNDN theo phương pháp đã cấu hình.</li>
+</ol>
+<h4>Bố cục</h4>
+<p>Bảng có các cột:</p>
+<ul>
+<li>A — số hiệu chứng từ.</li>
+<li>B — ngày tháng.</li>
+<li>C — diễn giải.</li>
+<li>1 — số tiền.</li>
+</ul>
+<p>Các dòng chuẩn gồm:</p>
+<ul>
+<li>Số thuế TNDN còn phải nộp đầu kỳ.</li>
+<li>Số phát sinh.</li>
+<li><strong>1. Doanh thu và thu nhập</strong>.</li>
+<li><strong>2. Chi phí</strong>.</li>
+<li>Tổng TNDN phải nộp trong kỳ.</li>
+<li>Tổng TNDN đã nộp trong kỳ.</li>
+<li>Tổng TNDN còn phải nộp cuối kỳ: <code>(4) = (1) + (2) − (3)</code>.</li>
+</ul>
+<h4>Cách tải từng loại chi phí</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nhóm chi phí trên S2b</th>
+<th>Nguồn nghiệp vụ và điều kiện</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nguyên liệu, vật liệu, nhiên liệu, năng lượng, hàng hóa</td>
+<td>Phiếu nhập mua/chi phí mua đã hoàn tất và phần tiêu hao đã được ghi nhận; không lấy toàn bộ giá trị phiếu Nháp. Giá vốn xuất kho lấy từ phiếu xuất đã hoàn thành theo phương pháp kho.</td>
+</tr>
+<tr>
+<td>Tiền lương, tiền công, phụ cấp, bảo hiểm</td>
+<td>Bảng lương/phiếu chi lương đã hoàn tất, nhận diện đúng loại chi phí và kỳ; không lấy khoản đề nghị chưa duyệt.</td>
+</tr>
+<tr>
+<td>Khấu hao TSCĐ</td>
+<td>Bút toán/phiếu khấu hao đã hoàn tất trong kỳ từ tài sản đang sử dụng; không lấy nguyên giá làm chi phí một lần.</td>
+</tr>
+<tr>
+<td>Dịch vụ mua ngoài</td>
+<td>Phiếu chi hoặc đề nghị chi đã hoàn tất cho điện, nước, internet, vận chuyển, thuê, sửa chữa; phân loại theo ngày chứng từ của nghiệp vụ.</td>
+</tr>
+<tr>
+<td>Lãi vay</td>
+<td>Chứng từ chi lãi đã hoàn tất, tách khỏi khoản trả gốc.</td>
+</tr>
+<tr>
+<td>Chi phí khác trực tiếp</td>
+<td>Phiếu chi đã hoàn tất có loại chi phí hợp lệ; loại trừ giao dịch chuyển tiền nội bộ và khoản hoàn/đảo.</td>
+</tr>
+</tbody></table></div>
+<p>Hệ thống phải chống lấy trùng: một khoản chi chỉ thuộc một nhóm chi phí, chi phí đã dùng để hình thành tài sản không đồng thời đưa vào chi phí kỳ, và khoản VAT được khấu trừ (nếu có) không cộng vào chi phí theo phương pháp khấu trừ.</p>
+<h4>Công thức và ví dụ</h4>
+<p>Doanh thu/thu nhập thuần = tổng nguồn thu hợp lệ − giảm trừ; thu nhập tính thuế = doanh thu/thu nhập − chi phí được phân loại. TNDN phải nộp = thu nhập tính thuế dương × thuế suất hoạt động.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Doanh thu và thu nhập: 420.000.000 đồng.</li>
+<li>Chi phí nguyên liệu: 210.000.000 đồng.</li>
+<li>Chi phí tiền lương: 60.000.000 đồng.</li>
+<li>Chi phí khấu hao: 12.000.000 đồng.</li>
+<li>Chi phí dịch vụ mua ngoài: 33.000.000 đồng.</li>
+<li>Tổng chi phí: <code>210.000.000 + 60.000.000 + 12.000.000 + 33.000.000 = 315.000.000 đồng</code>.</li>
+<li>Thu nhập tính thuế: <code>420.000.000 − 315.000.000 = 105.000.000 đồng</code>.</li>
+<li>Với thuế suất 15%, TNDN = <code>105.000.000 × 15% = 15.750.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-4">38.5.4. Sổ chi tiết vật liệu, dụng cụ, sản phẩm, hàng hóa: Mẫu S2c-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị áp dụng TT58 có hàng tồn kho cần theo dõi để xác định chi phí và thu nhập tính thuế trong bộ S2.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu gồm:</p>
+<ul>
+<li>Cột A — số hiệu chứng từ.</li>
+<li>Cột B — ngày tháng.</li>
+<li>Cột C — diễn giải.</li>
+<li>Cột D — đơn vị tính.</li>
+<li>Cột 1 — đơn giá.</li>
+<li>Cột 2 — số lượng nhập.</li>
+<li>Cột 3 — thành tiền nhập.</li>
+<li>Cột 4 — số lượng xuất.</li>
+<li>Cột 5 — thành tiền xuất.</li>
+<li>Cột 6 — số lượng tồn.</li>
+<li>Cột 7 — thành tiền tồn.</li>
+<li>Cột 8 — ghi chú.</li>
+<li>Dòng số dư đầu kỳ của từng sản phẩm tại từng kho.</li>
+<li>Dòng cộng phát sinh trong kỳ.</li>
+<li>Dòng số dư cuối kỳ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S2c-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ CHI TIẾT VẬT LIỆU, DỤNG CỤ, SẢN PHẨM, HÀNG HÓA</strong><br><em>Tên vật liệu, dụng cụ, sản phẩm, hàng hóa: … · Kho: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th>Đơn vị tính [D]</th>
+<th align="right">Đơn giá [1]</th>
+<th align="right">Nhập SL [2]</th>
+<th align="right">Nhập tiền [3]</th>
+<th align="right">Xuất SL [4]</th>
+<th align="right">Xuất tiền [5]</th>
+<th align="right">Tồn SL [6]</th>
+<th align="right">Tồn tiền [7]</th>
+<th>Ghi chú [8]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td>Số dư đầu kỳ</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td>…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Cộng phát sinh trong kỳ</strong></td>
+<td></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư cuối kỳ</strong></td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ol>
+<li>Chỉ tải các phiếu nhập và phiếu xuất đã hoàn thành.</li>
+<li>Quy đổi số lượng về đơn vị tính đang sử dụng trên sổ.</li>
+<li>Chỉ lấy phát sinh thuộc đúng kho và sản phẩm đang xem.</li>
+<li>Xác định giá trị xuất theo phương pháp tính giá vốn đã cấu hình.</li>
+<li>Không tạo dòng cho phiếu ở trạng thái Nháp.</li>
+<li>Tính số lượng và giá trị tồn sau từng phát sinh.</li>
+<li>Hiển thị cảnh báo nếu nguồn lô hoặc giá vốn chưa được xác định đầy đủ.</li>
+</ol>
+<h4>Bố cục và công thức giá vốn</h4>
+<ul>
+<li>Cột A/B/C/D lần lượt là chứng từ, ngày, diễn giải và đơn vị tính.</li>
+<li>Cột 1 là đơn giá.</li>
+<li>Cột 2/3 là nhập số lượng/thành tiền.</li>
+<li>Cột 4/5 là xuất số lượng/thành tiền.</li>
+<li>Cột 6/7 là tồn số lượng/thành tiền.</li>
+<li>Cột 8 là ghi chú.</li>
+<li>Đầu kỳ, phát sinh và cuối kỳ được tính liên tục theo từng sản phẩm/kho.</li>
+</ul>
+<p>Khi áp dụng giá bình quân theo kỳ, đơn giá xuất = <code>(giá trị tồn đầu kỳ + giá trị nhập trong kỳ) / (số lượng tồn đầu kỳ + số lượng nhập trong kỳ)</code>. Khi hệ thống cấu hình bình quân sau từng lần nhập, giá xuất tại thời điểm đó dùng giá trị bình quân gần nhất. FIFO/LIFO/đích danh theo cấu hình Công ty phải lấy đúng nguồn lô; phiếu xuất Nháp không tạo dòng xuất.</p>
+<h4>Tải dữ liệu và ví dụ</h4>
+<ul>
+<li>Hệ thống lấy phiếu nhập/xuất đã hoàn thành trong kỳ, quy đổi về đơn vị đang xem, lọc đúng kho và sản phẩm.</li>
+<li>Kiểm kê và sản xuất được đưa vào nhóm nhập/xuất theo loại chứng từ.</li>
+<li>Đầu kỳ là số dư cuối kỳ trước.</li>
+<li>Cuối kỳ = đầu kỳ + nhập − xuất ± điều chỉnh.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Tồn đầu kỳ: 30 chiếc, trị giá 1.500.000 đồng.</li>
+<li>Nhập trong kỳ: 20 chiếc, trị giá 1.100.000 đồng.</li>
+<li>Xuất trong kỳ: 25 chiếc, giá vốn 1.375.000 đồng.</li>
+<li>Tồn cuối kỳ: 25 chiếc, trị giá <code>1.500.000 + 1.100.000 − 1.375.000 = 1.225.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-5">38.5.5. Sổ chi tiết tiền: Mẫu S2d-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị áp dụng TT58 dùng bộ S2 và có tiền mặt hoặc tiền gửi không kỳ hạn cần theo dõi.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu chia thành phần Tiền mặt và từng tài khoản tiền gửi.</p>
+<p>Mỗi phần có:</p>
+<ul>
+<li>Số hiệu chứng từ.</li>
+<li>Ngày tháng.</li>
+<li>Diễn giải.</li>
+<li>Thu hoặc Gửi vào.</li>
+<li>Chi hoặc Rút ra.</li>
+<li>Số dư đầu kỳ.</li>
+<li>Tổng phát sinh.</li>
+<li>Số dư cuối kỳ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S2d-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ CHI TIẾT TIỀN</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu chứng từ [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Thu/Gửi vào [1]</th>
+<th align="right">Chi/Rút ra [2]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td><strong>Tiền mặt tồn đầu kỳ</strong></td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh tiền mặt</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền mặt tồn cuối kỳ</strong></td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền gửi không kỳ hạn tại ngân hàng/tổ chức thanh toán …</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Tiền gửi tồn đầu kỳ</td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh gửi vào/rút ra</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền gửi tồn cuối kỳ</strong></td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ol>
+<li>Hệ thống lấy các biến động tiền đã hoàn tất.</li>
+<li>Mỗi biến động được phân vào đúng nguồn tiền và chi nhánh.</li>
+<li>Các biến động được sắp theo ngày và thứ tự chứng từ ổn định.</li>
+</ol>
+<p>Thu/gửi vào ghi số dương, chi/rút ra ghi trị tuyệt đối của số giảm.</p>
+<p>Bù trừ công nợ không có dòng tiền không được tải vào mẫu.</p>
+<p>Bảng có các cột:</p>
+<ul>
+<li>A — số hiệu chứng từ.</li>
+<li>B — ngày tháng.</li>
+<li>C — diễn giải.</li>
+<li>1 — Thu hoặc Gửi vào.</li>
+<li>2 — Chi hoặc Rút ra.</li>
+</ul>
+<p>Số dư được xác định như sau:</p>
+<ul>
+<li>Đầu kỳ lấy số dư trước ngày đầu kỳ.</li>
+<li>Phát sinh lấy các biến động tiền và phiếu thu chi đã hoàn tất.</li>
+<li>Cuối kỳ bằng đầu kỳ cộng thu và trừ chi.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Số dư tiền gửi đầu kỳ: 40.000.000 đồng.</li>
+<li>Tiền thu của khách hàng: 18.000.000 đồng.</li>
+<li>Tiền trả nhà cung cấp: 12.500.000 đồng.</li>
+<li>Phí ngân hàng: 250.000 đồng.</li>
+<li>Số dư cuối kỳ: <code>40.000.000 + 18.000.000 − 12.500.000 − 250.000 = 45.250.000 đồng</code>.</li>
+<li>Giảm công nợ do bù trừ không có biến động tiền không được đưa vào cột Thu.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-6">38.5.6. Sổ doanh thu bán hàng hóa, dịch vụ: Mẫu S3a-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị áp dụng TT58, tính GTGT theo phương pháp Khấu trừ nhưng tính TNDN theo tỷ lệ phần trăm trên doanh thu.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Thân sổ chia theo nhóm có cùng tỷ lệ TNDN.</p>
+<p>Mẫu có:</p>
+<ul>
+<li>Cột số hiệu chứng từ.</li>
+<li>Cột ngày tháng.</li>
+<li>Cột diễn giải.</li>
+<li>Cột doanh thu.</li>
+<li>Dòng tổng của từng nhóm.</li>
+<li>Số TNDN của từng nhóm.</li>
+<li>Tổng TNDN toàn sổ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S3a-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ DOANH THU BÁN HÀNG HÓA, DỊCH VỤ</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu chứng từ [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Số tiền [1]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td>Số thuế TNDN còn phải nộp đầu kỳ (1)</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh theo nhóm hàng hóa, dịch vụ, ngành nghề</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Tổng cộng nhóm</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Thuế TNDN</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế TNDN phải nộp trong kỳ (2)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Số thuế TNDN đã nộp trong kỳ (3)</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số thuế TNDN còn phải nộp cuối kỳ (4) = (1) + (2) - (3)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ol>
+<li>Hệ thống lấy doanh thu còn hiệu lực của các đơn đã hoàn tất.</li>
+<li>Hệ thống phân doanh thu theo ngành nghề và tỷ lệ TNDN.</li>
+<li>Hệ thống tính doanh thu và thuế TNDN của từng nhóm.</li>
+</ol>
+<p>VAT đầu vào và VAT đầu ra không được đưa vào mẫu này.</p>
+<p>Các cột của mẫu gồm:</p>
+<ul>
+<li><p>Cột A — số hiệu chứng từ.</p>
+</li>
+<li><p>Cột B — ngày tháng.</p>
+</li>
+<li><p>Cột C — diễn giải.</p>
+</li>
+<li><p>Cột 1 — doanh thu.</p>
+</li>
+<li><p>Mỗi nhóm cùng tỷ lệ TNDN có tổng và dòng Thuế TNDN.</p>
+</li>
+<li><p>Doanh thu lấy từ đơn hoàn tất sau trả/hủy.</p>
+</li>
+<li><p>GTGT khấu trừ không ghi vào mẫu này.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Doanh thu nhóm A: 60.000.000 đồng.</li>
+<li>Tỷ lệ TNDN của nhóm A: 1%.</li>
+<li>Thuế TNDN của nhóm A: <code>60.000.000 × 1% = 600.000 đồng</code>.</li>
+<li>Doanh thu nhóm B: 40.000.000 đồng.</li>
+<li>Tỷ lệ TNDN của nhóm B: 2%.</li>
+<li>Thuế TNDN của nhóm B: <code>40.000.000 × 2% = 800.000 đồng</code>.</li>
+<li>Tổng thuế TNDN: <code>600.000 + 800.000 = 1.400.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-7">38.5.7. Sổ theo dõi nghĩa vụ thuế GTGT: Mẫu S3b-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Mọi đơn vị áp dụng TT58, tính thuế GTGT theo phương pháp khấu trừ và cần theo dõi:</p>
+<ul>
+<li>Thuế GTGT đầu vào.</li>
+<li>Thuế GTGT đầu ra.</li>
+<li>Số thuế đã nộp.</li>
+<li>Số thuế đã hoàn.</li>
+<li>Số dư nghĩa vụ thuế theo kỳ.</li>
+</ul>
+<p><strong>Hình mẫu/wireframe:</strong></p>
+<ul>
+<li>Mẫu có chứng từ.</li>
+<li>Ngày.</li>
+<li>Diễn giải.</li>
+<li>GTGT đầu vào.</li>
+<li>GTGT đầu ra.</li>
+<li>Số dư đầu kỳ.</li>
+<li>Số phát sinh.</li>
+<li>Số đã nộp.</li>
+<li>Số đã hoàn.</li>
+<li>Số dư cuối kỳ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S3b-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ THEO DÕI NGHĨA VỤ THUẾ GTGT</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu chứng từ [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Thuế GTGT đầu vào [1]</th>
+<th align="right">Thuế GTGT đầu ra [2]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td>Số thuế còn được khấu trừ/hoàn đầu kỳ</td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Số thuế còn phải nộp đầu kỳ</td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh trong kỳ</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Cộng số phát sinh trong kỳ</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Số thuế GTGT đã nộp trong kỳ</td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Số thuế GTGT đã được hoàn trong kỳ</td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư cuối kỳ</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ul>
+<li>GTGT đầu vào lấy từ hóa đơn mua hợp lệ được khấu trừ.</li>
+<li>GTGT đầu ra lấy từ giao dịch hoặc hóa đơn bán đã hoàn tất.</li>
+<li>Số đã nộp và số đã hoàn lấy từ chứng từ thuế tương ứng.</li>
+<li>Trạng thái còn được khấu trừ hoặc hoàn được giữ riêng với trạng thái còn phải nộp.</li>
+</ul>
+<p>Bảng có các cột:</p>
+<ul>
+<li>A — số hiệu chứng từ.</li>
+<li>B — ngày tháng.</li>
+<li>C — diễn giải.</li>
+<li>1 — GTGT đầu vào.</li>
+<li>2 — GTGT đầu ra.</li>
+</ul>
+<p>Các dòng tổng hợp gồm:</p>
+<ul>
+<li>Số dư đầu kỳ.</li>
+<li>Phát sinh trong kỳ.</li>
+<li>Tổng GTGT phải nộp.</li>
+<li>Số đã nộp.</li>
+<li>Số đã hoàn.</li>
+<li>Số dư cuối kỳ.</li>
+</ul>
+<p>Công thức kiểm tra: còn được khấu trừ/hoàn cuối kỳ = đầu kỳ + đầu vào − đầu ra + đã nộp − đã hoàn; còn phải nộp cuối kỳ = đầu kỳ + đầu ra − đầu vào − đã nộp + đã hoàn.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Số được khấu trừ đầu kỳ: 1.000.000 đồng.</li>
+<li>GTGT đầu vào trong kỳ: 2.500.000 đồng.</li>
+<li>GTGT đầu ra trong kỳ: 3.000.000 đồng.</li>
+<li>Số đã nộp: 500.000 đồng.</li>
+<li>Chưa phát sinh hoàn thuế.</li>
+<li>Số dư được khấu trừ hoặc hoàn cuối kỳ: <code>1.000.000 + 2.500.000 − 3.000.000 + 500.000 = 1.000.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-8">38.5.8. Sổ chi tiết thanh toán công nợ: Mẫu S4a-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị cần theo dõi nghĩa vụ theo từng đối tượng công nợ, gồm:</p>
+<ul>
+<li>Khách hàng.</li>
+<li>Nhà cung cấp.</li>
+<li>Đơn vị vận chuyển.</li>
+<li>Đối tượng công nợ khác.</li>
+</ul>
+<p><strong>Hình mẫu/wireframe:</strong> Mỗi đối tượng có một phần riêng gồm:</p>
+<ul>
+<li>Số hiệu chứng từ.</li>
+<li>Ngày.</li>
+<li>Diễn giải.</li>
+<li>Số phải thu.</li>
+<li>Số đã thu.</li>
+<li>Số còn phải thu.</li>
+<li>Số phải trả.</li>
+<li>Số đã trả.</li>
+<li>Số còn phải trả.</li>
+</ul>
+<p>Đầu phần có số dư đầu kỳ; cuối phần có tổng phát sinh và số dư cuối kỳ.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S4a-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ CHI TIẾT THANH TOÁN CÔNG NỢ</strong><br><em>Đối tượng: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Phải thu [1]</th>
+<th align="right">Đã thu [2]</th>
+<th align="right">Còn phải thu [3]</th>
+<th align="right">Phải trả [4]</th>
+<th align="right">Đã trả [5]</th>
+<th align="right">Còn phải trả [6]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td>Số dư đầu kỳ</td>
+<td align="right">…</td>
+<td align="right"></td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh trong kỳ</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Cộng phát sinh trong kỳ</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư cuối kỳ</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Hệ thống lấy các khoản tăng nợ, giảm nợ và lần phân bổ thanh toán đã hoàn tất theo đúng đối tượng và ngày nghiệp vụ. Khoản bị hủy hoặc chưa hoàn tất không tạo dòng. Khoản phải thu và khoản phải trả được theo dõi theo hai chiều độc lập, không tự bù trừ.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Phải thu đầu kỳ của khách hàng A: 20.000.000 đồng.</li>
+<li>Bán chịu trong kỳ: 8.000.000 đồng.</li>
+<li>Khách đã thanh toán trong kỳ: 5.000.000 đồng.</li>
+<li>Phải thu cuối kỳ: <code>20.000.000 + 8.000.000 − 5.000.000 = 23.000.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-9">38.5.9. Sổ tài sản cố định: Mẫu S4b-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị có tài sản cố định cần theo dõi toàn bộ vòng đời:</p>
+<ul>
+<li>Hình thành tài sản.</li>
+<li>Đưa tài sản vào sử dụng.</li>
+<li>Trích khấu hao.</li>
+<li>Ghi giảm tài sản.</li>
+</ul>
+<p><strong>Hình mẫu/wireframe:</strong></p>
+<ul>
+<li>Mỗi tài sản thể hiện chứng từ tăng.</li>
+<li>Tên và đặc điểm tài sản.</li>
+<li>Ngày đưa vào sử dụng.</li>
+<li>Nguyên giá.</li>
+<li>Tỷ lệ hoặc mức khấu hao.</li>
+<li>Khấu hao từng kỳ.</li>
+<li>Khấu hao lũy kế.</li>
+<li>Giá trị còn lại.</li>
+<li>Chứng từ ghi giảm.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S4b-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ TÀI SẢN CỐ ĐỊNH</strong><br><em>Loại tài sản: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>CT tăng<br>Số hiệu [A]</th>
+<th>CT tăng<br>Ngày [B]</th>
+<th>Tên, đặc điểm, ký hiệu [C]</th>
+<th>Tháng/năm sử dụng [D]</th>
+<th align="right">Nguyên giá [1]</th>
+<th align="right">Tỷ lệ khấu hao [2]</th>
+<th align="right">Khấu hao năm [3]</th>
+<th align="right">Khấu hao lũy kế [4]</th>
+<th>CT giảm<br>Số hiệu [E]</th>
+<th>CT giảm<br>Ngày [G]</th>
+<th>Lý do giảm [H]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Cộng</strong></td>
+<td></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Nguyên giá lấy từ hồ sơ hình thành tài sản đã hoàn tất. Khấu hao lấy từ các kỳ khấu hao đã hoàn tất trong thời gian tài sản đang sử dụng. Ghi giảm chỉ được tải khi nghiệp vụ thanh lý, bán, mất hoặc điều chuyển làm chấm dứt việc theo dõi tại phạm vi hiện tại đã có hiệu lực.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Nguyên giá máy móc: 120.000.000 đồng.</li>
+<li>Khấu hao lũy kế đến đầu kỳ: 30.000.000 đồng.</li>
+<li>Khấu hao phát sinh trong kỳ: 5.000.000 đồng.</li>
+<li>Giá trị còn lại cuối kỳ: <code>120.000.000 − 30.000.000 − 5.000.000 = 85.000.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-10">38.5.10. Sổ theo dõi nghĩa vụ thuế khác: Mẫu S4c-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị phát sinh một hoặc nhiều nghĩa vụ thuế thuộc phạm vi của mẫu:</p>
+<ul>
+<li>Thuế tiêu thụ đặc biệt.</li>
+<li>Thuế tài nguyên.</li>
+<li>Thuế bảo vệ môi trường.</li>
+<li>Nghĩa vụ thuế khác được mẫu hỗ trợ.</li>
+</ul>
+<p><strong>Hình mẫu/wireframe:</strong> Dòng sổ gồm:</p>
+<ul>
+<li>Ngày.</li>
+<li>Số hiệu giao dịch.</li>
+<li>Diễn giải.</li>
+<li>Số lượng chịu thuế.</li>
+<li>Giá tính thuế.</li>
+<li>Thuế suất hoặc mức thuế tuyệt đối.</li>
+<li>Số thuế phát sinh.</li>
+</ul>
+<p>Mỗi loại nghĩa vụ có dòng tổng riêng và tổng kỳ.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S4c-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ THEO DÕI NGHĨA VỤ THUẾ KHÁC</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Ngày ghi sổ [A]</th>
+<th>Giao dịch [B]</th>
+<th align="right">Lượng chịu thuế [1]</th>
+<th align="right">Mức tuyệt đối [2]</th>
+<th align="right">Giá tính thuế/đơn vị [3]</th>
+<th align="right">Thuế suất [4]</th>
+<th align="right">XK/NK/TTĐB theo % [5]</th>
+<th align="right">XK/NK/TTĐB tuyệt đối [6]</th>
+<th align="right">Tổng XK/NK/TTĐB [7]</th>
+<th align="right">Thuế BVMT [8]</th>
+<th align="right">Thuế tài nguyên [9]</th>
+<th align="right">Thuế sử dụng đất [10]</th>
+<th align="right">Thuế khác [11]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Tổng cộng</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Hệ thống chỉ lấy chứng từ thuế đã hoàn tất và thông tin nhập bổ sung có nguồn xác định. Lượng chịu thuế, giá tính thuế và tỷ lệ phải thuộc cùng một giao dịch. Khoản chưa đủ căn cứ được cảnh báo và không tự gán số tiền để làm đầy biểu.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Số lượng hàng chịu thuế: 100 đơn vị.</li>
+<li>Mức thuế tuyệt đối: 2.000 đồng/đơn vị.</li>
+<li>Nghĩa vụ phát sinh: <code>100 × 2.000 = 200.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-5-11">38.5.11. Sổ theo dõi vốn chủ sở hữu: Mẫu S4d-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Đơn vị cần theo dõi:</p>
+<ul>
+<li>Vốn góp.</li>
+<li>Các lần tăng vốn.</li>
+<li>Các lần giảm vốn.</li>
+<li>Lợi nhuận chưa phân phối.</li>
+<li>Các quỹ thuộc vốn chủ sở hữu.</li>
+</ul>
+<p><strong>Hình mẫu/wireframe:</strong></p>
+<ul>
+<li>Mỗi nhóm vốn có số dư đầu kỳ.</li>
+<li>Chứng từ và ngày tăng.</li>
+<li>Giá trị tăng.</li>
+<li>Chứng từ và ngày giảm.</li>
+<li>Giá trị giảm.</li>
+<li>Cùng số dư cuối kỳ.</li>
+</ul>
+<p>Lợi nhuận chưa phân phối và từng quỹ được trình bày thành các nhóm riêng trong cùng mẫu.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số S4d-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>SỔ THEO DÕI VỐN CHỦ SỞ HỮU</strong><br><em>Năm: … · Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Số hiệu chứng từ [A]</th>
+<th>Ngày, tháng [B]</th>
+<th>Diễn giải [C]</th>
+<th align="right">Tăng trong kỳ [1]</th>
+<th align="right">Giảm trong kỳ [2]</th>
+<th align="right">Số dư [3]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td><strong>1. Vốn góp của chủ sở hữu — số dư đầu kỳ</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh trong kỳ</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư cuối kỳ</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>2. Lợi nhuận sau thuế chưa phân phối — số dư đầu kỳ</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh trong kỳ</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư cuối kỳ</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>3. Các quỹ thuộc vốn chủ sở hữu — số dư đầu kỳ</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>Phát sinh trong kỳ</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư cuối kỳ</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Góp vốn và rút vốn lấy theo ngày nghiệp vụ đã hoàn tất. Kết quả kinh doanh chỉ được chuyển vào lợi nhuận chưa phân phối khi kỳ đã hoàn tất theo quy trình áp dụng. Một khoản tăng tiền do vay hoặc chuyển nội bộ không được nhận diện là tăng vốn góp.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Vốn góp đầu kỳ: 200.000.000 đồng.</li>
+<li>Góp thêm trong kỳ: 50.000.000 đồng.</li>
+<li>Rút vốn trong kỳ: 20.000.000 đồng.</li>
+<li>Vốn góp cuối kỳ: <code>200.000.000 + 50.000.000 − 20.000.000 = 230.000.000 đồng</code>.</li>
+</ul>
+</blockquote>
+<h2 id="section-38-6">38.6. Bảng kê</h2>
+<h3 id="section-38-6-1">38.6.1. Bảng kê thu mua hàng hóa, dịch vụ không có hóa đơn: Mẫu số 02/TNDN</h3>
+<h4>Mục đích và phạm vi</h4>
+<p>Mẫu số <strong>02/TNDN</strong> ghi nhận theo trình tự thời gian các lần doanh nghiệp mua hàng hóa, dịch vụ không có hóa đơn nhưng thuộc trường hợp được phép lập bảng kê. Bảng kê hỗ trợ hồ sơ mua hàng; bản thân bảng kê không làm cho mọi giao dịch thiếu hóa đơn trở thành chi phí hợp lệ và không thay thế hồ sơ giao nhận, thanh toán hoặc căn cứ chứng minh nguồn mua.</p>
+<p>Các nhóm giao dịch có thể được lựa chọn gồm:</p>
+<ul>
+<li>Nông, lâm, thủy sản mua trực tiếp từ người sản xuất hoặc người đánh bắt.</li>
+<li>Sản phẩm thủ công làm từ nguyên liệu nông nghiệp mua trực tiếp từ người sản xuất thủ công.</li>
+<li>Đất, đá, cát, sỏi mua trực tiếp từ hộ hoặc cá nhân tự khai thác theo trường hợp được phép.</li>
+<li>Phế liệu mua trực tiếp từ người thu nhặt.</li>
+<li>Đồ dùng, tài sản và dịch vụ do hộ gia đình hoặc cá nhân không kinh doanh trực tiếp bán.</li>
+<li>Hàng hóa, dịch vụ của hộ hoặc cá nhân kinh doanh thuộc trường hợp được lập bảng kê theo quy định áp dụng.</li>
+</ul>
+<p>Người dùng phải xác định căn cứ cho từng giao dịch. Không dùng một lý do chung để hợp thức hóa toàn bộ giao dịch của một người bán.</p>
+<h4>Hình mẫu/wireframe</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Mẫu số: 02/TNDN</strong><br><em>(Ban hành kèm theo Thông tư số 20/2026/TT-BTC của Bộ trưởng Bộ Tài chính)</em></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><strong>BẢNG KÊ THU MUA HÀNG HÓA, DỊCH VỤ KHÔNG CÓ HÓA ĐƠN</strong><br><em>(Ngày … tháng … năm …)</em></td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>Tên doanh nghiệp: …</li>
+<li>Mã số thuế: …</li>
+<li>Địa chỉ: …</li>
+<li>Số điện thoại: …</li>
+<li>Địa chỉ nơi tổ chức thu mua: …</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Ngày tháng năm mua hàng</th>
+<th>Tên người bán</th>
+<th>Địa chỉ</th>
+<th>Số căn cước</th>
+<th>Số điện thoại nếu có</th>
+<th>Tên hàng hóa, dịch vụ</th>
+<th align="right">Số lượng, trọng lượng</th>
+<th align="right">Đơn giá</th>
+<th align="right">Tổng giá thanh toán</th>
+<th>Ghi chú</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">9</td>
+<td>10</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td>…</td>
+</tr>
+</tbody></table></div>
+<p><strong>Tổng giá trị hàng hóa, dịch vụ mua vào:</strong> …<br><strong>Số tiền bằng chữ:</strong> …</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BẢNG KÊ</strong><br><em>(Ký, ghi rõ họ tên)</em></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN HOẶC NGƯỜI ĐƯỢC ỦY QUYỀN CỦA DOANH NGHIỆP</strong><br><em>(Ký tên, đóng dấu)</em></th>
+</tr>
+</thead>
+</table></div>
+<h4>Điều kiện chọn giao dịch</h4>
+<p>Người dùng chọn ngày lập, tháng tổng hợp, địa điểm thu mua và phạm vi đơn vị. Hệ thống chỉ đưa vào bảng kê giao dịch đáp ứng đồng thời:</p>
+<ul>
+<li>Là mua hàng ngoài hoặc mua dịch vụ đã hoàn thành.</li>
+<li>Không có hóa đơn.</li>
+<li>Có người bán xác định được.</li>
+<li>Có căn cứ thuộc phạm vi lập bảng kê.</li>
+<li>Có ngày mua, tên hàng hóa hoặc dịch vụ và tổng giá thanh toán.</li>
+<li>Chưa được đưa vào một bảng kê còn hiệu lực khác của cùng kỳ.</li>
+</ul>
+<p>Giao dịch có hóa đơn hợp lệ không được đưa vào chỉ để gom chung chi phí. Giao dịch nháp, đã hủy hoặc đã bị trả toàn bộ không được tải. Nếu chỉ trả một phần, số lượng và giá trị còn giữ được trình bày sau khi trừ phần trả.</p>
+<h4>Cách tải từng cột</h4>
+<ul>
+<li>Cột 1 lấy ngày mua hoặc ngày hoàn thành giao nhận.</li>
+<li>Cột 2 lấy họ tên hoặc tên người bán được lưu tại thời điểm mua.</li>
+<li>Cột 3 lấy địa chỉ người bán.</li>
+<li>Cột 4 lấy số căn cước của người bán.</li>
+<li>Cột 5 lấy số điện thoại nếu có.</li>
+<li>Cột 6 lấy tên hàng hóa hoặc dịch vụ trên chứng từ mua.</li>
+<li>Cột 7 lấy số lượng hoặc trọng lượng sau khi quy đổi về đơn vị thể hiện trên chứng từ.</li>
+<li>Cột 8 lấy đơn giá mua.</li>
+<li>Cột 9 là tổng giá thanh toán của dòng; với dòng có số lượng và đơn giá, giá trị bằng số lượng nhân đơn giá sau điều chỉnh hợp lệ.</li>
+<li>Cột 10 ghi thông tin cần thiết để nhận diện căn cứ áp dụng, chứng từ nguồn hoặc tình trạng đặc biệt của giao dịch.</li>
+</ul>
+<p>Một người bán có nhiều mặt hàng trong cùng ngày được trình bày thành nhiều dòng. Thông tin người bán được lặp hoặc thể hiện theo bố cục gộp của tệp xuất nhưng mọi dòng vẫn phải truy ngược được về giao dịch nguồn.</p>
+<p>Tổng giá trị hàng hóa, dịch vụ mua vào bằng tổng cột 9 của các dòng còn hiệu lực. Số tiền bằng chữ được sinh từ tổng này. Bảng kê được sắp xếp tăng dần theo ngày mua; nếu cùng ngày thì theo thời điểm hoàn thành và mã giao dịch.</p>
+<h4>Kiểm tra thanh toán và công nợ</h4>
+<p>Khi hoàn thành nghiệp vụ mua:</p>
+<ul>
+<li>Thanh toán đủ: tạo phiếu chi bằng toàn bộ số tiền cần thanh toán và không tạo công nợ.</li>
+<li>Thanh toán một phần: tạo phiếu chi cho phần đã trả và tạo công nợ cho phần còn lại.</li>
+<li>Thanh toán 0 đồng: không tạo phiếu chi và tạo công nợ bằng toàn bộ số tiền phải trả.</li>
+</ul>
+<p>Bảng kê chỉ đọc kết quả thanh toán đã phát sinh; việc lập hoặc tải lại bảng kê không tự tạo, sửa hay xóa phiếu chi và công nợ.</p>
+<p>Đối với tổng giá trị mua trong cùng ngày của cùng một hộ hoặc cá nhân từ <strong>5.000.000 đồng trở lên</strong>, hệ thống cảnh báo yêu cầu kiểm tra điều kiện thanh toán không dùng tiền mặt. Tổng được cộng theo người bán và ngày, không theo số lượng phiếu, nên việc tách một giao dịch thành nhiều phiếu không làm mất cảnh báo.</p>
+<h4>Trạm và địa điểm thu mua</h4>
+<p>Nếu doanh nghiệp tổ chức nhiều trạm thu mua:</p>
+<ul>
+<li>Mỗi trạm lập một bảng kê riêng theo giao dịch phát sinh tại trạm.</li>
+<li>Địa chỉ nơi tổ chức thu mua phải phản ánh đúng trạm.</li>
+<li>Doanh nghiệp có thể lập bản tổng hợp chung từ các bảng kê của từng trạm.</li>
+<li>Một dòng của trạm chỉ được cộng một lần vào bản tổng hợp.</li>
+<li>Tổng bản tổng hợp phải bằng tổng các bảng kê trạm còn hiệu lực thuộc cùng phạm vi thời gian.</li>
+</ul>
+<h4>Kiểm tra trước khi khóa</h4>
+<p>Hệ thống không cho khóa bảng kê khi còn một trong các lỗi:</p>
+<ul>
+<li>Thiếu ngày mua.</li>
+<li>Thiếu tên hoặc địa chỉ người bán.</li>
+<li>Thiếu số căn cước khi mẫu yêu cầu.</li>
+<li>Thiếu tên hàng hóa, dịch vụ.</li>
+<li>Số lượng, đơn giá hoặc tổng giá thanh toán không hợp lệ.</li>
+<li>Thiếu căn cứ áp dụng cho giao dịch không có hóa đơn.</li>
+<li>Một giao dịch đã có trong bảng kê khác còn hiệu lực.</li>
+<li>Tổng dòng không khớp tổng giá trị mua vào.</li>
+</ul>
+<p>Bảng kê nháp được tải lại khi giao dịch mua, người bán, số lượng, đơn giá, trả hàng hoặc thanh toán thay đổi. Bảng kê đã khóa không bị viết lại âm thầm; thay đổi phát sinh sau đó được ghi nhận để người dùng lập bản điều chỉnh hoặc thay thế theo quy trình quản lý hồ sơ.</p>
+<h4>Ví dụ</h4>
+<p>Ngày 12/08, doanh nghiệp mua 100 kg nguyên liệu của một cá nhân với đơn giá 30.000 đồng/kg và chưa thanh toán.</p>
+<p>Dòng bảng kê được thể hiện:</p>
+<ul>
+<li>Ngày mua: 12/08.</li>
+<li>Tên, địa chỉ, số căn cước của người bán: lấy từ hồ sơ giao dịch.</li>
+<li>Tên hàng hóa: tên nguyên liệu đã mua.</li>
+<li>Số lượng: 100 kg.</li>
+<li>Đơn giá: 30.000 đồng.</li>
+<li>Tổng giá thanh toán: 3.000.000 đồng.</li>
+<li>Phiếu chi: không phát sinh.</li>
+<li>Công nợ: 3.000.000 đồng.</li>
+</ul>
+<h2 id="section-38-7">38.7. Báo cáo</h2>
+<p>Doanh nghiệp siêu nhỏ nộp thuế TNDN trên thu nhập tính thuế lập báo cáo tài chính hằng năm, trừ trường hợp pháp luật có quy định khác. Báo cáo phải được nộp cho cơ quan nhà nước có thẩm quyền trong thời hạn <strong>90 ngày kể từ ngày kết thúc kỳ kế toán năm</strong>.</p>
+<p>Doanh nghiệp nộp thuế TNDN theo tỷ lệ phần trăm trên doanh thu không bắt buộc lập báo cáo tài chính để nộp, trừ khi pháp luật khác yêu cầu. Nếu doanh nghiệp chủ động áp dụng bộ sổ phục vụ xác định thu nhập tính thuế thì vẫn có thể lập, bảo quản và sử dụng báo cáo cho nhu cầu quản lý.</p>
+<h3 id="section-38-7-1">38.7.1. Báo cáo tình hình tài chính: Mẫu số B01-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Doanh nghiệp siêu nhỏ cần trình bày tài sản và nguồn hình thành tài sản tại ngày kết thúc kỳ kế toán năm.</p>
+<p><strong>Hình mẫu/wireframe:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số B01-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>BÁO CÁO TÌNH HÌNH TÀI CHÍNH</strong></p>
+<p><em>Tại ngày … tháng … năm …</em><br><em>Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>CHỈ TIÊU</th>
+<th align="right">Mã số</th>
+<th align="right">Số cuối năm</th>
+<th align="right">Số đầu năm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TÀI SẢN</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>1. Tiền</td>
+<td align="right">110</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>2. Các khoản nợ phải thu</td>
+<td align="right">120</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>3. Hàng tồn kho</td>
+<td align="right">130</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>4. Tài sản cố định</td>
+<td align="right">140</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>5. Tài sản khác</td>
+<td align="right">150</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td><strong>TỔNG CỘNG TÀI SẢN</strong></td>
+<td align="right"><strong>200</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td><strong>NGUỒN VỐN</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>I. Nợ phải trả</td>
+<td align="right">300</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>1. Các khoản nợ phải trả</td>
+<td align="right">310</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>2. Thuế và các khoản phải nộp Nhà nước</td>
+<td align="right">320</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>II. Vốn chủ sở hữu</td>
+<td align="right">400</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>1. Vốn đầu tư của chủ sở hữu</td>
+<td align="right">410</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>2. Lợi nhuận sau thuế chưa phân phối</td>
+<td align="right">420</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>3. Các quỹ thuộc vốn chủ sở hữu</td>
+<td align="right">430</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td><strong>TỔNG CỘNG NGUỒN VỐN</strong></td>
+<td align="right"><strong>500</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong><br><em>(Ký, ghi rõ họ tên)</em></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong><br><em>(Ký, ghi rõ họ tên)</em></th>
+<th>Phê duyệt, ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<p>Người dùng chọn năm tài chính, đơn vị tiền và phạm vi toàn doanh nghiệp. Hệ thống lấy số đầu năm từ số cuối năm đã khóa của kỳ trước hoặc từ số chuyển đầu kỳ được phê duyệt. Số cuối năm lấy tại thời điểm kết thúc ngày cuối kỳ.</p>
+<p>Các chỉ tiêu được tải như sau:</p>
+<ul>
+<li>Mã 110 — Tiền: tổng số dư tiền mặt và tiền gửi không kỳ hạn.</li>
+<li>Mã 120 — Các khoản nợ phải thu: tổng phải thu khách hàng và các khoản phải thu khác; bao gồm phần thuế GTGT còn được khấu trừ hoặc được hoàn khi thuộc bản chất phải thu.</li>
+<li>Mã 130 — Hàng tồn kho: giá trị cuối kỳ của vật liệu, dụng cụ, sản phẩm, hàng hóa và sản phẩm dở dang đủ điều kiện ghi nhận.</li>
+<li>Mã 140 — Tài sản cố định: nguyên giá trừ khấu hao lũy kế của tài sản còn được theo dõi tại ngày báo cáo.</li>
+<li>Mã 150 — Tài sản khác: tài sản chưa thuộc các mã 110–140, như tiền gửi có kỳ hạn hoặc khoản thuế tạm nộp lớn hơn nghĩa vụ phải nộp.</li>
+<li>Mã 310 — Các khoản nợ phải trả: phải trả người bán, nợ vay, tiền lương, khoản trích theo lương, nhận ký quỹ, ký cược và nghĩa vụ phải trả khác.</li>
+<li>Mã 320 — Thuế và các khoản phải nộp Nhà nước: tổng số GTGT, TNDN và nghĩa vụ thuế khác còn phải nộp.</li>
+<li>Mã 410 — Vốn đầu tư của chủ sở hữu: số vốn chủ sở hữu đã thực góp còn lại cuối kỳ.</li>
+<li>Mã 420 — Lợi nhuận sau thuế chưa phân phối: lãi hoặc lỗ sau thuế chưa phân phối còn lại.</li>
+<li>Mã 430 — Các quỹ thuộc vốn chủ sở hữu: số dư các quỹ tại ngày báo cáo.</li>
+</ul>
+<p>Công thức kiểm tra:</p>
+<ul>
+<li>200 = 110 + 120 + 130 + 140 + 150.</li>
+<li>300 = 310 + 320.</li>
+<li>400 = 410 + 420 + 430.</li>
+<li>500 = 300 + 400.</li>
+<li>200 phải bằng 500.</li>
+</ul>
+<p>Nếu tổng tài sản không bằng tổng nguồn vốn, hệ thống không cho phê duyệt. Người dùng phải mở danh sách chênh lệch để xác định khoản tiền, công nợ, tồn kho, tài sản, thuế hoặc vốn chưa được phân loại; không sửa trực tiếp một dòng tổng để ép cân.</p>
+<p><strong>Luồng lập báo cáo:</strong></p>
+<ol>
+<li>Người dùng chọn năm tài chính.</li>
+<li>Hệ thống khóa phạm vi tại toàn doanh nghiệp và tải số đầu năm.</li>
+<li>Hệ thống tổng hợp số cuối năm theo từng nhóm tài sản, nợ phải trả và vốn.</li>
+<li>Hệ thống tính các dòng tổng và kiểm tra cân đối.</li>
+<li>Người dùng xử lý dòng thiếu phân loại hoặc chênh lệch.</li>
+<li>Người lập biểu, người phụ trách kế toán và người đại diện theo pháp luật xác nhận theo thẩm quyền.</li>
+<li>Hệ thống lưu phiên bản đã phê duyệt và cho xuất biểu mẫu.</li>
+</ol>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<p>Số cuối năm gồm:</p>
+<ul>
+<li>Tiền: 80.000.000 đồng.</li>
+<li>Nợ phải thu: 45.000.000 đồng.</li>
+<li>Hàng tồn kho: 120.000.000 đồng.</li>
+<li>Tài sản cố định còn lại: 150.000.000 đồng.</li>
+<li>Tài sản khác: 5.000.000 đồng.</li>
+</ul>
+<p>Kết quả:</p>
+<ul>
+<li>Tổng tài sản = 80.000.000 + 45.000.000 + 120.000.000 + 150.000.000 + 5.000.000 = 400.000.000 đồng.</li>
+<li>Nợ phải trả và thuế phải nộp: 100.000.000 đồng.</li>
+<li>Vốn đầu tư, lợi nhuận chưa phân phối và quỹ: 300.000.000 đồng.</li>
+<li>Tổng nguồn vốn = 100.000.000 + 300.000.000 = 400.000.000 đồng.</li>
+<li>Báo cáo cân bằng vì mã 200 bằng mã 500.</li>
+</ul>
+</blockquote>
+<h3 id="section-38-7-2">38.7.2. Báo cáo kết quả hoạt động kinh doanh: Mẫu số B02-DNSN</h3>
+<p><strong>Đối tượng sử dụng:</strong> Doanh nghiệp siêu nhỏ cần trình bày doanh thu, chi phí và kết quả kinh doanh của năm tài chính.</p>
+<p><strong>Hình mẫu/wireframe:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>ĐƠN VỊ:</strong> …<br><strong>Địa chỉ:</strong> …</th>
+<th><strong>Mẫu số B02-DNSN</strong><br><em>(Kèm theo Thông tư số 58/2026/TT-BTC ngày 25 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>BÁO CÁO KẾT QUẢ HOẠT ĐỘNG KINH DOANH</strong></p>
+<p><em>Năm …</em><br><em>Đơn vị tính: …</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chỉ tiêu</th>
+<th align="right">Mã số</th>
+<th align="right">Năm nay</th>
+<th align="right">Năm trước</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. Doanh thu và thu nhập thuần</td>
+<td align="right">01</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>2. Các khoản chi phí</td>
+<td align="right">02</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>3. Lợi nhuận kế toán trước thuế TNDN</td>
+<td align="right">03</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>4. Chi phí thuế TNDN</td>
+<td align="right">10</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>5. Lợi nhuận sau thuế TNDN</td>
+<td align="right">20</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BIỂU</strong><br><em>(Ký, ghi rõ họ tên)</em></th>
+<th><strong>KẾ TOÁN TRƯỞNG/NGƯỜI PHỤ TRÁCH KẾ TOÁN</strong><br><em>(Ký, ghi rõ họ tên)</em></th>
+<th>Phê duyệt, ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN THEO PHÁP LUẬT</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu)</em></th>
+</tr>
+</thead>
+</table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<p>Người dùng chọn năm tài chính và đơn vị tiền. Hệ thống tải cột Năm nay theo các nghiệp vụ hoàn tất trong kỳ; cột Năm trước lấy từ báo cáo đã phê duyệt của năm liền trước hoặc số chuyển đổi được phê duyệt.</p>
+<ul>
+<li>Mã 01 — Doanh thu và thu nhập thuần: doanh thu bán hàng, cung cấp dịch vụ và thu nhập khác sau khi trừ trả hàng, giảm giá, hủy và khoản giảm trừ còn hiệu lực.</li>
+<li>Mã 02 — Các khoản chi phí: tổng chi phí nguyên vật liệu, nhân công, khấu hao tài sản cố định, dịch vụ mua ngoài, lãi vay và chi phí khác phục vụ hoạt động.</li>
+<li>Mã 03 — Lợi nhuận kế toán trước thuế TNDN: mã 01 trừ mã 02.</li>
+<li>Mã 10 — Chi phí thuế TNDN: nghĩa vụ thuế TNDN của năm theo phương pháp áp dụng; không lấy số tiền đã nộp thay cho chi phí thuế.</li>
+<li>Mã 20 — Lợi nhuận sau thuế TNDN: mã 03 trừ mã 10.</li>
+</ul>
+<p>Một giao dịch chỉ được tính một lần:</p>
+<ul>
+<li>Tiền thu công nợ không làm tăng doanh thu lần nữa.</li>
+<li>Trả nợ gốc vay không phải chi phí.</li>
+<li>Mua tài sản cố định không được đưa toàn bộ nguyên giá vào chi phí kỳ nếu tài sản phải được khấu hao.</li>
+</ul>
+<p>Công thức:</p>
+<ul>
+<li>03 = 01 - 02.</li>
+<li>20 = 03 - 10.</li>
+</ul>
+<p>Kết quả âm được trình bày là lỗ, không chuyển thành 0. Nếu nguồn doanh thu hoặc chi phí thay đổi sau khi báo cáo đã phê duyệt, bản cũ giữ nguyên và hệ thống đánh dấu cần lập lại hoặc điều chỉnh theo quy trình kiểm soát kỳ.</p>
+<p><strong>Luồng lập báo cáo:</strong></p>
+<ol>
+<li>Người dùng chọn năm tài chính.</li>
+<li>Hệ thống tải số so sánh của năm trước.</li>
+<li>Hệ thống tổng hợp doanh thu, thu nhập và chi phí của năm nay.</li>
+<li>Hệ thống tính lợi nhuận trước thuế, chi phí thuế và lợi nhuận sau thuế.</li>
+<li>Người dùng kiểm tra chênh lệch với sổ chi tiết và xử lý nguồn thiếu phân loại.</li>
+<li>Các vị trí có trách nhiệm xác nhận và phê duyệt.</li>
+<li>Hệ thống lưu phiên bản và cho xuất biểu mẫu.</li>
+</ol>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Doanh thu và thu nhập thuần: 1.200.000.000 đồng.</li>
+<li>Các khoản chi phí: 1.020.000.000 đồng.</li>
+<li>Lợi nhuận trước thuế = 1.200.000.000 - 1.020.000.000 = 180.000.000 đồng.</li>
+<li>Chi phí thuế TNDN: 27.000.000 đồng.</li>
+<li>Lợi nhuận sau thuế = 180.000.000 - 27.000.000 = 153.000.000 đồng.</li>
+</ul>
+</blockquote>
+</article></main>
+    <nav class="chapter-nav"><a href="37-he-thong-so-ke-toan.html">← 37. Thông tư 152 — Hộ kinh doanh</a><a href="39-tt133-tt99-ke-toan.html">39. Thông tư 133 và Thông tư 99 →</a></nav></div></body></html>

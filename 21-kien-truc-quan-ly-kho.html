@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>21. Kiến trúc quản lý kho — Đặc tả POS</title><meta name="description" content="Kiến trúc quản lý kho"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần VI · Chương 21</p><article class="spec"><h1>CHƯƠNG 21. KIẾN TRÚC QUẢN LÝ KHO</h1><details class="section-toc"><summary>Nội dung chương · 22 mục</summary><ol><li><a href="#section-21-1">21.1. Mục đích</a></li><li><a href="#section-21-2">21.2. Phạm vi</a></li><li><a href="#section-21-3">21.3. Nguyên tắc thiết kế nghiệp vụ</a></li><li><a href="#section-21-4">21.4. Vai trò và quyền</a></li><li><a href="#section-21-5">21.5. Danh mục kho</a></li><li><a href="#section-21-6">21.6. Cấu hình chi phối quản lý kho</a></li><li><a href="#section-21-7">21.7. Phân loại phiếu kho</a></li><li><a href="#section-21-8">21.8. Trạng thái và vòng đời phiếu</a></li><li><a href="#section-21-9">21.9. Mô hình tồn hiện tại</a></li><li><a href="#section-21-10">21.10. Tồn theo lần nhập</a></li><li><a href="#section-21-11">21.11. Serial và phương pháp đích danh</a></li><li><a href="#section-21-12">21.12. Phương pháp xác định giá xuất</a></li><li><a href="#section-21-13">21.13. Lịch sử biến động</a></li><li><a href="#section-21-14">21.14. Quan hệ với kỳ kế toán</a></li><li><a href="#section-21-15">21.15. Sửa ngày chứng từ đã hoàn thành</a></li><li><a href="#section-21-16">21.16. Hoàn tác và xóa</a></li><li><a href="#section-21-17">21.17. Tác động liên phân hệ</a></li><li><a href="#section-21-18">21.18. Giao diện quản lý kho</a></li><li><a href="#section-21-19">21.19. Đồng thời, gửi lại và tính nhất quán</a></li><li><a href="#section-21-20">21.20. Kiểm soát và truy vết</a></li><li><a href="#section-21-21">21.21. Báo cáo và chỉ số</a></li><li><a href="#section-21-22">21.22. Tình huống lỗi và cách xử lý</a></li></ol></details>
+<h2 id="section-21-1">21.1. Mục đích</h2>
+<p>Quản lý kho là lớp kiểm soát sự dịch chuyển vật lý của hàng hóa trong toàn doanh nghiệp. Chức năng này trả lời bốn câu hỏi cốt lõi:</p>
+<ul>
+<li>Hàng đang ở kho nào?</li>
+<li>Còn bao nhiêu?</li>
+<li>Có giá trị bao nhiêu?</li>
+<li>Mỗi biến động được tạo ra bởi nghiệp vụ nào?</li>
+</ul>
+<p>Kết quả quản lý kho là căn cứ để bán hàng kiểm tra khả năng đáp ứng, sản xuất xác định nguyên liệu có thể sử dụng, kế toán ghi nhận giá trị hàng tồn và quản lý phát hiện thiếu hụt hoặc hàng chậm luân chuyển.</p>
+<p>Một thay đổi trên danh mục sản phẩm hoặc một thao tác chọn hàng trên màn hình bán không tự làm tăng, giảm tồn kho. Tồn chỉ thay đổi khi một phiếu nhập hoặc phiếu xuất đạt trạng thái hoàn thành. Nguyên tắc này tách rõ ý định kinh doanh khỏi sự kiện hàng hóa đã thực sự đi vào hoặc đi ra khỏi kho.</p>
+<p>Kiến trúc quản lý kho phải duy trì đồng thời ba góc nhìn:</p>
+<ul>
+<li>Số lượng hiện có của từng sản phẩm tại từng kho;</li>
+<li>Số lượng còn lại và giá vốn của từng lần nhập;</li>
+<li>Chuỗi biến động theo thời gian để có thể giải thích số dư hiện tại.</li>
+</ul>
+<p>Ba góc nhìn phải thống nhất với nhau. Khi phát hiện chênh lệch, hệ thống không cho phép người dùng sửa thẳng số tồn mà phải đi qua kiểm kê, điều chỉnh ngày chứng từ hoặc hoàn tác nghiệp vụ phù hợp. Nhờ vậy, mọi thay đổi đều có lý do, người thực hiện và thời điểm xác định.</p>
+<h2 id="section-21-2">21.2. Phạm vi</h2>
+<p>Kiến trúc quản lý kho bao phủ:</p>
+<ol>
+<li>Khai báo và duy trì danh sách kho của doanh nghiệp.</li>
+<li>Gắn kho với chi nhánh khi doanh nghiệp cấu hình sử dụng kho.</li>
+<li>Xác định sản phẩm nào có theo dõi tồn và cách quy đổi đơn vị.</li>
+<li>Tiếp nhận các phiếu nhập, phiếu xuất được tạo thủ công hoặc sinh từ nghiệp vụ khác.</li>
+<li>Quản lý hai trạng thái Nháp và Hoàn thành của phiếu kho.</li>
+<li>Cập nhật số lượng, giá trị, lô nhập và serial khi phiếu có hiệu lực.</li>
+<li>Áp dụng phương pháp tính giá xuất kho theo cấu hình chung hoặc theo nhóm sản phẩm, đồng thời áp dụng đúng cách tính Bình quân mà doanh nghiệp đã chọn.</li>
+<li>Kiểm soát tồn không đủ theo một trong ba chính sách, trong đó mặc định giữ phiếu xuất ở trạng thái chưa hoàn thành.</li>
+<li>Tra cứu tồn hiện tại, lô còn hàng, lịch sử sản phẩm và sổ chi tiết theo ngày.</li>
+<li>Tính lại chuỗi biến động khi ngày của chứng từ thủ công đã hoàn thành được sửa đúng quyền.</li>
+<li>Cung cấp kết quả cho bán hàng, sản xuất, kiểm kê, tài sản cố định, kế toán và báo cáo.</li>
+</ol>
+<p>Mô hình kho bao gồm:</p>
+<ul>
+<li>Nhập mua.</li>
+<li>Hóa đơn đầu vào.</li>
+<li>Xuất kho.</li>
+<li>Điều chuyển.</li>
+<li>Kiểm kê.</li>
+<li>Công thức.</li>
+<li>Sản xuất.</li>
+</ul>
+<p>Mọi nghiệp vụ phải dùng chung kho, sản phẩm, đơn vị chuẩn, thời điểm phát sinh, nguồn lô hoặc serial, trạng thái phiếu và lịch sử biến động được quy định tại đây.</p>
+<h2 id="section-21-3">21.3. Nguyên tắc thiết kế nghiệp vụ</h2>
+<h3 id="section-21-3-1">21.3.1. Kho là nơi giữ hàng, chi nhánh là nơi vận hành</h3>
+<p>Chi nhánh và kho không đồng nghĩa. Chi nhánh mô tả nơi bán hàng hoặc nơi nhân viên làm việc; kho mô tả nơi hàng hóa được lưu giữ. Một kho có thể phục vụ hoạt động của một hoặc nhiều chi nhánh theo cấu hình của doanh nghiệp.</p>
+<p>Nếu doanh nghiệp bật sử dụng kho, mỗi chi nhánh được thêm mới phải chọn kho. Kho đã chọn trở thành kho mặc định cho các nghiệp vụ của chi nhánh, trừ quy trình cho phép người có quyền chọn kho khác. Nếu doanh nghiệp không sử dụng kho, việc thêm chi nhánh không bắt buộc chọn kho và các nghiệp vụ không được giả định rằng luôn tồn tại một kho.</p>
+<h3 id="section-21-3-2">21.3.2. Chỉ sản phẩm theo dõi tồn mới tham gia kho</h3>
+<p>Sản phẩm phải được đánh dấu quản lý tồn mới có thể xuất hiện trên phiếu nhập, phiếu xuất và số tồn. Dịch vụ hoặc sản phẩm không quản lý tồn vẫn có thể được bán, nhưng không được tạo biến động kho chỉ vì có mặt trên đơn hàng.</p>
+<p>Khi một sản phẩm ngừng hoạt động, sản phẩm không còn được chọn cho giao dịch mới nhưng lịch sử nhập, xuất và số tồn cũ vẫn phải đọc được. Việc ngừng bán không tự xóa lượng hàng còn lại. Doanh nghiệp phải xử lý lượng hàng bằng điều chuyển, trả nhà cung cấp, tiêu hủy hoặc nghiệp vụ phù hợp.</p>
+<h3 id="section-21-3-3">21.3.3. Phiếu kho là căn cứ duy nhất làm thay đổi tồn</h3>
+<p>Mọi biến động tăng phải gắn với một phiếu nhập; mọi biến động giảm phải gắn với một phiếu xuất. Không có biến động vừa là nhập vừa là xuất. Không có biến động không xác định được chứng từ tạo ra nó.</p>
+<p>Một nghiệp vụ bên ngoài có thể yêu cầu hệ thống tạo phiếu kho tự động, nhưng kết quả cuối cùng vẫn phải tuân theo cùng cơ chế hoàn thành, giá vốn và truy vết như phiếu được lập tại chức năng kho.</p>
+<h3 id="section-21-3-4">21.3.4. Trạng thái quyết định hiệu lực</h3>
+<p>Phiếu Nháp ghi nhận nội dung đang chuẩn bị. Phiếu này chưa thay đổi tồn, có thể được sửa hoặc xóa theo quyền. Phiếu Hoàn thành ghi nhận hàng đã thực sự được nhận hoặc xuất. Tại thời điểm hoàn thành, hệ thống chốt người hoàn thành, thời điểm hoàn thành, cập nhật tồn và tạo các kết quả liên quan.</p>
+<p>Không sử dụng trạng thái hiển thị ở màn hình làm căn cứ duy nhất. Trước mỗi thao tác hoàn thành, sửa hoặc xóa, hệ thống kiểm tra lại trạng thái hiện tại. Nếu một người khác đã hoàn thành phiếu, yêu cầu đến sau phải bị từ chối thay vì cập nhật tồn lần thứ hai.</p>
+<h3 id="section-21-3-5">21.3.5. Số lượng vận hành theo đơn vị chuẩn</h3>
+<p>Người dùng có thể nhập hoặc xuất bằng đơn vị bán, đơn vị đóng gói hay đơn vị cơ bản. Hệ thống quy đổi về đơn vị chuẩn của sản phẩm trước khi cộng, trừ tồn và đối chiếu số lượng.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Một thùng bằng 24 chai.</li>
+<li>Nhập 3 thùng làm tăng 72 chai trong tồn chuẩn.</li>
+<li>Màn hình vẫn có thể trình bày 3 thùng để người dùng nhận biết cách giao dịch, nhưng mọi phép kiểm tra khả dụng phải dựa trên 72 chai.</li>
+<li>Hệ số quy đổi phải lớn hơn không và phải thuộc đúng sản phẩm.</li>
+</ul>
+</blockquote>
+<h3 id="section-21-3-6">21.3.6. Giá trị đi cùng số lượng</h3>
+<p>Mỗi lần nhập hoàn thành tạo một nguồn giá trị cho hàng tồn. Khi xuất, hệ thống xác định phần giá trị cần giảm theo phương pháp của sản phẩm. Sau mỗi biến động, số lượng còn lại và giá trị còn lại phải được cập nhật cùng nhau.</p>
+<p>Không được có tình trạng số lượng đã tăng nhưng giá trị chưa được xác định đối với một phiếu bắt buộc có giá vốn. Nếu giá nhập bằng không là hợp lệ, hệ thống vẫn ghi nhận rõ đó là giá trị bằng không, không coi là thiếu thông tin.</p>
+<h3 id="section-21-3-7">21.3.7. Lịch sử không bị viết lại âm thầm</h3>
+<p>Khi sửa ngày một chứng từ đã hoàn thành, thứ tự các lần nhập và xuất có thể thay đổi, kéo theo thay đổi cách chọn lô và giá vốn. Hệ thống phải tính lại toàn bộ chuỗi bị ảnh hưởng từ ngày sớm hơn giữa ngày cũ và ngày mới đến hiện tại. Người dùng phải nhập lý do và có quyền đặc biệt.</p>
+<p>Nếu một nghiệp vụ không cho phép sửa trực tiếp sau hoàn thành, người dùng phải xử lý tại nghiệp vụ nguồn hoặc thực hiện hoàn tác theo quy định. Không chuyển một phiếu tự động thành phiếu thủ công chỉ để vượt qua giới hạn này.</p>
+<h2 id="section-21-4">21.4. Vai trò và quyền</h2>
+<h3 id="section-21-4-1">21.4.1. Người quản lý kho</h3>
+<p>Người có quyền quản lý kho được tạo kho, sửa thông tin liên hệ, thay đổi trạng thái hoạt động và xóa kho khi thỏa điều kiện. Người này không mặc nhiên có quyền nhập, xuất, kiểm kê hoặc xem giá vốn nếu chưa được cấp các quyền tương ứng.</p>
+<h3 id="section-21-4-2">21.4.2. Nhân viên nhập kho</h3>
+<p>Nhân viên có quyền nhập kho được lập, sửa, hoàn thành và xóa phiếu nhập thủ công khi phiếu còn Nháp. Người này có thể bổ sung hoặc gỡ tệp đính kèm trong phạm vi được cho phép, thực hiện thanh toán nhập mua và xóa thanh toán theo hành động hiện có trên phiếu.</p>
+<h3 id="section-21-4-3">21.4.3. Nhân viên xuất kho</h3>
+<p>Nhân viên có quyền xuất kho được lập và xử lý các loại xuất thủ công. Quyền xuất kho không tự cho phép sửa hoặc xóa phiếu xuất đã hoàn thành.</p>
+<h3 id="section-21-4-4">21.4.4. Nhân viên kiểm kê</h3>
+<p>Nhân viên kiểm kê được lập đợt kiểm kê, ghi số thực tế và hoàn thành kết quả. Các phiếu điều chỉnh được sinh ra từ kiểm kê phải giữ liên kết về đợt kiểm kê đã tạo chúng.</p>
+<h3 id="section-21-4-5">21.4.5. Người xem tồn kho</h3>
+<p>Quyền tồn kho cho phép mở danh sách tồn, lọc theo kho và nhóm sản phẩm, xem tổng nhập, tổng xuất, tồn hiện tại và giá trị bán tham chiếu. Giá trị vốn chỉ được hiển thị khi người dùng có thêm quyền xem giá vốn.</p>
+<h3 id="section-21-4-6">21.4.6. Người tra cứu lịch sử hàng hóa</h3>
+<p>Quyền tra cứu lịch sử cho phép đi từ một sản phẩm đến chuỗi nhập, xuất, số dư sau giao dịch và nguồn chứng từ. Quyền này tách biệt với quyền sửa chứng từ.</p>
+<h3 id="section-21-4-7">21.4.7. Quyền sửa hoặc xóa phiếu đã hoàn thành</h3>
+<p>Phiếu nhập và phiếu xuất có hai quyền đặc biệt riêng để sửa ngày hoặc xóa sau hoàn thành. Có quyền vẫn chưa đủ; loại phiếu phải thuộc nhóm được phép và không vi phạm các điều kiện về lô đã xuất, nghiệp vụ nguồn, tài chính hoặc tài sản.</p>
+<h2 id="section-21-5">21.5. Danh mục kho</h2>
+<h3 id="section-21-5-1">21.5.1. Thông tin một kho</h3>
+<p>Một kho được nhận diện bằng tên và thuộc duy nhất một doanh nghiệp. Kho có thể có địa chỉ, số điện thoại, thư điện tử và trạng thái hoạt động. Tên kho dùng để lựa chọn và tra cứu nên phải rõ nghĩa trong phạm vi doanh nghiệp, chẳng hạn Kho trung tâm, Kho cửa hàng Quận 1 hoặc Kho bếp.</p>
+<h3 id="section-21-5-2">21.5.2. Tạo kho</h3>
+<p>Người dùng mở chức năng quản lý kho, nhập thông tin cần thiết và xác nhận tạo. Kho mới chỉ thuộc doanh nghiệp hiện tại. Người dùng của doanh nghiệp khác không thể nhìn thấy hoặc chọn kho này.</p>
+<p>Sau khi tạo, kho có thể được gắn cho chi nhánh và dùng trên các phiếu kho. Việc tạo kho không tự sinh số tồn, không tự chuyển hàng từ kho khác và không tự bật quản lý tồn cho sản phẩm.</p>
+<h3 id="section-21-5-3">21.5.3. Sửa kho</h3>
+<p>Tên, địa chỉ, số điện thoại, thư điện tử và trạng thái hoạt động có thể được cập nhật. Thay đổi tên kho chỉ đổi cách hiển thị hiện tại; các chứng từ cũ vẫn phải xác định được đúng kho đã phát sinh.</p>
+<p>Kho ngừng hoạt động không còn xuất hiện trong danh sách chọn cho nghiệp vụ mới. Việc ngừng hoạt động không xóa hàng đang còn, không hoàn tác phiếu cũ và không làm biến mất kho khỏi báo cáo lịch sử.</p>
+<h3 id="section-21-5-4">21.5.4. Xóa kho</h3>
+<p>Hệ thống không cho xóa kho đã có phiếu nhập. Đây là dấu hiệu kho đã tham gia vòng đời hàng hóa và cần được giữ lại để tra cứu. Cách xử lý thông thường đối với kho không dùng nữa là chuyển hết hàng cần thiết, kiểm tra số tồn và chuyển kho sang ngừng hoạt động.</p>
+<p>Nếu kho chưa có nghiệp vụ nhập và đủ điều kiện xóa, việc xóa chỉ loại bỏ kho khỏi danh sách sử dụng. Hệ thống phải kiểm tra kho thuộc đúng doanh nghiệp và yêu cầu quyền quản lý kho.</p>
+<h2 id="section-21-6">21.6. Cấu hình chi phối quản lý kho</h2>
+<h3 id="section-21-6-1">21.6.1. Phương pháp tính giá xuất kho</h3>
+<p>Phương pháp tính giá xuất kho là cấu hình cấp doanh nghiệp, mặc định là <strong>Bình quân</strong>. Doanh nghiệp có thể chọn Bình quân, Đích danh, Nhập trước xuất trước, Nhập sau xuất trước hoặc Theo nhóm sản phẩm. Khi chọn Theo nhóm, từng nhóm xác định phương pháp cho các sản phẩm của mình. Hộ kinh doanh luôn dùng Bình quân và không thấy lựa chọn đổi phương pháp. Phiếu xuất sử dụng phương pháp có hiệu lực của sản phẩm tại thời điểm nghiệp vụ để chọn nguồn và xác định giá vốn.</p>
+<h3 id="section-21-6-2">21.6.2. Cách tính Bình quân</h3>
+<ul>
+<li>Sản phẩm dùng Bình quân còn chịu một cấu hình cấp doanh nghiệp gồm <strong>Sau từng lô nhập</strong> và <strong>Theo từng kỳ</strong>.</li>
+<li>Mặc định là Sau từng lô nhập.</li>
+<li>Lựa chọn này áp dụng cho mọi nhóm đang dùng Bình quân và chỉ được hiển thị khi doanh nghiệp bật sử dụng kho và quản lý tồn.</li>
+<li>Sau từng lô nhập tính lại đơn giá ngay khi một lần nhập hoàn thành.</li>
+<li>Theo từng kỳ tính riêng theo sản phẩm, kho và kỳ kế toán rồi cập nhật các lần xuất chịu ảnh hưởng.</li>
+</ul>
+<h3 id="section-21-6-3">21.6.3. Tự động gợi ý giá nhập</h3>
+<p>Đối với phiếu nhập thủ công, doanh nghiệp có thể chọn không tự điền, lấy giá của lần nhập gần nhất hoặc lấy giá bình quân của kho được chọn ngay trước lần nhập. Mặc định là <strong>không tự động điền</strong>; sản phẩm chưa có dữ liệu phù hợp được gợi ý bằng không. Đây chỉ là giá gợi ý và vẫn được sửa trước khi hoàn thành. Khi đổi đơn vị, hệ thống quy đổi cả số lượng chuẩn và đơn giá để tổng giá trị không đổi.</p>
+<h3 id="section-21-6-4">21.6.4. Xử lý khi tồn không đủ</h3>
+<ul>
+<li>Cấu hình cấp doanh nghiệp có ba lựa chọn: thông báo lỗi.</li>
+<li>Giữ phiếu xuất chưa hoàn thành.</li>
+<li>Hoặc cho phép trừ âm tồn kho.</li>
+<li>Mặc định là <strong>Không xử lý hoàn thành phiếu xuất</strong>.</li>
+<li>Serial luôn phải có thật trong đúng kho và không được xuất âm.</li>
+<li>Đơn có Phiếu xuất bán còn Nháp chưa được trả hàng.</li>
+<li>Nếu Phiếu xuất đã hoàn thành theo cách Trừ âm, phần hàng còn thiếu nguồn cũng chưa được trả cho đến khi nguồn và giá vốn gốc được xác định đủ.</li>
+</ul>
+<h3 id="section-21-6-5">21.6.5. Phương pháp tính thuế giá trị gia tăng</h3>
+<ul>
+<li>Phương pháp thuế tác động trực tiếp đến giá vốn nhập mua: theo phương pháp Khấu trừ, VAT đầu vào được tách và <strong>không đưa vào giá vốn</strong>.</li>
+<li>Theo phương pháp Trực tiếp, giá vốn dùng số tiền thực tế doanh nghiệp phải trả.</li>
+<li>Giá mua và chi phí mua hàng đủ điều kiện hình thành giá nhập.</li>
+<li>Giá vốn xuất lấy từ nguồn nhập đã xác định theo phương pháp có hiệu lực.</li>
+</ul>
+<h3 id="section-21-6-6">21.6.6. Kỳ kế toán</h3>
+<p>Ngày nhập và ngày xuất xác định kỳ mà biến động tham gia. Module Kho không dùng trạng thái khóa kỳ kế toán để chặn hoàn thành, sửa hoặc xóa; thao tác vẫn phải thỏa quyền, loại phiếu, ngày hợp lệ và các quan hệ phụ thuộc. Khi ngày thay đổi hợp lệ, hệ thống xác định lại các kỳ liên quan và tính lại số dư chịu ảnh hưởng.</p>
+<h2 id="section-21-7">21.7. Phân loại phiếu kho</h2>
+<h3 id="section-21-7-1">21.7.1. Phiếu nhập</h3>
+<p>Hệ thống hỗ trợ sáu loại nhập:</p>
+<ol>
+<li>Nhập mua ngoài từ nhà cung cấp.</li>
+<li>Nhập thành phẩm hoặc bán thành phẩm từ sản xuất nội bộ.</li>
+<li>Nhập từ điều chuyển nội bộ.</li>
+<li>Nhập lại do khách trả hàng.</li>
+<li>Nhập điều chỉnh khi kiểm kê thừa.</li>
+<li>Nhập số dư ban đầu.</li>
+</ol>
+<p>Nhập mua ngoài và nhập ban đầu được lập thủ công tại màn hình tạo phiếu nhập. Bốn loại còn lại được hình thành từ nghiệp vụ nguồn và không được lập tùy ý để tránh mất liên kết.</p>
+<h3 id="section-21-7-2">21.7.2. Phiếu xuất</h3>
+<p>Hệ thống hỗ trợ tám loại xuất:</p>
+<ol>
+<li>Xuất để bán hàng.</li>
+<li>Xuất nguyên liệu cho sản xuất.</li>
+<li>Xuất điều chuyển sang kho khác.</li>
+<li>Xuất trả nhà cung cấp.</li>
+<li>Xuất điều chỉnh khi kiểm kê thiếu.</li>
+<li>Xuất tiêu hủy.</li>
+<li>Xuất tiêu hao nội bộ.</li>
+<li>Xuất hàng để hình thành tài sản cố định đưa vào sử dụng.</li>
+</ol>
+<p>Xuất bán, xuất sản xuất và xuất kiểm kê hình thành từ nghiệp vụ liên quan. Điều chuyển, trả nhà cung cấp, tiêu hủy, tiêu hao nội bộ và xuất tài sản được người có quyền lập tại chức năng kho.</p>
+<h3 id="section-21-7-3">21.7.3. Nguồn tạo</h3>
+<p>Mỗi phiếu thể hiện được nó được tạo thủ công hay tự động. Phiếu tự động phải giữ liên kết với đơn hàng, lần sản xuất, phiếu điều chuyển hoặc đợt kiểm kê đã tạo ra nó. Người dùng tra cứu từ phiếu kho có thể nhận biết lý do phát sinh và đi đến nghiệp vụ nguồn khi có quyền.</p>
+<h2 id="section-21-8">21.8. Trạng thái và vòng đời phiếu</h2>
+<h3 id="section-21-8-1">21.8.1. Nháp</h3>
+<p>Phiếu Nháp chưa làm thay đổi số tồn. Người dùng có quyền phù hợp có thể sửa ngày, kho, đối tượng liên quan, danh sách sản phẩm, số lượng, đơn vị, giá, serial, ghi chú và tệp đính kèm trong giới hạn của loại phiếu.</p>
+<p>Phiếu tự động chỉ ở trạng thái Nháp khi chính sách thiếu tồn mặc định giữ phiếu xuất chưa hoàn thành, hoặc khi phiếu nhập thành phẩm phụ thuộc một phiếu xuất nguyên vật liệu chưa hoàn thành. Nội dung của các phiếu này do nghiệp vụ nguồn quyết định và không được sửa hoặc xóa trực tiếp tại kho. Các lỗi khác phải báo thất bại ở bước nghiệp vụ tương ứng, không để lại một phiếu tự động Nháp như thể đang chờ đủ hàng.</p>
+<h3 id="section-21-8-2">21.8.2. Hoàn thành</h3>
+<p>Phiếu Hoàn thành đã tác động đến tồn. Hệ thống ghi nhận thời điểm và người hoàn thành, chốt giá vốn cần thiết, cập nhật lô cùng serial, ghi nhận biến động theo thời gian và đồng bộ kết quả cho nghiệp vụ liên quan.</p>
+<p>Hoàn thành là hành động có tính nguyên khối. Nếu một bước bắt buộc thất bại, chẳng hạn serial không hợp lệ hoặc không tính được giá vốn, toàn bộ thao tác phải thất bại; không để phiếu được đánh dấu hoàn thành trong khi tồn chưa cập nhật hoặc ngược lại.</p>
+<h3 id="section-21-8-3">21.8.3. Không có thao tác hoàn thành lặp</h3>
+<p>Nếu người dùng gửi lại yêu cầu do mạng chậm, hệ thống kiểm tra phiếu đã hoàn thành hay chưa. Yêu cầu sau không được cộng hoặc trừ tồn lần nữa. Màn hình làm mới và hiển thị trạng thái thực tế để người dùng biết lần trước đã thành công.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 590" role="img" aria-labelledby="title-warehouse-lifecycle-18 desc-warehouse-lifecycle-18" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-warehouse-lifecycle-18">Từ chứng từ gốc đến biến động kho</title><desc id="desc-warehouse-lifecycle-18">NGUỒN THỦ CÔNG. Nhập mua · ban đầu. Xuất chuyển · tiêu hao · TSCĐ; NGUỒN TỰ ĐỘNG. Bán · trả · sản xuất. Điều chuyển · kiểm kê; PHIẾU NHÁP. Chưa tăng/giảm tồn. Kiểm tra điều kiện khi Hoàn thành; PHIẾU HOÀN THÀNH. Ghi lượng · lô · serial · giá trị. Cập nhật lịch sử và số dư. Kích hoạt xử lý liên quan</desc><defs><marker id="arrow-warehouse-lifecycle-18" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M235 94 V140 H480 V180" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-warehouse-lifecycle-18)"/><path d="M725 94 V140 H480 V180" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-warehouse-lifecycle-18)"/><path d="M480 267 V326 H480 V380" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-warehouse-lifecycle-18)"/><text x="542" y="317" text-anchor="middle" font-size="15" fill="#4e615b">Đủ điều kiện</text><g><rect x="70" y="16" width="330" height="78" rx="10" fill="#183d36" stroke="#708c82"/><text x="235" fill="#fff" text-anchor="middle" font-size="16"><tspan x="235" y="39" font-weight="700">NGUỒN THỦ CÔNG</tspan><tspan x="235" y="61">Nhập mua · ban đầu</tspan><tspan x="235" y="83">Xuất chuyển · tiêu hao · TSCĐ</tspan></text></g><g><rect x="560" y="16" width="330" height="78" rx="10" fill="#183d36" stroke="#708c82"/><text x="725" fill="#fff" text-anchor="middle" font-size="16"><tspan x="725" y="39" font-weight="700">NGUỒN TỰ ĐỘNG</tspan><tspan x="725" y="61">Bán · trả · sản xuất</tspan><tspan x="725" y="83">Điều chuyển · kiểm kê</tspan></text></g><g><rect x="300" y="185" width="360" height="82" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="210" font-weight="700">PHIẾU NHÁP</tspan><tspan x="480" y="232">Chưa tăng/giảm tồn</tspan><tspan x="480" y="254">Kiểm tra điều kiện khi Hoàn thành</tspan></text></g><g><rect x="300" y="385" width="360" height="104" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="410" font-weight="700">PHIẾU HOÀN THÀNH</tspan><tspan x="480" y="432">Ghi lượng · lô · serial · giá trị</tspan><tspan x="480" y="454">Cập nhật lịch sử và số dư</tspan><tspan x="480" y="476">Kích hoạt xử lý liên quan</tspan></text></g></svg></div><figcaption><strong>Từ chứng từ gốc đến biến động kho.</strong> Phiếu Nháp chưa làm thay đổi tồn. Phiếu tự động phải được điều chỉnh từ nghiệp vụ gốc, ngoại trừ thao tác Hoàn thành phiếu đang chờ đủ hàng. Hoàn thành mới ghi số lượng, lô, serial và giá trị.</figcaption></figure>
+
+<h2 id="section-21-9">21.9. Mô hình tồn hiện tại</h2>
+<p>Tồn hiện tại được xác định theo cặp kho và sản phẩm. Một sản phẩm có thể còn 10 đơn vị ở Kho A và 5 đơn vị ở Kho B; hai số lượng này độc lập. Tổng tồn toàn doanh nghiệp là tổng số lượng ở các kho thuộc doanh nghiệp.</p>
+<p>Sau một phiếu nhập hoàn thành:</p>
+<p><strong>Tồn mới = Tồn trước + Số lượng nhập đã quy đổi.</strong></p>
+<p>Sau một phiếu xuất hoàn thành:</p>
+<p><strong>Tồn mới = Tồn trước - Số lượng xuất đã quy đổi.</strong></p>
+<p>Nếu doanh nghiệp cho phép tồn âm, số mới có thể nhỏ hơn không đối với sản phẩm không quản lý serial. Nếu không cho phép, thao tác xuất phải tuân theo chính sách đã cấu hình. Khi nhập hàng vào sản phẩm đang âm, lượng tổng được cộng theo đúng phiếu</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Tồn âm 5 và nhập 7 thì số tồn mới là 2.</li>
+</ul>
+</blockquote>
+<p>Việc cộng lượng tổng và việc bổ sung nguồn lô là hai kết quả cần phân biệt. Lô nhập chỉ được gắn bù cho phần xuất thiếu khi thời điểm nhập <strong>trước thời điểm xuất</strong>. Một lô được dùng để bổ sung nguồn không làm tổng xuất tăng thêm, bởi số lượng xuất đã được ghi nhận đầy đủ tại lần hoàn thành phiếu xuất ban đầu.</p>
+<p>Danh sách tồn hiển thị kho, mã và tên sản phẩm, nhóm, tổng nhập, tổng xuất, số còn lại, đơn vị chuẩn, đơn giá bán tham chiếu và thành tiền theo giá bán. Giá trị vốn chỉ hiển thị cho người có quyền. Khi tổng nhập trừ tổng xuất không khớp số tồn hiện tại, màn hình làm nổi bật dòng cần kiểm tra.</p>
+<h2 id="section-21-10">21.10. Tồn theo lần nhập</h2>
+<p>Mỗi phiếu nhập hoàn thành hình thành một lần nhập có số lượng ban đầu, số lượng còn lại và giá vốn đơn vị. Góc nhìn này cho biết hàng còn lại đến từ lần mua, lần sản xuất, lần điều chuyển, lần trả hàng, kiểm kê hay số dư ban đầu nào.</p>
+<p>Khi một lần xuất lấy hàng từ nguồn nhập cụ thể, số lượng còn lại của nguồn đó giảm. Giá vốn đơn vị của nguồn nhập đã chốt không đổi, trừ khi người có quyền thực hiện một quy trình điều chỉnh làm hệ thống tính lại toàn bộ phạm vi ảnh hưởng.</p>
+<p>Khi chính sách cho âm được áp dụng, phần xuất có đủ nguồn vẫn trừ vào các lần nhập hợp lệ như bình thường; phần chưa có nguồn được giữ như lượng chờ phân bổ. Không tạo một lô nhập giả hoặc ép một lô thực tế xuống âm để che phần thiếu. Một phiếu nhập được bổ sung hoặc ghi lùi ngày chỉ được dùng để hoàn thiện phần chờ nếu thời điểm nhập đứng trước thời điểm xuất.</p>
+<p>Giá trị còn lại của một lần nhập được xác định:</p>
+<p><strong>Giá trị còn lại = Số lượng còn lại × Giá vốn đơn vị của lần nhập.</strong></p>
+<p>Người dùng có thể mở chức năng xem các lần nhập từ danh sách tồn để biết mã phiếu, ngày nhập, số lượng nhập, số còn lại và giá vốn tương ứng. Việc xem này không cho phép sửa trực tiếp số lượng còn lại.</p>
+<h2 id="section-21-11">21.11. Serial và phương pháp đích danh</h2>
+<h3 id="section-21-11-1">21.11.1. Ý nghĩa</h3>
+<p>Serial là mã duy nhất nhận diện từng đơn vị hàng. Phương pháp đích danh dùng serial để xác định chính xác lần nhập và giá vốn của hàng được xuất. Cách quản lý này phù hợp với điện thoại, máy tính, đồng hồ, thiết bị hoặc tài sản cần theo dõi riêng.</p>
+<h3 id="section-21-11-2">21.11.2. Nhập serial</h3>
+<p>Nếu sản phẩm yêu cầu serial, số serial hợp lệ phải bằng số lượng nhập theo đơn vị có thể đếm riêng. Nhập 5 thiết bị yêu cầu 5 serial khác nhau. Serial rỗng, trùng trong cùng phiếu, đã tồn tại không hợp lệ hoặc không thuộc đúng sản phẩm phải bị từ chối.</p>
+<h3 id="section-21-11-3">21.11.3. Xuất serial</h3>
+<p>Khi xuất sản phẩm đích danh, người dùng chọn serial đang còn trong đúng kho. Hệ thống lấy giá vốn của chính lần nhập chứa serial đó. Serial đã xuất không thể được chọn lại, trừ khi một nghiệp vụ trả hàng hoặc hoàn tác hợp lệ đưa nó trở lại kho.</p>
+<h3 id="section-21-11-4">21.11.4. Điều chuyển và trả hàng</h3>
+<p>Serial đi cùng hàng qua điều chuyển. Phiếu nhập kho đích sử dụng đúng serial đã xuất khỏi kho nguồn. Khi khách trả hàng, serial phải phù hợp với hàng đã bán trong giao dịch gốc. Nhờ đó lịch sử của từng thiết bị được giữ xuyên suốt.</p>
+<h2 id="section-21-12">21.12. Phương pháp xác định giá xuất</h2>
+<h3 id="section-21-12-1">21.12.1. Bình quân gia quyền</h3>
+<p>Phương pháp Bình quân có hai cách tính. Với <strong>Sau từng lô nhập</strong>, hệ thống tính lại đơn giá sau mỗi lần nhập hoàn thành và phiếu xuất dùng đơn giá đã xác định sau lần nhập gần nhất trước thời điểm xuất. Với <strong>Theo từng kỳ</strong>, đơn giá được tính riêng cho sản phẩm, kho và kỳ kế toán từ tồn đầu kỳ cùng toàn bộ lần nhập đã hoàn thành trong kỳ. Khi chứng từ quá khứ thay đổi, hệ thống tính lại từ thời điểm sớm nhất bị ảnh hưởng đến hiện tại.</p>
+<h3 id="section-21-12-2">21.12.2. Nhập trước xuất trước</h3>
+<p>Hệ thống ưu tiên lần nhập có ngày sớm nhất còn hàng. Nếu một lần nhập không đủ, phần còn thiếu được lấy tiếp từ lần nhập kế tiếp. Kết quả xuất phải thể hiện được số lượng đã lấy từ từng nguồn và giá vốn tương ứng.</p>
+<h3 id="section-21-12-3">21.12.3. Nhập sau xuất trước</h3>
+<p>Hệ thống ưu tiên lần nhập có ngày gần nhất còn hàng. Nếu cần lấy từ nhiều nguồn, hệ thống đi ngược dần theo thứ tự thời gian. Mọi lần lấy phải được truy vết.</p>
+<h3 id="section-21-12-4">21.12.4. Đích danh</h3>
+<p>Nguồn nhập được xác định bởi serial người dùng chọn. Giá vốn không phụ thuộc thứ tự nhập mà phụ thuộc chính serial đã xuất.</p>
+<h3 id="section-21-12-5">21.12.5. Tùy chọn theo nhóm sản phẩm</h3>
+<p>Khi doanh nghiệp chọn chế độ này, hệ thống đọc phương pháp của nhóm chứa sản phẩm. Nếu nhóm chưa có phương pháp hợp lệ, nghiệp vụ xuất phải dừng và hướng dẫn người quản trị bổ sung cấu hình.</p>
+<h2 id="section-21-13">21.13. Lịch sử biến động</h2>
+<p>Mỗi lần nhập hoặc xuất hoàn thành tạo một dấu mốc trong lịch sử của sản phẩm tại kho. Dấu mốc cho biết ngày nghiệp vụ, loại nhập hoặc xuất, mã phiếu, số lượng tăng hoặc giảm, giá trị tăng hoặc giảm và số dư ngay sau giao dịch.</p>
+<p>Lịch sử được sắp theo trình tự nghiệp vụ để người dùng đi từ tồn đầu đến tồn cuối. Khi nhiều giao dịch có cùng ngày, hệ thống vẫn cần một thứ tự ổn định để kết quả tính lô có thể lặp lại. Mã phiếu và thời điểm hoàn thành hỗ trợ phân biệt các giao dịch.</p>
+<p>Tra cứu lịch sử sản phẩm cho phép xem cả các thành phần đơn vị quy đổi và nguồn phiếu. Sổ chi tiết theo ngày cho phép chọn khoảng thời gian, kho hoặc chi nhánh, sau đó xem tồn đầu, nhập, xuất và số cuối. Người dùng có thể xuất kết quả phục vụ đối chiếu trong giới hạn số dòng cho phép.</p>
+<h2 id="section-21-14">21.14. Quan hệ với kỳ kế toán</h2>
+<p>Mỗi kỳ theo dõi tồn đầu, số lượng và giá trị nhập trong kỳ, số lượng xuất trong kỳ cùng tồn chuyển sang kỳ sau. Công thức số lượng tổng quát là:</p>
+<p><strong>Tồn cuối kỳ = Tồn đầu kỳ + Nhập trong kỳ - Xuất trong kỳ.</strong></p>
+<p>Khi hệ thống xác định kỳ tiếp theo, tồn cuối của kỳ trước trở thành tồn đầu của kỳ đó. Giá trị chuyển kỳ phải phù hợp với phương pháp đang áp dụng và các lần nhập còn hàng. Bình quân Theo từng kỳ dùng trực tiếp tồn đầu kỳ trong công thức; Bình quân Sau từng lô nhập dùng lượng và giá trị đang tồn làm căn cứ trước lần nhập tiếp theo.</p>
+<p>Việc chia kỳ dùng để tổng hợp và chuyển số dư, không phải điều kiện khóa nghiệp vụ kho. Một thay đổi hợp lệ phải cập nhật kỳ bị ảnh hưởng, chuyển tiếp số dư sang các kỳ sau và giữ đủ lý do cùng lịch sử thao tác.</p>
+<h2 id="section-21-15">21.15. Sửa ngày chứng từ đã hoàn thành</h2>
+<h3 id="section-21-15-1">21.15.1. Phạm vi được phép</h3>
+<p>Ngày nhập của phiếu mua ngoài và phiếu nhập ban đầu lập thủ công có thể được sửa sau hoàn thành nếu người dùng có quyền sửa, xóa phiếu nhập đã hoàn thành. Ngày của phiếu sinh từ sản xuất, điều chuyển, trả hàng hoặc kiểm kê không được sửa trực tiếp tại kho.</p>
+<p>Đối với phiếu xuất, chỉ các loại thủ công được quy định mới cho sửa ngày sau hoàn thành. Phiếu bán hàng, sản xuất hoặc kiểm kê phải được xử lý từ nghiệp vụ nguồn.</p>
+<h3 id="section-21-15-2">21.15.2. Điều kiện nhập</h3>
+<p>Ngày mới phải hợp lệ và không ở tương lai. Người dùng phải nhập lý do. Hệ thống kiểm tra quyền, loại phiếu, trạng thái và các quan hệ phụ thuộc ngay lúc xác nhận; không chặn chỉ vì kỳ kế toán đã khóa.</p>
+<h3 id="section-21-15-3">21.15.3. Phạm vi tính lại</h3>
+<p>Thời gian ảnh hưởng bắt đầu từ ngày sớm hơn giữa ngày cũ và ngày mới, kéo dài đến hiện tại. Hệ thống xác định các sản phẩm của phiếu, các lần nhập và xuất của những sản phẩm này trong khoảng ảnh hưởng, rồi sắp xếp lại theo ngày.</p>
+<p>Đối với Bình quân Theo từng kỳ, hệ thống tính lại các kỳ và phiếu xuất bị ảnh hưởng. Đối với Bình quân Sau từng lô nhập, hệ thống phát lại chuỗi nhập xuất và dùng đơn giá sau lần nhập gần nhất trước từng lần xuất. Đối với nhập trước xuất trước hoặc nhập sau xuất trước, hệ thống xác định lại nguồn hàng của từng lần xuất. Đối với đích danh, quan hệ serial được giữ nhưng giá trị và kỳ liên quan vẫn phải được kiểm tra.</p>
+<h3 id="section-21-15-4">21.15.4. Kết quả</h3>
+<p>Sau khi tính lại, tồn hiện tại, số còn theo lần nhập, giá trị tồn, giá vốn xuất và số tổng hợp theo kỳ phải khớp. Hệ thống giữ ngày cũ, ngày mới, lý do, người sửa và thời điểm sửa để tra cứu.</p>
+<h2 id="section-21-16">21.16. Hoàn tác và xóa</h2>
+<h3 id="section-21-16-1">21.16.1. Phiếu Nháp</h3>
+<p>Phiếu Nháp có thể xóa khi người dùng có quyền xử lý loại phiếu đó. Vì chưa làm thay đổi tồn, việc xóa không sinh biến động bù. Các nội dung phụ chưa có hiệu lực, như tệp đính kèm hoặc liên kết nhập hóa đơn, được dọn theo cùng thao tác.</p>
+<h3 id="section-21-16-2">21.16.2. Phiếu Hoàn thành</h3>
+<p>Xóa phiếu Hoàn thành là hoàn tác một sự kiện kho, không chỉ là bỏ một dòng khỏi danh sách. Hệ thống phải kiểm tra hàng của lần nhập đã được dùng ở giao dịch sau hay chưa, có thanh toán hoặc công nợ liên quan không, có nghiệp vụ nguồn phải xóa cùng không và người dùng có quyền đặc biệt hay không.</p>
+<p>Nếu lô nhập đã phát sinh xuất, phiếu nhập không được xóa vì việc đó sẽ làm mất nguồn của hàng đã xuất. Nếu phiếu sinh từ sản xuất, điều chuyển hoặc kiểm kê, hệ thống yêu cầu xác nhận xóa dây chuyền và hoàn tác các phiếu liên quan theo đúng thứ tự.</p>
+<p>Phiếu nhập trả hàng không được xóa trực tiếp. Người dùng xử lý theo nghiệp vụ trả hàng gốc để bảo đảm đơn hàng, tiền, công nợ và kho thống nhất.</p>
+<h3 id="section-21-16-3">21.16.3. Tính nguyên khối</h3>
+<p>Hoàn tác phải thực hiện trọn vẹn. Nếu không thể hoàn nguyên một phần bắt buộc, toàn bộ yêu cầu thất bại và trạng thái trước thao tác được giữ nguyên. Không để số tồn đã đổi nhưng chứng từ tài chính hoặc nghiệp vụ nguồn chưa được xử lý.</p>
+<h2 id="section-21-17">21.17. Tác động liên phân hệ</h2>
+<h3 id="section-21-17-1">21.17.1. Bán lẻ</h3>
+<p>Đơn bán lẻ có hàng quản lý tồn tạo phiếu xuất nháp khi xác nhận.</p>
+<ul>
+<li>Thanh toán tại cửa hàng và gửi hàng giao tận nơi là các mốc yêu cầu hoàn thành xuất.</li>
+<li>Kết quả thực tế còn phụ thuộc kiểm tra tồn và một trong ba chính sách thiếu hàng.</li>
+<li>Người tạo hủy trước các mốc này thì phiếu xuất nháp bị xóa, đơn giữ Đã hủy.</li>
+<li>Trả hàng chỉ được xử lý sau khi Phiếu xuất đã Hoàn thành.</li>
+<li>Phần hàng được trả phải có đủ nguồn xuất và giá vốn gốc.</li>
+<li>Xóa đơn có quyền xử lý đồng bộ các xuất, nhập, sản xuất, tiền và nợ liên quan.</li>
+<li>Đơn không chứa hàng quản lý tồn không tạo biến động kho.</li>
+</ul>
+<h3 id="section-21-17-2">21.17.2. F&amp;B, dịch vụ, tài nguyên và lưu trú</h3>
+<p>Món, dịch vụ hoặc hoạt động sử dụng tài nguyên có thể tiêu hao nguyên liệu theo công thức. Khi nghiệp vụ đạt mốc xuất nguyên liệu, kho giảm theo kho của chi nhánh. Minibar hoặc vật tư lưu trú được phân biệt giữa hàng tính tiền cho khách và tiêu hao nội bộ.</p>
+<h3 id="section-21-17-3">21.17.3. Sản xuất</h3>
+<p>Sản xuất tạo phiếu xuất nguyên liệu và có thể tạo phiếu nhập đầu ra. Giá trị nguyên liệu đã xuất là căn cứ xác định giá trị thành phẩm theo quy tắc sản xuất. Nếu đầu ra không quản lý tồn, hệ thống không tạo nhập kho chỉ để hoàn tất quy trình.</p>
+<h3 id="section-21-17-4">21.17.4. Điều chuyển</h3>
+<p>Điều chuyển tạo giảm ở kho nguồn và tăng ở kho đích. Tổng lượng hàng của doanh nghiệp không đổi nếu toàn bộ quy trình hoàn thành. Giá vốn tại kho đích kế thừa giá trị đã xuất từ kho nguồn; không hình thành doanh thu hoặc chi phí mua hàng.</p>
+<h3 id="section-21-17-5">21.17.5. Kiểm kê</h3>
+<p>Kiểm kê chụp số tồn hệ thống, ghi số thực tế và sinh nhập thừa hoặc xuất thiếu khi hoàn thành. Người dùng không sửa trực tiếp số tồn để làm khớp kiểm kê.</p>
+<h3 id="section-21-17-6">21.17.6. Tài sản cố định</h3>
+<p>Xuất tài sản để sử dụng vừa giảm hàng khỏi kho vừa tạo tài sản tương ứng. Nếu không tạo được tài sản, phiếu xuất không được hoàn thành. Xóa phiếu bị chặn khi tài sản đã phát sinh khấu hao hoặc nghiệp vụ tiếp theo.</p>
+<h3 id="section-21-17-7">21.17.7. Tài chính, công nợ và kế toán</h3>
+<p>Nhập mua có thể tạo phiếu chi và khoản phải trả khi người dùng xử lý thanh toán. Chi phí khác đi theo quy trình đề nghị chi. Phiếu kho hoàn thành cung cấp thông tin cho kế toán; việc đã hoàn thành kho không đồng nghĩa đã ghi sổ kế toán.</p>
+<p>Khi phiếu kho bị xóa hợp lệ, các kết quả kế toán chưa được khóa phải được đánh dấu hoặc hoàn tác theo quy trình. Lịch sử đã ghi sổ không được âm thầm biến mất.</p>
+<h2 id="section-21-18">21.18. Giao diện quản lý kho</h2>
+<h3 id="section-21-18-1">21.18.1. Danh sách kho</h3>
+<p>Màn hình cho phép tìm kiếm, xem tên, địa chỉ, thông tin liên hệ và trạng thái. Người có quyền quản lý kho thấy các hành động tạo, sửa, bật hoặc tắt hoạt động và xóa khi đủ điều kiện.</p>
+<h3 id="section-21-18-2">21.18.2. Trang chi tiết kho</h3>
+<p>Trang chi tiết tập hợp các góc nhìn tồn kho, phiếu nhập, phiếu xuất và kiểm kê của kho được chọn. Việc chuyển giữa các góc nhìn không làm thay đổi bộ lọc doanh nghiệp và kho.</p>
+<h3 id="section-21-18-3">21.18.3. Danh sách tồn</h3>
+<p>Người dùng có thể lọc theo kho, từ khóa sản phẩm, nhóm sản phẩm và chỉ xem mặt hàng cần cảnh báo. Danh sách có phân trang. Hành động xem lần nhập mở chi tiết số lượng còn theo nguồn. Người có quyền tra cứu lịch sử có thể mở lịch sử sản phẩm trong cửa sổ riêng.</p>
+<h3 id="section-21-18-4">21.18.4. Xuất kết quả</h3>
+<p>Danh sách tồn có thể được xuất thành tệp Excel. Người dùng chọn số lượng dòng trong giới hạn hệ thống. Kết quả xuất phải dùng cùng điều kiện lọc và cùng quyền hiển thị giá vốn như màn hình.</p>
+<h3 id="section-21-18-5">21.18.5. Danh sách phiếu</h3>
+<p>Danh sách nhập và xuất cho phép lọc theo khoảng ngày, mã phiếu, kho, nguồn hoặc nơi nhận và loại nghiệp vụ. Trạng thái được nhận biết từ việc phiếu đã có thời điểm hoàn thành hay chưa. Mã phiếu mở chi tiết để xem sản phẩm, số lượng, giá trị, tệp đính kèm và liên kết nghiệp vụ.</p>
+<h2 id="section-21-19">21.19. Đồng thời, gửi lại và tính nhất quán</h2>
+<h3 id="section-21-19-1">21.19.1. Hai người cùng hoàn thành</h3>
+<p>Nếu hai người cùng mở một phiếu Nháp, chỉ yêu cầu hoàn thành đầu tiên hợp lệ được cập nhật tồn. Yêu cầu còn lại nhận thông báo phiếu đã hoàn thành và phải tải lại. Không được dựa vào trạng thái cũ đang hiển thị trên trình duyệt.</p>
+<h3 id="section-21-19-2">21.19.2. Hai phiếu cùng lấy một lượng tồn</h3>
+<p>Khi nhiều phiếu xuất đồng thời cần cùng sản phẩm hoặc cùng serial, hệ thống phải kiểm tra và phân bổ trong một thao tác nhất quán. Một serial không thể thuộc hai phiếu xuất hoàn thành và serial không được áp dụng âm tồn. Với sản phẩm khác, tổng lượng được chấp nhận không vượt lượng khả dụng trừ khi doanh nghiệp đã chọn cho âm tồn.</p>
+<h3 id="section-21-19-3">21.19.3. Gửi lại do mất kết nối</h3>
+<p>Người dùng có thể không nhận được phản hồi dù thao tác đã thành công. Khi gửi lại, mã phiếu, trạng thái và quan hệ nghiệp vụ giúp hệ thống nhận biết kết quả đã tồn tại. Hệ thống không tạo thêm phiếu tự động hoặc lặp biến động.</p>
+<h3 id="section-21-19-4">21.19.4. Lỗi ở bước liên phân hệ</h3>
+<p>Nếu cập nhật tồn, tạo tài sản hoặc tạo cặp điều chuyển là các kết quả bắt buộc của cùng nghiệp vụ, thất bại ở một bước làm toàn bộ thao tác thất bại. Nếu đồng bộ kế toán được thực hiện sau sự kiện kho và tạm thời không thành công, hệ thống giữ dấu vết cần xử lý lại mà không lặp biến động kho.</p>
+<h2 id="section-21-20">21.20. Kiểm soát và truy vết</h2>
+<p>Mỗi phiếu phải cho biết mã, loại, kho, ngày nghiệp vụ, ngày tạo, người tạo, trạng thái, người hoàn thành, thời điểm hoàn thành và ghi chú. Với phiếu tự động, phải nhận biết nghiệp vụ nguồn. Với phiếu điều chỉnh ngày, phải giữ lý do cùng giá trị trước và sau.</p>
+<p>Mỗi sản phẩm xuất theo nguồn nhập phải giải thích được đã lấy bao nhiêu từ lần nhập nào và theo giá vốn nào. Sản phẩm đích danh phải giải thích được serial nhập ở đâu, đã chuyển qua kho nào và xuất bởi phiếu nào.</p>
+<p>Tệp đính kèm phục vụ đối chiếu nhưng không thay thế nội dung nghiệp vụ. Xóa một tệp không được xóa phiếu; xóa phiếu phải xử lý tệp theo chính sách lưu giữ chung.</p>
+<h2 id="section-21-21">21.21. Báo cáo và chỉ số</h2>
+<p>Các kết quả kho phục vụ những góc nhìn sau:</p>
+<ul>
+<li>Tồn theo sản phẩm và kho;</li>
+<li>Tổng tồn toàn doanh nghiệp;</li>
+<li>Tồn theo nguồn nhập;</li>
+<li>Giá trị tồn theo kho và sản phẩm;</li>
+<li>Nhập, xuất, tồn theo khoảng thời gian;</li>
+<li>Lịch sử chi tiết của một sản phẩm;</li>
+<li>Mặt hàng hết hoặc dưới ngưỡng cảnh báo;</li>
+<li>Tồn âm khi doanh nghiệp cho phép;</li>
+<li>Biến động số lượng và giá trị;</li>
+<li>Serial còn trong kho và serial đã xuất;</li>
+<li>Đối chiếu giữa tổng nhập, tổng xuất và số tồn;</li>
+<li>Giá vốn dùng cho lợi nhuận và kế toán.</li>
+</ul>
+<p>Mỗi báo cáo phải xác định rõ ngày dùng để lọc, trạng thái được tính, kho hoặc chi nhánh áp dụng và cách xử lý phiếu đã xóa hoặc ngày đã điều chỉnh. Phiếu Nháp không được tính vào số tồn thực tế.</p>
+<h2 id="section-21-22">21.22. Tình huống lỗi và cách xử lý</h2>
+<h3 id="section-21-22-1">21.22.1. Kho không hợp lệ</h3>
+<p>Hệ thống từ chối khi kho không tồn tại, không thuộc doanh nghiệp, đã ngừng hoạt động đối với giao dịch mới hoặc chưa được cấu hình cho chi nhánh trong trường hợp bắt buộc. Thông báo phải nêu rõ kho cần được chọn hoặc cấu hình.</p>
+<h3 id="section-21-22-2">21.22.2. Sản phẩm không quản lý tồn</h3>
+<p>Sản phẩm không theo dõi tồn không được thêm vào phiếu kho. Nếu một nghiệp vụ nguồn chứa cả hàng quản lý tồn và dịch vụ, phiếu kho chỉ nhận phần hàng quản lý tồn.</p>
+<h3 id="section-21-22-3">21.22.3. Số lượng hoặc đơn vị không hợp lệ</h3>
+<p>Số lượng nhập và xuất phải lớn hơn không. Đơn vị phải thuộc sản phẩm và có hệ số quy đổi hợp lệ. Hệ thống chỉ ra sản phẩm gây lỗi để người dùng sửa.</p>
+<h3 id="section-21-22-4">21.22.4. Serial không hợp lệ</h3>
+<p>Thiếu serial, trùng serial, serial không thuộc sản phẩm, không ở đúng kho hoặc đã được xuất đều làm thao tác bị từ chối. Danh sách serial hợp lệ đã nhập không bị mất khi người dùng quay lại sửa lỗi. Cấu hình cho âm tồn không thay đổi kết quả này.</p>
+<h3 id="section-21-22-5">21.22.5. Không xác định được giá vốn</h3>
+<p>Nếu thiếu nguồn nhập, hệ thống xử lý theo chính sách thiếu tồn đã cấu hình. Nhánh cho trừ âm có thể hoàn thành phần số lượng chưa có nguồn và đánh dấu chờ phân bổ; hai nhánh còn lại không được tự gán nguồn hoặc giá vốn giả. Thiếu giá của serial hoặc cấu hình nhóm không hợp lệ luôn phải được báo rõ.</p>
+<h3 id="section-21-22-6">21.22.6. Thay đổi quá khứ không đủ điều kiện</h3>
+<p>Thay đổi bị từ chối khi người dùng thiếu quyền, loại phiếu không cho sửa trực tiếp, ngày ở tương lai hoặc chứng từ phụ thuộc không thể được tính lại an toàn. Trạng thái khóa kỳ kế toán không phải nguyên nhân chặn riêng của nghiệp vụ kho.</p>
+<h3 id="section-21-22-7">21.22.7. Xung đột trạng thái</h3>
+<p>Nếu phiếu đã được người khác sửa, hoàn thành hoặc xóa, hệ thống không ghi đè dựa trên phiên bản cũ. Màn hình thông báo và tải lại nội dung hiện tại.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="20-hospitality-luu-tru.html">← 20. Hospitality - Lưu trú</a><a href="22-nhap-kho-mua-hang.html">22. Nhập kho và mua hàng →</a></nav></div></body></html>

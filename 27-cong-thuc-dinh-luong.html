@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>27. Công thức - Định lượng — Đặc tả POS</title><meta name="description" content="Công thức - Định lượng"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần VI · Chương 27</p><article class="spec"><h1>CHƯƠNG 27. CÔNG THỨC VÀ ĐỊNH LƯỢNG</h1><details class="section-toc"><summary>Nội dung chương · 17 mục</summary><ol><li><a href="#section-27-1">27.1. Mục đích và phạm vi</a></li><li><a href="#section-27-2">27.2. Vai trò và quyền sử dụng</a></li><li><a href="#section-27-3">27.3. Hai loại công thức</a></li><li><a href="#section-27-4">27.4. Điều kiện danh mục</a></li><li><a href="#section-27-5">27.5. Nội dung một công thức</a></li><li><a href="#section-27-6">27.6. Cách tính lượng và đơn vị</a></li><li><a href="#section-27-7">27.7. Trạng thái hoạt động và thay thế công thức</a></li><li><a href="#section-27-8">27.8. Tạo định lượng từ chi tiết sản phẩm</a></li><li><a href="#section-27-9">27.9. Tạo công thức từ màn hình quản lý tập trung</a></li><li><a href="#section-27-10">27.10. Xem và sửa công thức chưa sử dụng</a></li><li><a href="#section-27-11">27.11. Xóa công thức</a></li><li><a href="#section-27-12">27.12. Xem trước chi phí</a></li><li><a href="#section-27-13">27.13. Áp dụng trong bán hàng và dịch vụ</a></li><li><a href="#section-27-14">27.14. Bán thành phẩm và nhiều cấp chế biến</a></li><li><a href="#section-27-15">27.15. Liên kết kho, giá vốn, tài chính và báo cáo</a></li><li><a href="#section-27-16">27.16. Đồng thời, gửi lại và dấu vết</a></li><li><a href="#section-27-17">27.17. Giao diện và thông báo</a></li></ol></details>
+<h2 id="section-27-1">27.1. Mục đích và phạm vi</h2>
+<p>Công thức mô tả sản phẩm hoặc vật tư nào được sử dụng, sử dụng bao nhiêu và tạo ra kết quả gì. Đây là căn cứ để tính nhu cầu nguyên liệu, thực hiện sản xuất, ghi nhận tiêu hao khi bán hàng và xác định giá vốn.</p>
+<p>Khai báo hoặc kích hoạt công thức không tự làm xuất nguyên liệu, nhập thành phẩm, tạo doanh thu hay ghi nhận chi tiền. Những ảnh hưởng đó chỉ phát sinh khi công thức được sử dụng trong một nghiệp vụ sản xuất hoặc nghiệp vụ bán hàng tương ứng.</p>
+<p>Phạm vi quản lý gồm hai loại công thức:</p>
+<ul>
+<li>Định lượng theo sản phẩm hoặc dịch vụ.</li>
+<li>Sản xuất theo mẻ.</li>
+</ul>
+<p>Công thức có thể phục vụ:</p>
+<ul>
+<li>Pha chế món bán ngay.</li>
+<li>Tiêu hao vật tư khi thực hiện dịch vụ.</li>
+<li>Sơ chế nguyên liệu.</li>
+<li>Tạo bán thành phẩm.</li>
+<li>Đóng gói nội bộ.</li>
+<li>Tạo nhiều thành phẩm từ một mẻ.</li>
+</ul>
+<h2 id="section-27-2">27.2. Vai trò và quyền sử dụng</h2>
+<p>Người quản lý công thức khai báo thành phần, đơn vị, lượng định mức, lượng đầu ra và trạng thái hoạt động. Quyền quản lý công thức được phân biệt với quyền tạo phiếu sản xuất và quyền xem giá vốn.</p>
+<p>Nhân viên sản xuất sử dụng công thức đang hoạt động để lập phiếu. Nhân viên bán hàng sử dụng gián tiếp qua sản phẩm bán và đơn vị được chọn; không tự thay nguyên liệu của công thức ngay trên đơn bán hàng.</p>
+<p>Người quản lý kho kiểm tra nguyên liệu, đơn vị quy đổi, phương pháp xuất kho và tồn khả dụng. Người quản lý giá vốn xem dự tính chi phí để phát hiện định lượng bất thường, nhưng không coi giá dự tính là giá vốn đã chốt của một lần sản xuất chưa diễn ra.</p>
+<h2 id="section-27-3">27.3. Hai loại công thức</h2>
+<h3 id="section-27-3-1">27.3.1. Định lượng theo sản phẩm hoặc dịch vụ</h3>
+<p>Loại này mô tả mức tiêu hao cho một đơn vị bán cụ thể của một sản phẩm. Một công thức có một đầu ra. Đầu ra có thể là hàng hóa, thành phẩm, bán thành phẩm hoặc dịch vụ phù hợp với loại hình kinh doanh.</p>
+<p>Đơn vị đầu ra là một phần của cách áp dụng công thức. Một sản phẩm bán theo ly và theo bình có thể có hai định lượng khác nhau; không mặc nhiên lấy định lượng của ly nhân tỷ lệ dung tích nếu bình đã có công thức riêng.</p>
+<p>Với sản phẩm không lưu kho, công thức được sử dụng trong luồng chế biến hoặc tiêu hao gắn với bán hàng. Với dịch vụ, đầu ra là kết quả cung cấp dịch vụ chứ không phải hàng tồn. Hệ thống sử dụng nguyên liệu hoặc vật tư được khai báo, không nhập dịch vụ vào kho.</p>
+<h3 id="section-27-3-2">27.3.2. Sản xuất theo mẻ</h3>
+<p>Loại này mô tả một lần thực hiện công thức tạo ra một hoặc nhiều đầu ra. Người dùng đặt tên để nhận diện mẻ và khai báo lượng từng đầu ra. Công thức được chọn chủ động khi lập phiếu sản xuất theo mẻ, không phải lựa chọn thay thế cho định lượng của một sản phẩm đang bán.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Một mẻ sơ chế gà có thể dùng gà nguyên con và tạo nhiều phần thịt, cánh và đùi.</li>
+<li>Lượng đầu vào và từng lượng đầu ra đều được nhân với số lần công thức thực hiện.</li>
+<li>Việc phân bổ giá vốn giữa các đầu ra được quyết định khi lập sản xuất,.</li>
+</ul>
+</blockquote>
+<h2 id="section-27-4">27.4. Điều kiện danh mục</h2>
+<p>Các sản phẩm đầu vào và đầu ra cần được khai báo trước. Mỗi sản phẩm có đơn vị chuẩn và các đơn vị phụ nếu sử dụng. Đơn vị phụ phải có tỷ lệ quy đổi đúng sang đơn vị chuẩn để lượng tiêu hao và lượng nhập kho có cùng cách hiểu.</p>
+<p>Nguyên liệu lựa chọn có thể là nguyên vật liệu, hàng hóa, thành phẩm hoặc bán thành phẩm phù hợp. Không sử dụng một dịch vụ như một lượng vật tư xuất kho. Với sản xuất mẻ, màn hình lựa chọn đầu ra không dùng dịch vụ làm thành phẩm nhập kho.</p>
+<p>Cờ quản lý tồn của từng sản phẩm quyết định sản phẩm đó có tạo nhập xuất thực tế khi áp dụng công thức hay không. Công thức có nguyên liệu không lưu kho không biến nguyên liệu ấy thành hàng được theo dõi tồn. Tương tự, có tên sản phẩm ở đầu ra không tự khiến sản phẩm đó được nhập kho.</p>
+<h2 id="section-27-5">27.5. Nội dung một công thức</h2>
+<p>Thông tin chung gồm loại công thức, tên nhận diện và trạng thái hoạt động. Công thức theo sản phẩm sử dụng tên hình thành từ sản phẩm và đơn vị đầu ra. Công thức sản xuất mẻ có tên do người dùng nhập.</p>
+<p>Mỗi đầu vào gồm:</p>
+<ul>
+<li>Sản phẩm.</li>
+<li>Đơn vị tính.</li>
+<li>Lượng định mức.</li>
+</ul>
+<p>Mỗi đầu ra gồm:</p>
+<ul>
+<li>Sản phẩm.</li>
+<li>Đơn vị tính.</li>
+<li>Lượng tạo thành theo một lần công thức.</li>
+</ul>
+<p>Công thức theo sản phẩm được trình bày cho một đơn vị đầu ra. Công thức sản xuất mẻ có thể mô tả lượng lớn hơn một hoặc nhiều loại đầu ra.</p>
+<p>Các lượng đầu vào phải lớn hơn không. Người dùng không đưa số âm vào công thức để biểu diễn phụ phẩm thu hồi hoặc hàng trả lại; sản phẩm thu hồi cần được thể hiện là đầu ra phù hợp. Bỏ một nguyên liệu khỏi công thức chưa sử dụng khác với đặt lượng nguyên liệu bằng không.</p>
+<h2 id="section-27-6">27.6. Cách tính lượng và đơn vị</h2>
+<p>Lượng nguyên liệu cần dùng bằng định mức của nguyên liệu nhân số lần áp dụng công thức. Nếu nguyên liệu dùng đơn vị phụ, lượng được quy đổi tiếp theo tỷ lệ sang đơn vị chuẩn khi xử lý kho.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Một mẻ dùng 0,5 kg nguyên liệu và phiếu thực hiện 4 mẻ thì nhu cầu là 2 kg.</li>
+<li>Nếu danh mục quản lý nguyên liệu theo gram với tỷ lệ 1 kg bằng 1.000 gram, kho xuất tương đương 2.000 gram.</li>
+<li>Không nhân tỷ lệ quy đổi thêm lần nữa sau khi đã có lượng chuẩn.</li>
+</ul>
+</blockquote>
+<p>Lượng đầu ra của phiếu sản xuất bằng lượng đầu ra trong công thức nhân số lần thực hiện. Nếu một mẻ tạo 20 chai, sản xuất 3 mẻ tạo 60 chai, không phải 3 chai. Cần kiểm tra cả đơn vị và lượng đầu ra trước khi xác nhận phân bổ giá nhập.</p>
+<p>Tỷ lệ đầu vào và đầu ra không bắt buộc bằng nhau về số học vì có thể dùng các đơn vị khác nhau hoặc có hao hụt tự nhiên. Công thức không tự suy diễn phần thiếu thành một nghiệp vụ kiểm kê hoặc tiêu hủy. Định mức cần mô tả đúng kết quả vận hành được doanh nghiệp chấp nhận.</p>
+<h2 id="section-27-7">27.7. Trạng thái hoạt động và thay thế công thức</h2>
+<p>Công thức được lưu với trạng thái Đang hoạt động hoặc Không hoạt động. Không hoạt động nghĩa là không được sử dụng như công thức hiện hành trong bước lựa chọn tự động. Trạng thái này không đồng nghĩa đã bị xóa và không loại bỏ lịch sử sử dụng trước đó.</p>
+<p>Người dùng có thể chọn trạng thái ngay khi tạo công thức. Không có yêu cầu bắt buộc mọi công thức phải trải qua một lần lưu nháp rồi một lần kích hoạt riêng. Tại màn hình tạo từ sản phẩm, công thức mới được khởi tạo với lựa chọn hoạt động; người lập cần xem lại lựa chọn này trước khi lưu.</p>
+<p>Khi lưu một công thức định lượng mới ở trạng thái hoạt động cho cùng sản phẩm và cùng đơn vị, công thức đang hoạt động trước đó của cặp sản phẩm–đơn vị được chuyển sang không hoạt động. Công thức của một đơn vị khác không được xem là cùng định lượng chỉ vì cùng tên sản phẩm.</p>
+<p>Công thức đã được áp dụng trong sản xuất không được sửa trực tiếp hoặc xóa. Khi cần thay đổi định mức, tạo công thức mới và đưa công thức mới vào sử dụng. Các lần sản xuất cũ tiếp tục tham chiếu công thức đã dùng, không tự đổi lượng tiêu hao theo công thức mới.</p>
+<h2 id="section-27-8">27.8. Tạo định lượng từ chi tiết sản phẩm</h2>
+<p>Người dùng mở sản phẩm hoặc dịch vụ, vào phần Định lượng và chọn tạo công thức. Hệ thống xác định sẵn loại định lượng theo sản phẩm và đầu ra là sản phẩm đang mở. Người dùng không chọn thêm một đầu ra thứ hai trong màn hình này.</p>
+<p>Trình tự khai báo gồm:</p>
+<ol>
+<li>Chọn đơn vị đầu ra cần có định lượng.</li>
+<li>Kiểm tra trạng thái hoạt động dự kiến.</li>
+<li>Chọn từng nguyên liệu.</li>
+<li>Chọn đơn vị và nhập lượng định mức của từng nguyên liệu.</li>
+<li>Kiểm tra tổng giá vốn dự tính, nếu có quyền và có kho để đối chiếu.</li>
+<li>Lưu công thức.</li>
+</ol>
+<ul>
+<li>Đơn vị đầu ra phải có tên hợp lệ.</li>
+<li>Danh sách nguyên liệu không được rỗng.</li>
+<li>Mọi lượng nguyên liệu phải lớn hơn không.</li>
+<li>Khi thiếu điều kiện, màn hình thông báo và giữ phần đang nhập để người dùng sửa.</li>
+</ul>
+<p>Khi chọn lại một nguyên liệu đã có trong màn hình khai báo, lượng của nguyên liệu có thể được tăng trên mục hiện hữu thay vì tạo mục trùng. Người dùng phải đọc lại tổng lượng sau thao tác tìm kiếm hoặc quét mã lặp, nhất là nguyên liệu có định mức nhỏ hơn một đơn vị.</p>
+<p>Hủy trước khi lưu không kích hoạt công thức và không đổi công thức đang dùng. Sau khi báo lưu thành công, tải lại danh sách định lượng của sản phẩm để xác nhận đúng đơn vị và trạng thái.</p>
+<h2 id="section-27-9">27.9. Tạo công thức từ màn hình quản lý tập trung</h2>
+<p>Màn hình quản lý tập trung hiển thị cả công thức định lượng và công thức sản xuất mẻ. Người dùng chọn loại phù hợp ngay khi tạo.</p>
+<p>Với định lượng theo sản phẩm, người dùng chọn một đầu ra và đơn vị của đầu ra. Tên nhận diện được hình thành theo sản phẩm và đơn vị, không yêu cầu đặt một tên mẻ riêng. Danh sách đầu vào được khai báo giống phần Định lượng tại sản phẩm.</p>
+<p>Với sản xuất mẻ, tên công thức là nội dung bắt buộc. Người dùng thêm ít nhất một đầu ra, chọn đơn vị và nhập lượng tạo thành, sau đó khai báo nguyên liệu đầu vào. Mỗi sản phẩm cần có một mục rõ ràng, tránh thêm cùng sản phẩm nhiều lần chỉ để biểu diễn các lần thực hiện khác nhau của cùng mẻ.</p>
+<p>Trước khi lưu cần kiểm tra đầy đủ đầu vào, đầu ra, các lượng và trạng thái hoạt động. Màn hình không tự xác nhận công thức đúng về chuyên môn sản xuất: hệ thống tính đúng theo lượng đã khai báo, còn người quản lý chịu trách nhiệm rằng lượng đó phản ánh quy trình thực tế.</p>
+<h2 id="section-27-10">27.10. Xem và sửa công thức chưa sử dụng</h2>
+<p>Người dùng mở chi tiết từ danh sách. Chi tiết thể hiện đầu ra, nguyên liệu, đơn vị, lượng và trạng thái. Công thức chưa được áp dụng có thể được cập nhật để sửa tên mẻ, lựa chọn hoạt động và thành phần theo loại công thức.</p>
+<p>Khi lưu chỉnh sửa, hệ thống kiểm tra lại công thức đã được sử dụng hay chưa. Nếu một người khác vừa dùng công thức để tạo sản xuất sau khi màn hình sửa được mở, lần lưu có thể bị từ chối với yêu cầu tạo công thức mới. Không chỉ dựa vào tình trạng cũ đang nhìn thấy trên màn hình.</p>
+<p>Đối với công thức đã sử dụng, không mô tả thao tác lưu cập nhật như một cách chỉ thay trạng thái nhưng vẫn sửa cùng bản công thức. Luồng thay định mức an toàn là lập công thức mới, kiểm tra nguyên liệu, rồi đưa bản mới vào hoạt động.</p>
+<h2 id="section-27-11">27.11. Xóa công thức</h2>
+<p>Danh sách cho phép xóa công thức chưa có sản xuất sử dụng. Sau khi người dùng xác nhận, hệ thống kiểm tra điều kiện một lần nữa và loại bỏ công thức cùng khai báo đầu vào, đầu ra của nó.</p>
+<p>Công thức đã được áp dụng bị từ chối xóa, kể cả khi người dùng không còn muốn dùng cho các lần phát sinh mới. Ngừng sử dụng công thức không đồng nghĩa được xóa căn cứ của lịch sử kho.</p>
+<p>Xóa công thức chưa dùng không xóa sản phẩm, không điều chỉnh tồn, không hoàn tiền và không tạo chứng từ kho. Nếu xóa công thức đang hoạt động mà chưa có công thức thay thế, sản phẩm có thể không còn định lượng hoạt động cho đơn vị đó; người quản lý phải kiểm tra trước khi tiếp tục bán hoặc lập sản xuất.</p>
+<h2 id="section-27-12">27.12. Xem trước chi phí</h2>
+<p>Giá vốn dự tính phụ thuộc vào kho được chọn, lượng nguyên liệu, đơn vị và phương pháp giá vốn. Chọn kho khác có thể cho một kết quả khác dù công thức không đổi, vì giá và nguồn nhập của mỗi kho có thể khác nhau.</p>
+<p>Khi tính dự tính, hệ thống quy đổi nguyên liệu về đơn vị chuẩn, tổng hợp nhu cầu của từng nguyên liệu, xác định giá vốn cho nhu cầu đó rồi trình bày lại theo các mục của công thức. Tổng giá vốn nguyên liệu bằng tổng giá trị của các nguyên liệu được tính.</p>
+<p>Phần đầu ra có thể hiển thị giá bán hiện hành theo đơn vị được chọn và thành tiền đầu ra. Giá bán đầu ra là thông tin tham khảo về giá trị bán, không phải đơn giá nhập kho sản xuất. Không cộng giá bán vào giá vốn nguyên liệu và không coi chênh lệch giữa hai số là lợi nhuận đã phát sinh.</p>
+<p>Khi thay đổi nguyên liệu, lượng, đơn vị hoặc kho, màn hình tải lại phần dự tính. Không tải được giá thì cảnh báo; không nên đọc một giá trị không hiển thị hoặc bằng không như bằng chứng nguyên liệu miễn phí.</p>
+<p>Kết quả dự tính chưa khóa nguồn nhập. Từ lúc xem trước đến lúc sản xuất, các giao dịch khác có thể thay đổi tồn và giá vốn. Giá thực tế được xác định trong quá trình hoàn tất chứng từ xuất nguyên liệu; cần phân biệt với số xem trước.</p>
+<h2 id="section-27-13">27.13. Áp dụng trong bán hàng và dịch vụ</h2>
+<p>Sản phẩm bán có quản lý tồn thường được xuất từ lượng thành phẩm đã có trong kho. Việc sản phẩm có công thức không phải chỉ dẫn mặc định rằng mỗi lần bán phải sản xuất thêm một lượng tương ứng.</p>
+<p>Sản phẩm không quản lý tồn nhưng có định lượng hoạt động được xử lý theo luồng của mô hình bán. F&amp;B sử dụng mốc gửi chế biến hoặc In chế biến; các mốc xác nhận, thanh toán, hủy món và hủy đơn tuân. Công thức xác định nguyên liệu và lượng, không tự quyết định một thời điểm thanh toán mới.</p>
+<p>Với dịch vụ có định lượng, vật tư tiêu hao được ghi nhận theo sự kiện sử dụng được mô hình dịch vụ xác nhận. Bán một gói nhiều lần không được mặc nhiên xem là đã sử dụng toàn bộ các lần trong gói. Đầu ra dịch vụ không tạo lô thành phẩm để nhập lại hoặc xuất bán.</p>
+<p>Khi chưa có công thức hoạt động đúng sản phẩm và đơn vị, không tự chọn một công thức không hoạt động hoặc một công thức của đơn vị khác. Người dùng cần kiểm tra phần Định lượng trước khi tiếp tục nghiệp vụ cần tiêu hao theo công thức.</p>
+<h2 id="section-27-14">27.14. Bán thành phẩm và nhiều cấp chế biến</h2>
+<p>Một bán thành phẩm có thể là đầu ra của công thức này và đầu vào của công thức khác. Nếu bán thành phẩm được lưu kho, việc dùng bán thành phẩm làm nguyên liệu sẽ xuất lượng bán thành phẩm hiện có. Nó không đồng thời sản xuất lại bán thành phẩm từ nguyên liệu gốc chỉ vì có công thức riêng.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Nước cốt được sản xuất trước và nhập kho.</li>
+<li>Công thức tô phở sử dụng nước cốt đã lưu kho.</li>
+<li>Khi bán tô phở, kho giảm nước cốt theo định mức.</li>
+<li>Nguyên liệu nấu nước cốt đã được xuất ở lần sản xuất trước.</li>
+<li>Cách tách này tránh ghi tiêu hao xương và gia vị hai lần.</li>
+</ul>
+</blockquote>
+<p>Người quản lý phải phân biệt rõ các công đoạn cần lập sản xuất riêng. Không sử dụng vòng công thức, trong đó các sản phẩm phụ thuộc trở lại lẫn nhau, như một cơ chế tự động tạo hàng tồn. Khai báo công thức không thay thế kế hoạch và trình tự thực hiện các mẻ trung gian.</p>
+<h2 id="section-27-15">27.15. Liên kết kho, giá vốn, tài chính và báo cáo</h2>
+<p>Công thức chỉ là định nghĩa. Phiếu sản xuất là lần thực hiện. Phiếu xuất và phiếu nhập là bằng chứng biến động kho của lần thực hiện đó. Quan hệ này cần được giữ rõ khi tra cứu: cùng một công thức có thể được dùng nhiều lần, mỗi lần có số lượng, kho, thời điểm và giá vốn khác nhau.</p>
+<p>Chi phí nhân công, vận chuyển hoặc chi phí khác không được tự thêm bằng cách đặt một khoản tiền như một nguyên liệu nếu không có sản phẩm tương ứng. Các khoản này được ghi nhận bằng Đề nghị chi, phải có loại chi phí, số tiền, đối tượng và trạng thái hoàn tất phù hợp trước khi được đưa vào chi phí sản xuất.</p>
+<p>Báo cáo công thức phục vụ tra cứu thành phần, trạng thái và việc đã sử dụng hay chưa. Báo cáo sản xuất và kho mới cung cấp lượng thực tế đã xuất, nhập và giá vốn. Sửa công thức chưa dùng không tạo phát sinh báo cáo doanh thu hoặc tồn kho.</p>
+<h2 id="section-27-16">27.16. Đồng thời, gửi lại và dấu vết</h2>
+<p>Khi nhiều người cùng làm việc, trạng thái hoạt động và việc đã sử dụng của công thức phải được đọc lại sau mỗi lần lưu hoặc tạo sản xuất. Không giữ nhiều màn hình sửa cùng một công thức rồi mặc nhiên tin rằng lần lưu sau sẽ tự hợp nhất ý định của từng người.</p>
+<p>Sau lỗi kết nối khi lưu, kiểm tra danh sách và chi tiết trước khi tạo lại. Tạo mới lần nữa có thể tạo thêm một công thức khác và thay công thức hoạt động hiện có. Gửi lại không phải hành động vô hại nếu người dùng đã chuyển sang một lần tạo mới.</p>
+<p>Dấu vết cần dùng khi đối chiếu gồm:</p>
+<ul>
+<li>Công thức đã áp dụng.</li>
+<li>Trạng thái hiện tại.</li>
+<li>Sản phẩm và đơn vị đầu ra.</li>
+<li>Nguyên liệu.</li>
+<li>Người tạo.</li>
+<li>Thời điểm tạo.</li>
+</ul>
+<p>Các phiếu sản xuất cũ là căn cứ để xác định một công thức đã được sử dụng, kể cả khi công thức không còn hoạt động.</p>
+<h2 id="section-27-17">27.17. Giao diện và thông báo</h2>
+<p>Danh sách hỗ trợ tìm tên, lọc loại và trạng thái, phân trang, xem chi tiết và xóa công thức chưa dùng. Tên, loại, trạng thái và danh sách nguyên liệu giúp người dùng phân biệt các công thức có cùng đầu ra.</p>
+<p>Màn hình tạo và sửa tách khu vực đầu ra với khu vực nguyên liệu. Định lượng theo sản phẩm chỉ có một đầu ra; sản xuất mẻ cho phép nhiều đầu ra và tên riêng. Đơn vị phải được đặt cạnh lượng để người dùng không đọc nhầm lượng theo đơn vị chuẩn và đơn vị phụ.</p>
+<p>Thông báo cần nêu rõ thiếu nguyên liệu, lượng nguyên liệu không lớn hơn không, thiếu đầu ra, thiếu tên công thức mẻ, không tải được giá vốn, công thức không tồn tại, hoặc công thức đã áp dụng nên không thể sửa/xóa. Lỗi lưu không được trình bày như một lần kích hoạt thành công.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="26-kiem-ke-dieu-chinh-ton.html">← 26. Kiểm kê và điều chỉnh tồn kho</a><a href="28-san-xuat-che-bien.html">28. Sản xuất - Chế biến →</a></nav></div></body></html>
