@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>62. Từ điển dữ liệu chi tiết theo module và ERD — Đặc tả POS</title><meta name="description" content="Từ điển dữ liệu chi tiết theo module và ERD"><style>
+<title>56. Từ điển dữ liệu chi tiết theo module và ERD — Đặc tả POS</title><meta name="description" content="Từ điển dữ liệu chi tiết theo module và ERD"><style>
 :root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
 a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
@@ -18,19 +18,19 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <body><div class="shell"><header class="topbar"><div class="topbar-inner">
     <a class="brand" href="index.html">Đặc tả toàn hệ thống POS</a><div class="actions">
       <a class="button secondary" href="index.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
-    </div></div></header><main class="reading"><p class="kicker">Phần XIII · Chương 62</p><article class="spec"><h1>CHƯƠNG 62. THIẾT KẾ CƠ SỞ DỮ LIỆU THEO PHÂN HỆ</h1><details class="section-toc"><summary>Nội dung chương · 26 mục</summary><ol><li><a href="#section-62-1">62.1. Mục tiêu</a></li><li><a href="#section-62-2">62.2. Tổ chức và phân quyền</a></li><li><a href="#section-62-3">62.3. Danh mục sản phẩm và giá</a></li><li><a href="#section-62-4">62.4. Khách hàng và Membership</a></li><li><a href="#section-62-5">62.5. Lịch, F&amp;B, Facility và Hospitality</a></li><li><a href="#section-62-6">62.6. Đơn hàng và dòng bán</a></li><li><a href="#section-62-7">62.7. Kênh sàn và đồng bộ</a></li><li><a href="#section-62-8">62.8. Kho, lô, serial và tồn</a></li><li><a href="#section-62-9">62.9. Mua hàng và hóa đơn đầu vào</a></li><li><a href="#section-62-10">62.10. Thu chi, công nợ và chuyển tiền</a></li><li><a href="#section-62-11">62.11. Kế toán và sổ</a></li><li><a href="#section-62-12">62.12. Thuế và hóa đơn</a></li><li><a href="#section-62-13">62.13. Thông báo, nội dung và tiện ích</a></li><li><a href="#section-62-14">62.14. Quy tắc quan hệ và cascade</a></li><li><a href="#section-62-15">62.15. Chỉ mục, phân vùng và hiệu năng</a></li><li><a href="#section-62-16">62.16. Migration và kiểm soát thay đổi</a></li><li><a href="#section-62-17">62.17. Kiểm tra bao phủ</a></li><li><a href="#section-62-18">62.18. Quy ước đọc mô hình quan hệ</a></li><li><a href="#section-62-19">62.19. Ma trận quan hệ lõi</a></li><li><a href="#section-62-20">62.20. Luồng liên kết dữ liệu mẫu</a></li><li><a href="#section-62-21">62.21. Ma trận kiểm thử quan hệ</a></li><li><a href="#section-62-22">62.22. Kiểm kê đầy đủ bảng</a></li><li><a href="#section-62-23">62.23. Ma trận danh mục bảng POS đầy đủ</a></li><li><a href="#section-62-24">62.24. Sơ đồ quan hệ thực thể (ERD) theo module</a></li><li><a href="#section-62-25">62.25. Bảng tenant control plane</a></li><li><a href="#section-62-26">62.26. Quy tắc cập nhật ma trận</a></li></ol></details>
-<h2 id="section-62-1">62.1. Mục tiêu</h2>
+    </div></div></header><main class="reading"><p class="kicker">Phần XII · Chương 56</p><article class="spec"><h1>CHƯƠNG 56. THIẾT KẾ CƠ SỞ DỮ LIỆU THEO PHÂN HỆ</h1><details class="section-toc"><summary>Nội dung chương · 26 mục</summary><ol><li><a href="#section-56-1">56.1. Mục tiêu</a></li><li><a href="#section-56-2">56.2. Tổ chức và phân quyền</a></li><li><a href="#section-56-3">56.3. Danh mục sản phẩm và giá</a></li><li><a href="#section-56-4">56.4. Khách hàng và Membership</a></li><li><a href="#section-56-5">56.5. Lịch, F&amp;B, Facility và Hospitality</a></li><li><a href="#section-56-6">56.6. Đơn hàng và dòng bán</a></li><li><a href="#section-56-7">56.7. Kênh sàn và đồng bộ</a></li><li><a href="#section-56-8">56.8. Kho, lô, serial và tồn</a></li><li><a href="#section-56-9">56.9. Mua hàng và hóa đơn đầu vào</a></li><li><a href="#section-56-10">56.10. Thu chi, công nợ và chuyển tiền</a></li><li><a href="#section-56-11">56.11. Kế toán và sổ</a></li><li><a href="#section-56-12">56.12. Thuế và hóa đơn</a></li><li><a href="#section-56-13">56.13. Thông báo, nội dung và tiện ích</a></li><li><a href="#section-56-14">56.14. Quy tắc quan hệ và cascade</a></li><li><a href="#section-56-15">56.15. Chỉ mục, phân vùng và hiệu năng</a></li><li><a href="#section-56-16">56.16. Migration và kiểm soát thay đổi</a></li><li><a href="#section-56-17">56.17. Kiểm tra bao phủ</a></li><li><a href="#section-56-18">56.18. Quy ước đọc mô hình quan hệ</a></li><li><a href="#section-56-19">56.19. Ma trận quan hệ lõi</a></li><li><a href="#section-56-20">56.20. Luồng liên kết dữ liệu mẫu</a></li><li><a href="#section-56-21">56.21. Ma trận kiểm thử quan hệ</a></li><li><a href="#section-56-22">56.22. Kiểm kê đầy đủ bảng</a></li><li><a href="#section-56-23">56.23. Ma trận danh mục bảng POS đầy đủ</a></li><li><a href="#section-56-24">56.24. Sơ đồ quan hệ thực thể (ERD) theo module</a></li><li><a href="#section-56-25">56.25. Bảng tenant control plane</a></li><li><a href="#section-56-26">56.26. Quy tắc cập nhật ma trận</a></li></ol></details>
+<h2 id="section-56-1">56.1. Mục tiêu</h2>
 <p>Chương này liệt kê cấu trúc chi tiết theo nhóm phân hệ, cách đặt khóa, kiểu dữ liệu, quan hệ, chỉ mục, cascade và các điểm cần kiểm thử. Mỗi nhóm dữ liệu phải tự nêu mục đích lưu trữ, quan hệ, bất biến và tác động migration cần thiết.</p>
-<h2 id="section-62-2">62.2. Tổ chức và phân quyền</h2>
+<h2 id="section-56-2">56.2. Tổ chức và phân quyền</h2>
 <p>Companies là gốc doanh nghiệp. CompanyBranches có CompanyId bắt buộc, thông tin tên, địa chỉ, mã số thuế, mô hình và trạng thái. Employees là hồ sơ nhân sự; AspNetUsers kế thừa Identity và liên kết đến phạm vi nhân viên/doanh nghiệp theo cấu hình ứng dụng. AspNetRoles, AspNetUserRoles, UserGroups, RoleGroups và GroupRoles tạo phân quyền.</p>
 <p>Khóa chính dùng UUID. Chỉ mục trên CompanyId, BranchId, EmployeeId và tên chuẩn hóa phục vụ đăng nhập và phạm vi. Tài khoản nhân viên trong AspNetUsers có concurrency stamp; cập nhật đồng thời phải dùng token này để tránh ghi đè mật khẩu, trạng thái hoặc chi nhánh.</p>
-<h2 id="section-62-3">62.3. Danh mục sản phẩm và giá</h2>
+<h2 id="section-56-3">56.3. Danh mục sản phẩm và giá</h2>
 <p>Item là thực thể danh mục chung; ItemProduct mở rộng hàng hóa, ItemProductUnit giữ đơn vị và hệ số, Category phân nhóm, Attribute/AttributeValue giữ thuộc tính. Combo và các thực thể chi tiết giữ sản phẩm con, định lượng, giá và điều kiện.</p>
 <p>Các dòng giá theo kênh hoặc chiến dịch liên kết sản phẩm, kênh và thời gian hiệu lực. Chỉ mục trên product id, category id, channel id và thời gian phục vụ truy vấn giá. Không cascade xóa sản phẩm đã có OrderProduct hoặc phiếu kho; dùng trạng thái ngừng bán.</p>
-<h2 id="section-62-4">62.4. Khách hàng và Membership</h2>
+<h2 id="section-56-4">56.4. Khách hàng và Membership</h2>
 <p>Customers giữ thông tin khách, số điện thoại, địa chỉ và phạm vi doanh nghiệp. MembershipRanks giữ ngưỡng điểm, tỷ lệ hoặc quyền; MembershipPointHistories gắn customer, order và loại biến động. OrderMembershipPointHistories, OrderDiscounts và OrderDiscountDetails giữ phần điểm/giảm giá áp dụng trên đơn.</p>
 <p>Lịch sử điểm phải có khóa nguồn, loại biến động, điểm dương/âm, tỷ lệ đổi tiền và thời gian. Chỉ mục trên CustomerId, OrderId, CreatedAt giúp tính số dư theo thứ tự. Xóa đơn không được xóa lịch sử trước khi service đảo điểm và kiểm tra giao dịch phụ thuộc.</p>
-<h2 id="section-62-5">62.5. Lịch, F&amp;B, Facility và Hospitality</h2>
+<h2 id="section-56-5">56.5. Lịch, F&amp;B, Facility và Hospitality</h2>
 <p>Schedules, ScheduleEmployees và các bảng phòng/bàn giữ thời gian, khách, nhân viên, trạng thái.</p>
 <ul>
 <li>F&amp;B dùng OrderFnBs, OrderFacilityTables và các liên kết bàn.</li>
@@ -38,14 +38,14 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <li>Hospitality dùng HospitalityBookings, HospitalityPricingPolicies, OrderHospitalities và OrderHospitalityRooms.</li>
 </ul>
 <p>Khóa ngoại tới Order cho phép truy ngược đơn nguồn. Cần chỉ mục theo BranchId, ResourceId, FromDate/ToDate và trạng thái để kiểm tra trùng lịch. Giao dịch đổi phòng/bàn/tài nguyên ghi lịch sử thay vì sửa mất mốc cũ.</p>
-<h2 id="section-62-6">62.6. Đơn hàng và dòng bán</h2>
+<h2 id="section-56-6">56.6. Đơn hàng và dòng bán</h2>
 <p>Orders giữ CompanyId, BranchId, Code, Type, Status, CreateDate, FinishDate, PaymentDate, SaleChannelId, CustomerId, EInvoiceType và tổng tiền. OrderProducts giữ product/unit, quantity, price, VAT, discount, surcharge, status, ReturnDate và phần giá trị còn lại.</p>
 <p>OrderPayments giữ phương thức, số tiền, thời điểm và trạng thái. OrderInvoiceInfo giữ snapshot người mua; OrderInvoices giữ Kind, Provider, EInvoiceCode, InvoiceNumber, SearchKey, Status, TaxAmount, TotalAmount, IsSign, IsSentToTaxAuthority, Url và RawData. OrderInvoiceRequests giữ từng lần gửi và lỗi.</p>
 <p>Chỉ mục bắt buộc trên CompanyId/BranchId, Code, FinishDate, Status, CustomerId, SaleChannelId và các khóa hóa đơn. Unique code phải theo phương pháp sinh mã của doanh nghiệp; retry không được tạo trùng.</p>
-<h2 id="section-62-7">62.7. Kênh sàn và đồng bộ</h2>
+<h2 id="section-56-7">56.7. Kênh sàn và đồng bộ</h2>
 <p>CompanyShopeeShops và CompanyTikTokShops giữ thông tin shop, chi nhánh, token mã hóa, trạng thái, tùy chọn đồng bộ và phát hành hóa đơn. Các bảng order mapping, package, return và sync log liên kết shop với Order.</p>
 <p>Token, refresh token và raw data phải mã hóa hoặc bảo vệ ở tầng ứng dụng. Sync status, LastSyncedAt, LastError và ErrorCode phải cập nhật độc lập với trạng thái đơn. Idempotency dựa trên mã đơn sàn và shop id để kéo lại không tạo đơn thứ hai.</p>
-<h2 id="section-62-8">62.8. Kho, lô, serial và tồn</h2>
+<h2 id="section-56-8">56.8. Kho, lô, serial và tồn</h2>
 <p>Warehouses giữ CompanyId, BranchId, tên, loại và trạng thái.</p>
 <ul>
 <li>WarehouseInputs/Outputs là header.</li>
@@ -54,25 +54,25 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <li>ItemProductSerials và OrderProductSerials giữ serial, lô, trạng thái và quan hệ xuất/nhập.</li>
 </ul>
 <p>WarehouseInventoryChecks, WarehouseInventoryCheckDetails, WarehouseProductions, WarehouseProductRecipes, WarehouseProductRecipeInputs và WarehouseProductRecipeOutputs phục vụ kiểm kê và sản xuất. Chỉ mục trên WarehouseId, ProductId, BranchId, DocumentDate, Status và Lot/Serial. Serial nên có unique constraint theo sản phẩm hoặc tenant để ngăn trùng.</p>
-<h2 id="section-62-9">62.9. Mua hàng và hóa đơn đầu vào</h2>
+<h2 id="section-56-9">56.9. Mua hàng và hóa đơn đầu vào</h2>
 <p>Purchase invoice hoặc WarehouseInput giữ nhà cung cấp, ngày hóa đơn, số hóa đơn, tổng trước thuế, VAT, tổng sau thuế, phương thức thanh toán và trạng thái. Dòng giữ mã XML, sản phẩm ánh xạ, đơn vị, số lượng, đơn giá, thuế suất và giá nhập.</p>
 <p>LogXMLInvoiceImports lưu tên tệp, hash hoặc mã nhận diện, kết quả parse, lỗi và người import để chống import trùng. Import theo batch phải có correlation id; nếu batch thất bại, chỉ batch đó retry được mà không tạo lại batch đã thành công.</p>
-<h2 id="section-62-10">62.10. Thu chi, công nợ và chuyển tiền</h2>
+<h2 id="section-56-10">56.10. Thu chi, công nợ và chuyển tiền</h2>
 <p>PaymentRequests và PaymentVouchers giữ đề nghị/phiếu thu chi, nguồn tiền, số tiền, ngày, đối tượng và ReferenceId. AccountDebts giữ chiều nợ, đối tượng, số gốc, số còn lại, ngày và nguồn; AccountDebtDetails, AccountDebtOffsets và AccountDebtChangeHistory giữ các dòng chi tiết, bù trừ và lịch sử thay đổi.</p>
 <p>CompanyBankAccounts, CompanyBranchBankAccounts, OrderPaymentBanks và OrderPaymentVpBanks giữ tài khoản, ngân hàng, chi nhánh, trạng thái và quyền dùng. InternalTransfers giữ nguồn, đích, số tiền, ngày và trạng thái; một giao dịch tạo hai biến động tiền nhưng một mã chuyển. Chỉ mục trên company, branch, date, source và đối tượng.</p>
-<h2 id="section-62-11">62.11. Kế toán và sổ</h2>
+<h2 id="section-56-11">56.11. Kế toán và sổ</h2>
 <p>AccountingPeriods giữ kỳ mở/đóng, ngày bắt đầu/kết thúc và trạng thái. AccountingSourceDocuments/Items giữ nghiệp vụ chờ hạch toán; CompanyAccountingAccounts và AccountingAccountMappings giữ tài khoản và mapping. JournalEntries/Details giữ bút toán, Nợ/Có, đối tượng, nguồn và trạng thái ghi sổ.</p>
 <p>AccountingProcessingLogs ghi lần xử lý, lỗi, số nguồn và thời điểm. Journal entry đã posted phải bất biến; sửa nguồn tạo phiên bản hoặc bút toán đảo theo quy tắc, không sửa trực tiếp số đã ghi.</p>
-<h2 id="section-62-12">62.12. Thuế và hóa đơn</h2>
+<h2 id="section-56-12">56.12. Thuế và hóa đơn</h2>
 <p>TaxDeclaration01CNKDTT18s có CompanyId, BranchId nullable, kỳ, lần kê khai, thông tin người nộp thuế, SectionA/B/D JSON, tổng GTGT/TNCN/TTĐB, miễn giảm, chữ ký và audit. Đây là tên kỹ thuật của hồ sơ đang hiển thị bằng <strong>Mẫu số 01/CNKD</strong>, không phải một mã mẫu khác. TaxDeclaration01TKNCNKDs có năm, lựa chọn điều kiện, SectionA/B/E và tổng. TaxDeclaration02CNKDQTTs có năm, BranchId, doanh thu, sáu nhóm chi phí, thuế suất, tạm nộp, hoàn/bù trừ, SectionC/D và DebtInfo.</p>
 <p>JSON phải được deserialize bằng DTO có giá trị mặc định, kiểm tra phiên bản và chống dữ liệu không hợp lệ. Khi xuất XML, builder dùng trường đã lưu; lỗi serialize không được đổi status.</p>
 <p>CompanyBranchInvoiceQuotas giữ tổng hạn mức, đã dùng, còn lại, nhà cung cấp và thời điểm đồng bộ. OrderInvoiceRequests và LogXMLInvoiceImports là nhật ký tích hợp; RawData chỉ lưu dữ liệu trả về đã được bảo vệ.</p>
-<h2 id="section-62-13">62.13. Thông báo, nội dung và tiện ích</h2>
+<h2 id="section-56-13">56.13. Thông báo, nội dung và tiện ích</h2>
 <p>Notifications, NotificationReceivers, NotificationCampaigns, NotificationCampaignTargets, ItemLanguages, ItemMedias, ItemImages, ItemArticles và các bảng tiện ích giữ nội dung, tệp, người nhận, trạng thái đọc và liên kết. Tệp phải tách metadata khỏi nội dung lớn nếu cần; khóa tham chiếu tới doanh nghiệp để tránh lộ chéo tenant.</p>
-<h2 id="section-62-14">62.14. Quy tắc quan hệ và cascade</h2>
+<h2 id="section-56-14">56.14. Quy tắc quan hệ và cascade</h2>
 <p>Cascade phù hợp cho chi tiết phụ thuộc chặt như Company → Employees/AspNetUsers hoặc Orders → OrderProducts khi xóa aggregate được phép. Restrict hoặc set null dùng cho danh mục, tài khoản, nhà cung cấp và chứng từ lịch sử. Migration phải kiểm tra cascade cycle và delete orphan.</p>
 <p>Quan hệ logic không có khóa ngoại, như SourceType/SourceId tới nhiều loại nghiệp vụ, phải có service validator và chỉ mục nguồn. Khi xóa, service duyệt tất cả loại nguồn được hỗ trợ thay vì phụ thuộc vào cascade.</p>
-<h2 id="section-62-15">62.15. Chỉ mục, phân vùng và hiệu năng</h2>
+<h2 id="section-56-15">56.15. Chỉ mục, phân vùng và hiệu năng</h2>
 <ul>
 <li>Các truy vấn theo ngày dùng chỉ mục ghép CompanyId/BranchId/Date.</li>
 <li>Truy vấn trạng thái dùng CompanyId/Status.</li>
@@ -80,13 +80,13 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <li>Thay đổi phân vùng không được đổi semantics.</li>
 </ul>
 <p>Báo cáo dùng projection, AsNoTracking và split query khi nhiều quan hệ. API phân trang phải trả total count riêng. Khi cần export toàn kỳ, dùng streaming hoặc batch để không giữ toàn bộ kết quả trong bộ nhớ.</p>
-<h2 id="section-62-16">62.16. Migration và kiểm soát thay đổi</h2>
+<h2 id="section-56-16">56.16. Migration và kiểm soát thay đổi</h2>
 <p>Mỗi thay đổi thuộc tính, chỉ mục, khóa ngoại hoặc enum phải có migration, cập nhật snapshot và kiểm tra dữ liệu hiện hữu. Migration nguy hiểm phải có bước backfill, kiểm tra đếm trước/sau và kế hoạch rollback.</p>
 <p>Không tạo migration chỉ cho thay đổi giao diện hoặc thuật toán phân bổ nếu cấu trúc lưu trữ không đổi. Ngược lại, thay đổi source reference, trạng thái, kiểu tiền hoặc độ chính xác phải cập nhật cả DTO, mapper, repository, báo cáo và chương đặc tả.</p>
-<h2 id="section-62-17">62.17. Kiểm tra bao phủ</h2>
+<h2 id="section-56-17">56.17. Kiểm tra bao phủ</h2>
 <p>Pipeline kiểm tra phải so sánh số entity, thuộc tính, quan hệ, chỉ mục và constraint trong snapshot với báo cáo trích xuất. Mỗi quan hệ mới kiểm tra cascade, nullability và tenant scope. Mỗi bảng tiền kiểm tra decimal precision; mỗi bảng ngày kiểm tra timezone.</p>
 <p>Kết quả kiểm tra phải được lưu cùng phiên bản build. Nếu snapshot và tài liệu lệch, phát hành bị chặn cho đến khi cập nhật đầy đủ mô hình tổng thể, ma trận quan hệ và từ điển cột hoặc xác nhận có căn cứ rằng thay đổi không ảnh hưởng mô hình.</p>
-<h2 id="section-62-18">62.18. Quy ước đọc mô hình quan hệ</h2>
+<h2 id="section-56-18">56.18. Quy ước đọc mô hình quan hệ</h2>
 <p>Các bảng dưới đây dùng ký hiệu <strong>PK</strong> cho khóa chính, <strong>FK</strong> cho khóa ngoại, <code>1—N</code> cho một-nhiều, <code>1—1</code> cho một-một và <code>N—N</code> cho quan hệ nhiều-nhiều thông qua bảng liên kết. Tên cột được viết theo tên trong migration; tên có hậu tố số nhiều là tên bảng vật lý, không tự suy ra tên lớp miền.</p>
 <div class="table-wrap"><table>
 <thead>
@@ -116,9 +116,9 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Tên, mã, đơn vị, thuế, giá tại thời điểm chốt; không đọc lại danh mục để sửa lịch sử.</td>
 </tr>
 </tbody></table></div>
-<h2 id="section-62-19">62.19. Ma trận quan hệ lõi</h2>
+<h2 id="section-56-19">56.19. Ma trận quan hệ lõi</h2>
 <p>Đây là các aggregate quan trọng cần được mô tả đến mức cột nghiệp vụ, quan hệ và bất biến. Danh sách đầy đủ 253 bảng được lập.</p>
-<h3 id="section-62-19-1">62.19.1. Tổ chức và cấu hình</h3>
+<h3 id="section-56-19-1">56.19.1. Tổ chức và cấu hình</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -179,7 +179,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Kiểm tra quyền tại service, không chỉ ẩn nút giao diện.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-19-2">62.19.2. Danh mục và Membership</h3>
+<h3 id="section-56-19-2">56.19.2. Danh mục và Membership</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -247,7 +247,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Mỗi nguồn chỉ đảo/cộng một lần; hoàn hàng chỉ đảo phần hợp lệ.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-19-3">62.19.3. Đơn hàng, thanh toán và hóa đơn</h3>
+<h3 id="section-56-19-3">56.19.3. Đơn hàng, thanh toán và hóa đơn</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -315,7 +315,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Lịch sử append; hủy và xóa không làm mất dấu vết.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-19-4">62.19.4. Kho, nguồn xuất và giá vốn</h3>
+<h3 id="section-56-19-4">56.19.4. Kho, nguồn xuất và giá vốn</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -390,7 +390,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Điều chỉnh kiểm kê phải có người duyệt và lý do.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-19-5">62.19.5. Tài chính, kế toán và thuế</h3>
+<h3 id="section-56-19-5">56.19.5. Tài chính, kế toán và thuế</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -465,8 +465,8 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Không serialize lại làm mất trường người dùng nhập.</td>
 </tr>
 </tbody></table></div>
-<h2 id="section-62-20">62.20. Luồng liên kết dữ liệu mẫu</h2>
-<h3 id="section-62-20-1">62.20.1. Bán hàng tại cửa hàng</h3>
+<h2 id="section-56-20">56.20. Luồng liên kết dữ liệu mẫu</h2>
+<h3 id="section-56-20-1">56.20.1. Bán hàng tại cửa hàng</h3>
 <p><code>Orders</code> tạo <code>OrderProducts</code> → xác nhận tạo liên kết <code>WarehouseOutputToOrders</code> tới phiếu trong <code>WarehouseOutputs</code> → hoàn thành xuất tạo <code>WarehouseOutputProductDetails</code> và cập nhật <code>WarehouseInventories</code>/<code>WarehouseInventoryHistories</code> → thanh toán tạo <code>OrderPayments</code>, <code>PaymentVouchers</code>, <code>FinMoneyLedgers</code> và <code>AccountDebts</code> nếu còn nợ → phát hành hóa đơn tạo <code>OrderInvoiceRequests</code>/<code>OrderInvoices</code> → kỳ kế toán nhận <code>AccountingSourceDocuments</code> và <code>JournalEntries</code>.</p>
 <ul>
 <li>Nếu phiếu xuất vẫn Nháp, tồn và giá vốn chưa được ghi nhận.</li>
@@ -474,7 +474,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <li>Nếu xuất âm đã hoàn thành nhưng thiếu nguồn, chỉ phần đã xác định nguồn được trả.</li>
 <li>Phần thiếu phải bổ sung lô trước thời điểm xuất rồi mới tính lại.</li>
 </ul>
-<h3 id="section-62-20-2">62.20.2. Nhập mua và thanh toán</h3>
+<h3 id="section-56-20-2">56.20.2. Nhập mua và thanh toán</h3>
 <ul>
 <li><code>WarehouseInputs</code> + <code>WarehouseInputProducts</code> ghi hàng và giá nhập.</li>
 <li>Khi người dùng xác nhận thanh toán, <code>PaymentVouchers</code> được tạo bằng phần thực trả.</li>
@@ -483,9 +483,9 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <li>Trả 0 đồng chỉ tạo <code>AccountDebts</code> bằng toàn bộ số phải trả.</li>
 <li>Ba kết quả phải cùng transaction và có thể truy nguyên về input/nhà cung cấp.</li>
 </ul>
-<h3 id="section-62-20-3">62.20.3. Trả hàng</h3>
+<h3 id="section-56-20-3">56.20.3. Trả hàng</h3>
 <p>Trước khi tạo <code>WarehouseInputs</code> trả hàng, service kiểm tra output bán đã hoàn thành và từng dòng trả có đủ <code>WarehouseOutputProductDetails</code>/giá vốn gốc. Giá vốn bằng 0 được coi là đã xác định nếu nguồn đầy đủ. Giá nhập của phiếu trả bằng giá vốn xuất gốc; không tự đặt giá bằng 0 khi nguồn chưa được phân bổ.</p>
-<h2 id="section-62-21">62.21. Ma trận kiểm thử quan hệ</h2>
+<h2 id="section-56-21">56.21. Ma trận kiểm thử quan hệ</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -530,11 +530,11 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Idempotency không tạo đơn/hóa đơn/phiếu thứ hai.</td>
 </tr>
 </tbody></table></div>
-<h2 id="section-62-22">62.22. Kiểm kê đầy đủ bảng</h2>
+<h2 id="section-56-22">56.22. Kiểm kê đầy đủ bảng</h2>
 <p>Ma trận toàn bộ bảng POS sử dụng khóa chính đọc từ migration <code>20260824021254_2.1.3.90</code>; phần mô hình chi tiết giải thích các bảng lõi và luồng quan hệ. Khi thêm migration, phải cập nhật cả PK, FK, index, nullability và vai trò của bảng mới, không chỉ tăng bộ đếm.</p>
-<h2 id="section-62-23">62.23. Ma trận danh mục bảng POS đầy đủ</h2>
+<h2 id="section-56-23">56.23. Ma trận danh mục bảng POS đầy đủ</h2>
 <p>Mỗi dòng là một bảng vật lý trong migration hiện hành. Cột “quan hệ/ý nghĩa” là vai trò thiết kế và hướng liên kết chính; FK chi tiết, nullability và cascade phải đối chiếu snapshot khi triển khai.</p>
-<h3 id="section-62-23-1">62.23.1. Danh tính và phân quyền</h3>
+<h3 id="section-56-23-1">56.23.1. Danh tính và phân quyền</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -624,7 +624,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Danh tính, nhân sự hoặc liên kết quyền; thuộc phạm vi doanh nghiệp/chi nhánh khi có.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-2">62.23.2. Đơn hàng và bán</h3>
+<h3 id="section-56-23-2">56.23.2. Đơn hàng và bán</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -869,7 +869,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Header/chi tiết/nhật ký của đơn bán; liên kết Orders, sản phẩm, thanh toán hoặc trạng thái.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-3">62.23.3. Tài chính và công nợ</h3>
+<h3 id="section-56-23-3">56.23.3. Tài chính và công nợ</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -949,7 +949,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Thu/chi, chuyển tiền, công nợ hoặc vốn; liên kết nguồn, đối tượng và sổ tiền.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-4">62.23.4. Kế toán và thuế</h3>
+<h3 id="section-56-23-4">56.23.4. Kế toán và thuế</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1024,7 +1024,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>undefined</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-5">62.23.5. Danh mục và giá</h3>
+<h3 id="section-56-23-5">56.23.5. Danh mục và giá</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1244,7 +1244,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Danh mục, thuộc tính, giá, combo hoặc chiến dịch; liên kết sản phẩm và phạm vi áp dụng.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-6">62.23.6. Doanh nghiệp, cấu hình và tiện ích</h3>
+<h3 id="section-56-23-6">56.23.6. Doanh nghiệp, cấu hình và tiện ích</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1419,7 +1419,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Tổ chức, cấu hình, ngôn ngữ, phiên bản hoặc tiện ích dùng chung.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-7">62.23.7. Kho, mua hàng và tài sản</h3>
+<h3 id="section-56-23-7">56.23.7. Kho, mua hàng và tài sản</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1644,7 +1644,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Nhập, xuất, tồn, kiểm kê, sản xuất, nhà cung cấp hoặc tài sản; liên kết kho và nguồn chứng từ.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-8">62.23.8. Tích hợp và đồng bộ</h3>
+<h3 id="section-56-23-8">56.23.8. Tích hợp và đồng bộ</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1729,7 +1729,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Ánh xạ shop/sàn, hóa đơn đầu vào hoặc nhật ký đồng bộ; phải idempotent và bảo vệ raw data.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-9">62.23.9. Khách hàng và Membership</h3>
+<h3 id="section-56-23-9">56.23.9. Khách hàng và Membership</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1784,7 +1784,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Khách hàng, liên hệ, quyền lợi hoặc biến động điểm; liên kết đơn khi có nguồn.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-10">62.23.10. Lịch, dịch vụ và vận hành</h3>
+<h3 id="section-56-23-10">56.23.10. Lịch, dịch vụ và vận hành</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1879,7 +1879,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>Lịch, ca, phòng, bàn hoặc chính sách dịch vụ; liên kết chi nhánh và đơn.</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-62-23-11">62.23.11. Thông báo</h3>
+<h3 id="section-56-23-11">56.23.11. Thông báo</h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1910,7 +1910,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p><strong>Tổng kiểm kê:</strong> 253 bảng POS. Bốn bảng tenant control plane được tách; không cộng lẫn vào 253 bảng POS.</p>
-<h3 id="section-62-23-12">62.23.12. Từ điển cột vật lý đầy đủ</h3>
+<h3 id="section-56-23-12">56.23.12. Từ điển cột vật lý đầy đủ</h3>
 <p>Snapshot hiện hành có 253 bảng POS và 2.427 cột. Mỗi bảng bên dưới liệt kê toàn bộ cột, kiểu lưu trữ suy ra từ migration và mục đích nghiệp vụ/kiểm soát.</p>
 <ul>
 <li>Quy tắc chung áp dụng cho mọi bảng là khóa chính không được rỗng và duy nhất trong bảng.</li>
@@ -1924,7 +1924,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <li>Tổng Nợ = tổng Có.</li>
 <li>Công thức chi tiết của từng dòng nghiệp vụ được dẫn về chương kho, bán hàng, tài chính hoặc kế toán tương ứng.</li>
 </ul>
-<h4 id="section-62-23-12-1">62.23.12.1. Tổ chức, định danh và quyền — từ điển cột</h4>
+<h4 id="section-56-23-12-1">56.23.12.1. Tổ chức, định danh và quyền — từ điển cột</h4>
 <h5><code>AspNetUserClaims</code></h5>
 <p>Khóa chính: Id</p>
 <div class="table-wrap"><table>
@@ -3284,7 +3284,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 23.</p>
-<h4 id="section-62-23-12-2">62.23.12.2. Đơn hàng và vận hành bán hàng — từ điển cột</h4>
+<h4 id="section-56-23-12-2">56.23.12.2. Đơn hàng và vận hành bán hàng — từ điển cột</h4>
 <h5><code>DictionarySaleChanels</code></h5>
 <p>Khóa chính: Id</p>
 <div class="table-wrap"><table>
@@ -4541,7 +4541,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 20.</p>
-<h4 id="section-62-23-12-3">62.23.12.3. Tài chính, thu chi và công nợ — từ điển cột</h4>
+<h4 id="section-56-23-12-3">56.23.12.3. Tài chính, thu chi và công nợ — từ điển cột</h4>
 <h5><code>AccountDebtChangeHistory</code></h5>
 <p>Khóa chính: Id</p>
 <div class="table-wrap"><table>
@@ -6312,7 +6312,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 29.</p>
-<h4 id="section-62-23-12-4">62.23.12.4. Kế toán và thuế — từ điển cột</h4>
+<h4 id="section-56-23-12-4">56.23.12.4. Kế toán và thuế — từ điển cột</h4>
 <h5><code>AccountingAccountMappings</code></h5>
 <p>Khóa chính: Id</p>
 <div class="table-wrap"><table>
@@ -7814,7 +7814,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 15.</p>
-<h4 id="section-62-23-12-5">62.23.12.5. Danh mục sản phẩm, giá và combo — từ điển cột</h4>
+<h4 id="section-56-23-12-5">56.23.12.5. Danh mục sản phẩm, giá và combo — từ điển cột</h4>
 <h5><code>AttributeCategories</code></h5>
 <p>Khóa chính: CompanyId, AttributeId, CategoryId</p>
 <div class="table-wrap"><table>
@@ -9971,7 +9971,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 44.</p>
-<h4 id="section-62-23-12-6">62.23.12.6. Cấu hình doanh nghiệp, chi nhánh và kênh — từ điển cột</h4>
+<h4 id="section-56-23-12-6">56.23.12.6. Cấu hình doanh nghiệp, chi nhánh và kênh — từ điển cột</h4>
 <h5><code>AspNetRoleClaims</code></h5>
 <p>Khóa chính: Id</p>
 <div class="table-wrap"><table>
@@ -10896,7 +10896,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 23.</p>
-<h4 id="section-62-23-12-7">62.23.12.7. Kho, mua hàng, xuất nhập và sản xuất — từ điển cột</h4>
+<h4 id="section-56-23-12-7">56.23.12.7. Kho, mua hàng, xuất nhập và sản xuất — từ điển cột</h4>
 <h5><code>ItemProductSerials</code></h5>
 <p>Khóa chính: ProductId, SerialNumber, WarehouseId</p>
 <div class="table-wrap"><table>
@@ -12389,7 +12389,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 36.</p>
-<h4 id="section-62-23-12-8">62.23.12.8. Tích hợp ngoài và hóa đơn — từ điển cột</h4>
+<h4 id="section-56-23-12-8">56.23.12.8. Tích hợp ngoài và hóa đơn — từ điển cột</h4>
 <h5><code>CompanyBranchInvoiceQuotas</code></h5>
 <p>Khóa chính: BranchId</p>
 <div class="table-wrap"><table>
@@ -15115,7 +15115,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 29.</p>
-<h4 id="section-62-23-12-9">62.23.12.9. Khách hàng và Membership — từ điển cột</h4>
+<h4 id="section-56-23-12-9">56.23.12.9. Khách hàng và Membership — từ điển cột</h4>
 <h5><code>ContactAttributes</code></h5>
 <p>Khóa chính: ContactId, AttributeId, LanguageCode</p>
 <div class="table-wrap"><table>
@@ -15713,7 +15713,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 11.</p>
-<h4 id="section-62-23-12-10">62.23.12.10. Lịch, dịch vụ và tài nguyên — từ điển cột</h4>
+<h4 id="section-56-23-12-10">56.23.12.10. Lịch, dịch vụ và tài nguyên — từ điển cột</h4>
 <h5><code>FacilityTypePrices</code></h5>
 <p>Khóa chính: Id</p>
 <div class="table-wrap"><table>
@@ -16694,7 +16694,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 19.</p>
-<h4 id="section-62-23-12-11">62.23.12.11. Thông báo — từ điển cột</h4>
+<h4 id="section-56-23-12-11">56.23.12.11. Thông báo — từ điển cột</h4>
 <h5><code>NotificationCampaigns</code></h5>
 <p>Khóa chính: Id</p>
 <div class="table-wrap"><table>
@@ -16870,36 +16870,36 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 </tr>
 </tbody></table></div>
 <p>Số bảng trong nhóm: 4.</p>
-<h2 id="section-62-24">62.24. Sơ đồ quan hệ thực thể (ERD) theo module</h2>
+<h2 id="section-56-24">56.24. Sơ đồ quan hệ thực thể (ERD) theo module</h2>
 <p>Các sơ đồ dưới đây trình bày các bảng trung tâm và quan hệ chính của từng module. Sơ đồ là lớp nhìn khái quát; PK/FK, cột bắt buộc, chỉ mục và bất biến chi tiết được liệt kê ngay trong ma trận cùng danh mục dữ liệu tương ứng. Mũi tên mô tả quan hệ tham chiếu hoặc phát sinh, không có nghĩa mọi thao tác đều chạy theo một transaction duy nhất.</p>
-<h3 id="section-62-24-1">62.24.1. Tổ chức, cấu hình và quyền</h3>
+<h3 id="section-56-24-1">56.24.1. Tổ chức, cấu hình và quyền</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="title-erd-org-41 desc-erd-org-41" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-org-41">ERD — tổ chức, cấu hình và quyền</title><desc id="desc-erd-org-41">Companies. PK Id · mã số thuế · trạng thái; CompanyBranches. PK Id · FK CompanyId. FK WarehouseId tùy cấu hình; CompanyConfigs. PK CompanyId + Key. CompanyBranchConfigs; Employees / AspNetUsers. PK Id · FK Company/Branch. Identity roles &amp; groups; EntityVersions / audit. Nguồn · người · thời điểm</desc><defs><marker id="arrow-erd-org-41" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 90 V135 H155 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-org-41)"/><path d="M480 90 V135 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-org-41)"/><path d="M480 90 V135 H805 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-org-41)"/><path d="M155 268 V314 H480 V355" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-org-41)"/><path d="M480 268 V314 H480 V355" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-org-41)"/><path d="M805 268 V314 H480 V355" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-org-41)"/><g><rect x="330" y="18" width="300" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="49" font-weight="700">Companies</tspan><tspan x="480" y="71">PK Id · mã số thuế · trạng thái</tspan></text></g><g><rect x="20" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="208" font-weight="700">CompanyBranches</tspan><tspan x="155" y="230">PK Id · FK CompanyId</tspan><tspan x="155" y="252">FK WarehouseId tùy cấu hình</tspan></text></g><g><rect x="345" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="208" font-weight="700">CompanyConfigs</tspan><tspan x="480" y="230">PK CompanyId + Key</tspan><tspan x="480" y="252">CompanyBranchConfigs</tspan></text></g><g><rect x="670" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="208" font-weight="700">Employees / AspNetUsers</tspan><tspan x="805" y="230">PK Id · FK Company/Branch</tspan><tspan x="805" y="252">Identity roles &amp; groups</tspan></text></g><g><rect x="345" y="360" width="270" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="391" font-weight="700">EntityVersions / audit</tspan><tspan x="480" y="413">Nguồn · người · thời điểm</tspan></text></g></svg></div><figcaption><strong>ERD — tổ chức, cấu hình và quyền.</strong> Company là aggregate gốc; chi nhánh, cấu hình và nhân sự thuộc company. Quyền được nối qua Identity và nhóm vai trò, không mở rộng phạm vi tenant.</figcaption></figure>
 
-<h3 id="section-62-24-2">62.24.2. Danh mục, sản phẩm, giá và combo</h3>
+<h3 id="section-56-24-2">56.24.2. Danh mục, sản phẩm, giá và combo</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="title-erd-catalog-42 desc-erd-catalog-42" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-catalog-42">ERD — danh mục, sản phẩm, giá và combo</title><desc id="desc-erd-catalog-42">Items. PK Id · mã · tên · trạng thái; ItemProducts. PK/FK ItemId · VAT. lô/serial · nhóm; ItemProductUnits. PK Id · FK ProductId. hệ số quy đổi · làm tròn; Attributes / Values. khóa ghép company/ngôn ngữ. ItemAttributes; Combos → ComboGroups. PK Id · FK ItemProduct; ComboProducts. FK group/product/unit · quantity</desc><defs><marker id="arrow-erd-catalog-42" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 90 V135 H155 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-catalog-42)"/><path d="M480 90 V135 H805 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-catalog-42)"/><path d="M155 268 V224 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-catalog-42)"/><path d="M155 268 V314 H315 V355" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-catalog-42)"/><path d="M315 432 V396 H645 V355" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-catalog-42)"/><g><rect x="330" y="18" width="300" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="49" font-weight="700">Items</tspan><tspan x="480" y="71">PK Id · mã · tên · trạng thái</tspan></text></g><g><rect x="20" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="208" font-weight="700">ItemProducts</tspan><tspan x="155" y="230">PK/FK ItemId · VAT</tspan><tspan x="155" y="252">lô/serial · nhóm</tspan></text></g><g><rect x="345" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="208" font-weight="700">ItemProductUnits</tspan><tspan x="480" y="230">PK Id · FK ProductId</tspan><tspan x="480" y="252">hệ số quy đổi · làm tròn</tspan></text></g><g><rect x="670" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="208" font-weight="700">Attributes / Values</tspan><tspan x="805" y="230">khóa ghép company/ngôn ngữ</tspan><tspan x="805" y="252">ItemAttributes</tspan></text></g><g><rect x="180" y="360" width="270" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="315" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="315" y="391" font-weight="700">Combos → ComboGroups</tspan><tspan x="315" y="413">PK Id · FK ItemProduct</tspan></text></g><g><rect x="510" y="360" width="270" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="645" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="645" y="391" font-weight="700">ComboProducts</tspan><tspan x="645" y="413">FK group/product/unit · quantity</tspan></text></g></svg></div><figcaption><strong>ERD — danh mục, sản phẩm, giá và combo.</strong> Items là thông tin chung; ItemProducts, đơn vị, thuộc tính, combo và giá mở rộng theo quan hệ 1—N. Giao dịch chỉ đọc danh mục để tạo snapshot.</figcaption></figure>
 
-<h3 id="section-62-24-3">62.24.3. Khách hàng và Membership</h3>
+<h3 id="section-56-24-3">56.24.3. Khách hàng và Membership</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="title-erd-customer-membership-43 desc-erd-customer-membership-43" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-customer-membership-43">ERD — khách hàng và Membership</title><desc id="desc-erd-customer-membership-43">Companies. PK Id; Customers. PK Id · FK CompanyId. điện thoại · thông tin khách; MembershipRanks / Configs. FK CompanyId. ngưỡng · tỷ lệ · quyền lợi; MembershipPointHistories. FK CustomerId · OrderId. dương/âm · source key; Orders. Nguồn dùng/thu hồi điểm</desc><defs><marker id="arrow-erd-customer-membership-43" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V132 H175 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-customer-membership-43)"/><path d="M480 88 V132 H480 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-customer-membership-43)"/><path d="M175 257 V216 H785 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-customer-membership-43)"/><path d="M480 257 V216 H785 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-customer-membership-43)"/><path d="M480 415 V295 H785 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-customer-membership-43)"/><g><rect x="330" y="18" width="300" height="70" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="48" font-weight="700">Companies</tspan><tspan x="480" y="70">PK Id</tspan></text></g><g><rect x="40" y="175" width="270" height="82" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="175" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="175" y="200" font-weight="700">Customers</tspan><tspan x="175" y="222">PK Id · FK CompanyId</tspan><tspan x="175" y="244">điện thoại · thông tin khách</tspan></text></g><g><rect x="345" y="175" width="270" height="82" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="200" font-weight="700">MembershipRanks / Configs</tspan><tspan x="480" y="222">FK CompanyId</tspan><tspan x="480" y="244">ngưỡng · tỷ lệ · quyền lợi</tspan></text></g><g><rect x="650" y="175" width="270" height="82" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="785" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="785" y="200" font-weight="700">MembershipPointHistories</tspan><tspan x="785" y="222">FK CustomerId · OrderId</tspan><tspan x="785" y="244">dương/âm · source key</tspan></text></g><g><rect x="345" y="345" width="270" height="70" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="375" font-weight="700">Orders</tspan><tspan x="480" y="397">Nguồn dùng/thu hồi điểm</tspan></text></g></svg></div><figcaption><strong>ERD — khách hàng và Membership.</strong> Điểm là lịch sử biến động gắn với nguồn; số dư và hạng được suy ra theo thứ tự thời gian, không xóa lịch sử khi đơn bị hoàn tác.</figcaption></figure>
 
-<h3 id="section-62-24-4">62.24.4. Đơn hàng, thanh toán và hóa đơn</h3>
+<h3 id="section-56-24-4">56.24.4. Đơn hàng, thanh toán và hóa đơn</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="title-erd-orders-44 desc-erd-orders-44" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-orders-44">ERD — đơn hàng, thanh toán và hóa đơn</title><desc id="desc-erd-orders-44">Orders. PK Id · CompanyId · BranchId. Code · Status · totals; OrderProducts. PK Id · FK OrderId/ProductId. quantity · price · VAT · return; OrderPayments. PK OrderId. method · amount · date; OrderInvoices / Requests. FK OrderId. provider · number · status; OrderDeliveries. giao · nhận · không nhận; OrderHistories. trạng thái cũ/mới · actor</desc><defs><marker id="arrow-erd-orders-44" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 90 V138 H155 V180" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-orders-44)"/><path d="M480 90 V138 H480 V180" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-orders-44)"/><path d="M480 90 V138 H805 V180" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-orders-44)"/><path d="M480 90 V230 H315 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-orders-44)"/><path d="M480 90 V230 H645 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-orders-44)"/><g><rect x="330" y="16" width="300" height="74" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="37" font-weight="700">Orders</tspan><tspan x="480" y="59">PK Id · CompanyId · BranchId</tspan><tspan x="480" y="81">Code · Status · totals</tspan></text></g><g><rect x="20" y="185" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="213" font-weight="700">OrderProducts</tspan><tspan x="155" y="235">PK Id · FK OrderId/ProductId</tspan><tspan x="155" y="257">quantity · price · VAT · return</tspan></text></g><g><rect x="345" y="185" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="213" font-weight="700">OrderPayments</tspan><tspan x="480" y="235">PK OrderId</tspan><tspan x="480" y="257">method · amount · date</tspan></text></g><g><rect x="670" y="185" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="213" font-weight="700">OrderInvoices / Requests</tspan><tspan x="805" y="235">FK OrderId</tspan><tspan x="805" y="257">provider · number · status</tspan></text></g><g><rect x="180" y="370" width="270" height="74" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="315" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="315" y="402" font-weight="700">OrderDeliveries</tspan><tspan x="315" y="424">giao · nhận · không nhận</tspan></text></g><g><rect x="510" y="370" width="270" height="74" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="645" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="645" y="402" font-weight="700">OrderHistories</tspan><tspan x="645" y="424">trạng thái cũ/mới · actor</tspan></text></g></svg></div><figcaption><strong>ERD — đơn hàng, thanh toán và hóa đơn.</strong> Orders là root; các trục thanh toán, giao hàng, xuất kho và hóa đơn có trạng thái độc lập. Dòng bán lưu snapshot để bảo toàn lịch sử.</figcaption></figure>
 
-<h3 id="section-62-24-5">62.24.5. Kho, lô, serial và giá vốn</h3>
+<h3 id="section-56-24-5">56.24.5. Kho, lô, serial và giá vốn</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title-erd-warehouse-45 desc-erd-warehouse-45" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-warehouse-45">ERD — kho, lô, serial và giá vốn</title><desc id="desc-erd-warehouse-45">Warehouses. PK Id · CompanyId · BranchId; WarehouseInputs. WarehouseInputProducts. nguồn nhập · giá nhập; WarehouseOutputs. WarehouseOutputProducts. trạng thái · số lượng xuất; WarehouseInventories. PK WarehouseId + ProductId. số lượng · trị giá; OutputProductDetails. OutputId + InputId + ProductId. lô trước thời điểm xuất; InventoryHistories / Serial. nguồn · mốc · serial</desc><defs><marker id="arrow-erd-warehouse-45" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V132 H155 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><path d="M480 88 V132 H480 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><path d="M480 88 V132 H805 V170" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><path d="M155 265 V318 H315 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><path d="M480 265 V318 H315 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><path d="M480 265 V318 H645 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><path d="M155 265 V318 H645 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><path d="M805 265 V318 H645 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-warehouse-45)"/><g><rect x="330" y="16" width="300" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">Warehouses</tspan><tspan x="480" y="69">PK Id · CompanyId · BranchId</tspan></text></g><g><rect x="20" y="175" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="204" font-weight="700">WarehouseInputs</tspan><tspan x="155" y="226">WarehouseInputProducts</tspan><tspan x="155" y="248">nguồn nhập · giá nhập</tspan></text></g><g><rect x="345" y="175" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="204" font-weight="700">WarehouseOutputs</tspan><tspan x="480" y="226">WarehouseOutputProducts</tspan><tspan x="480" y="248">trạng thái · số lượng xuất</tspan></text></g><g><rect x="670" y="175" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="204" font-weight="700">WarehouseInventories</tspan><tspan x="805" y="226">PK WarehouseId + ProductId</tspan><tspan x="805" y="248">số lượng · trị giá</tspan></text></g><g><rect x="180" y="370" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="315" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="315" y="399" font-weight="700">OutputProductDetails</tspan><tspan x="315" y="421">OutputId + InputId + ProductId</tspan><tspan x="315" y="443">lô trước thời điểm xuất</tspan></text></g><g><rect x="510" y="370" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="645" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="645" y="410" font-weight="700">InventoryHistories / Serial</tspan><tspan x="645" y="432">nguồn · mốc · serial</tspan></text></g></svg></div><figcaption><strong>ERD — kho, lô, serial và giá vốn.</strong> Phiếu nhập/xuất là nguồn; dòng chi tiết và phân bổ lô quyết định biến động tồn. Chỉ phiếu hoàn thành mới ghi lịch sử và số dư kho.</figcaption></figure>
 
-<h3 id="section-62-24-6">62.24.6. Tài chính và công nợ</h3>
+<h3 id="section-56-24-6">56.24.6. Tài chính và công nợ</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="title-erd-finance-46 desc-erd-finance-46" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-finance-46">ERD — thu chi, công nợ và chuyển tiền</title><desc id="desc-erd-finance-46">PaymentRequests. PK Id · amount · status; PaymentVouchers. FK Company/Branch/Bank. source · thu/chi · amount; AccountDebts. FK customer/supplier. direction · increase/decrease; InternalTransfers. from/to account · amount. history; FinMoneyLedgers. balance before/after · source; DebtDetails / Offsets. allocation · source debt</desc><defs><marker id="arrow-erd-finance-46" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V134 H155 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-finance-46)"/><path d="M480 88 V134 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-finance-46)"/><path d="M155 270 V320 H315 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-finance-46)"/><path d="M805 270 V320 H315 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-finance-46)"/><path d="M480 270 V320 H645 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-finance-46)"/><path d="M155 270 V320 H645 V365" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-finance-46)"/><g><rect x="330" y="16" width="300" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">PaymentRequests</tspan><tspan x="480" y="69">PK Id · amount · status</tspan></text></g><g><rect x="20" y="180" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="209" font-weight="700">PaymentVouchers</tspan><tspan x="155" y="231">FK Company/Branch/Bank</tspan><tspan x="155" y="253">source · thu/chi · amount</tspan></text></g><g><rect x="345" y="180" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="209" font-weight="700">AccountDebts</tspan><tspan x="480" y="231">FK customer/supplier</tspan><tspan x="480" y="253">direction · increase/decrease</tspan></text></g><g><rect x="670" y="180" width="270" height="90" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="209" font-weight="700">InternalTransfers</tspan><tspan x="805" y="231">from/to account · amount</tspan><tspan x="805" y="253">history</tspan></text></g><g><rect x="180" y="370" width="270" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="315" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="315" y="401" font-weight="700">FinMoneyLedgers</tspan><tspan x="315" y="423">balance before/after · source</tspan></text></g><g><rect x="510" y="370" width="270" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="645" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="645" y="401" font-weight="700">DebtDetails / Offsets</tspan><tspan x="645" y="423">allocation · source debt</tspan></text></g></svg></div><figcaption><strong>ERD — thu chi, công nợ và chuyển tiền.</strong> Đề nghị, phiếu hoàn tất, sổ tiền và công nợ nối theo nguồn. Một lần thanh toán có thể phân bổ nhiều khoản nợ; một khoản nợ có thể được thanh toán nhiều lần.</figcaption></figure>
 
-<h3 id="section-62-24-7">62.24.7. Kế toán và bút toán</h3>
+<h3 id="section-56-24-7">56.24.7. Kế toán và bút toán</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="title-erd-accounting-47 desc-erd-accounting-47" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-accounting-47">ERD — nguồn kế toán, kỳ và bút toán</title><desc id="desc-erd-accounting-47">AccountingPeriods. PK Id · start/end · status; AccountingSourceDocuments. items · source type/id. company · date; JournalEntries. PK Id · period · entry code. status · source; JournalEntryLines. FK JournalEntryId. account · debit · credit; AccountingMappings. nguồn → tài khoản</desc><defs><marker id="arrow-erd-accounting-47" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V134 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-accounting-47)"/><path d="M175 266 V223 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-accounting-47)"/><path d="M480 266 V223 H785 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-accounting-47)"/><path d="M480 420 V300 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-accounting-47)"/><path d="M480 420 V300 H785 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-accounting-47)"/><g><rect x="330" y="16" width="300" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">AccountingPeriods</tspan><tspan x="480" y="69">PK Id · start/end · status</tspan></text></g><g><rect x="40" y="180" width="270" height="86" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="175" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="175" y="207" font-weight="700">AccountingSourceDocuments</tspan><tspan x="175" y="229">items · source type/id</tspan><tspan x="175" y="251">company · date</tspan></text></g><g><rect x="345" y="180" width="270" height="86" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="207" font-weight="700">JournalEntries</tspan><tspan x="480" y="229">PK Id · period · entry code</tspan><tspan x="480" y="251">status · source</tspan></text></g><g><rect x="650" y="180" width="270" height="86" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="785" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="785" y="207" font-weight="700">JournalEntryLines</tspan><tspan x="785" y="229">FK JournalEntryId</tspan><tspan x="785" y="251">account · debit · credit</tspan></text></g><g><rect x="345" y="350" width="270" height="70" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="380" font-weight="700">AccountingMappings</tspan><tspan x="480" y="402">nguồn → tài khoản</tspan></text></g></svg></div><figcaption><strong>ERD — nguồn kế toán, kỳ và bút toán.</strong> Nghiệp vụ nguồn được chuẩn hóa thành chứng từ kế toán; mỗi chứng từ sinh bút toán và dòng Nợ/Có. Bút toán đã ghi sổ không sửa trực tiếp.</figcaption></figure>
 
-<h3 id="section-62-24-8">62.24.8. Tờ khai, hóa đơn và thuế</h3>
+<h3 id="section-56-24-8">56.24.8. Tờ khai, hóa đơn và thuế</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title-erd-tax-48 desc-erd-tax-48" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-tax-48">ERD — tờ khai, hóa đơn và thuế</title><desc id="desc-erd-tax-48">Companies. PK Id · tax method · regime; Orders / OrderInvoices. VAT output · buyer snapshot. request/status/provider; WarehouseInputs / XML logs. VAT input · supplier · lines; TaxDeclarations. period · sections · totals. DTO version · audit; Sổ TT152 / TT58. load theo bộ mẫu</desc><defs><marker id="arrow-erd-tax-48" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V134 H155 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-tax-48)"/><path d="M480 88 V134 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-tax-48)"/><path d="M480 88 V134 H805 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-tax-48)"/><path d="M155 268 V224 H805 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-tax-48)"/><path d="M480 268 V224 H805 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-tax-48)"/><path d="M805 268 V312 H480 V350" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-tax-48)"/><g><rect x="330" y="16" width="300" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">Companies</tspan><tspan x="480" y="69">PK Id · tax method · regime</tspan></text></g><g><rect x="20" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="208" font-weight="700">Orders / OrderInvoices</tspan><tspan x="155" y="230">VAT output · buyer snapshot</tspan><tspan x="155" y="252">request/status/provider</tspan></text></g><g><rect x="345" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="219" font-weight="700">WarehouseInputs / XML logs</tspan><tspan x="480" y="241">VAT input · supplier · lines</tspan></text></g><g><rect x="670" y="180" width="270" height="88" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="805" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="805" y="208" font-weight="700">TaxDeclarations</tspan><tspan x="805" y="230">period · sections · totals</tspan><tspan x="805" y="252">DTO version · audit</tspan></text></g><g><rect x="345" y="355" width="270" height="70" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="385" font-weight="700">Sổ TT152 / TT58</tspan><tspan x="480" y="407">load theo bộ mẫu</tspan></text></g></svg></div><figcaption><strong>ERD — tờ khai, hóa đơn và thuế.</strong> Tờ khai giữ snapshot phần nhập và kết quả tính; hóa đơn lưu request, phản hồi và trạng thái riêng. Nguồn bán/mua không bị thay đổi khi xuất tệp.</figcaption></figure>
 
-<h3 id="section-62-24-9">62.24.9. Kênh sàn và đồng bộ ngoài</h3>
+<h3 id="section-56-24-9">56.24.9. Kênh sàn và đồng bộ ngoài</h3>
 <figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="title-erd-integration-49 desc-erd-integration-49" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-erd-integration-49">ERD — kênh sàn và đồng bộ ngoài</title><desc id="desc-erd-integration-49">Companies. PK Id; CompanyShopeeShops / TikTokShops. CompanyId · BranchId. token/status; ShopProduct mappings. shop SKU ↔ ProductId. audit/missing SKU; Order sync / packages. external order id · status. last error · retry; Orders. idempotent internal order</desc><defs><marker id="arrow-erd-integration-49" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V134 H155 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-integration-49)"/><path d="M155 266 V223 H480 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-integration-49)"/><path d="M155 266 V223 H785 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-integration-49)"/><path d="M480 266 V223 H785 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-integration-49)"/><path d="M785 266 V308 H480 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-erd-integration-49)"/><g><rect x="330" y="16" width="300" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="47" font-weight="700">Companies</tspan><tspan x="480" y="69">PK Id</tspan></text></g><g><rect x="20" y="180" width="270" height="86" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="155" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="155" y="207" font-weight="700">CompanyShopeeShops / TikTokShops</tspan><tspan x="155" y="229">CompanyId · BranchId</tspan><tspan x="155" y="251">token/status</tspan></text></g><g><rect x="345" y="180" width="270" height="86" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="207" font-weight="700">ShopProduct mappings</tspan><tspan x="480" y="229">shop SKU ↔ ProductId</tspan><tspan x="480" y="251">audit/missing SKU</tspan></text></g><g><rect x="650" y="180" width="270" height="86" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="785" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="785" y="207" font-weight="700">Order sync / packages</tspan><tspan x="785" y="229">external order id · status</tspan><tspan x="785" y="251">last error · retry</tspan></text></g><g><rect x="345" y="350" width="270" height="70" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="380" font-weight="700">Orders</tspan><tspan x="480" y="402">idempotent internal order</tspan></text></g></svg></div><figcaption><strong>ERD — kênh sàn và đồng bộ ngoài.</strong> Shop, ánh xạ sản phẩm, đồng bộ đơn và nhật ký lỗi tách khỏi đơn nội bộ. Idempotency theo shop và mã đơn ngăn tạo trùng khi retry.</figcaption></figure>
 
-<h2 id="section-62-25">62.25. Bảng tenant control plane</h2>
+<h2 id="section-56-25">56.25. Bảng tenant control plane</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -16934,7 +16934,7 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <td>DatabaseId và ProviderId unique; thông tin định danh phải bảo vệ.</td>
 </tr>
 </tbody></table></div>
-<h2 id="section-62-26">62.26. Quy tắc cập nhật ma trận</h2>
+<h2 id="section-56-26">56.26. Quy tắc cập nhật ma trận</h2>
 <p>Ma trận này được sinh từ snapshot để tránh bỏ sót tên bảng.</p>
 <ul>
 <li>Khi migration thêm/xóa/đổi bảng, người phát triển phải cập nhật: PK.</li>
@@ -16948,4 +16948,4 @@ a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10
 <li>Một bảng mới chưa được gán module hoặc chưa có owner nghiệp vụ là lỗi thiết kế, không phải việc để sau.</li>
 </ul>
 </article></main>
-    <nav class="chapter-nav"><a href="61-mo-hinh-du-lieu-tong-the.html">← 61. Kiến trúc lưu trữ và mô hình quan hệ tổng thể</a><span></span></nav></div></body></html>
+    <nav class="chapter-nav"><a href="55-mo-hinh-du-lieu-tong-the.html">← 55. Kiến trúc lưu trữ và mô hình quan hệ tổng thể</a><span></span></nav></div></body></html>
