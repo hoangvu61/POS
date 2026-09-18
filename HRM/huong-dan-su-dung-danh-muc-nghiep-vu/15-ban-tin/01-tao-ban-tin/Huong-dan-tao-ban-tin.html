@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn Tạo bản tin | VIN-HRM</title>
+<style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #fff; color: #1f2937; font-family: Roboto, Arial, sans-serif; font-size: 10.5pt; line-height: 1.42; }
+.cover { min-height: 245mm; position: relative; page-break-after: always; break-after: page; }
+.cover-head { text-align: center; }
+.cover-kicker { margin: 0 0 18pt; color: #1f2937; font-size: 12pt; font-weight: 700; text-align: center; text-transform: uppercase; }
+.cover-title { margin: 0 0 5pt; padding: 0; border: 0; color: #1f2937; font-size: 28pt; font-weight: 700; line-height: 1.12; text-align: center; }
+.cover-sub { margin: 0; color: #4b5563; font-size: 13.5pt; line-height: 1.35; text-align: center; }
+.cover-meta { margin-top: 25mm; font-size: 10.5pt; line-height: 1.38; }
+.cover-meta p { margin: 2pt 0; }
+.cover-toc { margin-top: 14mm; }
+.cover-toc h2 { margin: 0 0 10pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; text-transform: uppercase; }
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 { margin: 0 0 8pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; line-height: 1.2; page-break-after: avoid; }
+h2 { margin: 18pt 0 3pt; color: #111827; font-size: 13.5pt; line-height: 1.25; page-break-after: avoid; }
+h3 { margin: 14pt 0 3pt; color: #111827; font-size: 11.5pt; line-height: 1.3; page-break-after: avoid; }
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 3pt; }
+.lead { margin: 0 0 12pt; padding: 9pt 11pt; border: 1px solid #9ca3af; background: #eef4f8; }
+.route { padding: 1pt 3pt; background: #edf2f7; color: #111827; font-weight: 700; }
+.tag { white-space: nowrap; padding: 1pt 4pt; border: 1px solid #9ca3af; background: #f7f9fb; font-size: 9pt; font-weight: 700; }
+table { width: 100%; margin: 8pt 0 12pt; border-collapse: collapse; table-layout: fixed; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; }
+th { padding: 6pt; border: 1px solid #9ca3af; background: #d9e7f2; color: #111827; font-size: 9.5pt; line-height: 1.3; text-align: left; vertical-align: middle; }
+td { padding: 6pt; border: 1px solid #b8c0ca; background: #fff; font-size: 9.5pt; line-height: 1.35; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.flow { margin: 8pt 0 10pt; border: 0; border-collapse: separate; page-break-inside: avoid; }
+.flow td { padding: 0; border: 0; background: #fff !important; text-align: center; vertical-align: middle; }
+.flow .flow-node { padding: 6pt 9pt; border: 1px solid #7b8794; background: #eef4f8 !important; }
+.flow .flow-node strong { display: block; margin-bottom: 1pt; color: #111827; font-size: 10.5pt; }
+.flow .flow-node p { margin: 0; color: #374151; font-size: 8.8pt; text-align: center; }
+.flow .flow-arrow { height: 12pt; color: #4b5563; font-size: 13pt; font-weight: 700; line-height: 1; }
+.branch td { text-align: center; vertical-align: middle; }
+.branch .decision { background: #fff8e6; font-weight: 700; }
+.callout { width: 100%; margin: 10pt 0; border: 1px solid #9ca3af; border-collapse: separate; background: #eef4f8; page-break-inside: avoid; }
+.callout td { padding: 9pt 11pt; border: 0; background: transparent !important; font-size: 10.5pt; line-height: 1.35; }
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+figure { margin: 12pt 0 14pt; page-break-inside: avoid; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid #9ca3af; }
+figcaption { margin-top: 4pt; color: #4b5563; font-size: 9pt; font-style: italic; line-height: 1.3; text-align: center; }
+.steps { margin: 6pt 0 11pt 24pt; padding-left: 15pt; }
+.page-break { page-break-before: always; break-before: page; }
+.footer-note { margin-top: 18pt; padding-top: 7pt; border-top: 1px solid #9ca3af; color: #4b5563; font-size: 8.8pt; }
+@media screen { body { background: #eef1f4; } .cover, .doc { width: 210mm; margin: 12mm auto; padding: 25.4mm; background: #fff; box-shadow: 0 2px 16px rgba(17,24,39,.10); } .cover { min-height: 297mm; } .doc { min-height: 297mm; } }
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN<br>TẠO BẢN TIN</p>
+    <p class="cover-sub">Soạn nội dung, chọn phạm vi, lưu nháp và gửi quy trình phê duyệt</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn Tạo bản tin</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 24/08/2026</p>
+    <p><strong>Đối tượng:</strong> cán bộ truyền thông nội bộ, nhân sự, quản lý và người được cấp quyền quản lý bản tin</p>
+    <p><strong>Nguồn:</strong> tài liệu nghiệp vụ “Bản tin nội bộ v1.0”, mã nguồn và phần mềm VIN-HRM thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Mục đích, phạm vi và luồng tạo bản tin</li>
+      <li>Điều kiện, phân quyền và cấu hình liên quan</li>
+      <li>Màn hình Quản lý bản tin</li>
+      <li>Giải thích biểu mẫu tạo bản tin</li>
+      <li>Chọn phạm vi phát hành</li>
+      <li>Lưu nháp, gửi duyệt và theo dõi trạng thái</li>
+      <li>Chỉnh sửa, xóa và thu hồi yêu cầu duyệt</li>
+      <li>Lỗi thường gặp và danh sách kiểm tra</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích, phạm vi và luồng tạo bản tin</h1>
+<p class="lead">Chức năng Tạo bản tin dùng để chuẩn bị một thông báo nội bộ có nội dung chuẩn, xác định đúng người nhận và đưa nội dung vào quy trình kiểm soát trước khi phát hành. Người tạo có thể lưu ở trạng thái Nháp để tiếp tục hoàn thiện hoặc tạo và gửi duyệt ngay. Bản tin chỉ xuất hiện với người nhận sau khi toàn bộ quy trình phê duyệt hoàn tất.</p>
+<p>Tài liệu này phản ánh giao diện VIN-HRM đang vận hành. Phần mềm hiện tại có trạng thái <b>Nháp</b> và cho người tạo <b>chọn trực tiếp một quy trình phê duyệt đang hoạt động</b>; đây là điểm cần lưu ý khi đối chiếu với đặc tả nghiệp vụ ban đầu vốn mô tả quy trình được lấy tự động từ cấu hình.</p>
+
+<h2>1.1. Luồng nghiệp vụ tổng quát</h2>
+<table class="flow" aria-label="Luồng tạo và gửi duyệt bản tin">
+  <tbody>
+    <tr><td class="flow-node"><strong>1. Chuẩn bị thông tin</strong><p>Xác định mục tiêu, tiêu đề, nội dung, tệp đính kèm và nhóm người cần nhận.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>2. Mở Tạo bản tin</strong><p>Bản tin nội bộ → Quản lý bản tin → TẠO BẢN TIN; hoặc mở Bản tin và chọn ô chia sẻ.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>3. Nhập nội dung và phạm vi</strong><p>Tiêu đề → nội dung → tệp → một loại phạm vi → đối tượng chi tiết → quy trình.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>4. Chọn cách lưu</strong><p>Lưu nháp để tiếp tục sửa HOẶC Tạo &amp; Gửi duyệt để khởi tạo quy trình ngay.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>5. Phê duyệt</strong><p>Người duyệt xử lý theo từng bước; trong thời gian này bản tin chưa hiển thị cho người nhận.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>6. Phát hành</strong><p>Hoàn tất quy trình → chốt danh sách người nhận → ghi thời gian phát hành → hiển thị trên Bản tin nội bộ.</p></td></tr>
+  </tbody>
+</table>
+<table class="branch" aria-label="Hai cách lưu bản tin">
+  <colgroup><col style="width:47%"><col style="width:6%"><col style="width:47%"></colgroup>
+  <tbody><tr><td class="decision">LƯU NHÁP<br>↓<br>Được sửa, xóa, đổi phạm vi và gửi duyệt sau</td><td style="border:0;background:#fff;">HOẶC</td><td class="decision">TẠO &amp; GỬI DUYỆT<br>↓<br>Chuyển sang Chờ duyệt và khóa chỉnh sửa</td></tr></tbody>
+</table>
+
+<h2>1.2. Phạm vi dữ liệu và nguyên tắc</h2>
+<ul>
+  <li>Mỗi bản tin thuộc đúng doanh nghiệp của người đang đăng nhập; không chọn phòng ban, nhân viên hoặc quy trình của doanh nghiệp khác.</li>
+  <li>Người tạo được hệ thống xác định tự động, không nhập tay và chỉ người tạo mới được sửa, gửi duyệt, xóa Nháp hoặc thu hồi yêu cầu duyệt của bản tin đó.</li>
+  <li>Mỗi bản tin chỉ dùng <b>một</b> loại phạm vi: Toàn công ty, Phòng ban hoặc Người dùng cụ thể.</li>
+  <li>Danh sách người nhận chỉ được chốt khi bản tin được duyệt; thay đổi tổ chức sau thời điểm đó không sửa lại lịch sử người đã nhận.</li>
+  <li>Nội dung rich text được làm sạch trước khi lưu; mã thực thi, script hoặc nội dung không an toàn bị loại bỏ.</li>
+</ul>
+
+<h1>2. Điều kiện, phân quyền và cấu hình liên quan</h1>
+<h2>2.1. Điều kiện sử dụng</h2>
+<ol class="steps">
+  <li>Tài khoản đăng nhập và hồ sơ nhân viên còn hoạt động trong doanh nghiệp.</li>
+  <li>Tài khoản có quyền <span class="tag">News.Manage</span> — tên hiển thị trong Phân quyền là <b>Quản lý bản tin</b>.</li>
+  <li>Doanh nghiệp có ít nhất một quy trình loại <b>Duyệt bản tin</b> đang hoạt động và có bước phê duyệt hợp lệ.</li>
+  <li>Người duyệt được khai báo tại bước đầu tiên phải còn hoạt động; nếu không, hệ thống không thể khởi tạo quy trình.</li>
+  <li>Phòng ban hoặc người dùng được chọn phải đang hoạt động và thuộc cùng doanh nghiệp.</li>
+</ol>
+
+<h2>2.2. Quy trình phê duyệt là cấu hình bắt buộc</h2>
+<p>Quản trị có quyền mở <span class="route">Hệ thống &gt; Quy trình phê duyệt</span>, tạo quy trình với <b>Loại quy trình = Duyệt bản tin</b>, thêm các bước và kích hoạt. Trong biểu mẫu bản tin, danh sách <b>Quy trình phê duyệt</b> chỉ trả về các quy trình cùng loại đang hoạt động.</p>
+<figure>
+  <img src="images/05-cau-hinh-quy-trinh-ban-tin.png" alt="Màn hình cấu hình Quy trình duyệt bản tin đang hoạt động, có một bước Duyệt thẳng do Phòng Dev xử lý.">
+  <figcaption>Hình 1. Ví dụ quy trình Duyệt bản tin; người duyệt, thứ tự và cách xử lý khi từ chối do cấu hình quy trình quyết định.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:26%"><col style="width:29%"><col style="width:45%"></colgroup>
+  <thead><tr><th>Thành phần cấu hình</th><th>Ý nghĩa</th><th>Lưu ý khi dùng cho Bản tin</th></tr></thead>
+  <tbody>
+    <tr><td>Loại quy trình</td><td>Xác định module sử dụng quy trình.</td><td>Phải là <b>Duyệt bản tin</b>. Quy trình của Hợp đồng, Nghỉ phép hoặc module khác không xuất hiện trong ô chọn.</td></tr>
+    <tr><td>Trạng thái</td><td>Hoạt động hoặc Ngừng hoạt động.</td><td>Chỉ quy trình Hoạt động được chọn và được dùng để khởi tạo phiên xử lý mới.</td></tr>
+    <tr><td>Bước phê duyệt</td><td>Tên bước, thứ tự và người duyệt.</td><td>Bản tin hiện chỉ hỗ trợ hành động <b>Duyệt</b>; không chọn quy trình có bước ký điện tử, ký số hoặc upload tài liệu.</td></tr>
+    <tr><td>Người duyệt</td><td>Cá nhân, phòng ban, chức vụ hoặc đối tượng theo thiết kế bước.</td><td>Người thỏa điều kiện bước mới thấy hồ sơ tại Duyệt bản tin. Cấp quyền News.Approve nhưng không thuộc bước hiện tại thì vẫn không xử lý được.</td></tr>
+    <tr><td>Khi từ chối</td><td>Hủy quy trình hoặc trả về bước đã cấu hình.</td><td>Quyết định trạng thái và hướng đi tiếp theo. Cần kiểm tra kỹ trước khi đưa quy trình vào sử dụng.</td></tr>
+  </tbody>
+</table>
+<table class="callout warning"><tbody><tr><td><strong>Không có công tắc Bật/Tắt Bản tin riêng</strong><p>Trong phiên bản đang chạy, chức năng Tạo bản tin phụ thuộc quyền News.Manage, dữ liệu tổ chức, dịch vụ tệp và quy trình Duyệt bản tin. Ô quy trình trên biểu mẫu là bắt buộc. Nếu danh sách trống, cần kiểm tra loại quy trình, trạng thái Hoạt động, các bước và người duyệt; không phải lỗi của ô nhập bản tin.</p></td></tr></tbody></table>
+
+<h1 class="page-break">3. Màn hình Quản lý bản tin</h1>
+<p>Mở <span class="route">Bản tin nội bộ &gt; Quản lý bản tin</span>. Màn hình dùng để tìm, theo dõi và thao tác với tất cả bản tin trong phạm vi quyền của doanh nghiệp.</p>
+<figure>
+  <img src="images/01-danh-sach-quan-ly-ban-tin.png" alt="Màn hình Quản lý bản tin VIN-HRM giao diện rộng 1920 pixel, gồm bộ lọc, nút Tạo bản tin và bảng trạng thái.">
+  <figcaption>Hình 2. Danh sách quản lý hiển thị tiêu đề, người tạo, phạm vi, trạng thái, ngày tạo, thời điểm phát hành, yêu cầu thu hồi và thao tác.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Khu vực</th><th>Cách sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Tìm kiếm</td><td>Nhập tiêu đề, tên người tạo hoặc mã nhân viên. Kết quả tự tải lại theo từ khóa.</td></tr>
+    <tr><td>Trạng thái bản tin</td><td>Lọc theo Nháp, Chờ duyệt, Đã duyệt, Đã thu hồi hoặc Bị từ chối.</td></tr>
+    <tr><td>Phát hành từ/đến ngày</td><td>Lọc theo ngày phát hành. Bản tin Nháp hoặc Chờ duyệt chưa có ngày phát hành nên không phù hợp khi đặt khoảng ngày này.</td></tr>
+    <tr><td>Xóa bộ lọc</td><td>Xóa toàn bộ điều kiện và tải lại trang đầu tiên.</td></tr>
+    <tr><td>TẠO BẢN TIN</td><td>Mở biểu mẫu tạo; chỉ hiển thị với tài khoản có News.Manage.</td></tr>
+    <tr><td>Thao tác theo dòng</td><td>Xem chi tiết; xem quy trình; cập nhật Nháp; gửi duyệt; xóa Nháp; thu hồi hồ sơ đang Chờ duyệt; hoặc yêu cầu thu hồi bản tin Đã duyệt khi đủ điều kiện.</td></tr>
+  </tbody>
+</table>
+
+<h1>4. Giải thích biểu mẫu tạo bản tin</h1>
+<h2>4.1. Mở biểu mẫu</h2>
+<ol class="steps">
+  <li>Từ Quản lý bản tin, chọn <b>TẠO BẢN TIN</b>; hoặc mở <b>Bản tin</b> trên thanh đầu trang rồi chọn ô “Bạn muốn chia sẻ bản tin gì?”.</li>
+  <li>Chờ biểu mẫu tải xong. Nếu có thông báo lỗi, đóng biểu mẫu, kiểm tra quyền/kết nối và mở lại.</li>
+  <li>Nhập lần lượt từ trên xuống để tránh bỏ sót trường bắt buộc.</li>
+</ol>
+<figure>
+  <img src="images/02-bieu-mau-tao-ban-tin.png" alt="Biểu mẫu Tạo bản tin mới gồm tiêu đề, trình soạn thảo nội dung, chọn tệp, phạm vi và các nút Lưu nháp, Tạo và Gửi duyệt.">
+  <figcaption>Hình 3. Phần trên của biểu mẫu: Tiêu đề, trình soạn thảo rich text, tệp đính kèm và hai cách lưu.</figcaption>
+</figure>
+
+<h2>4.2. Ý nghĩa các trường</h2>
+<table>
+  <colgroup><col style="width:22%"><col style="width:14%"><col style="width:64%"></colgroup>
+  <thead><tr><th>Trường</th><th>Bắt buộc</th><th>Ý nghĩa và cách nhập</th></tr></thead>
+  <tbody>
+    <tr><td>Tiêu đề</td><td>Có</td><td>Tên hiển thị nổi bật trên danh sách và thẻ bản tin; tối đa 500 ký tự. Nên nêu loại thông báo, nội dung chính và mốc quan trọng, ví dụ “Thông báo lịch nghỉ lễ Quốc khánh”.</td></tr>
+    <tr><td>Nội dung</td><td>Có</td><td>Thông tin chi tiết ở dạng rich text. Hệ thống loại bỏ nội dung rỗng và mã không an toàn. Nên trình bày mở đầu, nội dung chính, thời gian/phạm vi áp dụng, việc nhân viên cần làm và đầu mối liên hệ.</td></tr>
+    <tr><td>Tệp đính kèm</td><td>Không</td><td>Thêm ảnh hoặc tài liệu cần xem/tải. Có thể chọn nhiều tệp; tệp được kiểm tra theo dịch vụ lưu trữ của hệ thống. Không đưa dữ liệu nhạy cảm nếu phạm vi phát hành rộng.</td></tr>
+    <tr><td>Phạm vi phát hành</td><td>Có</td><td>Chọn đúng một trong ba lựa chọn. Phạm vi quyết định cách hệ thống chốt người nhận sau khi duyệt.</td></tr>
+    <tr><td>Phòng ban</td><td>Có điều kiện</td><td>Chỉ xuất hiện khi chọn Phòng ban; phải chọn ít nhất một đơn vị đang hoạt động. Chọn phòng ban cha không mặc nhiên bao gồm phòng ban con, vì vậy cần chọn đủ từng đơn vị cần nhận.</td></tr>
+    <tr><td>Người dùng</td><td>Có điều kiện</td><td>Chỉ xuất hiện khi chọn Người dùng cụ thể; phải chọn ít nhất một nhân viên đang hoạt động, có tài khoản hoạt động trong doanh nghiệp.</td></tr>
+    <tr><td>Quy trình phê duyệt</td><td>Có</td><td>Chọn quy trình loại Duyệt bản tin đang hoạt động. Quy trình này quyết định số bước, người xử lý và đường đi khi từ chối.</td></tr>
+  </tbody>
+</table>
+
+<h2>4.3. Các nút trên trình soạn thảo</h2>
+<table>
+  <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+  <thead><tr><th>Nhóm công cụ</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Normal / Heading 2 / Heading 3</td><td>Đặt kiểu đoạn văn hoặc tiêu đề cấp nhỏ trong nội dung. Không dùng quá nhiều tiêu đề khiến bản tin rối mắt.</td></tr>
+    <tr><td>Đậm, nghiêng, gạch chân, gạch ngang</td><td>Nhấn mạnh từ hoặc câu. Ưu tiên chữ đậm cho thông tin quan trọng; tránh gạch chân nếu không phải liên kết.</td></tr>
+    <tr><td>Màu chữ và màu nền</td><td>Làm nổi bật cảnh báo hoặc trạng thái; nên dùng ít màu, bảo đảm dễ đọc.</td></tr>
+    <tr><td>Danh sách số / dấu đầu dòng</td><td>Trình bày các bước hoặc nhóm nội dung; dùng danh sách số khi thứ tự thực hiện có ý nghĩa.</td></tr>
+    <tr><td>Giảm / tăng thụt lề</td><td>Tạo cấp con của danh sách hoặc điều chỉnh mức lề.</td></tr>
+    <tr><td>Căn lề, trích dẫn, khối mã</td><td>Căn đoạn, làm nổi trích dẫn hoặc trình bày nội dung kỹ thuật. Khối mã chỉ dùng khi thật sự cần truyền đạt đoạn cấu hình/mã an toàn.</td></tr>
+    <tr><td>Liên kết / xóa định dạng</td><td>Chèn đường dẫn hợp lệ hoặc đưa đoạn văn về định dạng bình thường.</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">5. Chọn phạm vi phát hành</h1>
+<h2>5.1. Ý nghĩa từng lựa chọn</h2>
+<table>
+  <colgroup><col style="width:21%"><col style="width:34%"><col style="width:45%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Hệ thống xác định người nhận</th><th>Khi nên dùng và lưu ý</th></tr></thead>
+  <tbody>
+    <tr><td>Toàn công ty</td><td>Tất cả nhân viên đang hoạt động thuộc doanh nghiệp và có tài khoản hoạt động tại thời điểm phát hành.</td><td>Thông báo chung như nghỉ lễ, chính sách toàn doanh nghiệp, bảo trì hệ thống. Cần rà soát kỹ nội dung và tệp vì phạm vi rộng nhất.</td></tr>
+    <tr><td>Phòng ban</td><td>Nhân viên có thông tin công việc hiệu lực tại một trong các phòng ban được chọn, còn hoạt động và có tài khoản.</td><td>Nội dung chuyên môn hoặc áp dụng theo đơn vị. Nếu một người thuộc nhiều phòng ban được chọn, hệ thống chỉ tạo một bản ghi người nhận.</td></tr>
+    <tr><td>Người dùng cụ thể</td><td>Những nhân viên được chọn trực tiếp và vẫn còn hoạt động tại thời điểm phát hành.</td><td>Thư mời, thông báo cho nhóm quản lý hoặc danh sách giới hạn. Kiểm tra mã nhân viên, phòng ban và email để tránh chọn nhầm người trùng tên.</td></tr>
+  </tbody>
+</table>
+
+<h2>5.2. Chọn Phòng ban</h2>
+<ol class="steps">
+  <li>Chọn nút tròn <b>Phòng ban</b>.</li>
+  <li>Chọn trường <b>Phòng ban *</b>, tìm theo mã hoặc tên và đánh dấu các đơn vị cần nhận.</li>
+  <li>Kiểm tra khu vực Phòng ban đã chọn; gỡ các đơn vị không đúng.</li>
+  <li>Nếu cần cả phòng ban con, chọn từng phòng ban con thay vì giả định hệ thống tự kế thừa.</li>
+</ol>
+<figure>
+  <img src="images/03-pham-vi-phong-ban.png" alt="Biểu mẫu tạo bản tin chọn phạm vi Phòng ban và hiển thị trường Phòng ban bắt buộc.">
+  <figcaption>Hình 4. Chọn Phòng ban làm xuất hiện trường lựa chọn đơn vị bắt buộc.</figcaption>
+</figure>
+
+<h2>5.3. Chọn Người dùng cụ thể</h2>
+<ol class="steps">
+  <li>Chọn nút tròn <b>Người dùng cụ thể</b>.</li>
+  <li>Mở trường <b>Người dùng *</b>; tìm theo mã nhân viên, họ tên hoặc email.</li>
+  <li>Đánh dấu người nhận; kiểm tra phòng ban đang làm việc trước khi xác nhận.</li>
+  <li>Khi đổi từ Phòng ban sang Người dùng hoặc ngược lại, hệ thống xóa danh sách của loại cũ; cần chọn lại đúng phạm vi mới.</li>
+</ol>
+<figure>
+  <img src="images/04-pham-vi-nguoi-dung.png" alt="Biểu mẫu tạo bản tin chọn phạm vi Người dùng cụ thể và hiển thị trường chọn người dùng.">
+  <figcaption>Hình 5. Người dùng cụ thể phù hợp khi chỉ một danh sách giới hạn cần nhận bản tin.</figcaption>
+</figure>
+<table class="callout warning"><tbody><tr><td><strong>Người tạo không tự động là người nhận</strong><p>Nếu cần xem bản tin sau khi phát hành, người tạo phải thuộc phạm vi Toàn công ty, có công việc tại phòng ban được chọn hoặc được chọn trực tiếp. Danh sách người nhận được chốt tại thời điểm phát hành; nhân viên mới vào phòng ban sau đó không tự nhận bản tin cũ.</p></td></tr></tbody></table>
+
+<h1>6. Lưu nháp, gửi duyệt và theo dõi trạng thái</h1>
+<h2>6.1. Lưu nháp</h2>
+<ol class="steps">
+  <li>Nhập đủ dữ liệu hợp lệ, kể cả quy trình phê duyệt.</li>
+  <li>Chọn <b>Lưu nháp</b>.</li>
+  <li>Kiểm tra thông báo thành công và dòng mới có trạng thái <b>Nháp</b>.</li>
+  <li>Dùng nút Cập nhật để sửa; dùng Gửi duyệt khi nội dung đã sẵn sàng.</li>
+</ol>
+<p>Lưu nháp không phát hành, không tạo phiên quy trình và không gửi thông báo cho người duyệt. Đây là lựa chọn phù hợp khi tệp hoặc phạm vi chưa được rà soát xong.</p>
+
+<h2>6.2. Tạo &amp; Gửi duyệt</h2>
+<ol class="steps">
+  <li>Rà soát tiêu đề, nội dung, tệp, phạm vi và quy trình.</li>
+  <li>Chọn <b>Tạo &amp; Gửi duyệt</b> hoặc, với dòng Nháp, chọn biểu tượng Gửi duyệt.</li>
+  <li>Xác nhận cảnh báo: bản tin chuyển sang Chờ duyệt và không thể chỉnh sửa.</li>
+  <li>Hệ thống tạo phiên quy trình, chuyển đến bước đầu tiên và thông báo cho người xử lý phù hợp.</li>
+  <li>Theo dõi bằng biểu tượng Quy trình phê duyệt trong cột Thao tác.</li>
+</ol>
+
+<h2>6.3. Ý nghĩa trạng thái</h2>
+<table>
+  <colgroup><col style="width:22%"><col style="width:45%"><col style="width:33%"></colgroup>
+  <thead><tr><th>Trạng thái</th><th>Ý nghĩa</th><th>Thao tác chính</th></tr></thead>
+  <tbody>
+    <tr><td>Nháp</td><td>Đã lưu nhưng chưa khởi tạo quy trình; chưa có người nhận.</td><td>Xem, cập nhật, gửi duyệt hoặc xóa.</td></tr>
+    <tr><td>Chờ duyệt</td><td>Quy trình đang xử lý; chưa hiển thị cho người nhận.</td><td>Xem, xem tiến trình; người tạo có thể Thu hồi về Nháp khi quy trình chưa bị từ chối.</td></tr>
+    <tr><td>Đã duyệt</td><td>Toàn bộ quy trình hoàn tất, người nhận đã được chốt và bản tin đã phát hành.</td><td>Xem; không sửa nội dung hoặc phạm vi. Khi sai phải yêu cầu thu hồi và tạo bản tin mới.</td></tr>
+    <tr><td>Đã thu hồi</td><td>Quy trình thu hồi đã hoàn tất; bản tin không còn xuất hiện với người nhận.</td><td>Chỉ tra cứu lịch sử ở màn hình quản lý.</td></tr>
+    <tr><td>Bị từ chối</td><td>Quy trình phát hành kết thúc do từ chối.</td><td>Phiên bản hiện tại không cho sửa trực tiếp trạng thái này; xem lý do và tạo bản tin mới khi cần gửi lại nội dung đã điều chỉnh.</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">7. Chỉnh sửa, xóa và thu hồi yêu cầu duyệt</h1>
+<h2>7.1. Cập nhật Nháp</h2>
+<ol class="steps">
+  <li>Tại dòng Nháp do chính mình tạo, chọn biểu tượng Cập nhật.</li>
+  <li>Chỉnh tiêu đề, nội dung, tệp, phạm vi, danh sách đối tượng hoặc quy trình.</li>
+  <li>Chọn <b>Lưu thay đổi</b> để vẫn ở Nháp hoặc <b>Lưu &amp; Gửi duyệt</b> để khởi tạo quy trình.</li>
+</ol>
+
+<h2>7.2. Xóa Nháp</h2>
+<p>Chọn biểu tượng Xóa và xác nhận. Hệ thống chỉ cho xóa bản tin ở trạng thái Nháp do chính người dùng tạo. Bản tin đã phát sinh quy trình không dùng thao tác xóa này.</p>
+
+<h2>7.3. Thu hồi hồ sơ đang Chờ duyệt về Nháp</h2>
+<table class="flow" aria-label="Luồng thu hồi yêu cầu duyệt về Nháp">
+  <tbody>
+    <tr><td class="flow-node"><strong>Bản tin Chờ duyệt</strong><p>Người tạo phát hiện nội dung hoặc phạm vi cần sửa.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>Chọn Thu hồi</strong><p>Xác nhận thu hồi toàn bộ tiến trình phê duyệt hiện tại.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>Hệ thống xóa phiên xử lý hiện tại</strong><p>Bản tin trở lại Nháp; danh sách nội dung, phạm vi và tệp được giữ.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>Cập nhật và gửi lại</strong><p>Chỉnh sửa → kiểm tra → khởi tạo một phiên phê duyệt mới.</p></td></tr>
+  </tbody>
+</table>
+<table class="callout warning"><tbody><tr><td><strong>Phân biệt hai loại “thu hồi”</strong><p><b>Thu hồi hồ sơ Chờ duyệt</b> đưa bản tin về Nháp để sửa và xóa tiến trình hiện tại. <b>Yêu cầu thu hồi bản tin Đã duyệt</b> là nghiệp vụ khác, cần lý do và một quy trình phê duyệt thu hồi; bản tin vẫn hiển thị cho người nhận cho đến khi yêu cầu được duyệt.</p></td></tr></tbody></table>
+
+<h1>8. Lỗi thường gặp và danh sách kiểm tra</h1>
+<h2>8.1. Lỗi thường gặp</h2>
+<table>
+  <colgroup><col style="width:31%"><col style="width:32%"><col style="width:37%"></colgroup>
+  <thead><tr><th>Hiện tượng</th><th>Nguyên nhân thường gặp</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Không thấy nút TẠO BẢN TIN</td><td>Thiếu quyền News.Manage hoặc phiên quyền chưa được cập nhật.</td><td>Kiểm tra Phân quyền, đăng xuất/đăng nhập lại sau khi cấp quyền.</td></tr>
+    <tr><td>Không chọn được quy trình</td><td>Chưa có quy trình Duyệt bản tin đang Hoạt động hoặc quy trình không có bước hợp lệ.</td><td>Mở Hệ thống → Quy trình phê duyệt, kiểm tra Loại, Trạng thái, bước và người duyệt.</td></tr>
+    <tr><td>Không thể lưu/gửi vì nội dung</td><td>Tiêu đề hoặc nội dung rỗng; nội dung chỉ có định dạng nhưng không có chữ/ảnh có ý nghĩa.</td><td>Nhập lại nội dung thực, bỏ các khối rỗng; tiêu đề không vượt quá 500 ký tự.</td></tr>
+    <tr><td>Báo chưa chọn Phòng ban/Người dùng</td><td>Chọn phạm vi có điều kiện nhưng danh sách chi tiết trống.</td><td>Mở lại ô chọn và thêm ít nhất một đối tượng hợp lệ.</td></tr>
+    <tr><td>Tệp không tải lên</td><td>Định dạng, dung lượng, kết nối hoặc quyền upload không hợp lệ.</td><td>Dùng tệp nhỏ hơn, định dạng thông dụng; tải lại biểu mẫu và liên hệ quản trị dịch vụ tệp nếu lỗi lặp lại.</td></tr>
+    <tr><td>Không sửa được bản tin</td><td>Không phải người tạo hoặc trạng thái không còn là Nháp.</td><td>Nếu đang Chờ duyệt, người tạo dùng Thu hồi về Nháp; nếu Đã duyệt, yêu cầu thu hồi và tạo bản tin mới.</td></tr>
+    <tr><td>Người cần nhận không thấy bản tin</td><td>Bản tin chưa được duyệt hoặc người đó không thuộc danh sách chốt tại thời điểm phát hành.</td><td>Xem tiến trình phê duyệt; kiểm tra trạng thái nhân viên, tài khoản và thông tin công việc tại thời điểm phát hành.</td></tr>
+  </tbody>
+</table>
+
+<h2>8.2. Danh sách kiểm tra trước khi gửi duyệt</h2>
+<ul>
+  <li>Tiêu đề ngắn gọn, không viết hoa toàn bộ nếu không cần thiết.</li>
+  <li>Nội dung có thời gian, phạm vi áp dụng, việc người đọc cần làm và đầu mối liên hệ.</li>
+  <li>Liên kết mở được; tệp đúng phiên bản, không chứa dữ liệu ngoài phạm vi.</li>
+  <li>Chọn đúng một loại phạm vi và kiểm tra đủ phòng ban/người dùng.</li>
+  <li>Quy trình đúng loại, đang hoạt động và người duyệt còn hiệu lực.</li>
+  <li>Đã xem lại chính tả, ngày giờ, số liệu và tên đơn vị.</li>
+  <li>Nếu chưa chắc chắn, chọn Lưu nháp; chỉ Gửi duyệt khi nội dung đã sẵn sàng phát hành.</li>
+</ul>
+
+<p class="footer-note">Tài liệu được biên soạn theo giao diện VIN-HRM tại thời điểm ban hành. Tên quyền, trạng thái và hành vi có thể thay đổi khi phần mềm được nâng cấp; khi có khác biệt, ưu tiên giao diện và quy định vận hành hiện hành của doanh nghiệp.</p>
+</main>
+</body>
+</html>

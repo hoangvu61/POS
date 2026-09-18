@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn quản lý quy trình phê duyệt | VIN-HRM</title>
+<style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #fff; color: #1f2937; font-family: Roboto, Arial, sans-serif; font-size: 10.5pt; line-height: 1.42; }
+.cover { min-height: 245mm; position: relative; page-break-after: always; break-after: page; }
+.cover-head { text-align: center; }
+.cover-kicker { margin: 0 0 18pt; color: #1f2937; font-size: 12pt; font-weight: 700; text-align: center; text-transform: uppercase; }
+.cover-title { margin: 0 0 5pt; padding: 0; border: 0; color: #1f2937; font-size: 28pt; font-weight: 700; line-height: 1.12; text-align: center; }
+.cover-sub { margin: 0; color: #4b5563; font-size: 13.5pt; line-height: 1.35; text-align: center; }
+.cover-meta { margin-top: 28mm; font-size: 10.5pt; line-height: 1.38; }
+.cover-meta p { margin: 2pt 0; }
+.cover-meta strong { font-weight: 700; }
+.cover-toc { margin-top: 32mm; }
+.cover-toc h2 { margin: 0 0 10pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; font-weight: 700; line-height: 1.2; text-transform: uppercase; }
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 { margin: 0 0 8pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; font-weight: 700; line-height: 1.2; page-break-after: avoid; break-after: avoid; }
+h2 { margin: 18pt 0 3pt; padding: 0; border: 0; color: #111827; font-size: 13.5pt; font-weight: 700; line-height: 1.25; page-break-after: avoid; break-after: avoid; }
+h3 { margin: 14pt 0 3pt; color: #111827; font-size: 11.5pt; font-weight: 700; line-height: 1.3; page-break-after: avoid; break-after: avoid; }
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 3pt; }
+.lead { margin: 0 0 12pt; padding: 9pt 11pt; border: 1px solid #9ca3af; background: #eef4f8; color: #1f2937; font-size: 10.5pt; }
+.route { display: inline; padding: 1pt 3pt; background: #edf2f7; color: #111827; font-weight: 700; }
+table { width: 100%; margin: 8pt 0 12pt; border-collapse: collapse; border-spacing: 0; table-layout: fixed; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; break-inside: avoid; }
+th { padding: 6pt; border: 1px solid #9ca3af; background: #d9e7f2; color: #111827; font-size: 9.5pt; font-weight: 700; line-height: 1.3; text-align: left; vertical-align: middle; }
+td { padding: 6pt; border: 1px solid #b8c0ca; background: #fff; color: #1f2937; font-size: 9.5pt; line-height: 1.35; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.steps { margin: 6pt 0 11pt 24pt; padding-left: 15pt; }
+.callout-anchor { margin: 0 !important; padding: 0; font-size: 1pt; line-height: 1pt; page-break-after: avoid; break-after: avoid; }
+.callout { width: 100%; margin: 10pt 0; padding: 0; border: 1px solid #9ca3af; border-collapse: separate; background: #eef4f8; page-break-inside: avoid; break-inside: avoid; }
+.callout td { padding: 9pt 11pt; border: 0; background: transparent !important; color: #1f2937; font-size: 10.5pt; line-height: 1.35; vertical-align: top; }
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.info { background: #eef4f8; border-color: #9ca3af; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+figure { margin: 12pt 0 14pt; page-break-inside: avoid; break-inside: avoid; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid #9ca3af; }
+figcaption { margin-top: 4pt; color: #4b5563; font-size: 9pt; font-style: italic; line-height: 1.3; text-align: center; }
+.page-break { page-break-before: always; break-before: page; }
+.checklist li { break-inside: avoid; }
+.footer-note { margin-top: 18pt; padding-top: 7pt; border-top: 1px solid #9ca3af; color: #4b5563; font-size: 8.8pt; }
+@media screen {
+  body { background: #eef1f4; }
+  .cover, .doc { width: 210mm; margin: 12mm auto; padding: 25.4mm; background: #fff; box-shadow: 0 2px 16px rgba(17,24,39,.10); }
+  .cover { min-height: 297mm; }
+  .doc { min-height: 297mm; }
+}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN QUẢN LÝ QUY TRÌNH PHÊ DUYỆT</p>
+    <p class="cover-sub">Thiết lập luồng xử lý, người duyệt, hành động và quy tắc từ chối cho các nghiệp vụ</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn quản lý quy trình phê duyệt</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 14/08/2026</p>
+    <p><strong>Đối tượng:</strong> quản trị viên hệ thống, cán bộ nhân sự và người được phân quyền cấu hình quy trình</p>
+    <p><strong>Nguồn:</strong> VIN-HRM - tài liệu nghiệp vụ, mã nguồn và phần mềm thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Truy cập và đọc danh sách quy trình</li>
+      <li>Tạo quy trình và chọn loại nghiệp vụ</li>
+      <li>Quản lý danh sách bước phê duyệt</li>
+      <li>Cấu hình hành động và người duyệt</li>
+      <li>Quy tắc vận hành, sửa và xóa</li>
+      <li>Mô-đun sử dụng, lỗi thường gặp và kiểm tra trước khi dùng</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích và phạm vi</h1>
+<p class="lead">Quy trình phê duyệt là bản thiết kế các bước mà một hồ sơ phải đi qua trước khi được hoàn tất. Mỗi bước xác định việc cần làm, người được phép xử lý và hướng xử lý khi từ chối. Khi một hồ sơ nghiệp vụ bắt đầu chạy, hệ thống tạo một bản thực thi từ các bước đang kích hoạt của quy trình đã chọn.</p>
+<p>Tài liệu này hướng dẫn người quản trị tạo quy trình, cấu hình bước, hiểu toàn bộ lựa chọn và kiểm tra các ràng buộc trước khi đưa vào sử dụng. Phạm vi áp dụng cho các nghiệp vụ hợp đồng, nghỉ phép, đăng ký ca, hủy OT, thưởng/phạt, đào tạo, bản tin và quản lý thiết bị đang được hỗ trợ trên hệ thống.</p>
+
+<h2>2. Truy cập chức năng</h2>
+<p>Mở <span class="route">Hệ thống → Quy trình phê duyệt</span>. Tài khoản phải có quyền quản lý quy trình. Nếu không thấy chức năng hoặc không có nút tạo/sửa, liên hệ người quản trị phân quyền.</p>
+<figure>
+  <img src="images/01-danh-sach-quy-trinh.png" alt="Hình 1. Màn hình danh sách quy trình phê duyệt của VIN-HRM.">
+  <figcaption>Hình 1. Danh sách quy trình phê duyệt, bộ lọc và nhóm thao tác trên phần mềm thực tế.</figcaption>
+</figure>
+
+<h2>3. Đọc danh sách và sử dụng bộ lọc</h2>
+<table>
+  <colgroup><col style="width:29%"><col style="width:71%"></colgroup>
+  <thead><tr><th>Thành phần</th><th>Ý nghĩa và cách sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Nhập tên quy trình</td><td>Tìm theo tên. Có thể nhập một phần tên; nên dùng từ khóa đặc trưng như “nghỉ phép”, “chứng nhận” hoặc “thiết bị”.</td></tr>
+    <tr><td>Trạng thái</td><td><b>Tất cả</b> hiển thị mọi quy trình; <b>Hoạt động</b> là các quy trình có thể được chọn cho hồ sơ mới; <b>Ngừng hoạt động</b> dùng để tra cứu cấu hình cũ.</td></tr>
+    <tr><td>Xóa bộ lọc</td><td>Đưa từ khóa và trạng thái về mặc định rồi tải lại toàn bộ danh sách.</td></tr>
+    <tr><td>Tên quy trình</td><td>Tên nhận biết trong phạm vi doanh nghiệp. Tên phải duy nhất, nên mô tả rõ nghiệp vụ và phạm vi áp dụng.</td></tr>
+    <tr><td>Loại quy trình</td><td>Xác định mô-đun nghiệp vụ nào được phép dùng quy trình.</td></tr>
+    <tr><td>Thao tác</td><td>Biểu tượng bút để sửa thông tin; bánh răng để quản lý các bước; thùng rác để xóa khi dữ liệu cho phép.</td></tr>
+  </tbody>
+</table>
+
+<p class="callout-anchor">&#160;</p>
+<table class="callout info"><tbody><tr><td><strong>Phân biệt “tên” và “loại”</strong><p>Tên giúp người dùng chọn đúng quy trình; loại quyết định hệ thống có đưa quy trình đó vào danh sách của một nghiệp vụ hay không. Hai quy trình có thể cùng loại nhưng không được trùng tên.</p></td></tr></tbody></table>
+
+<h2>4. Tạo một quy trình mới</h2>
+<figure>
+  <img src="images/02-them-quy-trinh.png" alt="Hình 2. Biểu mẫu tạo quy trình phê duyệt.">
+  <figcaption>Hình 2. Biểu mẫu tạo quy trình gồm tên, loại, mô tả và trạng thái.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Chọn <b>THÊM QUY TRÌNH</b>.</li>
+  <li>Nhập <b>Tên quy trình</b>, tối đa 200 ký tự. Dùng tên dễ phân biệt, ví dụ “Duyệt nghỉ phép khối văn phòng”.</li>
+  <li>Chọn <b>Loại</b> đúng với nghiệp vụ sẽ sử dụng.</li>
+  <li>Nhập <b>Mô tả</b>, tối đa 500 ký tự, để nêu phạm vi, đối tượng hoặc nguyên tắc đặc biệt.</li>
+  <li>Giữ <b>Trạng thái = Hoạt động</b> nếu muốn dùng sau khi cấu hình đủ bước. Nếu đang chuẩn bị, nên tắt trạng thái và chỉ kích hoạt sau khi kiểm tra.</li>
+  <li>Chọn <b>Lưu</b>. Sau đó mở biểu tượng bánh răng của quy trình để thêm các bước phê duyệt.</li>
+</ol>
+
+<h3>4.1. Ý nghĩa các loại quy trình</h3>
+<table>
+  <colgroup><col style="width:35%"><col style="width:65%"></colgroup>
+  <thead><tr><th>Loại quy trình</th><th>Nghiệp vụ sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Duyệt hợp đồng</td><td>Duyệt hoặc ký hợp đồng lao động. Có thể kết hợp bước tải tài liệu, ký điện tử và ký số.</td></tr>
+    <tr><td>Duyệt nghỉ phép</td><td>Xử lý đơn nghỉ phép của nhân viên.</td></tr>
+    <tr><td>Duyệt tạm ứng lương</td><td>Dành cho nghiệp vụ tạm ứng lương. Chỉ chọn khi doanh nghiệp đã triển khai màn hình tạm ứng tương ứng.</td></tr>
+    <tr><td>Duyệt đăng ký ca</td><td>Xử lý đề nghị đăng ký hoặc thay đổi ca làm việc.</td></tr>
+    <tr><td>Duyệt hủy OT</td><td>Xử lý đề nghị hủy thời gian tăng ca.</td></tr>
+    <tr><td>Duyệt đề nghị thưởng/phạt</td><td>Xử lý đề nghị điều chỉnh thưởng hoặc phạt trước khi ghi nhận.</td></tr>
+    <tr><td>Duyệt/ký chứng nhận đào tạo</td><td>Duyệt, ký và phát hành chứng nhận đào tạo; có thể ký trên chứng nhận do hệ thống sinh.</td></tr>
+    <tr><td>Duyệt bản tin</td><td>Duyệt nội dung bản tin nội bộ trước khi xuất bản.</td></tr>
+    <tr><td>Phê duyệt đăng ký khóa học</td><td>Duyệt yêu cầu tham gia khóa học. Loại này chỉ hỗ trợ hành động <b>Duyệt</b>.</td></tr>
+    <tr><td>Duyệt cấp phát thiết bị</td><td>Duyệt phiếu cấp phát thiết bị cho nhân viên.</td></tr>
+    <tr><td>Duyệt điều chuyển thiết bị</td><td>Duyệt việc chuyển thiết bị giữa nhân viên, bộ phận hoặc địa điểm.</td></tr>
+    <tr><td>Duyệt thu hồi thiết bị</td><td>Duyệt phiếu thu hồi thiết bị.</td></tr>
+    <tr><td>Duyệt báo hỏng thiết bị</td><td>Duyệt báo cáo thiết bị hư hỏng.</td></tr>
+    <tr><td>Duyệt báo mất thiết bị</td><td>Duyệt báo cáo mất thiết bị.</td></tr>
+    <tr><td>Duyệt thanh lý thiết bị</td><td>Duyệt đề nghị thanh lý thiết bị.</td></tr>
+  </tbody>
+</table>
+
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Không kích hoạt quy trình chưa có bước</strong><p>Một quy trình cần ít nhất một bước đang kích hoạt mới có thể chạy. Tạo phần đầu chỉ mới khai báo tên và loại; phải cấu hình bước, người duyệt và thử nghiệm trước khi đưa vào nghiệp vụ.</p></td></tr></tbody></table>
+
+<h2>5. Quản lý danh sách bước phê duyệt</h2>
+<p>Tại danh sách quy trình, chọn biểu tượng <b>bánh răng</b>. Trang chi tiết hiển thị tên, trạng thái, mô tả và hai thẻ: <b>Danh sách bước phê duyệt</b> và <b>Lịch sử cấu hình</b>.</p>
+<figure>
+  <img src="images/03-danh-sach-buoc-phe-duyet.png" alt="Hình 3. Trang chi tiết quy trình và danh sách bước phê duyệt.">
+  <figcaption>Hình 3. Danh sách bước theo thứ tự, trạng thái, hành động, cách xử lý từ chối và người duyệt.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Thành phần</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Thứ tự</td><td>Trình tự xử lý từ nhỏ đến lớn. Chỉ bước đang kích hoạt được đưa vào bản thực thi của hồ sơ.</td></tr>
+    <tr><td>Dạng bảng</td><td>Phù hợp khi cần đọc đầy đủ các cột, sửa, xóa hoặc sắp xếp bước.</td></tr>
+    <tr><td>Dạng workflow</td><td>Hiển thị luồng trực quan để kiểm tra thứ tự và mối nối giữa các bước.</td></tr>
+    <tr><td>Lịch sử cấu hình</td><td>Ghi lại thời gian, người thực hiện, thao tác cùng giá trị cũ và mới khi tạo, sửa hoặc xóa quy trình/bước.</td></tr>
+    <tr><td>Thêm bước</td><td>Mở biểu mẫu tạo bước tiếp theo. Thứ tự mặc định là vị trí tiếp theo sau các bước hiện có.</td></tr>
+  </tbody>
+</table>
+
+<h2>6. Thêm và cấu hình một bước</h2>
+<figure>
+  <img src="images/04-them-buoc-phe-duyet.png" alt="Hình 4. Biểu mẫu tạo bước phê duyệt.">
+  <figcaption>Hình 4. Các trường cơ bản của một bước phê duyệt trên phần mềm thực tế.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Chọn <b>Thêm bước</b>, nhập <b>Tên bước</b> tối đa 200 ký tự.</li>
+  <li>Nhập <b>Thứ tự</b> là số nguyên dương và không trùng bước khác trong cùng quy trình.</li>
+  <li>Chọn <b>Loại hành động</b>, sau đó hoàn thành các trường xuất hiện theo loại đã chọn.</li>
+  <li>Chọn cách <b>Xử lý khi từ chối</b>.</li>
+  <li>Chọn <b>Loại người duyệt</b> và chỉ định nguồn người duyệt.</li>
+  <li>Giữ <b>Kích hoạt</b> nếu bước phải chạy. Khi tắt, bước được lưu để tham khảo nhưng bị bỏ qua trong hồ sơ mới.</li>
+  <li>Chọn <b>Lưu</b>, rồi kiểm tra lại toàn bộ thứ tự và các bước tham chiếu.</li>
+</ol>
+
+<h3>6.1. Loại hành động</h3>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa và điều kiện sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Duyệt</td><td>Người có thẩm quyền chấp thuận hoặc từ chối hồ sơ. Với phê duyệt đăng ký khóa học, đây là hành động duy nhất được hỗ trợ.</td></tr>
+    <tr><td>Ký điện tử</td><td>Người xử lý ký điện tử lên tài liệu. Phải chọn tài liệu từ một bước tải lên trước đó có đánh dấu dùng để ký; riêng chứng nhận đào tạo có thể dùng tài liệu do hệ thống sinh.</td></tr>
+    <tr><td>Ký số</td><td>Người xử lý ký số lên tài liệu. Nguồn tài liệu phải đến từ bước trước và thứ tự ký số phải đứng sau toàn bộ bước ký điện tử.</td></tr>
+    <tr><td>Upload tài liệu</td><td>Yêu cầu tải tài liệu lên hồ sơ. Có thể bật <b>Upload tài liệu để ký</b> để làm nguồn cho bước ký phía sau. Hành động này không có thao tác từ chối.</td></tr>
+  </tbody>
+</table>
+
+<h3>6.2. Xử lý khi từ chối</h3>
+<table>
+  <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Kết quả</th></tr></thead>
+  <tbody>
+    <tr><td>Hủy quy trình</td><td>Kết thúc luồng hiện tại theo trạng thái bị từ chối; hồ sơ không chuyển sang bước tiếp theo.</td></tr>
+    <tr><td>Quay về bước trước</td><td>Đưa hồ sơ trở lại một bước đang kích hoạt có thứ tự nhỏ hơn. Chỉ các bước hợp lệ ở phía trước mới xuất hiện để chọn.</td></tr>
+    <tr><td>Đối với Upload tài liệu</td><td>Không cấu hình từ chối; hệ thống xóa lựa chọn bước quay lại vì thao tác tải lên không hỗ trợ quyết định từ chối.</td></tr>
+  </tbody>
+</table>
+
+<h3>6.3. Loại người duyệt</h3>
+<figure>
+  <img src="images/05-loai-nguoi-duyet.png" alt="Hình 5. Danh sách các loại người duyệt của một bước.">
+  <figcaption>Hình 5. Sáu cách xác định người được phép xử lý một bước.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:31%"><col style="width:69%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa và trường cần khai báo</th></tr></thead>
+  <tbody>
+    <tr><td>Người dùng</td><td>Chỉ định một nhân viên cụ thể. Dùng khi trách nhiệm cố định cho một cá nhân; cần cập nhật khi người đó đổi nhiệm vụ hoặc ngừng làm việc.</td></tr>
+    <tr><td>Phòng ban</td><td>Cho phép người thuộc phòng ban đáp ứng quyền xử lý. Chọn phòng ban cụ thể hoặc lấy phòng ban đang làm việc của nhân viên nguồn.</td></tr>
+    <tr><td>Chức vụ</td><td>Cho phép người giữ một chức vụ đang hoạt động xử lý. Hệ thống không chấp nhận chức vụ ngừng hoạt động.</td></tr>
+    <tr><td>Phòng ban + Chức vụ</td><td>Người xử lý phải đồng thời thuộc đúng phòng ban và giữ đúng chức vụ. Cách này giúp thu hẹp phạm vi chính xác hơn.</td></tr>
+    <tr><td>Quản lý trực tiếp</td><td>Lấy quản lý trực tiếp của nhân viên liên quan hồ sơ hoặc của nhân viên được xác định tại một bước trước đang kích hoạt.</td></tr>
+    <tr><td>Nhân viên liên quan hồ sơ</td><td>Cho phép nhân viên gắn trực tiếp với hồ sơ nghiệp vụ xử lý, phù hợp khi chủ thể hồ sơ cần xác nhận hoặc bổ sung thông tin.</td></tr>
+  </tbody>
+</table>
+
+<h3>6.4. Các trường phụ thuộc xuất hiện theo lựa chọn</h3>
+<table>
+  <colgroup><col style="width:33%"><col style="width:67%"></colgroup>
+  <thead><tr><th>Trường</th><th>Cách hiểu</th></tr></thead>
+  <tbody>
+    <tr><td>Tài liệu ký</td><td>Chọn một bước <b>Upload tài liệu</b> đang kích hoạt, đứng trước bước ký và đã đánh dấu là tài liệu để ký. Không thể lấy tài liệu từ bước phía sau.</td></tr>
+    <tr><td>Upload tài liệu để ký</td><td>Đánh dấu tài liệu tải lên là nguồn đầu vào cho bước ký điện tử/ký số phía sau.</td></tr>
+    <tr><td>Nguồn phòng ban - Chọn phòng ban cụ thể</td><td>Người cấu hình chọn trực tiếp một phòng ban cố định.</td></tr>
+    <tr><td>Nguồn phòng ban - Phòng ban đang làm việc</td><td>Hệ thống xác định phòng ban hiện tại của nhân viên nguồn; nguồn có thể là nhân viên hồ sơ hoặc nhân viên ở một bước trước đang kích hoạt.</td></tr>
+    <tr><td>Quản lý trực tiếp của</td><td>Xác định nhân viên dùng để tìm quản lý: nhân viên hồ sơ hoặc nhân viên được xác định tại một bước trước.</td></tr>
+    <tr><td>Kích hoạt</td><td>Bật: bước được sao chép vào hồ sơ mới. Tắt: bước bị bỏ qua, nhưng vẫn còn trong cấu hình và lịch sử.</td></tr>
+  </tbody>
+</table>
+
+<h2>7. Các quy tắc vận hành bắt buộc</h2>
+<table>
+  <colgroup><col style="width:34%"><col style="width:66%"></colgroup>
+  <thead><tr><th>Quy tắc</th><th>Giải thích</th></tr></thead>
+  <tbody>
+    <tr><td>Ít nhất một bước hoạt động</td><td>Không được tắt hoặc xóa bước hoạt động cuối cùng của quy trình.</td></tr>
+    <tr><td>Thứ tự duy nhất</td><td>Mỗi bước có một số thứ tự riêng. Khi sắp xếp lại, hệ thống chuẩn hóa thứ tự và kiểm tra lại toàn bộ tham chiếu.</td></tr>
+    <tr><td>Nguồn phải đứng trước</td><td>Bước dùng làm nguồn tài liệu, nguồn nhân viên, nguồn phòng ban hoặc đích quay lại khi từ chối phải đứng trước và đang hoạt động.</td></tr>
+    <tr><td>Ký điện tử trước ký số</td><td>Tất cả bước ký điện tử phải nằm trước các bước ký số để bảo đảm chuỗi ký đúng thứ tự.</td></tr>
+    <tr><td>Không xóa bước đang được tham chiếu</td><td>Phải đổi tài liệu ký, bước quay lại, nguồn quản lý hoặc nguồn phòng ban ở các bước phụ thuộc trước khi xóa bước nguồn.</td></tr>
+    <tr><td>Không xóa nguồn tài liệu ký</td><td>Bước Upload tài liệu để ký không thể xóa khi còn bước ký phía sau đang dùng tài liệu đó.</td></tr>
+    <tr><td>Chỉ sao chép bước đang hoạt động</td><td>Khi hồ sơ bắt đầu, hệ thống tạo bản thực thi từ các bước đang bật; bước đầu chờ xử lý, các bước sau chờ đến lượt.</td></tr>
+  </tbody>
+</table>
+
+<p class="callout-anchor">&#160;</p>
+<table class="callout danger"><tbody><tr><td><strong>Cẩn trọng khi thay đổi quy trình đang được sử dụng</strong><p>Nếu hệ thống hiển thị xác nhận cập nhật các quy trình đang diễn ra về ban đầu, chỉ đồng ý sau khi đã đánh giá hồ sơ bị ảnh hưởng và thông báo cho người xử lý. Việc đặt lại có thể làm hồ sơ đang chạy quay về bước đầu.</p></td></tr></tbody></table>
+
+<h2>8. Sửa, ngừng hoạt động và xóa</h2>
+<table>
+  <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+  <thead><tr><th>Thao tác</th><th>Nguyên tắc</th></tr></thead>
+  <tbody>
+    <tr><td>Sửa quy trình</td><td>Có thể đổi tên, loại, mô tả và trạng thái. Tên mới vẫn phải duy nhất trong doanh nghiệp.</td></tr>
+    <tr><td>Sửa bước</td><td>Có thể đổi tên, thứ tự, hành động, cách từ chối và người duyệt; mọi phụ thuộc phải tiếp tục hợp lệ sau khi lưu.</td></tr>
+    <tr><td>Ngừng hoạt động</td><td>Dùng khi không muốn quy trình xuất hiện cho hồ sơ mới nhưng vẫn cần giữ cấu hình và lịch sử. Đây là lựa chọn an toàn cho quy trình đã từng sử dụng.</td></tr>
+    <tr><td>Xóa quy trình</td><td>Không thể xóa nếu có hồ sơ đang chạy hoặc quy trình đã từng được sử dụng. Khi đó hãy chuyển sang Ngừng hoạt động.</td></tr>
+    <tr><td>Xóa bước</td><td>Không thể xóa bước duy nhất, bước hoạt động cuối cùng hoặc bước đang được bước khác tham chiếu.</td></tr>
+  </tbody>
+</table>
+
+<h2>9. Lịch sử cấu hình</h2>
+<p>Thẻ <b>Lịch sử cấu hình</b> giúp truy vết thay đổi. Mỗi dòng cho biết thời gian, người thao tác, hành động, giá trị cũ và giá trị mới. Khi phát hiện luồng chạy khác dự kiến, hãy kiểm tra lịch sử trước khi sửa để xác định thay đổi nào đã xảy ra.</p>
+
+<h2>10. Mô-đun sử dụng và cấu hình liên quan</h2>
+<p>Quy trình không tự gắn vào mọi hồ sơ chỉ nhờ trạng thái Hoạt động. Mô-đun nghiệp vụ lấy danh sách quy trình hoạt động đúng loại, sau đó người dùng hoặc cấu hình nghiệp vụ chọn đúng quy trình cho hồ sơ. Vì vậy cần kiểm tra cả hai phía: quy trình và màn hình nghiệp vụ.</p>
+<table>
+  <colgroup><col style="width:37%"><col style="width:63%"></colgroup>
+  <thead><tr><th>Nhóm mô-đun</th><th>Nội dung cần kiểm tra</th></tr></thead>
+  <tbody>
+    <tr><td>Hợp đồng</td><td>Quy trình đúng loại Duyệt hợp đồng; nếu có ký, phải có nguồn tài liệu hợp lệ và đúng thứ tự ký.</td></tr>
+    <tr><td>Nghỉ phép, đăng ký ca, hủy OT</td><td>Quy trình hoạt động đúng loại; người duyệt có quyền tương ứng và thuộc đúng phạm vi phòng ban/chức vụ.</td></tr>
+    <tr><td>Thưởng/phạt</td><td>Chọn loại Duyệt đề nghị thưởng/phạt; kiểm tra người duyệt có quyền phê duyệt thưởng/phạt.</td></tr>
+    <tr><td>Đào tạo và bản tin</td><td>Chọn đúng loại chứng nhận, đăng ký khóa học hoặc bản tin. Đăng ký khóa học chỉ dùng hành động Duyệt.</td></tr>
+    <tr><td>Thiết bị</td><td>Mỗi nghiệp vụ cấp phát, điều chuyển, thu hồi, báo hỏng, báo mất và thanh lý có một loại riêng; không dùng lẫn loại.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout info"><tbody><tr><td><strong>Cấu hình hệ thống liên quan</strong><p>Chức năng không phụ thuộc một khóa cấu hình chung bắt buộc tại Hệ thống → Cấu hình. Tuy nhiên, kết quả xác định người duyệt phụ thuộc dữ liệu nhân viên, công việc, phòng ban, chức vụ, quản lý trực tiếp và phân quyền. Các dữ liệu này phải còn hoạt động và được khai báo đúng.</p></td></tr></tbody></table>
+
+<h2>11. Lỗi thường gặp và cách xử lý</h2>
+<table>
+  <colgroup><col style="width:43%"><col style="width:57%"></colgroup>
+  <thead><tr><th>Hiện tượng/Thông báo</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Tên quy trình đã tồn tại</td><td>Đổi tên để thể hiện rõ phạm vi; không dùng lại tên của quy trình khác trong doanh nghiệp.</td></tr>
+    <tr><td>Không có bước hoạt động</td><td>Bật ít nhất một bước và bảo đảm bước có người duyệt hợp lệ.</td></tr>
+    <tr><td>Thứ tự đã được sử dụng</td><td>Nhập số khác hoặc sắp xếp lại danh sách bước.</td></tr>
+    <tr><td>Không chọn được tài liệu ký</td><td>Tạo một bước Upload tài liệu ở phía trước, bật Upload tài liệu để ký và giữ bước đó hoạt động.</td></tr>
+    <tr><td>Thứ tự ký không hợp lệ</td><td>Đưa toàn bộ bước ký điện tử lên trước bước ký số.</td></tr>
+    <tr><td>Không xóa được bước</td><td>Kiểm tra đây có phải bước duy nhất/bước hoạt động cuối cùng hoặc đang là nguồn của bước khác; gỡ tham chiếu trước.</td></tr>
+    <tr><td>Không xóa được quy trình</td><td>Dừng hoặc xử lý xong hồ sơ đang chạy; nếu quy trình đã từng dùng, chuyển sang Ngừng hoạt động.</td></tr>
+    <tr><td>Người cần duyệt không thấy hồ sơ</td><td>Kiểm tra quyền nghiệp vụ, trạng thái nhân viên/chức vụ, phòng ban, quản lý trực tiếp và loại người duyệt của bước hiện tại.</td></tr>
+  </tbody>
+</table>
+
+<h2>12. Danh sách kiểm tra trước khi đưa vào sử dụng</h2>
+<ul class="checklist">
+  <li>Tên quy trình rõ ràng, loại nghiệp vụ chính xác và trạng thái phù hợp.</li>
+  <li>Có ít nhất một bước đang hoạt động; thứ tự liên tục, không trùng.</li>
+  <li>Mỗi bước có hành động, cách từ chối và người duyệt đúng mục đích.</li>
+  <li>Mọi nguồn tài liệu, nguồn nhân viên, nguồn phòng ban và bước quay lại đều nằm ở phía trước.</li>
+  <li>Bước ký điện tử đứng trước bước ký số; tài liệu ký đã được đánh dấu đúng.</li>
+  <li>Nhân viên, phòng ban, chức vụ và quản lý trực tiếp đang hoạt động; quyền xử lý đã được cấp.</li>
+  <li>Đã mở Dạng workflow để kiểm tra trực quan và xem Lịch sử cấu hình.</li>
+  <li>Đã chạy thử một hồ sơ mẫu, gồm cả trường hợp duyệt, từ chối và quay lại bước trước.</li>
+</ul>
+
+<p class="footer-note">Tài liệu được biên soạn từ hành vi của phiên bản VIN-HRM đang chạy ngày 14/08/2026. Khi phần mềm được nâng cấp, tên nút hoặc phạm vi nghiệp vụ có thể thay đổi; cần đối chiếu lại trên môi trường sử dụng trước khi ban hành nội bộ.</p>
+</main>
+</body>
+</html>

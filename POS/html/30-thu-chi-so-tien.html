@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>30. Thu Chi và Sổ tiền — Đặc tả POS</title><meta name="description" content="Thu Chi và Sổ tiền"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần VII · Chương 30</p><article class="spec"><h1>CHƯƠNG 30. THU CHI VÀ SỔ TIỀN</h1><details class="section-toc"><summary>Nội dung chương · 29 mục</summary><ol><li><a href="#section-30-1">30.1. Mục đích và phạm vi</a></li><li><a href="#section-30-2">30.2. Vai trò và quyền</a></li><li><a href="#section-30-3">30.3. Cấu hình và điều kiện tiên quyết</a></li><li><a href="#section-30-4">30.4. Phân loại Thu Chi</a></li><li><a href="#section-30-5">30.5. Chứng từ, phiếu tiền và Sổ tiền</a></li><li><a href="#section-30-6">30.6. Trạng thái</a></li><li><a href="#section-30-7">30.7. Thu tự động từ bán hàng</a></li><li><a href="#section-30-8">30.8. Thu tự động từ công nợ và tạm ứng</a></li><li><a href="#section-30-9">30.9. Thu tự động từ góp vốn</a></li><li><a href="#section-30-10">30.10. Tạo Thu ngoài bán hàng</a></li><li><a href="#section-30-11">30.11. Hoàn tất Thu ngoài bán hàng</a></li><li><a href="#section-30-12">30.12. Tạo Đề nghị Chi</a></li><li><a href="#section-30-13">30.13. Hoàn tất Đề nghị Chi</a></li><li><a href="#section-30-14">30.14. Chi tự động từ mua hàng</a></li><li><a href="#section-30-15">30.15. Chi tự động từ công nợ và tạm ứng nhà cung cấp</a></li><li><a href="#section-30-16">30.16. Chi tự động từ hoàn hàng và rút vốn</a></li><li><a href="#section-30-17">30.17. Sửa chứng từ Nháp</a></li><li><a href="#section-30-18">30.18. Xóa chứng từ Nháp</a></li><li><a href="#section-30-19">30.19. Sửa Thu ngoài bán hàng đã hoàn tất</a></li><li><a href="#section-30-20">30.20. Sửa Đề nghị Chi đã hoàn tất</a></li><li><a href="#section-30-21">30.21. Xóa chứng từ đã hoàn tất</a></li><li><a href="#section-30-22">30.22. Tra cứu Phiếu thu và Phiếu chi</a></li><li><a href="#section-30-23">30.23. Sổ tiền</a></li><li><a href="#section-30-24">30.24. Đối soát với ca bán hàng</a></li><li><a href="#section-30-25">30.25. Đồng thời và gửi lại</a></li><li><a href="#section-30-26">30.26. Giao diện và hành vi người dùng</a></li><li><a href="#section-30-27">30.27. Lưu vết và bảo mật</a></li><li><a href="#section-30-28">30.28. Báo cáo</a></li><li><a href="#section-30-29">30.29. Ngoại lệ bắt buộc xử lý</a></li></ol></details>
+<h2 id="section-30-1">30.1. Mục đích và phạm vi</h2>
+<p>Phân hệ Thu Chi ghi nhận mọi khoản tiền thực tế đi vào hoặc đi ra khỏi doanh nghiệp, bất kể khoản đó phát sinh tự động từ bán hàng, mua hàng, công nợ, vốn hay do người dùng lập cho một nghiệp vụ ngoài bán hàng. Mỗi biến động tiền phải có chứng từ gốc, Phiếu thu hoặc Phiếu chi và một kết quả tương ứng trên Sổ tiền.</p>
+<p>Phạm vi gồm:</p>
+<ul>
+<li>Quản lý loại thu và loại chi;</li>
+<li>Tự động tạo Phiếu thu từ bán hàng, thu nợ, tạm ứng và góp vốn;</li>
+<li>Tự động tạo Phiếu chi từ mua hàng, trả nợ nhà cung cấp, tạm ứng, hoàn tiền và rút vốn;</li>
+<li>Lập Thu ngoài bán hàng có nhiều khoản thu;</li>
+<li>Lập Đề nghị Chi có nhiều khoản chi;</li>
+<li>Hoàn tất, sửa, xóa và đảo tác động tiền theo quyền;</li>
+<li>Tra cứu Phiếu thu, Phiếu chi và Sổ tiền;</li>
+<li>Đối soát tiền theo ngày, chi nhánh, tài khoản, phương thức và nghiệp vụ gốc.</li>
+</ul>
+<p>Người dùng không tạo Phiếu thu hoặc Phiếu chi độc lập. Phiếu luôn sinh từ một nghiệp vụ gốc để mọi dòng tiền đều có căn cứ và có nơi thực hiện điều chỉnh.</p>
+<h2 id="section-30-2">30.2. Vai trò và quyền</h2>
+<h3 id="section-30-2-1">30.2.1. Người lập</h3>
+<p>Người lập tạo Thu ngoài bán hàng hoặc Đề nghị Chi ở trạng thái Nháp, sửa nội dung và xóa bản Nháp trong phạm vi chi nhánh được cấp. Quyền tạo thu ngoài không mặc nhiên cho phép tạo chi và ngược lại.</p>
+<h3 id="section-30-2-2">30.2.2. Người hoàn tất</h3>
+<p>Người hoàn tất kiểm tra nội dung, chọn phương thức, tài khoản tiền và xác nhận dòng tiền. Tùy cơ chế phân quyền, người lập có thể đồng thời là người hoàn tất hoặc cần một người khác thực hiện.</p>
+<h3 id="section-30-2-3">30.2.3. Người có quyền sửa hoặc xóa sau hoàn tất</h3>
+<p>Chứng từ đã hoàn tất mặc định bị khóa. Chỉ người có quyền riêng mới được sửa hoặc xóa Thu ngoài bán hàng hay Đề nghị Chi đã hoàn tất. Quyền của hai loại chứng từ được kiểm soát độc lập. Thao tác không yêu cầu nhập lý do bắt buộc theo luồng hiện hành, nhưng hệ thống luôn lưu nội dung trước và sau cùng người thực hiện.</p>
+<h3 id="section-30-2-4">30.2.4. Người xem và đối soát</h3>
+<p>Người xem có thể tra cứu Phiếu thu, Phiếu chi, Sổ tiền và chứng từ gốc theo phạm vi được cấp. Quyền xem số dư, xem tài khoản ngân hàng và xuất báo cáo có thể bị giới hạn chặt hơn quyền xem một giao dịch bán hàng.</p>
+<h2 id="section-30-3">30.3. Cấu hình và điều kiện tiên quyết</h2>
+<p>Doanh nghiệp cần có:</p>
+<ul>
+<li>Chi nhánh hoạt động;</li>
+<li>Quỹ tiền mặt và tài khoản ngân hàng hoặc nguồn tiền khác được phép sử dụng;</li>
+<li>Phương thức thanh toán và cách liên kết với tài khoản tiền;</li>
+<li>Nhóm Thu, nhóm Chi và các loại chi tiết cần dùng;</li>
+<li>Phạm vi sử dụng của từng tài khoản;</li>
+<li>Quyền tạo, hoàn tất, sửa sau hoàn tất và xóa sau hoàn tất;</li>
+<li>Quy tắc ngày nghiệp vụ và số dư âm nếu có;</li>
+<li>Mẫu Phiếu thu, Phiếu chi và báo cáo Sổ tiền.</li>
+</ul>
+<p>Thanh toán bằng chuyển khoản bắt buộc chọn tài khoản ngân hàng. Thanh toán tiền mặt phải đi vào quỹ tiền mặt phù hợp với chi nhánh hoặc ca. Tài khoản ngừng sử dụng không được chọn cho giao dịch mới.</p>
+<h2 id="section-30-4">30.4. Phân loại Thu Chi</h2>
+<h3 id="section-30-4-1">30.4.1. Loại hệ thống dùng cho nghiệp vụ tự động</h3>
+<p>Các loại này thể hiện bản chất cố định và không xuất hiện để người dùng chọn trong Thu ngoài bán hàng hoặc Đề nghị Chi:</p>
+<ul>
+<li>Thu tiền bán hàng;</li>
+<li>Thu tiền công nợ khách hàng;</li>
+<li>Khách hàng tạm ứng;</li>
+<li>Hoàn tiền do khách trả hàng;</li>
+<li>Thanh toán tiền vốn mua hàng;</li>
+<li>Chi phí mua hàng;</li>
+<li>Thanh toán công nợ nhà cung cấp;</li>
+<li>Tạm ứng mua hàng từ nhà cung cấp;</li>
+<li>Góp vốn;</li>
+<li>Rút vốn.</li>
+</ul>
+<p>Người dùng không được sửa, xóa hoặc tạo loại con dưới các loại này. Nghiệp vụ gốc tự chọn đúng loại khi phát sinh tiền.</p>
+<p>Chuyển tiền nội bộ không nằm trong doanh thu hoặc chi phí Thu Chi. Khấu hao tài sản cố định không nằm trong danh sách vì không có tiền thực tế đi ra tại thời điểm khấu hao.</p>
+<h3 id="section-30-4-2">30.4.2. Nhóm cố định cho phép khai báo loại chi tiết</h3>
+<p>Hệ thống cung cấp nhóm Thu ngoài bán hàng và các nhóm Chi gồm:</p>
+<ul>
+<li>Lương nhân viên thực nhận;</li>
+<li>Các khoản trích theo lương;</li>
+<li>Dịch vụ mua ngoài;</li>
+<li>Chi phí tài chính;</li>
+<li>Mua vật liệu hoặc dụng cụ sử dụng ngay, không nhập kho;</li>
+<li>Chi phí bằng tiền khác;</li>
+<li>Thuế và các khoản phải nộp Nhà nước.</li>
+</ul>
+<p>Nhóm cố định chỉ dùng làm khung phân loại. Người dùng không chọn trực tiếp nhóm trên chứng từ, không sửa hoặc xóa nhóm, nhưng có thể khai báo loại chi tiết bên dưới.</p>
+<h3 id="section-30-4-3">30.4.3. Loại do doanh nghiệp khai báo</h3>
+<p>Khi tạo loại mới, người dùng chọn chiều Thu hoặc Chi, nhóm cha cùng chiều, tên và trạng thái. Loại Thu chỉ được đặt dưới nhóm Thu ngoài bán hàng. Loại Chi phải đặt dưới một nhóm Chi cố định. Không cho tạo cấp con bên dưới loại do doanh nghiệp khai báo.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Nhóm Dịch vụ mua ngoài có thể chứa Tiền điện, Tiền nước, Internet và Thuê mặt bằng.</li>
+<li>Nhóm Thu ngoài bán hàng có thể chứa Thu bồi thường hoặc Thu thanh lý.</li>
+</ul>
+</blockquote>
+<p>Nếu loại chưa được sử dụng, người dùng có thể sửa tên, đổi nhóm cha cùng chiều, thay trạng thái hoặc xóa. Nếu đã được sử dụng, loại có thể đổi tên và Ngừng sử dụng nhưng không được đổi nhóm cha hoặc xóa. Tên mới dùng cho hiển thị hiện tại; chứng từ vẫn giữ quan hệ phân loại để báo cáo nhất quán.</p>
+<p>Khi Ngừng sử dụng, loại không xuất hiện để chọn cho chứng từ mới nhưng vẫn hiển thị trên lịch sử. Loại có thể được kích hoạt lại.</p>
+<h2 id="section-30-5">30.5. Chứng từ, phiếu tiền và Sổ tiền</h2>
+<p>Một lần phát sinh tiền gồm ba lớp:</p>
+<ol>
+<li><strong>Chứng từ gốc</strong> mô tả lý do và nội dung nghiệp vụ.</li>
+<li><strong>Phiếu thu hoặc Phiếu chi</strong> xác nhận tổng tiền thực tế, chiều tiền, phương thức và tài khoản.</li>
+<li><strong>Sổ tiền</strong> phản ánh số dư tăng hoặc giảm.</li>
+</ol>
+<p>Một Thu ngoài bán hàng có nhiều khoản chi tiết nhưng khi hoàn tất tạo một Phiếu thu theo tổng tiền. Một Đề nghị Chi có nhiều khoản chi tiết nhưng tạo một Phiếu chi theo tổng tiền. Chi tiết phân loại vẫn được giữ để báo cáo.</p>
+<p>Phiếu thu làm tăng tiền; Phiếu chi làm giảm tiền. Người dùng chỉ xem Phiếu tiền tự động và không sửa trực tiếp. Sổ tiền cũng không cho sửa hoặc xóa trực tiếp. Mọi điều chỉnh bắt đầu từ chứng từ gốc.</p>
+<h2 id="section-30-6">30.6. Trạng thái</h2>
+<h3 id="section-30-6-1">30.6.1. Nháp</h3>
+<p>Nháp lưu nhu cầu và nội dung nhưng chưa tạo Phiếu thu hoặc Phiếu chi, chưa thay đổi Sổ tiền. Có thể sửa hoặc xóa theo quyền thông thường. Nháp không được tính vào tổng thu, tổng chi hoặc số dư.</p>
+<h3 id="section-30-6-2">30.6.2. Đã hoàn tất</h3>
+<p>Đã hoàn tất xác nhận tiền đã thực sự thu hoặc chi. Hệ thống tạo Phiếu tiền, cập nhật Sổ tiền và khóa nội dung khỏi sửa thông thường.</p>
+<h3 id="section-30-6-3">30.6.3. Kết quả sau sửa hoặc xóa đặc biệt</h3>
+<p>Khi sửa chứng từ đã hoàn tất, trạng thái vẫn là Đã hoàn tất nhưng Phiếu tiền và Sổ tiền được cập nhật theo nội dung mới, đồng thời lịch sử giữ phiên bản trước và sau. Khi xóa bằng quyền đặc biệt, tác động tiền liên quan được xử lý ngược trước khi chứng từ không còn trong danh sách vận hành thông thường; lịch sử vẫn đủ để kiểm tra.</p>
+<h2 id="section-30-7">30.7. Thu tự động từ bán hàng</h2>
+<p>Khi khách thanh toán đơn mua tại cửa hàng thành công, hệ thống tạo Phiếu thu loại Thu tiền bán hàng theo đúng số thực trả. Phiếu giữ phương thức, tài khoản ngân hàng nếu chuyển khoản, chi nhánh, ca và liên kết với đơn.</p>
+<p>Đơn giao tận nơi có trình tự riêng: khi gửi hàng, hệ thống tạo phiếu thu tiền tạm ứng nếu có và hoàn thành tăng công nợ. Thanh toán đơn chỉ thực hiện sau khi gửi hàng; mỗi lần ghi nhận tiền hợp lệ tạo giảm công nợ khách hàng và phiếu thu cho khoản thanh toán giảm nợ. Thanh toán không tự xác nhận khách đã nhận hàng. Đổi phương thức thanh toán cập nhật phiếu thu liên quan, không tạo thêm lần thu hoặc giảm nợ cho cùng khoản tiền.</p>
+<p>Nếu đơn sử dụng nhiều phương thức, mỗi phần tiền phải được phản ánh đúng tài khoản. Tổng các phần bằng số khách thực trả. Phần chuyển thành công nợ không tạo Phiếu thu cho đến khi tiền thực tế được thu.</p>
+<p>Nếu khách dùng tiền đặt trước hoặc số dư có sẵn, hệ thống giảm khoản nghĩa vụ tương ứng mà không tạo Phiếu thu mới. Chỉ phần thực sự làm tăng hoặc giảm tài khoản tiền tại thời điểm đó mới tạo biến động tiền.</p>
+<p>Trả hàng giữ quan hệ với Phiếu thu gốc. Khi doanh nghiệp hoàn tiền, hệ thống tạo Phiếu chi Hoàn tiền do khách trả hàng theo số thực hoàn. Giảm phần khách còn nợ không được ghi thành tiền chi. Xóa đơn có quyền là luồng khác: hệ thống xử lý và xóa các phiếu thu, chi liên quan trong phạm vi toàn bộ đơn, không giữ chúng như khoản tiền còn hiệu lực của một đơn đã bị xóa.</p>
+<h2 id="section-30-8">30.8. Thu tự động từ công nợ và tạm ứng</h2>
+<p>Khi hoàn tất thu nợ khách hàng, hệ thống tạo Phiếu thu Thu tiền công nợ khách hàng, tăng tài khoản tiền và giảm số phải thu cùng lúc. Số thu không được vượt số nợ được chọn, trừ khi phần vượt được người dùng xác nhận thành tạm ứng theo nghiệp vụ hỗ trợ.</p>
+<p>Khi nhận tiền trước chưa gắn với đơn cụ thể, hệ thống tạo Phiếu thu Khách hàng tạm ứng và tăng số tiền khách có thể được đối trừ. Tạm ứng phải gắn khách hàng; không tạo tạm ứng cho đối tượng không xác định.</p>
+<p>Việc dùng tạm ứng cho một đơn không tạo thêm tiền thu vì tiền đã được ghi khi nhận. Hệ thống chỉ giảm số tạm ứng khả dụng và bù nghĩa vụ của đơn.</p>
+<h2 id="section-30-9">30.9. Thu tự động từ góp vốn</h2>
+<p>Khi chứng từ góp vốn hoàn tất, hệ thống tạo Phiếu thu Góp vốn, ghi đúng chủ sở hữu, phương thức, tài khoản và chi nhánh. Khoản này làm tiền tăng nhưng không được đưa vào doanh thu bán hàng hoặc Thu ngoài bán hàng.</p>
+<p>Nếu chứng từ góp vốn bị sửa hoặc xóa theo quyền, tác động tiền phải được xử lý thông qua chính chứng từ vốn. Hệ thống hoàn tác Phiếu thu cũ hoặc tạo lại Phiếu thu theo giá trị còn hiệu lực, không cho sửa độc lập dòng tiền tự động.</p>
+<h2 id="section-30-10">30.10. Tạo Thu ngoài bán hàng</h2>
+<p>Thu ngoài bán hàng dùng cho khoản tiền thực thu không phải tiền bán hàng, thu nợ, tạm ứng hay góp vốn. Người dùng nhập ngày chứng từ, đối tượng nộp tiền, chi nhánh và ít nhất một khoản thu.</p>
+<p>Mỗi khoản gồm:</p>
+<ul>
+<li>Loại Thu đang sử dụng thuộc nhóm Thu ngoài bán hàng.</li>
+<li>Số tiền lớn hơn không.</li>
+<li>Lý do thu.</li>
+<li>Mã tham chiếu.</li>
+<li>Ghi chú nếu có.</li>
+</ul>
+<p>Một chứng từ có thể gồm nhiều khoản của các loại khác nhau.</p>
+<p>Ngày chứng từ không được lớn hơn ngày hiện tại. Đối tượng nộp có thể là cá nhân hoặc tổ chức phù hợp với phạm vi hệ thống. Khi lưu, chứng từ ở Nháp, chưa yêu cầu phương thức và chưa làm tăng tiền.</p>
+<p>Hệ thống phải phát hiện thao tác lưu lặp do bấm nhiều lần hoặc mất kết nối, không tạo hai bản Nháp giống nhau khi cùng một yêu cầu được gửi lại.</p>
+<h2 id="section-30-11">30.11. Hoàn tất Thu ngoài bán hàng</h2>
+<p>Người dùng chọn chứng từ Nháp và yêu cầu Hoàn tất. Hệ thống hiển thị tổng tiền cùng nội dung các khoản, sau đó bắt buộc chọn phương thức thanh toán; nếu chuyển khoản, bắt buộc chọn tài khoản ngân hàng.</p>
+<p>Tại thời điểm xác nhận, hệ thống kiểm tra lại:</p>
+<ul>
+<li>Chứng từ vẫn là Nháp;</li>
+<li>Có ít nhất một khoản;</li>
+<li>Mọi khoản có loại Thu hợp lệ và đang sử dụng;</li>
+<li>Mọi số tiền lớn hơn không;</li>
+<li>Tổng tiền lớn hơn không;</li>
+<li>Ngày không ở tương lai;</li>
+<li>Chi nhánh, người dùng và tài khoản vẫn hợp lệ;</li>
+<li>Phương thức và tài khoản phù hợp.</li>
+</ul>
+<p>Khi thành công, hệ thống tính tổng, tạo một Phiếu thu Thu ngoài bán hàng, tăng Sổ tiền của tài khoản và chuyển chứng từ sang Đã hoàn tất. Các bước hoàn thành cùng nhau; không để chứng từ đã hoàn tất mà thiếu tiền hoặc tiền đã tăng trong khi chứng từ còn Nháp.</p>
+<h2 id="section-30-12">30.12. Tạo Đề nghị Chi</h2>
+<p>Đề nghị Chi ghi nhận một lần chi có thể gồm:</p>
+<ul>
+<li>Nhiều khoản.</li>
+<li>Chẳng hạn lương.</li>
+<li>Bảo hiểm.</li>
+<li>Điện nước.</li>
+<li>Thuê mặt bằng.</li>
+<li>Phí tài chính.</li>
+<li>Vật liệu dùng ngay.</li>
+<li>Chi khác hoặc thuế phải nộp.</li>
+</ul>
+<p>Người dùng nhập ngày chứng từ, đối tượng nhận tiền, chi nhánh và các khoản chi. Mỗi khoản chọn một loại Chi đang sử dụng bên dưới nhóm cố định phù hợp, số tiền lớn hơn không, lý do, mã tham chiếu và ghi chú nếu có.</p>
+<p>Một Đề nghị Chi có thể chứa khoản thuộc nhiều nhóm cha. Tổng chứng từ bằng tổng các khoản. Khi lưu Nháp, hệ thống chưa tạo Phiếu chi và chưa giảm tiền.</p>
+<h2 id="section-30-13">30.13. Hoàn tất Đề nghị Chi</h2>
+<p>Người dùng yêu cầu Hoàn tất và chọn phương thức thanh toán. Nếu chuyển khoản, tài khoản ngân hàng là bắt buộc. Hệ thống hiển thị tổng tiền sẽ chi và tài khoản bị giảm để người dùng xác nhận.</p>
+<p>Các điều kiện cần kiểm tra lại gồm:</p>
+<ul>
+<li>Chứng từ vẫn ở Nháp;</li>
+<li>Có ít nhất một khoản chi;</li>
+<li>Mọi loại Chi hợp lệ, đang sử dụng và thuộc nhóm được phép;</li>
+<li>Từng số tiền và tổng tiền lớn hơn không;</li>
+<li>Ngày không ở tương lai và kỳ còn cho phép;</li>
+<li>Đối tượng nhận, chi nhánh, phương thức và tài khoản đầy đủ;</li>
+<li>Người dùng có quyền hoàn tất;</li>
+<li>Tài khoản thỏa chính sách số dư của doanh nghiệp.</li>
+</ul>
+<p>Khi thành công, hệ thống tạo một Phiếu chi theo tổng tiền, giảm Sổ tiền của tài khoản, chuyển Đề nghị Chi sang Đã hoàn tất và khóa chứng từ. Nếu tài khoản không cho phép âm và số dư không đủ, thao tác dừng; chứng từ vẫn Nháp.</p>
+<h2 id="section-30-14">30.14. Chi tự động từ mua hàng</h2>
+<p>Khi thanh toán giá trị hàng mua, hệ thống tạo Phiếu chi Thanh toán tiền vốn mua hàng theo số thực trả và liên kết với phiếu nhập mua ngoài. Phần chưa trả tạo công nợ nhà cung cấp, không tạo Phiếu chi cho đến lúc thanh toán.</p>
+<p>Chi phí mua hàng được phân biệt với tiền vốn hàng và Chi phí khác không vốn hóa. Khi khoản vận chuyển, bốc vác hoặc chi phí đưa hàng về kho được thanh toán qua luồng mua hàng, hệ thống tạo Phiếu chi Thanh toán chi phí mua hàng theo số thực chi. Phần chi phí đủ điều kiện được phân bổ vào giá nhập của hàng còn nhận; Phiếu chi chỉ phản ánh tiền ra và không tự quyết định phần được vốn hóa.</p>
+<p>Hoàn tất nhập kho và thanh toán là hai kết quả khác nhau. Phiếu nhập có thể đã tăng tồn nhưng chưa ghi tiền hoặc công nợ nếu người dùng mới chọn Hoàn tất. Khi người dùng chọn Hoàn tất và thanh toán, hoặc thanh toán sau trên phiếu đã hoàn tất, hệ thống mới tạo Phiếu chi và công nợ tương ứng.</p>
+<h2 id="section-30-15">30.15. Chi tự động từ công nợ và tạm ứng nhà cung cấp</h2>
+<p>Khi doanh nghiệp trả nợ nhà cung cấp, hệ thống tạo Phiếu chi Thanh toán công nợ nhà cung cấp, giảm tài khoản tiền và giảm khoản phải trả trong cùng thao tác. Số trả không được vượt số nợ đã chọn trừ trường hợp phần vượt được chuyển thành tạm ứng nhà cung cấp theo luồng được hỗ trợ.</p>
+<p>Khi doanh nghiệp trả trước nhưng chưa nhận hàng hoặc chưa bù vào chứng từ mua, hệ thống tạo Phiếu chi Tạm ứng mua hàng từ nhà cung cấp. Khoản tạm ứng phải gắn đúng nhà cung cấp để được đối trừ về sau.</p>
+<p>Khi dùng tạm ứng để thanh toán phiếu mua, hệ thống không tạo tiền chi lần nữa cho phần đã trả trước. Chỉ phần tiền mới chuyển thêm làm phát sinh Phiếu chi mới.</p>
+<h2 id="section-30-16">30.16. Chi tự động từ hoàn hàng và rút vốn</h2>
+<p>Khi khách trả hàng và được hoàn tiền, hệ thống tạo Phiếu chi Hoàn tiền do khách trả hàng theo số thực hoàn. Phiếu giữ liên kết với chứng từ trả hàng và giao dịch bán gốc. Phần giảm công nợ chưa thanh toán không làm giảm tài khoản tiền.</p>
+<ul>
+<li>Với đơn giao tận nơi không được khách nhận hoặc bị trả lại, hệ thống xóa khoản giảm công nợ khách hàng còn nháp do lập thủ công trước đó.</li>
+<li>Tạo phiếu chi hoàn trả nếu có tiền đã thanh toán hợp lệ.</li>
+<li>Sau đó, nếu tổng nợ tăng còn lớn hơn tổng giảm có hiệu lực, tạo giảm phần chênh lệch để nợ đơn về 0.</li>
+<li>Trường hợp không nhận hàng còn giảm công nợ đơn vị vận chuyển nếu có.</li>
+<li>Khoản giảm nợ thuần túy không được nhầm là tiền khách đã trả để hoàn.</li>
+<li>Không tự chuyển tiền phải hoàn thành số dư khách hàng thay cho luồng hoàn tiền này.</li>
+</ul>
+<p>Khi chứng từ rút vốn hoàn tất, hệ thống tạo Phiếu chi Rút vốn. Khoản này không được tính là chi phí vận hành. Việc sửa, xóa và lịch sử thực hiện qua nghiệp vụ vốn.</p>
+<h2 id="section-30-17">30.17. Sửa chứng từ Nháp</h2>
+<p>Thu ngoài bán hàng và Đề nghị Chi còn Nháp được sửa ngày, đối tượng, chi nhánh và danh sách khoản. Người dùng có thể thêm, bỏ hoặc đổi loại, số tiền, lý do, mã tham chiếu và ghi chú.</p>
+<p>Mỗi lần lưu phải kiểm tra lại loại đang sử dụng, nhóm phù hợp, số tiền và phạm vi chi nhánh. Nếu loại vừa bị Ngừng sử dụng, người dùng phải chọn loại còn hiệu lực; không được giữ một lựa chọn đã cũ cho chứng từ mới hoàn tất.</p>
+<p>Sửa Nháp không thay đổi Phiếu tiền hay Sổ tiền. Nếu hai người cùng sửa, người lưu sau phải nhận cảnh báo dữ liệu đã thay đổi và tải lại trước khi ghi tiếp, không ghi đè im lặng.</p>
+<h2 id="section-30-18">30.18. Xóa chứng từ Nháp</h2>
+<p>Người dùng có thể xóa Nháp theo quyền sau xác nhận thông thường. Vì chưa có Phiếu thu, Phiếu chi hoặc Sổ tiền, xóa Nháp không tạo biến động đảo.</p>
+<p>Nếu chứng từ đã được người khác hoàn tất trước khi xác nhận xóa, thao tác phải dừng và hiển thị trạng thái mới. Không được dùng quyền xóa Nháp để vượt qua quy tắc xóa sau hoàn tất.</p>
+<h2 id="section-30-19">30.19. Sửa Thu ngoài bán hàng đã hoàn tất</h2>
+<p>Mặc định không cho sửa. Người có quyền “Sửa/Xóa phiếu thu ngoài bán hàng đã hoàn thành” có thể mở và lưu thay đổi mà không có bước nhập lý do bắt buộc.</p>
+<p>Khi lưu, hệ thống kiểm tra quyền, tình trạng khóa, dữ liệu như lúc hoàn tất, sau đó:</p>
+<ul>
+<li>Giữ đầy đủ nội dung trước và sau;</li>
+<li>Cập nhật chứng từ Thu ngoài bán hàng;</li>
+<li>Cập nhật Phiếu thu đã sinh;</li>
+<li>Cập nhật lại tác động Sổ tiền theo tổng, tài khoản, phương thức và ngày mới;</li>
+<li>Giữ chứng từ ở trạng thái Đã hoàn tất.</li>
+</ul>
+<p>Nếu thay đổi tài khoản hoặc số tiền, tác động cũ phải được loại bỏ đúng cách và tác động mới được áp dụng trọn vẹn. Nếu bất kỳ bước nào thất bại, hệ thống giữ nguyên kết quả trước khi sửa.</p>
+<p>Không cho sửa nếu Phiếu tiền liên quan đã được đối soát hoặc đã được một nghiệp vụ khác sử dụng theo cách không thể hoàn nguyên.</p>
+<h2 id="section-30-20">30.20. Sửa Đề nghị Chi đã hoàn tất</h2>
+<p>Chỉ người có quyền “Sửa/Xóa đề nghị chi đã hoàn thành” được sửa. Luồng hiện hành không yêu cầu nhập lý do bắt buộc nhưng vẫn lưu nội dung trước và sau.</p>
+<p>Hệ thống kiểm tra lại mọi khoản, tổng tiền, ngày, chi nhánh, phương thức và tài khoản; cập nhật Đề nghị Chi, Phiếu chi và Sổ tiền trong cùng một thao tác. Chứng từ vẫn Đã hoàn tất.</p>
+<p>Nếu sửa làm tăng tiền chi vượt chính sách số dư, thao tác bị từ chối. Nếu một loại Chi cũ đã Ngừng sử dụng nhưng vẫn giữ nguyên trên chứng từ, lịch sử có thể tiếp tục sử dụng; nếu người dùng đổi sang loại khác, loại mới phải đang sử dụng và phù hợp.</p>
+<h2 id="section-30-21">30.21. Xóa chứng từ đã hoàn tất</h2>
+<p>Xóa Thu ngoài bán hàng hoặc Đề nghị Chi đã hoàn tất cần đúng quyền riêng của từng loại. Hệ thống hiển thị xác nhận; luồng hiện hành không bắt buộc nhập lý do.</p>
+<p>Trước khi xóa, hệ thống kiểm tra chứng từ không bị khóa. Khi xác nhận:</p>
+<ul>
+<li>Lưu toàn bộ nội dung trước khi xóa;</li>
+<li>Xử lý Phiếu thu hoặc Phiếu chi đã sinh;</li>
+<li>Đảo tác động Sổ tiền;</li>
+<li>Loại chứng từ khỏi danh sách vận hành theo cơ chế của hệ thống;</li>
+<li>Giữ khả năng truy vết phục vụ kiểm tra.</li>
+</ul>
+<p>Không được xóa chứng từ mà để số dư vẫn mang tác động của phiếu cũ. Nếu đảo tiền thất bại, chứng từ không bị xóa.</p>
+<p>Phiếu thu hoặc chi tự động từ bán hàng, công nợ, mua hàng, vốn và hoàn hàng không xóa trực tiếp tại màn hình Thu Chi. Người dùng xử lý nghiệp vụ gốc. Riêng xóa đơn có quyền phải xử lý các phiếu thu, chi liên quan trong cùng luồng xóa; giới hạn xóa trực tiếp tại Thu Chi không ngăn việc đó.</p>
+<h2 id="section-30-22">30.22. Tra cứu Phiếu thu và Phiếu chi</h2>
+<p>Danh sách Phiếu tiền cho phép lọc theo:</p>
+<ul>
+<li>Khoảng ngày;</li>
+<li>Chi nhánh;</li>
+<li>Chiều Thu hoặc Chi;</li>
+<li>Loại thu chi;</li>
+<li>Phương thức;</li>
+<li>Tài khoản tiền;</li>
+<li>Đối tượng nộp hoặc nhận;</li>
+<li>Nghiệp vụ gốc và mã tham chiếu;</li>
+<li>Người tạo hoặc người hoàn tất.</li>
+</ul>
+<p>Mỗi kết quả hiển thị mã phiếu, ngày, chiều, loại, đối tượng, số tiền, tài khoản, chi nhánh và căn cứ. Người dùng có thể mở chứng từ gốc nếu có quyền. Phiếu hệ thống chỉ cho xem; hành động sửa hoặc xóa điều hướng về nghiệp vụ sở hữu.</p>
+<p>Tổng trên danh sách phải dựa vào toàn bộ kết quả theo bộ lọc, không chỉ phần đang hiển thị. Phiếu đã đảo phải được nhận biết rõ và không được cộng như đang còn hiệu lực.</p>
+<h2 id="section-30-23">30.23. Sổ tiền</h2>
+<p>Sổ tiền theo dõi lịch sử tăng giảm của tiền mặt và tài khoản ngân hàng. Mỗi dòng thể hiện thời điểm, ngày nghiệp vụ, chi nhánh, tài khoản, nội dung, tiền vào hoặc tiền ra, số dư sau giao dịch, Phiếu tiền và chứng từ gốc.</p>
+<p>Nguyên tắc:</p>
+<ul>
+<li>Phiếu thu ghi tiền vào lớn hơn không;</li>
+<li>Phiếu chi ghi tiền ra lớn hơn không và làm số dư giảm;</li>
+<li>Không tồn tại một dòng vừa có tiền vào vừa có tiền ra;</li>
+<li>Một Phiếu tiền chỉ tạo một tác động hiệu lực cho cùng tài khoản;</li>
+<li>Không sửa hoặc xóa trực tiếp;</li>
+<li>Giao dịch đảo liên kết với giao dịch bị đảo;</li>
+<li>Số dư được xác định theo trình tự ngày nghiệp vụ và quy tắc sắp xếp ổn định khi cùng thời điểm.</li>
+</ul>
+<p>Nếu người dùng sửa chứng từ hoàn tất sang ngày quá khứ, hệ thống phải tính lại số dư trình bày của các dòng sau trong tài khoản đó. Lịch sử thời điểm thao tác vẫn cho biết thay đổi được thực hiện sau.</p>
+<h2 id="section-30-24">30.24. Đối soát với ca bán hàng</h2>
+<p>Tiền thu, hoàn tiền và các khoản phát sinh tại quầy được gắn với ca đang mở của nhân viên tại thời điểm phát sinh. Sổ tiền phản ánh tài khoản doanh nghiệp; ca phản ánh trách nhiệm của nhân viên trong khoảng làm việc. Hai góc nhìn phải đối chiếu được nhưng không thay thế nhau.</p>
+<p>Một khoản Thu ngoài hoặc Đề nghị Chi có thể thuộc ca khi được thực hiện tại quầy và cấu hình yêu cầu. Giao dịch ngân hàng không nhất thiết làm thay đổi tiền mặt trong ca. Báo cáo kết ca phải phân biệt phương thức và tài khoản để không cộng chuyển khoản vào tiền mặt dự kiến.</p>
+<p>Sửa hoặc xóa chứng từ sau khi ca đã kết thúc vẫn cập nhật Sổ tiền, đồng thời xuất hiện như điều chỉnh sau ca để người quản lý nhận biết; không âm thầm viết lại kết quả đã in.</p>
+<h2 id="section-30-25">30.25. Đồng thời và gửi lại</h2>
+<p>Các trường hợp phải được kiểm soát:</p>
+<ul>
+<li>Hai người cùng hoàn tất một bản Nháp;</li>
+<li>Một người sửa trong lúc người khác hoàn tất;</li>
+<li>Người dùng bấm Hoàn tất nhiều lần;</li>
+<li>Phản hồi thanh toán bên ngoài bị gián đoạn;</li>
+<li>Tài khoản hoặc loại thu chi bị Ngừng sử dụng giữa lúc xác nhận;</li>
+<li>Sửa chứng từ đã hoàn tất đồng thời với xóa;</li>
+<li>Ca bán hàng đã đóng trong khi thao tác đang thực hiện và nghiệp vụ yêu cầu một ca đang mở.</li>
+</ul>
+<p>Chỉ một kết quả được chấp nhận. Gửi lại cùng yêu cầu phải trả về kết quả đã có thay vì tạo Phiếu tiền mới. Người thao tác trên nội dung cũ phải được yêu cầu tải lại.</p>
+<h2 id="section-30-26">30.26. Giao diện và hành vi người dùng</h2>
+<h3 id="section-30-26-1">30.26.1. Quản lý loại Thu Chi</h3>
+<p>Màn hình cho phép lọc theo chiều, nhóm, tên và trạng thái. Nhóm hệ thống thể hiện rõ là không thể sửa/xóa. Loại người dùng hiển thị hành động phù hợp: sửa, xóa khi chưa sử dụng, Ngừng sử dụng hoặc kích hoạt lại.</p>
+<h3 id="section-30-26-2">30.26.2. Thu ngoài và Đề nghị Chi</h3>
+<p>Danh sách thể hiện mã, ngày, đối tượng, chi nhánh, tổng tiền, trạng thái, người lập và hành động. Biểu mẫu cho phép thêm nhiều khoản; tổng cập nhật ngay khi số tiền thay đổi. Loại không phù hợp với chiều không được hiển thị.</p>
+<p>Nút Hoàn tất chỉ xuất hiện khi người dùng có quyền và chứng từ còn Nháp. Nút sửa/xóa sau hoàn tất chỉ xuất hiện với quyền đặc biệt và khi chứng từ chưa bị khóa.</p>
+<h3 id="section-30-26-3">30.26.3. Xác nhận hoàn tất</h3>
+<p>Hộp xác nhận hiển thị mã chứng từ, đối tượng, chi nhánh, tổng tiền, phương thức và tài khoản. Khi chọn chuyển khoản, tài khoản ngân hàng trở thành bắt buộc. Người dùng phải nhìn rõ số tiền sẽ tăng hoặc giảm trước khi xác nhận.</p>
+<h3 id="section-30-26-4">30.26.4. Chi tiết Phiếu tiền và Sổ tiền</h3>
+<p>Lỗi in hoặc tải chứng từ sau khi tiền đã ghi nhận không làm lùi kết quả tài chính. Người dùng xử lý lại việc in hoặc tải, không lập một phiếu tiền mới chỉ để có lại bản chứng từ.</p>
+<p>Màn hình chi tiết thể hiện quan hệ từ Phiếu tiền về chứng từ gốc và từ Sổ tiền về Phiếu. Dòng đã đảo có nhãn và liên kết đến giao dịch đảo. Không hiển thị nút sửa trực tiếp ở Sổ tiền.</p>
+<h2 id="section-30-27">30.27. Lưu vết và bảo mật</h2>
+<p>Hệ thống giữ người tạo, thời điểm tạo, người hoàn tất, thời điểm hoàn tất và mọi thay đổi sau hoàn tất. Lịch sử đặc biệt phải thể hiện nội dung trước/sau, Phiếu tiền và tác động tài khoản trước/sau.</p>
+<p>Người dùng chỉ xem tài khoản và số dư trong phạm vi quyền. Khi xuất báo cáo, quyền phải được kiểm tra lại; quyền xem một Phiếu chi không mặc nhiên cho phép xem toàn bộ số dư tài khoản ngân hàng.</p>
+<h2 id="section-30-28">30.28. Báo cáo</h2>
+<p>Phân hệ cung cấp thông tin cho:</p>
+<ul>
+<li>Tổng Thu, tổng Chi và thuần tiền theo thời gian;</li>
+<li>Thu Chi theo loại và nhóm;</li>
+<li>Thu Chi theo chi nhánh, tài khoản, phương thức và đối tượng;</li>
+<li>Thu Chi tự động so với Thu/Chi ngoài bán hàng;</li>
+<li>Sổ tiền và số dư đầu/cuối kỳ;</li>
+<li>Giao dịch đã sửa, xóa hoặc đảo;</li>
+<li>Đối soát tiền bán hàng, mua hàng, công nợ, vốn và ca;</li>
+<li>Danh sách Nháp chưa hoàn tất.</li>
+</ul>
+<p>Thu ngoài bán hàng không được cộng vào doanh thu bán hàng chỉ vì là tiền vào. Đề nghị Chi không mặc nhiên là chi phí kế toán chỉ vì là tiền ra. Báo cáo kế toán dùng quy tắc phân loại riêng.</p>
+<h2 id="section-30-29">30.29. Ngoại lệ bắt buộc xử lý</h2>
+<ul>
+<li>Chứng từ không có khoản hoặc có khoản bằng không.</li>
+<li>Loại đã Ngừng sử dụng trước lúc hoàn tất.</li>
+<li>Ngày chứng từ ở tương lai.</li>
+<li>Chuyển khoản nhưng chưa chọn tài khoản ngân hàng.</li>
+<li>Tài khoản không thuộc chi nhánh hoặc ngừng sử dụng.</li>
+<li>Số dư không đủ khi chính sách không cho âm.</li>
+<li>Hai người cùng hoàn tất hoặc sửa.</li>
+<li>Gửi lại sau mất kết nối.</li>
+<li>Phiếu tiền đã bị nghiệp vụ khác khóa.</li>
+<li>Sửa tổng tiền, phương thức, tài khoản, chi nhánh hoặc ngày sau hoàn tất.</li>
+<li>Xóa kết quả đã hoàn tất nhưng đảo Sổ tiền lỗi.</li>
+<li>Khách trả hàng nhưng phần hoàn thực tế khác giá trị trả.</li>
+<li>Thanh toán mua hàng chỉ trả một phần và phần còn lại thành công nợ.</li>
+<li>Tạm ứng được bù vào nghĩa vụ nhưng bị ghi tiền lần nữa.</li>
+<li>Sửa sau khi ca đã kết thúc.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="29-mo-hinh-tai-chinh-pos.html">← 29. Mô hình tài chính POS</a><a href="31-cong-no.html">31. Công nợ →</a></nav></div></body></html>

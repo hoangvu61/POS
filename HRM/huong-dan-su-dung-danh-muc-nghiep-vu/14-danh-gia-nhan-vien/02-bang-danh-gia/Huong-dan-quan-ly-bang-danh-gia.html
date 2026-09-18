@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn quản lý Bảng đánh giá | VIN-HRM</title>
+<style>
+@page { size:A4 portrait; margin:25.4mm; } *{box-sizing:border-box} html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:#fff;color:#1f2937;font-family:Roboto,Arial,sans-serif;font-size:10.5pt;line-height:1.42}.cover{min-height:245mm;position:relative;page-break-after:always;break-after:page}.cover-head{text-align:center}.cover-kicker{margin:0 0 18pt;font-size:12pt;font-weight:700;text-align:center;text-transform:uppercase}.cover-title{margin:0 0 5pt;color:#1f2937;font-size:28pt;font-weight:700;line-height:1.12;text-align:center}.cover-sub{margin:0;color:#4b5563;font-size:13.5pt;line-height:1.35;text-align:center}.cover-meta{margin-top:25mm;font-size:10.5pt;line-height:1.38}.cover-meta p{margin:2pt 0}.cover-toc{margin-top:14mm}.cover-toc h2{margin:0 0 10pt;padding:0 0 5pt;border-bottom:1px solid #111827;font-size:18pt;text-transform:uppercase}.cover-toc ol{margin:0 0 0 22pt;padding:0}.cover-toc li{margin:0;padding-left:4pt}.doc{width:100%}
+h1{margin:0 0 8pt;padding:0 0 5pt;border-bottom:1px solid #111827;color:#111827;font-size:18pt;line-height:1.2;page-break-after:avoid}h2{margin:18pt 0 3pt;color:#111827;font-size:13.5pt;line-height:1.25;page-break-after:avoid}h3{margin:14pt 0 3pt;color:#111827;font-size:11.5pt;line-height:1.3;page-break-after:avoid}p{margin:0 0 9pt;text-align:justify}ul,ol{margin:5pt 0 10pt 24pt;padding-left:12pt}li{margin:0 0 3pt}.lead{margin:0 0 12pt;padding:9pt 11pt;border:1px solid #9ca3af;background:#eef4f8}.route{padding:1pt 3pt;background:#edf2f7;color:#111827;font-weight:700}.tag{white-space:nowrap;padding:1pt 4pt;border:1px solid #9ca3af;background:#f7f9fb;font-size:9pt;font-weight:700}
+table{width:100%;margin:8pt 0 12pt;border-collapse:collapse;table-layout:fixed}thead{display:table-header-group}tr{page-break-inside:avoid}th{padding:6pt;border:1px solid #9ca3af;background:#d9e7f2;color:#111827;font-size:9.5pt;line-height:1.3;text-align:left;vertical-align:middle}td{padding:6pt;border:1px solid #b8c0ca;background:#fff;font-size:9.5pt;line-height:1.35;text-align:left;vertical-align:top;overflow-wrap:anywhere}tbody tr:nth-child(even) td{background:#f7f9fb}.flow{margin:8pt 0 10pt;border:0;border-collapse:separate;page-break-inside:avoid}.flow td{padding:0;border:0;background:#fff!important;text-align:center;vertical-align:middle}.flow .flow-node{padding:6pt 9pt;border:1px solid #7b8794;background:#eef4f8!important}.flow .flow-node strong{display:block;margin-bottom:1pt;color:#111827;font-size:10.5pt}.flow .flow-node p{margin:0;color:#374151;font-size:8.8pt;text-align:center}.flow .flow-arrow{height:12pt;color:#4b5563;font-size:13pt;font-weight:700;line-height:1}.callout{width:100%;margin:10pt 0;border:1px solid #9ca3af;border-collapse:separate;background:#eef4f8;page-break-inside:avoid}.callout td{padding:9pt 11pt;border:0;background:transparent!important;font-size:10.5pt;line-height:1.35}.callout strong{display:block;margin-bottom:3pt;color:#111827}.callout p{margin:0}.warning{background:#fff8e6;border-color:#c9a75d}.danger{background:#fff0f0;border-color:#c77c7c}
+figure{margin:12pt 0 14pt;page-break-inside:avoid}figure img{display:block;width:100%;height:auto;border:1px solid #9ca3af}figcaption{margin-top:4pt;color:#4b5563;font-size:9pt;font-style:italic;line-height:1.3;text-align:center}.steps{margin:6pt 0 11pt 24pt;padding-left:15pt}.page-break{page-break-before:always;break-before:page}.footer-note{margin-top:18pt;padding-top:7pt;border-top:1px solid #9ca3af;color:#4b5563;font-size:8.8pt}
+@media screen{body{background:#eef1f4}.cover,.doc{width:210mm;margin:12mm auto;padding:25.4mm;background:#fff;box-shadow:0 2px 16px rgba(17,24,39,.10)}.cover{min-height:297mm}.doc{min-height:297mm}}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN QUẢN LÝ<br>BẢNG ĐÁNH GIÁ</p>
+    <p class="cover-sub">Thiết lập nhóm tiêu chí, tiêu chí có hệ số và các mức đánh giá dùng chung</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn quản lý Bảng đánh giá</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 24/08/2026</p>
+    <p><strong>Đối tượng:</strong> quản trị hệ thống, cán bộ nhân sự và người được giao thiết kế tiêu chí đánh giá</p>
+    <p><strong>Nguồn:</strong> tài liệu nghiệp vụ “15. Đánh giá nhân viên v1.1”, mã nguồn và phần mềm VIN-HRM thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Mục đích, cấu trúc và luồng thiết lập</li>
+      <li>Điều kiện và phân quyền</li>
+      <li>Danh sách Bảng đánh giá</li>
+      <li>Tạo và khai báo thông tin bảng</li>
+      <li>Quản lý Nhóm tiêu chí</li>
+      <li>Quản lý Tiêu chí và Hệ số</li>
+      <li>Quản lý Mức đánh giá</li>
+      <li>Cách tính điểm và kiểm tra thang điểm</li>
+      <li>Trạng thái, sửa, xóa và ảnh hưởng dữ liệu</li>
+      <li>Lỗi thường gặp và danh sách kiểm tra</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before:always;">1. Mục đích, cấu trúc và luồng thiết lập</h1>
+<p class="lead">Bảng đánh giá là mẫu chấm điểm dùng lại cho nhiều phiếu và nhiều kỳ. Bảng xác định “đánh giá điều gì”, “mức độ quan trọng ra sao” và “mỗi mức đạt được bao nhiêu điểm”. Có thể tạo các bảng riêng cho DEV, QC, BA, Nhân sự, thử việc, sau dự án, xét lương, thưởng hoặc bổ nhiệm.</p>
+<p>Một Bảng đánh giá tốt phải phản ánh đúng mục đích sử dụng, có tiêu chí cụ thể, hệ số hợp lý và mô tả mức điểm đủ rõ để nhiều người chấm có cách hiểu thống nhất.</p>
+
+<h2>1.1. Cấu trúc bốn tầng</h2>
+<table class="flow" aria-label="Cấu trúc Bảng đánh giá">
+  <tbody>
+    <tr><td class="flow-node"><strong>BẢNG ĐÁNH GIÁ</strong><p>Ví dụ: Bảng đánh giá xét tăng lương</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>NHÓM TIÊU CHÍ</strong><p>Ví dụ: Chất lượng công việc, Năng lực chuyên môn, Thái độ</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>TIÊU CHÍ + HỆ SỐ</strong><p>Ví dụ: Kết quả công việc, hệ số 5</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>MỨC ĐÁNH GIÁ + ĐIỂM</strong><p>Ví dụ: Không đạt (1) → Đạt (3) → Vượt mong đợi (5)</p></td></tr>
+  </tbody>
+</table>
+
+<h2 class="page-break">1.2. Luồng thiết lập nên thực hiện</h2>
+<table class="flow" aria-label="Luồng thiết lập Bảng đánh giá">
+  <tbody>
+    <tr><td class="flow-node"><strong>1. Xác định mục đích</strong><p>Ai được đánh giá, dùng kết quả để làm gì, chu kỳ nào.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>2. Tạo Bảng đánh giá</strong><p>Nhập tên, mô tả, thứ tự; có thể để Ngừng hoạt động trong lúc chuẩn bị.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>3. Tạo Nhóm tiêu chí</strong><p>Gom các nội dung cùng chủ đề để biểu mẫu dễ đọc.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>4. Tạo Tiêu chí</strong><p>Viết tiêu chí cụ thể → gán hệ số → sắp thứ tự.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>5. Tạo Mức đánh giá</strong><p>Khai báo tiêu đề, điểm và mô tả cho từng tiêu chí.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>6. Kiểm tra và đưa vào dùng</strong><p>Đối chiếu thang điểm → chấm thử → chuyển Bảng, Nhóm, Tiêu chí và Mức cần dùng sang Đang hoạt động.</p></td></tr>
+  </tbody>
+</table>
+
+<h1>2. Điều kiện và phân quyền</h1>
+<p>Người dùng cần quyền <span class="tag">Evaluation.Template</span> để mở <span class="route">Đánh giá nhân viên &gt; Bảng đánh giá</span> và tạo, sửa, xóa Bảng, Nhóm, Tiêu chí, Mức đánh giá. Quyền này chỉ dùng cho thiết kế mẫu; muốn tạo phiếu hoặc Kỳ đánh giá còn cần <span class="tag">Evaluation.Create</span> hoặc <span class="tag">Evaluation.DirectManager</span>.</p>
+<table>
+  <colgroup><col style="width:28%"><col style="width:72%"></colgroup>
+  <thead><tr><th>Dữ liệu chuẩn bị</th><th>Khuyến nghị</th></tr></thead>
+  <tbody>
+    <tr><td>Mục đích đánh giá</td><td>Chốt trước thử việc, định kỳ, dự án, xét lương, thưởng hay bổ nhiệm; tránh dùng một bảng quá chung cho mọi mục đích.</td></tr>
+    <tr><td>Danh sách nhóm và tiêu chí</td><td>Mỗi tiêu chí phải quan sát hoặc đo lường được; tránh trùng ý giữa các nhóm.</td></tr>
+    <tr><td>Hệ số</td><td>Phản ánh mức ảnh hưởng tương đối. Tiêu chí quan trọng hơn có hệ số cao hơn; toàn bộ hệ số phải lớn hơn 0.</td></tr>
+    <tr><td>Mức đánh giá</td><td>Nên dùng số mức nhất quán, thường là 5 mức; tiêu đề và mô tả cần phân biệt rõ.</td></tr>
+    <tr><td>Người duyệt nội dung</td><td>Nên có đại diện Nhân sự và quản lý chuyên môn kiểm tra trước khi bật Đang hoạt động.</td></tr>
+  </tbody>
+</table>
+<p>Chức năng không có công tắc cấu hình hệ thống riêng. Những yếu tố quyết định là quyền Evaluation.Template, trạng thái từng phần tử và việc Bảng có đủ cấu trúc hợp lệ để bắt đầu đánh giá.</p>
+
+<h1 class="page-break">3. Danh sách Bảng đánh giá</h1>
+<figure>
+  <img src="images/01-danh-sach-bang-danh-gia.png" alt="Danh sách Bảng đánh giá trên VIN-HRM ở giao diện rộng 1920 pixel, có bộ lọc trạng thái và nút Thêm bảng.">
+  <figcaption>Hình 1. Danh sách Bảng đánh giá hiển thị số Nhóm, Tiêu chí, người tạo và trạng thái.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Khu vực</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Tìm theo tên bảng</td><td>Lọc theo một phần tên. Nên dùng tên riêng biệt để tìm nhanh.</td></tr>
+    <tr><td>Trạng thái</td><td><b>Đang hoạt động:</b> có thể xuất hiện khi tạo đánh giá nếu đủ cấu trúc. <b>Ngừng hoạt động:</b> giữ để xem lịch sử nhưng không dùng cho phiếu/kỳ mới.</td></tr>
+    <tr><td>Thứ tự</td><td>Quy định thứ tự hiển thị tương đối. Có thể sắp xếp từ tiêu đề cột.</td></tr>
+    <tr><td>Nhóm – Tiêu chí</td><td>Cho biết nhanh mức độ hoàn thiện. Bảng có 0 nhóm hoặc 0 tiêu chí chưa thể dùng để chấm.</td></tr>
+    <tr><td>Thao tác</td><td>Mở cấu hình chi tiết hoặc xóa theo điều kiện. Hãy ưu tiên Ngừng hoạt động nếu bảng đã được sử dụng.</td></tr>
+  </tbody>
+</table>
+
+<h1>4. Tạo và khai báo thông tin bảng</h1>
+<p>Chọn <b>THÊM BẢNG</b>, nhập thông tin rồi chọn <b>Lưu</b>.</p>
+<figure>
+  <img src="images/02-them-bang-danh-gia.png" alt="Hộp thoại Thêm bảng đánh giá với các trường tên, mô tả, số thứ tự và trạng thái.">
+  <figcaption>Hình 2. Thông tin nhận diện và trạng thái của một Bảng đánh giá.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:22%"><col style="width:16%"><col style="width:62%"></colgroup>
+  <thead><tr><th>Trường</th><th>Quy tắc</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Tên bảng đánh giá</td><td>Bắt buộc, tối đa 255 ký tự</td><td>Tên được hiển thị khi tạo kỳ và phiếu. Nên gồm mục đích hoặc đối tượng, ví dụ “Đánh giá thử việc – Khối Kỹ thuật”.</td></tr>
+    <tr><td>Mô tả</td><td>Không bắt buộc, tối đa 1.000 ký tự</td><td>Giải thích phạm vi áp dụng, nguyên tắc chấm hoặc phiên bản nội dung.</td></tr>
+    <tr><td>Số thứ tự</td><td>Số nguyên</td><td>Điều khiển vị trí hiển thị. Số nhỏ thường đứng trước.</td></tr>
+    <tr><td>Trạng thái</td><td>Đang hoạt động / Ngừng hoạt động</td><td>Nên chọn Ngừng hoạt động khi còn biên soạn; chỉ bật Đang hoạt động sau khi đã đủ nhóm, tiêu chí và mức điểm.</td></tr>
+  </tbody>
+</table>
+<p>Sau khi lưu, mở bảng vừa tạo để cấu hình nội dung. Phần đầu trang cho phép sửa tên, mô tả, thứ tự, trạng thái và hiển thị số nhóm, tiêu chí, mức điểm cùng thang điểm hiện tại.</p>
+<figure>
+  <img src="images/03-cau-truc-bang-danh-gia.png" alt="Trang cấu hình Bảng đánh giá gồm thông tin bảng, thống kê, Nhóm tiêu chí, Tiêu chí và Mức điểm.">
+  <figcaption>Hình 3. Không gian cấu hình ba tầng: Nhóm tiêu chí → Tiêu chí → Mức điểm.</figcaption>
+</figure>
+
+<h1 class="page-break">5. Quản lý Nhóm tiêu chí</h1>
+<p>Nhóm tiêu chí gom các tiêu chí cùng chủ đề, giúp người chấm đọc biểu mẫu theo từng phần. Ví dụ: “Kết quả công việc”, “Năng lực chuyên môn”, “Hợp tác và thái độ”.</p>
+<ol class="steps">
+  <li>Trong trang cấu hình bảng, chọn <b>Thêm nhóm</b> hoặc <b>Thêm nhóm tiêu chí</b>.</li>
+  <li>Nhập Tên nhóm, Mô tả, Thứ tự và Trạng thái.</li>
+  <li>Chọn <b>Lưu</b>. Nhóm xuất hiện ở cột bên trái.</li>
+  <li>Chọn nhóm để cấu hình danh sách tiêu chí bên phải.</li>
+  <li>Dùng menu ba chấm trên nhóm để Sửa hoặc Xóa.</li>
+</ol>
+<figure>
+  <img src="images/04-them-nhom-tieu-chi.png" alt="Hộp thoại Thêm nhóm tiêu chí gồm tên nhóm, mô tả, thứ tự và trạng thái.">
+  <figcaption>Hình 4. Mỗi nhóm có trạng thái riêng và chỉ các nhóm Đang hoạt động mới tham gia chấm điểm.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:22%"><col style="width:18%"><col style="width:60%"></colgroup>
+  <thead><tr><th>Trường</th><th>Quy tắc</th><th>Cách dùng</th></tr></thead>
+  <tbody>
+    <tr><td>Tên nhóm tiêu chí</td><td>Bắt buộc, tối đa 255 ký tự</td><td>Đặt theo một chủ đề lớn; không viết thành một câu hỏi chấm điểm.</td></tr>
+    <tr><td>Mô tả</td><td>Tối đa 1.000 ký tự</td><td>Giải thích phạm vi của nhóm để tránh đưa tiêu chí sai chỗ.</td></tr>
+    <tr><td>Thứ tự</td><td>Số nguyên</td><td>Quyết định trình tự nhóm trên biểu mẫu đánh giá.</td></tr>
+    <tr><td>Trạng thái</td><td>Hai lựa chọn</td><td><b>Đang hoạt động:</b> nhóm và các tiêu chí hợp lệ bên trong được đưa vào phiếu. <b>Ngừng hoạt động:</b> loại toàn nhóm khỏi biểu mẫu mới nhưng vẫn giữ dữ liệu lịch sử.</td></tr>
+  </tbody>
+</table>
+<table class="callout warning"><tbody><tr><td><strong>Không dùng trạng thái nhóm để “ẩn tạm” mà quên bật lại</strong><p>Khi nhóm Ngừng hoạt động, toàn bộ tiêu chí bên trong không tham gia tính điểm, dù từng tiêu chí vẫn đang hoạt động. Sau khi chỉnh sửa, kiểm tra trạng thái ở cả Bảng, Nhóm, Tiêu chí và Mức.</p></td></tr></tbody></table>
+
+<h1>6. Quản lý Tiêu chí và Hệ số</h1>
+<p>Chọn một nhóm, sau đó chọn <b>Thêm tiêu chí</b>. Tiêu chí là nội dung cụ thể mà người đánh giá phải quyết định mức đạt được.</p>
+<figure>
+  <img src="images/05-them-tieu-chi.png" alt="Hộp thoại Thêm tiêu chí với các trường tên tiêu chí, mô tả, hệ số, thứ tự và trạng thái.">
+  <figcaption>Hình 5. Hệ số quyết định mức đóng góp của tiêu chí vào kết quả tổng.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:21%"><col style="width:20%"><col style="width:59%"></colgroup>
+  <thead><tr><th>Trường</th><th>Quy tắc</th><th>Ý nghĩa và ví dụ</th></tr></thead>
+  <tbody>
+    <tr><td>Tên tiêu chí</td><td>Bắt buộc, tối đa 255 ký tự</td><td>Viết ngắn, cụ thể, ví dụ “Hoàn thành công việc đúng hạn”. Tránh tên mơ hồ như “Tốt”.</td></tr>
+    <tr><td>Mô tả</td><td>Tối đa 1.000 ký tự</td><td>Nêu nội dung quan sát, bằng chứng hoặc phạm vi xem xét.</td></tr>
+    <tr><td>Hệ số</td><td>Lớn hơn 0; tối đa theo hệ thống</td><td>Là trọng số tương đối. Hệ số 5 có ảnh hưởng gấp năm lần hệ số 1 nếu cùng điểm. Một số màn hình hiển thị tiêu đề “Trọng số (%)”, nhưng giá trị được dùng theo công thức hệ số, không bắt buộc tổng bằng 100.</td></tr>
+    <tr><td>Thứ tự</td><td>Số nguyên</td><td>Quyết định thứ tự tiêu chí trong nhóm.</td></tr>
+    <tr><td>Trạng thái</td><td>Đang hoạt động / Ngừng hoạt động</td><td>Chỉ tiêu chí Đang hoạt động trong nhóm đang hoạt động mới xuất hiện khi chấm.</td></tr>
+  </tbody>
+</table>
+
+<h2>6.1. Cách chọn hệ số</h2>
+<ul>
+  <li>Dùng một thang thống nhất, ví dụ 1–5, để người thiết kế dễ so sánh mức quan trọng.</li>
+  <li>Hệ số cao cho tiêu chí ảnh hưởng trực tiếp đến mục đích đánh giá; hệ số thấp cho tiêu chí hỗ trợ.</li>
+  <li>Không tăng đồng loạt mọi hệ số vì tỷ lệ tương đối không đổi nhưng số tổng trở nên khó đọc.</li>
+  <li>Chấm thử một trường hợp tốt, trung bình và yếu để xem hệ số có làm một tiêu chí lấn át toàn bộ kết quả hay không.</li>
+</ul>
+<table class="callout"><tbody><tr><td><strong>Ví dụ</strong><p>“Kết quả công việc” có hệ số 5, chấm mức 3 → điểm quy đổi 15. “Tinh thần hợp tác” có hệ số 2, chấm mức 4 → điểm quy đổi 8. Dù mức của tiêu chí thứ hai cao hơn, tiêu chí đầu vẫn đóng góp nhiều hơn vì hệ số lớn hơn.</p></td></tr></tbody></table>
+
+<h1 class="page-break">7. Quản lý Mức đánh giá</h1>
+<p>Chọn một tiêu chí, sau đó chọn <b>Thêm mức</b> hoặc <b>Thêm mức đánh giá</b>. Mức đánh giá là lựa chọn người chấm sẽ sử dụng, kèm điểm số cụ thể.</p>
+<figure>
+  <img src="images/06-them-muc-danh-gia.png" alt="Hộp thoại Thêm mức đánh giá gồm tiêu đề mức, mô tả, điểm, thứ tự và trạng thái.">
+  <figcaption>Hình 6. Mỗi tiêu chí cần có các mức điểm đang hoạt động để người dùng lựa chọn.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:21%"><col style="width:20%"><col style="width:59%"></colgroup>
+  <thead><tr><th>Trường</th><th>Quy tắc</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Tiêu đề mức</td><td>Bắt buộc, tối đa 255 ký tự</td><td>Tên ngắn gọn như “Không đáp ứng”, “Đạt mong đợi”, “Vượt mong đợi”.</td></tr>
+    <tr><td>Mô tả</td><td>Tối đa 1.000 ký tự</td><td>Nêu biểu hiện cụ thể của mức để giảm chấm theo cảm tính. Mô tả nên khác nhau rõ ràng giữa các mức liền kề.</td></tr>
+    <tr><td>Điểm</td><td>Từ 0 trở lên</td><td>Số dùng để tính kết quả. Điểm cao hơn nên biểu thị mức tốt hơn, trừ khi doanh nghiệp có quy ước khác được giải thích rõ.</td></tr>
+    <tr><td>Thứ tự</td><td>Số nguyên</td><td>Quyết định thứ tự hiển thị trong ô chọn mức.</td></tr>
+    <tr><td>Trạng thái</td><td>Hai lựa chọn</td><td>Đang hoạt động để được chọn khi chấm; Ngừng hoạt động để ngăn dùng cho phiếu mới nhưng giữ lịch sử.</td></tr>
+  </tbody>
+</table>
+
+<h2>7.1. Thang 5 mức tham khảo</h2>
+<table>
+  <colgroup><col style="width:12%"><col style="width:31%"><col style="width:57%"></colgroup>
+  <thead><tr><th>Điểm</th><th>Tiêu đề</th><th>Ý nghĩa tham khảo</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Không đáp ứng yêu cầu</td><td>Kết quả hoặc hành vi thấp hơn rõ rệt so với yêu cầu tối thiểu.</td></tr>
+    <tr><td>2</td><td>Đáp ứng một phần</td><td>Đạt một phần nhưng còn thiếu nội dung quan trọng; cần kế hoạch cải thiện.</td></tr>
+    <tr><td>3</td><td>Đáp ứng mong đợi</td><td>Hoàn thành đúng yêu cầu của vị trí hoặc mục tiêu.</td></tr>
+    <tr><td>4</td><td>Vượt mong đợi</td><td>Kết quả tốt hơn yêu cầu, có đóng góp nổi bật và ổn định.</td></tr>
+    <tr><td>5</td><td>Vượt xa mong đợi</td><td>Kết quả đặc biệt xuất sắc, tạo ảnh hưởng vượt phạm vi thông thường.</td></tr>
+  </tbody>
+</table>
+<p>Đây là gợi ý, không phải cấu hình bắt buộc. Doanh nghiệp có thể dùng 3, 4, 5 hoặc nhiều mức; điều quan trọng là mỗi tiêu chí có ít nhất một mức Đang hoạt động và cách hiểu giữa các mức nhất quán.</p>
+
+<h1>8. Cách tính điểm và kiểm tra thang điểm</h1>
+<h2>8.1. Công thức</h2>
+<table>
+  <colgroup><col style="width:26%"><col style="width:34%"><col style="width:40%"></colgroup>
+  <thead><tr><th>Kết quả</th><th>Công thức</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Điểm quy đổi tiêu chí</td><td>Điểm mức × Hệ số</td><td>Đóng góp của một tiêu chí vào tổng.</td></tr>
+    <tr><td>Tổng điểm</td><td>Tổng điểm quy đổi</td><td>Tổng kết quả có xét hệ số.</td></tr>
+    <tr><td>Điểm tối đa</td><td>Tổng (điểm mức cao nhất × hệ số)</td><td>Mức tối đa có thể đạt với cấu hình hiện tại.</td></tr>
+    <tr><td>Điểm trung bình</td><td>Tổng điểm ÷ Tổng hệ số</td><td>Đưa kết quả về thang điểm trung bình.</td></tr>
+    <tr><td>Tỷ lệ</td><td>Tổng điểm ÷ Điểm tối đa × 100</td><td>Chuẩn hóa kết quả về phần trăm.</td></tr>
+  </tbody>
+</table>
+<p>“Thang điểm” hiển thị trên trang cấu hình là điểm trung bình tối đa, được tính từ các Nhóm, Tiêu chí và Mức đang hoạt động. Nếu một tiêu chí có mức cao nhất là 100 trong khi tiêu chí khác cao nhất là 5, thang điểm tổng có thể khó hiểu. Vì vậy nên dùng cùng thang mức cho các tiêu chí trong một bảng.</p>
+
+<h2>8.2. Kiểm tra trước khi đưa vào sử dụng</h2>
+<ol class="steps">
+  <li>Mỗi Nhóm cần dùng ở trạng thái Đang hoạt động.</li>
+  <li>Mỗi Nhóm có ít nhất một Tiêu chí Đang hoạt động.</li>
+  <li>Mỗi Tiêu chí có Hệ số lớn hơn 0 và ít nhất một Mức Đang hoạt động.</li>
+  <li>Điểm và thứ tự các Mức đi từ thấp đến cao, mô tả không mâu thuẫn.</li>
+  <li>Thang điểm hiển thị phù hợp dự kiến; chấm thử một phiếu và kiểm tra Tổng điểm, Điểm TB, Tỷ lệ.</li>
+  <li>Chỉ sau khi kiểm tra xong mới chuyển Bảng sang Đang hoạt động.</li>
+</ol>
+
+<h1 class="page-break">9. Trạng thái, sửa, xóa và ảnh hưởng dữ liệu</h1>
+<h2>9.1. Khi cần sửa</h2>
+<p>Trong trang cấu hình, chọn đúng Nhóm hoặc Tiêu chí; dùng biểu tượng bút chì hoặc menu ba chấm để sửa. Sau khi sửa thông tin bảng ở phần đầu trang, chọn <b>Lưu thông tin bảng</b>. Nút <b>Làm mới</b> tải lại dữ liệu và có thể làm mất nội dung chưa lưu.</p>
+<table class="callout warning"><tbody><tr><td><strong>Kết quả cũ được bảo toàn bằng dữ liệu chụp nhanh</strong><p>Phiếu đánh giá đã lưu giữ tên nhóm, tiêu chí, mức, hệ số và điểm tại thời điểm chấm. Sửa cấu hình chủ yếu ảnh hưởng các phiếu tạo sau. Tuy vậy, để báo cáo dễ giải thích, nên tạo Bảng đánh giá mới khi thay đổi lớn thay vì sửa sâu một bảng đang dùng.</p></td></tr></tbody></table>
+
+<h2>9.2. Khi nào tạo bảng mới</h2>
+<ul>
+  <li>Thay đổi mục đích sử dụng, ví dụ từ đánh giá thử việc sang xét tăng lương.</li>
+  <li>Thay đổi nhiều nhóm, hệ số hoặc thang điểm.</li>
+  <li>Cần giữ nguyên một phiên bản cho kỳ cũ và đưa phiên bản mới vào kỳ tiếp theo.</li>
+  <li>Phạm vi nghề nghiệp khác biệt, ví dụ DEV và Nhân sự cần bộ tiêu chí riêng.</li>
+</ul>
+
+<h2>9.3. Xóa hay Ngừng hoạt động</h2>
+<table>
+  <colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+  <thead><tr><th>Thao tác</th><th>Dùng khi</th><th>Lưu ý</th></tr></thead>
+  <tbody>
+    <tr><td>Ngừng hoạt động</td><td>Dữ liệu đã hoặc có thể đã được sử dụng, nhưng không muốn dùng cho phiếu mới.</td><td>Là lựa chọn an toàn, giữ lịch sử và có thể bật lại.</td></tr>
+    <tr><td>Xóa</td><td>Tạo nhầm, chưa phát sinh phụ thuộc và chắc chắn không cần giữ.</td><td>Có thể bị hệ thống từ chối nếu đang được tham chiếu. Xóa nhóm có thể ảnh hưởng toàn bộ tiêu chí bên trong; đọc kỹ hộp xác nhận.</td></tr>
+  </tbody>
+</table>
+
+<h1>10. Lỗi thường gặp và danh sách kiểm tra</h1>
+<table>
+  <colgroup><col style="width:31%"><col style="width:33%"><col style="width:36%"></colgroup>
+  <thead><tr><th>Hiện tượng</th><th>Nguyên nhân</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Không thấy menu Bảng đánh giá.</td><td>Thiếu Evaluation.Template.</td><td>Đề nghị quản trị cấp đúng quyền cho vai trò.</td></tr>
+    <tr><td>Bảng Đang hoạt động nhưng không chọn được khi đánh giá.</td><td>Thiếu nhóm/tiêu chí/mức hoạt động, hệ số không hợp lệ hoặc không nằm trong phạm vi truy cập.</td><td>Kiểm tra lần lượt bốn tầng và chấm thử sau khi lưu.</td></tr>
+    <tr><td>Thang điểm bằng 0.</td><td>Không có tiêu chí hoạt động, tổng hệ số bằng 0 hoặc không có mức hoạt động.</td><td>Bật và hoàn thiện dữ liệu cần dùng; hệ số phải lớn hơn 0.</td></tr>
+    <tr><td>Kết quả bị lệch quá nhiều về một tiêu chí.</td><td>Hệ số của tiêu chí đó quá cao.</td><td>Đối chiếu tỷ lệ hệ số giữa các tiêu chí và chấm thử nhiều tình huống.</td></tr>
+    <tr><td>Không xóa được bảng/nhóm/tiêu chí/mức.</td><td>Dữ liệu đã được sử dụng hoặc có phần tử con.</td><td>Chọn Ngừng hoạt động; chỉ xóa dữ liệu tạo nhầm chưa phát sinh.</td></tr>
+    <tr><td>Mức điểm hiển thị không đúng thứ tự.</td><td>Thứ tự khai báo không đúng hoặc trùng.</td><td>Sửa Thứ tự theo trình tự mong muốn và tải lại.</td></tr>
+  </tbody>
+</table>
+
+<h2>10.1. Danh sách kiểm tra nghiệm thu</h2>
+<ul>
+  <li>Tên và mô tả nói rõ mục đích, đối tượng áp dụng.</li>
+  <li>Nhóm không trùng nội dung; thứ tự hợp lý.</li>
+  <li>Tiêu chí cụ thể, có mô tả và hệ số đã được thống nhất.</li>
+  <li>Mỗi tiêu chí có đủ mức, điểm và mô tả phân biệt rõ.</li>
+  <li>Thang điểm, Điểm TB và Tỷ lệ được kiểm tra bằng phiếu chấm thử.</li>
+  <li>Trạng thái Đang hoạt động chỉ bật cho nội dung đã duyệt.</li>
+  <li>Nếu thay đổi lớn, đã cân nhắc tạo phiên bản Bảng mới.</li>
+</ul>
+<p class="footer-note">Tài liệu được biên soạn theo VIN-HRM thực tế tại thời điểm 24/08/2026. Tên nút hoặc quy tắc phân quyền có thể thay đổi theo phiên bản phần mềm và chính sách của doanh nghiệp.</p>
+</main>
+</body>
+</html>

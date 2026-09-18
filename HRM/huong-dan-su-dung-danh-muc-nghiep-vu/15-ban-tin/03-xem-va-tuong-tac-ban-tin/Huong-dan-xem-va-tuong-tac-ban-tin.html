@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn Xem và tương tác bản tin | VIN-HRM</title>
+<style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #fff; color: #1f2937; font-family: Roboto, Arial, sans-serif; font-size: 10.5pt; line-height: 1.42; }
+.cover { min-height: 245mm; position: relative; page-break-after: always; break-after: page; }
+.cover-head { text-align: center; }
+.cover-kicker { margin: 0 0 18pt; color: #1f2937; font-size: 12pt; font-weight: 700; text-align: center; text-transform: uppercase; }
+.cover-title { margin: 0 0 5pt; padding: 0; border: 0; color: #1f2937; font-size: 28pt; font-weight: 700; line-height: 1.12; text-align: center; }
+.cover-sub { margin: 0; color: #4b5563; font-size: 13.5pt; line-height: 1.35; text-align: center; }
+.cover-meta { margin-top: 25mm; font-size: 10.5pt; line-height: 1.38; }
+.cover-meta p { margin: 2pt 0; }
+.cover-toc { margin-top: 14mm; }
+.cover-toc h2 { margin: 0 0 10pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; text-transform: uppercase; }
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 { margin: 0 0 8pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; line-height: 1.2; page-break-after: avoid; }
+h2 { margin: 18pt 0 3pt; color: #111827; font-size: 13.5pt; line-height: 1.25; page-break-after: avoid; }
+h3 { margin: 14pt 0 3pt; color: #111827; font-size: 11.5pt; line-height: 1.3; page-break-after: avoid; }
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 3pt; }
+.lead { margin: 0 0 12pt; padding: 9pt 11pt; border: 1px solid #9ca3af; background: #eef4f8; }
+.route { padding: 1pt 3pt; background: #edf2f7; color: #111827; font-weight: 700; }
+.tag { white-space: nowrap; padding: 1pt 4pt; border: 1px solid #9ca3af; background: #f7f9fb; font-size: 9pt; font-weight: 700; }
+table { width: 100%; margin: 8pt 0 12pt; border-collapse: collapse; table-layout: fixed; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; }
+th { padding: 6pt; border: 1px solid #9ca3af; background: #d9e7f2; color: #111827; font-size: 9.5pt; line-height: 1.3; text-align: left; vertical-align: middle; }
+td { padding: 6pt; border: 1px solid #b8c0ca; background: #fff; font-size: 9.5pt; line-height: 1.35; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.flow { margin: 8pt 0 10pt; border: 0; border-collapse: separate; page-break-inside: avoid; }
+.flow td { padding: 0; border: 0; background: #fff !important; text-align: center; vertical-align: middle; }
+.flow .flow-node { padding: 6pt 9pt; border: 1px solid #7b8794; background: #eef4f8 !important; }
+.flow .flow-node strong { display: block; margin-bottom: 1pt; color: #111827; font-size: 10.5pt; }
+.flow .flow-node p { margin: 0; color: #374151; font-size: 8.8pt; text-align: center; }
+.flow .flow-arrow { height: 12pt; color: #4b5563; font-size: 13pt; font-weight: 700; line-height: 1; }
+.branch td { text-align: center; vertical-align: middle; }
+.branch .decision { background: #fff8e6; font-weight: 700; }
+.callout { width: 100%; margin: 10pt 0; border: 1px solid #9ca3af; border-collapse: separate; background: #eef4f8; page-break-inside: avoid; }
+.callout td { padding: 9pt 11pt; border: 0; background: transparent !important; font-size: 10.5pt; line-height: 1.35; }
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+figure { margin: 12pt 0 14pt; page-break-inside: avoid; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid #9ca3af; }
+figcaption { margin-top: 4pt; color: #4b5563; font-size: 9pt; font-style: italic; line-height: 1.3; text-align: center; }
+.steps { margin: 6pt 0 11pt 24pt; padding-left: 15pt; }
+.page-break { page-break-before: always; break-before: page; }
+.footer-note { margin-top: 18pt; padding-top: 7pt; border-top: 1px solid #9ca3af; color: #4b5563; font-size: 8.8pt; }
+@media screen { body { background: #eef1f4; } .cover, .doc { width: 210mm; margin: 12mm auto; padding: 25.4mm; background: #fff; box-shadow: 0 2px 16px rgba(17,24,39,.10); } .cover { min-height: 297mm; } .doc { min-height: 297mm; } }
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN<br>XEM VÀ TƯƠNG TÁC BẢN TIN</p>
+    <p class="cover-sub">Đọc thông báo, xem tệp, bày tỏ cảm xúc, bình luận, trả lời và gắn thẻ đồng nghiệp</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn Xem và tương tác bản tin</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 24/08/2026</p>
+    <p><strong>Đối tượng:</strong> toàn thể nhân viên sử dụng Bản tin nội bộ VIN-HRM</p>
+    <p><strong>Nguồn:</strong> tài liệu nghiệp vụ “Bản tin nội bộ v1.0”, mã nguồn và phần mềm VIN-HRM thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Mục đích, điều kiện hiển thị và luồng sử dụng</li>
+      <li>Màn hình Bản tin của tôi</li>
+      <li>Tìm kiếm, lọc và tải thêm bản tin</li>
+      <li>Đọc nội dung, xem ảnh và tệp đính kèm</li>
+      <li>Bày tỏ cảm xúc</li>
+      <li>Bình luận, trả lời và gắn thẻ</li>
+      <li>Cập nhật thời gian thực và quy tắc hiển thị</li>
+      <li>Lỗi thường gặp và quy tắc giao tiếp</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích, điều kiện hiển thị và luồng sử dụng</h1>
+<p class="lead">Bản tin của tôi là luồng thông tin nội bộ dành riêng cho người đang đăng nhập. Người dùng có thể đọc bản tin đã được phê duyệt, mở ảnh và tệp, bày tỏ cảm xúc, bình luận, trả lời bình luận và gắn thẻ đồng nghiệp phù hợp. Nội dung nhìn thấy phụ thuộc danh sách người nhận được hệ thống chốt khi bản tin phát hành.</p>
+
+<h2>1.1. Luồng sử dụng tổng quát</h2>
+<table class="flow" aria-label="Luồng xem và tương tác với bản tin">
+  <tbody>
+    <tr><td class="flow-node"><strong>1. Bản tin được duyệt bước cuối</strong><p>Hệ thống chuyển trạng thái Đã duyệt, ghi thời điểm phát hành và chốt người nhận.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>2. Người nhận mở Bản tin</strong><p>Danh sách hiển thị các nội dung được phép xem trong cùng doanh nghiệp.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>3. Tìm hoặc lọc</strong><p>Dùng từ khóa và khoảng ngày để tìm đúng nội dung; cuộn trang để tải thêm.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>4. Đọc chi tiết</strong><p>Mở rộng nội dung, xem ảnh, xem trước hoặc tải tệp đính kèm nếu có.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>5. Tương tác</strong><p>Chọn cảm xúc; viết bình luận; trả lời; gắn thẻ hoặc bày tỏ cảm xúc với bình luận.</p></td></tr>
+    <tr><td class="flow-arrow">↓</td></tr>
+    <tr><td class="flow-node"><strong>6. Nhận cập nhật</strong><p>Phản hồi mới được đồng bộ qua cơ chế thời gian thực; tải lại nếu kết nối bị gián đoạn.</p></td></tr>
+  </tbody>
+</table>
+
+<h2>1.2. Điều kiện để một bản tin xuất hiện</h2>
+<ul>
+  <li>Bản tin đã hoàn tất quy trình và có trạng thái <b>Đã duyệt</b>.</li>
+  <li>Người đang đăng nhập thuộc danh sách người nhận được chốt tại thời điểm phát hành.</li>
+  <li>Bản tin và người dùng thuộc cùng doanh nghiệp.</li>
+  <li>Bản tin chưa chuyển sang trạng thái <b>Đã thu hồi</b>.</li>
+</ul>
+<table>
+  <colgroup><col style="width:25%"><col style="width:37%"><col style="width:38%"></colgroup>
+  <thead><tr><th>Phạm vi khi tạo</th><th>Ai được nhận khi phát hành</th><th>Lưu ý</th></tr></thead>
+  <tbody>
+    <tr><td>Toàn công ty</td><td>Nhân viên đang hoạt động trong doanh nghiệp tại thời điểm phát hành.</td><td>Phù hợp thông báo chung; không dùng cho nội dung có dữ liệu riêng của một nhóm nhỏ.</td></tr>
+    <tr><td>Phòng ban</td><td>Nhân viên thuộc một hoặc nhiều phòng ban đã chọn khi hệ thống chốt người nhận.</td><td>Danh sách là ảnh chụp tại thời điểm phát hành; thay đổi phòng ban sau đó không viết lại lịch sử.</td></tr>
+    <tr><td>Người dùng cụ thể</td><td>Đúng các tài khoản/nhân viên được chọn.</td><td>Phù hợp nhóm nhỏ hoặc nội dung có phạm vi hạn chế; người không được chọn sẽ không thấy.</td></tr>
+  </tbody>
+</table>
+<table class="callout"><tbody><tr><td><strong>Không cần quyền Quản lý bản tin để đọc</strong><p>News.Manage dùng cho người tạo và quản lý nội dung. Người dùng thông thường vẫn xem và tương tác nếu là người nhận của bản tin đã duyệt. Việc không thấy một bản tin thường liên quan phạm vi, trạng thái hoặc thu hồi, không phải do thiếu quyền News.Manage.</p></td></tr></tbody></table>
+
+<h1 class="page-break">2. Màn hình Bản tin của tôi</h1>
+<p>Mở <span class="route">Bản tin nội bộ &gt; Bản tin</span>. Màn hình được trình bày theo dạng luồng thẻ: phần trên là bộ lọc, phía dưới là các bản tin mới nhất mà người dùng được nhận.</p>
+<figure>
+  <img src="images/01-ban-tin-cua-toi.png" alt="Màn hình Bản tin của tôi giao diện rộng 1920 pixel, gồm bộ lọc và một thẻ bản tin đã phát hành.">
+  <figcaption>Hình 1. Luồng Bản tin thực tế hiển thị người tạo, thời điểm phát hành, phạm vi, nội dung, cảm xúc và bình luận.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Khu vực</th><th>Ý nghĩa và cách sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Tìm kiếm</td><td>Nhập từ khóa liên quan tới nội dung cần tìm. Nên dùng cụm ngắn, tên chương trình, đơn vị hoặc từ nổi bật trong tiêu đề.</td></tr>
+    <tr><td>Từ ngày/Đến ngày</td><td>Giới hạn bản tin theo thời gian phát hành. Đặt cả hai đầu khoảng để tránh lấy nhầm giai đoạn.</td></tr>
+    <tr><td>Xóa bộ lọc</td><td>Đưa từ khóa và ngày về trống, sau đó tải lại luồng đầy đủ.</td></tr>
+    <tr><td>Thẻ bản tin</td><td>Cho biết người tạo, thời gian, phạm vi, tiêu đề, nội dung rút gọn, tệp, tổng cảm xúc và bình luận.</td></tr>
+    <tr><td>Khu vực tương tác</td><td>Cho phép chọn cảm xúc, xem danh sách người tương tác, mở bình luận và gửi phản hồi.</td></tr>
+  </tbody>
+</table>
+
+<h1>3. Tìm kiếm, lọc và tải thêm bản tin</h1>
+<h2>3.1. Tìm theo từ khóa</h2>
+<ol class="steps">
+  <li>Chọn ô <b>Tìm kiếm</b>.</li>
+  <li>Nhập từ khóa. Tránh câu quá dài hoặc các từ quá chung như “thông báo”.</li>
+  <li>Chờ hệ thống tải lại danh sách. Nếu chưa đúng, rút gọn từ khóa hoặc xóa và nhập từ khác.</li>
+</ol>
+
+<h2>3.2. Lọc theo ngày phát hành</h2>
+<ol class="steps">
+  <li>Chọn <b>Từ ngày</b>, sau đó chọn ngày bắt đầu.</li>
+  <li>Chọn <b>Đến ngày</b>, sau đó chọn ngày kết thúc không nhỏ hơn ngày bắt đầu.</li>
+  <li>Kết hợp từ khóa nếu cần. Khi muốn trở về toàn bộ luồng, chọn <b>Xóa bộ lọc</b>.</li>
+</ol>
+<p>Khoảng ngày áp dụng cho thời điểm bản tin được duyệt và phát hành, không phải ngày người tạo bắt đầu soạn Nháp.</p>
+
+<h2>3.3. Tải thêm khi cuộn</h2>
+<p>Luồng sử dụng cơ chế tải dần. Khi cuộn gần cuối danh sách, hệ thống tự lấy trang tiếp theo thay vì hiển thị phân trang. Không cuộn liên tục quá nhanh khi mạng chậm; chờ chỉ báo tải hoàn tất để tránh tưởng rằng không còn dữ liệu.</p>
+<table class="callout warning"><tbody><tr><td><strong>Bộ lọc được áp dụng đồng thời</strong><p>Khi vừa nhập từ khóa vừa chọn khoảng ngày, bản tin phải thỏa cả hai điều kiện mới xuất hiện. Nếu kết quả trống, hãy xóa từng điều kiện để xác định bộ lọc nào đang giới hạn dữ liệu.</p></td></tr></tbody></table>
+
+<h1 class="page-break">4. Đọc nội dung, xem ảnh và tệp đính kèm</h1>
+<h2>4.1. Mở nội dung đầy đủ</h2>
+<p>Bản tin dài có thể được rút gọn trên thẻ. Chọn vùng mở rộng hoặc liên kết xem thêm để đọc toàn bộ. Nội dung có thể gồm đoạn văn, chữ đậm/nghiêng/gạch chân, danh sách, liên kết và hình ảnh do người tạo định dạng.</p>
+<figure>
+  <img src="images/02-chi-tiet-va-binh-luan.png" alt="Một bản tin được mở chi tiết với nội dung, số cảm xúc và khu vực bình luận.">
+  <figcaption>Hình 2. Khi mở chi tiết, người dùng đọc toàn bộ nội dung và thực hiện tương tác ngay dưới bản tin.</figcaption>
+</figure>
+
+<h2>4.2. Xem ảnh</h2>
+<ul>
+  <li>Chọn ảnh trong nội dung hoặc khu vực tệp hình để mở trình xem ảnh.</li>
+  <li>Nếu có nhiều ảnh, dùng điều khiển trước/sau để chuyển ảnh; đóng trình xem để trở lại vị trí đang đọc.</li>
+  <li>Không chụp lại hoặc phát tán ảnh ra ngoài doanh nghiệp nếu nội dung có giới hạn sử dụng.</li>
+</ul>
+
+<h2>4.3. Xem hoặc tải tệp đính kèm</h2>
+<ul>
+  <li>Chọn tên tệp để xem trước khi định dạng được hệ thống hỗ trợ.</li>
+  <li>Dùng tải xuống khi cần lưu tệp về máy. Kiểm tra tên tệp và nguồn trước khi mở.</li>
+  <li>Nếu trình duyệt không xem trước được, tải tệp rồi mở bằng ứng dụng phù hợp; không đổi phần mở rộng của tệp.</li>
+  <li>Tệp đã tải xuống là bản tại thời điểm phát hành. Nếu có bản tin thay thế, ưu tiên tệp trong thông báo mới nhất.</li>
+</ul>
+
+<h1>5. Bày tỏ cảm xúc</h1>
+<p>Mỗi người dùng có tối đa một cảm xúc đang chọn trên một bản tin. Có thể đổi sang cảm xúc khác hoặc bỏ cảm xúc hiện tại.</p>
+<table>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa gợi ý</th></tr></thead>
+  <tbody>
+    <tr><td>Thích</td><td>Đã đọc, đồng tình hoặc đánh giá nội dung hữu ích.</td></tr>
+    <tr><td>Yêu thích</td><td>Đánh giá rất tích cực, phù hợp nội dung chúc mừng hoặc ghi nhận.</td></tr>
+    <tr><td>Haha</td><td>Phản hồi vui vẻ với nội dung có tính giải trí; không dùng với sự cố hoặc thông báo nghiêm túc.</td></tr>
+    <tr><td>Ngạc nhiên</td><td>Thể hiện bất ngờ trước thông tin, không mặc nhiên đồng nghĩa đồng ý hay phản đối.</td></tr>
+    <tr><td>Buồn</td><td>Phù hợp thông tin đáng tiếc, chia sẻ hoặc tổn thất.</td></tr>
+    <tr><td>Phẫn nộ</td><td>Thể hiện phản ứng tiêu cực mạnh; cân nhắc bối cảnh và quy tắc giao tiếp nội bộ trước khi dùng.</td></tr>
+  </tbody>
+</table>
+<ol class="steps">
+  <li>Đưa chuột hoặc chọn khu vực cảm xúc để hiển thị các lựa chọn.</li>
+  <li>Chọn một cảm xúc. Tổng số và biểu tượng được cập nhật.</li>
+  <li>Muốn đổi: mở danh sách và chọn cảm xúc khác; cảm xúc cũ được thay thế.</li>
+  <li>Muốn bỏ: chọn lại đúng cảm xúc đang dùng.</li>
+</ol>
+<figure>
+  <img src="images/04-danh-sach-cam-xuc.png" alt="Hộp danh sách cảm xúc của bản tin với các thẻ phân loại và danh sách người đã tương tác.">
+  <figcaption>Hình 3. Chọn tổng cảm xúc để xem người đã tương tác; các thẻ giúp lọc theo từng loại cảm xúc.</figcaption>
+</figure>
+<p>Số lượng cảm xúc là thông tin tham khảo, không phải phiếu biểu quyết trừ khi doanh nghiệp có quy định riêng. Người dùng cần đọc nội dung đầy đủ trước khi phản ứng.</p>
+
+<h1>6. Bình luận, trả lời và gắn thẻ</h1>
+<h2>6.1. Viết bình luận mới</h2>
+<ol class="steps">
+  <li>Mở bản tin và chọn ô nhập bình luận.</li>
+  <li>Nhập nội dung tối đa 4.000 ký tự. Có thể dùng biểu tượng cảm xúc để bổ sung sắc thái.</li>
+  <li>Đọc lại nội dung, kiểm tra người được nhắc tới và chọn nút gửi.</li>
+  <li>Chờ bình luận xuất hiện. Nếu mạng chậm, không gửi lặp lại cùng một nội dung.</li>
+</ol>
+
+<h2>6.2. Sắp xếp bình luận</h2>
+<table>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Mới nhất</td><td>Đưa bình luận mới lên trước, phù hợp khi theo dõi trao đổi đang diễn ra.</td></tr>
+    <tr><td>Cũ nhất</td><td>Đọc theo trình tự thời gian từ đầu, phù hợp khi cần hiểu toàn bộ mạch thảo luận.</td></tr>
+  </tbody>
+</table>
+
+<h2>6.3. Trả lời bình luận</h2>
+<ol class="steps">
+  <li>Tại bình luận cần phản hồi, chọn <b>Trả lời</b>.</li>
+  <li>Hệ thống mở ô nhập gắn với bình luận đó. Nhập nội dung rõ ràng, tránh tạo một trao đổi không liên quan.</li>
+  <li>Chọn gửi. Câu trả lời hiển thị trong nhánh của bình luận gốc.</li>
+</ol>
+<figure>
+  <img src="images/03-tra-loi-binh-luan.png" alt="Khu vực trả lời một bình luận trong bản tin, thể hiện ô nhập phản hồi theo nhánh.">
+  <figcaption>Hình 4. Trả lời đúng bình luận giúp giữ mạch trao đổi và làm rõ người, nội dung đang được phản hồi.</figcaption>
+</figure>
+
+<h2>6.4. Gắn thẻ đồng nghiệp bằng ký hiệu @</h2>
+<ol class="steps">
+  <li>Trong ô bình luận hoặc trả lời, nhập ký hiệu <b>@</b> rồi gõ một phần tên hoặc mã nhân viên.</li>
+  <li>Chọn đúng người trong danh sách gợi ý. Hệ thống giới hạn số ứng viên gợi ý để danh sách dễ dùng.</li>
+  <li>Tiếp tục nhập nội dung và gửi. Không chỉ gõ tên bằng văn bản nếu muốn tạo liên kết gắn thẻ.</li>
+</ol>
+<figure>
+  <img src="images/05-gan-the-nguoi-nhan.png" alt="Danh sách gợi ý nhân viên xuất hiện khi nhập ký hiệu a còng trong ô bình luận bản tin.">
+  <figcaption>Hình 5. Danh sách gợi ý giúp chọn đúng tài khoản cần gắn thẻ; hãy đối chiếu mã hoặc đơn vị nếu có người trùng tên.</figcaption>
+</figure>
+<table class="callout warning"><tbody><tr><td><strong>Gắn thẻ không mở rộng quyền xem bản tin</strong><p>Chỉ gắn thẻ người đang có quyền xem theo danh sách người nhận. Việc nhắc một người không thuộc phạm vi không tự cấp cho họ quyền truy cập nội dung.</p></td></tr></tbody></table>
+
+<h2>6.5. Cảm xúc và xóa bình luận</h2>
+<ul>
+  <li>Có thể bày tỏ cảm xúc với bình luận tương tự cách phản ứng với bản tin; mỗi người có một cảm xúc hiện tại trên mỗi bình luận.</li>
+  <li>Tác giả được xóa bình luận của chính mình khi giao diện cho phép. Hãy kiểm tra các câu trả lời liên quan trước khi xóa để tránh làm đứt mạch trao đổi.</li>
+  <li>Không chỉnh sửa hoặc xóa nội dung của người khác; trường hợp vi phạm cần báo đầu mối quản trị theo quy định doanh nghiệp.</li>
+</ul>
+
+<h1>7. Cập nhật thời gian thực và quy tắc hiển thị</h1>
+<h2>7.1. Cập nhật thời gian thực</h2>
+<p>Khi đang mở trang Bản tin, ứng dụng nhận các thay đổi như bản tin mới, cảm xúc và bình luận qua kênh thời gian thực. Dữ liệu có thể tự cập nhật mà không cần tải lại toàn trang. Nếu máy ngủ, đổi mạng hoặc để tab mở quá lâu, kết nối có thể gián đoạn; khi đó tải lại trang để đồng bộ.</p>
+
+<h2>7.2. Bản tin được phát hành sau khi đang mở trang</h2>
+<p>Nếu người dùng thuộc danh sách nhận của bản tin vừa được duyệt, nội dung có thể xuất hiện trong luồng qua cơ chế cập nhật. Nếu đang dùng bộ lọc không phù hợp, bản tin mới vẫn bị ẩn cho tới khi xóa bộ lọc.</p>
+
+<h2>7.3. Khi bản tin bị thu hồi</h2>
+<p>Sau khi yêu cầu thu hồi được phê duyệt hoàn tất, bản tin chuyển Đã thu hồi và không còn hiển thị trên luồng tin của người nhận. Việc thu hồi không có nghĩa là sửa nội dung cũ; nếu cần thông tin thay thế, đơn vị phụ trách phải phát hành bản tin mới.</p>
+<table class="callout danger"><tbody><tr><td><strong>Không sử dụng bản sao đã tải xuống sau khi có thông báo thu hồi</strong><p>Một tệp đã tải về máy không tự bị xóa khi bản tin bị thu hồi. Khi biết nội dung đã bị gỡ hoặc có bản thay thế, ngừng sử dụng bản cũ và thực hiện theo thông báo mới nhất.</p></td></tr></tbody></table>
+
+<h1 class="page-break">8. Lỗi thường gặp và quy tắc giao tiếp</h1>
+<h2>8.1. Lỗi thường gặp</h2>
+<table>
+  <colgroup><col style="width:31%"><col style="width:33%"><col style="width:36%"></colgroup>
+  <thead><tr><th>Hiện tượng</th><th>Nguyên nhân thường gặp</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Không thấy bản tin đồng nghiệp đang xem</td><td>Không thuộc danh sách người nhận, bản tin chưa duyệt, đã thu hồi hoặc đang có bộ lọc.</td><td>Xóa bộ lọc, tải lại; hỏi người tạo về phạm vi. Không yêu cầu mở rộng quyền nếu nội dung không dành cho mình.</td></tr>
+    <tr><td>Tìm kiếm không có kết quả</td><td>Từ khóa quá dài, khoảng ngày hẹp hoặc các điều kiện đang kết hợp.</td><td>Rút gọn từ khóa, xóa ngày hoặc chọn Xóa bộ lọc.</td></tr>
+    <tr><td>Không mở được tệp</td><td>Trình duyệt không hỗ trợ xem trước, mạng gián đoạn hoặc thiếu ứng dụng đọc tệp.</td><td>Tải xuống, kiểm tra định dạng và mở bằng phần mềm phù hợp; liên hệ người tạo nếu tệp hỏng.</td></tr>
+    <tr><td>Gửi bình luận nhưng chưa thấy</td><td>Mạng chậm, kết nối thời gian thực gián đoạn hoặc nội dung vượt 4.000 ký tự.</td><td>Chờ một lần, tải lại, rút gọn nội dung; tránh bấm gửi nhiều lần.</td></tr>
+    <tr><td>Không tìm thấy người để gắn thẻ</td><td>Từ khóa chưa đúng, người đó không thuộc phạm vi phù hợp hoặc tài khoản không hoạt động.</td><td>Tìm bằng tên/mã chính xác; kiểm tra người đó có quyền xem bản tin.</td></tr>
+    <tr><td>Số cảm xúc/bình luận chưa đổi</td><td>Màn hình đang dùng dữ liệu cũ hoặc kết nối thời gian thực bị ngắt.</td><td>Tải lại trang và mở lại chi tiết bản tin.</td></tr>
+    <tr><td>Bản tin vừa biến mất</td><td>Đã được thu hồi, không còn phù hợp bộ lọc hoặc quyền/danh sách người nhận thay đổi do xử lý dữ liệu.</td><td>Xóa bộ lọc; nếu cần truy vết nghiệp vụ, liên hệ người quản lý bản tin thay vì dùng đường dẫn/bản sao cũ.</td></tr>
+  </tbody>
+</table>
+
+<h2>8.2. Quy tắc giao tiếp nội bộ</h2>
+<ul>
+  <li>Đọc đầy đủ nội dung và tệp liên quan trước khi phản ứng hoặc bình luận.</li>
+  <li>Trao đổi đúng chủ đề, ngắn gọn, lịch sự; không dùng từ ngữ công kích, mỉa mai hoặc gây hiểu nhầm.</li>
+  <li>Không đưa mật khẩu, thông tin lương, dữ liệu cá nhân nhạy cảm hoặc tài liệu mật vào bình luận.</li>
+  <li>Chỉ gắn thẻ người thực sự cần biết; kiểm tra đúng người khi trùng tên.</li>
+  <li>Không xem số cảm xúc là kết quả biểu quyết chính thức nếu doanh nghiệp chưa quy định.</li>
+  <li>Nếu phát hiện nội dung sai hoặc không phù hợp, báo người tạo/quản lý bản tin bằng kênh chính thức; không lan truyền bản sao.</li>
+</ul>
+
+<h2>8.3. Danh sách kiểm tra nhanh</h2>
+<ul>
+  <li>Đúng bản tin, đúng thời điểm và đúng phạm vi.</li>
+  <li>Đã đọc toàn bộ nội dung, mở tệp và kiểm tra phiên bản.</li>
+  <li>Cảm xúc phù hợp bối cảnh.</li>
+  <li>Bình luận không quá 4.000 ký tự, không chứa dữ liệu nhạy cảm.</li>
+  <li>Trả lời đúng nhánh và gắn thẻ đúng người.</li>
+  <li>Đã tải lại trang nếu thấy dữ liệu không đồng bộ.</li>
+</ul>
+
+<p class="footer-note">Tài liệu được biên soạn theo giao diện VIN-HRM tại thời điểm ban hành. Tên chức năng và hành vi có thể thay đổi khi phần mềm được nâng cấp; khi có khác biệt, ưu tiên giao diện và quy định vận hành hiện hành của doanh nghiệp.</p>
+</main>
+</body>
+</html>

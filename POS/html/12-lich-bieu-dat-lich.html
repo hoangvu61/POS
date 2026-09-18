@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>12. Lịch biểu và đặt lịch — Đặc tả POS</title><meta name="description" content="Lịch biểu và đặt lịch"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần III · Chương 12</p><article class="spec"><h1>CHƯƠNG 12. LỊCH BIỂU VÀ ĐẶT LỊCH</h1><details class="section-toc"><summary>Nội dung chương · 32 mục</summary><ol><li><a href="#section-12-1">12.1. Mục tiêu và phạm vi</a></li><li><a href="#section-12-2">12.2. Lịch tồn tại độc lập với đơn hàng</a></li><li><a href="#section-12-3">12.3. Phạm vi doanh nghiệp và chi nhánh</a></li><li><a href="#section-12-4">12.4. Hai loại lịch</a></li><li><a href="#section-12-5">12.5. Đặt lịch</a></li><li><a href="#section-12-6">12.6. Ghi chú nội bộ</a></li><li><a href="#section-12-7">12.7. Quyền xem và quản lý lịch</a></li><li><a href="#section-12-8">12.8. Trạng thái của lịch chung</a></li><li><a href="#section-12-9">12.9. Thời gian của lịch</a></li><li><a href="#section-12-10">12.10. Tạo lịch</a></li><li><a href="#section-12-11">12.11. Kiểm tra trùng theo thời gian</a></li><li><a href="#section-12-12">12.12. Xung đột tài nguyên</a></li><li><a href="#section-12-13">12.13. Xung đột nhân viên</a></li><li><a href="#section-12-14">12.14. Chỉnh sửa lịch</a></li><li><a href="#section-12-15">12.15. Hủy lịch</a></li><li><a href="#section-12-16">12.16. Xóa lịch tạo nhầm</a></li><li><a href="#section-12-17">12.17. Xử lý Ghi chú</a></li><li><a href="#section-12-18">12.18. Check-in Đặt lịch</a></li><li><a href="#section-12-19">12.19. Hoàn tác lịch khi đơn hàng bị xóa</a></li><li><a href="#section-12-20">12.20. Nhắc lịch</a></li><li><a href="#section-12-21">12.21. Hiển thị lịch</a></li><li><a href="#section-12-22">12.22. Hành động nhanh</a></li><li><a href="#section-12-23">12.23. Quan hệ với khách hàng</a></li><li><a href="#section-12-24">12.24. Quan hệ với nhân viên</a></li><li><a href="#section-12-25">12.25. Quan hệ với F&amp;B</a></li><li><a href="#section-12-26">12.26. Quan hệ với Service</a></li><li><a href="#section-12-27">12.27. Quan hệ với Facility</a></li><li><a href="#section-12-28">12.28. Đặt phòng lưu trú</a></li><li><a href="#section-12-29">12.29. Tính nhất quán khi xử lý</a></li><li><a href="#section-12-30">12.30. Kiểm soát đồng thời</a></li><li><a href="#section-12-31">12.31. Nhật ký kiểm soát</a></li><li><a href="#section-12-32">12.32. Tình huống lỗi và cách xử lý</a></li></ol></details>
+<h2 id="section-12-1">12.1. Mục tiêu và phạm vi</h2>
+<p>Lịch biểu giúp doanh nghiệp ghi nhận trước một khoảng thời gian dành cho khách hàng, vị trí phục vụ hoặc công việc nội bộ tại một chi nhánh.</p>
+<p>Chức năng hỗ trợ các tình huống:</p>
+<ul>
+<li>Khách đặt bàn nhà hàng.</li>
+<li>Khách đặt phòng, sân hoặc vị trí phục vụ theo giờ.</li>
+<li>Khách đặt lịch sử dụng dịch vụ và nhân viên thực hiện.</li>
+<li>Nhân viên tạo ghi chú, lịch làm việc hoặc lời nhắc nội bộ.</li>
+</ul>
+<p>Lịch biểu giúp người dùng xem kế hoạch theo thời gian, hạn chế xung đột tài nguyên và nhân viên, nhận thông báo trước giờ hẹn và chuyển một lịch đặt thành giao dịch bán hàng khi khách đến.</p>
+<h2 id="section-12-2">12.2. Lịch tồn tại độc lập với đơn hàng</h2>
+<p>Một lịch có thể được tạo trước khi có đơn hàng. Tạo lịch không tự:</p>
+<ul>
+<li>Ghi nhận doanh thu.</li>
+<li>Thu tiền.</li>
+<li>Tạo công nợ.</li>
+<li>Xuất hoặc nhập kho.</li>
+<li>Tạo điểm Membership.</li>
+</ul>
+<p>Đơn hàng chỉ được tạo khi người dùng thực hiện thao tác xử lý hoặc check-in theo mô hình bán hàng tương ứng. Lịch và đơn có vòng đời riêng nhưng có thể liên kết để phục vụ hoàn tác và truy vết.</p>
+<h2 id="section-12-3">12.3. Phạm vi doanh nghiệp và chi nhánh</h2>
+<p>Mỗi lịch thuộc một doanh nghiệp và một chi nhánh cụ thể. Người dùng phải đang làm việc tại một chi nhánh và có quyền với loại lịch tương ứng.</p>
+<p>Tài nguyên và nhân viên được chọn phải hợp lệ trong phạm vi chi nhánh. Không cho tạo lịch ở một chi nhánh nhưng giữ bàn, phòng hoặc vị trí của chi nhánh khác.</p>
+<p>Khi người dùng chuyển chi nhánh làm việc, lịch cũ vẫn thuộc chi nhánh đã tạo và không tự chuyển theo người dùng.</p>
+<h2 id="section-12-4">12.4. Hai loại lịch</h2>
+<p>Hệ thống có hai loại lịch chung:</p>
+<ul>
+<li><strong>Đặt lịch:</strong> dành cho khách hàng và có thể được check-in để bắt đầu phục vụ.</li>
+<li><strong>Ghi chú:</strong> dành cho công việc nội bộ và chỉ được đánh dấu đã xử lý.</li>
+</ul>
+<p>Loại lịch quyết định thông tin bắt buộc, quyền truy cập và hành động được phép.</p>
+<h2 id="section-12-5">12.5. Đặt lịch</h2>
+<p>Đặt lịch ghi nhận một cuộc hẹn của khách. Mỗi lịch đặt bắt buộc có:</p>
+<ul>
+<li>Tên khách hàng.</li>
+<li>Số điện thoại khách hàng.</li>
+<li>Thời gian bắt đầu.</li>
+</ul>
+<p>Lịch có thể bổ sung:</p>
+<ul>
+<li>Thời gian kết thúc.</li>
+<li>Địa chỉ khách hàng.</li>
+<li>Nội dung ghi chú.</li>
+<li>Khu vực.</li>
+<li>Bàn, phòng hoặc vị trí phục vụ.</li>
+<li>Một hoặc nhiều nhân viên phụ trách.</li>
+<li>Số phút cần nhắc trước.</li>
+</ul>
+<p>Khách trên lịch được ghi nhận bằng thông tin liên hệ của cuộc hẹn. Người dùng không phải chọn sẵn một hồ sơ khách hàng để tạo lịch.</p>
+<p>Đặt lịch không bắt buộc có tiêu đề. Trọng tâm hiển thị là khách, thời gian, tài nguyên và người phụ trách.</p>
+<h2 id="section-12-6">12.6. Ghi chú nội bộ</h2>
+<p>Ghi chú được dùng cho nhắc việc, công việc vận hành hoặc lịch làm việc nội bộ. Một ghi chú bắt buộc có:</p>
+<ul>
+<li>Tiêu đề.</li>
+<li>Thời gian bắt đầu.</li>
+</ul>
+<p>Ghi chú có thể có thời gian kết thúc, nội dung, nhân viên phụ trách và thời gian nhắc. Khách hàng và tài nguyên không phải thông tin bắt buộc.</p>
+<p>Khi ghi chú được đánh dấu đã xử lý, hệ thống chỉ kết thúc công việc trên lịch; không tạo đơn hàng và không phát sinh tiền.</p>
+<h2 id="section-12-7">12.7. Quyền xem và quản lý lịch</h2>
+<p>Quyền Đặt lịch và quyền Ghi chú lịch được kiểm soát độc lập:</p>
+<ul>
+<li>Người chỉ có quyền Đặt lịch chỉ xem và thao tác các lịch đặt.</li>
+<li>Người chỉ có quyền Ghi chú lịch chỉ xem và thao tác các ghi chú.</li>
+<li>Người có cả hai quyền có thể xem và quản lý cả hai loại.</li>
+<li>Người không có quyền tương ứng không được tạo, sửa, hủy, xóa hoặc xử lý loại lịch đó.</li>
+</ul>
+<p>Hệ thống kiểm tra quyền ở từng hành động. Việc một lịch đã hiển thị trên màn hình không có nghĩa người dùng được phép thay đổi lịch.</p>
+<h2 id="section-12-8">12.8. Trạng thái của lịch chung</h2>
+<h3 id="section-12-8-1">12.8.1. Mới</h3>
+<p>Lịch mới được tạo và chưa xử lý. Đây là trạng thái cho phép chỉnh sửa.</p>
+<p>Tùy loại lịch và thời điểm, người dùng có thể:</p>
+<ul>
+<li>Sửa thông tin.</li>
+<li>Hủy lịch.</li>
+<li>Xóa lịch tạo nhầm khi lịch chưa bắt đầu.</li>
+<li>Check-in nếu là Đặt lịch.</li>
+<li>Đánh dấu hoàn thành nếu là Ghi chú.</li>
+</ul>
+<h3 id="section-12-8-2">12.8.2. Đã xử lý</h3>
+<p>Ý nghĩa trạng thái phụ thuộc loại lịch:</p>
+<ul>
+<li>Với Đặt lịch, khách đã được check-in hoặc lịch đã được xử lý để bắt đầu phục vụ.</li>
+<li>Với Ghi chú, công việc đã được đánh dấu hoàn thành.</li>
+</ul>
+<p>Lịch đã xử lý không được sửa, hủy hoặc xóa từ chức năng lịch chung.</p>
+<h3 id="section-12-8-3">12.8.3. Đã hủy</h3>
+<p>Lịch đã hủy không còn giữ vai trò một cuộc hẹn đang hoạt động. Dữ liệu vẫn được giữ để tra cứu.</p>
+<p>Lịch đã hủy không được sửa, check-in, xử lý lại hoặc hủy lần nữa từ chức năng lịch chung.</p>
+<h2 id="section-12-9">12.9. Thời gian của lịch</h2>
+<p>Mọi lịch phải có thời gian bắt đầu. Khi tạo mới, thời gian bắt đầu không được nằm trong quá khứ.</p>
+<p>Thời gian kết thúc có thể để trống. Nếu được nhập, thời gian kết thúc phải lớn hơn thời gian bắt đầu; hai thời điểm bằng nhau không hợp lệ.</p>
+<p>Để kiểm tra trùng lịch, một lịch không có thời gian kết thúc được tạm tính có thời lượng một giờ kể từ thời gian bắt đầu. Quy tắc một giờ cũng được dùng khi hiển thị thông báo xung đột cho lịch mở.</p>
+<p>Thời gian được hiểu theo múi giờ vận hành của hệ thống. Các màn hình ngày, tuần và tháng phải dùng cùng cách hiểu để tránh lịch hiển thị ở một ngày nhưng được kiểm tra ở ngày khác.</p>
+<h2 id="section-12-10">12.10. Tạo lịch</h2>
+<h3 id="section-12-10-1">12.10.1. Chọn loại lịch</h3>
+<p>Người dùng chọn Đặt lịch hoặc Ghi chú. Hệ thống hiển thị biểu mẫu phù hợp và chỉ yêu cầu các thông tin có ý nghĩa với loại đã chọn.</p>
+<h3 id="section-12-10-2">12.10.2. Tạo Đặt lịch</h3>
+<p>Luồng chính:</p>
+<ol>
+<li>Người dùng nhập tên và số điện thoại khách.</li>
+<li>Chọn thời gian bắt đầu và thời gian kết thúc nếu có.</li>
+<li>Chọn khu vực, bàn, phòng hoặc vị trí phục vụ nếu cần.</li>
+<li>Chọn một hoặc nhiều nhân viên phụ trách.</li>
+<li>Nhập địa chỉ, ghi chú và số phút nhắc trước nếu cần.</li>
+<li>Hệ thống kiểm tra quyền, chi nhánh, thời gian và dữ liệu bắt buộc.</li>
+<li>Hệ thống kiểm tra xung đột tài nguyên và nhân viên.</li>
+<li>Nếu hợp lệ, lịch được tạo ở trạng thái Mới và lời nhắc được lên lịch.</li>
+</ol>
+<h3 id="section-12-10-3">12.10.3. Tạo Ghi chú</h3>
+<p>Luồng chính:</p>
+<ol>
+<li>Người dùng nhập tiêu đề.</li>
+<li>Chọn thời gian bắt đầu và thời gian kết thúc nếu có.</li>
+<li>Nhập nội dung và chọn nhân viên phụ trách nếu cần.</li>
+<li>Cấu hình số phút nhắc trước.</li>
+<li>Hệ thống kiểm tra quyền, thời gian và xung đột nhân viên.</li>
+<li>Nếu hợp lệ, ghi chú được tạo ở trạng thái Mới.</li>
+</ol>
+<h3 id="section-12-10-4">12.10.4. Chuẩn hóa dữ liệu nhập</h3>
+<p>Tên khách, số điện thoại, địa chỉ, tiêu đề và nội dung được loại bỏ khoảng trắng thừa ở đầu và cuối trước khi lưu. Danh sách nhân viên được loại trùng để một người chỉ xuất hiện một lần trên lịch.</p>
+<h2 id="section-12-11">12.11. Kiểm tra trùng theo thời gian</h2>
+<p>Hai lịch được coi là chồng lấn khi thời gian bắt đầu của mỗi lịch nằm trước thời gian kết thúc hiệu lực của lịch còn lại.</p>
+<p>Chỉ các lịch đang hoạt động mới tham gia kiểm tra xung đột. Lịch đã hủy hoặc đã hoàn tất không chặn một lịch mới.</p>
+<p>Khi sửa, hệ thống loại chính lịch đang sửa khỏi danh sách so sánh để không báo xung đột với bản thân nó.</p>
+<p>Việc kiểm tra không chỉ so sánh giờ bắt đầu. Một lịch bắt đầu sớm hơn vẫn xung đột nếu khoảng thời gian của nó kéo dài sang lịch mới.</p>
+<h2 id="section-12-12">12.12. Xung đột tài nguyên</h2>
+<p>Khi người dùng chọn bàn, phòng hoặc vị trí phục vụ, hệ thống tìm các lịch hoạt động cùng tài nguyên trong khoảng thời gian chồng lấn.</p>
+<p>Nếu phát hiện xung đột, hệ thống:</p>
+<ul>
+<li>Hiển thị tên tài nguyên và thời gian của lịch đã có.</li>
+<li>Đề nghị chọn thời gian sau thời điểm kết thúc của lịch đó.</li>
+<li>Cho phép người dùng xác nhận vẫn đặt lịch tại cùng tài nguyên.</li>
+</ul>
+<p>Việc xác nhận chỉ bỏ qua xung đột tài nguyên của thao tác hiện tại. Nó không bỏ qua quyền, dữ liệu bắt buộc, thời gian hợp lệ hoặc xung đột nhân viên.</p>
+<p>Hai lịch cùng khu vực nhưng khác tài nguyên không bị coi là trùng tài nguyên.</p>
+<h2 id="section-12-13">12.13. Xung đột nhân viên</h2>
+<p>Nếu một nhân viên đã được phân vào lịch hoạt động có thời gian chồng lấn, hệ thống không cho gán nhân viên đó vào lịch mới hoặc lịch đang sửa.</p>
+<p>Quy tắc được áp dụng cho từng nhân viên trong danh sách. Chỉ cần một người bị trùng lịch, yêu cầu bị từ chối và người dùng phải thay đổi thời gian hoặc nhân sự.</p>
+<p>Xung đột nhân viên không có lựa chọn xác nhận bỏ qua như xung đột tài nguyên.</p>
+<h2 id="section-12-14">12.14. Chỉnh sửa lịch</h2>
+<p>Chỉ lịch trạng thái Mới được chỉnh sửa từ chức năng lịch chung.</p>
+<p>Luồng sửa:</p>
+<ol>
+<li>Người dùng mở lịch và chọn Sửa.</li>
+<li>Hệ thống kiểm tra quyền đối với loại lịch ban đầu.</li>
+<li>Người dùng thay đổi các thông tin được phép.</li>
+<li>Hệ thống kiểm tra lại quyền đối với loại lịch sau thay đổi.</li>
+<li>Kiểm tra lại thông tin bắt buộc, thời gian, tài nguyên và nhân viên.</li>
+<li>Kiểm tra xung đột, loại trừ chính lịch đang sửa.</li>
+<li>Hủy lời nhắc cũ và tạo lại lời nhắc theo thời gian mới.</li>
+<li>Giữ trạng thái Mới sau khi lưu.</li>
+</ol>
+<p>Lịch đặt phòng lưu trú phải được cập nhật tại chức năng Đặt phòng, không sửa trực tiếp từ lịch chung.</p>
+<h2 id="section-12-15">12.15. Hủy lịch</h2>
+<p>Hủy lịch giữ lại thông tin nhưng kết thúc hiệu lực của cuộc hẹn.</p>
+<p>Luồng:</p>
+<ol>
+<li>Người dùng chọn Hủy và xác nhận.</li>
+<li>Hệ thống kiểm tra lịch tồn tại trong chi nhánh hiện tại.</li>
+<li>Kiểm tra quyền đối với loại lịch.</li>
+<li>Từ chối nếu lịch đã xử lý hoặc đã hủy.</li>
+<li>Chuyển lịch sang Đã hủy.</li>
+<li>Hủy lời nhắc chưa gửi.</li>
+<li>Cập nhật màn hình lịch và trạng thái tài nguyên liên quan.</li>
+</ol>
+<p>Lịch đặt phòng lưu trú được hủy tại chức năng Đặt phòng, không hủy từ lịch chung.</p>
+<h2 id="section-12-16">12.16. Xóa lịch tạo nhầm</h2>
+<p>Xóa chỉ dành cho lịch trạng thái Mới có thời gian bắt đầu ở tương lai.</p>
+<p>Hệ thống từ chối xóa khi:</p>
+<ul>
+<li>Lịch đã bắt đầu hoặc đã diễn ra.</li>
+<li>Lịch đã xử lý.</li>
+<li>Lịch đã hủy.</li>
+<li>Người dùng không có quyền với loại lịch.</li>
+<li>Lịch thuộc một chi nhánh khác.</li>
+</ul>
+<p>Khi xóa, hệ thống đồng thời hủy lời nhắc và loại bỏ các phân công nhân viên của lịch. Lịch đặt phòng lưu trú không được xóa từ lịch chung.</p>
+<p>Hủy và xóa có ý nghĩa khác nhau: Hủy lưu lại cuộc hẹn để tra cứu; Xóa loại bỏ một lịch mới được tạo nhầm trước khi bắt đầu.</p>
+<h2 id="section-12-17">12.17. Xử lý Ghi chú</h2>
+<p>Người dùng có quyền Ghi chú lịch có thể đánh dấu một ghi chú chưa hoàn tất là Đã xử lý.</p>
+<p>Hệ thống:</p>
+<ul>
+<li>Từ chối nếu ghi chú đã hủy.</li>
+<li>Từ chối nếu đã xử lý trước đó.</li>
+<li>Chuyển trạng thái sang Đã xử lý.</li>
+<li>Hủy lời nhắc chưa gửi.</li>
+<li>Không tạo đơn hàng.</li>
+</ul>
+<h2 id="section-12-18">12.18. Check-in Đặt lịch</h2>
+<h3 id="section-12-18-1">12.18.1. Điều kiện</h3>
+<p>Đặt lịch phải còn ở trạng thái Mới. Lịch đã hủy hoặc đã xử lý không được check-in lần nữa.</p>
+<p>Nếu lịch đã có tài nguyên, hệ thống sử dụng tài nguyên đó. Nếu chưa có, người dùng chọn tài nguyên ở bước bắt đầu phục vụ theo mô hình tương ứng.</p>
+<h3 id="section-12-18-2">12.18.2. Kiểm tra tài nguyên tại thời điểm thực tế</h3>
+<p>Trước khi check-in, hệ thống kiểm tra tài nguyên không có:</p>
+<ul>
+<li>Đơn F&amp;B đang hoạt động.</li>
+<li>Phiên Facility đang hoạt động hoặc chưa thanh toán.</li>
+</ul>
+<p>Nếu tài nguyên đang bận, hệ thống yêu cầu hoàn tất hoặc hủy giao dịch đang chiếm dụng trước khi check-in lịch mới.</p>
+<p>Việc tài nguyên đã được giữ trên lịch không thay thế kiểm tra trạng thái thực tế khi khách đến.</p>
+<h3 id="section-12-18-3">12.18.3. Chuyển thông tin sang giao dịch</h3>
+<p>Khi mô hình bán hàng tạo đơn từ lịch, giao dịch mới tiếp nhận các thông tin phù hợp:</p>
+<ul>
+<li>Tên và số điện thoại khách.</li>
+<li>Địa chỉ nếu có.</li>
+<li>Tài nguyên.</li>
+<li>Nhân viên phụ trách.</li>
+<li>Ghi chú.</li>
+</ul>
+<p>Giá bán, sản phẩm, dịch vụ và trạng thái vận hành được xác định theo mô hình bán hàng, không được suy ra chỉ từ lịch.</p>
+<p>Lịch chỉ chuyển sang Đã xử lý sau khi bước check-in bắt buộc thành công. Nếu việc tạo giao dịch thất bại, lịch vẫn ở trạng thái Mới.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title-booking-lifecycle-4 desc-booking-lifecycle-4" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-booking-lifecycle-4">Từ lịch đặt đến giao dịch phục vụ</title><desc id="desc-booking-lifecycle-4">LỊCH MỚI. Thời gian · Khách · Tài nguyên; KIỂM TRA TRƯỚC CHECK-IN. Quyền · Chi nhánh · Trùng lịch. Tài nguyên và nhân viên sẵn sàng; HỦY LỊCH. Giữ lịch sử và lý do. Không tạo đơn; ĐÃ XỬ LÝ. Tạo hoặc gắn đơn phục vụ. Giữ liên kết hai chiều; XÓA ĐƠN NGUỒN HỢP LỆ. Đưa lịch về Mới. Kiểm tra lại tài nguyên. trước lần check-in tiếp theo</desc><defs><marker id="arrow-booking-lifecycle-4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 81 V113 H480 V140" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-booking-lifecycle-4)"/><path d="M480 231 V281 H175 V325" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-booking-lifecycle-4)"/><text x="327.5" y="272" text-anchor="middle" font-size="15" fill="#4e615b">Hủy</text><path d="M480 231 V281 H480 V325" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-booking-lifecycle-4)"/><text x="542" y="272" text-anchor="middle" font-size="15" fill="#4e615b">Check-in</text><path d="M480 412 V371 H785 V325" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-booking-lifecycle-4)"/><text x="632.5" y="362" text-anchor="middle" font-size="15" fill="#4e615b">Xóa đơn</text><g><rect x="325" y="15" width="310" height="66" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="43" font-weight="700">LỊCH MỚI</tspan><tspan x="480" y="65">Thời gian · Khách · Tài nguyên</tspan></text></g><g><rect x="300" y="145" width="360" height="86" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="172" font-weight="700">KIỂM TRA TRƯỚC CHECK-IN</tspan><tspan x="480" y="194">Quyền · Chi nhánh · Trùng lịch</tspan><tspan x="480" y="216">Tài nguyên và nhân viên sẵn sàng</tspan></text></g><g><rect x="35" y="330" width="280" height="82" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="175" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="175" y="355" font-weight="700">HỦY LỊCH</tspan><tspan x="175" y="377">Giữ lịch sử và lý do</tspan><tspan x="175" y="399">Không tạo đơn</tspan></text></g><g><rect x="340" y="330" width="280" height="82" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="355" font-weight="700">ĐÃ XỬ LÝ</tspan><tspan x="480" y="377">Tạo hoặc gắn đơn phục vụ</tspan><tspan x="480" y="399">Giữ liên kết hai chiều</tspan></text></g><g><rect x="645" y="330" width="280" height="108" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="785" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="785" y="357" font-weight="700">XÓA ĐƠN NGUỒN HỢP LỆ</tspan><tspan x="785" y="379">Đưa lịch về Mới</tspan><tspan x="785" y="401">Kiểm tra lại tài nguyên</tspan><tspan x="785" y="423">trước lần check-in tiếp theo</tspan></text></g></svg></div><figcaption><strong>Từ lịch đặt đến giao dịch phục vụ.</strong> Lịch tồn tại độc lập với đơn. Check-in hợp lệ mới tạo hoặc gắn đơn và chuyển lịch sang đã xử lý; khi đơn nguồn bị xóa hợp lệ, lịch trở về Mới thay vì bị xóa.</figcaption></figure>
+
+<h2 id="section-12-19">12.19. Hoàn tác lịch khi đơn hàng bị xóa</h2>
+<p>Khi đơn hàng được tạo từ một lịch và đơn đó bị xóa theo quy trình hợp lệ:</p>
+<ul>
+<li>Nếu lịch đang ở trạng thái Đã xử lý, hệ thống chuyển lịch về Mới.</li>
+<li>Lịch không bị xóa.</li>
+<li>Người dùng có thể xử lý lại lịch sau khi hệ thống kiểm tra tài nguyên và trạng thái thực tế.</li>
+</ul>
+<p>Việc hoàn tác lịch phải nằm trong cùng quy trình nhất quán với việc xóa đơn. Không được xóa đơn thành công nhưng để lịch tiếp tục thể hiện khách đã check-in.</p>
+<h2 id="section-12-20">12.20. Nhắc lịch</h2>
+<p>Mỗi lịch có thể khai báo số phút cần nhắc trước thời gian bắt đầu.</p>
+<ul>
+<li>Giá trị lớn hơn 0: tạo lời nhắc vào thời điểm bắt đầu trừ số phút cấu hình.</li>
+<li>Giá trị bằng 0 hoặc để trống: không tạo lời nhắc.</li>
+<li>Nếu thời điểm cần nhắc đã qua nhưng lịch chưa bắt đầu, hệ thống gửi lời nhắc ngay.</li>
+</ul>
+<p>Chỉ lịch trạng thái Mới được nhắc. Khi lịch được sửa, hủy, xử lý hoặc xóa, lời nhắc cũ phải được hủy hoặc thay thế phù hợp.</p>
+<p>Mỗi lịch chỉ phát một lời nhắc cho cấu hình hiện tại. Lỗi gửi thông báo không làm thay đổi trạng thái lịch và không tự tạo giao dịch.</p>
+<h2 id="section-12-21">12.21. Hiển thị lịch</h2>
+<p>Hệ thống hỗ trợ các dạng xem:</p>
+<ul>
+<li>Tháng.</li>
+<li>Tuần.</li>
+<li>Ngày.</li>
+<li>Danh sách.</li>
+</ul>
+<p>Dữ liệu được tải theo chi nhánh và khoảng thời gian đang xem. Mỗi mục lịch cần giúp người dùng nhận biết:</p>
+<ul>
+<li>Thời gian.</li>
+<li>Loại lịch.</li>
+<li>Trạng thái.</li>
+<li>Tên khách hoặc tiêu đề.</li>
+<li>Tài nguyên.</li>
+<li>Nhân viên phụ trách khi cần.</li>
+</ul>
+<p>Màu sắc và ký hiệu được dùng nhất quán để phân biệt Đặt lịch, Ghi chú, lịch mới, lịch đã xử lý và lịch đã hủy.</p>
+<h2 id="section-12-22">12.22. Hành động nhanh</h2>
+<p>Từ màn hình lịch, người dùng có thể thực hiện hành động phù hợp với quyền và trạng thái:</p>
+<ul>
+<li>Tạo lịch.</li>
+<li>Mở chi tiết.</li>
+<li>Sửa lịch Mới.</li>
+<li>Check-in Đặt lịch Mới.</li>
+<li>Đánh dấu Ghi chú là Đã xử lý.</li>
+<li>Hủy lịch chưa xử lý.</li>
+<li>Xóa lịch Mới chưa bắt đầu.</li>
+</ul>
+<p>Giao diện ẩn hoặc vô hiệu hóa hành động không hợp lệ. Hệ thống vẫn kiểm tra lại toàn bộ điều kiện khi nhận thao tác.</p>
+<h2 id="section-12-23">12.23. Quan hệ với khách hàng</h2>
+<p>Đặt lịch bắt buộc có tên và số điện thoại khách nhưng không bắt buộc phải liên kết với một hồ sơ khách hàng đã tồn tại.</p>
+<p>Khi check-in:</p>
+<ul>
+<li>Nếu người dùng nhận diện được khách hàng hiện hữu, đơn có thể gắn với khách đó.</li>
+<li>Nếu chỉ có thông tin liên hệ trên lịch, mô hình bán hàng dùng thông tin phù hợp để bắt đầu phục vụ.</li>
+<li>Việc tạo hồ sơ khách hàng mới là thao tác có chủ đích trong luồng bán hàng, không tự xảy ra chỉ vì check-in.</li>
+</ul>
+<h2 id="section-12-24">12.24. Quan hệ với nhân viên</h2>
+<p>Một lịch có thể có nhiều nhân viên phụ trách. Mỗi nhân viên:</p>
+<ul>
+<li>Phải thuộc phạm vi doanh nghiệp và chi nhánh được phép.</li>
+<li>Chỉ xuất hiện một lần trên cùng lịch.</li>
+<li>Không được trùng thời gian với lịch hoạt động khác.</li>
+</ul>
+<p>Khi lịch không còn ở trạng thái Mới, danh sách người phụ trách không được thay đổi từ chức năng lịch chung.</p>
+<h2 id="section-12-25">12.25. Quan hệ với F&amp;B</h2>
+<p>Trong F&amp;B, tài nguyên thường là bàn hoặc khu vực. Lịch giúp giữ bàn trước khi khách đến.</p>
+<p>Khi check-in, hệ thống kiểm tra bàn không có đơn F&amp;B đang hoạt động. Sau khi giao dịch được tạo, các nghiệp vụ gọi món, KDS, chuyển bàn, gộp hoặc tách bàn thuộc vòng đời đơn F&amp;B.</p>
+<h2 id="section-12-26">12.26. Quan hệ với Service</h2>
+<p>Trong Service, lịch ghi nhận thời gian khách đến và các nhân viên dự kiến thực hiện. Check-in có thể dùng thông tin này để bắt đầu đơn dịch vụ.</p>
+<p>Lịch không xác định giá dịch vụ, định lượng vật tư hoặc quyền Combo nhiều lượt. Các nội dung đó được xử lý khi tạo và hoàn tất giao dịch Service.</p>
+<h2 id="section-12-27">12.27. Quan hệ với Facility</h2>
+<p>Trong Facility, lịch có thể giữ phòng, sân hoặc tài nguyên sử dụng theo thời gian.</p>
+<p>Tại thời điểm check-in, tài nguyên phải không có phiên đang hoạt động hoặc chưa thanh toán. Thời gian sử dụng thực tế và số tiền phát sinh được quản lý bởi phiên Facility, không phải thời gian dự kiến trên lịch.</p>
+<h2 id="section-12-28">12.28. Đặt phòng lưu trú</h2>
+<p>Đặt phòng lưu trú có vòng đời chuyên biệt gồm:</p>
+<ul>
+<li>Đặt phòng.</li>
+<li>Check-in.</li>
+<li>Đang lưu trú.</li>
+<li>No-show.</li>
+<li>Hoàn tất.</li>
+</ul>
+<p>Các lịch này có thể xuất hiện trong lịch tổng quan nhưng phải được sửa, hủy hoặc xử lý tại chức năng Đặt phòng.</p>
+<p>Chức năng lịch chung không được thay đổi trực tiếp một lịch thuộc đặt phòng lưu trú.</p>
+<h2 id="section-12-29">12.29. Tính nhất quán khi xử lý</h2>
+<p>Các thao tác tạo, sửa, hủy, xóa hoặc hoàn tất lịch phải cập nhật đồng bộ trạng thái lịch, nhân viên phụ trách và lời nhắc.</p>
+<p>Nếu việc lưu lịch thất bại:</p>
+<ul>
+<li>Không giữ phân công nhân viên rời rạc.</li>
+<li>Không để lời nhắc tiếp tục tồn tại cho một lịch chưa được tạo.</li>
+<li>Không phát tín hiệu làm mới màn hình như thể thao tác đã thành công.</li>
+</ul>
+<p>Khi check-in có tạo đơn, việc tạo đơn và chuyển lịch sang Đã xử lý phải được phối hợp để không tạo hai đơn từ cùng một thao tác hoặc đánh dấu lịch hoàn tất khi đơn không tồn tại.</p>
+<h2 id="section-12-30">12.30. Kiểm soát đồng thời</h2>
+<p>Hai người có thể cùng sửa hoặc check-in một lịch. Hệ thống phải kiểm tra lại trạng thái ở thời điểm xử lý cuối cùng:</p>
+<ul>
+<li>Chỉ một yêu cầu được phép chuyển lịch Mới sang Đã xử lý.</li>
+<li>Yêu cầu đến sau nhận thông báo lịch đã được xử lý.</li>
+<li>Tài nguyên được kiểm tra lại ngay trước check-in.</li>
+<li>Việc xác nhận xung đột tài nguyên không bỏ qua xung đột mới phát sinh sau khi màn hình đã mở.</li>
+</ul>
+<h2 id="section-12-31">12.31. Nhật ký kiểm soát</h2>
+<p>Các sự kiện cần truy vết gồm:</p>
+<ul>
+<li>Người và thời điểm tạo lịch.</li>
+<li>Nội dung thay đổi khi sửa.</li>
+<li>Người hủy, xóa hoặc xử lý lịch.</li>
+<li>Thời điểm check-in.</li>
+<li>Đơn hàng được tạo từ lịch.</li>
+<li>Việc hoàn tác lịch về Mới khi đơn bị xóa.</li>
+<li>Lời nhắc đã lên lịch, bị thay thế hoặc bị hủy.</li>
+</ul>
+<p>Lịch đã hủy và đã xử lý được giữ để phục vụ tra cứu vận hành. Lịch bị xóa theo điều kiện tạo nhầm không tiếp tục xuất hiện như một cuộc hẹn có hiệu lực.</p>
+<h2 id="section-12-32">12.32. Tình huống lỗi và cách xử lý</h2>
+<ul>
+<li>Tài khoản chưa gán chi nhánh: không cho tạo hoặc quản lý lịch.</li>
+<li>Không có quyền tương ứng: từ chối hành động với Đặt lịch hoặc Ghi chú.</li>
+<li>Thời gian bắt đầu ở quá khứ khi tạo: từ chối.</li>
+<li>Thời gian kết thúc không lớn hơn thời gian bắt đầu: từ chối.</li>
+<li>Đặt lịch thiếu tên hoặc số điện thoại: từ chối.</li>
+<li>Ghi chú thiếu tiêu đề: từ chối.</li>
+<li>Trùng tài nguyên: hiển thị lịch xung đột và yêu cầu đổi thời gian hoặc xác nhận tiếp tục.</li>
+<li>Trùng nhân viên: từ chối cho đến khi thay đổi thời gian hoặc nhân viên.</li>
+<li>Sửa lịch không còn Mới: từ chối.</li>
+<li>Hủy lịch đã xử lý: từ chối.</li>
+<li>Xóa lịch đã bắt đầu: từ chối.</li>
+<li>Check-in khi tài nguyên đang có giao dịch hoạt động: từ chối và hướng dẫn xử lý giao dịch đang chiếm dụng.</li>
+<li>Thao tác lịch lưu trú từ lịch chung: từ chối và hướng dẫn sang chức năng Đặt phòng.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="11-khach-hang-membership.html">← 11. Khách hàng và Membership</a><a href="13-don-hang-loi-va-vong-doi.html">13. Đơn hàng - cấu trúc, trạng thái và vòng đời →</a></nav></div></body></html>

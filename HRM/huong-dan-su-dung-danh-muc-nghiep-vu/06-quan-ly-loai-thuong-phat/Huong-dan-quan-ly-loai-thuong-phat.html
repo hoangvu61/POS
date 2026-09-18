@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn quản lý loại thưởng/phạt | VIN-HRM</title><style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  background: #fff;
+  color: #1f2937;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.42;
+}
+.cover {
+  min-height: 245mm;
+  position: relative;
+  page-break-after: always;
+  break-after: page;
+}
+.cover-head { text-align: center; }
+.cover-kicker {
+  margin: 0 0 18pt;
+  color: #1f2937;
+  font-size: 12pt;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+.cover-title {
+  margin: 0 0 5pt;
+  padding: 0;
+  border: 0;
+  color: #1f2937;
+  font-size: 29pt;
+  font-weight: 700;
+  line-height: 1.12;
+  text-align: center;
+}
+.cover-sub {
+  margin: 0;
+  color: #4b5563;
+  font-size: 13.5pt;
+  line-height: 1.35;
+  text-align: center;
+}
+.cover-meta {
+  margin-top: 31mm;
+  font-size: 10.5pt;
+  line-height: 1.38;
+}
+.cover-meta p { margin: 2pt 0; }
+.cover-meta strong { font-weight: 700; }
+.cover-toc { margin-top: 38mm; }
+.cover-toc h2 {
+  margin: 0 0 10pt;
+  padding: 0 0 5pt;
+  border-bottom: 1px solid #111827;
+  color: #111827;
+  font-size: 18pt;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 {
+  margin: 0 0 8pt;
+  padding: 0 0 5pt;
+  border-bottom: 1px solid #111827;
+  color: #111827;
+  font-size: 18pt;
+  font-weight: 700;
+  line-height: 1.2;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+h2 {
+  margin: 18pt 0 3pt;
+  padding: 0;
+  border: 0;
+  color: #111827;
+  font-size: 13.5pt;
+  font-weight: 700;
+  line-height: 1.25;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+h3 {
+  margin: 14pt 0 3pt;
+  color: #111827;
+  font-size: 11.5pt;
+  font-weight: 700;
+  line-height: 1.3;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 2pt; }
+.lead {
+  margin: 0 0 12pt;
+  padding: 9pt 11pt;
+  border: 1px solid #9ca3af;
+  background: #eef4f8;
+  color: #1f2937;
+  font-size: 10.5pt;
+}
+.route {
+  display: inline;
+  padding: 1pt 3pt;
+  border: 0;
+  border-radius: 0;
+  background: #edf2f7;
+  color: #111827;
+  font-weight: 700;
+}
+table {
+  width: 100%;
+  margin: 8pt 0 12pt;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; break-inside: avoid; }
+th {
+  padding: 6pt;
+  border: 1px solid #9ca3af;
+  background: #d9e7f2;
+  color: #111827;
+  font-size: 9.5pt;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: left;
+  vertical-align: middle;
+}
+td {
+  padding: 6pt;
+  border: 1px solid #b8c0ca;
+  background: #fff;
+  color: #1f2937;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  text-align: left;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.steps {
+  counter-reset: none;
+  list-style: decimal;
+  margin: 6pt 0 11pt 24pt;
+  padding-left: 15pt;
+}
+.steps li {
+  position: static;
+  margin: 0 0 4pt;
+  padding: 0;
+  border: 0;
+}
+.steps li::before { content: none; }
+.callout-anchor {
+  margin: 0 !important;
+  padding: 0;
+  font-size: 1pt;
+  line-height: 1pt;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+.callout {
+  width: 100%;
+  margin: 10pt 0;
+  padding: 0;
+  border: 1px solid #9ca3af;
+  border-radius: 0;
+  border-collapse: separate;
+  background: #eef4f8;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.callout td {
+  padding: 9pt 11pt;
+  border: 0;
+  background: transparent !important;
+  color: #1f2937;
+  font-size: 10.5pt;
+  line-height: 1.35;
+  vertical-align: top;
+}
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.info { background: #eef4f8; border-color: #9ca3af; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+.success { background: #edf7f0; border-color: #7eaa8b; }
+figure {
+  margin: 12pt 0 14pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #9ca3af;
+  border-radius: 0;
+}
+figcaption {
+  margin-top: 4pt;
+  color: #4b5563;
+  font-size: 9pt;
+  font-style: italic;
+  line-height: 1.3;
+  text-align: center;
+}
+.page-break { page-break-before: always; break-before: page; }
+.checklist { columns: 1; }
+.checklist li { break-inside: avoid; }
+.small { color: #4b5563; font-size: 9pt; }
+.footer-note {
+  margin-top: 18pt;
+  padding-top: 7pt;
+  border-top: 1px solid #9ca3af;
+  color: #4b5563;
+  font-size: 8.8pt;
+}
+@media screen {
+  body { background: #eef1f4; }
+  .cover, .doc {
+    width: 210mm;
+    margin: 12mm auto;
+    padding: 25.4mm;
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(17, 24, 39, .10);
+  }
+  .cover { min-height: 297mm; }
+  .doc { min-height: 297mm; }
+}
+</style></head><body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN QUẢN LÝ LOẠI THƯỞNG/PHẠT</p>
+    <p class="cover-sub">Thiết lập khoản cộng, khoản trừ, thuế, bảo hiểm và quyền điều chỉnh</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn quản lý loại thưởng/phạt</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 14/08/2026</p>
+    <p><strong>Đối tượng:</strong> quản trị viên nhân sự, tiền lương và người được phân quyền</p>
+    <p><strong>Nguồn:</strong> VIN-HRM - Tài liệu nghiệp vụ và phần mềm thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol><li>Đọc danh sách loại thưởng/phạt</li><li>Giải thích Thưởng, Phạt và bốn lựa chọn thuế/bảo hiểm</li><li>Tạo, sửa, đổi trạng thái, xóa</li><li>Quan hệ với đề nghị, quy trình duyệt và bảng lương</li></ol>
+  </div>
+</section>
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích và phạm vi</h1>
+<p class="lead">Loại thưởng/phạt là danh mục dùng khi lập đề nghị điều chỉnh thu nhập. Loại quyết định khoản tiền là cộng thêm hay khấu trừ; bốn cờ thuế và bảo hiểm cung cấp giá trị mặc định và quyền sửa cho từng dòng nhân viên trong đề nghị.</p>
+
+<h2>2. Truy cập</h2><p>Mở <span class="route">Thưởng / Phạt → Loại thưởng phạt</span>. Chức năng cần quyền cấu hình.</p>
+<figure><img src="images/01-danh-sach-loai-thuong-phat.png" alt="Hình 1. Danh mục loại thưởng/phạt trên phần mềm thực tế."><figcaption>Hình 1. Danh mục loại thưởng/phạt trên phần mềm thực tế.</figcaption></figure>
+<h2>3. Bộ lọc và cột dữ liệu</h2>
+<table><colgroup><col style="width:29%"><col style="width:71%"></colgroup><thead><tr><th>Thành phần</th><th>Ý nghĩa</th></tr></thead><tbody><tr><td>Loại</td><td>Tất cả, Thưởng hoặc Phạt.</td></tr><tr><td>Trạng thái</td><td>Tất cả, Đang áp dụng hoặc Ngừng áp dụng.</td></tr><tr><td>Tìm theo mã hoặc tên</td><td>Tìm nhanh bản ghi.</td></tr><tr><td>Thuế mặc định</td><td>Giá trị Có/Không tự điền vào dòng chi tiết đề nghị.</td></tr><tr><td>BH mặc định</td><td>Giá trị Có/Không tự điền cho bảo hiểm.</td></tr><tr><td>Công tắc</td><td>Đổi trạng thái để cho phép hoặc ngừng sử dụng mới.</td></tr><tr><td>Bút chì/Thùng rác</td><td>Sửa hoặc xóa khi đủ điều kiện.</td></tr></tbody></table>
+<h2>4. Tạo loại thưởng/phạt</h2>
+<figure><img src="images/02-them-loai-thuong-phat.png" alt="Hình 2. Biểu mẫu Tạo loại thưởng/phạt."><figcaption>Hình 2. Biểu mẫu Tạo loại thưởng/phạt.</figcaption></figure>
+<ol class="steps"><li>Chọn <b>Tạo mới</b>.</li><li>Nhập mã và tên loại.</li><li>Chọn <b>Thưởng</b> hoặc <b>Phạt</b>.</li><li>Thiết lập hai cặp: giá trị mặc định và quyền chỉnh sửa cho Thuế, Bảo hiểm.</li><li>Nhập mô tả để người lập đề nghị hiểu trường hợp sử dụng.</li><li>Chọn <b>Lưu</b>; bản ghi mới mặc định Đang áp dụng.</li></ol>
+<p style="page-break-before: always;"></p>
+<table><colgroup><col style="width:34%"><col style="width:66%"></colgroup><thead><tr><th>Trường/Lựa chọn</th><th>Giải thích</th></tr></thead><tbody><tr><td>Mã loại</td><td>Bắt buộc, tối đa 50 ký tự, chuẩn hóa chữ in hoa và duy nhất trong doanh nghiệp.</td></tr><tr><td>Tên loại</td><td>Bắt buộc, tối đa 255 ký tự.</td></tr><tr><td>Thưởng</td><td>Khoản thu nhập cộng thêm cho nhân viên.</td></tr><tr><td>Phạt</td><td>Khoản khấu trừ khỏi thu nhập của nhân viên.</td></tr><tr><td>Mặc định tính thuế</td><td>Giá trị Có/Không được sao chép vào từng dòng nhân viên khi chọn loại.</td></tr><tr><td>Cho phép chỉnh sửa thuế</td><td>Có: người lập đề nghị có thể đổi cờ thuế; Không: cờ bị khóa theo mặc định.</td></tr><tr><td>Mặc định tính bảo hiểm</td><td>Giá trị Có/Không được sao chép vào dòng nhân viên.</td></tr><tr><td>Cho phép chỉnh sửa bảo hiểm</td><td>Có: người lập đề nghị có thể đổi; Không: cờ bị khóa.</td></tr><tr><td>Mô tả</td><td>Không bắt buộc, tối đa 1.000 ký tự; nên nêu điều kiện và ví dụ sử dụng.</td></tr></tbody></table>
+<h3>Bốn tổ hợp cho mỗi cờ thuế/bảo hiểm</h3>
+<table><colgroup><col style="width:20%"><col style="width:20%"><col style="width:60%"></colgroup><thead><tr><th>Mặc định</th><th>Cho sửa</th><th>Kết quả trong đề nghị</th></tr></thead><tbody><tr><td>Không</td><td>Không</td><td>Luôn là Không; người lập không đổi được.</td></tr><tr><td>Có</td><td>Không</td><td>Luôn là Có; người lập không đổi được.</td></tr><tr><td>Không</td><td>Có</td><td>Ban đầu là Không nhưng có thể bật Có.</td></tr><tr><td>Có</td><td>Có</td><td>Ban đầu là Có nhưng có thể chuyển Không.</td></tr></tbody></table>
+<p class="callout-anchor">&#160;</p><table class="callout warning"><tbody><tr><td><strong>Ý nghĩa của “Cho phép chỉnh sửa”</strong><p>Lựa chọn này không tự xác định nghĩa vụ thuế hoặc bảo hiểm. Nó chỉ quyết định người lập đề nghị có được thay đổi giá trị mặc định trên từng nhân viên hay không. Chính sách nên được phê duyệt trước khi mở quyền sửa.</p></td></tr></tbody></table>
+<h2>5. Dòng chảy nghiệp vụ sau khi cấu hình</h2>
+<ol><li>Người dùng lập <b>Đề nghị thưởng phạt</b>, chọn loại và danh sách nhân viên.</li><li>Hệ thống sao chép cờ thuế/bảo hiểm mặc định; chỉ mở ô chọn nếu loại cho phép sửa.</li><li>Đề nghị được gửi qua quy trình phê duyệt đã chọn.</li><li>Khi duyệt hoàn tất, hệ thống sinh giao dịch thưởng/phạt cho từng nhân viên.</li><li>Thanh toán ngay được đánh dấu đã chi; thanh toán qua lương chờ đưa vào kỳ lương.</li></ol>
+<p class="callout-anchor">&#160;</p><table class="callout info"><tbody><tr><td><strong>Cấu hình liên quan</strong><p>Danh mục loại không dùng khóa trực tiếp tại Hệ thống → Cấu hình. Tuy nhiên Đề nghị thưởng/phạt bắt buộc dùng một quy trình còn hiệu lực tại Hệ thống → Quy trình phê duyệt, đúng loại quy trình phê duyệt thưởng/phạt.</p></td></tr></tbody></table>
+<h2>6. Sửa, đổi trạng thái và xóa</h2>
+<table><colgroup><col style="width:28%"><col style="width:72%"></colgroup><thead><tr><th>Thao tác</th><th>Cách thực hiện và lưu ý</th></tr></thead><tbody><tr><td>Sửa</td><td>Chọn bút chì; có thể cập nhật mã, tên, loại, bốn cờ, mô tả và trạng thái. Mã mới vẫn phải duy nhất.</td></tr><tr><td>Ngừng áp dụng</td><td>Tắt công tắc để không dùng cho phát sinh mới nhưng vẫn giữ lịch sử đề nghị và giao dịch.</td></tr><tr><td>Kích hoạt lại</td><td>Bật công tắc khi chính sách tiếp tục được sử dụng.</td></tr><tr><td>Xóa</td><td>Chỉ xóa loại chưa phát sinh Đề nghị hoặc giao dịch. Nếu đã dùng, hệ thống chặn xóa và yêu cầu Ngừng áp dụng.</td></tr></tbody></table>
+<h2>7. Lỗi thường gặp</h2>
+<table><colgroup><col style="width:42%"><col style="width:58%"></colgroup><thead><tr><th>Thông báo/Hiện tượng</th><th>Cách xử lý</th></tr></thead><tbody><tr><td>Mã loại đã tồn tại</td><td>Tìm bản ghi cùng mã hoặc nhập mã khác.</td></tr><tr><td>Không thể xóa vì đã phát sinh dữ liệu</td><td>Chuyển sang Ngừng áp dụng.</td></tr><tr><td>Không sửa được cờ thuế/bảo hiểm trong đề nghị</td><td>Loại đang chọn đặt Cho phép chỉnh sửa = Không; quản trị viên cần đánh giá chính sách trước khi thay đổi.</td></tr><tr><td>Giá trị mặc định không như mong muốn</td><td>Mở loại đang áp dụng, kiểm tra hai trường Mặc định; đổi loại trên đề nghị sẽ đặt lại cờ theo loại mới.</td></tr><tr><td>Không gửi được đề nghị vì quy trình không hợp lệ</td><td>Kiểm tra quy trình phê duyệt, bước duyệt và người/phòng ban/chức vụ duyệt còn hoạt động.</td></tr></tbody></table>
+<h2>8. Danh sách kiểm tra</h2><ul class="checklist"><li>Mã loại duy nhất.</li><li>Thưởng/Phạt đúng bản chất.</li><li>Mặc định thuế đã duyệt.</li><li>Quyền sửa thuế phù hợp.</li><li>Mặc định bảo hiểm đã duyệt.</li><li>Quyền sửa bảo hiểm phù hợp.</li><li>Quy trình duyệt đang hoạt động.</li><li>Đã thử một đề nghị mẫu.</li></ul>
+
+
+</main></body></html>

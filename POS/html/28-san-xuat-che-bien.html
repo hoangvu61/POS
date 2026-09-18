@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>28. Sản xuất - Chế biến — Đặc tả POS</title><meta name="description" content="Sản xuất - Chế biến"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần VI · Chương 28</p><article class="spec"><h1>CHƯƠNG 28. SẢN XUẤT VÀ CHẾ BIẾN</h1><details class="section-toc"><summary>Nội dung chương · 19 mục</summary><ol><li><a href="#section-28-1">28.1. Mục đích và phạm vi</a></li><li><a href="#section-28-2">28.2. Vai trò và phân quyền</a></li><li><a href="#section-28-3">28.3. Điều kiện vận hành</a></li><li><a href="#section-28-4">28.4. Phân biệt nguồn phát sinh</a></li><li><a href="#section-28-5">28.5. Nội dung và cách đọc phiếu</a></li><li><a href="#section-28-6">28.6. Lập sản xuất thủ công</a></li><li><a href="#section-28-7">28.7. Tính lượng nguyên liệu và đầu ra</a></li><li><a href="#section-28-8">28.8. Giá vốn nguyên liệu</a></li><li><a href="#section-28-9">28.9. Phân bổ giá nhập thành phẩm</a></li><li><a href="#section-28-10">28.10. Ghi nhận kho khi tạo và hoàn tất</a></li><li><a href="#section-28-11">28.11. Khi nguyên liệu không đủ</a></li><li><a href="#section-28-12">28.12. Sản xuất tự động từ món và dịch vụ</a></li><li><a href="#section-28-13">28.13. Chi phí khác và Đề nghị chi</a></li><li><a href="#section-28-14">28.14. Đổi ngày chứng từ</a></li><li><a href="#section-28-15">28.15. Sửa nội dung, hủy và xóa</a></li><li><a href="#section-28-16">28.16. Xử lý chi phí khi xóa sản xuất</a></li><li><a href="#section-28-17">28.17. Đồng thời, gửi lại và phục hồi sau lỗi</a></li><li><a href="#section-28-18">28.18. Giao diện tra cứu và chi tiết</a></li><li><a href="#section-28-19">28.19. Báo cáo và đối chiếu liên phân hệ</a></li></ol></details>
+<h2 id="section-28-1">28.1. Mục đích và phạm vi</h2>
+<p>Sản xuất và chế biến ghi nhận một lần sử dụng công thức để tiêu hao nguyên liệu, tạo hàng hóa hoặc phục vụ một sản phẩm, món ăn hay dịch vụ. Phiếu sản xuất là chứng từ trung tâm của lần thực hiện đó; các chứng từ kho đi kèm thể hiện nguyên liệu đã xuất và đầu ra đã nhập.</p>
+<p>Nghiệp vụ hỗ trợ sản xuất chủ động theo mẻ, chuẩn bị bán thành phẩm, chế biến gắn với bán hàng và tiêu hao định lượng. Một phiếu có thể chỉ xuất nguyên liệu, chỉ nhập đầu ra phù hợp hoặc có cả xuất và nhập. Không bắt buộc mọi lần sản xuất phải tạo một thành phẩm được lưu kho.</p>
+<p>Đầu ra dịch vụ và sản phẩm không lưu kho không được nhập vào kho chỉ vì có công thức. Với các sản phẩm này, ý nghĩa của sản xuất là ghi nhận lượng nguyên liệu hoặc vật tư đã được sử dụng theo nghiệp vụ gốc.</p>
+<p>Công thức phải được khai báo và có hiệu lực trước khi sản xuất sử dụng. Sự kiện bán hàng chỉ làm phát sinh hoặc hoàn tác chế biến khi mô hình bán và trạng thái giao dịch đạt đúng mốc. Phần này quy định cách ghi nhận lần sản xuất, xử lý kho, phân bổ giá vốn, chi phí khác và điều kiện sửa xóa.</p>
+<h2 id="section-28-2">28.2. Vai trò và phân quyền</h2>
+<p>Nhân viên sản xuất chủ động chọn công thức, lượng thực hiện, kho nguyên liệu, kho đầu ra nếu cần, ngày chứng từ và nơi sản xuất. Người này kiểm tra nhu cầu nguyên liệu và phân bổ đơn giá đầu ra trước khi tạo phiếu.</p>
+<p>Nhân viên bán hàng, phục vụ hoặc bếp làm phát sinh sản xuất gián tiếp qua các bước xác nhận món, gửi chế biến hoặc xử lý đơn. Nhân viên kho theo dõi chứng từ xuất nguyên liệu, nhập thành phẩm và xử lý các phiếu còn chờ hoàn tất vì điều kiện tồn.</p>
+<p>Quyền sản xuất thông thường và quyền sửa, xóa phiếu sản xuất đã hoàn tất là hai phạm vi khác nhau. Người có quyền tạo sản xuất không mặc nhiên được đổi ngày hoặc xóa một phiếu hoàn tất. Phiếu phát sinh tự động còn chịu ràng buộc nguồn gốc, kể cả khi người dùng có quyền sửa xóa phiếu hoàn tất.</p>
+<p>Quyền xem và quản lý Đề nghị chi được kiểm tra riêng. Người xem phiếu sản xuất có thể không được thêm, sửa hoặc xóa chi phí liên quan. Các giá trị giá vốn được sử dụng theo quyền xem giá vốn của người dùng.</p>
+<h2 id="section-28-3">28.3. Điều kiện vận hành</h2>
+<p>Trước khi sản xuất, công thức phải tồn tại và được chọn đúng loại, đúng mục đích. Màn hình lựa chọn phục vụ công thức đang hoạt động. Người dùng phải đọc lượng đầu ra theo một lần công thức để nhập đúng số lần thực hiện.</p>
+<p>Kho xuất nguyên liệu phải được chọn. Kho nhập đầu ra bắt buộc khi có ít nhất một sản phẩm đầu ra quản lý tồn. Nếu toàn bộ đầu ra không lưu kho, không yêu cầu kho thành phẩm và không tạo nhập đầu ra.</p>
+<p>Nếu doanh nghiệp bật quản lý tồn, chi nhánh dùng để phát sinh sản xuất tự động phải được cấu hình kho theo quy tắc tổ chức. Nếu doanh nghiệp không sử dụng quản lý tồn, ghi nhận sản xuất không kéo theo nhập xuất tồn thực tế. Không dùng việc tắt quản lý tồn tạm thời như cách vượt lỗi thiếu hàng của một lần sản xuất.</p>
+<p>Danh mục sản phẩm cần có đơn vị và tỷ lệ quy đổi hợp lệ. Phương pháp giá vốn và cách xử lý thiếu tồn phải được xác định. Nơi sản xuất là thông tin mô tả địa điểm thực hiện, có thể không chọn; nó không thay cho kho xuất hoặc kho nhập.</p>
+<h2 id="section-28-4">28.4. Phân biệt nguồn phát sinh</h2>
+<h3 id="section-28-4-1">28.4.1. Sản xuất thủ công</h3>
+<p>Người dùng chủ động lập phiếu độc lập với đơn bán hàng. Cách này phục vụ chuẩn bị hàng trước, sản xuất mẻ, sơ chế hoặc tạo bán thành phẩm lưu kho. Người dùng trực tiếp chọn công thức, lượng thực hiện và các kho.</p>
+<p>Nút Tạo sản xuất thực hiện tạo và ghi nhận hoàn tất phiếu sản xuất trong cùng lượt xử lý. Đây không phải một nút lưu nháp để sau đó bắt buộc quay lại bấm hoàn tất sản xuất lần nữa. Nếu quy tắc thiếu tồn làm chứng từ kho chưa hoàn tất, phải theo dõi trạng thái riêng của chứng từ kho như phần 32.11.</p>
+<h3 id="section-28-4-2">28.4.2. Sản xuất phát sinh tự động</h3>
+<p>Sản xuất tự động được tạo từ nghiệp vụ bán hàng hoặc chế biến. Phiếu giữ mã tham chiếu để nhận diện đơn hay nghiệp vụ đã tạo ra nó. Người dùng không tạo thêm một phiếu thủ công cho cùng lượt chỉ để làm cho danh sách sản xuất dễ nhìn hơn.</p>
+<p>Thời điểm tạo và hoàn tất phụ thuộc vào mô hình bán. F&amp;B có các bước gửi bếp, In chế biến, xử lý món và thanh toán; sản xuất chỉ được hoàn tất tại mốc cấu hình đã chọn. Facility và dịch vụ sử dụng mốc bắt đầu hoặc hoàn tất phiên tương ứng. Phiếu tự động có thể được chuẩn bị trước rồi hoàn tất khi nghiệp vụ gốc đạt mốc xử lý.</p>
+<h2 id="section-28-5">28.5. Nội dung và cách đọc phiếu</h2>
+<p>Phiếu có mã sản xuất, công thức, lượng thực hiện, kho nguyên liệu, kho đầu ra nếu có, nơi sản xuất, ngày chứng từ, người và thời điểm tạo, người và thời điểm hoàn tất, ghi chú và mã tham chiếu.</p>
+<p>Chi tiết thể hiện nguyên liệu theo công thức, lượng cần dùng, đơn vị, giá vốn và đầu ra theo công thức. Chứng từ kho liên quan phải được đọc theo trạng thái thực tế: phiếu sản xuất đã hoàn tất không tự chứng minh rằng mọi phiếu kho của nó đã hoàn tất trong tình huống doanh nghiệp chọn tạm hoãn xuất vì thiếu tồn.</p>
+<p>Ngày chứng từ thể hiện ngày nghiệp vụ được đưa vào tính toán kho. Thời điểm tạo cho biết lúc người dùng ghi nhận trên hệ thống. Hai thời điểm có thể khác nhau đối với một nghiệp vụ được nhập bổ sung cho ngày đã qua.</p>
+<h2 id="section-28-6">28.6. Lập sản xuất thủ công</h2>
+<p>Người dùng mở chức năng Sản xuất – Chế biến và chọn tạo mới. Màn hình lấy kho nguyên liệu mặc định từ chi nhánh khi có cấu hình phù hợp; người dùng vẫn phải kiểm tra kho đang chọn trước khi tiếp tục.</p>
+<p>Trình tự chính:</p>
+<ol>
+<li>Chọn công thức đang hoạt động.</li>
+<li>Xem lại danh sách đầu ra và nguyên liệu được tải từ công thức.</li>
+<li>Nhập lượng thực hiện lớn hơn không.</li>
+<li>Chọn ngày chứng từ không ở tương lai.</li>
+<li>Chọn kho nguyên liệu và kho đầu ra khi có hàng lưu kho.</li>
+<li>Chọn nơi sản xuất và ghi chú nếu cần.</li>
+<li>Khai báo đề nghị chi kèm theo nếu có quyền và có chi phí khác.</li>
+<li>Kiểm tra nhu cầu nguyên liệu và giá vốn dự tính.</li>
+<li>Bấm Tạo sản xuất; nếu có đầu ra nhập kho, xác nhận phân bổ giá nhập.</li>
+</ol>
+<p>Khi chưa có công thức, lượng không hợp lệ hoặc thiếu kho đầu ra bắt buộc, màn hình dừng và yêu cầu bổ sung. Nếu người dùng đóng phần phân bổ giá, chưa có yêu cầu tạo sản xuất được gửi đi; phần đang khai báo vẫn cần được xác nhận lại khi muốn tiếp tục.</p>
+<p>Sau khi thành công, hệ thống sinh mã sản xuất và chuyển người dùng về danh sách. Không dùng thao tác làm mới rồi bấm tạo một lần nữa để xác nhận kết quả đã thành công.</p>
+<h2 id="section-28-7">28.7. Tính lượng nguyên liệu và đầu ra</h2>
+<p>Lượng nguyên liệu theo đơn vị công thức bằng định mức nhân lượng thực hiện. Lượng chuẩn để xuất kho còn nhân tỷ lệ quy đổi của đơn vị phụ, nếu có. Chỉ các nguyên liệu được quản lý tồn mới tạo chi tiết xuất kho thực tế.</p>
+<p>Lượng từng đầu ra bằng lượng đầu ra theo một lần công thức nhân lượng thực hiện. Chỉ đầu ra có quản lý tồn được nhập kho, và chỉ khi phiếu có kho nhập. Công thức hỗn hợp có cả đầu ra lưu kho và không lưu kho vẫn nhập đúng phần lưu kho; không loại toàn bộ phần nhập chỉ vì một đầu ra không quản lý tồn.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Một mẻ dùng 5 kg nguyên liệu, tạo 20 chai thành phẩm A và 10 gói thành phẩm B.</li>
+<li>Thực hiện 2 mẻ cần 10 kg nguyên liệu, nhập 40 chai A và 20 gói B.</li>
+<li>Nếu B được cấu hình không lưu kho, phiếu nhập chỉ có A.</li>
+<li>Kết quả B vẫn được đọc trong công thức nhưng không tạo tồn kho B.</li>
+</ul>
+</blockquote>
+<p>Nếu công thức không có nguyên liệu quản lý tồn, việc không tạo phiếu xuất không tự ngăn phần nhập đầu ra hợp lệ. Ngược lại, nếu không có đầu ra lưu kho thì sản xuất có thể chỉ tạo phiếu xuất nguyên liệu.</p>
+<h2 id="section-28-8">28.8. Giá vốn nguyên liệu</h2>
+<p>Giá vốn của lần sản xuất được xác định từ nguyên liệu xuất cho lần đó. Khi phiếu xuất đã có giá vốn thực tế, hệ thống sử dụng tổng giá trị đã xác định theo các nguồn nhập được xuất. Giá trị này phản ánh phương pháp bình quân, nhập trước xuất trước, nhập sau xuất trước hoặc cách xác định phù hợp của nghiệp vụ kho.</p>
+<p>Nếu chứng từ xuất chưa có kết quả giá vốn hoàn tất, các phần hiển thị có thể sử dụng giá dự tính từ công thức và kho. Người dùng phải phân biệt số dự tính này với giá vốn đã chốt. Thiếu nguồn nhập hoặc thiếu cấu hình có thể làm việc tính giá không thực hiện được hoặc cho kết quả không đủ để quyết định phân bổ.</p>
+<p>Giá vốn không được lấy từ giá bán thành phẩm. Thay giá bán không tự làm thay giá trị nguyên liệu đã dùng cho một phiếu sản xuất hoàn tất.</p>
+<h2 id="section-28-9">28.9. Phân bổ giá nhập thành phẩm</h2>
+<p>Khi có ít nhất một đầu ra nhập kho, màn hình mở phần Phân bổ giá nhập thành phẩm. Phần này chỉ đưa vào các sản phẩm thật sự sẽ nhập kho, giữ đúng sản phẩm, đơn vị và lượng nhập của lần sản xuất.</p>
+<p>Thông tin cần kiểm tra gồm:</p>
+<ul>
+<li>Tổng giá vốn nguyên liệu đầu vào.</li>
+<li>Lượng nhập từng sản phẩm.</li>
+<li>Đơn giá nhập.</li>
+<li>Thành tiền.</li>
+</ul>
+<p>Thành tiền một sản phẩm bằng lượng nhập nhân đơn giá nhập.</p>
+<p>Tổng thành tiền đầu ra là tổng của các sản phẩm được nhập kho.</p>
+<p>Mặc định, hệ thống lấy tổng giá vốn nguyên liệu chia cho tổng số lượng đầu ra nhập kho để đề xuất cùng một đơn giá cho các đầu ra. Đây là phân bổ mặc định theo số lượng, không phải tự cân bằng theo giá bán hoặc giá trị kinh tế của từng thành phẩm. Khi các đầu ra có đơn vị hoặc giá trị khác nhau, người dùng cần điều chỉnh đơn giá cho phù hợp trước khi xác nhận.</p>
+<p>Người dùng không được nhập đơn giá âm. Trên màn hình, tổng thành tiền đầu ra phải khớp tổng tiền nguyên liệu, với dung sai 0,01 để xử lý chênh lệch làm tròn. Nếu tổng thấp hơn hoặc cao hơn giới hạn này, nút xác nhận không khả dụng và màn hình cho biết cần điều chỉnh.</p>
+<p>Khi xử lý tạo phiếu, hệ thống kiểm tra lại số lượng các mục phân bổ, sản phẩm và đơn vị có khớp công thức hay không; tổng phân bổ không được vượt giá vốn nguyên liệu thực tế ngoài dung sai cho phép. Nếu tồn hoặc giá vốn đã thay đổi từ lúc xem trước, người dùng có thể phải tải lại giá và phân bổ lại.</p>
+<p>Chi phí khác khai báo qua Đề nghị chi không được cộng vào tổng nguyên liệu để phân bổ giá nhập ở bước này. Tổng chi phí quản trị của phiếu và giá trị nhập thành phẩm vì vậy cần được đọc như hai khái niệm khác nhau.</p>
+<h2 id="section-28-10">28.10. Ghi nhận kho khi tạo và hoàn tất</h2>
+<p>Với nguyên liệu quản lý tồn, hệ thống tạo phiếu xuất sản xuất ở kho nguyên liệu và tính lượng theo công thức. Phần xuất được hoàn tất theo quy tắc tồn và giá vốn. Sau đó, nếu có đầu ra lưu kho cùng kho nhập hợp lệ, hệ thống lập phiếu nhập sản xuất với lượng và đơn giá đã xác định.</p>
+<p>Phiếu nhập đầu ra được hoàn tất khi phần xuất nguyên liệu đã xử lý thành công, hoặc khi không có nguyên liệu cần xuất. Không cộng tồn thành phẩm hoàn tất trong khi bước xuất bắt buộc chưa hoàn tất do doanh nghiệp chọn giữ chờ thiếu tồn.</p>
+<p>Ngày ghi nhận của phiếu nhập và xuất liên quan theo ngày chứng từ sản xuất. Chứng từ kho gắn với phiếu sản xuất để tra cứu và hoàn tác đúng phạm vi. Khi hoàn tất, phát sinh được đưa vào lịch sử kho và các phần tổng hợp liên quan.</p>
+<p>Người dùng không sửa độc lập công thức, lượng hoặc kho của một phiếu đã phát sinh. Các chứng từ kho tự động thuộc lần sản xuất cần được xử lý theo nguồn gốc; không xóa riêng một phần rồi để phần còn lại tồn tại như một lần sản xuất đầy đủ.</p>
+<h2 id="section-28-11">28.11. Khi nguyên liệu không đủ</h2>
+<p>Cách xử lý phụ thuộc vào cấu hình thiếu tồn của doanh nghiệp. Ba kết quả cần được phân biệt:</p>
+<ul>
+<li><strong>Thông báo lỗi:</strong> không cho nghiệp vụ hoàn tất theo yêu cầu hiện tại; người dùng bổ sung tồn hoặc xử lý sai lệch trước khi thử lại.</li>
+<li><strong>Không tự hoàn tất xuất:</strong> có thể ghi nhận sản xuất nhưng để phiếu xuất nguyên liệu ở trạng thái chưa hoàn tất.<ul>
+<li>Người dùng theo dõi chứng từ chờ, bổ sung hàng và hoàn tất theo luồng được phép.</li>
+<li>Phần nhập đầu ra không tự hoàn tất khi xuất bắt buộc chưa thành công.</li>
+</ul>
+</li>
+<li><strong>Cho phép tồn âm:</strong> với hàng không serial, hệ thống ghi đủ lượng xuất, phân bổ phần có lô và đánh dấu phần chưa đủ lô để bổ sung.<ul>
+<li>Serial vẫn phải hợp lệ và đang ở kho, không được xuất âm.</li>
+</ul>
+</li>
+</ul>
+<p>Trong F&amp;B, nếu bước xử lý kho bị chặn thì lượt In chế biến hoặc gửi chế biến không được tiếp tục. Không được coi một bản in đã ra giấy là bằng chứng rằng nguyên liệu đã trừ tồn.</p>
+<p>Màn hình chi tiết và danh sách chứng từ kho cần được kiểm tra sau các tình huống giữ chờ. Không lập một phiếu sản xuất mới cho cùng lần thực hiện chỉ vì phiếu xuất cũ chưa hoàn tất; thao tác đó có thể khiến tiêu hao bị ghi nhận hai lần sau khi hàng đã được bổ sung.</p>
+<p>Giữ phiếu xuất chưa hoàn thành là lựa chọn mặc định của cấu hình thiếu tồn. Đủ hàng được xét tại thời điểm nghiệp vụ xuất, không chỉ ở thời điểm người dùng mở lại phiếu. Nếu xuất đã hoàn thành âm, chỉ nhập có thời điểm trước xuất mới được xét bổ sung lô thiếu. Bổ sung lô làm tính lại giá vốn và lịch sử, không xuất nguyên liệu lần hai; ảnh hưởng đến giá trị thành phẩm phải đi theo cùng chuỗi tính lại.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" role="img" aria-labelledby="title-production-flow-23 desc-production-flow-23" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-production-flow-23">Dòng vật chất và giá trị trong sản xuất</title><desc id="desc-production-flow-23">PHIẾU SẢN XUẤT. Công thức · số lượng · ngày · kho; XUẤT NGUYÊN LIỆU. Kiểm tra tồn, lô và serial. Xác định giá vốn đầu vào; CHI PHÍ LIÊN QUAN. Phân biệt vốn hóa và chi kỳ. Tạo đề nghị chi khi cần; NHẬP THÀNH PHẨM. Chỉ hoàn thành khi đầu vào hợp lệ. Phân bổ giá trị và tăng tồn</desc><defs><marker id="arrow-production-flow-23" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 88 V134 H230 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-production-flow-23)"/><path d="M480 88 V134 H730 V175" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-production-flow-23)"/><path d="M230 268 V334 H480 V395" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-production-flow-23)"/><path d="M730 268 V334 H480 V395" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-production-flow-23)"/><g><rect x="300" y="14" width="360" height="74" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="46" font-weight="700">PHIẾU SẢN XUẤT</tspan><tspan x="480" y="68">Công thức · số lượng · ngày · kho</tspan></text></g><g><rect x="60" y="180" width="340" height="88" rx="10" fill="#fff" stroke="#708c82"/><text x="230" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="230" y="208" font-weight="700">XUẤT NGUYÊN LIỆU</tspan><tspan x="230" y="230">Kiểm tra tồn, lô và serial</tspan><tspan x="230" y="252">Xác định giá vốn đầu vào</tspan></text></g><g><rect x="560" y="180" width="340" height="88" rx="10" fill="#fff" stroke="#708c82"/><text x="730" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="730" y="208" font-weight="700">CHI PHÍ LIÊN QUAN</tspan><tspan x="730" y="230">Phân biệt vốn hóa và chi kỳ</tspan><tspan x="730" y="252">Tạo đề nghị chi khi cần</tspan></text></g><g><rect x="300" y="400" width="360" height="96" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="432" font-weight="700">NHẬP THÀNH PHẨM</tspan><tspan x="480" y="454">Chỉ hoàn thành khi đầu vào hợp lệ</tspan><tspan x="480" y="476">Phân bổ giá trị và tăng tồn</tspan></text></g></svg></div><figcaption><strong>Dòng vật chất và giá trị trong sản xuất.</strong> Đầu ra chỉ hoàn thành khi phần xuất nguyên liệu đã đủ điều kiện. Giá nhập thành phẩm được phân bổ từ giá vốn đầu vào và chi phí được vốn hóa theo quy tắc của phiếu sản xuất.</figcaption></figure>
+
+<h2 id="section-28-12">28.12. Sản xuất tự động từ món và dịch vụ</h2>
+<p>Khi bán sản phẩm không lưu kho có định lượng, hệ thống áp dụng công thức hoạt động phù hợp với sản phẩm và đơn vị. Mỗi lượt được xác nhận tạo lượng sản xuất tương ứng, gắn với nghiệp vụ đã làm phát sinh. Nguyên liệu lưu kho được xuất; đầu ra không lưu kho không tạo phiếu nhập thành phẩm.</p>
+<p>Sản phẩm lưu kho đã được sản xuất trước được xuất như hàng có sẵn theo luồng bán, không mặc nhiên sản xuất lại chỉ vì vẫn có công thức trong danh mục. Bán thành phẩm dùng làm đầu vào cũng được tiêu hao từ lượng đã nhập trước đó.</p>
+<p>Với dịch vụ, định lượng biểu diễn vật tư dùng để thực hiện dịch vụ. Thời điểm phát sinh tuân theo luồng dịch vụ đã xác nhận, không phát sinh chỉ từ thao tác mở màn hình hoặc xem giá. Gói nhiều lần phải gắn tiêu hao với lượt sử dụng theo quy tắc của gói, không tự xuất toàn bộ vật tư của các lượt tương lai khi bán gói.</p>
+<p>Khi một lượt sản phẩm đã gửi hoặc đã xử lý, yêu cầu bổ sung chỉ áp dụng cho lượng mới theo luồng của đơn. Hoàn tác món hoặc lượt sử dụng phải tìm đúng sản xuất liên quan và áp dụng quy tắc có hoàn nguyên nguyên liệu hay không của nghiệp vụ gốc.</p>
+<h2 id="section-28-13">28.13. Chi phí khác và Đề nghị chi</h2>
+<p>Chi phí khác như vận chuyển, bốc xếp hoặc thuê ngoài được lập thành Đề nghị chi, không trộn vào số lượng nguyên liệu. Người có quyền có thể khai báo cùng lúc tạo sản xuất hoặc thêm từ phần chi phí trên chi tiết phiếu, theo phạm vi quyền tài chính.</p>
+<p>Khi tạo cùng sản xuất, các khoản có số tiền lớn hơn không được đưa vào đề nghị và tự gắn mã sản xuất vừa sinh. Người dùng không phải tự đoán mã phiếu trước để nhập liên kết. Chi nhánh của đề nghị phải phù hợp với kho nguyên liệu theo quy tắc tài chính.</p>
+<p>Trạng thái Đề nghị chi độc lập với trạng thái sản xuất. Phiếu sản xuất đã hoàn tất vẫn có thể có đề nghị chờ duyệt. Được tạo đề nghị không đồng nghĩa khoản tiền đã được chi hoặc đã được tính là chi phí được duyệt.</p>
+<p>Chi tiết phân biệt chi phí đã duyệt và chi phí chờ duyệt. Tổng chi phí sản xuất để theo dõi quản trị gồm giá vốn nguyên liệu cộng chi phí đã duyệt. Khoản chờ duyệt được trình bày riêng, không âm thầm cộng vào tổng đã xác nhận.</p>
+<p>Đề nghị chưa duyệt có thể sửa hoặc xóa nếu có quyền. Đề nghị đã duyệt được giữ theo quy tắc tài chính, không sửa như một nội dung tự do của phiếu sản xuất. Việc thêm hoặc duyệt chi phí sau sản xuất không tự phân bổ lại đơn giá nhập thành phẩm ở bước tạo phiếu.</p>
+<h2 id="section-28-14">28.14. Đổi ngày chứng từ</h2>
+<p>Ngày sản xuất không được bỏ trống và không được lớn hơn ngày hiện tại. Khi nhập bổ sung nghiệp vụ của ngày trước, hệ thống sử dụng ngày đã chọn để tính lại ảnh hưởng kho từ thời điểm phù hợp, thay vì chỉ đổi ngày hiển thị trên phiếu.</p>
+<p>Với phiếu chưa hoàn tất, người có quyền sản xuất được sửa ngày theo điều kiện áp dụng. Với phiếu đã hoàn tất, chỉ phiếu được tạo thủ công và người có quyền sửa phiếu hoàn tất mới được đổi ngày trực tiếp. Phiếu tự động đã hoàn tất phải xử lý từ nguồn gốc, không đổi ngày riêng tại sản xuất.</p>
+<p>Đổi ngày của phiếu hoàn tất yêu cầu lý do. Lý do không để trống và không vượt quá 500 ký tự. Hệ thống ghi lại ngày cũ, ngày mới, người và lý do thay đổi để phục vụ kiểm tra.</p>
+<p>Thay đổi ngày kéo theo cập nhật ngày ghi nhận của phiếu kho liên quan và tính lại các ảnh hưởng tồn, nguồn nhập, giá vốn trong phạm vi cần thiết. Có thể ảnh hưởng đến những giao dịch diễn ra sau ngày được thay đổi. Người dùng phải kiểm tra báo cáo liên quan sau khi hoàn tất việc tính lại, không chỉ kiểm tra ngày trên đầu phiếu.</p>
+<h2 id="section-28-15">28.15. Sửa nội dung, hủy và xóa</h2>
+<p>Phiếu sản xuất không có luồng sửa tự do công thức, kho, lượng và thành phần sau khi đã ghi nhận như một lần sản xuất. Ngày chứng từ là thao tác sửa riêng có kiểm soát. Nếu chọn sai công thức hoặc lượng, cần xử lý xóa hoặc hoàn tác đúng điều kiện rồi lập lại, thay vì sửa công thức đã sử dụng để làm thay lịch sử.</p>
+<h3 id="section-28-15-1">28.15.1. Phiếu chưa hoàn tất</h3>
+<p>Người có quyền sản xuất được xóa theo điều kiện của chứng từ gốc và các chứng từ liên quan. Phần xuất nguyên liệu còn nháp không có ảnh hưởng tồn để hoàn trả. Nếu có phát sinh liên quan đã đạt trạng thái khác, hệ thống phải kiểm tra và xử lý theo trạng thái thực tế.</p>
+<h3 id="section-28-15-2">28.15.2. Phiếu thủ công đã hoàn tất</h3>
+<p>Người dùng phải có quyền xóa phiếu sản xuất hoàn tất. Nếu có nhập đầu ra, hệ thống kiểm tra nguồn nhập đã được dùng để xuất hay chưa. Khi thành phẩm của lô đã được sử dụng, không cho xóa để tránh rút bỏ căn cứ của giao dịch tiếp theo.</p>
+<p>Nếu đủ điều kiện, hệ thống đảo ảnh hưởng nhập thành phẩm và xuất nguyên liệu, loại bỏ các chứng từ kho liên quan rồi xóa phiếu sản xuất. Kết quả đúng là tồn của đầu ra giảm lại phần đã nhập và tồn nguyên liệu được hoàn trả theo ảnh hưởng xuất trước đó, có xét các quy tắc giá vốn và nguồn nhập.</p>
+<h3 id="section-28-15-3">28.15.3. Phiếu tự động đã hoàn tất</h3>
+<p>Không được xóa trực tiếp từ màn hình sản xuất. Người dùng xử lý hủy món, hủy đơn, trả hoặc xóa nghiệp vụ gốc và chương mô hình bán tương ứng. Luồng gốc quyết định có hoàn nguyên nguyên liệu, hoàn tiền, giảm công nợ, xử lý điểm hoặc hóa đơn hay không.</p>
+<p>Đảo sản xuất tự động không được tách rời phần còn lại của đơn. Nếu chỉ làm mất phiếu sản xuất nhưng đơn vẫn giữ món đã dùng, giá vốn và tồn sẽ không còn phản ánh doanh thu tương ứng.</p>
+<h2 id="section-28-16">28.16. Xử lý chi phí khi xóa sản xuất</h2>
+<p>Khi xóa phiếu sản xuất được phép, hệ thống tìm các Đề nghị chi liên quan. Đề nghị chưa duyệt được xóa theo quy tắc của lần xóa. Đề nghị đã duyệt không bị xóa như một bản chưa phát sinh; chứng từ tài chính được giữ lại và phần tham chiếu đến sản xuất bị gỡ.</p>
+<p>Điều này có nghĩa xóa sản xuất không đồng nghĩa tự thu hồi khoản tiền đã chi. Nếu khoản đã duyệt cần được hoàn lại, phải xử lý bằng nghiệp vụ tài chính phù hợp. Người dùng kiểm tra cả sản xuất, kho và tài chính sau khi xóa.</p>
+<p>Các bước xử lý chứng từ kho, đề nghị và phiếu sản xuất được thực hiện như một nghiệp vụ thống nhất. Nếu một điều kiện như lô nhập đã được sử dụng khiến không thể xóa, không được báo thành công chỉ vì đã xử lý được một phần trước đó.</p>
+<h2 id="section-28-17">28.17. Đồng thời, gửi lại và phục hồi sau lỗi</h2>
+<p>Từ lúc chọn công thức đến lúc tạo phiếu, có thể phát sinh giao dịch làm thay đổi tồn hoặc giá vốn. Người dùng phải đọc lỗi ở bước xác nhận, tải lại giá hoặc kiểm tra kho rồi mới quyết định thử lại. Không giữ nguyên một phân bổ đã vượt giá trị nguyên liệu sau khi hoàn tất xuất thực tế.</p>
+<p>Tạo sản xuất, tạo chứng từ kho và tạo đề nghị chi kèm theo được xử lý cùng một lượt thống nhất. Lỗi không được hiểu là cho phép tự tạo riêng từng chứng từ kho để bù phần còn thiếu. Trước tiên phải đọc lại kết quả của phiếu gốc.</p>
+<p>Khi mất kết nối sau bấm tạo, tra cứu mã tham chiếu, công thức, lượng và thời điểm trước khi lập lại. Một lần tạo mới có thể là một lần sản xuất mới hoàn toàn, không tự được hợp nhất với lần trước.</p>
+<p>Khi một phiếu tự động đã có nhưng kho còn chờ, dùng quy trình hoàn tất chứng từ hiện hữu. Khi xóa bị từ chối vì lô đầu ra đã được dùng, kiểm tra giao dịch sử dụng lô đó; không cố xóa phiếu nhập hoặc xuất ở nơi khác để vượt điều kiện bảo vệ.</p>
+<h2 id="section-28-18">28.18. Giao diện tra cứu và chi tiết</h2>
+<p>Danh sách cho phép tìm phiếu theo các điều kiện được cung cấp, mở chi tiết và nhận diện công thức, mã phiếu, lượng, ngày chứng từ, trạng thái cùng tham chiếu. Chi tiết trình bày riêng thông tin chung, nguyên liệu, đầu ra và đề nghị chi.</p>
+<p>Màn hình tạo giúp người dùng chọn công thức trước khi nhập các quyết định còn lại. Thay kho nguyên liệu tải lại giá dự tính. Đầu ra có lưu kho làm xuất hiện yêu cầu kho thành phẩm và phần phân bổ giá; không có đầu ra lưu kho thì bỏ qua bước phân bổ nhập.</p>
+<p>Màn hình chi tiết chỉ cung cấp các thao tác phù hợp với quyền và nguồn gốc phiếu. Phiếu tự động đã hoàn tất không hiện như một chứng từ thủ công có thể xóa trực tiếp. Phần chi phí tách đã duyệt với chờ duyệt và chỉ cho sửa/xóa đề nghị còn đủ điều kiện.</p>
+<h2 id="section-28-19">28.19. Báo cáo và đối chiếu liên phân hệ</h2>
+<p>Sau xử lý, cần đối chiếu lượng nguyên liệu xuất, đầu ra nhập, giá trị nhập sản xuất, giá vốn nguyên liệu, chi phí khác, tình trạng phiếu kho và ngày ghi nhận. Lần sản xuất không có đầu ra lưu kho phải được nhận diện là tiêu hao hoặc chế biến không nhập thành phẩm, không coi là thiếu phiếu nhập.</p>
+<p>Kho nguyên liệu, kho thành phẩm và nơi sản xuất là ba khái niệm khác nhau. Báo cáo theo kho phản ánh nơi hàng tăng giảm; báo cáo theo nơi sản xuất phản ánh địa điểm thực hiện khi có khai báo. Không gộp tên địa điểm sản xuất thành một kho không tồn tại.</p>
+<p>Với sản xuất gắn bán hàng, giá vốn liên quan cần khớp với đơn hoặc lượt đã làm phát sinh. Với phiếu thủ công, việc nhập đầu ra không tạo doanh thu. Đề nghị chi chờ duyệt không tự làm thay sổ quỹ. Khi đổi ngày hoặc xóa hợp lệ, các báo cáo tồn và giá trị liên quan phải được đọc lại sau xử lý.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="27-cong-thuc-dinh-luong.html">← 27. Công thức - Định lượng</a><a href="29-mo-hinh-tai-chinh-pos.html">29. Mô hình tài chính POS →</a></nav></div></body></html>

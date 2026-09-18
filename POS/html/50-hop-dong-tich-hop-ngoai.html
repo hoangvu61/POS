@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>50. Hợp đồng tích hợp ngoài — Đặc tả POS</title><meta name="description" content="Hợp đồng tích hợp ngoài"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần XI · Chương 50</p><article class="spec"><h1>CHƯƠNG 50. HỢP ĐỒNG TÍCH HỢP NGOÀI</h1><details class="section-toc"><summary>Nội dung chương · 12 mục</summary><ol><li><a href="#section-50-1">50.1. Mục tiêu</a></li><li><a href="#section-50-2">50.2. Nguyên tắc chung</a></li><li><a href="#section-50-3">50.3. Hóa đơn VISNAM</a></li><li><a href="#section-50-4">50.4. Hóa đơn MOBI</a></li><li><a href="#section-50-5">50.5. Shopee và TikTok</a></li><li><a href="#section-50-6">50.6. VnPost và giao hàng</a></li><li><a href="#section-50-7">50.7. Tra cứu mã số thuế và VietQR</a></li><li><a href="#section-50-8">50.8. Retry và webhook</a></li><li><a href="#section-50-9">50.9. Bảo mật hợp đồng</a></li><li><a href="#section-50-10">50.10. Versioning và tương thích</a></li><li><a href="#section-50-11">50.11. Đối soát tích hợp</a></li><li><a href="#section-50-12">50.12. Kiểm thử contract</a></li></ol></details>
+<h2 id="section-50-1">50.1. Mục tiêu</h2>
+<p>Hợp đồng tích hợp xác định dữ liệu gửi/nhận, xác thực, trạng thái, retry, giới hạn, mapping và cách bảo toàn nghiệp vụ khi đối tác ngoài thay đổi.</p>
+<p>Các tích hợp hiện hành gồm:</p>
+<ul>
+<li>Nhà cung cấp hóa đơn VISNAM/MOBI.</li>
+<li>Shopee.</li>
+<li>TikTok.</li>
+<li>VnPost.</li>
+<li>VietQR/Viettel hoặc dịch vụ tra cứu tùy chức năng.</li>
+</ul>
+<h2 id="section-50-2">50.2. Nguyên tắc chung</h2>
+<p>Mỗi provider có adapter riêng, không để DTO ngoài lan vào nghiệp vụ. Adapter chuyển lỗi và trạng thái về mô hình nội bộ, giữ raw value để tra cứu. Timeout, rate limit, token hết hạn và lỗi xác thực được phân loại riêng.</p>
+<p>Request phải có correlation id, idempotency key, thời gian gửi và phiên bản contract. Response được kiểm tra schema, mã thành công, mã lỗi và dữ liệu bắt buộc trước khi commit.</p>
+<h2 id="section-50-3">50.3. Hóa đơn VISNAM</h2>
+<p>VISNAM nhận thông tin chi nhánh, mã số thuế, mẫu, ký hiệu, người mua, dòng hàng, phương pháp GTGT, giảm giá, phụ thu và tổng tiền. Hệ thống có thể gọi tạo/ký hoặc chỉ tạo tùy EInvoiceSignEnabled. Response chứa số hóa đơn, mã tra cứu, trạng thái, mã kết quả, mô tả, mã giao dịch, ký và trạng thái gửi.</p>
+<p>Cập nhật trạng thái và lấy PDF dùng mã tra cứu hoặc mã provider đã lưu. Điều chỉnh dùng mã hóa đơn gốc và lưu Kind/OriginInvoiceId. Lỗi không có thông tin xuất hóa đơn hoặc mã kết quả khác thành công đưa vào IssueFailed.</p>
+<h2 id="section-50-4">50.4. Hóa đơn MOBI</h2>
+<p>MOBI nhận cấu hình credential, ký hiệu, người mua và danh sách detail. Hệ thống hỗ trợ tạo và ký hoặc tạo không ký; khi điều chỉnh có thể dùng edit mode với mã hóa đơn cũ theo contract. Response có danh sách kết quả, fkey/hóa đơn thành công, số hóa đơn, trạng thái ký và thông tin tra cứu.</p>
+<p>MOBI và VISNAM có thể dùng tên trường, mã lỗi và trạng thái khác nhau; UI dùng mapper nội bộ. Không so sánh chuỗi trạng thái của hai provider trực tiếp.</p>
+<h2 id="section-50-5">50.5. Shopee và TikTok</h2>
+<p>Tích hợp sàn dùng access/refresh token, shop id, mã đơn, gói hàng, dòng sản phẩm, trạng thái giao nhận và hoàn tiền.</p>
+<ul>
+<li>Token lưu bảo mật.</li>
+<li>Refresh trước hết hạn.</li>
+<li>Đồng bộ theo mốc và trang.</li>
+<li>Kéo lại phải idempotent theo shop/mã đơn.</li>
+</ul>
+<p>Sàn có thể gửi trạng thái không nhận, hoàn tiền hoặc trả hàng. Mapper cập nhật đơn, kho, thanh toán và hóa đơn theo quy tắc nội bộ; trạng thái không biết được lưu raw và đưa vào hàng chờ xử lý.</p>
+<h2 id="section-50-6">50.6. VnPost và giao hàng</h2>
+<p>VnPost yêu cầu mã khách hàng, địa chỉ gửi, dịch vụ, khối lượng và thông tin người nhận. Màn hình kiểm tra cấu hình trước khi tính cước hoặc tạo đơn. Lỗi địa chỉ hoặc dịch vụ dừng trước khi đổi trạng thái đơn.</p>
+<h2 id="section-50-7">50.7. Tra cứu mã số thuế và VietQR</h2>
+<ul>
+<li>Tra cứu mã số thuế chỉ điền gợi ý tên, mã, địa chỉ.</li>
+<li>Người dùng xác nhận trước khi lưu hóa đơn.</li>
+<li>VietQR tạo mã theo nguồn tiền, số tiền và nội dung.</li>
+<li>Tài khoản phải hoạt động.</li>
+<li>QR không phải phiếu thu cho tới khi thanh toán được xác nhận.</li>
+</ul>
+<h2 id="section-50-8">50.8. Retry và webhook</h2>
+<p>Webhook phải xác thực chữ ký, timestamp và idempotency. Bản tin trùng bỏ qua sau khi kiểm tra đã xử lý. Request pull có backoff và giới hạn lần thử. Khi provider thành công nhưng webhook đến muộn, trạng thái pull được ưu tiên theo version mới hơn.</p>
+<h2 id="section-50-9">50.9. Bảo mật hợp đồng</h2>
+<p>Credential không ghi log thô. TLS bắt buộc khi provider hỗ trợ. Secret rotation không làm mất lịch sử request. Raw data hạn chế quyền xem và có thể mã hóa. Tệp XML/PDF tải xuống phải kiểm tra content type và kích thước.</p>
+<h2 id="section-50-10">50.10. Versioning và tương thích</h2>
+<p>Mỗi adapter có version contract và test fixture. Khi provider thêm trường, parser bỏ qua trường không dùng nhưng giữ raw; khi bỏ trường bắt buộc, adapter báo lỗi cấu hình. Không đổi mapping âm thầm làm lệch tiền hoặc thuế.</p>
+<h2 id="section-50-11">50.11. Đối soát tích hợp</h2>
+<p>Job đối soát so mã đơn nội bộ với provider, số tiền, số hóa đơn, trạng thái và thời gian. Chênh lệch tạo danh sách cần xử lý; không tự chỉnh đơn theo provider nếu chưa qua quy tắc. Người dùng có thể mở request log và retry có kiểm soát.</p>
+<h2 id="section-50-12">50.12. Kiểm thử contract</h2>
+<p>Fixture phải bao gồm:</p>
+<ul>
+<li>Thành công.</li>
+<li>Lỗi xác thực.</li>
+<li>Timeout.</li>
+<li>Rate limit.</li>
+<li>Response rỗng.</li>
+<li>XML sai encoding.</li>
+<li>Hoàn tiền một phần/toàn bộ.</li>
+<li>Đơn nhiều gói.</li>
+<li>Hóa đơn điều chỉnh.</li>
+<li>Trạng thái không biết.</li>
+</ul>
+<p>Test kiểm tra idempotency và không tạo trùng.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="49-audit-lich-su-du-lieu-qua-khu.html">← 49. Audit, lịch sử và dữ liệu quá khứ</a><a href="51-bao-mat-rieng-tu.html">51. Bảo mật và riêng tư dữ liệu →</a></nav></div></body></html>

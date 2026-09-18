@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn quản lý Kỳ đánh giá | VIN-HRM</title>
+<style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin:0; background:#fff; color:#1f2937; font-family:Roboto,Arial,sans-serif; font-size:10.5pt; line-height:1.42; }
+.cover { min-height:245mm; position:relative; page-break-after:always; break-after:page; }
+.cover-head { text-align:center; }
+.cover-kicker { margin:0 0 18pt; font-size:12pt; font-weight:700; text-align:center; text-transform:uppercase; }
+.cover-title { margin:0 0 5pt; color:#1f2937; font-size:28pt; font-weight:700; line-height:1.12; text-align:center; }
+.cover-sub { margin:0; color:#4b5563; font-size:13.5pt; line-height:1.35; text-align:center; }
+.cover-meta { margin-top:25mm; font-size:10.5pt; line-height:1.38; }
+.cover-meta p { margin:2pt 0; }
+.cover-toc { margin-top:14mm; }
+.cover-toc h2 { margin:0 0 10pt; padding:0 0 5pt; border-bottom:1px solid #111827; font-size:18pt; text-transform:uppercase; }
+.cover-toc ol { margin:0 0 0 22pt; padding:0; }
+.cover-toc li { margin:0; padding-left:4pt; }
+.doc { width:100%; }
+h1 { margin:0 0 8pt; padding:0 0 5pt; border-bottom:1px solid #111827; color:#111827; font-size:18pt; line-height:1.2; page-break-after:avoid; }
+h2 { margin:18pt 0 3pt; color:#111827; font-size:13.5pt; line-height:1.25; page-break-after:avoid; }
+h3 { margin:14pt 0 3pt; color:#111827; font-size:11.5pt; line-height:1.3; page-break-after:avoid; }
+p { margin:0 0 9pt; text-align:justify; }
+ul,ol { margin:5pt 0 10pt 24pt; padding-left:12pt; }
+li { margin:0 0 3pt; }
+.lead { margin:0 0 12pt; padding:9pt 11pt; border:1px solid #9ca3af; background:#eef4f8; }
+.route { padding:1pt 3pt; background:#edf2f7; color:#111827; font-weight:700; }
+.tag { white-space:nowrap; padding:1pt 4pt; border:1px solid #9ca3af; background:#f7f9fb; font-size:9pt; font-weight:700; }
+table { width:100%; margin:8pt 0 12pt; border-collapse:collapse; table-layout:fixed; }
+thead { display:table-header-group; } tr { page-break-inside:avoid; }
+th { padding:6pt; border:1px solid #9ca3af; background:#d9e7f2; color:#111827; font-size:9.5pt; line-height:1.3; text-align:left; vertical-align:middle; }
+td { padding:6pt; border:1px solid #b8c0ca; background:#fff; font-size:9.5pt; line-height:1.35; text-align:left; vertical-align:top; overflow-wrap:anywhere; }
+tbody tr:nth-child(even) td { background:#f7f9fb; }
+.flow { margin:8pt 0 10pt; border:0; border-collapse:separate; page-break-inside:avoid; }
+.flow td { padding:0; border:0; background:#fff !important; text-align:center; vertical-align:middle; }
+.flow .flow-node { padding:6pt 9pt; border:1px solid #7b8794; background:#eef4f8 !important; }
+.flow .flow-node strong { display:block; margin-bottom:1pt; color:#111827; font-size:10.5pt; }
+.flow .flow-node p { margin:0; color:#374151; font-size:8.8pt; text-align:center; }
+.flow .flow-arrow { height:12pt; color:#4b5563; font-size:13pt; font-weight:700; line-height:1; }
+.callout { width:100%; margin:10pt 0; border:1px solid #9ca3af; border-collapse:separate; background:#eef4f8; page-break-inside:avoid; }
+.callout td { padding:9pt 11pt; border:0; background:transparent !important; font-size:10.5pt; line-height:1.35; }
+.callout strong { display:block; margin-bottom:3pt; color:#111827; }.callout p { margin:0; }
+.warning { background:#fff8e6; border-color:#c9a75d; }.danger { background:#fff0f0; border-color:#c77c7c; }
+figure { margin:12pt 0 14pt; page-break-inside:avoid; } figure img { display:block; width:100%; height:auto; border:1px solid #9ca3af; }
+figcaption { margin-top:4pt; color:#4b5563; font-size:9pt; font-style:italic; line-height:1.3; text-align:center; }
+.steps { margin:6pt 0 11pt 24pt; padding-left:15pt; }.page-break { page-break-before:always; break-before:page; }
+.footer-note { margin-top:18pt; padding-top:7pt; border-top:1px solid #9ca3af; color:#4b5563; font-size:8.8pt; }
+@media screen { body { background:#eef1f4; } .cover,.doc { width:210mm; margin:12mm auto; padding:25.4mm; background:#fff; box-shadow:0 2px 16px rgba(17,24,39,.10); } .cover { min-height:297mm; } .doc { min-height:297mm; } }
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN QUẢN LÝ<br>KỲ ĐÁNH GIÁ</p>
+    <p class="cover-sub">Lập kế hoạch, phân loại kết quả, theo dõi tiến độ và chia sẻ kết quả đánh giá nhân viên</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn quản lý Kỳ đánh giá</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 24/08/2026</p>
+    <p><strong>Đối tượng:</strong> cán bộ nhân sự, người quản lý và quản trị hệ thống được cấp quyền</p>
+    <p><strong>Nguồn:</strong> tài liệu nghiệp vụ “15. Đánh giá nhân viên v1.1”, mã nguồn và phần mềm VIN-HRM thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Mục đích, phạm vi và luồng nghiệp vụ</li>
+      <li>Điều kiện, phân quyền và dữ liệu chuẩn bị</li>
+      <li>Danh sách Kỳ đánh giá</li>
+      <li>Tạo Kỳ đánh giá</li>
+      <li>Cấu hình phân loại kết quả</li>
+      <li>Theo dõi và thực hiện đánh giá trong kỳ</li>
+      <li>Sửa, thay đổi trạng thái và xóa kỳ</li>
+      <li>Chia sẻ và xuất kết quả</li>
+      <li>Lỗi thường gặp và danh sách kiểm tra</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before:always;">1. Mục đích, phạm vi và luồng nghiệp vụ</h1>
+<p class="lead">Kỳ đánh giá là một kế hoạch đánh giá theo đợt. Mỗi kỳ xác định rõ thời gian, mục đích, một Bảng đánh giá dùng chung, danh sách nhân viên và quy tắc phân loại kết quả. Chức năng phù hợp với đánh giá thử việc, theo tháng/quý/năm, sau dự án, xét thưởng, xét tăng lương hoặc xem xét bổ nhiệm.</p>
+<p>Khác với một phiếu đánh giá độc lập, Kỳ đánh giá giúp người phụ trách quản lý nhiều nhân viên trong cùng một kế hoạch, biết ai đã được chấm, ai chưa được chấm và tổng hợp kết quả theo cùng một thang đo. Kết quả của từng người vẫn được lưu thành phiếu đánh giá riêng nhưng liên kết với kỳ.</p>
+
+<h2>1.1. Luồng nghiệp vụ tổng quát</h2>
+<table class="flow" aria-label="Luồng quản lý Kỳ đánh giá">
+  <tbody>
+    <tr><td class="flow-node"><strong>1. Chuẩn bị Bảng đánh giá</strong><p>Tạo nhóm tiêu chí → tiêu chí có hệ số → các mức đánh giá có điểm → chuyển sang Đang hoạt động.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>2. Tạo Kỳ đánh giá</strong><p>Nhập thông tin kỳ → chọn một Bảng đánh giá → chọn nhân viên → khai báo cách phân loại kết quả.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>3. Mở kỳ và thực hiện</strong><p>Người tạo kỳ mở chi tiết → chọn nhân viên Chưa đánh giá → chọn mức cho từng tiêu chí → Lưu và gửi.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>4. Cập nhật tiến độ và phân loại</strong><p>Phiếu được gửi → nhân viên chuyển sang Đã đánh giá → hệ thống chụp điểm và gán mức kết quả của kỳ.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>5. Hoàn tất và sử dụng kết quả</strong><p>Kiểm tra đủ nhân viên → chuyển kỳ sang Hoàn tất → chia sẻ chỉ xem hoặc xuất Excel khi cần.</p></td></tr>
+  </tbody>
+</table>
+
+<h2>1.2. Ba dữ liệu có quan hệ với nhau</h2>
+<table>
+  <colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+  <thead><tr><th>Dữ liệu</th><th>Vai trò</th><th>Quan hệ</th></tr></thead>
+  <tbody>
+    <tr><td>Bảng đánh giá</td><td>Là cấu trúc chấm điểm gồm nhóm, tiêu chí, hệ số và mức điểm.</td><td>Một kỳ chỉ dùng một bảng. Bảng phải đang hoạt động và đủ dữ liệu để chấm.</td></tr>
+    <tr><td>Kỳ đánh giá</td><td>Là kế hoạch theo đợt, quản lý danh sách người và quy tắc phân loại.</td><td>Một kỳ có nhiều nhân viên; mỗi người chỉ có một phiếu trong cùng kỳ.</td></tr>
+    <tr><td>Phiếu đánh giá nhân viên</td><td>Là kết quả chấm chi tiết của một người.</td><td>Khi gửi từ kỳ, phiếu cập nhật trạng thái và kết quả chụp nhanh tại dòng nhân viên của kỳ.</td></tr>
+  </tbody>
+</table>
+
+<h1>2. Điều kiện, phân quyền và dữ liệu chuẩn bị</h1>
+<h2>2.1. Quyền sử dụng</h2>
+<table>
+  <colgroup><col style="width:28%"><col style="width:36%"><col style="width:36%"></colgroup>
+  <thead><tr><th>Quyền</th><th>Ý nghĩa</th><th>Phạm vi thực tế</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag">Evaluation.Create</span></td><td>Cho phép tạo Kỳ đánh giá và tạo phiếu đánh giá.</td><td>Danh sách nhân viên phụ thuộc phạm vi phòng ban được gán cho quyền. Phạm vi toàn bộ thì có thể chọn toàn doanh nghiệp; phạm vi giới hạn thì chỉ chọn đúng đơn vị được phép.</td></tr>
+    <tr><td><span class="tag">Evaluation.DirectManager</span></td><td>Cho phép người quản lý đánh giá nhân viên do mình quản lý trực tiếp.</td><td>Khi dùng riêng, danh sách tập trung vào các nhân viên có thông tin công việc ghi nhận người dùng là quản lý trực tiếp.</td></tr>
+    <tr><td><span class="tag">Evaluation.Template</span></td><td>Cho phép cấu hình Bảng đánh giá.</td><td>Cần cấp cho người chuẩn bị tiêu chí và thang điểm; không thay thế quyền tạo kỳ hoặc quyền đánh giá.</td></tr>
+  </tbody>
+</table>
+<table class="callout warning"><tbody><tr><td><strong>Người tạo là người điều hành kỳ</strong><p>Hệ thống cho phép người tạo kỳ sửa, chia sẻ và thực hiện đánh giá trong kỳ. Người được chia sẻ Kỳ đánh giá chỉ xem kết quả; không được sửa kỳ, chấm thay, chia sẻ tiếp hoặc thay đổi danh sách nhân viên.</p></td></tr></tbody></table>
+
+<h2>2.2. Dữ liệu cần sẵn sàng</h2>
+<ul>
+  <li>Có ít nhất một Bảng đánh giá ở trạng thái <b>Đang hoạt động</b>, có nhóm đang hoạt động, tiêu chí đang hoạt động, hệ số lớn hơn 0 và mức điểm đang hoạt động.</li>
+  <li>Nhân viên cần đánh giá đang làm việc, có hồ sơ công việc và nằm trong phạm vi người tạo được phép đánh giá.</li>
+  <li>Ngày bắt đầu, ngày kết thúc và mục đích của kỳ đã được thống nhất.</li>
+  <li>Các mức phân loại kết quả đã xác định rõ, không chồng lấp và phù hợp thang điểm của Bảng đánh giá.</li>
+</ul>
+<p>Chức năng không có một công tắc cấu hình hệ thống riêng. Việc sử dụng phụ thuộc chủ yếu vào ba quyền nêu trên, phạm vi dữ liệu của quyền, trạng thái Bảng đánh giá và dữ liệu công việc của nhân viên.</p>
+
+<h1 class="page-break">3. Danh sách Kỳ đánh giá</h1>
+<p>Mở <span class="route">Đánh giá nhân viên &gt; Kỳ đánh giá</span>. Màn hình hiển thị các kỳ do người dùng tạo và các kỳ được chia sẻ cho người dùng xem.</p>
+<figure>
+  <img src="images/01-danh-sach-ky-danh-gia.png" alt="Danh sách Kỳ đánh giá trên VIN-HRM ở giao diện rộng 1920 pixel, có bộ lọc và các cột tiến độ, trạng thái, phân loại.">
+  <figcaption>Hình 1. Danh sách Kỳ đánh giá và bộ lọc theo bảng, trạng thái, cách phân loại, khoảng ngày.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Khu vực</th><th>Cách đọc và sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Tìm theo tên hoặc mục đích</td><td>Nhập một phần tên kỳ hoặc nội dung mục đích. Nên đặt tên có thời gian và phạm vi, ví dụ “Đánh giá quý III/2026 – Khối Kinh doanh”.</td></tr>
+    <tr><td>Bảng đánh giá</td><td>Lọc các kỳ đang dùng cùng một Bảng đánh giá.</td></tr>
+    <tr><td>Trạng thái</td><td>Lọc <b>Đang mở</b>, <b>Hoàn thành</b> hoặc <b>Đã hủy</b>.</td></tr>
+    <tr><td>Phân loại theo</td><td>Lọc kỳ xét kết quả theo <b>Điểm trung bình</b> hoặc <b>Tỷ lệ phần trăm</b>.</td></tr>
+    <tr><td>Từ ngày – Đến ngày</td><td>Lọc theo thời gian kỳ. Chọn Xóa bộ lọc để trở về danh sách đầy đủ.</td></tr>
+    <tr><td>Tiến độ</td><td>Hiển thị số người đã đánh giá trên tổng số người, ví dụ 1/2. Đây là chỉ báo cần kiểm tra trước khi hoàn tất kỳ.</td></tr>
+    <tr><td>Thao tác</td><td>Tùy quyền và trạng thái có thể mở chi tiết, sửa, chia sẻ hoặc xóa. Kỳ chỉ được chia sẻ ở chế độ xem.</td></tr>
+  </tbody>
+</table>
+
+<h1>4. Tạo Kỳ đánh giá</h1>
+<p>Chọn <b>TẠO KỲ</b>. Biểu mẫu gồm thông tin chung, danh sách nhân viên và tiêu chí phân loại kết quả.</p>
+<figure>
+  <img src="images/02-tao-ky-danh-gia.png" alt="Biểu mẫu tạo Kỳ đánh giá gồm tên, bảng đánh giá, trạng thái, mục đích, thời gian và danh sách nhân viên.">
+  <figcaption>Hình 2. Phần thông tin chung và danh sách nhân viên cần đánh giá.</figcaption>
+</figure>
+
+<h2>4.1. Ý nghĩa các trường thông tin chung</h2>
+<table>
+  <colgroup><col style="width:22%"><col style="width:16%"><col style="width:62%"></colgroup>
+  <thead><tr><th>Trường</th><th>Bắt buộc</th><th>Ý nghĩa và cách nhập</th></tr></thead>
+  <tbody>
+    <tr><td>Tên kỳ đánh giá</td><td>Có</td><td>Tên nhận biết kế hoạch, tối đa 255 ký tự. Nên thể hiện loại kỳ, thời gian và đơn vị áp dụng.</td></tr>
+    <tr><td>Bảng đánh giá</td><td>Có</td><td>Chọn đúng cấu trúc tiêu chí sẽ dùng cho tất cả nhân viên trong kỳ. Khi tạo mới chỉ chọn bảng Đang hoạt động. Không thay bảng tùy tiện sau khi đã chấm vì sẽ làm sai tính nhất quán.</td></tr>
+    <tr><td>Trạng thái</td><td>Có</td><td><b>Đang mở:</b> cho phép người tạo chấm người chưa đánh giá. <b>Hoàn tất:</b> đóng kỳ, không tạo thêm phiếu trong kỳ. <b>Đã hủy:</b> dừng kế hoạch; dùng khi kỳ không còn thực hiện. Trạng thái không đồng nghĩa tự động xóa kết quả đã có.</td></tr>
+    <tr><td>Mục đích đánh giá</td><td>Có</td><td>Lý do sử dụng kết quả, tối đa 500 ký tự, ví dụ xét tăng lương, đánh giá thử việc hoặc rà soát năng lực cuối năm.</td></tr>
+    <tr><td>Thời gian bắt đầu</td><td>Có</td><td>Ngày bắt đầu phạm vi của kỳ. Đây là mốc kế hoạch và lọc báo cáo, không tự động mở quyền nếu trạng thái chưa phù hợp.</td></tr>
+    <tr><td>Thời gian kết thúc</td><td>Có</td><td>Phải bằng hoặc sau ngày bắt đầu. Khi quá ngày, người quản lý vẫn cần chủ động kiểm tra và chuyển trạng thái phù hợp.</td></tr>
+    <tr><td>Mô tả</td><td>Không</td><td>Ghi hướng dẫn, phạm vi hoặc nguyên tắc riêng của kỳ, tối đa 1.000 ký tự.</td></tr>
+  </tbody>
+</table>
+
+<h2>4.2. Chọn danh sách nhân viên</h2>
+<ol class="steps">
+  <li>Tại <b>Danh sách nhân viên cần đánh giá</b>, mở ô <b>Chọn nhân viên</b>.</li>
+  <li>Tìm theo mã hoặc tên, chọn người phù hợp rồi nhấn <b>Thêm</b>.</li>
+  <li>Kiểm tra phòng ban, chức vụ, quản lý trực tiếp và trạng thái trên dòng vừa thêm.</li>
+  <li>Lặp lại đến khi đủ danh sách; tránh thêm trùng vì hệ thống chỉ chấp nhận mỗi người một lần.</li>
+  <li>Muốn bỏ một người chưa được chấm, dùng nút xóa ở cột Thao tác. Người đã có kết quả bị khóa và không thể gỡ khỏi kỳ khi sửa.</li>
+</ol>
+<table class="callout"><tbody><tr><td><strong>Phạm vi nhân viên</strong><p>Ô chọn chỉ trả về nhân viên đang hoạt động và thuộc phạm vi đánh giá của tài khoản. Nếu thiếu một người, kiểm tra trạng thái hồ sơ, thông tin quản lý trực tiếp, phòng ban và phạm vi quyền trước khi cho rằng hệ thống lỗi.</p></td></tr></tbody></table>
+
+<h1 class="page-break">5. Cấu hình phân loại kết quả</h1>
+<p>Phân loại kết quả biến một con số thành kết luận dễ dùng như “Cần cải thiện”, “Đạt” hoặc “Tốt”. Quy tắc này chỉ thuộc Kỳ đánh giá; không làm thay đổi điểm của Bảng đánh giá.</p>
+<figure>
+  <img src="images/03-tieu-chi-phan-loai-ket-qua.png" alt="Vùng tiêu chí phân loại kết quả của Kỳ đánh giá, có lựa chọn Điểm trung bình và các khoảng Cần cải thiện, Đạt, Tốt.">
+  <figcaption>Hình 3. Khai báo căn cứ phân loại và các khoảng kết quả không chồng lấp.</figcaption>
+</figure>
+
+<h2>5.1. Ý nghĩa hai lựa chọn “Phân loại theo”</h2>
+<table>
+  <colgroup><col style="width:23%"><col style="width:38%"><col style="width:39%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Cách tính</th><th>Khi nên dùng</th></tr></thead>
+  <tbody>
+    <tr><td>Điểm trung bình</td><td>Tổng điểm quy đổi chia tổng hệ số. Khoảng hợp lệ từ 0 đến điểm trung bình tối đa của Bảng đánh giá.</td><td>Dùng khi người đọc quen thang điểm, ví dụ 0–5. Dễ so sánh với các mức chấm 1–5.</td></tr>
+    <tr><td>Tỷ lệ phần trăm</td><td>Tổng điểm quy đổi chia điểm tối đa, nhân 100. Khoảng hợp lệ từ 0 đến 100.</td><td>Dùng khi cần chuẩn hóa nhiều bảng khác thang điểm hoặc trình bày kết quả theo tỷ lệ đạt.</td></tr>
+  </tbody>
+</table>
+<p>Quy đổi tại từng tiêu chí được tính bằng <b>Điểm mức đã chọn × Hệ số tiêu chí</b>. Tổng điểm là tổng toàn bộ điểm quy đổi. Ví dụ một tiêu chí hệ số 5 được chấm mức 3 sẽ đóng góp 15 điểm.</p>
+
+<h2>5.2. Quy tắc khoảng và giá trị mặc định</h2>
+<table>
+  <colgroup><col style="width:22%"><col style="width:26%"><col style="width:26%"><col style="width:26%"></colgroup>
+  <thead><tr><th>Căn cứ</th><th>Cần cải thiện</th><th>Đạt</th><th>Tốt</th></tr></thead>
+  <tbody>
+    <tr><td>Điểm trung bình</td><td>Từ 0 đến dưới 3</td><td>Từ 3 đến dưới 4</td><td>Từ 4 đến 5</td></tr>
+    <tr><td>Tỷ lệ phần trăm</td><td>Từ 0% đến dưới 70%</td><td>Từ 70% đến dưới 85%</td><td>Từ 85% đến 100%</td></tr>
+  </tbody>
+</table>
+<p>Hệ thống hiểu mỗi khoảng theo nguyên tắc <b>Từ ≤ kết quả &lt; Đến</b>. Riêng khoảng cuối cùng được nhận cả giá trị “Đến”. Vì vậy điểm 3 thuộc “Đạt”, không thuộc “Cần cải thiện”; điểm 5 thuộc “Tốt”.</p>
+<ul>
+  <li><b>Tên kết quả:</b> tên phân loại hiển thị tại dòng nhân viên và báo cáo.</li>
+  <li><b>Từ:</b> cận dưới, được tính vào khoảng.</li>
+  <li><b>Đến:</b> cận trên; phải lớn hơn Từ.</li>
+  <li><b>Mô tả:</b> giải thích ý nghĩa hoặc hành động sau phân loại.</li>
+  <li><b>Thêm mức:</b> thêm phân loại mới; các khoảng không được chồng lấp và thứ tự phải duy nhất.</li>
+</ul>
+<table class="callout warning"><tbody><tr><td><strong>Khi đổi căn cứ phân loại</strong><p>Giao diện áp dụng lại ba khoảng mặc định tương ứng. Hãy kiểm tra và điều chỉnh trước khi lưu. Với Điểm trung bình, cận trên không được vượt thang điểm tối đa đang hiển thị của Bảng đánh giá; với Tỷ lệ, mọi giá trị phải nằm trong 0–100.</p></td></tr></tbody></table>
+
+<h1>6. Theo dõi và thực hiện đánh giá trong kỳ</h1>
+<p>Mở một kỳ từ danh sách. Trang chi tiết cho biết thông tin kế hoạch, quy tắc phân loại, tiến độ và từng nhân viên.</p>
+<figure>
+  <img src="images/04-chi-tiet-ky-danh-gia.png" alt="Chi tiết Kỳ đánh giá trên VIN-HRM, có thông tin chung, thống kê tiến độ và danh sách nhân viên.">
+  <figcaption>Hình 4. Trang chi tiết là nơi điều hành kỳ, sửa thông tin, chia sẻ và xuất kết quả.</figcaption>
+</figure>
+<figure>
+  <img src="images/06-tien-do-nhan-vien-trong-ky.png" alt="Bảng Nhân viên trong kỳ thể hiện người đã đánh giá, chưa đánh giá, điểm trung bình, tỷ lệ và kết quả phân loại.">
+  <figcaption>Hình 5. Theo dõi trạng thái và kết quả chụp nhanh của từng nhân viên.</figcaption>
+</figure>
+
+<h2>6.1. Ý nghĩa trạng thái nhân viên</h2>
+<table>
+  <colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+  <thead><tr><th>Trạng thái</th><th>Ý nghĩa</th><th>Thao tác tiếp theo</th></tr></thead>
+  <tbody>
+    <tr><td>Chưa đánh giá</td><td>Chưa có phiếu đánh giá được gửi cho nhân viên trong kỳ.</td><td>Nếu kỳ Đang mở, người tạo kỳ có quyền với nhân viên có thể chọn nút Đánh giá.</td></tr>
+    <tr><td>Đã đánh giá</td><td>Đã có phiếu gửi thành công; hệ thống lưu người đánh giá, ngày đánh giá, điểm và phân loại.</td><td>Mở xem chi tiết; người tạo có thể sửa phiếu theo quyền hiển thị của hệ thống. Không tạo phiếu thứ hai cho cùng người trong cùng kỳ.</td></tr>
+  </tbody>
+</table>
+
+<h2 class="page-break">6.2. Đánh giá một nhân viên trong kỳ</h2>
+<table class="flow" aria-label="Luồng đánh giá một nhân viên trong kỳ">
+  <tbody>
+    <tr><td class="flow-node"><strong>Mở Kỳ đánh giá</strong><p>Chọn đúng kỳ đang ở trạng thái Đang mở.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Chọn nhân viên Chưa đánh giá</strong><p>Nhấn biểu tượng Đánh giá trên dòng nhân viên.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Chấm từng tiêu chí</strong><p>Hệ thống khóa sẵn Kỳ, Nhân viên và Bảng đánh giá → chọn mức → nhập nhận xét.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Lưu và gửi đánh giá</strong><p>Đánh giá trong kỳ không lưu nháp; xác nhận gửi để hoàn tất.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Cập nhật Kỳ đánh giá</strong><p>Trạng thái người → Đã đánh giá; điểm và mức phân loại được ghi nhận.</p></td></tr>
+  </tbody>
+</table>
+<table class="callout danger"><tbody><tr><td><strong>Không có bước lưu nháp trong kỳ</strong><p>Phiếu thuộc Kỳ đánh giá phải “Lưu và gửi” trực tiếp. Hãy kiểm tra toàn bộ mức điểm và nhận xét trước khi xác nhận. Chỉ người tạo kỳ mới được chấm nhân viên trong kỳ đó.</p></td></tr></tbody></table>
+
+<h1 class="page-break">7. Sửa, thay đổi trạng thái và xóa kỳ</h1>
+<h2>7.1. Sửa Kỳ đánh giá</h2>
+<ol class="steps">
+  <li>Mở kỳ và chọn <b>Sửa</b> nếu nút được hiển thị.</li>
+  <li>Điều chỉnh tên, mục đích, thời gian, mô tả, trạng thái, danh sách người chưa chấm hoặc quy tắc phân loại.</li>
+  <li>Không xóa nhân viên đã được đánh giá; các dòng này được khóa để bảo toàn quan hệ với phiếu đã gửi.</li>
+  <li>Kiểm tra lại các khoảng phân loại, sau đó chọn <b>Lưu kỳ đánh giá</b>.</li>
+</ol>
+<p>Nếu Bảng đánh giá cũ đã ngừng hoạt động, kỳ hiện hữu vẫn có thể hiển thị bảng đó để giữ lịch sử; khi tạo kỳ mới chỉ được chọn bảng đang hoạt động. Việc thay đổi Bảng đánh giá sau khi đã có kết quả không nên thực hiện.</p>
+
+<h2>7.2. Chọn trạng thái đúng</h2>
+<table>
+  <colgroup><col style="width:20%"><col style="width:38%"><col style="width:42%"></colgroup>
+  <thead><tr><th>Trạng thái</th><th>Dùng khi</th><th>Ảnh hưởng</th></tr></thead>
+  <tbody>
+    <tr><td>Đang mở</td><td>Kỳ đang chuẩn bị hoặc đang thực hiện.</td><td>Người tạo có thể đánh giá người Chưa đánh giá nếu còn trong phạm vi quyền.</td></tr>
+    <tr><td>Hoàn tất</td><td>Đã kết thúc và không cần tạo thêm phiếu.</td><td>Không thể bắt đầu đánh giá mới trong kỳ. Kết quả đã có vẫn xem và xuất được.</td></tr>
+    <tr><td>Đã hủy</td><td>Kế hoạch bị dừng hoặc tạo nhầm.</td><td>Không thể chấm tiếp. Kết quả đã ghi nhận không tự mất; cần kiểm tra trước khi chuyển trạng thái.</td></tr>
+  </tbody>
+</table>
+
+<h2>7.3. Xóa kỳ</h2>
+<p>Chỉ chọn Xóa khi chắc chắn kỳ được tạo nhầm và không còn cần lưu. Nút chỉ xuất hiện theo quyền sở hữu và điều kiện dữ liệu. Trước khi xác nhận, kiểm tra số người đã đánh giá và các phiếu liên quan. Nếu hệ thống từ chối xóa, nên chuyển sang Đã hủy để giữ dấu vết thay vì tìm cách xóa dữ liệu đã phát sinh.</p>
+
+<h1>8. Chia sẻ và xuất kết quả</h1>
+<h2>8.1. Chia sẻ Kỳ đánh giá</h2>
+<p>Từ trang chi tiết, chọn <b>Chia sẻ kết quả</b>, chọn người nhận rồi <b>Lưu chia sẻ</b>.</p>
+<figure>
+  <img src="images/05-chia-se-ky-danh-gia.png" alt="Màn hình chia sẻ kết quả Kỳ đánh giá, có trường chọn người nhận và danh sách người đã được chia sẻ.">
+  <figcaption>Hình 6. Chia sẻ kỳ chỉ cấp quyền xem kết quả.</figcaption>
+</figure>
+<ul>
+  <li>Người nhận xem thông tin kỳ, danh sách nhân viên và kết quả theo phạm vi hiển thị.</li>
+  <li>Người nhận không sửa, không chấm, không xóa và không chia sẻ tiếp kỳ.</li>
+  <li>Muốn thu hồi, người tạo xóa người nhận khỏi danh sách chia sẻ rồi lưu lại.</li>
+  <li>Chỉ chia sẻ cho người có nhu cầu công việc; kết quả đánh giá là dữ liệu nhân sự nhạy cảm.</li>
+</ul>
+
+<h2>8.2. Xuất Excel</h2>
+<p>Chọn <b>Xuất Excel</b> tại trang chi tiết để tải dữ liệu kỳ, danh sách nhân viên, trạng thái, điểm trung bình, tỷ lệ và phân loại. Sau khi tải, đối chiếu tên kỳ, số người và số người đã đánh giá với giao diện trước khi dùng làm báo cáo chính thức. Tệp xuất ra ngoài hệ thống cần được lưu tại vị trí có kiểm soát quyền truy cập.</p>
+
+<h1 class="page-break">9. Lỗi thường gặp và danh sách kiểm tra</h1>
+<table>
+  <colgroup><col style="width:30%"><col style="width:34%"><col style="width:36%"></colgroup>
+  <thead><tr><th>Hiện tượng</th><th>Nguyên nhân thường gặp</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Không thấy nút TẠO KỲ.</td><td>Thiếu Evaluation.Create và Evaluation.DirectManager.</td><td>Đề nghị quản trị kiểm tra quyền và phạm vi của tài khoản.</td></tr>
+    <tr><td>Không chọn được Bảng đánh giá.</td><td>Bảng ngừng hoạt động hoặc chưa đủ nhóm/tiêu chí/mức đang hoạt động.</td><td>Mở Bảng đánh giá, hoàn thiện cấu trúc và bật trạng thái phù hợp.</td></tr>
+    <tr><td>Không tìm thấy nhân viên.</td><td>Nhân viên không hoạt động, ngoài phạm vi phòng ban hoặc chưa ghi nhận đúng quản lý trực tiếp.</td><td>Kiểm tra hồ sơ và thông tin công việc, sau đó tải lại biểu mẫu.</td></tr>
+    <tr><td>Không lưu được phân loại.</td><td>Từ lớn hơn hoặc bằng Đến; khoảng chồng lấp; vượt 100% hoặc vượt thang điểm.</td><td>Sắp xếp lại các khoảng liên tục, không chồng nhau và đúng miền giá trị.</td></tr>
+    <tr><td>Không thể đánh giá một người.</td><td>Kỳ không Đang mở; tài khoản không phải người tạo; nhân viên đã có phiếu hoặc ngoài phạm vi.</td><td>Kiểm tra trạng thái kỳ, người tạo, trạng thái dòng nhân viên và quyền.</td></tr>
+    <tr><td>Không gỡ được nhân viên khi sửa kỳ.</td><td>Người đó đã có phiếu đánh giá.</td><td>Giữ dòng nhân viên để bảo toàn lịch sử; chỉ gỡ người Chưa đánh giá.</td></tr>
+    <tr><td>Người được chia sẻ không sửa được kỳ.</td><td>Chia sẻ kỳ chỉ là quyền xem.</td><td>Đây là hành vi đúng. Người tạo kỳ thực hiện thay đổi.</td></tr>
+  </tbody>
+</table>
+
+<h2>9.1. Kiểm tra trước khi mở kỳ</h2>
+<ul>
+  <li>Đúng Bảng đánh giá, thang điểm và trạng thái đang hoạt động.</li>
+  <li>Đúng mục đích, thời gian và danh sách nhân viên.</li>
+  <li>Không có khoảng phân loại chồng lấp; cận trên phù hợp thang điểm.</li>
+  <li>Người tạo có quyền và phạm vi với toàn bộ danh sách.</li>
+</ul>
+
+<h2>9.2. Kiểm tra trước khi hoàn tất</h2>
+<ul>
+  <li>Tiến độ phản ánh đúng số người đã đánh giá.</li>
+  <li>Các dòng Đã đánh giá có điểm, tỷ lệ và phân loại hợp lý.</li>
+  <li>Các trường hợp Chưa đánh giá đã có giải trình hoặc kế hoạch xử lý.</li>
+  <li>Đã xuất báo cáo và chia sẻ đúng người nếu quy trình nội bộ yêu cầu.</li>
+</ul>
+
+<p class="footer-note">Tài liệu được biên soạn theo VIN-HRM thực tế tại thời điểm 24/08/2026. Tên nút hoặc phạm vi dữ liệu có thể thay đổi theo phiên bản phần mềm và chính sách phân quyền của từng doanh nghiệp.</p>
+</main>
+</body>
+</html>

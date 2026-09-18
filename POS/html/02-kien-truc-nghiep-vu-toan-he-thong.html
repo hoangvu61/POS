@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2. Kiến trúc nghiệp vụ toàn hệ thống — Đặc tả POS</title><meta name="description" content="Kiến trúc nghiệp vụ toàn hệ thống"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần I · Chương 2</p><article class="spec"><h1>CHƯƠNG 2. KIẾN TRÚC NGHIỆP VỤ TOÀN HỆ THỐNG</h1><details class="section-toc"><summary>Nội dung chương · 16 mục</summary><ol><li><a href="#section-2-1">2.1. Mục tiêu của kiến trúc nghiệp vụ</a></li><li><a href="#section-2-2">2.2. Nguyên tắc phân tách trách nhiệm</a></li><li><a href="#section-2-3">2.3. Nền tảng tổ chức và phạm vi vận hành</a></li><li><a href="#section-2-4">2.4. Danh mục kinh doanh là đầu vào của giao dịch</a></li><li><a href="#section-2-5">2.5. Đơn hàng là trung tâm của bán hàng</a></li><li><a href="#section-2-6">2.6. Quan hệ giữa bán hàng và kho</a></li><li><a href="#section-2-7">2.7. Quan hệ giữa Công thức – Định lượng, Sản xuất – Chế biến và Kho</a></li><li><a href="#section-2-8">2.8. Quan hệ giữa giá, nghĩa vụ thanh toán, công nợ và dòng tiền</a></li><li><a href="#section-2-9">2.9. Quan hệ giữa nguồn tiền, Thu Chi, Chuyển tiền và Vốn</a></li><li><a href="#section-2-10">2.10. Quan hệ giữa Kho và Tài sản cố định</a></li><li><a href="#section-2-11">2.11. Quan hệ giữa vận hành và kế toán</a></li><li><a href="#section-2-12">2.12. Quan hệ giữa nghiệp vụ và báo cáo</a></li><li><a href="#section-2-13">2.13. Các luồng xuyên hệ thống tiêu biểu</a></li><li><a href="#section-2-14">2.14. Tác động xuyên phân hệ</a></li><li><a href="#section-2-15">2.15. Giao diện và trải nghiệm xuyên hệ thống</a></li><li><a href="#section-2-16">2.16. Audit và truy vết</a></li></ol></details>
+<h2 id="section-2-1">2.1. Mục tiêu của kiến trúc nghiệp vụ</h2>
+<p>Kiến trúc nghiệp vụ xác định trách nhiệm của từng nhóm chức năng và cách các nhóm đó phối hợp để xử lý một sự kiện kinh doanh từ đầu đến cuối. Mục tiêu là bảo đảm cùng một khái niệm được hiểu thống nhất trên toàn hệ thống và không có chức năng nào tự thay thế trách nhiệm của chức năng khác.</p>
+<p>Hệ thống không vận hành theo một chuỗi tuyến tính duy nhất. Tổ chức, quyền, cấu hình và danh mục tạo nền tảng chung. Từ nền tảng đó, hoạt động tách thành các nhánh bán hàng, mua hàng, sản xuất, dịch vụ, tài chính và quản lý tài sản. Kết quả của các nhánh lại hội tụ ở kế toán, thuế, dashboard và báo cáo.</p>
+<p>Chuỗi quan hệ tổng quát như sau:</p>
+<p>Tổ chức và cấu hình → Danh mục kinh doanh → Nghiệp vụ vận hành → Kết quả về hàng hóa, nghĩa vụ thanh toán và dòng tiền → Kế toán và thuế → Dashboard và báo cáo.</p>
+<p>Mỗi bước phải giữ được mối liên hệ với sự kiện đã tạo ra nó. Người dùng có thể đi từ kết quả tổng hợp về giao dịch cụ thể và từ giao dịch cụ thể đến các kết quả liên quan.</p>
+<h2 id="section-2-2">2.2. Nguyên tắc phân tách trách nhiệm</h2>
+<h3 id="section-2-2-1">2.2.1. Chức năng nền tảng tạo điều kiện vận hành</h3>
+<p>Doanh nghiệp, chi nhánh, nhân viên, người dùng, quyền và cấu hình không trực tiếp tạo doanh thu nhưng quyết định ai được làm gì, tại đâu và theo quy tắc nào.</p>
+<p>Một giao dịch chỉ được xử lý khi người dùng có quyền, đối tượng được chọn thuộc đúng doanh nghiệp, chi nhánh còn được phép hoạt động và cấu hình cần thiết đã sẵn sàng.</p>
+<h3 id="section-2-2-2">2.2.2. Danh mục mô tả đối tượng được kinh doanh</h3>
+<p>Sản phẩm, dịch vụ, giá bán, kênh bán, Combo, khách hàng và công thức định lượng là đầu vào của giao dịch. Danh mục có thể thay đổi theo thời gian nhưng giao dịch đã chốt phải giữ nguyên ý nghĩa tại thời điểm phát sinh.</p>
+<h3 id="section-2-2-3">2.2.3. Nghiệp vụ vận hành ghi nhận sự kiện thực tế</h3>
+<p>Bán hàng ghi nhận việc cung cấp hàng hóa hoặc dịch vụ cho khách. Kho ghi nhận hàng hóa vật lý di chuyển. Thu Chi ghi nhận tiền thực tế vào hoặc ra. Công nợ ghi nhận nghĩa vụ chưa thanh toán. Sản xuất ghi nhận lần chế biến hoặc tạo thành phẩm. Tài sản cố định ghi nhận vòng đời sử dụng tài sản.</p>
+<p>Một màn hình không được tạo ra kết quả thuộc trách nhiệm của chức năng khác theo cách khiến kết quả đó không còn truy vết được về nghiệp vụ ban đầu.</p>
+<h3 id="section-2-2-4">2.2.4. Báo cáo chỉ tổng hợp kết quả</h3>
+<p>Dashboard, báo cáo quản trị, báo cáo kế toán và biểu mẫu thuế sử dụng kết quả đã được ghi nhận. Người dùng không sửa giao dịch ban đầu thông qua báo cáo. Nếu phát hiện sai lệch, việc điều chỉnh được thực hiện ở nghiệp vụ phù hợp, sau đó kết quả tổng hợp được cập nhật lại.</p>
+<h2 id="section-2-3">2.3. Nền tảng tổ chức và phạm vi vận hành</h2>
+<p>Doanh nghiệp là phạm vi quản lý cao nhất của một khách hàng sử dụng hệ thống. Mọi giao dịch, danh mục và cấu hình đều phải thuộc đúng doanh nghiệp.</p>
+<p>Chi nhánh là địa điểm hoặc đơn vị vận hành trực thuộc doanh nghiệp. Chi nhánh được dùng để xác định nơi phát sinh bán hàng, nơi nhân viên làm việc, kho phục vụ, nguồn tiền có thể sử dụng, cấu hình riêng và phạm vi báo cáo.</p>
+<p>Nhân viên là người tham gia vận hành. Tài khoản đăng nhập xác định người đang thao tác, chi nhánh làm việc và tập quyền đang có hiệu lực. Một người có thể được tổ chức nhiều tài khoản khi cần làm việc tại nhiều chi nhánh, nhưng mỗi thao tác vẫn phải được xác định theo tài khoản đang đăng nhập.</p>
+<p>Cấu hình có thể áp dụng chung cho doanh nghiệp hoặc áp dụng riêng cho chi nhánh đối với những nội dung cho phép. Khi chi nhánh không có thiết lập riêng, hệ thống sử dụng thiết lập của doanh nghiệp.</p>
+<h2 id="section-2-4">2.4. Danh mục kinh doanh là đầu vào của giao dịch</h2>
+<p>Trước khi phát sinh giao dịch, hệ thống cần có đủ những nội dung phù hợp với nghiệp vụ:</p>
+<ul>
+<li>Sản phẩm hoặc dịch vụ được phép bán;</li>
+<li>Đơn vị tính và quy tắc quy đổi nếu có;</li>
+<li>Giá bán và điều kiện lựa chọn giá;</li>
+<li>Kênh bán;</li>
+<li>Combo hoặc gói dịch vụ;</li>
+<li>Khách hàng khi nghiệp vụ yêu cầu định danh;</li>
+<li>Chính sách Membership nếu doanh nghiệp sử dụng;</li>
+<li>Công thức định lượng đối với đối tượng có tiêu hao;</li>
+<li>Kho khi doanh nghiệp cấu hình sử dụng kho;</li>
+<li>Nguồn tiền và phương thức thanh toán;</li>
+<li>Cấu hình thuế, hóa đơn và in ấn;</li>
+<li>Dữ liệu đặc thù như khu vực, bàn, tài nguyên, phòng hoặc lịch hẹn.</li>
+</ul>
+<p>Khi một đối tượng danh mục ngừng hoạt động, đối tượng đó không được chọn cho giao dịch mới nhưng vẫn phải hiển thị đúng trong lịch sử. Khi giá, thuế, tên gọi hoặc cách vận hành thay đổi, giao dịch cũ không được tự đổi theo.</p>
+<h2 id="section-2-5">2.5. Đơn hàng là trung tâm của bán hàng</h2>
+<p>Retail, F&amp;B, Service, Facility và Hospitality có quy trình phục vụ khác nhau nhưng cùng quy về đơn hàng để xác định khách nhận gì, giá trị phải trả, khoản đã thanh toán và kết quả bán hàng.</p>
+<p>Tùy nội dung và trạng thái, một đơn hàng có thể làm phát sinh:</p>
+<ul>
+<li>Xuất hàng hoặc tiêu hao nguyên vật liệu;</li>
+<li>Thu tiền qua một hoặc nhiều phương thức;</li>
+<li>Công nợ khi khách chưa thanh toán đủ;</li>
+<li>Tích điểm hoặc tiêu điểm Membership;</li>
+<li>Quyền sử dụng các lần dịch vụ thuộc Combo;</li>
+<li>Hóa đơn;</li>
+<li>Thông tin phục vụ kế toán;</li>
+<li>Chỉ số và báo cáo.</li>
+</ul>
+<p>Không phải đơn nào cũng tạo đầy đủ các kết quả trên. Đơn không chứa hàng quản lý kho thì không làm thay đổi tồn kho. Đơn đã thu đủ không hình thành khoản phải thu. Nghiệp vụ Membership chỉ áp dụng khi xác định được khách hàng và thỏa mãn chính sách. Hóa đơn chỉ được tạo khi đủ điều kiện của quy trình hóa đơn.</p>
+<p>Đơn hàng không thay thế nghiệp vụ giao món, thực hiện dịch vụ, sử dụng tài nguyên hay lưu trú. Các hoạt động này có trạng thái vận hành riêng nhưng phải liên kết với đơn để tính tiền và đối soát.</p>
+<h2 id="section-2-6">2.6. Quan hệ giữa bán hàng và kho</h2>
+<p>Bán hàng trả lời khách mua gì, số lượng bao nhiêu, theo giá nào và đã thanh toán ra sao. Kho trả lời hàng hóa vật lý đã được nhập hoặc xuất ở đâu, với số lượng nào và giá trị liên quan thế nào.</p>
+<p>Khi doanh nghiệp sử dụng kho và sản phẩm được quản lý tồn, nghiệp vụ bán hàng tạo hoặc cập nhật yêu cầu xuất hàng theo thời điểm phù hợp với mô hình. Tồn kho chỉ thay đổi khi phiếu xuất đạt trạng thái Hoàn thành, không chỉ vì sản phẩm đã được chọn trên màn hình bán hàng hoặc phiếu xuất đã được lưu.</p>
+<ul>
+<li>Nếu số lượng không đủ, hệ thống xử lý theo một trong ba lựa chọn của doanh nghiệp: báo lỗi và dừng thao tác.</li>
+<li>Vẫn lưu phiếu xuất nhưng giữ chưa hoàn thành và chưa trừ tồn.</li>
+<li>Hoặc cho hoàn thành và trừ âm.</li>
+<li>Lựa chọn giữ phiếu chưa hoàn thành là mặc định.</li>
+<li>Sản phẩm quản lý serial luôn phải có serial hợp lệ trong kho và không được trừ âm.</li>
+</ul>
+<p>Khi khách không nhận hoặc trả hàng, Phiếu xuất bán phải đã Hoàn thành và phần hàng được trả phải xác định đủ nguồn xuất cùng giá vốn gốc. Khi đó các dòng nhận lại có theo dõi tồn được tạo Phiếu nhập trả Hoàn thành trong cùng lần xử lý. Phiếu xuất còn Nháp chặn toàn bộ nghiệp vụ trả; Phiếu xuất đã Hoàn thành nhưng một sản phẩm còn thiếu nguồn chặn riêng sản phẩm đó. Hủy đơn trước thanh toán hoặc trước gửi chỉ xóa phiếu xuất Nháp hay phiếu xuất chưa hoàn thành, không tạo nhập trả. Xóa đơn có quyền xử lý cả phiếu xuất và phiếu nhập đã gắn với đơn theo đúng trạng thái thực tế của từng phiếu.</p>
+<p>Chi nhánh phát sinh bán hàng và kho chịu biến động là hai khái niệm khác nhau. Nhiều chi nhánh có thể dùng chung một kho. Báo cáo phải phân biệt được địa điểm bán với nơi lưu giữ hàng hóa.</p>
+<h2 id="section-2-7">2.7. Quan hệ giữa Công thức – Định lượng, Sản xuất – Chế biến và Kho</h2>
+<p>Công thức – Định lượng mô tả nguyên liệu đầu vào, kết quả đầu ra và lượng tiêu hao chuẩn. Việc khai báo hoặc chỉnh sửa công thức không tự làm thay đổi tồn kho.</p>
+<p>Sản xuất – Chế biến ghi nhận một lần thực hiện cụ thể theo công thức có hiệu lực. Trong lần thực hiện đó, hệ thống xác định số lượng nguyên liệu thực tế cần xuất và đầu ra cần ghi nhận.</p>
+<p>Kho tiếp nhận kết quả vật lý:</p>
+<ul>
+<li>Xuất nguyên vật liệu, hàng hóa hoặc bán thành phẩm đã tiêu hao;</li>
+<li>Nhập thành phẩm hoặc bán thành phẩm khi đầu ra được quản lý tồn;</li>
+<li>Không nhập đầu ra khi kết quả là dịch vụ hoặc món không quản lý tồn.</li>
+</ul>
+<p>Khi công thức thay đổi, các lần sản xuất đã hoàn tất vẫn phải giải thích được theo công thức và số lượng thực tế đã sử dụng ở thời điểm đó.</p>
+<h2 id="section-2-8">2.8. Quan hệ giữa giá, nghĩa vụ thanh toán, công nợ và dòng tiền</h2>
+<p>Giá trị phải trả được hình thành từ sản phẩm, dịch vụ, giá, số lượng, chiết khấu, phụ thu, thuế và các quy tắc tính tiền. Giá trị này là nghĩa vụ của khách hoặc của doanh nghiệp, chưa đồng nghĩa tiền đã thực sự di chuyển.</p>
+<p>Khi khách thanh toán đủ ngay, nghĩa vụ và dòng tiền có thể được xử lý trong cùng một quy trình. Khi khách thanh toán một phần hoặc trả sau, phần chưa thanh toán trở thành công nợ. Khi khách thanh toán công nợ về sau, tiền tăng và khoản phải thu giảm nhưng không tạo lại doanh thu bán hàng.</p>
+<p>Đối với nhập mua, hàng có thể được nhập và nghĩa vụ phải trả nhà cung cấp được ghi nhận trước khi tiền được chi. Mỗi lần trả tiền về sau làm giảm khoản phải trả tương ứng.</p>
+<p>Vì vậy:</p>
+<ul>
+<li>Đơn hàng hoặc phiếu nhập giải thích lý do phát sinh nghĩa vụ;</li>
+<li>Công nợ cho biết phần nghĩa vụ còn lại;</li>
+<li>Phiếu thu hoặc Phiếu chi xác nhận tiền đã thực sự vào hoặc ra;</li>
+<li>Sổ tiền cho biết nguồn tiền nào đã biến động và số dư sau biến động.</li>
+</ul>
+<h2 id="section-2-9">2.9. Quan hệ giữa nguồn tiền, Thu Chi, Chuyển tiền và Vốn</h2>
+<p>Nguồn tiền đại diện cho nơi doanh nghiệp nắm giữ tiền, chẳng hạn tiền mặt hoặc tài khoản ngân hàng.</p>
+<p>Thu Chi ghi nhận tiền vào hoặc ra gắn với một lý do cụ thể. Khoản thu từ bán hàng làm tăng nguồn tiền. Khoản chi trả nhà cung cấp làm giảm nguồn tiền. Khoản thu nợ hoặc trả nợ phải liên kết với nghĩa vụ đã tồn tại.</p>
+<p>Chuyển tiền nội bộ tạo một khoản giảm ở nguồn gửi và một khoản tăng ở nguồn nhận. Tổng tiền của doanh nghiệp không tăng vì giao dịch này và không hình thành doanh thu hoặc chi phí.</p>
+<p>Góp vốn làm tăng tiền và tăng phần vốn của chủ sở hữu. Rút vốn làm giảm tiền và giảm phần vốn của chủ sở hữu. Hai nghiệp vụ này không được tính như doanh thu bán hàng hoặc chi phí vận hành.</p>
+<h2 id="section-2-10">2.10. Quan hệ giữa Kho và Tài sản cố định</h2>
+<p>Tài sản cố định được hình thành khi hàng hóa đủ điều kiện đang có trong kho được xuất để đưa vào sử dụng lâu dài.</p>
+<p>Quy trình tổng quát gồm:</p>
+<ol>
+<li>Người dùng chọn hàng hóa và số lượng cần đưa vào sử dụng.</li>
+<li>Hệ thống kiểm tra quyền, kho, số lượng và điều kiện của hàng hóa.</li>
+<li>Nghiệp vụ xuất tài sản được hoàn tất và hàng hóa giảm khỏi kho.</li>
+<li>Tài sản cố định tương ứng được hình thành.</li>
+<li>Doanh nghiệp theo dõi nơi sử dụng, nguyên giá, thời gian khấu hao, hao mòn và giá trị còn lại.</li>
+</ol>
+<p>Nếu bước tạo tài sản là kết quả bắt buộc của việc xuất hàng để sử dụng, hệ thống không được để xảy ra tình trạng hàng đã giảm nhưng tài sản không được hình thành.</p>
+<h2 id="section-2-11">2.11. Quan hệ giữa vận hành và kế toán</h2>
+<p>Các chức năng vận hành ghi nhận sự kiện kinh doanh. Người bán hàng, nhân viên kho hoặc nhân viên dịch vụ thực hiện công việc thực tế mà không cần chọn tài khoản Nợ/Có.</p>
+<p>Kế toán tiếp nhận thông tin của nghiệp vụ, xác định cách hạch toán phù hợp, lập hoặc kiểm tra bút toán và ghi sổ. Luồng tổng quát:</p>
+<p>Nghiệp vụ vận hành → Nội dung cần hạch toán → Quy tắc xác định tài khoản → Bút toán → Ghi sổ → Sổ kế toán.</p>
+<p>Chỉ bút toán đã ghi sổ mới tham gia các sổ và báo cáo kế toán tương ứng. Việc một giao dịch đã hoàn tất trong vận hành không đồng nghĩa giao dịch đó đã được ghi sổ.</p>
+<p>Khi nghiệp vụ vận hành bị điều chỉnh sau khi đã được hạch toán, hệ thống phải áp dụng quy trình điều chỉnh hoặc hoàn tác kế toán phù hợp, không được âm thầm làm biến mất lịch sử đã ghi sổ.</p>
+<h2 id="section-2-12">2.12. Quan hệ giữa nghiệp vụ và báo cáo</h2>
+<p>Báo cáo nhận kết quả từ nghiệp vụ đã phát sinh và tổng hợp theo một định nghĩa thống nhất. Mỗi chỉ số cần trả lời rõ:</p>
+<ul>
+<li>Đang đo điều gì?</li>
+<li>Lấy thời điểm nào làm căn cứ?</li>
+<li>Trạng thái nào được tính hoặc bị loại?</li>
+<li>Phạm vi doanh nghiệp và chi nhánh nào được áp dụng?</li>
+<li>Trả hàng, hủy, xóa và hoàn tác được xử lý ra sao?</li>
+<li>Combo được tính theo gói hay theo từng thành phần trong chỉ số đó?</li>
+<li>Kết quả được làm mới tại thời điểm nào?</li>
+</ul>
+<p>Người dùng không chỉnh số báo cáo trực tiếp. Khi kết quả không đúng, cần truy về giao dịch tạo ra số liệu và xử lý theo nghiệp vụ thích hợp.</p>
+<h2 id="section-2-13">2.13. Các luồng xuyên hệ thống tiêu biểu</h2>
+<h3 id="section-2-13-1">2.13.1. Bán hàng</h3>
+<ol>
+<li>Hệ thống xác định người dùng, doanh nghiệp, chi nhánh và cấu hình có hiệu lực.</li>
+<li>Người dùng chọn khách hàng, sản phẩm, dịch vụ, kênh bán và các nội dung liên quan.</li>
+<li>Hệ thống xác định giá, thuế, ưu đãi, phụ thu và số tiền phải trả.</li>
+<li>Nghiệp vụ được xác nhận theo quy trình của Retail, F&amp;B, Service, Facility hoặc Hospitality.</li>
+<li>Hệ thống xử lý yêu cầu xuất hàng hoặc tiêu hao nếu có. Phiếu xuất có thể được hoàn thành, bị chặn hoặc được giữ chưa hoàn thành tùy số lượng và cấu hình thiếu tồn.</li>
+<li>Hệ thống ghi nhận thanh toán và phần công nợ còn lại.</li>
+<li>Hệ thống xử lý Membership, quyền sử dụng dịch vụ và hóa đơn khi áp dụng.</li>
+<li>Thông tin được chuyển đến kế toán và báo cáo.</li>
+</ol>
+<p>Nếu một kết quả bắt buộc không thể hoàn thành, nghiệp vụ phải được dừng hoặc hoàn tác trong phạm vi phù hợp. Nếu lỗi xảy ra ở một dịch vụ bên ngoài sau khi giao dịch chính đã hoàn tất, hệ thống giữ nguyên giao dịch chính, ghi nhận lỗi và cho phép xử lý lại.</p>
+<h3 id="section-2-13-2">2.13.2. Nhập mua ngoài</h3>
+<ol>
+<li>Người dùng chọn nhà cung cấp, kho nhận, hàng hóa, số lượng và giá trị mua.</li>
+<li>Hệ thống kiểm tra phạm vi, trạng thái hàng hóa và điều kiện kho.</li>
+<li>Khi phiếu nhập hoàn tất, hàng tồn và giá trị nhập được ghi nhận.</li>
+<li>Khoản đã trả được ghi nhận vào dòng tiền.</li>
+<li>Phần chưa trả hình thành công nợ nhà cung cấp.</li>
+<li>Thông tin được chuyển đến kế toán và báo cáo.</li>
+</ol>
+<h3 id="section-2-13-3">2.13.3. Sản phẩm hoặc dịch vụ có định lượng</h3>
+<ol>
+<li>Nhu cầu phát sinh từ bán hàng, thực hiện dịch vụ hoặc yêu cầu sản xuất riêng.</li>
+<li>Hệ thống xác định công thức áp dụng và lượng thực hiện.</li>
+<li>Nguyên liệu cần tiêu hao được tính toán.</li>
+<li>Hệ thống ghi nhận lần sản xuất hoặc chế biến.</li>
+<li>Kho xuất nguyên liệu và nhập đầu ra nếu đầu ra được quản lý tồn.</li>
+<li>Giá trị liên quan được cung cấp cho kế toán và báo cáo.</li>
+</ol>
+<h3 id="section-2-13-4">2.13.4. Tài sản cố định</h3>
+<ol>
+<li>Hàng hóa đủ điều kiện đang có trong kho được chọn để đưa vào sử dụng.</li>
+<li>Nghiệp vụ xuất tài sản làm giảm hàng trong kho.</li>
+<li>Tài sản cố định được hình thành với nguyên giá và nơi sử dụng.</li>
+<li>Hệ thống theo dõi khấu hao và thay đổi trong vòng đời tài sản.</li>
+<li>Kết quả được chuyển đến kế toán và báo cáo tài sản.</li>
+</ol>
+<h3 id="section-2-13-5">2.13.5. Trả hàng hoặc hoàn tác đơn</h3>
+<ol>
+<li>Hệ thống kiểm tra quyền, trạng thái đơn, thời hạn và chính sách trả.</li>
+<li>Người dùng chọn toàn bộ hoặc một phần nội dung cần trả và xác nhận lý do.</li>
+<li>Hệ thống xác định số tiền cần hoàn hoặc nghĩa vụ cần điều chỉnh.</li>
+<li>Hàng trực tiếp có theo dõi tồn được nhập trả Hoàn thành trong lần xác nhận khách trả hoặc không nhận.</li>
+<li>Điểm đã tích được thu hồi theo cách xử lý Membership hiện tại; điểm đã tiêu không được hoàn lại trong nhánh trả hàng nhưng được đảo khi Xóa toàn bộ đơn có quyền.</li>
+<li>Hóa đơn, kế toán và báo cáo được xử lý theo quy trình điều chỉnh tương ứng.</li>
+<li>Toàn bộ kết quả được lưu dấu vết và liên kết với đơn ban đầu.</li>
+</ol>
+<h2 id="section-2-14">2.14. Tác động xuyên phân hệ</h2>
+<p>Khi thiết kế hoặc kiểm thử một nghiệp vụ, phải đánh giá đầy đủ các hướng tác động sau:</p>
+<ul>
+<li>Tổ chức và quyền: ai được làm, ở doanh nghiệp và chi nhánh nào.</li>
+<li>Cấu hình: thiết lập nào quyết định hành vi.</li>
+<li>Danh mục: đối tượng nào là đầu vào và có đang hoạt động hay không.</li>
+<li>Bán hàng: giá trị giao dịch và trạng thái đơn thay đổi thế nào.</li>
+<li>Kho: hàng hóa nào nhập, xuất hoặc không thay đổi.</li>
+<li>Tài chính: tiền nào vào, ra hoặc chưa phát sinh.</li>
+<li>Công nợ: nghĩa vụ nào tăng, giảm hoặc được tất toán.</li>
+<li>Membership và dịch vụ: điểm hoặc quyền sử dụng nào thay đổi.</li>
+<li>Hóa đơn: có cần lập mới, điều chỉnh, thay thế hoặc hủy không.</li>
+<li>Kế toán: nội dung nào cần hạch toán hoặc điều chỉnh.</li>
+<li>Báo cáo: chỉ số nào tăng, giảm hoặc cần tính lại.</li>
+</ul>
+<h2 id="section-2-15">2.15. Giao diện và trải nghiệm xuyên hệ thống</h2>
+<p>Giao diện phải giúp người dùng nhận biết rõ doanh nghiệp, chi nhánh và phạm vi đang làm việc. Chỉ những hành động phù hợp với quyền, trạng thái và cấu hình mới được hiển thị hoặc cho phép sử dụng.</p>
+<p>Trước thao tác có ảnh hưởng lớn, hệ thống phải thông báo rõ hậu quả dự kiến. Sau khi thực hiện, hệ thống phải thể hiện trạng thái cuối cùng và hướng dẫn khi còn bước tiếp theo, chẳng hạn xử lý lại hóa đơn điện tử bị lỗi.</p>
+<p>Các thông báo lỗi phải nêu được lý do nghiệp vụ như không đủ quyền, sai chi nhánh, đối tượng đã ngừng hoạt động, trạng thái không cho phép, thiếu cấu hình hoặc có nghiệp vụ phụ thuộc. Không sử dụng một thông báo chung khiến người dùng không biết cách khắc phục.</p>
+<h2 id="section-2-16">2.16. Audit và truy vết</h2>
+<p>Mỗi kết quả quan trọng phải có thể truy về nghiệp vụ ban đầu. Các thao tác nhạy cảm cần xác định được người thực hiện, thời điểm, hành động, lý do và nội dung thay đổi.</p>
+<p>Khi một nghiệp vụ bị hủy, trả hoặc xóa hợp lệ, dấu vết phải cho biết phạm vi đã hoàn tác. Khi tích hợp ngoài thất bại, dấu vết phải cho biết yêu cầu nào thất bại, trạng thái hiện tại và khả năng xử lý lại.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="01-gioi-thieu-he-thong-pos.html">← 1. Giới thiệu hệ thống POS</a><a href="03-nguyen-tac-nghiep-vu-dung-chung.html">3. Các nguyên tắc nghiệp vụ dùng chung →</a></nav></div></body></html>

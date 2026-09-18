@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn quản lý Loại và Mẫu tài liệu | VIN-HRM</title>
+<style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #fff; color: #1f2937; font-family: Roboto, Arial, sans-serif; font-size: 10.5pt; line-height: 1.42; }
+.cover { min-height: 245mm; position: relative; page-break-after: always; break-after: page; }
+.cover-head { text-align: center; }
+.cover-kicker { margin: 0 0 18pt; color: #1f2937; font-size: 12pt; font-weight: 700; text-align: center; text-transform: uppercase; }
+.cover-title { margin: 0 0 5pt; padding: 0; border: 0; color: #1f2937; font-size: 28pt; font-weight: 700; line-height: 1.12; text-align: center; }
+.cover-sub { margin: 0; color: #4b5563; font-size: 13.5pt; line-height: 1.35; text-align: center; }
+.cover-meta { margin-top: 28mm; font-size: 10.5pt; line-height: 1.38; }
+.cover-meta p { margin: 2pt 0; }
+.cover-meta strong { font-weight: 700; }
+.cover-toc { margin-top: 27mm; }
+.cover-toc h2 { margin: 0 0 10pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; font-weight: 700; line-height: 1.2; text-transform: uppercase; }
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 { margin: 0 0 8pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; font-weight: 700; line-height: 1.2; page-break-after: avoid; break-after: avoid; }
+h2 { margin: 18pt 0 3pt; padding: 0; border: 0; color: #111827; font-size: 13.5pt; font-weight: 700; line-height: 1.25; page-break-after: avoid; break-after: avoid; }
+h3 { margin: 14pt 0 3pt; color: #111827; font-size: 11.5pt; font-weight: 700; line-height: 1.3; page-break-after: avoid; break-after: avoid; }
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 3pt; }
+.lead { margin: 0 0 12pt; padding: 9pt 11pt; border: 1px solid #9ca3af; background: #eef4f8; color: #1f2937; font-size: 10.5pt; }
+.route { display: inline; padding: 1pt 3pt; background: #edf2f7; color: #111827; font-weight: 700; }
+.code { font-family: Consolas, "Courier New", monospace; padding: 1pt 3pt; background: #edf2f7; color: #111827; font-size: 9.5pt; }
+table { width: 100%; margin: 8pt 0 12pt; border-collapse: collapse; border-spacing: 0; table-layout: fixed; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; break-inside: avoid; }
+th { padding: 6pt; border: 1px solid #9ca3af; background: #d9e7f2; color: #111827; font-size: 9.5pt; font-weight: 700; line-height: 1.3; text-align: left; vertical-align: middle; }
+td { padding: 6pt; border: 1px solid #b8c0ca; background: #fff; color: #1f2937; font-size: 9.5pt; line-height: 1.35; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.steps { margin: 6pt 0 11pt 24pt; padding-left: 15pt; }
+.callout-anchor { margin: 0 !important; padding: 0; font-size: 1pt; line-height: 1pt; page-break-after: avoid; break-after: avoid; }
+.callout { width: 100%; margin: 10pt 0; padding: 0; border: 1px solid #9ca3af; border-collapse: separate; background: #eef4f8; page-break-inside: avoid; break-inside: avoid; }
+.callout td { padding: 9pt 11pt; border: 0; background: transparent !important; color: #1f2937; font-size: 10.5pt; line-height: 1.35; vertical-align: top; }
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.info { background: #eef4f8; border-color: #9ca3af; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+figure { margin: 12pt 0 14pt; page-break-inside: avoid; break-inside: avoid; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid #9ca3af; }
+figcaption { margin-top: 4pt; color: #4b5563; font-size: 9pt; font-style: italic; line-height: 1.3; text-align: center; }
+.page-break { page-break-before: always; break-before: page; }
+.checklist li { break-inside: avoid; }
+.footer-note { margin-top: 18pt; padding-top: 7pt; border-top: 1px solid #9ca3af; color: #4b5563; font-size: 8.8pt; }
+@media screen {
+  body { background: #eef1f4; }
+  .cover, .doc { width: 210mm; margin: 12mm auto; padding: 25.4mm; background: #fff; box-shadow: 0 2px 16px rgba(17,24,39,.10); }
+  .cover { min-height: 297mm; }
+  .doc { min-height: 297mm; }
+}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN QUẢN LÝ<br>LOẠI VÀ MẪU TÀI LIỆU</p>
+    <p class="cover-sub">Phân nhóm tài liệu, xây dựng mẫu Word/PDF và khai báo dữ liệu tự động cho nghiệp vụ</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn quản lý Loại và Mẫu tài liệu</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 14/08/2026</p>
+    <p><strong>Đối tượng:</strong> quản trị viên hệ thống, cán bộ nhân sự và người được phân quyền quản lý tài liệu mẫu</p>
+    <p><strong>Nguồn:</strong> VIN-HRM - tài liệu nghiệp vụ, mã nguồn và phần mềm thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Khái niệm, mối quan hệ và quyền truy cập</li>
+      <li>Quản lý Loại tài liệu</li>
+      <li>Quản lý Mẫu tài liệu</li>
+      <li>Mẫu Word và mã thay thế</li>
+      <li>Mẫu PDF và vùng dữ liệu</li>
+      <li>Mẫu Chứng nhận đào tạo</li>
+      <li>Cấu hình liên quan, lỗi thường gặp và kiểm tra trước khi dùng</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích và phạm vi</h1>
+<p class="lead">Loại tài liệu là danh mục dùng để phân nhóm. Mẫu tài liệu là một file Word hoặc PDF kèm quy tắc điền dữ liệu. Khi nghiệp vụ cần tạo tài liệu, người dùng chọn mẫu đang hoạt động, nhập các thông tin được yêu cầu và hệ thống tạo tài liệu theo bố cục đã chuẩn bị.</p>
+<p>Tài liệu này hướng dẫn toàn bộ thao tác tìm kiếm, tạo, sửa, ngừng sử dụng và xóa Loại tài liệu/Mẫu tài liệu. Nội dung cũng giải thích từng lựa chọn của trường dữ liệu, cách chuẩn bị file Word, cách đặt vùng trên PDF và trường hợp đặc biệt của chứng nhận đào tạo.</p>
+
+<h2>2. Mối quan hệ giữa Loại tài liệu và Mẫu tài liệu</h2>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Thành phần</th><th>Vai trò</th></tr></thead>
+  <tbody>
+    <tr><td>Loại tài liệu</td><td>Là nhãn phân nhóm, ví dụ “Hợp đồng” hoặc “Chứng nhận đào tạo”. Một loại có thể chứa nhiều mẫu.</td></tr>
+    <tr><td>Mẫu tài liệu</td><td>Là bản thiết kế cụ thể gồm tên, loại, file nguồn, trạng thái và danh sách trường dữ liệu. Mỗi mẫu chỉ thuộc một loại.</td></tr>
+    <tr><td>Trường dữ liệu</td><td>Là thông tin sẽ được nhập hoặc lấy tự động khi tạo tài liệu, ví dụ họ tên, ngày ký, số tiền hoặc lựa chọn Có/Không.</td></tr>
+    <tr><td>Tài liệu kết quả</td><td>Là bản được sinh từ file mẫu sau khi các trường dữ liệu đã có giá trị.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout info"><tbody><tr><td><strong>Thứ tự thiết lập nên áp dụng</strong><p>Tạo Loại tài liệu trước, chuẩn bị file Word/PDF đúng quy cách, sau đó tạo Mẫu tài liệu và khai báo các trường. Cuối cùng phải chạy thử trong nghiệp vụ trước khi ban hành.</p></td></tr></tbody></table>
+
+<h2>3. Quyền truy cập và phạm vi dữ liệu</h2>
+<p>Mở nhóm <span class="route">Hệ thống</span>, sau đó chọn <span class="route">Loại tài liệu</span> hoặc <span class="route">Mẫu tài liệu</span>. Người dùng cần có quyền <b>Cấu hình</b> hoặc quyền <b>Tài liệu mẫu</b>. Nếu không thấy chức năng, nút tạo hoặc nút sửa, liên hệ quản trị viên phân quyền.</p>
+<p>Danh mục được quản lý theo doanh nghiệp đang đăng nhập, không cấu hình riêng theo chi nhánh. Người dùng của doanh nghiệp khác không nhìn thấy các loại và mẫu của doanh nghiệp hiện tại.</p>
+
+<h1 class="page-break">4. Quản lý Loại tài liệu</h1>
+<figure>
+  <img src="images/01-danh-sach-loai-tai-lieu.png" alt="Hình 1. Danh sách loại tài liệu trên VIN-HRM.">
+  <figcaption>Hình 1. Danh sách Loại tài liệu, ô tìm kiếm, nút tạo mới và các biểu tượng thao tác.</figcaption>
+</figure>
+
+<h2>4.1. Đọc danh sách</h2>
+<table>
+  <colgroup><col style="width:28%"><col style="width:72%"></colgroup>
+  <thead><tr><th>Thành phần</th><th>Ý nghĩa và cách sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Tìm theo tên loại tài liệu</td><td>Nhập toàn bộ hoặc một phần tên. Hệ thống hỗ trợ tìm theo tên có dấu và dạng không dấu; kết quả tự tải lại sau khi ngừng nhập trong thời gian ngắn.</td></tr>
+    <tr><td>Xóa bộ lọc</td><td>Xóa từ khóa và tải lại toàn bộ danh sách.</td></tr>
+    <tr><td>Tên loại tài liệu</td><td>Tên phân nhóm được hiển thị khi tạo hoặc lọc Mẫu tài liệu. Có thể chọn tiêu đề cột để sắp xếp tăng/giảm.</td></tr>
+    <tr><td>Biểu tượng bút</td><td>Mở biểu mẫu sửa tên.</td></tr>
+    <tr><td>Biểu tượng thùng rác</td><td>Xóa loại chưa được mẫu nào sử dụng. Biểu tượng màu xám nghĩa là loại đã có mẫu liên kết nên không thể xóa.</td></tr>
+    <tr><td>Hiển thị / trang</td><td>Chọn số dòng trên một trang và dùng nút chuyển trang ở góc phải.</td></tr>
+  </tbody>
+</table>
+
+<h2>4.2. Tạo Loại tài liệu</h2>
+<figure>
+  <img src="images/02-tao-loai-tai-lieu.png" alt="Hình 2. Biểu mẫu tạo loại tài liệu.">
+  <figcaption>Hình 2. Biểu mẫu tạo Loại tài liệu chỉ yêu cầu một tên duy nhất trong doanh nghiệp.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Chọn <b>TẠO MỚI</b>.</li>
+  <li>Nhập <b>Tên loại tài liệu</b>. Trường này bắt buộc, tối đa 200 ký tự.</li>
+  <li>Dùng tên mô tả đúng nhóm nghiệp vụ, ví dụ “Quyết định nhân sự”, “Biên bản bàn giao” hoặc “Hợp đồng”.</li>
+  <li>Chọn <b>Lưu</b>. Nếu tên đã tồn tại, đổi sang tên khác; hệ thống không cho phép trùng tên trong cùng doanh nghiệp.</li>
+</ol>
+
+<h2>4.3. Sửa và xóa</h2>
+<p>Chọn biểu tượng <b>bút</b>, sửa tên rồi chọn <b>Lưu</b>. Việc đổi tên làm thay đổi tên loại hiển thị trên các Mẫu tài liệu đang liên kết, nhưng không thay file mẫu và trường dữ liệu của các mẫu đó.</p>
+<p>Muốn xóa, chọn biểu tượng <b>thùng rác</b> và xác nhận. Nếu loại đã được ít nhất một Mẫu tài liệu sử dụng, nút xóa bị vô hiệu hóa. Cần chuyển các mẫu sang loại khác hoặc xử lý các mẫu liên quan trước; không nên xóa dữ liệu chỉ để làm sạch danh sách.</p>
+
+<h1 class="page-break">5. Quản lý Mẫu tài liệu</h1>
+<figure>
+  <img src="images/03-danh-sach-mau-tai-lieu.png" alt="Hình 3. Danh sách mẫu tài liệu trên VIN-HRM.">
+  <figcaption>Hình 3. Danh sách Mẫu tài liệu với bộ lọc theo từ khóa, loại và trạng thái.</figcaption>
+</figure>
+
+<h2>5.1. Bộ lọc và các cột</h2>
+<table>
+  <colgroup><col style="width:28%"><col style="width:72%"></colgroup>
+  <thead><tr><th>Thành phần</th><th>Ý nghĩa và cách sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Tìm theo tên mẫu</td><td>Tìm theo toàn bộ hoặc một phần tên. Có thể nhập từ khóa có dấu hoặc không dấu.</td></tr>
+    <tr><td>Tất cả loại tài liệu</td><td>Hiển thị mọi loại. Chọn một loại để chỉ xem các mẫu thuộc nhóm đó.</td></tr>
+    <tr><td>Tất cả trạng thái</td><td><b>Tất cả trạng thái</b>: xem toàn bộ; <b>Hoạt động</b>: mẫu được phép chọn trong nghiệp vụ; <b>Ngừng hoạt động</b>: mẫu được giữ để tra cứu nhưng không đưa vào danh sách chọn cho hồ sơ mới.</td></tr>
+    <tr><td>Xóa bộ lọc</td><td>Đưa cả ba điều kiện về mặc định rồi tải lại danh sách.</td></tr>
+    <tr><td>Tên mẫu</td><td>Tên nhận biết của mẫu. Tên phải duy nhất trong doanh nghiệp.</td></tr>
+    <tr><td>Loại tài liệu</td><td>Nhóm mà mẫu đang thuộc về.</td></tr>
+    <tr><td>File</td><td>Tên file Word/PDF đã lưu. Chọn vào tên file để mở hoặc tải xem tùy trình duyệt.</td></tr>
+    <tr><td>Trạng thái</td><td>Nhãn xanh “Hoạt động” hoặc nhãn “Ngừng hoạt động”.</td></tr>
+    <tr><td>Thao tác</td><td>Biểu tượng bút để cập nhật; thùng rác để xóa khi mẫu chưa phát sinh dữ liệu liên quan.</td></tr>
+  </tbody>
+</table>
+
+<h2>5.2. Tạo Mẫu tài liệu</h2>
+<figure>
+  <img src="images/04-tao-mau-tai-lieu.png" alt="Hình 4. Biểu mẫu tạo mẫu tài liệu.">
+  <figcaption>Hình 4. Phần thông tin chung và khu vực khai báo trường dữ liệu của Mẫu tài liệu.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Chọn <b>TẠO MỚI</b>.</li>
+  <li>Nhập <b>Tên mẫu</b>, chọn <b>Loại tài liệu</b>, nhập <b>Mô tả</b> nếu cần.</li>
+  <li>Chọn <b>File mẫu</b> đúng định dạng. Với Word, hệ thống đọc các mã thay thế trong file; với PDF, hệ thống mở trình bố trí vùng dữ liệu.</li>
+  <li>Chọn <b>Trạng thái</b>.</li>
+  <li>Kiểm tra hoặc bổ sung danh sách trường thông tin.</li>
+  <li>Chọn <b>Lưu</b> sau khi toàn bộ trường bắt buộc, mã thay thế hoặc vị trí PDF đã hợp lệ.</li>
+</ol>
+
+<h2>5.3. Ý nghĩa từng trường thông tin chung</h2>
+<table>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Trường</th><th>Ý nghĩa, giới hạn và khuyến nghị</th></tr></thead>
+  <tbody>
+    <tr><td>Tên mẫu *</td><td>Bắt buộc, tối đa 200 ký tự và không trùng tên mẫu khác trong doanh nghiệp. Nên gồm loại tài liệu, đối tượng hoặc phiên bản, ví dụ “Hợp đồng lao động - Khối văn phòng - 2026”.</td></tr>
+    <tr><td>Loại tài liệu *</td><td>Bắt buộc. Dùng để phân nhóm và lọc danh sách. Nút dấu cộng cho phép tạo nhanh một loại mới nếu tài khoản có quyền phù hợp; tên tạo nhanh vẫn tối đa 200 ký tự và không được trùng.</td></tr>
+    <tr><td>Mô tả</td><td>Không bắt buộc, tối đa 500 ký tự. Nên ghi mục đích, đối tượng, thời điểm áp dụng hoặc ghi chú về dữ liệu cần nhập.</td></tr>
+    <tr><td>File mẫu *</td><td>Bắt buộc. Hỗ trợ <b>.docx</b> và <b>.pdf</b>; file Word cũ dạng <b>.doc</b> không được hỗ trợ. Khi thay file trong chế độ cập nhật, cần kiểm tra lại toàn bộ mã hoặc vị trí vì file cũ được thay thế.</td></tr>
+    <tr><td>Trạng thái</td><td><b>Hoạt động</b>: xuất hiện trong danh sách mẫu có thể sử dụng; <b>Ngừng hoạt động</b>: không dùng cho hồ sơ mới nhưng vẫn giữ dữ liệu và lịch sử liên quan. Mẫu mới mặc định là Hoạt động.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Nên ngừng hoạt động thay vì xóa mẫu đã dùng</strong><p>Nếu mẫu đã được gắn với phiên bản khóa học, đã phát sinh chứng nhận hoặc có dữ liệu liên quan, hệ thống từ chối xóa. Mở biểu tượng bút, đổi Trạng thái thành “Ngừng hoạt động” và lưu để giữ tính toàn vẹn của hồ sơ cũ.</p></td></tr></tbody></table>
+
+<h1 class="page-break">6. Khai báo trường thông tin</h1>
+<figure>
+  <img src="images/05-truong-thong-tin-mau.png" alt="Hình 5. Một dòng khai báo trường thông tin trong mẫu tài liệu.">
+  <figcaption>Hình 5. Một trường dữ liệu gồm mã, tên hiển thị, loại dữ liệu, trạng thái bắt buộc và thứ tự.</figcaption>
+</figure>
+
+<h2>6.1. Ý nghĩa các cột</h2>
+<table>
+  <colgroup><col style="width:24%"><col style="width:76%"></colgroup>
+  <thead><tr><th>Cột</th><th>Cách khai báo</th></tr></thead>
+  <tbody>
+    <tr><td>Mã thông tin</td><td>Khóa kỹ thuật dùng để ghép dữ liệu với file mẫu, tối đa 100 ký tự. Nên dùng chữ không dấu, không khoảng trắng; file Word chỉ nhận chữ cái, chữ số, dấu gạch dưới và dấu chấm. Ví dụ <span class="code">EmployeeName</span> hoặc <span class="code">Contract.SignDate</span>.</td></tr>
+    <tr><td>Tên thông tin</td><td>Nhãn tiếng Việt hiển thị cho người nhập dữ liệu, tối đa 200 ký tự, ví dụ “Họ và tên nhân viên”.</td></tr>
+    <tr><td>Loại dữ liệu</td><td>Quyết định kiểu ô nhập và cách kiểm tra dữ liệu khi nghiệp vụ sử dụng mẫu.</td></tr>
+    <tr><td>Bắt buộc</td><td>Bật: người dùng phải cung cấp giá trị trước khi tạo/tải tài liệu; tắt: có thể để trống. Với trường hệ thống của chứng nhận đào tạo, các trường chuẩn được đánh dấu bắt buộc tự động.</td></tr>
+    <tr><td>Thứ tự</td><td>Số nguyên dương xác định thứ tự hiển thị của các ô nhập. Nên đánh số liên tục 1, 2, 3… để biểu mẫu dễ theo dõi.</td></tr>
+    <tr><td>Thùng rác</td><td>Xóa dòng trường khỏi mẫu đang chỉnh sửa. Với Word, sau khi xóa trường phải xóa mã tương ứng trong file; nếu không, hệ thống sẽ báo không khớp khi lưu.</td></tr>
+  </tbody>
+</table>
+
+<h2>6.2. Bốn lựa chọn Loại dữ liệu</h2>
+<table>
+  <colgroup><col style="width:22%"><col style="width:78%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa và khi nên dùng</th></tr></thead>
+  <tbody>
+    <tr><td>Chữ</td><td>Hiển thị ô nhập văn bản. Dùng cho họ tên, địa chỉ, chức danh, ghi chú, mã hồ sơ hoặc nội dung có cả chữ và số.</td></tr>
+    <tr><td>Số</td><td>Hiển thị ô nhập số. Dùng cho số tiền, số lượng, tỷ lệ hoặc giá trị cần giới hạn ở dữ liệu số.</td></tr>
+    <tr><td>Ngày</td><td>Hiển thị bộ chọn ngày. Cách trình bày ngày tuân theo định dạng ngày của hệ thống; dùng cho ngày ký, ngày hiệu lực, ngày hoàn thành.</td></tr>
+    <tr><td>Có/Không</td><td>Hiển thị danh sách “Có” và “Không”. Dùng cho điều kiện nhị phân, ví dụ có thử việc, có phụ lục hoặc đã nhận bàn giao.</td></tr>
+  </tbody>
+</table>
+
+<h2>6.3. Quy tắc chung</h2>
+<ul>
+  <li>Mã thông tin và Tên thông tin không được để trống.</li>
+  <li>Không được khai báo hai Mã thông tin giống nhau trong cùng một mẫu; việc so khớp không phân biệt chữ hoa/chữ thường.</li>
+  <li>Với mẫu PDF phải có ít nhất một trường và mọi trường đều phải được đặt vùng.</li>
+  <li>Với mẫu Word, danh sách trường và danh sách mã thay thế trong file phải khớp hai chiều.</li>
+</ul>
+
+<h1 class="page-break">7. Chuẩn bị Mẫu Word (.docx)</h1>
+<p>Mẫu Word giữ nguyên bố cục, phông chữ, bảng biểu và phần văn bản cố định của file. Tại nơi cần dữ liệu động, chèn mã theo dạng <span class="code">{{MãThôngTin}}</span>. Ví dụ, nếu Mã thông tin là <span class="code">EmployeeName</span>, trong file phải có <span class="code">{{EmployeeName}}</span>.</p>
+
+<h2>7.1. Cách tạo đúng mã thay thế</h2>
+<ol class="steps">
+  <li>Mở file bằng Microsoft Word và xác định từng vị trí cần hệ thống điền dữ liệu.</li>
+  <li>Gõ hai dấu ngoặc nhọn mở, Mã thông tin và hai dấu ngoặc nhọn đóng, ví dụ <span class="code">{{ContractNo}}</span>.</li>
+  <li>Mã chỉ nên gồm chữ cái tiếng Anh, chữ số, dấu gạch dưới hoặc dấu chấm; không dùng khoảng trắng và ký tự tiếng Việt có dấu.</li>
+  <li>Lưu file ở định dạng <b>.docx</b>, không lưu dạng <b>.doc</b>.</li>
+  <li>Upload file vào biểu mẫu. Hệ thống đọc các mã theo thứ tự xuất hiện đầu tiên và tự tạo danh sách trường ban đầu.</li>
+  <li>Đổi Tên thông tin sang tiếng Việt dễ hiểu, chọn đúng Loại dữ liệu/Bắt buộc, rồi lưu.</li>
+</ol>
+
+<h2>7.2. Kiểm tra khớp hai chiều</h2>
+<table>
+  <colgroup><col style="width:42%"><col style="width:58%"></colgroup>
+  <thead><tr><th>Thông báo</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Mã trường chưa có trong file mẫu</td><td>Mở file Word và thêm đúng <span class="code">{{MãThôngTin}}</span>, hoặc xóa trường dư khỏi danh sách.</td></tr>
+    <tr><td>File mẫu có mã chưa khai báo trường</td><td>Thêm một dòng trường có Mã trùng với mã trong Word, hoặc xóa mã không dùng khỏi file.</td></tr>
+    <tr><td>Không tìm thấy mã dạng {{MãThôngTin}}</td><td>Kiểm tra file đúng .docx và mã có đủ hai cặp ngoặc nhọn. File vẫn có thể được tải lên nhưng sẽ không có trường dữ liệu tự động.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout info"><tbody><tr><td><strong>Định dạng của giá trị thay thế</strong><p>Dữ liệu được điền vào vị trí mã thay thế và kế thừa cách trình bày của đoạn văn bản trong Word. Hãy định dạng mã trước khi upload để kết quả có đúng phông chữ, cỡ chữ và căn lề mong muốn.</p></td></tr></tbody></table>
+
+<h1 class="page-break">8. Chuẩn bị Mẫu PDF (.pdf)</h1>
+<p>Với PDF, file gốc được dùng làm nền cố định. Hệ thống không tìm mã trong nội dung PDF; thay vào đó, người quản trị khai báo trường rồi vẽ một vùng hiển thị cho từng trường trực tiếp trên từng trang.</p>
+<figure>
+  <img src="images/06-bo-tri-du-lieu-pdf.png" alt="Hình 6. Mẫu chứng nhận PDF và danh sách các trường đã đặt vùng.">
+  <figcaption>Hình 6. Mẫu PDF thực tế với danh sách trường chuẩn và trạng thái “Đã đặt” trên trang 1.</figcaption>
+</figure>
+
+<h2>8.1. Đặt vùng hiển thị</h2>
+<ol class="steps">
+  <li>Upload file PDF. Nếu là mẫu thông thường, chọn <b>Thêm thông tin</b> và khai báo các trường trước.</li>
+  <li>Trong phần <b>Bố trí dữ liệu trên PDF</b>, chọn một trường ở bảng bên phải.</li>
+  <li>Chọn <b>Đặt vị trí</b> hoặc <b>Đặt lại vị trí</b>.</li>
+  <li>Giữ và kéo chuột trên PDF để tạo vùng chứa dữ liệu. Vùng phải nằm hoàn toàn trong trang.</li>
+  <li>Lặp lại cho đến khi bộ đếm cho biết toàn bộ trường đã được đặt.</li>
+  <li>Dùng nút chuyển trang và phóng to/thu nhỏ để thao tác chính xác trên PDF nhiều trang.</li>
+</ol>
+
+<figure>
+  <img src="images/07-tuy-chon-hien-thi-pdf.png" alt="Hình 7. Các tùy chọn trình bày dữ liệu trên PDF.">
+  <figcaption>Hình 7. Vùng dữ liệu, danh sách trường và các lựa chọn trình bày trên mẫu PDF thực tế.</figcaption>
+</figure>
+
+<h2>8.2. Ý nghĩa các lựa chọn trình bày</h2>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Trang</td><td>Cho biết trang PDF đang xem và trang chứa vùng của trường. Có thể chuyển trang bằng nút mũi tên.</td></tr>
+    <tr><td>Phóng to/thu nhỏ</td><td>Chỉ thay đổi tỷ lệ xem để đặt vùng chính xác, không làm thay đổi kích thước trang PDF kết quả.</td></tr>
+    <tr><td>Đặt lại vị trí</td><td>Vẽ lại vùng của trường khi vị trí hoặc kích thước chưa đúng.</td></tr>
+    <tr><td>Xóa vị trí</td><td>Gỡ vùng hiện tại. Mẫu không thể lưu nếu còn trường chưa đặt.</td></tr>
+    <tr><td>Cỡ chữ</td><td>Cỡ chữ ban đầu khi điền dữ liệu, cho phép từ 6 đến 96. Chọn theo kích thước vùng và thiết kế của file nền.</td></tr>
+    <tr><td>Căn chữ - Trái</td><td>Căn giá trị sát phía trái của vùng; phù hợp với đoạn nội dung hoặc dữ liệu đặt sau nhãn.</td></tr>
+    <tr><td>Căn chữ - Giữa</td><td>Căn giá trị giữa vùng; phù hợp với tiêu đề, họ tên trên chứng nhận.</td></tr>
+    <tr><td>Căn chữ - Phải</td><td>Căn giá trị sát phía phải; phù hợp với số, ngày hoặc dữ liệu cần thẳng cột.</td></tr>
+    <tr><td>In đậm</td><td>Bật để dữ liệu được vẽ bằng kiểu chữ đậm; tắt để dùng chữ thường.</td></tr>
+    <tr><td>Tự co chữ</td><td>Khi bật, hệ thống giảm dần cỡ chữ đến mức tối thiểu để giá trị dài vừa vùng. Khi tắt, dữ liệu giữ cỡ đã chọn và phần vượt vùng có thể bị cắt.</td></tr>
+    <tr><td>Màu chữ</td><td>Chọn màu trực quan. Hệ thống lưu theo mã màu dạng <span class="code">#RRGGBB</span> hoặc <span class="code">#AARRGGBB</span>; mặc định là màu xanh đen <span class="code">#111827</span>.</td></tr>
+  </tbody>
+</table>
+
+<h1>9. Trường hợp đặc biệt: Chứng nhận đào tạo</h1>
+<p>Khi Loại tài liệu có tên <b>Chứng nhận đào tạo</b>, hệ thống áp dụng bộ quy tắc riêng để phục vụ mô-đun Đào tạo. File bắt buộc là PDF; sau khi upload, hệ thống tự thêm các trường chuẩn. Người quản trị không tự thêm/xóa trường chuẩn mà chỉ đặt vị trí và kiểu trình bày.</p>
+<table>
+  <colgroup><col style="width:29%"><col style="width:31%"><col style="width:40%"></colgroup>
+  <thead><tr><th>Thông tin hiển thị</th><th>Mã hệ thống</th><th>Dữ liệu được lấy</th></tr></thead>
+  <tbody>
+    <tr><td>Tên học viên</td><td><span class="code">EmployeeName</span></td><td>Họ tên học viên tại thời điểm cấp chứng nhận.</td></tr>
+    <tr><td>Tên khóa học</td><td><span class="code">CourseName</span></td><td>Tên khóa học học viên đã hoàn thành.</td></tr>
+    <tr><td>Ngày hoàn thành</td><td><span class="code">CompletedAt</span></td><td>Ngày học viên hoàn thành khóa học.</td></tr>
+    <tr><td>Số chứng nhận</td><td><span class="code">CertificateNo</span></td><td>Số chứng nhận duy nhất do hệ thống phát sinh.</td></tr>
+    <tr><td>Mã xác thực</td><td><span class="code">VerificationCode</span></td><td>Mã dùng để kiểm tra tính hợp lệ của chứng nhận.</td></tr>
+    <tr><td>Liên kết xác thực</td><td><span class="code">VerificationUrl</span></td><td>Đường dẫn mở trang xác thực. Khi hợp lệ, PDF kết quả tạo một liên kết có thể bấm.</td></tr>
+    <tr><td>Mã nhân viên</td><td><span class="code">EmployeeCode</span></td><td>Trường được hệ thống hỗ trợ bổ sung nếu nghiệp vụ cần hiển thị mã nhân viên.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Không đổi tên loại đặc biệt tùy tiện</strong><p>Chức năng nhận diện “Chứng nhận đào tạo” theo tên/định danh chuẩn. Việc đổi tên loại có thể làm mất bộ trường tự động hoặc khiến mẫu không xuất hiện trong cấu hình phiên bản khóa học. Chỉ thay đổi sau khi có đánh giá nghiệp vụ và kỹ thuật.</p></td></tr></tbody></table>
+
+<h2>9.1. Điều kiện để dùng trong Đào tạo</h2>
+<ul>
+  <li>Mẫu phải thuộc loại <b>Chứng nhận đào tạo</b>, file PDF và trạng thái Hoạt động.</li>
+  <li>Sáu trường chuẩn phải có đủ, đúng mã và được đánh dấu bắt buộc.</li>
+  <li>Mỗi trường phải có vùng nằm trong trang PDF, cỡ chữ từ 6 đến 96.</li>
+  <li>Tại phiên bản khóa học, chọn mẫu chứng nhận và quy trình duyệt/ký chứng nhận phù hợp.</li>
+</ul>
+
+<h1 class="page-break">10. Mô-đun sử dụng và cấu hình liên quan</h1>
+<table>
+  <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+  <thead><tr><th>Nơi sử dụng / cấu hình</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Quy trình phê duyệt - Upload tài liệu</td><td>Khi một bước yêu cầu tải tài liệu, người xử lý có thể chọn nguồn “Mẫu tài liệu” hoặc “Upload file”. Danh sách chỉ lấy các mẫu đang Hoạt động. Các trường được hiển thị theo loại dữ liệu và trạng thái Bắt buộc.</td></tr>
+    <tr><td>Đào tạo - Phiên bản khóa học</td><td>Chọn mẫu PDF hoạt động thuộc loại Chứng nhận đào tạo để hệ thống sinh chứng nhận sau khi học viên hoàn thành và quy trình duyệt/ký được đáp ứng.</td></tr>
+    <tr><td>Hệ thống - Cấu hình ngày</td><td>Trường kiểu Ngày sử dụng định dạng ngày của hệ thống khi hiển thị ô chọn ngày. Cần thống nhất định dạng trước khi người dùng nhập dữ liệu.</td></tr>
+    <tr><td>Hệ thống - Phân quyền</td><td>Quyền Cấu hình hoặc Tài liệu mẫu cho phép mở hai chức năng. Chỉ cấp cho người chịu trách nhiệm quản trị nội dung và file mẫu.</td></tr>
+    <tr><td>Phạm vi doanh nghiệp</td><td>Loại và Mẫu tài liệu thuộc doanh nghiệp, không chia theo chi nhánh. Cần đặt tên đủ rõ nếu nhiều đơn vị cùng dùng chung.</td></tr>
+  </tbody>
+</table>
+<p>Không có một khóa cấu hình chung bắt buộc khác để bật chức năng. Tuy nhiên, trạng thái mẫu, quyền người dùng, định dạng ngày, cấu hình phiên bản khóa học và cấu hình bước quy trình quyết định mẫu có xuất hiện và hoạt động đúng hay không.</p>
+
+<h2>10.1. Sửa, thay file và ngừng hoạt động</h2>
+<table>
+  <colgroup><col style="width:29%"><col style="width:71%"></colgroup>
+  <thead><tr><th>Thao tác</th><th>Điều cần lưu ý</th></tr></thead>
+  <tbody>
+    <tr><td>Sửa tên/mô tả/loại</td><td>Tên mới vẫn phải duy nhất. Nếu đổi loại, kiểm tra quy tắc đặc biệt của loại mới, nhất là Chứng nhận đào tạo.</td></tr>
+    <tr><td>Thay file Word</td><td>Danh sách mã trong file mới phải khớp danh sách trường. Kiểm tra lại định dạng, bảng biểu và vị trí thay thế.</td></tr>
+    <tr><td>Thay file PDF</td><td>Phải kiểm tra và đặt lại vùng vì kích thước trang hoặc bố cục có thể khác file cũ.</td></tr>
+    <tr><td>Ngừng hoạt động</td><td>Mở sửa, chọn Trạng thái “Ngừng hoạt động”, lưu. Mẫu không còn xuất hiện cho hồ sơ mới nhưng dữ liệu cũ được giữ.</td></tr>
+    <tr><td>Xóa</td><td>Chỉ thực hiện khi chắc chắn mẫu chưa dùng. Khi cơ sở dữ liệu có liên kết, hệ thống từ chối xóa và yêu cầu ngừng hoạt động.</td></tr>
+  </tbody>
+</table>
+
+<h1>11. Lỗi thường gặp và cách xử lý</h1>
+<table>
+  <colgroup><col style="width:43%"><col style="width:57%"></colgroup>
+  <thead><tr><th>Hiện tượng / thông báo</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Tên loại tài liệu đã tồn tại</td><td>Đổi tên loại; không tạo hai loại chỉ khác chữ hoa/chữ thường.</td></tr>
+    <tr><td>Tên mẫu đã tồn tại</td><td>Đặt tên khác thể hiện rõ phạm vi hoặc phiên bản.</td></tr>
+    <tr><td>Chỉ hỗ trợ Word (.docx) hoặc PDF (.pdf)</td><td>Chuyển file về đúng định dạng. Không đổi phần mở rộng bằng cách sửa tên file; cần dùng chức năng Lưu thành/Xuất của phần mềm soạn thảo.</td></tr>
+    <tr><td>File .doc không còn được hỗ trợ</td><td>Mở file bằng Word và lưu lại dưới dạng .docx.</td></tr>
+    <tr><td>Mã thông tin bị trùng</td><td>Giữ một mã duy nhất; phân biệt các trường bằng tên mã rõ ràng.</td></tr>
+    <tr><td>Mã trong Word và danh sách trường không khớp</td><td>Đối chiếu hai chiều; mỗi mã trong file phải có một trường và mỗi trường phải xuất hiện trong file.</td></tr>
+    <tr><td>Mẫu PDF cần ít nhất một trường</td><td>Chọn Thêm thông tin, khai báo trường rồi đặt vùng trên PDF.</td></tr>
+    <tr><td>Trường chưa được đặt vùng</td><td>Mở trình bố trí, chọn trường và kéo vùng nằm hoàn toàn trong trang.</td></tr>
+    <tr><td>Cỡ chữ không hợp lệ</td><td>Nhập giá trị từ 6 đến 96.</td></tr>
+    <tr><td>PDF không hợp lệ hoặc có mật khẩu</td><td>Dùng file PDF đọc được, không bảo vệ bằng mật khẩu; xuất lại PDF nếu cần.</td></tr>
+    <tr><td>Mẫu chứng nhận bắt buộc là PDF</td><td>Chuyển file thiết kế chứng nhận sang PDF trước khi upload.</td></tr>
+    <tr><td>Không xóa được Loại tài liệu</td><td>Loại đang được mẫu sử dụng. Chuyển hoặc xử lý các mẫu liên quan trước.</td></tr>
+    <tr><td>Không xóa được Mẫu tài liệu</td><td>Mẫu đã có dữ liệu liên quan. Chuyển trạng thái sang Ngừng hoạt động.</td></tr>
+    <tr><td>Mẫu không xuất hiện trong nghiệp vụ</td><td>Kiểm tra trạng thái Hoạt động, đúng loại, đúng doanh nghiệp và quyền truy cập; với chứng nhận, kiểm tra file PDF và loại Chứng nhận đào tạo.</td></tr>
+  </tbody>
+</table>
+
+<h2>12. Danh sách kiểm tra trước khi đưa vào sử dụng</h2>
+<ul class="checklist">
+  <li>Loại tài liệu có tên rõ ràng, không trùng và đúng nhóm nghiệp vụ.</li>
+  <li>Tên mẫu mô tả đúng phạm vi; mô tả nêu đủ đối tượng và thời điểm áp dụng.</li>
+  <li>File là .docx hoặc .pdf, mở được và không có mật khẩu.</li>
+  <li>Mẫu Word có đủ mã dạng <span class="code">{{MãThôngTin}}</span>; danh sách trường khớp hai chiều với file.</li>
+  <li>Mỗi trường có Mã, Tên, Loại dữ liệu, trạng thái Bắt buộc và Thứ tự phù hợp.</li>
+  <li>Mẫu PDF có đủ vùng, đúng trang, đúng căn chữ, cỡ chữ, màu và lựa chọn Tự co chữ.</li>
+  <li>Mẫu chứng nhận có đủ trường chuẩn và đã được chọn trong phiên bản khóa học.</li>
+  <li>Trạng thái đang Hoạt động nếu muốn dùng cho hồ sơ mới; mẫu cũ được chuyển Ngừng hoạt động thay vì xóa.</li>
+  <li>Đã chạy thử một tài liệu với dữ liệu ngắn, dài, ngày, số và Có/Không; đã kiểm tra file kết quả ở 100% tỷ lệ.</li>
+  <li>Quyền Cấu hình/Tài liệu mẫu chỉ được cấp cho người quản trị phù hợp.</li>
+</ul>
+
+<p class="footer-note">Tài liệu được biên soạn từ hành vi của phiên bản VIN-HRM đang chạy ngày 14/08/2026. Khi phần mềm được nâng cấp, tên nút, quy tắc file hoặc phạm vi mô-đun có thể thay đổi; cần đối chiếu lại trên môi trường sử dụng trước khi ban hành nội bộ.</p>
+</main>
+</body>
+</html>

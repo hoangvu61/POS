@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn xếp lịch làm việc | VIN-HRM</title>
+<style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #fff; color: #1f2937; font-family: Roboto, Arial, sans-serif; font-size: 10.5pt; line-height: 1.42; }
+.cover { min-height: 245mm; position: relative; page-break-after: always; break-after: page; }
+.cover-head { text-align: center; }
+.cover-kicker { margin: 0 0 18pt; color: #1f2937; font-size: 12pt; font-weight: 700; text-align: center; text-transform: uppercase; }
+.cover-title { margin: 0 0 5pt; padding: 0; border: 0; color: #1f2937; font-size: 28pt; font-weight: 700; line-height: 1.12; text-align: center; }
+.cover-sub { margin: 0; color: #4b5563; font-size: 13.5pt; line-height: 1.35; text-align: center; }
+.cover-meta { margin-top: 27mm; font-size: 10.5pt; line-height: 1.38; }
+.cover-meta p { margin: 2pt 0; }
+.cover-meta strong { font-weight: 700; }
+.cover-toc { margin-top: 18mm; }
+.cover-toc h2 { margin: 0 0 10pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; font-weight: 700; line-height: 1.2; text-transform: uppercase; }
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 { margin: 0 0 8pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; font-weight: 700; line-height: 1.2; page-break-after: avoid; break-after: avoid; }
+h2 { margin: 18pt 0 3pt; padding: 0; border: 0; color: #111827; font-size: 13.5pt; font-weight: 700; line-height: 1.25; page-break-after: avoid; break-after: avoid; }
+h3 { margin: 14pt 0 3pt; color: #111827; font-size: 11.5pt; font-weight: 700; line-height: 1.3; page-break-after: avoid; break-after: avoid; }
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 3pt; }
+.lead { margin: 0 0 12pt; padding: 9pt 11pt; border: 1px solid #9ca3af; background: #eef4f8; color: #1f2937; font-size: 10.5pt; }
+.route { display: inline; padding: 1pt 3pt; background: #edf2f7; color: #111827; font-weight: 700; }
+.code { font-family: Consolas, "Courier New", monospace; padding: 1pt 3pt; background: #edf2f7; color: #111827; font-size: 9.5pt; }
+table { width: 100%; margin: 8pt 0 12pt; border-collapse: collapse; border-spacing: 0; table-layout: fixed; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; break-inside: avoid; }
+th { padding: 6pt; border: 1px solid #9ca3af; background: #d9e7f2; color: #111827; font-size: 9.5pt; font-weight: 700; line-height: 1.3; text-align: left; vertical-align: middle; }
+td { padding: 6pt; border: 1px solid #b8c0ca; background: #fff; color: #1f2937; font-size: 9.5pt; line-height: 1.35; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.steps { margin: 6pt 0 11pt 24pt; padding-left: 15pt; }
+.callout-anchor { margin: 0 !important; padding: 0; font-size: 1pt; line-height: 1pt; page-break-after: avoid; break-after: avoid; }
+.callout { width: 100%; margin: 10pt 0; padding: 0; border: 1px solid #9ca3af; border-collapse: separate; background: #eef4f8; page-break-inside: avoid; break-inside: avoid; }
+.callout td { padding: 9pt 11pt; border: 0; background: transparent !important; color: #1f2937; font-size: 10.5pt; line-height: 1.35; vertical-align: top; }
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.info { background: #eef4f8; border-color: #9ca3af; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+figure { margin: 12pt 0 14pt; page-break-inside: avoid; break-inside: avoid; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid #9ca3af; }
+figcaption { margin-top: 4pt; color: #4b5563; font-size: 9pt; font-style: italic; line-height: 1.3; text-align: center; }
+.page-break { page-break-before: always; break-before: page; }
+.checklist li { break-inside: avoid; }
+.footer-note { margin-top: 18pt; padding-top: 7pt; border-top: 1px solid #9ca3af; color: #4b5563; font-size: 8.8pt; }
+@media screen {
+  body { background: #eef1f4; }
+  .cover, .doc { width: 210mm; margin: 12mm auto; padding: 25.4mm; background: #fff; box-shadow: 0 2px 16px rgba(17,24,39,.10); }
+  .cover { min-height: 297mm; }
+  .doc { min-height: 297mm; }
+}
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN<br>XẾP LỊCH LÀM VIỆC</p>
+    <p class="cover-sub">Sinh lịch tự động, xếp ca thủ công, đăng ký ca và duyệt đăng ký</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn xếp lịch làm việc</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 20/08/2026</p>
+    <p><strong>Đối tượng:</strong> quản trị viên, cán bộ nhân sự, người quản lý, người duyệt đăng ký ca và nhân viên</p>
+    <p><strong>Nguồn:</strong> tài liệu nghiệp vụ, mã nguồn và phần mềm VIN-HRM thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Mục đích, phạm vi và khái niệm</li>
+      <li>Điều kiện chuẩn bị và quyền truy cập</li>
+      <li>Cấu hình liên quan đến xếp lịch</li>
+      <li>Đọc màn hình Xếp lịch làm việc</li>
+      <li>Xếp lịch tự động cho nhân viên ca cố định</li>
+      <li>Xếp lịch thủ công cho nhân viên ca linh hoạt</li>
+      <li>Nhân viên tự đăng ký ca làm việc</li>
+      <li>Duyệt đăng ký ca và hình thành lịch</li>
+      <li>Kiểm tra kết quả, lỗi thường gặp và danh sách kiểm tra</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích và phạm vi</h1>
+<p class="lead">Xếp lịch làm việc là bước chuyển các ca và mẫu lịch đã cấu hình thành lịch làm việc theo từng ngày của từng nhân viên. Lịch ngày là căn cứ để nhân viên xem lịch, thực hiện chấm công, tổng hợp công và phục vụ tính lương. Tài liệu này hướng dẫn đầy đủ ba nghiệp vụ: sinh lịch tự động cho nhân viên ca cố định; người quản lý xếp lịch thủ công cho nhân viên ca linh hoạt; nhân viên tự đăng ký ca và người có thẩm quyền duyệt đăng ký.</p>
+<p>Tài liệu <b>Ca và lịch làm việc</b> đã giải thích cách tạo Ca làm việc và Lịch làm việc cố định. Tài liệu <b>Quản lý thông tin công việc của Nhân viên</b> đã giải thích cách gán hình thức làm việc, lịch cố định và các thông tin công việc. Hai nội dung đó là điều kiện đầu vào của tài liệu này; người dùng nên hoàn tất trước khi bắt đầu xếp lịch.</p>
+
+<h1>2. Hiểu đúng chuỗi dữ liệu xếp lịch</h1>
+<table>
+  <colgroup><col style="width:24%"><col style="width:76%"></colgroup>
+  <thead><tr><th>Thành phần</th><th>Ý nghĩa và vai trò</th></tr></thead>
+  <tbody>
+    <tr><td>Ca làm việc</td><td>Là khung giờ chuẩn, ví dụ 08:30–17:30. Ca có thể thuộc một chi nhánh hoặc dùng chung tùy dữ liệu được thiết lập.</td></tr>
+    <tr><td>Lịch làm việc cố định</td><td>Là mẫu lặp theo tuần từ Thứ 2 đến Chủ nhật, cho biết mỗi ngày sử dụng ca nào hoặc không làm việc.</td></tr>
+    <tr><td>Thông tin công việc</td><td>Xác định nhân viên làm <b>Ca cố định</b> hay <b>Ca linh hoạt</b>. Nhân viên Ca cố định bắt buộc có Lịch làm việc cố định.</td></tr>
+    <tr><td>Lịch làm việc theo ngày</td><td>Là kết quả cuối cùng sau khi sinh tự động, xếp thủ công hoặc duyệt đăng ký. Mỗi bản ghi có ngày, giờ bắt đầu, giờ kết thúc, ca, chi nhánh và nguồn hình thành.</td></tr>
+    <tr><td>Chấm công và tính lương</td><td>Sử dụng lịch theo ngày để xác định thời gian phải làm, đối chiếu thời điểm chấm vào/chấm ra, tính đi muộn, về sớm, thiếu công, làm thêm và các kết quả lương liên quan.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout info"><tbody><tr><td><strong>Ba nguồn lịch có thể cùng xuất hiện trên hệ thống</strong><p><b>Tự động</b> là lịch sinh từ mẫu cố định; <b>Thủ công</b> là lịch do người quản lý xếp hoặc ghi đè; <b>Đăng ký</b> là lịch được tạo sau khi yêu cầu đăng ký ca được duyệt hoàn tất. Nguồn lịch giúp truy vết lịch được hình thành bằng cách nào.</p></td></tr></tbody></table>
+
+<h1 class="page-break">3. Điều kiện chuẩn bị và quyền truy cập</h1>
+<h2>3.1. Dữ liệu cần chuẩn bị</h2>
+<ol class="steps">
+  <li>Tạo đầy đủ <b>Chi nhánh</b>, <b>Phòng ban</b> và vị trí công việc đang hoạt động của nhân viên.</li>
+  <li>Tạo các <b>Ca làm việc</b> cần sử dụng; kiểm tra giờ bắt đầu, giờ kết thúc và chi nhánh.</li>
+  <li>Với nhân viên làm lịch ổn định, tạo <b>Lịch làm việc cố định</b> theo tuần và bảo đảm lịch thuộc đúng chi nhánh có vị trí công việc đang hoạt động.</li>
+  <li>Trong hồ sơ nhân viên, mở <span class="route">Thông tin công việc</span> và chọn đúng <b>Hình thức làm việc</b>. Nếu chọn Ca cố định, gán thêm Lịch làm việc cố định.</li>
+  <li>Nếu cho phép tự đăng ký ca, tạo ít nhất một <b>Quy trình phê duyệt</b> loại Duyệt đăng ký ca, cấu hình đúng người xử lý và đặt quy trình ở trạng thái Hoạt động.</li>
+  <li>Phân quyền <b>Xếp lịch làm việc</b> cho người quản lý và <b>Duyệt đăng ký ca</b> cho người có thẩm quyền.</li>
+</ol>
+
+<h2>3.2. Hình thức làm việc của nhân viên</h2>
+<figure>
+  <img src="images/10-thong-tin-cong-viec-ca-co-dinh.png" alt="Thông tin công việc của nhân viên có hình thức Ca cố định và lịch làm việc cố định.">
+  <figcaption>Hình 1. Thông tin công việc của nhân viên Ca cố định phải có lịch cố định và chi nhánh của lịch phù hợp.</figcaption>
+</figure>
+<figure>
+  <img src="images/11-bieu-mau-thong-tin-lam-viec.png" alt="Biểu mẫu sửa thông tin công việc của nhân viên.">
+  <figcaption>Hình 2. Biểu mẫu Thông tin công việc là nơi chọn hình thức làm việc và lịch cố định.</figcaption>
+</figure>
+<figure>
+  <img src="images/12-lua-chon-hinh-thuc-lam-viec.png" alt="Danh sách lựa chọn Ca cố định và Ca linh hoạt.">
+  <figcaption>Hình 3. Hình thức làm việc có hai lựa chọn: Ca cố định và Ca linh hoạt.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:23%"><col style="width:37%"><col style="width:40%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa</th><th>Cách xếp lịch phù hợp</th></tr></thead>
+  <tbody>
+    <tr><td>Ca cố định</td><td>Nhân viên làm theo một mẫu tuần ổn định. Khi chọn loại này, Lịch làm việc cố định là thông tin bắt buộc.</td><td>Sinh lịch tự động từ mẫu. Chỉ dùng xếp thủ công khi cần xử lý ngoại lệ có chủ đích.</td></tr>
+    <tr><td>Ca linh hoạt</td><td>Nhân viên không lặp một mẫu tuần cố định, thường làm theo ca thay đổi từng ngày hoặc từng kỳ.</td><td>Người quản lý xếp thủ công; hoặc nhân viên tự đăng ký ca rồi chờ duyệt.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Phải thống nhất chi nhánh</strong><p>Ca, lịch cố định và vị trí công việc của nhân viên phải cùng phạm vi chi nhánh. Danh sách lịch cố định trong hồ sơ nhân viên chỉ hiển thị các lịch thuộc chi nhánh có vị trí công việc đang hoạt động.</p></td></tr></tbody></table>
+
+<h2>3.3. Quyền và phạm vi dữ liệu</h2>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Quyền/chủ thể</th><th>Phạm vi sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Xếp lịch làm việc</td><td>Cho phép mở màn hình Xếp lịch làm việc, sinh lịch tự động, xếp thủ công và ghi đè. Nhân viên được chọn phải thuộc phòng ban nằm trong phạm vi phân quyền của tài khoản.</td></tr>
+    <tr><td>Duyệt đăng ký ca</td><td>Cho phép mở danh sách Duyệt đăng ký ca. Việc có được bấm duyệt/từ chối còn phụ thuộc tài khoản có phải người xử lý của bước hiện tại hay không.</td></tr>
+    <tr><td>Nhân viên</td><td>Có thể mở Đăng ký ca làm việc và theo dõi yêu cầu của chính mình. Chủ yêu cầu mới được gửi, thu hồi hoặc xóa yêu cầu của mình theo trạng thái cho phép.</td></tr>
+    <tr><td>Phạm vi chi nhánh/phòng ban</td><td>Người xếp lịch chỉ thấy và xử lý nhân viên có vị trí công việc đang hoạt động ở chi nhánh, phòng ban phù hợp với phạm vi quyền.</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">4. Cấu hình liên quan đến xếp lịch</h1>
+<h2>4.1. Chu kỳ tự động xếp lịch làm việc là gì?</h2>
+<p><b>Chu kỳ tự động xếp lịch làm việc</b> là lịch chạy nền định kỳ để hệ thống tự tạo lịch theo ngày cho nhân viên Ca cố định. Cấu hình này không tạo Ca làm việc và không tạo Lịch làm việc cố định; nó chỉ quyết định <b>khi nào</b> hệ thống lấy mẫu cố định đã có để sinh lịch ngày.</p>
+<p>Cấu hình được sử dụng trực tiếp bởi phân hệ <b>Lịch làm việc</b>. Kết quả sinh ra tiếp tục được sử dụng ở <b>Lịch của tôi</b>, <b>Chấm công</b>, các báo cáo công và <b>Tính lương</b> khi doanh nghiệp tính lương dựa trên dữ liệu chấm công.</p>
+<figure>
+  <img src="images/07-cau-hinh-xep-lich-tu-dong.png" alt="Cấu hình chu kỳ, ngày và giờ tự động xếp lịch tại cấp doanh nghiệp.">
+  <figcaption>Hình 4. Nhóm Lịch làm việc tại thẻ Doanh nghiệp gồm Chu kỳ, Ngày chạy và Giờ chạy.</figcaption>
+</figure>
+
+<h2>4.2. Ý nghĩa từng cấu hình và từng lựa chọn</h2>
+<table>
+  <colgroup><col style="width:30%"><col style="width:25%"><col style="width:45%"></colgroup>
+  <thead><tr><th>Cấu hình</th><th>Giá trị/lựa chọn</th><th>Ý nghĩa áp dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Chu kỳ tự động xếp lịch làm việc</td><td>Hằng tuần</td><td>Đến ngày và giờ đã cấu hình, hệ thống sinh lịch từ ngày chạy cho 7 ngày liên tiếp. Phù hợp đơn vị lập kế hoạch theo tuần.</td></tr>
+    <tr><td>Chu kỳ tự động xếp lịch làm việc</td><td>Hằng tháng</td><td>Đến ngày và giờ đã cấu hình, hệ thống sinh lịch từ ngày chạy đến hết tháng. Phù hợp đơn vị muốn chuẩn bị lịch theo tháng.</td></tr>
+    <tr><td>Ngày tự động xếp lịch trong tuần</td><td>Thứ 2 đến Chủ nhật</td><td>Chỉ được dùng khi chu kỳ là Hằng tuần. Đây là ngày trong tuần hệ thống bắt đầu sinh lịch cho 7 ngày kế tiếp.</td></tr>
+    <tr><td>Ngày tự động xếp lịch trong tháng</td><td>1 đến 31</td><td>Chỉ được dùng khi chu kỳ là Hằng tháng. Nếu chọn 29, 30 hoặc 31 mà tháng hiện tại không có ngày đó, hệ thống sử dụng ngày cuối cùng của tháng.</td></tr>
+    <tr><td>Giờ tự động xếp lịch</td><td>Giờ:phút, ví dụ 02:00</td><td>Thời điểm trong ngày bắt đầu tác vụ. Nên chọn giờ ít thao tác để hạn chế thay đổi dữ liệu đồng thời. Hệ thống kiểm tra lịch chạy định kỳ trong nền nên có thể có độ trễ ngắn so với phút cấu hình.</td></tr>
+  </tbody>
+</table>
+<figure>
+  <img src="images/08-lua-chon-chu-ky-xep-lich.png" alt="Danh sách lựa chọn Hằng tuần và Hằng tháng của chu kỳ tự động xếp lịch.">
+  <figcaption>Hình 5. Chu kỳ tự động có hai lựa chọn Hằng tuần và Hằng tháng.</figcaption>
+</figure>
+
+<h2>4.3. Cấp doanh nghiệp, cấp chi nhánh và thứ tự ưu tiên</h2>
+<p>Mở <span class="route">Hệ thống &gt; Cấu hình</span>. Cấu hình có thể được đặt ở thẻ <b>Doanh nghiệp</b> hoặc <b>Chi nhánh</b>. Khi hệ thống sinh lịch cho một chi nhánh, thứ tự xác định giá trị là:</p>
+<ol class="steps">
+  <li>Dùng cấu hình của <b>Chi nhánh</b> nếu chi nhánh đó có giá trị riêng.</li>
+  <li>Nếu chi nhánh chưa có giá trị riêng, dùng cấu hình của <b>Doanh nghiệp</b>.</li>
+  <li>Nếu cả hai cấp chưa có, dùng mặc định hệ thống: Hằng tuần, Thứ 2, lúc 02:00.</li>
+</ol>
+<figure>
+  <img src="images/09-cau-hinh-xep-lich-chi-nhanh.png" alt="Cấu hình xếp lịch tự động riêng cho chi nhánh Trụ sở Hà Nội.">
+  <figcaption>Hình 6. Cấp Chi nhánh có thể đặt ngày/giờ chạy khác với cấu hình chung của doanh nghiệp.</figcaption>
+</figure>
+<p class="callout-anchor">&#160;</p>
+<table class="callout info"><tbody><tr><td><strong>Ví dụ cách ưu tiên</strong><p>Doanh nghiệp cấu hình Hằng tuần vào Thứ 2 lúc 02:00; riêng Trụ sở Hà Nội cấu hình Thứ 4 lúc 02:00. Trụ sở Hà Nội chạy vào Thứ 4, các chi nhánh không có cấu hình riêng vẫn chạy vào Thứ 2.</p></td></tr></tbody></table>
+
+<h2>4.4. Quy trình phê duyệt đăng ký ca</h2>
+<p>Đăng ký ca không tự tạo lịch ngay khi nhân viên gửi. Yêu cầu phải gắn với một quy trình loại <b>Duyệt đăng ký ca</b>. Quy trình quy định các bước, người xử lý và thứ tự xử lý. Chỉ quy trình đang Hoạt động, hợp lệ và có thể xác định người duyệt mới xuất hiện để chọn.</p>
+<p>Mở <span class="route">Hệ thống &gt; Quy trình phê duyệt</span>, tạo hoặc kiểm tra quy trình Duyệt đăng ký ca. Nếu có nhiều quy trình, đặt tên rõ phạm vi áp dụng, ví dụ theo chi nhánh, khối nhân sự hoặc loại ca; hướng dẫn nhân viên chọn đúng quy trình thay vì chọn theo tên gần giống.</p>
+
+<h1 class="page-break">5. Đọc màn hình Xếp lịch làm việc</h1>
+<figure>
+  <img src="images/01-tong-quan-xep-lich.png" alt="Màn hình Xếp lịch làm việc ở chế độ tuần, giao diện rộng 1920 pixel.">
+  <figcaption>Hình 7. Màn hình Xếp lịch làm việc hiển thị lịch theo tuần và ba nút nghiệp vụ chính.</figcaption>
+</figure>
+<h2>5.1. Đường dẫn và bộ lọc</h2>
+<p>Mở <span class="route">Lịch làm việc &gt; Xếp lịch làm việc</span>. Người dùng có thể lọc theo nhân viên, phòng ban và ca; chọn Xóa bộ lọc để trở lại trạng thái ban đầu.</p>
+<table>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Thành phần</th><th>Cách sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Chế độ xem</td><td>Chọn Lịch để xem theo Tháng/Tuần/Ngày; các nút Tháng, Tuần, Ngày, Danh sách ở góc lịch giúp đổi cách đọc dữ liệu.</td></tr>
+    <tr><td>Nhân viên</td><td>Nhập mã hoặc tên để thu hẹp lịch của một người.</td></tr>
+    <tr><td>Phòng ban</td><td>Chỉ hiển thị ca của nhân viên thuộc phòng ban được chọn.</td></tr>
+    <tr><td>Ca</td><td>Chỉ hiển thị lịch sử dụng ca được chọn.</td></tr>
+    <tr><td>Mũi tên/Hôm nay</td><td>Chuyển kỳ lịch trước/sau hoặc trở về ngày hiện tại.</td></tr>
+    <tr><td>Nhãn nguồn</td><td>Mỗi khối lịch có nhãn Tự động, Thủ công hoặc Đăng ký để nhận biết nguồn hình thành.</td></tr>
+  </tbody>
+</table>
+
+<h2>5.2. Ba nút nghiệp vụ</h2>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Nút</th><th>Khi nào sử dụng</th></tr></thead>
+  <tbody>
+    <tr><td>Xếp lịch tự động</td><td>Sinh lịch từ mẫu cố định cho nhân viên Ca cố định; có thể áp dụng cho tất cả, một phòng ban hoặc các nhân viên được chọn.</td></tr>
+    <tr><td>Xếp lịch</td><td>Gán một ca trong một khoảng ngày cho nhân viên hoặc phòng ban. Đây là cách chính để xếp lịch cho nhân viên Ca linh hoạt.</td></tr>
+    <tr><td>Ghi đè lịch</td><td>Thay lịch Tự động/Thủ công trong khoảng ngày bằng một hoặc nhiều ca mới. Dùng để điều chỉnh ngoại lệ; lịch nguồn Đăng ký đã duyệt được bảo vệ.</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">6. Xếp lịch tự động cho nhân viên Ca cố định</h1>
+<h2>6.1. Điều kiện nhân viên được đưa vào sinh lịch</h2>
+<p>Hệ thống chỉ sinh lịch khi đồng thời thỏa các điều kiện:</p>
+<ul>
+  <li>Nhân viên đang hoạt động và có vị trí công việc đang hoạt động.</li>
+  <li>Hình thức làm việc là <b>Ca cố định</b>.</li>
+  <li>Đã gán Lịch làm việc cố định còn hoạt động.</li>
+  <li>Lịch cố định, ca trong mẫu và vị trí công việc phù hợp với chi nhánh được chọn.</li>
+  <li>Ngày cần sinh có một ca trong mẫu tuần; ngày không có ca trong mẫu sẽ được bỏ qua.</li>
+</ul>
+
+<h2>6.2. Thực hiện sinh lịch thủ công theo yêu cầu</h2>
+<figure>
+  <img src="images/02-xep-lich-tu-dong.png" alt="Biểu mẫu Xếp lịch làm việc tự động.">
+  <figcaption>Hình 8. Biểu mẫu sinh lịch tự động cho nhân viên Ca cố định.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Mở <span class="route">Lịch làm việc &gt; Xếp lịch làm việc</span> và chọn <b>Xếp lịch tự động</b>.</li>
+  <li>Chọn <b>Chi nhánh</b>. Hệ thống dùng chi nhánh để lọc nhân viên, mẫu lịch và ca.</li>
+  <li>Chọn một phạm vi: <b>Tất cả nhân viên ca cố định</b>, <b>Phòng ban</b> hoặc <b>Nhân viên</b>.</li>
+  <li>Nhập <b>Từ ngày</b> và <b>Đến ngày</b>. Mặc định biểu mẫu lấy toàn bộ tháng đang xem.</li>
+  <li>Chỉ bật <b>Sinh lại</b> khi cần xóa lịch tự động cũ trong khoảng ngày và tạo lại từ mẫu hiện tại.</li>
+  <li>Chọn <b>Xếp lịch</b>, đọc thông tin xác nhận nếu khoảng ngày có ngày lễ/ngày nghỉ bù, sau đó xác nhận nếu phạm vi là đúng.</li>
+  <li>Đọc kết quả gồm số lịch đã tạo, số đã bỏ qua, số lịch cũ đã xóa, số nhân viên đã xử lý và các cảnh báo.</li>
+</ol>
+
+<h2>6.3. Ý nghĩa phạm vi áp dụng</h2>
+<figure>
+  <img src="images/03-pham-vi-xep-lich-tu-dong.png" alt="Phạm vi sinh lịch tự động theo nhân viên.">
+  <figcaption>Hình 9. Khi chọn Nhân viên, biểu mẫu xuất hiện nút Chọn nhân viên để xác định chính xác đối tượng.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Tất cả nhân viên ca cố định</td><td>Sinh cho toàn bộ nhân viên Ca cố định có mẫu hợp lệ trong chi nhánh. Phù hợp chạy đầu tuần/đầu tháng.</td></tr>
+    <tr><td>Phòng ban</td><td>Chỉ sinh cho nhân viên Ca cố định thuộc phòng ban được chọn trong chi nhánh. Phù hợp khi một đơn vị thay đổi mẫu lịch.</td></tr>
+    <tr><td>Nhân viên</td><td>Chọn một hoặc nhiều nhân viên cụ thể. Danh sách chỉ gồm nhân viên Ca cố định có mẫu; phù hợp bổ sung người mới hoặc xử lý trường hợp riêng.</td></tr>
+  </tbody>
+</table>
+
+<h2>6.4. Quy tắc giữ nguyên, bỏ qua và sinh lại</h2>
+<table>
+  <colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+  <thead><tr><th>Tình huống</th><th>Hệ thống xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Đã có đúng ca cùng ngày</td><td>Bỏ qua, không tạo bản ghi trùng.</td></tr>
+    <tr><td>Đã có lịch giao thời gian</td><td>Bỏ qua và đưa vào cảnh báo; không chèn thêm ca gây chồng giờ.</td></tr>
+    <tr><td>Ngày không có ca trong mẫu</td><td>Bỏ qua vì đây là ngày không làm theo mẫu cố định.</td></tr>
+    <tr><td>Ngày lễ hoặc ngày nghỉ bù</td><td>Phiên bản hiện tại bỏ qua, không sinh lịch tự động cho ngày đó. Thông báo xác nhận chỉ giúp người dùng nhận biết khoảng ngày có ngày đặc biệt.</td></tr>
+    <tr><td>Không bật Sinh lại</td><td>Chỉ bổ sung lịch còn thiếu; lịch Tự động, Thủ công và Đăng ký hiện có được giữ nguyên.</td></tr>
+    <tr><td>Bật Sinh lại</td><td>Xóa các lịch có nguồn <b>Tự động</b> trong đúng chi nhánh và khoảng ngày, sau đó tạo lại. Lịch Thủ công và lịch từ Đăng ký không bị xóa.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Chỉ bật Sinh lại khi mẫu đã thay đổi</strong><p>Nếu lịch cố định được sửa sau khi đã sinh lịch, có thể dùng Sinh lại để đồng bộ. Trước khi chạy, cần kiểm tra khoảng ngày và đối tượng vì toàn bộ lịch nguồn Tự động trong phạm vi sẽ bị thay thế.</p></td></tr></tbody></table>
+
+<h2>6.5. Sinh lịch tự động theo chu kỳ cấu hình</h2>
+<p>Khi đến ngày và giờ cấu hình, hệ thống tự chạy cho từng chi nhánh bằng cùng quy tắc với nút Xếp lịch tự động nhưng không bật Sinh lại. Chu kỳ Hằng tuần sinh từ ngày chạy đến 6 ngày sau; chu kỳ Hằng tháng sinh từ ngày chạy đến hết tháng. Vì không xóa lịch cũ, tác vụ nền phù hợp để bổ sung lịch còn thiếu và không làm mất các điều chỉnh thủ công hoặc lịch đăng ký đã duyệt.</p>
+
+<h1 class="page-break">7. Xếp lịch thủ công cho nhân viên Ca linh hoạt</h1>
+<h2>7.1. Trường hợp sử dụng</h2>
+<p>Xếp thủ công được dùng khi lịch thay đổi theo nhu cầu vận hành, ví dụ cửa hàng phân ca từng tuần, bộ phận làm việc luân phiên, nhân viên thời vụ hoặc lịch ngoại lệ. Đối tượng nghiệp vụ chính là nhân viên <b>Ca linh hoạt</b>.</p>
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Màn hình hiện tại không khóa cứng theo hình thức làm việc</strong><p>Danh sách xếp thủ công có thể hiển thị cả nhân viên đang hoạt động không phải Ca linh hoạt. Người quản lý phải kiểm tra đúng hình thức làm việc và chỉ chọn nhân viên Ca cố định khi thật sự cần tạo ngoại lệ có chủ đích.</p></td></tr></tbody></table>
+
+<h2>7.2. Các bước xếp một ca</h2>
+<figure>
+  <img src="images/04-xep-ca-thu-cong.png" alt="Biểu mẫu Xếp ca thủ công.">
+  <figcaption>Hình 10. Xếp ca thủ công có thể áp dụng theo nhân viên hoặc phòng ban trong một khoảng ngày.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Mở <span class="route">Lịch làm việc &gt; Xếp lịch làm việc</span> và chọn <b>Xếp lịch</b>.</li>
+  <li>Chọn <b>Áp dụng cho: Nhân viên</b> nếu cần chọn từng người; chọn <b>Phòng ban</b> nếu toàn bộ nhân viên trong phòng cùng dùng một ca.</li>
+  <li>Chọn <b>Từ ngày</b> và <b>Đến ngày</b>. Hệ thống sẽ áp dụng ca cho từng ngày trong khoảng.</li>
+  <li>Chọn <b>Chi nhánh</b> và <b>Ca làm việc</b>. Danh sách ca chỉ gồm ca đang hoạt động, dùng chung hoặc phù hợp chi nhánh.</li>
+  <li>Chọn nhân viên/phòng ban. Với cách chọn nhân viên, hệ thống kiểm tra trước các ca trùng thời gian.</li>
+  <li>Chọn <b>Xếp ca</b>. Nếu khoảng ngày có ngày lễ/nghỉ bù, đọc thông báo và chỉ xác nhận khi doanh nghiệp thực sự bố trí làm trong ngày đó.</li>
+</ol>
+
+<h2>7.3. Kiểm tra trùng ca</h2>
+<figure>
+  <img src="images/05-chon-nhan-vien-kiem-tra-trung-ca.png" alt="Danh sách nhân viên với cảnh báo đã có ca trùng thời gian.">
+  <figcaption>Hình 11. Nhân viên đã có ca giao thời gian được làm mờ và hiển thị lý do không thể chọn.</figcaption>
+</figure>
+<p>Một lần Xếp lịch chỉ gán <b>một ca</b> cho các đối tượng đã chọn. Nếu một nhân viên đã có lịch giao thời gian trong bất kỳ ngày nào của khoảng chọn, hệ thống không cho tạo chồng ca. Khi gửi yêu cầu, hệ thống kiểm tra lại toàn bộ; nếu còn xung đột, thao tác bị dừng để tránh tình trạng một phần nhân viên được tạo còn một phần thất bại.</p>
+<p>Nếu cần một nhân viên làm nhiều ca trong ngày, sử dụng <b>Ghi đè lịch</b> và chọn nhiều ca không chồng thời gian, hoặc lập từng lịch theo quy trình vận hành phù hợp.</p>
+
+<h2>7.4. Ghi đè lịch</h2>
+<figure>
+  <img src="images/06-ghi-de-lich.png" alt="Biểu mẫu Ghi đè lịch trong ngày.">
+  <figcaption>Hình 12. Ghi đè cho phép chọn một hoặc nhiều ca và thay lịch Tự động/Thủ công trong phạm vi.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:29%"><col style="width:71%"></colgroup>
+  <thead><tr><th>Nội dung</th><th>Quy tắc</th></tr></thead>
+  <tbody>
+    <tr><td>Đối tượng</td><td>Chọn theo nhân viên hoặc phòng ban, tương tự Xếp lịch.</td></tr>
+    <tr><td>Danh sách ca</td><td>Có thể chọn một hoặc nhiều ca cho mỗi ngày; các ca mới không được chồng thời gian với nhau.</td></tr>
+    <tr><td>Lịch bị thay thế</td><td>Các lịch nguồn Tự động và Thủ công trong cùng chi nhánh, khoảng ngày và đối tượng sẽ bị xóa trước khi tạo lịch mới.</td></tr>
+    <tr><td>Lịch được bảo vệ</td><td>Lịch nguồn Đăng ký đã duyệt và lịch của chi nhánh khác không bị xóa.</td></tr>
+    <tr><td>Xung đột với lịch đăng ký</td><td>Nếu ca mới giao thời gian với lịch nguồn Đăng ký, hệ thống chặn ghi đè. Cần xử lý yêu cầu/lịch đăng ký theo đúng nghiệp vụ, không dùng Ghi đè để xóa.</td></tr>
+  </tbody>
+</table>
+<p class="callout-anchor">&#160;</p>
+<table class="callout danger"><tbody><tr><td><strong>Ghi đè là thao tác thay thế dữ liệu</strong><p>Trước khi xác nhận, kiểm tra kỹ chi nhánh, khoảng ngày, đối tượng và danh sách ca. Nên dùng bộ lọc trên lịch để đối chiếu các lịch hiện có và thông báo cho nhân viên nếu lịch đã được công bố.</p></td></tr></tbody></table>
+
+<h1 class="page-break">8. Nhân viên tự đăng ký ca làm việc</h1>
+<h2>8.1. Đối tượng và điều kiện</h2>
+<p>Nghiệp vụ này được thiết kế cho nhân viên <b>Ca linh hoạt</b> tự đề xuất ca phù hợp rồi chờ người quản lý duyệt. Nhân viên phải đang hoạt động; ngày đăng ký không được ở quá khứ; chi nhánh và ca phải đang hoạt động; yêu cầu không được giao thời gian với lịch đã có hoặc yêu cầu đang chờ xử lý.</p>
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Lưu ý về kiểm soát ở phiên bản hiện tại</strong><p>Phần mềm hiện kiểm tra trạng thái nhân viên và trùng thời gian nhưng chưa khóa cứng thao tác tự đăng ký theo loại Ca linh hoạt. Doanh nghiệp cần quy định rõ đối tượng được đăng ký và hướng dẫn nhân viên Ca cố định không dùng chức năng này, trừ trường hợp được phê duyệt theo chính sách nội bộ.</p></td></tr></tbody></table>
+
+<h2>8.2. Tạo yêu cầu đăng ký ca thường</h2>
+<figure>
+  <img src="images/13-dang-ky-ca-thuong.png" alt="Biểu mẫu Đăng ký lịch làm việc thường.">
+  <figcaption>Hình 13. Đăng ký ca thường yêu cầu chọn ngày, chi nhánh, ca và quy trình phê duyệt.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Mở <span class="route">Lịch làm việc &gt; Đăng ký ca làm việc</span> và chọn <b>ĐĂNG KÝ CA</b>.</li>
+  <li>Chọn <b>Lịch làm việc thường</b>.</li>
+  <li>Chọn <b>Ngày làm việc</b>. Không chọn ngày đã qua.</li>
+  <li>Chọn <b>Chi nhánh</b>, sau đó chọn <b>Ca làm việc</b> phù hợp.</li>
+  <li>Chọn <b>Quy trình phê duyệt</b>. Kiểm tra tên quy trình đúng với đơn vị hoặc loại yêu cầu.</li>
+  <li>Nhập <b>Ghi chú</b> nếu cần, tối đa 500 ký tự; nên nêu lý do hoặc thông tin bàn giao giúp người duyệt quyết định.</li>
+  <li>Chọn <b>Lưu nháp</b> nếu chưa muốn gửi; hoặc <b>Lưu &amp; Gửi duyệt</b> để tạo yêu cầu và bắt đầu quy trình.</li>
+</ol>
+
+<h2>8.3. Đăng ký lịch làm thêm giờ</h2>
+<figure>
+  <img src="images/14-dang-ky-ca-lam-them-gio.png" alt="Biểu mẫu Đăng ký lịch làm thêm giờ.">
+  <figcaption>Hình 14. Đăng ký làm thêm giờ sử dụng giờ bắt đầu và giờ kết thúc thay cho một ca có sẵn.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
+  <thead><tr><th>Trường</th><th>Ý nghĩa và kiểm tra</th></tr></thead>
+  <tbody>
+    <tr><td>Ngày làm việc</td><td>Là ngày bắt đầu khoảng làm thêm, không được ở quá khứ.</td></tr>
+    <tr><td>Chi nhánh</td><td>Nơi thực hiện công việc và phạm vi tạo lịch sau khi được duyệt.</td></tr>
+    <tr><td>Giờ bắt đầu</td><td>Thời điểm bắt đầu làm thêm.</td></tr>
+    <tr><td>Giờ kết thúc</td><td>Nếu giờ kết thúc nhỏ hơn hoặc bằng giờ bắt đầu, hệ thống hiểu ca kết thúc vào ngày kế tiếp. Ví dụ 22:00–02:00 là ca qua đêm.</td></tr>
+    <tr><td>Quy trình phê duyệt</td><td>Luồng duyệt sử dụng cho yêu cầu. Doanh nghiệp có thể dùng một quy trình chung hoặc quy trình riêng cho làm thêm nếu đã cấu hình.</td></tr>
+  </tbody>
+</table>
+
+<h2>8.4. Chọn quy trình phê duyệt</h2>
+<figure>
+  <img src="images/15-chon-quy-trinh-duyet-dang-ky-ca.png" alt="Danh sách quy trình phê duyệt trong biểu mẫu đăng ký ca.">
+  <figcaption>Hình 15. Danh sách chỉ hiển thị các quy trình Duyệt đăng ký ca đang hoạt động.</figcaption>
+</figure>
+<p>Khi có nhiều lựa chọn, không chọn ngẫu nhiên. Tên quy trình cần thể hiện rõ đối tượng; nếu chưa chắc, nhân viên hỏi người quản lý hoặc bộ phận nhân sự. Chọn sai quy trình có thể gửi yêu cầu đến sai người hoặc không xác định được người xử lý.</p>
+
+<h2>8.5. Trạng thái và thao tác của người đăng ký</h2>
+<table>
+  <colgroup><col style="width:22%"><col style="width:48%"><col style="width:30%"></colgroup>
+  <thead><tr><th>Trạng thái</th><th>Ý nghĩa</th><th>Thao tác thường có</th></tr></thead>
+  <tbody>
+    <tr><td>Nháp</td><td>Yêu cầu đã lưu nhưng chưa gửi cho người duyệt; chưa có lịch làm việc.</td><td>Gửi duyệt hoặc Xóa.</td></tr>
+    <tr><td>Chờ duyệt</td><td>Yêu cầu đã tạo quy trình và đang chờ bước đầu xử lý.</td><td>Thu hồi về Nháp; phiên quy trình hiện tại được loại bỏ.</td></tr>
+    <tr><td>Đang xử lý</td><td>Một hoặc nhiều bước đã được xử lý nhưng quy trình chưa hoàn tất.</td><td>Thu hồi về Nháp; khi gửi lại, hệ thống tạo một phiên duyệt mới.</td></tr>
+    <tr><td>Đã duyệt</td><td>Tất cả bước đã hoàn tất và lịch nguồn Đăng ký đã được tạo.</td><td>Xem thông tin/lịch sử.</td></tr>
+    <tr><td>Từ chối</td><td>Người duyệt từ chối; lý do được lưu và không tạo lịch.</td><td>Xem lý do; tạo yêu cầu mới sau khi điều chỉnh nếu cần.</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">9. Duyệt đăng ký ca và hình thành lịch</h1>
+<h2>9.1. Mở danh sách công việc</h2>
+<p>Người có quyền mở <span class="route">Lịch làm việc &gt; Duyệt đăng ký ca</span>. Mặc định màn hình ưu tiên các yêu cầu Chờ xử lý. Có thể lọc theo chi nhánh, ca, trạng thái, từ ngày và đến ngày.</p>
+<figure>
+  <img src="images/16-danh-sach-duyet-dang-ky-ca.png" alt="Danh sách Duyệt đăng ký ca làm việc.">
+  <figcaption>Hình 16. Danh sách cho biết nhân viên, ngày, chi nhánh, ca, giờ, tiến độ phê duyệt, trạng thái và thao tác.</figcaption>
+</figure>
+
+<h2>9.2. Ý nghĩa bộ lọc trạng thái công việc</h2>
+<table>
+  <colgroup><col style="width:28%"><col style="width:72%"></colgroup>
+  <thead><tr><th>Lựa chọn</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Chờ xử lý</td><td>Các yêu cầu mà tài khoản là người xử lý của bước hiện tại và chưa thực hiện hành động.</td></tr>
+    <tr><td>Đã xử lý</td><td>Các yêu cầu tài khoản đã thực hiện bước được giao; quy trình có thể đã hoàn tất hoặc còn tiếp tục ở bước sau.</td></tr>
+    <tr><td>Tất cả trạng thái</td><td>Hiển thị cả yêu cầu Chờ xử lý và Đã xử lý thuộc phạm vi công việc của tài khoản, giúp tra cứu lịch sử.</td></tr>
+  </tbody>
+</table>
+
+<h2>9.3. Các bước duyệt</h2>
+<ol class="steps">
+  <li>Lọc hoặc chọn yêu cầu cần xử lý; đối chiếu <b>Nhân viên</b>, <b>Ngày làm việc</b>, <b>Chi nhánh</b>, <b>Ca/Giờ ca</b> và tiến độ phê duyệt.</li>
+  <li>Mở biểu tượng xem chi tiết để đọc ghi chú, quy trình, người xử lý và lịch sử các bước.</li>
+  <li>Kiểm tra nhu cầu nhân sự, giới hạn số người theo ca, xung đột lịch, ngày lễ và quy định làm thêm của doanh nghiệp.</li>
+  <li>Nếu đồng ý, chọn hành động Duyệt và xác nhận. Nếu không đồng ý, chọn Từ chối và nhập lý do cụ thể để nhân viên biết cách điều chỉnh.</li>
+  <li>Nếu còn bước sau, yêu cầu chuyển sang người xử lý kế tiếp. Nếu đây là bước cuối, hệ thống kiểm tra trùng lịch lần cuối rồi tạo lịch nguồn <b>Đăng ký</b>.</li>
+</ol>
+<p class="callout-anchor">&#160;</p>
+<table class="callout warning"><tbody><tr><td><strong>Được duyệt về nội dung chưa chắc đã tạo được lịch</strong><p>Ngay trước khi tạo lịch ở bước cuối, hệ thống kiểm tra lại xem nhân viên đã có lịch giao thời gian hay chưa. Nếu có xung đột phát sinh trong lúc yêu cầu đang chờ duyệt, thao tác hoàn tất bị chặn; người quản lý cần xử lý xung đột rồi thực hiện lại theo quy trình.</p></td></tr></tbody></table>
+
+<h2>9.4. Kết quả sau phê duyệt</h2>
+<p>Sau khi duyệt hoàn tất, yêu cầu chuyển sang Đã duyệt và một lịch làm việc theo ngày được tạo với nguồn <b>Đăng ký</b>. Lịch này xuất hiện trên Xếp lịch làm việc và Lịch của tôi, đồng thời được dùng cho chấm công. Ghi đè lịch không tự xóa lịch nguồn Đăng ký; đây là cơ chế bảo vệ kết quả đã qua phê duyệt.</p>
+
+<h1 class="page-break">10. Kiểm tra kết quả và nguồn lịch</h1>
+<figure>
+  <img src="images/17-nguon-lich-cua-toi.png" alt="Bộ lọc Nguồn lịch trên màn hình Lịch của tôi.">
+  <figcaption>Hình 17. Lịch của tôi cho phép lọc theo Tự động, Thủ công hoặc Đăng ký.</figcaption>
+</figure>
+<ol class="steps">
+  <li>Người quản lý mở <span class="route">Xếp lịch làm việc</span>, chọn đúng tuần/tháng và lọc theo nhân viên để xác nhận ngày, ca và nhãn nguồn.</li>
+  <li>Nhân viên mở <span class="route">Lịch làm việc &gt; Lịch của tôi</span>.</li>
+  <li>Dùng bộ lọc <b>Nguồn lịch</b>: Tự động, Thủ công hoặc Đăng ký; có thể kết hợp bộ lọc Ca và Trạng thái.</li>
+  <li>Đối chiếu giờ ca với kế hoạch, thông báo phê duyệt và yêu cầu đăng ký.</li>
+  <li>Nếu lịch sai, báo người quản lý trước thời điểm chấm công; không tạo thêm một yêu cầu giao thời gian để “sửa” lịch cũ.</li>
+</ol>
+
+<h2>10.1. Ý nghĩa trạng thái lịch</h2>
+<table>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Trạng thái</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td>Hoạt động</td><td>Lịch đang có hiệu lực và được sử dụng cho hiển thị, chấm công và các nghiệp vụ liên quan.</td></tr>
+    <tr><td>Đã hủy</td><td>Lịch không còn hiệu lực. Giữ lại để tra cứu thay vì coi như một lịch làm việc hiện hành.</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">11. Lỗi thường gặp và cách xử lý</h1>
+<table>
+  <colgroup><col style="width:30%"><col style="width:33%"><col style="width:37%"></colgroup>
+  <thead><tr><th>Hiện tượng</th><th>Nguyên nhân thường gặp</th><th>Cách kiểm tra/xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Nhân viên không xuất hiện khi sinh lịch tự động</td><td>Không phải Ca cố định; chưa có mẫu; nhân viên/vị trí/mẫu ngừng hoạt động; sai chi nhánh.</td><td>Mở Thông tin công việc, kiểm tra Hình thức làm việc, Lịch cố định, Chi nhánh của lịch và vị trí công việc đang hoạt động.</td></tr>
+    <tr><td>Đã chạy nhưng một số ngày không có lịch</td><td>Mẫu tuần không có ca; ngày lễ/nghỉ bù; đã có lịch trùng hoặc giao thời gian.</td><td>Đọc cảnh báo kết quả, xem mẫu theo đúng thứ trong tuần và kiểm tra lịch hiện có.</td></tr>
+    <tr><td>Sinh lại không thay đổi lịch thủ công/đăng ký</td><td>Đúng theo thiết kế: Sinh lại chỉ xóa nguồn Tự động.</td><td>Dùng Ghi đè để thay lịch Thủ công; xử lý lịch Đăng ký theo nghiệp vụ phê duyệt, không kỳ vọng Sinh lại xóa.</td></tr>
+    <tr><td>Không chọn được nhân viên khi xếp thủ công</td><td>Đã có ca giao thời gian trong khoảng ngày hoặc ngoài phạm vi quyền.</td><td>Đọc dòng cảnh báo trùng ca; đổi ca/ngày hoặc xử lý lịch hiện có; kiểm tra quyền phòng ban.</td></tr>
+    <tr><td>Không thấy ca cần chọn</td><td>Ca ngừng hoạt động hoặc thuộc chi nhánh khác.</td><td>Kiểm tra danh mục Ca làm việc và chi nhánh đang chọn.</td></tr>
+    <tr><td>Không thấy quy trình đăng ký ca</td><td>Quy trình sai loại, ngừng hoạt động hoặc không hợp lệ.</td><td>Mở Quy trình phê duyệt, kiểm tra loại Duyệt đăng ký ca, trạng thái, bước và người xử lý.</td></tr>
+    <tr><td>Không gửi được yêu cầu đăng ký</td><td>Ngày đã qua; thiếu chi nhánh/ca/giờ/quy trình; trùng lịch hoặc trùng yêu cầu đang chờ.</td><td>Kiểm tra đầy đủ trường bắt buộc, chọn ngày tương lai và đối chiếu Lịch của tôi.</td></tr>
+    <tr><td>Duyệt bước cuối bị chặn</td><td>Trong thời gian chờ duyệt, nhân viên đã được tạo một lịch giao thời gian.</td><td>Mở Xếp lịch làm việc để xác định lịch xung đột; điều chỉnh theo thẩm quyền rồi xử lý lại.</td></tr>
+    <tr><td>Lịch tự động không chạy đúng ngày mong muốn</td><td>Chi nhánh có cấu hình riêng ghi đè cấp doanh nghiệp; chọn sai chu kỳ/ngày/giờ.</td><td>Kiểm tra cả thẻ Doanh nghiệp và Chi nhánh; đối chiếu thứ tự ưu tiên tại mục 4.3.</td></tr>
+  </tbody>
+</table>
+
+<h1>12. Danh sách kiểm tra trước khi đưa vào vận hành</h1>
+<ul class="checklist">
+  <li>Ca làm việc đã đúng giờ và đúng chi nhánh.</li>
+  <li>Lịch làm việc cố định đã đủ các ngày cần làm trong tuần.</li>
+  <li>Nhân viên đã có vị trí công việc đang hoạt động và đúng chi nhánh.</li>
+  <li>Hình thức làm việc đã chọn đúng Ca cố định hoặc Ca linh hoạt.</li>
+  <li>Nhân viên Ca cố định đã được gán Lịch làm việc cố định.</li>
+  <li>Chu kỳ, ngày và giờ sinh lịch đã được kiểm tra ở cả cấp Doanh nghiệp và Chi nhánh.</li>
+  <li>Người quản lý có quyền Xếp lịch làm việc đúng phạm vi phòng ban.</li>
+  <li>Quy trình Duyệt đăng ký ca đang hoạt động và có người xử lý hợp lệ.</li>
+  <li>Người duyệt có quyền Duyệt đăng ký ca và đã được gán vào bước quy trình.</li>
+  <li>Đã thống nhất quy định đối tượng được tự đăng ký, thời hạn đăng ký, số lượng người mỗi ca và cách xử lý ngày lễ/làm thêm.</li>
+  <li>Đã chạy thử trên một phạm vi nhỏ và đối chiếu Lịch của tôi trước khi chạy toàn chi nhánh.</li>
+  <li>Đã thông báo cho nhân viên cách đọc nhãn nguồn và thời điểm lịch được công bố.</li>
+</ul>
+
+<p class="footer-note">Tài liệu phản ánh giao diện và quy tắc của VIN-HRM tại thời điểm 20/08/2026. Ảnh minh họa được chụp từ phần mềm thực tế ở giao diện rộng 1920 pixel; dữ liệu mẫu có thể khác với môi trường vận hành của doanh nghiệp.</p>
+</main>
+</body>
+</html>

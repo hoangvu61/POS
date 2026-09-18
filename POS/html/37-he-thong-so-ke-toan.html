@@ -1,0 +1,2899 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>37. Thông tư 152 — Hộ kinh doanh — Đặc tả POS</title><meta name="description" content="Thông tư 152 — Hộ kinh doanh"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần IX · Chương 37</p><article class="spec"><h1>CHƯƠNG 37. HỘ KINH DOANH — SỔ KẾ TOÁN THEO THÔNG TƯ 152/2025/TT-BTC</h1><details class="section-toc"><summary>Nội dung chương · 7 mục</summary><ol><li><a href="#section-37-1">37.1. Mục đích và phạm vi</a></li><li><a href="#section-37-2">37.2. Nhóm doanh thu</a></li><li><a href="#section-37-3">37.3. Nhóm đối tượng sử dụng sổ kế toán</a></li><li><a href="#section-37-4">37.4. Tỷ lệ tính thuế theo từng ngành nghề</a></li><li><a href="#section-37-5">37.5. Sổ kế toán</a></li><li><a href="#section-37-6">37.6. Bảng kê</a></li><li><a href="#section-37-7">37.7. Tờ khai</a></li></ol></details>
+<h2 id="section-37-1">37.1. Mục đích và phạm vi</h2>
+<p>Hệ thống sổ kế toán giúp người phụ trách kế toán xem và xuất các sổ tổng hợp từ hoạt động bán hàng, nhập xuất hàng, thu chi, công nợ, tài sản cố định và vốn chủ sở hữu. Người sử dụng chọn mẫu sổ, xác định kỳ xem, giới hạn chi nhánh hoặc đối tượng cần theo dõi, kiểm tra phát sinh và tải kết quả để lưu trữ, đối chiếu hoặc trình ký.</p>
+<p>Các sổ trong chương này là chức năng tra cứu và lập báo cáo. Mở sổ, chuyển trang hoặc xuất Excel không tạo đơn bán, không thu tiền, không thay đổi tồn kho, không xác nhận công nợ và không tự ghi sổ bút toán. Thay đổi một con số phát sinh phải được thực hiện tại nghiệp vụ tạo ra con số đó rồi lập lại sổ.</p>
+<p>Trong chương này, trang tổng quan chỉ mở bộ mẫu TT152 dành cho Hộ kinh doanh/cá nhân kinh doanh. Tên mẫu và các tỷ lệ được trình bày mô tả chức năng tính toán của hệ thống; kết quả không tự xác nhận đối tượng sử dụng đã đáp ứng điều kiện áp dụng một chính sách thuế hay đã hoàn thành nghĩa vụ kê khai.</p>
+<p>Hộ kinh doanh dùng TT152 lập các mẫu trong chương này trực tiếp từ giao dịch vận hành đủ điều kiện. Số liệu được lấy từ đơn bán, chứng từ kho, tiền, công nợ, chi phí và tài sản đã đạt đúng mốc nghiệp vụ.</p>
+<h4>Điều kiện mở bộ TT152</h4>
+<p>Bộ sổ trong chương này chỉ được mở khi <strong>Loại hình đăng ký kinh doanh = Hộ kinh doanh</strong> và <strong>Chế độ kế toán = TT152</strong>. Hộ kinh doanh áp dụng phương pháp GTGT Trực tiếp và phương pháp xuất kho Bình quân. Nếu loại hình là Công ty, TT152 không xuất hiện trong danh sách chế độ kế toán.</p>
+<p>Việc có quyền xem sổ không thay thế điều kiện cấu hình. Hệ thống kiểm tra lại loại hình và chế độ khi mở từng mẫu, khi tải số liệu và khi xuất tệp để một đường dẫn cũ không thể tạo nhầm mẫu. Tệp đã xuất trước khi đổi chế độ là tài liệu lịch sử; hệ thống không sửa ngược nội dung tệp đó.</p>
+<h4>Người sử dụng, quyền truy cập và phạm vi dữ liệu</h4>
+<p>Người sử dụng phải đăng nhập và có quyền quản lý Thuế, kế toán. Quyền này được kiểm tra khi mở trang tổng quan, khi xem từng sổ và khi tải kết quả. Việc biết đường dẫn trực tiếp của một mẫu không thay thế quyền truy cập.</p>
+<p>Người có quyền quản lý chi nhánh được chọn chi nhánh trong bộ lọc. Người không có quyền này thấy chi nhánh làm việc của mình dưới dạng thông tin không sửa được. Khi đã xác định được chi nhánh của người sử dụng, bộ lọc ban đầu lấy chi nhánh đó.</p>
+<p>Quyền xem sổ không bao gồm:</p>
+<ul>
+<li>Quyền sửa đơn hàng.</li>
+<li>Xóa chứng từ.</li>
+<li>Sửa chi phí.</li>
+<li>Xác nhận công nợ hoặc thay đổi tài sản.</li>
+</ul>
+<p>Khi phát hiện sai lệch, kế toán chuyển sang chức năng nghiệp vụ tương ứng và chỉ xử lý trong phạm vi quyền được giao.</p>
+<p>Kết quả được giới hạn trong doanh nghiệp đang làm việc. Người sử dụng không được lấy thông tin của doanh nghiệp khác để bổ sung vào sổ hiện tại. Mỗi bản xuất phải được kiểm tra tên đơn vị, địa chỉ, mã số thuế và kỳ xem trước khi sử dụng.</p>
+<h2 id="section-37-2">37.2. Nhóm doanh thu</h2>
+<p>Hệ thống phân biệt bốn nhóm xử lý, vì mỗi nhóm cần một tập sổ khác nhau:</p>
+<ol>
+<li><strong>Doanh thu không chịu thuế GTGT và không phải nộp thuế TNCN:</strong> theo dõi doanh thu bằng S1a-HKD, không tự sinh dòng tính GTGT hoặc TNCN.</li>
+<li><strong>Doanh thu chịu GTGT và TNCN cùng tính theo tỷ lệ phần trăm trên doanh thu:</strong> dùng S2a-HKD; doanh thu phải được tách theo ngành nghề trước khi nhân từng tỷ lệ.</li>
+<li><strong>Doanh thu chịu GTGT theo tỷ lệ phần trăm trên doanh thu nhưng TNCN xác định theo thu nhập:</strong> dùng S2b-HKD để theo dõi doanh thu và GTGT, S2c-HKD để theo dõi doanh thu–chi phí, S2d-HKD cho nhập–xuất–tồn và S2e-HKD cho tiền.</li>
+<li><strong>Hoạt động phát sinh các sắc thuế khác:</strong> dùng thêm S3a-HKD để theo dõi lượng, giá tính thuế, mức tuyệt đối, thuế suất và nghĩa vụ tương ứng.</li>
+</ol>
+<p>Một hộ có thể có doanh thu ở nhiều ngành nghề. Hệ thống không được ép toàn bộ doanh thu vào một nhóm chỉ vì một ngành đang chiếm tỷ trọng lớn nhất.</p>
+<ul>
+<li>Mỗi phần giá trị của đơn được phân về ngành của sản phẩm/dịch vụ.</li>
+<li>Combo được phân bổ về sản phẩm con.</li>
+<li>Phần chênh làm tròn được điều chỉnh để tổng nhóm luôn bằng doanh thu còn giữ của đơn.</li>
+</ul>
+<h2 id="section-37-3">37.3. Nhóm đối tượng sử dụng sổ kế toán</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Mẫu</th>
+<th>Đối tượng sử dụng</th>
+<th>Khi nào hệ thống đưa mẫu vào bộ sổ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S1a-HKD</strong></td>
+<td>Hộ/cá nhân có doanh thu không chịu GTGT và không phải nộp TNCN</td>
+<td>Có nhóm doanh thu thuộc trường hợp này hoặc người dùng chọn đúng bộ theo cấu hình.</td>
+</tr>
+<tr>
+<td><strong>S2a-HKD</strong></td>
+<td>Hộ/cá nhân tính GTGT và TNCN cùng theo tỷ lệ trên doanh thu</td>
+<td>Cấu hình thuế của hoạt động xác định cả hai sắc thuế theo doanh thu.</td>
+</tr>
+<tr>
+<td><strong>S2b-HKD</strong></td>
+<td>Hộ/cá nhân tính GTGT theo doanh thu và TNCN theo thu nhập</td>
+<td>Dùng cùng S2c, S2d, S2e; không dùng S2a thay thế.</td>
+</tr>
+<tr>
+<td><strong>S2c-HKD</strong></td>
+<td>Cùng nhóm dùng S2b, cần theo dõi chi tiết doanh thu và chi phí</td>
+<td>Có dữ liệu doanh thu/chi phí của kỳ, kể cả khi chênh lệch không dương.</td>
+</tr>
+<tr>
+<td><strong>S2d-HKD</strong></td>
+<td>Cùng nhóm dùng S2b, có vật liệu, dụng cụ, sản phẩm hoặc hàng hóa cần theo dõi</td>
+<td>Có sử dụng kho; lập riêng cho sản phẩm và phạm vi kho được chọn.</td>
+</tr>
+<tr>
+<td><strong>S2e-HKD</strong></td>
+<td>Cùng nhóm dùng S2b, cần theo dõi tiền mặt và tiền gửi không kỳ hạn</td>
+<td>Mở phần tiền mặt và từng tài khoản có phạm vi phù hợp.</td>
+</tr>
+<tr>
+<td><strong>S3a-HKD</strong></td>
+<td>Hộ/cá nhân có phát sinh thuế xuất nhập khẩu, TTĐB, tài nguyên, bảo vệ môi trường, sử dụng đất hoặc thuế khác</td>
+<td>Dùng bổ sung, không thay thế sổ doanh thu, chi phí, hàng hóa hoặc tiền.</td>
+</tr>
+</tbody></table></div>
+<h2 id="section-37-4">37.4. Tỷ lệ tính thuế theo từng ngành nghề</h2>
+<p>Ở nhóm tính trực tiếp trên doanh thu, tỷ lệ phải đi cùng phần doanh thu của đúng ngành nghề. Ma trận chức năng dùng để phân loại và tính toán gồm:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Ngành nghề/hoạt động</th>
+<th align="right">Tỷ lệ GTGT trên doanh thu</th>
+<th align="right">Tỷ lệ TNCN trên doanh thu</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Phân phối, cung cấp hàng hóa</td>
+<td align="right">1%</td>
+<td align="right">0,5%</td>
+</tr>
+<tr>
+<td>Dịch vụ, xây dựng không bao thầu nguyên vật liệu</td>
+<td align="right">5%</td>
+<td align="right">2%</td>
+</tr>
+<tr>
+<td>Cho thuê tài sản</td>
+<td align="right">5%</td>
+<td align="right">5%</td>
+</tr>
+<tr>
+<td>Đại lý xổ số, đại lý bảo hiểm, bán hàng đa cấp và khoản hoa hồng thuộc trường hợp không tính GTGT tại hộ</td>
+<td align="right">Không tính theo dòng này</td>
+<td align="right">5%</td>
+</tr>
+<tr>
+<td>Sản xuất, vận tải, dịch vụ gắn với hàng hóa; xây dựng có bao thầu nguyên vật liệu</td>
+<td align="right">3%</td>
+<td align="right">1,5%</td>
+</tr>
+<tr>
+<td>Hoạt động kinh doanh khác</td>
+<td align="right">2%</td>
+<td align="right">1%</td>
+</tr>
+</tbody></table></div>
+<p>Tỷ lệ trên danh mục ngành được giữ cùng giao dịch khi chốt. Khi tỷ lệ cấu hình thay đổi cho kỳ sau, hệ thống không lấy tỷ lệ mới nhân lại doanh thu của giao dịch lịch sử. Nếu sản phẩm thiếu ngành, màn hình sổ phải cảnh báo phần doanh thu chưa phân loại; không tự đẩy vào “Hoạt động kinh doanh khác” mà không cho người dùng biết.</p>
+<h2 id="section-37-5">37.5. Sổ kế toán</h2>
+<p>Phần này chỉ mô tả bố cục nghiệp vụ của các mẫu sổ ban hành kèm <strong>Thông tư số 152/2025/TT-BTC</strong> cho hộ kinh doanh và cá nhân kinh doanh. Đây là mẫu sổ kế toán theo chế độ kế toán, không phải tờ khai thuế điện tử. Khi xuất Excel, hệ thống phải giữ mã mẫu, tên sổ, các cột, dòng tổng và khu vực ký tương ứng; không được đổi mã mẫu để làm cho một sổ hiện trạng trông như mẫu khác.</p>
+<p>Chương này chỉ đặc tả bộ sổ dành cho <strong>Hộ kinh doanh/cá nhân kinh doanh</strong> theo Thông tư 152/2025/TT-BTC.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Điều kiện áp dụng HKD</th>
+<th>Mẫu sổ</th>
+<th>Nguồn số liệu tự động</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Không chịu GTGT và không phải nộp TNCN</td>
+<td>S1a-HKD</td>
+<td>Doanh thu từ đơn đủ điều kiện; không đưa tiền thu/công nợ vào doanh thu.</td>
+</tr>
+<tr>
+<td>GTGT và TNCN tính theo tỷ lệ % trên doanh thu</td>
+<td>S2a-HKD</td>
+<td>Doanh thu đã hoàn tất, nhóm ngành nghề, tỷ lệ GTGT/TNCN cấu hình.</td>
+</tr>
+<tr>
+<td>GTGT theo tỷ lệ % trên doanh thu, TNCN tính theo thu nhập</td>
+<td>S2b-HKD, S2c-HKD, S2d-HKD, S2e-HKD</td>
+<td>Doanh thu, chi phí đủ điều kiện, nhập–xuất–tồn và thu–chi theo từng sổ.</td>
+</tr>
+<tr>
+<td>Có thuế khác</td>
+<td>S3a-HKD</td>
+<td>Mẫu theo dõi để người dùng nhập số liệu theo sắc thuế phát sinh.</td>
+</tr>
+</tbody></table></div>
+<p>Giá trị mặc định của loại hình đăng ký là Hộ kinh doanh; khi chọn HKD, phương pháp GTGT là Trực tiếp và phương pháp xuất kho là Bình quân, đều không cho sửa. Bộ mẫu của chương này được mở khi chế độ kế toán là TT152. Sổ tự động chỉ lấy dữ liệu đã đạt mốc nghiệp vụ tương ứng, còn biểu trống không tạo dữ liệu giả.</p>
+<h4>Trang tổng quan và lựa chọn bộ mẫu TT152</h4>
+<p>Trang Tổng quan sổ kế toán của chương này chỉ mở bộ mẫu <strong>Hộ kinh doanh/cá nhân kinh doanh theo Thông tư 152/2025/TT-BTC</strong>. Mỗi ô hiển thị mã mẫu, tên sổ, mô tả và đường dẫn mở chi tiết. Mã mẫu phải xuất hiện đồng nhất trên tiêu đề màn hình và phần đầu tệp Excel.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Mẫu</th>
+<th>Tên chức năng</th>
+<th>Kết quả chính</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S1a-HKD</td>
+<td>Sổ doanh thu bán hàng hóa, dịch vụ</td>
+<td>Doanh thu theo từng đơn đủ điều kiện.</td>
+</tr>
+<tr>
+<td>S2a-HKD</td>
+<td>Sổ doanh thu bán hàng hóa, dịch vụ</td>
+<td>Doanh thu theo ngành nghề, số tính GTGT và TNCN.</td>
+</tr>
+<tr>
+<td>S2b-HKD</td>
+<td>Sổ doanh thu bán hàng hóa, dịch vụ</td>
+<td>Doanh thu theo ngành nghề và số tính GTGT.</td>
+</tr>
+<tr>
+<td>S2c-HKD</td>
+<td>Sổ chi tiết doanh thu, chi phí</td>
+<td>Doanh thu, sáu nhóm chi phí, chênh lệch và số tính TNCN.</td>
+</tr>
+<tr>
+<td>S2d-HKD</td>
+<td>Sổ chi tiết vật liệu, dụng cụ, sản phẩm, hàng hóa</td>
+<td>Đầu kỳ, nhập, xuất và tồn của một sản phẩm.</td>
+</tr>
+<tr>
+<td>S2e-HKD</td>
+<td>Sổ chi tiết tiền</td>
+<td>Thu, chi và số dư theo tiền mặt, từng tài khoản ngân hàng.</td>
+</tr>
+<tr>
+<td>S3a-HKD</td>
+<td>Sổ theo dõi nghĩa vụ thuế khác</td>
+<td>Biểu để theo dõi các sắc thuế khác khi có phát sinh.</td>
+</tr>
+</tbody></table></div>
+<p>Phần đầu mỗi tệp ghi đúng tên hộ/cá nhân kinh doanh, địa chỉ, mã số thuế, địa điểm kinh doanh, kỳ và dòng “Kèm theo Thông tư số 152/2025/TT-BTC”. Tệp xuất phải sử dụng đúng mã mẫu TT152 được chọn.</p>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" role="img" aria-labelledby="title-tt152-book-map-29 desc-tt152-book-map-29" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-tt152-book-map-29">Bảy sổ TT152 và nội dung được tải lên từng mẫu</title><desc id="desc-tt152-book-map-29">CHỌN BỘ SỔ TT152. HKD · đúng kỳ · đúng chi nhánh; S1a-HKD. Doanh thu từng đơn. Không tính GTGT/TNCN; S2a-HKD. Doanh thu theo ngành. GTGT và TNCN; S2b-HKD. Doanh thu theo ngành. GTGT; S2c-HKD. Doanh thu · sáu nhóm chi phí. Chênh lệch · TNCN; S2d-HKD. Đầu kỳ · nhập · xuất · tồn. Theo sản phẩm và kho; S2e-HKD. Tiền mặt · tiền gửi. Thu · chi · số dư; S3a-HKD. Nghĩa vụ thuế khác. Lượng · giá tính · thuế suất</desc><defs><marker id="arrow-tt152-book-map-29" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 82 V116 H153 V145" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt152-book-map-29)"/><path d="M480 82 V116 H480 V145" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt152-book-map-29)"/><path d="M480 82 V116 H807 V145" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt152-book-map-29)"/><path d="M480 82 V216 H153 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt152-book-map-29)"/><path d="M480 82 V216 H480 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt152-book-map-29)"/><path d="M480 82 V216 H807 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt152-book-map-29)"/><path d="M480 82 V326 H480 V565" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tt152-book-map-29)"/><g><rect x="300" y="14" width="360" height="68" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="43" font-weight="700">CHỌN BỘ SỔ TT152</tspan><tspan x="480" y="65">HKD · đúng kỳ · đúng chi nhánh</tspan></text></g><g><rect x="18" y="150" width="270" height="88" rx="10" fill="#fff" stroke="#708c82"/><text x="153" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="153" y="178" font-weight="700">S1a-HKD</tspan><tspan x="153" y="200">Doanh thu từng đơn</tspan><tspan x="153" y="222">Không tính GTGT/TNCN</tspan></text></g><g><rect x="345" y="150" width="270" height="88" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="178" font-weight="700">S2a-HKD</tspan><tspan x="480" y="200">Doanh thu theo ngành</tspan><tspan x="480" y="222">GTGT và TNCN</tspan></text></g><g><rect x="672" y="150" width="270" height="88" rx="10" fill="#fff" stroke="#708c82"/><text x="807" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="807" y="178" font-weight="700">S2b-HKD</tspan><tspan x="807" y="200">Doanh thu theo ngành</tspan><tspan x="807" y="222">GTGT</tspan></text></g><g><rect x="18" y="350" width="270" height="98" rx="10" fill="#fff" stroke="#708c82"/><text x="153" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="153" y="383" font-weight="700">S2c-HKD</tspan><tspan x="153" y="405">Doanh thu · sáu nhóm chi phí</tspan><tspan x="153" y="427">Chênh lệch · TNCN</tspan></text></g><g><rect x="345" y="350" width="270" height="98" rx="10" fill="#fff" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="383" font-weight="700">S2d-HKD</tspan><tspan x="480" y="405">Đầu kỳ · nhập · xuất · tồn</tspan><tspan x="480" y="427">Theo sản phẩm và kho</tspan></text></g><g><rect x="672" y="350" width="270" height="98" rx="10" fill="#fff" stroke="#708c82"/><text x="807" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="807" y="383" font-weight="700">S2e-HKD</tspan><tspan x="807" y="405">Tiền mặt · tiền gửi</tspan><tspan x="807" y="427">Thu · chi · số dư</tspan></text></g><g><rect x="300" y="570" width="360" height="98" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="603" font-weight="700">S3a-HKD</tspan><tspan x="480" y="625">Nghĩa vụ thuế khác</tspan><tspan x="480" y="647">Lượng · giá tính · thuế suất</tspan></text></g></svg></div><figcaption><strong>Bảy sổ TT152 và nội dung được tải lên từng mẫu.</strong> Mỗi ô là một khung biểu mẫu. S1a/S2a/S2b lấy doanh thu; S2c ghép doanh thu với chi phí; S2d tính nhập–xuất–tồn liên tục; S2e theo dõi tiền thực thu/chi; S3a dành cho nghĩa vụ thuế khác. Bố cục cột chi tiết của từng khung được trình bày tại mục 41.29.</figcaption></figure>
+
+<h4>Quy trình lập một sổ</h4>
+<p>Quy trình sử dụng thông thường gồm các bước sau:</p>
+<ol>
+<li>Mở Tổng quan sổ kế toán và chọn đúng mẫu.</li>
+<li>Kiểm tra chi nhánh đang chọn.</li>
+<li>Chọn kỳ xem hoặc nhập khoảng ngày tùy chọn.</li>
+<li>Chọn sản phẩm đối với sổ vật liệu, hàng hóa; chọn thêm đối tác và chiều công nợ đối với sổ công nợ khi cần.</li>
+<li>Chọn cách xem tổng hợp hoặc chi tiết nếu mẫu hỗ trợ.</li>
+<li>Chờ hệ thống tính và hiển thị kết quả.</li>
+<li>Kiểm tra tổng hợp, đọc các phát sinh bất thường và đối chiếu chứng từ gốc.</li>
+<li>Xuất Excel, kiểm tra đầu trang và phạm vi kết quả trong tệp.</li>
+</ol>
+<p>Thay bộ lọc đưa danh sách về trang đầu. Việc đổi trang chỉ thay phần đang nhìn, không thay kỳ xem và không làm tính lại tổng thành tổng riêng của trang.</p>
+<p>Người sử dụng không nhập số doanh thu, số dư hoặc số thuế trực tiếp trên những sổ tự động. Ngoại lệ là S3a-HKD: người sử dụng tải biểu trống và hoàn thiện nội dung trong tệp đã tải, không ghi nội dung đó trở lại hệ thống từ màn hình sổ.</p>
+<h4>Kỳ xem và ý nghĩa ngày</h4>
+<p>Các lựa chọn phổ biến là Tháng này, Tháng trước, Năm này, Năm trước và Tùy chọn.</p>
+<ul>
+<li>Tháng này bắt đầu từ ngày đầu tháng.</li>
+<li>Tháng trước lấy trọn tháng liền trước.</li>
+<li>Năm trước lấy trọn năm liền trước.</li>
+<li>Tùy chọn cho phép nhập Từ ngày và Đến ngày.</li>
+</ul>
+<p>Trên các bộ lọc HKD, khi người sử dụng đưa Từ ngày vượt Đến ngày, giao diện điều chỉnh Đến ngày bằng Từ ngày. Khi đưa Đến ngày lùi trước Từ ngày, giao diện điều chỉnh Từ ngày bằng Đến ngày. Khoảng ngày vì vậy không bị đảo chiều sau thao tác nhập thông thường.</p>
+<p>Các sổ doanh thu và sổ kho tiếp nhận khoảng ngày mà người sử dụng đã chọn. Bộ lọc Năm này của các màn hình này có thể biểu diễn đến cuối năm. Sổ tiền xác định Năm này từ đầu năm đến ngày hiện tại. Khi cần so sánh chính xác nhiều mẫu, người sử dụng chọn cùng một khoảng Tùy chọn thay vì chỉ dựa vào tên lựa chọn nhanh.</p>
+<p>Ngày dùng để đưa một phát sinh vào sổ khác nhau theo loại nghiệp vụ:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Phát sinh</th>
+<th>Ngày dùng trong sổ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Doanh thu bán hàng</td>
+<td>Ngày đơn hoàn tất.</td>
+</tr>
+<tr>
+<td>Nhập, xuất trong sổ vật liệu, hàng hóa</td>
+<td>Ngày nhập hoặc ngày xuất của phiếu đã hoàn tất.</td>
+</tr>
+<tr>
+<td>Tiêu hao nội bộ trong sổ doanh thu, chi phí</td>
+<td>Ngày xuất của phiếu tiêu hao đã hoàn tất.</td>
+</tr>
+<tr>
+<td>Khoản chi thuộc đề nghị chi</td>
+<td>Ngày chứng từ của đề nghị chi đã hoàn tất.</td>
+</tr>
+<tr>
+<td>Khấu hao</td>
+<td>Ngày khấu hao.</td>
+</tr>
+<tr>
+<td>Thu, chi trong sổ tiền</td>
+<td>Ngày phát sinh biến động tiền.</td>
+</tr>
+</tbody></table></div>
+<p>Điều kiện hoàn tất và ngày được lọc là hai điều khác nhau. Một phiếu xuất có ngày xuất tháng trước nhưng vừa hoàn tất hôm nay có thể thuộc sổ kho tháng trước khi lập lại. Không đổi ngày xuất thành ngày hoàn tất chỉ để khớp thời điểm thao tác trên màn hình.</p>
+<h4>Phân biệt tổng sổ và phần đang xem</h4>
+<p>Các màn hình có phân trang để đọc số liệu. Kích thước ban đầu thường là 15 dòng. Một dòng tiêu đề nhóm, cộng nhóm hoặc tổng thuế có thể được tính là một dòng hiển thị, không nhất thiết là một chứng từ bán hàng.</p>
+<p>S1a-HKD tính tổng doanh thu trên toàn bộ đơn thỏa điều kiện trước khi chia trang. S2a-HKD và S2b-HKD cũng tính doanh thu và thuế cho toàn bộ nhóm trước khi chia trang. S2d-HKD tính tồn liên tục trên toàn bộ phát sinh theo thời gian rồi mới lấy phần của trang hiện tại. Vì vậy, dòng đầu trang hai tiếp tục số tồn của các phát sinh trước đó, không bắt đầu lại từ đầu kỳ.</p>
+<p>S2c-HKD có cách phân trang riêng. Ở chế độ Tổng hợp, sổ giữ các dòng tổng hợp và không chia các dòng đó thành danh sách chi tiết. Ở chế độ Chi tiết, chỉ các phát sinh doanh thu và chi phí được chia trang; các dòng tổng hợp vẫn được giữ để người đọc thấy quan hệ tổng thể.</p>
+<p>Không cộng lại tất cả dòng đang hiển thị để suy ra tổng sổ. Một số dòng là chi tiết, một số dòng là tổng của chính các chi tiết đó. Cộng cả hai loại sẽ làm nhân đôi số liệu.</p>
+<h4>Điều kiện doanh thu chung</h4>
+<p>Các sổ doanh thu tự động trong chương này sử dụng đơn có thời điểm hoàn tất và thuộc cách tính GTGT trực tiếp được ghi nhận cho đơn. Đơn mới, đơn mới xác nhận hoặc đơn giao hàng chưa hoàn tất không trở thành doanh thu của sổ chỉ vì đã có một khoản thu.</p>
+<p>Ngày thu tiền không thay thế ngày hoàn tất đơn. Đơn giao hàng đã gửi có thể có phiếu thu và công nợ trong khi chưa xuất hiện trong sổ doanh thu. Ngược lại, đơn đã hoàn tất nhưng chưa thu đủ có thể đã có doanh thu, đồng thời còn số phải thu trong sổ công nợ.</p>
+<p>Giá trị trình bày căn cứ kết quả hiện hành của đơn và phần doanh thu đã được tổng hợp theo ngành nghề. Sản phẩm bị hủy, phần hàng trả, số tiền hoàn, Voucher, giảm giá, phụ thu và điểm đã dùng có thể làm thay đổi kết quả khi đơn được xử lý lại theo nghiệp vụ bán hàng.</p>
+<p>Nếu xử lý trả hàng khiến đơn không còn thời điểm hoàn tất, đơn đó không đáp ứng điều kiện xuất hiện trong các sổ doanh thu nêu trên. Không tự tạo một đơn hoàn tất giả để ghi số âm bù lại. Nếu đơn vẫn đủ điều kiện và còn một khoản doanh thu giữ lại sau trả hàng, việc tổng hợp theo ngành nghề phản ánh phần còn lại theo kết quả xử lý đơn.</p>
+<p>Tên khách hàng trống được trình bày là Khách lẻ. Mã đơn không có được thể hiện bằng dấu gạch thay thế. Những cách trình bày này giúp đọc sổ nhưng không khẳng định hồ sơ khách hàng hoặc mã đơn đã đầy đủ để phục vụ mục đích khác.</p>
+<h4>Xuất Excel</h4>
+<p>Xuất Excel lấy toàn bộ kết quả theo kỳ, chi nhánh và lựa chọn đang áp dụng, không chỉ lấy trang đang mở. S2c-HKD giữ cách xem Tổng hợp hoặc Chi tiết đã chọn khi tạo tệp. Các sổ yêu cầu sản phẩm vẫn phải có sản phẩm hợp lệ khi xuất.</p>
+<p>Các màn hình HKD có dữ liệu cung cấp hộp chọn số dòng trên một trang tính. Giá trị ban đầu là 100. Người sử dụng phải nhập số nguyên dương trong giới hạn chức năng cho phép; giá trị không hợp lệ hiển thị thông báo và không bắt đầu xuất. Đây là số dòng dùng để chia trang tính, không phải giới hạn tổng chứng từ được lấy của sổ.</p>
+<p>Một tệp có thể có nhiều trang tính mang tên Trang 1, Trang 2 và tiếp tục. Người sử dụng không cần xuất từng trang màn hình rồi ghép lại. Ngược lại, việc có nhiều trang tính không có nghĩa mỗi trang tính là một kỳ hoặc chi nhánh khác nhau.</p>
+<p>Khi chia trang tính, một nhóm có thể kéo dài qua hai trang vì số dòng của trang tính bao gồm cả dòng trình bày. Các dòng trước và sau điểm ngắt trang vẫn thuộc cùng một nhóm. Không coi nhóm ở trang tính kế tiếp là một ngành nghề mới nếu đó chỉ là phần tiếp tục.</p>
+<p>Thông tin đầu biểu gồm:</p>
+<ul>
+<li>Mã mẫu.</li>
+<li>Tên đơn vị.</li>
+<li>Địa chỉ.</li>
+<li>Mã số thuế.</li>
+<li>Tên sổ.</li>
+<li>Kỳ theo khả năng của từng mẫu.</li>
+</ul>
+<p>Các mẫu HKD doanh thu, chi phí và hàng hóa ưu tiên thông tin chi nhánh đã chọn; khi không có chi nhánh, một số thông tin đầu biểu có thể để trống.</p>
+<p>Sổ tiền và biểu S3a-HKD có cách lấy thông tin doanh nghiệp khi không chọn chi nhánh.</p>
+<p>Không dùng việc đầu biểu trống để kết luận phần số liệu cũng trống.</p>
+<p>Kỳ được trình bày dưới dạng Tháng, Năm hoặc Từ ngày đến ngày. Ngày ở khu vực ký là ngày tạo bản xuất, không thay đổi ngày các phát sinh. Các số tiền và số lượng được xuất theo từng mẫu, không chuyển toàn bộ số thành diễn giải chữ.</p>
+<p>S3a-HKD xuất trực tiếp biểu trống, không mở lựa chọn số dòng phát sinh.</p>
+<p>Chức năng xuất sổ hiện cung cấp Excel. Việc tải sổ không đồng thời tạo một tệp PDF có chứng nhận, không ký điện tử và không gửi tự động cho cơ quan bên ngoài. Người sử dụng có thể in hoặc lưu dạng khác từ tệp đã tải bằng công cụ phù hợp, nhưng thao tác đó không phải ghi sổ mới trong hệ thống.</p>
+<h4>Tổng hợp doanh thu theo ngành nghề</h4>
+<p>Các sổ doanh thu có yêu cầu phân loại ngành nghề sử dụng phần doanh thu của đơn đã được phân chia theo ngành nghề. Một đơn bán nhiều nhóm hàng có thể xuất hiện ở nhiều nhóm, mỗi nhóm chỉ mang phần giá trị thuộc nhóm đó.</p>
+<p>Đối với sản phẩm thông thường còn hiệu lực, hệ thống lấy giá trị bán sau phần Voucher phân bổ cho sản phẩm để hình thành tỷ trọng ban đầu. Sản phẩm trả hàng có thể còn khoản cửa hàng giữ lại; khoản giữ lại dương được phân vào ngành nghề của sản phẩm. Trường hợp đã hoàn lại toàn bộ thì không còn phần giữ lại của sản phẩm đó.</p>
+<p>Đối với Combo, giá trị Combo sau phần Voucher phân bổ được chia cho các sản phẩm bên trong theo tỷ trọng giá trị. Khi toàn bộ trọng số bằng không, giá trị được chia đều. Sản phẩm cuối cùng nhận phần chênh còn lại để tổng phần phân bổ bằng giá trị Combo, tránh thiếu hoặc thừa do phép chia.</p>
+<p>Các phiên sử dụng theo giờ của Facility được nhận diện theo ngành nghề của phiên. Thời gian kết thúc phiên lấy kết quả chốt sử dụng, không kéo dài đến thời điểm người xem sổ. Phiên không có khoảng sử dụng dương không tự tạo thêm một khoản doanh thu giờ.</p>
+<p>Sau khi hình thành các nhóm, hệ thống cân chỉnh tổng nhóm theo các thành phần của giá trị doanh thu mà đơn đang giữ lại trước VAT:</p>
+<ul>
+<li>Tiền sản phẩm còn hiệu lực.</li>
+<li>Tiền Combo còn hiệu lực.</li>
+<li>Phụ thu còn hiệu lực.</li>
+<li>Trừ Voucher.</li>
+<li>Trừ giảm giá.</li>
+<li>Trừ phần điểm còn được áp dụng sau các lần hoàn trả.</li>
+</ul>
+<p>Việc cân chỉnh bảo đảm tổng nhóm không cộng thêm các khoản giảm một lần nữa khi trình bày sổ.</p>
+<p>Nếu chưa xác định được một nhóm hợp lệ nào nhưng đơn còn giá trị, hệ thống dùng ngành nghề có thể nhận diện từ sản phẩm hoặc nhóm Hoạt động kinh doanh khác. Nếu chỉ một phần sản phẩm có nhóm hợp lệ, việc cân chỉnh có thể phân bổ phần giá trị còn lại vào những nhóm đã có. Do đó, tổng doanh thu khớp đơn không đủ để chứng minh ngành nghề đã phân loại đúng; người phụ trách vẫn phải kiểm tra nhóm ngành của sản phẩm và phiên sử dụng.</p>
+<p>Các nhóm được sắp theo thứ tự ngành nghề của hệ thống. Trong từng nhóm, chứng từ sắp theo ngày hoàn tất rồi mã đơn. Không sắp lại toàn bộ sổ chỉ theo mã đơn vì sẽ làm mất cấu trúc nhóm và các dòng tính thuế theo nhóm.</p>
+<h3 id="section-37-5-1">37.5.1. Sổ doanh thu bán hàng hóa, dịch vụ: Mẫu số S1a-HKĐ</h3>
+<p>S1a-HKD trình bày ngày hoàn tất, diễn giải bán hàng và số tiền. Diễn giải kết hợp tên khách hàng với mã đơn để người đọc nhận biết giao dịch mà không cần mở nhiều màn hình. Các dòng sắp theo ngày hoàn tất tăng dần, sau đó theo diễn giải.</p>
+<p>Số tiền của dòng là giá trị cuối cùng trước VAT mà đơn đang ghi nhận. Giá trị này đã chịu tác động của cách tính tiền hàng, Combo, tiền sử dụng theo giờ và các khoản giảm hoặc điều chỉnh áp dụng trên đơn. Sổ không lấy tổng phiếu thu để thay thế giá trị đơn và không cộng công nợ thêm một lần vào doanh thu.</p>
+<p>Người dùng chọn một trong hai cách hiển thị. Ở chế độ <strong>Theo đơn</strong>, mỗi đơn đủ điều kiện tạo một dòng và diễn giải nhận diện khách hàng cùng mã đơn. Ở chế độ <strong>Theo ngày</strong>, hệ thống gom các đơn có cùng ngày hoàn tất thành một dòng, cộng doanh thu còn hiệu lực của ngày đó và dùng diễn giải “Doanh thu bán hàng ngày [dd/MM/yyyy]”. Việc gom theo ngày chỉ thay đổi cách trình bày, không thay đổi tổng doanh thu, điều kiện lọc hoặc dữ liệu nguồn; người dùng vẫn phải mở chi tiết ngày để truy ngược các đơn cấu thành.</p>
+<p>Tổng cộng bằng tổng số tiền của tất cả đơn thỏa điều kiện trong kỳ và chi nhánh đã chọn. Việc chỉ nhìn 15 dòng đầu không làm tổng cộng giảm còn 15 đơn đó. Khi thay đổi kỳ, cả danh sách và tổng cộng đều được lấy lại theo điều kiện mới.</p>
+<p>S1a-HKD không tự chia ngành nghề và không có dòng tính GTGT hoặc TNCN. Vì vậy, không dùng việc mẫu này không có số thuế để kết luận toàn bộ hoạt động đang xem không phát sinh nghĩa vụ thuế.</p>
+<p><strong>Đối tượng sử dụng:</strong> Hộ kinh doanh hoặc cá nhân kinh doanh thuộc trường hợp không chịu thuế GTGT và không phải nộp thuế TNCN.</p>
+<p><strong>Hình mẫu/wireframe:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HỘ, CÁ NHÂN KINH DOANH:</strong> ………………<br><strong>Địa chỉ:</strong> …………………………………………<br><strong>Mã số thuế:</strong> …………………………………</td>
+<td><strong>Mẫu số S1a-HKD</strong><br><em>(Kèm theo Thông tư số 152/2025/TT-BTC ngày 31 tháng 12 năm 2025 của Bộ trưởng Bộ Tài chính)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>SỔ DOANH THU BÁN HÀNG HÓA, DỊCH VỤ</strong></p>
+<p><strong>Địa điểm kinh doanh:</strong> …………………………………</p>
+<p><strong>Kỳ kê khai:</strong> …………………………………</p>
+<p><em>Đơn vị tính: …………………………………</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Ngày tháng</strong></th>
+<th><strong>Diễn giải</strong></th>
+<th align="right"><strong>Số tiền</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>B</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Tổng cộng</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&nbsp;</td>
+<td><em>Ngày ... tháng ... năm ...</em><br><strong>NGƯỜI ĐẠI DIỆN HỘ KINH DOANH/</strong><br><strong>CÁ NHÂN KINH DOANH</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu nếu có)</em></td>
+</tr>
+</tbody></table></div>
+<p>Khi chọn Theo đơn, mỗi dòng nhận diện một đơn; khi chọn Theo ngày, mỗi dòng là tổng các đơn có cùng ngày hoàn tất.</p>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Hệ thống lấy đơn đã hoàn tất trong kỳ và chi nhánh được chọn, bỏ món hủy và phần hàng đã trả.</p>
+<ul>
+<li>Cột A nhận ngày hoàn tất.</li>
+<li>Cột B nhận diễn giải theo chế độ Theo đơn hoặc Theo ngày.</li>
+<li>Cột 1 nhận doanh thu còn hiệu lực sau Voucher và điều chỉnh.</li>
+<li>Tiền đã thu và công nợ chỉ là cách hình thành thanh toán, không được cộng thêm vào doanh thu.</li>
+</ul>
+<p><strong>Phần đầu mẫu:</strong></p>
+<ul>
+<li>Hộ hoặc cá nhân kinh doanh.</li>
+<li>Địa chỉ.</li>
+<li>Mã số thuế.</li>
+<li>Địa điểm kinh doanh.</li>
+<li>Kỳ kê khai.</li>
+<li>Đơn vị tính.</li>
+<li>Mã <strong>S1a-HKD</strong> và dòng dẫn chiếu Thông tư 152/2025/TT-BTC.</li>
+</ul>
+<p><strong>Bảng sổ:</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Nội dung phải có</th>
+<th>Cách đưa số liệu</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>Ngày tháng ghi sổ</td>
+<td>Ngày ghi nhận doanh thu theo chứng từ hoặc ngày tổng hợp định kỳ.</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Diễn giải</td>
+<td>Nội dung bán hàng hóa, cung cấp dịch vụ; có thể ghi từng giao dịch hoặc tổng hợp kèm bảng chi tiết.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Số tiền</td>
+<td>Doanh thu bán hàng hóa, dịch vụ của dòng.</td>
+</tr>
+</tbody></table></div>
+<p>Cuối bảng có dòng <strong>Tổng cộng</strong> và khu vực ngày lập, chữ ký người đại diện hộ kinh doanh/cá nhân kinh doanh. Sổ này không có cột GTGT hoặc TNCN vì áp dụng cho trường hợp không chịu các sắc thuế đó.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Ba đơn đầu có giá trị lần lượt là 1.200.000 đồng, 850.000 đồng và 2.450.000 đồng.</li>
+<li>Chín đơn còn lại có tổng giá trị 8.500.000 đồng.</li>
+<li>Nếu ghi từng đơn, sổ tạo các dòng riêng để truy vết.</li>
+<li>Nếu ghi gộp một dòng, số tiền là <code>1.200.000 + 850.000 + 2.450.000 + 8.500.000 = 13.000.000 đồng</code>.</li>
+<li>Không ghi thêm tiền đã thu hoặc công nợ vào cột 1.</li>
+</ul>
+</blockquote>
+<h3 id="section-37-5-2">37.5.2. Sổ doanh thu bán hàng hóa, dịch vụ: Mẫu số S2a-HKĐ</h3>
+<p>S2a-HKD trình bày một phần cho mỗi ngành nghề có phát sinh.</p>
+<p>Một phần gồm:</p>
+<ul>
+<li>Tên ngành nghề.</li>
+<li>Các dòng bán hàng.</li>
+<li>Tổng doanh thu nhóm.</li>
+<li>Số tính GTGT.</li>
+<li>Số tính TNCN.</li>
+</ul>
+<p>Mỗi dòng bán hàng thể hiện mã đơn, ngày hoàn tất, diễn giải bán hàng và phần doanh thu của đơn trong nhóm.</p>
+<p>Doanh thu nhóm bằng tổng các phần doanh thu thuộc nhóm. Số tính GTGT bằng tổng của từng phần doanh thu nhân tỷ lệ GTGT đã đi cùng phần doanh thu đó, chia 100. Số tính TNCN được tính tương tự bằng tỷ lệ TNCN.</p>
+<p>Hệ thống cộng các kết quả tính trong nhóm trước rồi làm tròn đến đồng. Phần đúng nửa đồng được làm tròn ra xa số không. Tổng GTGT của sổ bằng tổng các số GTGT nhóm đã làm tròn; tổng TNCN được cộng tương tự. Không mặc định rằng làm tròn từng sản phẩm trước rồi cộng sẽ luôn cho cùng kết quả.</p>
+<p>Tỷ lệ tính trên sổ được sử dụng để tính kết quả của mẫu. Người sử dụng không nhập một tỷ lệ mới trực tiếp trên màn hình sổ và không đánh dấu số tính này là đã nộp bằng thao tác xuất Excel.</p>
+<p>Sổ này trình bày số tính theo doanh thu đã phân nhóm; không tự lấy các phiếu chi nộp thuế để trừ vào hai dòng tổng thuế. Việc theo dõi số đã nộp thuộc các chức năng có hỗ trợ đối chiếu nghĩa vụ và thanh toán tương ứng.</p>
+<p>Khi nhóm không có phát sinh thì không cần tạo một phần nhóm trống. Các dòng tổng thuế cuối sổ vẫn có thể thể hiện giá trị bằng không khi không có doanh thu đủ điều kiện. Điều này khác với kết luận không có hoạt động bán hàng trong toàn doanh nghiệp.</p>
+<p><strong>Đối tượng sử dụng:</strong> Hộ kinh doanh hoặc cá nhân kinh doanh nộp thuế GTGT và TNCN theo tỷ lệ phần trăm trên doanh thu.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu chia thân sổ thành các khối ngành nghề.</p>
+<p>Mỗi khối có:</p>
+<ul>
+<li>Số hiệu chứng từ.</li>
+<li>Ngày tháng.</li>
+<li>Diễn giải.</li>
+<li>Doanh thu.</li>
+<li>Dòng tổng nhóm.</li>
+<li>Dòng GTGT.</li>
+<li>Dòng TNCN.</li>
+</ul>
+<p>Cuối sổ có:</p>
+<ul>
+<li>Tổng số thuế GTGT.</li>
+<li>Tổng số thuế TNCN.</li>
+<li>Khu vực ký.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HỘ, CÁ NHÂN KINH DOANH:</strong> ………………<br><strong>Địa chỉ:</strong> …………………………………………<br><strong>Mã số thuế:</strong> …………………………………</td>
+<td><strong>Mẫu số S2a-HKD</strong><br><em>(Kèm theo Thông tư số 152/2025/TT-BTC ngày 31 tháng 12 năm 2025 của Bộ trưởng Bộ Tài chính)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>SỔ DOANH THU BÁN HÀNG HÓA, DỊCH VỤ</strong></p>
+<p><strong>Địa điểm kinh doanh:</strong> …………………………………</p>
+<p><strong>Kỳ kê khai:</strong> …………………………………</p>
+<p><em>Đơn vị tính: …………………………………</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Chứng từ — Số hiệu</strong></th>
+<th><strong>Chứng từ — Ngày, tháng</strong></th>
+<th><strong>Diễn giải</strong></th>
+<th align="right"><strong>Số tiền</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>1. Ngành nghề ………………………</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng cộng (1)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Thuế GTGT</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Thuế TNCN</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>2. Ngành nghề ………………………</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng cộng (2)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Thuế GTGT</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Thuế TNCN</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế GTGT phải nộp</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế TNCN phải nộp</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&nbsp;</td>
+<td><em>Ngày ... tháng ... năm ...</em><br><strong>NGƯỜI ĐẠI DIỆN HỘ KINH DOANH/</strong><br><strong>CÁ NHÂN KINH DOANH</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu nếu có)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ol>
+<li>Hệ thống lấy từng đơn đã hoàn tất.</li>
+<li>Hệ thống xác định giá trị còn hiệu lực sau giảm giá, Voucher và trả hàng.</li>
+<li>Giá trị Combo được phân bổ về từng sản phẩm con.</li>
+<li>Giá trị của từng sản phẩm được phân vào ngành nghề có cùng tỷ lệ GTGT và TNCN.</li>
+<li>Hệ thống gom các dòng theo ngành nghề và tính tổng của từng nhóm.</li>
+</ol>
+<p>Một đơn có nhiều ngành nghề tạo nhiều dòng nhưng tổng các dòng phải bằng doanh thu còn hiệu lực của đơn.</p>
+<p>Thuế của từng nhóm được tính theo tỷ lệ của chính nhóm rồi mới cộng toàn sổ.</p>
+<p><strong>Phần đầu mẫu:</strong></p>
+<ul>
+<li>Ghi tên hộ/cá nhân kinh doanh.</li>
+<li>Địa chỉ.</li>
+<li>Mã số thuế.</li>
+<li>Địa điểm kinh doanh.</li>
+<li>Kỳ kê khai.</li>
+<li>Đơn vị tính.</li>
+<li>Mã <strong>S2a-HKD</strong>.</li>
+<li>Dòng dẫn chiếu Thông tư 152/2025/TT-BTC.</li>
+</ul>
+<p>Bảng dùng các cột:</p>
+<ul>
+<li>A — số hiệu chứng từ.</li>
+<li>B — ngày tháng.</li>
+<li>C — diễn giải.</li>
+<li>1 — số tiền.</li>
+</ul>
+<p>Dưới mỗi nhóm ngành có các dòng <strong>Tổng cộng (n)</strong>, <strong>Thuế GTGT</strong>, <strong>Thuế TNCN</strong>; cuối sổ có <strong>Tổng số thuế GTGT phải nộp</strong> và <strong>Tổng số thuế TNCN phải nộp</strong>.</p>
+<p>Doanh thu được tách theo nhóm có cùng tỷ lệ % tính GTGT hoặc cùng thuế suất TNCN. Số thuế nhóm được tính từ doanh thu nhóm và tỷ lệ tương ứng, sau đó làm tròn đến đồng ở bước quy định của mẫu. Khoản thuế đã nộp không được trừ trực tiếp vào dòng doanh thu.</p>
+<blockquote>
+<p><strong>Ví dụ tính theo hai nhóm</strong></p>
+</blockquote>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nhóm</th>
+<th align="right">Doanh thu</th>
+<th align="right">Tỷ lệ GTGT</th>
+<th align="right">GTGT tính</th>
+<th align="right">Tỷ lệ TNCN</th>
+<th align="right">TNCN tính</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Phân phối hàng hóa</td>
+<td align="right">20.000.000</td>
+<td align="right">1%</td>
+<td align="right">200.000</td>
+<td align="right">0,5%</td>
+<td align="right">100.000</td>
+</tr>
+<tr>
+<td>Dịch vụ</td>
+<td align="right">10.000.000</td>
+<td align="right">5%</td>
+<td align="right">500.000</td>
+<td align="right">2%</td>
+<td align="right">200.000</td>
+</tr>
+<tr>
+<td><strong>Tổng</strong></td>
+<td align="right"><strong>30.000.000</strong></td>
+<td align="right"></td>
+<td align="right"><strong>700.000</strong></td>
+<td align="right"></td>
+<td align="right"><strong>300.000</strong></td>
+</tr>
+</tbody></table></div>
+<p>Nếu có ba nhóm, mỗi nhóm phải có tổng riêng trước khi cộng toàn sổ. Không nhân tổng 30.000.000 đồng với một tỷ lệ duy nhất khi hai nhóm có tỷ lệ khác nhau.</p>
+<h3 id="section-37-5-3">37.5.3. Sổ doanh thu bán hàng hóa, dịch vụ: Mẫu số S2b-HKĐ</h3>
+<p>S2b-HKD phân doanh thu theo ngành nghề của từng phần giá trị trên đơn. Mỗi nhóm có tên ngành nghề, các chứng từ bán hàng, cộng doanh thu và số tính GTGT. Cuối sổ là tổng số GTGT của các nhóm.</p>
+<p>Mẫu này không có dòng tính TNCN theo tỷ lệ doanh thu và không trình bày chi phí. Phạm vi của mẫu chỉ gồm doanh thu đã phân nhóm và số GTGT tính trên doanh thu của từng nhóm.</p>
+<p>Một đơn có hai ngành nghề tạo hai dòng chi tiết ở hai phần khác nhau. Hai dòng đó là phân bổ của cùng một đơn, không phải hai lần bán. Việc đếm chứng từ duy nhất phải dựa trên mã đơn, không dựa trên số dòng in ra.</p>
+<p><strong>Đối tượng sử dụng:</strong> Hộ kinh doanh hoặc cá nhân kinh doanh nộp GTGT theo tỷ lệ trên doanh thu và xác định TNCN trên thu nhập tính thuế; mẫu này theo dõi doanh thu và GTGT theo từng nhóm ngành nghề.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu chia theo nhóm ngành nghề.</p>
+<p>Mỗi nhóm có:</p>
+<ul>
+<li>Cột A — số hiệu chứng từ.</li>
+<li>Cột B — ngày tháng.</li>
+<li>Cột C — diễn giải.</li>
+<li>Cột 1 — số tiền.</li>
+<li>Dòng tổng doanh thu nhóm.</li>
+<li>Dòng GTGT của nhóm.</li>
+</ul>
+<p>Mẫu không có dòng TNCN hoặc nhóm chi phí.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HỘ, CÁ NHÂN KINH DOANH:</strong> ………………<br><strong>Địa chỉ:</strong> …………………………………………<br><strong>Mã số thuế:</strong> …………………………………</td>
+<td><strong>Mẫu số S2b-HKD</strong><br><em>(Kèm theo Thông tư số 152/2025/TT-BTC ngày 31 tháng 12 năm 2025 của Bộ trưởng Bộ Tài chính)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>SỔ DOANH THU BÁN HÀNG HÓA, DỊCH VỤ</strong></p>
+<p><strong>Địa điểm kinh doanh:</strong> …………………………………</p>
+<p><strong>Kỳ kê khai:</strong> …………………………………</p>
+<p><em>Đơn vị tính: …………………………………</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Chứng từ — Số hiệu</strong></th>
+<th><strong>Chứng từ — Ngày, tháng</strong></th>
+<th><strong>Diễn giải</strong></th>
+<th align="right"><strong>Số tiền</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>1. Ngành nghề ………………………</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng cộng (1)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Thuế GTGT</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>2. Ngành nghề ………………………</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng cộng (2)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Thuế GTGT</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng số thuế GTGT phải nộp</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&nbsp;</td>
+<td><em>Ngày ... tháng ... năm ...</em><br><strong>NGƯỜI ĐẠI DIỆN HỘ KINH DOANH/</strong><br><strong>CÁ NHÂN KINH DOANH</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu nếu có)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Nguồn là đơn đã hoàn tất còn doanh thu sau hủy, trả và giảm trừ. Hệ thống ghi mã đơn, ngày hoàn tất, diễn giải và phần doanh thu theo từng ngành nghề; sau đó nhân doanh thu nhóm với tỷ lệ GTGT của nhóm. Không dùng tiền thu, công nợ hoặc giá vốn để thay doanh thu trên mẫu này.</p>
+<p>Phần đầu mẫu có:</p>
+<ul>
+<li>Tên hộ hoặc cá nhân kinh doanh.</li>
+<li>Địa chỉ.</li>
+<li>Mã số thuế.</li>
+<li>Địa điểm kinh doanh.</li>
+<li>Kỳ kê khai.</li>
+<li>Đơn vị tính.</li>
+<li>Mã <strong>S2b-HKD</strong>.</li>
+</ul>
+<p>Cuối sổ có dòng <strong>Tổng số thuế GTGT phải nộp</strong>. Mẫu không tạo dòng TNCN.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Nhóm bán hàng hóa có doanh thu 75.500.000 đồng và tỷ lệ GTGT 1%.</li>
+<li>Nhóm dịch vụ có doanh thu 24.500.000 đồng và tỷ lệ GTGT 5%.</li>
+<li>GTGT của nhóm bán hàng hóa là 755.000 đồng.</li>
+<li>GTGT của nhóm dịch vụ là 1.225.000 đồng.</li>
+<li>Tổng doanh thu là 100.000.000 đồng.</li>
+<li>Tổng GTGT là 1.980.000 đồng.</li>
+<li>Khoản giảm giá đã phân bổ cho nhóm phải được trừ trước khi nhân tỷ lệ, không trừ sau khi đã tổng hợp thuế.</li>
+</ul>
+</blockquote>
+<h3 id="section-37-5-4">37.5.4. Sổ chi tiết doanh thu, chi phí: Mẫu S2c-HKĐ</h3>
+<p>S2c-HKD có bốn phần:</p>
+<ul>
+<li>Doanh thu và thu nhập.</li>
+<li>Chi phí.</li>
+<li>Chênh lệch.</li>
+<li>Số tính TNCN.</li>
+</ul>
+<p>Chi phí được chia theo thứ tự cố định thành sáu nhóm:</p>
+<ul>
+<li>Nguyên liệu, vật liệu và hàng hóa.</li>
+<li>Tiền lương và các khoản liên quan.</li>
+<li>Khấu hao tài sản.</li>
+<li>Dịch vụ mua ngoài.</li>
+<li>Lãi vay.</li>
+<li>Các khoản chi khác.</li>
+</ul>
+<p>Chế độ Tổng hợp chỉ trình bày tổng doanh thu, tổng chi phí, tổng từng nhóm, chênh lệch và số tính thuế. Chế độ Chi tiết thêm các chứng từ bên dưới phần tương ứng. Chuyển cách xem không làm đổi tổng doanh thu, tổng chi phí hoặc chênh lệch.</p>
+<p>Doanh thu của S2c-HKD được tính bằng giá trị đơn gồm VAT cộng phí giao hàng của đơn đủ điều kiện. Voucher, giảm giá, phần hàng trả lại và các điều chỉnh còn hiệu lực phải được xử lý trước khi đưa giá trị lên sổ.</p>
+<p>Mỗi dòng chi tiết doanh thu dùng mã đơn, ngày hoàn tất, tên khách hàng hoặc Khách lẻ và giá trị theo cách tính của S2c-HKD. Các dòng được xếp theo ngày rồi mã đơn trong phần doanh thu.</p>
+<p>Tên nhóm chi phí trên mẫu là cách phân loại để tổng hợp. Việc một khoản xuất hiện ở nhóm không đồng nghĩa hệ thống đã tự kiểm tra toàn bộ chứng từ hoặc điều kiện để khoản đó được chấp nhận cho một mục đích thuế cụ thể.</p>
+<h5>S2c-HKD — chi phí hàng hóa và nguyên vật liệu</h5>
+<p>Nhóm nguyên liệu, vật liệu và hàng hóa gồm giá vốn gắn với đơn bán đủ điều kiện và giá trị xuất tiêu hao nội bộ đã hoàn tất. Phiếu nhập mua hàng chưa làm toàn bộ số tiền mua trở thành chi phí của nhóm chỉ vì đã thanh toán cho nhà cung cấp.</p>
+<p>Đối với hàng lưu kho, giá vốn lấy từ Phiếu xuất đã Hoàn thành theo phương pháp và cách tính Bình quân có hiệu lực. Bình quân Sau từng lô nhập dùng đơn giá sau lần nhập gần nhất trước thời điểm xuất. Bình quân Theo từng kỳ dùng đơn giá của kỳ chứa ngày xuất và được cập nhật khi căn cứ của kỳ thay đổi. Báo cáo ưu tiên kết quả giá vốn đã ghi nhận trên chính phiếu xuất; không dùng ngày hoàn tất đơn để chọn kỳ, không lấy một kỳ gần nhất ngoài phạm vi để ước đoán và không suy giá vốn từ giá bán.</p>
+<p>Đối với các phương pháp theo lần xuất hoặc lô hàng, hệ thống cộng giá trị hàng của các lần xuất gắn với đơn. Khoản hàng đã bị từ chối hoặc trả lại theo điều kiện của luồng bán không được coi như giá vốn của một giao dịch bán hoàn tất còn nguyên hiệu lực.</p>
+<p>Đối với sản phẩm có chế biến theo đơn, phần giá trị nguyên vật liệu đã xuất theo lệnh chế biến hoàn tất được tổng hợp theo tham chiếu đơn. Lệnh chế biến phải nằm trong khoảng ngày sản xuất được xét. Giá bán món ăn hoặc thành phẩm không thay thế giá vốn nguyên vật liệu.</p>
+<p>Đối với tiêu hao nội bộ, hệ thống lấy phiếu xuất tiêu hao đã hoàn tất theo ngày xuất, cộng số lượng thực xuất nhân giá vốn của từng phần xuất. Chỉ khoản có tổng giá trị dương được thêm vào chi phí. Diễn giải cho biết đây là tiêu hao sử dụng hoặc sản xuất chế biến, để phân biệt với giá vốn bán hàng.</p>
+<p>Phần tiêu hao nội bộ đang được tổng hợp trong phạm vi toàn doanh nghiệp, kể cả khi người sử dụng đã chọn chi nhánh cho sổ. Phần doanh thu, đề nghị chi và khấu hao có điều kiện chi nhánh riêng. Khi đối chiếu S2c-HKD của một chi nhánh, người đọc phải tách khoản tiêu hao nội bộ này; không kết luận mọi khoản chi phí trên sổ đều chỉ thuộc chi nhánh đã chọn.</p>
+<p>Các giá trị giá vốn của một đơn được cộng thành dòng Chi phí hàng hóa, nguyên vật liệu. Không cộng thêm cùng một phiếu xuất vào nhiều nhóm chi phí chỉ để khớp tổng mua hàng.</p>
+<h5>S2c-HKD — các nhóm chi phí còn lại</h5>
+<p>Nhóm tiền lương và các khoản liên quan sử dụng các khoản thuộc đề nghị chi đã hoàn tất được phân loại vào lương, tiền công, phụ cấp, bảo hiểm hoặc các khoản trích liên quan. Một đề nghị chi có nhiều khoản có thể tạo nhiều dòng chi tiết. Tổng số tiền của đề nghị không được đưa toàn bộ vào nhóm lương nếu chỉ một phần thuộc nhóm đó.</p>
+<p>Nhóm dịch vụ mua ngoài sử dụng các khoản được phân loại vào điện, nước, điện thoại, internet, vận chuyển, thuê tài sản, sửa chữa, bảo dưỡng và các loại dịch vụ tương ứng. Nhóm lãi vay sử dụng khoản được phân loại chi phí tài chính theo danh mục đã nhận diện. Nhóm chi khác sử dụng các khoản nằm trong tập phân loại chi khác của hệ thống.</p>
+<p>Một khoản chi chỉ được thêm vào nhóm khi loại khoản chi được hệ thống nhận diện. Đề nghị chi đã hoàn tất nhưng loại khoản chưa thuộc tập phân loại của sổ không tự được dồn vào một nhóm khác. Không dùng tổng tiền chi ra trên sổ tiền làm tổng chi phí thay thế, vì trả nợ, hoàn tiền hoặc rút vốn không phải lúc nào cũng là chi phí của sổ này.</p>
+<p>Ngày chi tiết là ngày chứng từ của đề nghị chi. Mã chứng từ là mã đề nghị chi. Diễn giải ưu tiên ghi chú của từng khoản; nếu không có ghi chú thì lấy tên loại khoản chi. Số tiền là giá trị của khoản được phân loại, không tự cộng VAT thêm một lần vào số đã ghi nhận.</p>
+<p>Nhóm khấu hao được lấy từ các lần khấu hao tài sản, theo ngày khấu hao và chi nhánh của lần khấu hao. Diễn giải cho biết tên tài sản; mã chứng từ nhận diện tài sản. Sổ không lấy một khoản chi mua tài sản để thay cho khấu hao và không coi việc xem báo cáo là lệnh tạo khấu hao.</p>
+<p>Tổng chi phí bằng giá vốn và tiêu hao nội bộ cộng các khoản của năm nhóm còn lại. Mỗi nhóm vẫn có dòng tổng hợp kể cả khi không có chi tiết. Dòng tổng chi phí không được cộng lặp lại vào tổng sáu nhóm.</p>
+<h5>S2c-HKD — chênh lệch và số tính TNCN</h5>
+<p>Chênh lệch bằng tổng doanh thu trừ tổng chi phí trong điều kiện đang xem. Chênh lệch âm được giữ để thể hiện kết quả lỗ, không đổi thành số dương và không tự chuyển sang doanh thu kỳ khác.</p>
+<p>Số tính TNCN lấy phần chênh lệch dương nhân tỷ lệ được hệ thống lựa chọn theo doanh thu năm. Nếu chênh lệch bằng hoặc nhỏ hơn không thì số tính này bằng không. Kết quả được làm tròn đến đồng sau khi nhân.</p>
+<p>Năm tham chiếu là năm của ngày cuối khoảng xem. Doanh thu để chọn tỷ lệ là doanh thu cả năm của toàn doanh nghiệp, không chỉ doanh thu chi nhánh đang lọc và không chỉ doanh thu của tháng đang xem. Khi khoảng tùy chọn đi qua hai năm, hệ thống vẫn dùng năm của ngày kết thúc để lựa chọn tỷ lệ, không tự tách thành hai phép tính theo hai năm.</p>
+<p>Các mốc tính đang được chức năng sử dụng là:</p>
+<ul>
+<li>Dưới 500 triệu đồng chọn 0%.</li>
+<li>Từ 500 triệu đến dưới 3 tỷ đồng chọn 15%.</li>
+<li>Từ 3 tỷ đến dưới 50 tỷ đồng chọn 17%.</li>
+<li>Từ 50 tỷ đồng trở lên chọn 20%.</li>
+<li>Đây là mô tả phép tính có sẵn trong chức năng, không phải kết luận áp dụng pháp luật cho người sử dụng.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Chênh lệch kỳ là 40 triệu đồng và tỷ lệ chức năng xác định là 15% thì số tính TNCN là 6 triệu đồng.</li>
+<li>Nếu kỳ có chênh lệch âm 10 triệu đồng, số tính bằng không trong khi chênh lệch vẫn thể hiện âm 10 triệu đồng.</li>
+</ul>
+</blockquote>
+<p>Số tính này không được giảm tự động bởi các lần nộp thuế trong kỳ. Việc xuất sổ cũng không tạo đề nghị chi nộp thuế, không xác nhận đã nộp và không thay thế một hồ sơ kê khai.</p>
+<p><strong>Đối tượng sử dụng:</strong> Hộ kinh doanh hoặc cá nhân kinh doanh nộp GTGT theo tỷ lệ trên doanh thu và xác định TNCN trên thu nhập tính thuế.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu gồm bốn phần theo thứ tự cố định:</p>
+<ul>
+<li>Doanh thu.</li>
+<li>Sáu nhóm chi phí.</li>
+<li>Chênh lệch.</li>
+<li>TNCN phải nộp.</li>
+</ul>
+<p>Người dùng có thể xem Tổng hợp hoặc Chi tiết; cả hai chế độ phải cho cùng tổng cuối.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HỘ, CÁ NHÂN KINH DOANH:</strong> ………………<br><strong>Địa chỉ:</strong> …………………………………………<br><strong>Mã số thuế:</strong> …………………………………</td>
+<td><strong>Mẫu số S2c-HKD</strong><br><em>(Kèm theo Thông tư số 152/2025/TT-BTC ngày 31 tháng 12 năm 2025 của Bộ trưởng Bộ Tài chính)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>SỔ CHI TIẾT DOANH THU, CHI PHÍ</strong></p>
+<p><strong>Tên địa điểm kinh doanh:</strong> …………………………………</p>
+<p><strong>Kỳ kê khai:</strong> …………………………………</p>
+<p><em>Đơn vị tính: …………………………………</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Chứng từ — Số hiệu</strong></th>
+<th><strong>Chứng từ — Ngày, tháng</strong></th>
+<th><strong>Diễn giải</strong></th>
+<th align="right"><strong>Số tiền</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>1. Doanh thu bán hàng hóa, dịch vụ</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>2. Chi phí hợp lý</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>a) Chi phí nguyên liệu, vật liệu, nhiên liệu, năng lượng và hàng hóa</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>b) Chi phí tiền lương, tiền công, phụ cấp, bảo hiểm và khoản trả người lao động</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>c) Chi phí khấu hao tài sản cố định phục vụ hoạt động kinh doanh</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>d) Chi phí dịch vụ mua ngoài</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>e) Chi phí trả lãi tiền vay vốn phục vụ hoạt động kinh doanh</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>f) Các khoản chi khác phục vụ trực tiếp hoạt động kinh doanh</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>3. Chênh lệch (3 = 1 − 2)</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>4. Tổng số thuế TNCN phải nộp</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&nbsp;</td>
+<td><em>Ngày ... tháng ... năm ...</em><br><strong>NGƯỜI ĐẠI DIỆN HỘ KINH DOANH/</strong><br><strong>CÁ NHÂN KINH DOANH</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu nếu có)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ul>
+<li>Doanh thu lấy từ đơn đủ điều kiện.</li>
+<li>Giá vốn và tiêu hao lấy từ phiếu xuất đã hoàn thành.</li>
+<li>Lương, dịch vụ, lãi vay và chi phí khác lấy từ khoản chi đã hoàn tất và được phân loại.</li>
+<li>Khấu hao lấy từ lần khấu hao hợp lệ.</li>
+<li>Mỗi nguồn chỉ được đưa vào một nhóm.</li>
+<li>Chênh lệch bằng doanh thu trừ chi phí.</li>
+<li>TNCN chỉ được tính trên phần chênh lệch dương theo tỷ lệ áp dụng.</li>
+</ul>
+<p><strong>Bố cục:</strong></p>
+<ul>
+<li>Phần đầu ghi hộ/cá nhân kinh doanh.</li>
+<li>Địa chỉ.</li>
+<li>Mã số thuế.</li>
+<li>Địa điểm.</li>
+<li>Kỳ kê khai.</li>
+<li>Mã <strong>S2c-HKD</strong>.</li>
+</ul>
+<p>Bảng có các cột:</p>
+<ul>
+<li>A — số hiệu chứng từ.</li>
+<li>B — ngày tháng.</li>
+<li>C — diễn giải.</li>
+<li>1 — số tiền.</li>
+</ul>
+<p>Các dòng bắt buộc gồm:</p>
+<ol>
+<li>Doanh thu bán hàng hóa, dịch vụ.</li>
+<li>Chi phí hợp lý, được chia thành:<ul>
+<li>Nguyên liệu, vật liệu, nhiên liệu, năng lượng và hàng hóa.</li>
+<li>Tiền lương, tiền công, phụ cấp, bảo hiểm và khoản trả người lao động.</li>
+<li>Khấu hao tài sản cố định phục vụ kinh doanh.</li>
+<li>Dịch vụ mua ngoài.</li>
+<li>Chi phí khác phục vụ trực tiếp hoạt động.</li>
+</ul>
+</li>
+<li>Chênh lệch, tính bằng doanh thu trừ chi phí.</li>
+<li>Tổng số thuế TNCN phải nộp, tính trên chênh lệch dương theo thuế suất áp dụng.</li>
+</ol>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Doanh thu kỳ là 180.000.000 đồng.</li>
+<li>Chi phí nguyên liệu 92.000.000 đồng, tiền công 28.000.000 đồng, khấu hao 6.000.000 đồng và dịch vụ mua ngoài 14.000.000 đồng.</li>
+<li>Tổng chi phí là <code>92.000.000 + 28.000.000 + 6.000.000 + 14.000.000 = 140.000.000 đồng</code>.</li>
+<li>Chênh lệch là <code>180.000.000 - 140.000.000 = 40.000.000 đồng</code>.</li>
+<li>Nếu thuế suất chức năng áp dụng là 15%, số tính TNCN là <code>40.000.000 × 15% = 6.000.000 đồng</code>.</li>
+<li>Nếu chi phí là 195.000.000 đồng thì chênh lệch âm 15.000.000 đồng vẫn phải thể hiện âm, còn số tính TNCN bằng 0.</li>
+</ul>
+</blockquote>
+<h3 id="section-37-5-5">37.5.5. Sổ chi tiết vật liệu, dụng cụ, sản phẩm, hàng hóa: Mẫu S2d-HKĐ</h3>
+<p>S2d-HKD được lập cho một sản phẩm mỗi lần xem. Người sử dụng phải chọn sản phẩm; nếu chưa chọn, hệ thống thông báo Vui lòng chọn sản phẩm. Sản phẩm không tồn tại trong doanh nghiệp đang làm việc bị từ chối với thông báo Không tìm thấy sản phẩm.</p>
+<p>Nếu đã chọn chi nhánh, sổ sử dụng kho gắn với chi nhánh đó. Nếu không giới hạn chi nhánh, sổ sử dụng các kho của doanh nghiệp. Không tìm được kho phù hợp thì báo Không tìm thấy kho; hệ thống không lấy một kho khác để thay thế âm thầm.</p>
+<p>Tên sản phẩm ưu tiên tên tiếng Việt; khi thiếu tên thì dùng mã sản phẩm. Số lượng được quy về đơn vị tính gốc của sản phẩm. Một phiếu nhập theo thùng và một phiếu xuất theo chiếc phải được đổi về cùng đơn vị trước khi cộng nhập, xuất hoặc tồn.</p>
+<p>Số dư đầu kỳ được xác định trước ngày bắt đầu xem. Nếu chưa có kỳ kế toán trước đó, số lượng và trị giá đầu kỳ bằng tổng nhập trừ tổng xuất của các phiếu hoàn tất có ngày nghiệp vụ trước ngày bắt đầu.</p>
+<p>Nếu có kỳ kế toán kết thúc trước khoảng xem, hệ thống lấy kỳ gần nhất làm mốc rồi cộng các phát sinh sau ngày kết thúc kỳ đó đến trước ngày bắt đầu xem. Mốc số lượng được tính bằng số lượng đầu kỳ cộng nhập trong kỳ trừ xuất trong kỳ đã chọn làm mốc.</p>
+<p>Đối với trị giá của mốc kỳ, phép tổng hợp hiện hành sử dụng giá trị đầu kỳ cộng giá trị nhập của kỳ làm mốc, rồi cộng hoặc trừ các biến động sau mốc. Người đọc không được mặc định trị giá mốc này đã được giảm toàn bộ giá trị xuất của kỳ trước. Khi đối chiếu trị giá đầu kỳ với báo cáo tồn cuối kỳ trước, phải kiểm tra riêng thành phần giá trị xuất của kỳ làm mốc.</p>
+<p>Những ngày nằm trước khoảng xem không xuất hiện thành dòng phát sinh trong kỳ nhưng có thể làm thay đổi số dư đầu kỳ. Vì vậy, việc sửa hoặc xóa hợp lệ một phiếu cũ có thể khiến số dư đầu kỳ thay đổi khi lập lại sổ.</p>
+<h5>S2d-HKD — nhập, xuất và tồn liên tục</h5>
+<p>Sổ chỉ nhận phiếu nhập, xuất đã hoàn tất. Phiếu nháp không tạo dòng nhập hoặc xuất, dù đã có ngày chứng từ và danh sách sản phẩm. Ngày trên dòng là ngày nhập hoặc ngày xuất của phiếu.</p>
+<p>Một dòng thể hiện mã phiếu, ngày, diễn giải, đơn vị tính, đơn giá, số lượng nhập và trị giá nhập hoặc số lượng xuất và trị giá xuất, số tồn sau phát sinh và ghi chú. Diễn giải giúp phân biệt mua hàng, nhập thành phẩm, nhận chuyển kho, khách trả, điều chỉnh kiểm kê, xuất bán, chuyển kho, trả nhà cung cấp, tiêu hủy hoặc xuất sản xuất.</p>
+<p>Số lượng nhập bằng số lượng trên phiếu nhân hệ số quy đổi về đơn vị gốc. Trị giá nhập bằng số lượng đã quy đổi nhân giá vốn nhập theo đơn vị gốc. Giá vốn nhập đã bao gồm các thành phần giá trị được xác định tại nghiệp vụ nhập; sổ không phân bổ lại chi phí mua hàng khi người sử dụng mở báo cáo.</p>
+<p>Số lượng xuất gồm phần xuất theo đơn vị gốc và phần xuất qua đơn vị quy đổi. Đơn giá xuất ưu tiên giá vốn đã ghi nhận trên phiếu. Nếu có chi tiết giá theo các phần xuất thì lấy tổng trị giá của các phần đó chia số lượng xuất để trình bày đơn giá tương ứng. Khi không có cả hai loại giá này, hệ thống lấy giá xuất có thể xác định từ chức năng kho; khi số lượng bằng không thì đơn giá và trị giá của dòng bằng không.</p>
+<p>Hệ thống ghép tất cả phát sinh nhập và xuất trước khi tính số tồn. Thứ tự là ngày nghiệp vụ, tiếp theo thời điểm hoàn tất; khi vẫn trùng thì nhập đứng trước xuất và có thứ tự ổn định giữa các chứng từ. Không tính xong toàn bộ nhập rồi mới tính toàn bộ xuất nếu thực tế các giao dịch xen kẽ nhau.</p>
+<p>Sau mỗi dòng, số lượng tồn bằng số lượng tồn trước dòng cộng nhập trừ xuất. Trị giá tồn bằng trị giá tồn trước dòng cộng trị giá nhập trừ trị giá xuất. Cuối kỳ bằng đầu kỳ cộng tổng nhập trừ tổng xuất. Những công thức này được áp dụng độc lập cho số lượng và giá trị.</p>
+<p>Một số tồn âm phải được thể hiện để đối chiếu, không tự đổi thành không. Nguyên nhân có thể thuộc ngày chứng từ, thứ tự hoàn tất, số dư đầu kỳ, hệ số quy đổi hoặc giá vốn chưa đầy đủ. Người sử dụng phải kiểm tra nghiệp vụ kho thay vì sửa con số tồn trực tiếp trên sổ.</p>
+<p><strong>Đối tượng sử dụng:</strong> Hộ kinh doanh hoặc cá nhân kinh doanh thuộc bộ sổ xác định TNCN trên thu nhập tính thuế, có vật liệu, dụng cụ, sản phẩm hoặc hàng hóa cần theo dõi nhập–xuất–tồn.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu mở riêng cho từng sản phẩm hoặc nhóm theo phạm vi được hỗ trợ.</p>
+<p>Mẫu có các nhóm thông tin:</p>
+<ul>
+<li>Chứng từ.</li>
+<li>Ngày tháng.</li>
+<li>Diễn giải.</li>
+<li>Đơn vị tính.</li>
+<li>Đơn giá.</li>
+<li>Số lượng và giá trị nhập.</li>
+<li>Số lượng và giá trị xuất.</li>
+<li>Số lượng và giá trị tồn.</li>
+<li>Ghi chú.</li>
+</ul>
+<p>Ba mốc bắt buộc gồm:</p>
+<ul>
+<li>Số dư đầu kỳ.</li>
+<li>Cộng phát sinh trong kỳ.</li>
+<li>Số dư cuối kỳ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HỘ, CÁ NHÂN KINH DOANH:</strong> ………………<br><strong>Địa chỉ:</strong> …………………………………………<br><strong>Mã số thuế:</strong> …………………………………</td>
+<td><strong>Mẫu số S2d-HKD</strong><br><em>(Kèm theo Thông tư số 152/2025/TT-BTC ngày 31 tháng 12 năm 2025 của Bộ trưởng Bộ Tài chính)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>SỔ CHI TIẾT VẬT LIỆU, DỤNG CỤ, SẢN PHẨM, HÀNG HÓA</strong></p>
+<p><strong>Tên vật liệu, dụng cụ, sản phẩm, hàng hóa:</strong> …………………………………</p>
+<p><strong>Kỳ kê khai:</strong> …………………………………</p>
+<p><em>Đơn vị tính: …………………………………</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Chứng từ — Số hiệu</strong></th>
+<th><strong>Chứng từ — Ngày, tháng</strong></th>
+<th><strong>Diễn giải</strong></th>
+<th><strong>Đơn vị tính</strong></th>
+<th align="right"><strong>Đơn giá</strong></th>
+<th align="right"><strong>Nhập — Số lượng</strong></th>
+<th align="right"><strong>Nhập — Thành tiền</strong></th>
+<th align="right"><strong>Xuất — Số lượng</strong></th>
+<th align="right"><strong>Xuất — Thành tiền</strong></th>
+<th align="right"><strong>Tồn — Số lượng</strong></th>
+<th align="right"><strong>Tồn — Thành tiền</strong></th>
+<th><strong>Ghi chú</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td>8</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư đầu kỳ</strong></td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td>…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Cộng phát sinh trong kỳ</strong></td>
+<td></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Số dư cuối kỳ</strong></td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&nbsp;</td>
+<td><em>Ngày ... tháng ... năm ...</em><br><strong>NGƯỜI ĐẠI DIỆN HỘ KINH DOANH/</strong><br><strong>CÁ NHÂN KINH DOANH</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu nếu có)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong></p>
+<ol>
+<li>Hệ thống chỉ lấy phiếu nhập và phiếu xuất đã hoàn thành.</li>
+<li>Số lượng được quy đổi về đơn vị cơ bản.</li>
+<li>Các phát sinh được sắp theo ngày nghiệp vụ.</li>
+<li>Khi trùng ngày, hệ thống dùng thời điểm hoàn tất và thứ tự ổn định của chứng từ.</li>
+</ol>
+<p>Giá nhập dùng giá vốn nhập; giá xuất dùng giá vốn đã xác định theo phương pháp kho.</p>
+<p>Phiếu xuất Nháp hoặc phần xuất âm chưa đủ nguồn giá vốn không được đưa thành số liệu giá trị chính thức.</p>
+<p><strong>Phần đầu mẫu:</strong></p>
+<ul>
+<li>Hộ/cá nhân kinh doanh.</li>
+<li>Địa chỉ.</li>
+<li>Mã số thuế.</li>
+<li>Mã <strong>S2d-HKD</strong>.</li>
+<li>Tên vật liệu/dụng cụ/sản phẩm/hàng hóa.</li>
+<li>Kỳ kê khai.</li>
+<li>Kho khi hệ thống quản lý theo kho.</li>
+</ul>
+<p><strong>Các cột:</strong></p>
+<ul>
+<li>A — số hiệu chứng từ.</li>
+<li>B — ngày tháng.</li>
+<li>C — diễn giải.</li>
+<li>D — đơn vị tính.</li>
+<li>1 — đơn giá.</li>
+<li>2 — nhập số lượng.</li>
+<li>3 — nhập thành tiền.</li>
+<li>4 — xuất số lượng.</li>
+<li>5 — xuất thành tiền.</li>
+<li>6 — tồn số lượng.</li>
+<li>7 — tồn thành tiền.</li>
+<li>8 — ghi chú.</li>
+</ul>
+<p>Cuối sổ có:</p>
+<ul>
+<li><strong>Số dư đầu kỳ</strong>.</li>
+<li><strong>Cộng phát sinh trong kỳ</strong>.</li>
+<li><strong>Số dư cuối kỳ</strong>.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Tồn đầu kỳ: 10 chiếc, trị giá 500.000 đồng.</li>
+<li>Nhập trong kỳ: 8 chiếc, trị giá 440.000 đồng.</li>
+<li>Xuất trong kỳ: 12 chiếc, trị giá 624.000 đồng theo giá vốn đã xác định.</li>
+<li>Số lượng cuối kỳ: <code>10 + 8 − 12 = 6 chiếc</code>.</li>
+<li>Trị giá cuối kỳ: <code>500.000 + 440.000 − 624.000 = 316.000 đồng</code>.</li>
+<li>Đơn giá tồn trình bày khoảng <code>316.000 / 6 = 52.666,67 đồng/chiếc</code> nếu mẫu cho phép hiển thị đơn giá bình quân.</li>
+<li>Số liệu giá vốn phải lấy từ kết quả kho theo phương pháp cấu hình, không tự đổi giá xuất chỉ để làm cho tồn cuối kỳ bằng một mức mong muốn.</li>
+</ul>
+</blockquote>
+<h3 id="section-37-5-6">37.5.6. Sổ chi tiết tiền: Mẫu S2e-HKĐ</h3>
+<p>S2e-HKD sử dụng các biến động đã ghi nhận trong sổ quỹ. Phiếu thu, phiếu chi mới nháp hoặc đề nghị chưa tạo biến động tiền không tự xuất hiện chỉ vì được lập trong khoảng ngày đang xem.</p>
+<p>Khi chọn chi nhánh, hệ thống xác định phạm vi qua chi nhánh của phiếu thu hoặc phiếu chi đi cùng biến động. Biến động không gắn được với phiếu của chi nhánh đang chọn không được tự suy ra là của chi nhánh đó.</p>
+<p>Các phát sinh được chia theo tiền mặt và từng tài khoản ngân hàng. Tiền mặt đứng trước; sau đó là các tài khoản ngân hàng theo tên. Hai tài khoản thuộc cùng một ngân hàng vẫn là hai sổ riêng và cần nhận diện thêm bằng số tài khoản.</p>
+<p>Sổ chỉ trình bày các quỹ hoặc tài khoản có phát sinh trong khoảng ngày đang xem. Nếu toàn bộ khoảng xem không có phát sinh, kết quả là danh sách trống. Một tài khoản có số dư từ trước nhưng không phát sinh trong kỳ không tự xuất hiện thành một phần chỉ có đầu kỳ và cuối kỳ. Vì vậy, danh sách trống không đồng nghĩa toàn doanh nghiệp có số dư tiền bằng không.</p>
+<p>Trong từng quỹ, số dư đầu kỳ bằng tổng các biến động trước ngày bắt đầu, theo đúng quỹ và đúng phạm vi chi nhánh đang áp dụng. Không lấy số dư toàn doanh nghiệp của giao dịch đầu tiên để dùng cho báo cáo riêng một chi nhánh.</p>
+<h5>S2e-HKD — thu, chi và số dư</h5>
+<p>Mỗi phần quỹ gồm:</p>
+<ul>
+<li>Tên quỹ.</li>
+<li>Số dư đầu kỳ.</li>
+<li>Các phát sinh.</li>
+<li>Tổng thu nếu có.</li>
+<li>Tổng chi nếu có.</li>
+<li>Số dư cuối kỳ.</li>
+</ul>
+<p>Đối với ngân hàng, cách gọi được đổi thành tiền gửi đầu kỳ, tổng gửi vào, tổng rút ra và tiền gửi cuối kỳ.</p>
+<p>Mỗi phát sinh có số phiếu thu hoặc phiếu chi, ngày phát sinh tiền, diễn giải và số tiền. Biến động dương được trình bày phía Thu/Gửi vào. Biến động âm được trình bày phía Chi/Rút ra với giá trị tuyệt đối, không đặt dấu âm vào cả hai phía.</p>
+<p>Diễn giải sử dụng nội dung của biến động và bổ sung mã chứng từ nghiệp vụ liên quan khi cần. Không lặp mã chứng từ nếu mã đã có trong diễn giải. Tên hoặc mã chứng từ giúp lần theo bán hàng, nhập hàng, công nợ và chi phí; không làm phát sinh một giao dịch tiền mới.</p>
+<p>Tổng thu bằng tổng các biến động dương trong kỳ. Tổng chi bằng tổng giá trị tuyệt đối của các biến động âm. Số dư cuối kỳ bằng số dư đầu kỳ cộng tổng thu trừ tổng chi. Không lấy tổng thu trừ tổng chi làm số dư cuối kỳ khi quỹ đã có tiền trước kỳ.</p>
+<p>Dòng tổng hợp Tiền gửi không kỳ hạn có thể xuất hiện ngay sau phần tiền mặt khi có phần tiền mặt và tổng số dư cuối kỳ của những tài khoản ngân hàng đang được trình bày khác không. Dòng này tổng hợp các ngân hàng có phát sinh trong kỳ, không phải cam kết đã liệt kê mọi tài khoản có số dư. Nếu chỉ phát sinh ngân hàng mà không có phần tiền mặt, không mặc định dòng tổng này vẫn xuất hiện.</p>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Quỹ tiền mặt có đầu kỳ 5 triệu đồng, thu 3 triệu đồng và chi 2 triệu đồng thì cuối kỳ là 6 triệu đồng.</li>
+<li>Một khoản giảm công nợ do điều chỉnh nhưng không thu tiền không được thêm vào tổng thu chỉ để khớp mức giảm nợ.</li>
+</ul>
+</blockquote>
+<p><strong>Đối tượng sử dụng:</strong> Hộ kinh doanh hoặc cá nhân kinh doanh thuộc bộ sổ xác định TNCN trên thu nhập tính thuế và cần theo dõi tiền mặt cùng tiền gửi không kỳ hạn.</p>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu mở phần Tiền mặt trước, sau đó mở một phần cho từng tài khoản tiền gửi.</p>
+<p>Mỗi phần có:</p>
+<ul>
+<li>Số hiệu chứng từ.</li>
+<li>Ngày tháng.</li>
+<li>Diễn giải.</li>
+<li>Thu hoặc Gửi vào.</li>
+<li>Chi hoặc Rút ra.</li>
+<li>Số dư đầu kỳ.</li>
+<li>Tổng phát sinh.</li>
+<li>Số dư cuối kỳ.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HỘ, CÁ NHÂN KINH DOANH:</strong> ………………<br><strong>Địa chỉ:</strong> …………………………………………<br><strong>Mã số thuế:</strong> …………………………………</td>
+<td><strong>Mẫu số S2e-HKD</strong><br><em>(Kèm theo Thông tư số 152/2025/TT-BTC ngày 31 tháng 12 năm 2025 của Bộ trưởng Bộ Tài chính)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>SỔ CHI TIẾT TIỀN</strong></p>
+<p><strong>Kỳ kê khai:</strong> …………………………………</p>
+<p><em>Đơn vị tính: …………………………………</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Chứng từ — Số hiệu</strong></th>
+<th><strong>Chứng từ — Ngày, tháng</strong></th>
+<th><strong>Diễn giải</strong></th>
+<th align="right"><strong>Thu/Gửi vào</strong></th>
+<th align="right"><strong>Chi/Rút ra</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền mặt</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền mặt đầu kỳ</strong></td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng tiền thu vào trong kỳ</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng tiền chi ra trong kỳ</strong></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền mặt tồn cuối kỳ</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền gửi không kỳ hạn</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Ngân hàng ………………………</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền gửi đầu kỳ</strong></td>
+<td align="right">…</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng gửi vào trong kỳ</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng tiền rút ra trong kỳ</strong></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tiền gửi cuối kỳ</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&nbsp;</td>
+<td><em>Ngày ... tháng ... năm ...</em><br><strong>NGƯỜI ĐẠI DIỆN HỘ KINH DOANH/</strong><br><strong>CÁ NHÂN KINH DOANH</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu nếu có)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Hệ thống lấy các biến động tiền đã có hiệu lực trong kỳ, phân theo quỹ tiền mặt hoặc đúng tài khoản ngân hàng. Biến động dương vào cột Thu/Gửi vào; biến động âm lấy trị tuyệt đối vào cột Chi/Rút ra. Khoản giảm công nợ không làm dịch chuyển tiền không được ghi vào sổ tiền.</p>
+<p><strong>Bố cục:</strong></p>
+<ul>
+<li>Mã <strong>S2e-HKD</strong>.</li>
+<li>Kỳ kê khai.</li>
+<li>Đơn vị tính.</li>
+<li>Cột A — số hiệu chứng từ.</li>
+<li>Cột B — ngày tháng.</li>
+<li>Cột C — diễn giải.</li>
+<li>Cột 1 — Thu hoặc Gửi vào.</li>
+<li>Cột 2 — Chi hoặc Rút ra.</li>
+<li>Phần <strong>Tiền mặt</strong>.</li>
+<li>Từng phần <strong>Tiền gửi không kỳ hạn</strong> theo ngân hàng hoặc tổ chức cung ứng dịch vụ thanh toán.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Tiền mặt đầu kỳ 5.000.000 đồng, thu bán hàng 3.200.000 đồng, chi mua vật tư 1.400.000 đồng.</li>
+<li>Tổng thu là 3.200.000 đồng, tổng chi là 1.400.000 đồng, tiền mặt cuối kỳ là <code>5.000.000 + 3.200.000 - 1.400.000 = 6.800.000 đồng</code>.</li>
+<li>Một khoản giảm công nợ do bù trừ không có biến động tiền thì không ghi vào cột Thu/Gửi vào.</li>
+</ul>
+</blockquote>
+<h3 id="section-37-5-7">37.5.7. Sổ theo dõi nghĩa vụ thuế khác: Mẫu S3a-HKĐ</h3>
+<p>S3a-HKD là biểu trống để người sử dụng tự điền. Màn hình thông báo rõ cách sử dụng và cung cấp nút Xuất Excel. Không có danh sách nghĩa vụ thuế tự động, không có thao tác nhập nghĩa vụ trực tiếp trên màn hình và không tự tổng hợp số phải nộp từ bán hàng hoặc nhập xuất hàng.</p>
+<p>Kỳ xem và chi nhánh được dùng để điền thông tin đầu biểu. Nếu chọn chi nhánh, tên, địa chỉ và mã số thuế lấy theo chi nhánh. Nếu không chọn chi nhánh, biểu sử dụng thông tin doanh nghiệp có thể xác định.</p>
+<p>Tệp có phần nhận diện đơn vị, tên sổ, kỳ, các mục nhập ngày, diễn giải, lượng hàng hóa hoặc dịch vụ, mức thuế tuyệt đối, giá tính thuế, thuế suất và các nhóm thuế khác. Tệp có 20 dòng trống, một dòng Tổng cộng và khu vực ngày, người ký.</p>
+<p>Người sử dụng điền, kiểm tra và tính toán trong tệp đã tải. Hệ thống không xác nhận số tự điền là đúng, không tự tạo phiếu nộp thuế và không đồng bộ nội dung đã chỉnh trong tệp về sổ trên màn hình. Việc tải lại tạo một biểu mới theo thông tin và kỳ đang chọn.</p>
+<p><strong>Đối tượng sử dụng:</strong> Hộ kinh doanh hoặc cá nhân kinh doanh có hoạt động thuộc phạm vi của mẫu, gồm:</p>
+<ul>
+<li>Thuế xuất khẩu.</li>
+<li>Thuế nhập khẩu.</li>
+<li>Thuế tiêu thụ đặc biệt.</li>
+<li>Thuế tài nguyên.</li>
+<li>Thuế bảo vệ môi trường.</li>
+<li>Thuế sử dụng đất.</li>
+<li>Nghĩa vụ thuế khác được mẫu hỗ trợ.</li>
+</ul>
+<p><strong>Hình mẫu/wireframe:</strong> Mẫu có phần nhận diện, các cột A/B/1–10, dòng Tổng cộng và khu vực ký.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HỘ, CÁ NHÂN KINH DOANH:</strong> ………………<br><strong>Địa chỉ:</strong> …………………………………………<br><strong>Mã số thuế:</strong> …………………………………</td>
+<td><strong>Mẫu số S3a-HKD</strong><br><em>(Kèm theo Thông tư số 152/2025/TT-BTC ngày 31 tháng 12 năm 2025 của Bộ trưởng Bộ Tài chính)</em></td>
+</tr>
+</tbody></table></div>
+<p><strong>SỔ THEO DÕI NGHĨA VỤ THUẾ KHÁC</strong></p>
+<p><strong>Địa điểm kinh doanh:</strong> …………………………………</p>
+<p><strong>Kỳ kê khai:</strong> …………………………………</p>
+<p><em>Đơn vị tính: …………………………………</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Ngày tháng ghi sổ</strong></th>
+<th><strong>Diễn giải</strong></th>
+<th align="right"><strong>Lượng hàng hóa, dịch vụ chịu thuế</strong></th>
+<th align="right"><strong>Mức thuế tuyệt đối</strong></th>
+<th align="right"><strong>Giá tính thuế/01 đơn vị</strong></th>
+<th align="right"><strong>Thuế suất</strong></th>
+<th align="right"><strong>Thuế XNK, TTĐB theo tỷ lệ %</strong></th>
+<th align="right"><strong>Thuế XNK, TTĐB theo mức tuyệt đối</strong></th>
+<th align="right"><strong>Tổng thuế XNK, TTĐB phải nộp</strong></th>
+<th align="right"><strong>Thuế bảo vệ môi trường</strong></th>
+<th align="right"><strong>Thuế tài nguyên</strong></th>
+<th align="right"><strong>Thuế sử dụng đất</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>B</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">5</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">9</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Tổng cộng</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&nbsp;</td>
+<td><em>Ngày ... tháng ... năm ...</em><br><strong>NGƯỜI ĐẠI DIỆN HỘ KINH DOANH/</strong><br><strong>CÁ NHÂN KINH DOANH</strong><br><em>(Ký, ghi rõ họ tên, đóng dấu nếu có)</em></td>
+</tr>
+</tbody></table></div>
+<p>Các công thức sau khung giải thích cách người dùng xác định giá trị khi điền tệp, không phải phép tính tự động của màn hình.</p>
+<p><strong>Nghiệp vụ tải dữ liệu:</strong> Hệ thống chỉ tải thông tin đầu biểu theo kỳ và chi nhánh rồi xuất 20 dòng trống. Người dùng tự điền và tự kiểm tra trong tệp Excel; hệ thống không tự tổng hợp nghĩa vụ, không lưu ngược nội dung tệp và không tạo chứng từ nộp thuế.</p>
+<p>Mẫu <strong>S3a-HKD</strong> dùng thêm khi có thuế xuất khẩu, thuế nhập khẩu, thuế tiêu thụ đặc biệt, thuế tài nguyên, thuế bảo vệ môi trường, thuế sử dụng đất hoặc thuế khác. Phần đầu ghi hộ/cá nhân kinh doanh, địa chỉ, mã số thuế, địa điểm, kỳ kê khai và đơn vị tính.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Cột</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>Ngày tháng ghi sổ</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Diễn giải</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Lượng hàng hóa, dịch vụ chịu thuế</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mức thuế tuyệt đối</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Giá tính thuế trên một đơn vị</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Thuế suất</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Thuế xuất khẩu, nhập khẩu, tiêu thụ đặc biệt theo tỷ lệ %</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Thuế xuất khẩu, nhập khẩu, tiêu thụ đặc biệt theo phương pháp tuyệt đối</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Tổng thuế xuất khẩu, nhập khẩu, tiêu thụ đặc biệt phải nộp</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Thuế bảo vệ môi trường</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Thuế tài nguyên</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Thuế sử dụng đất</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>Công thức phải được thể hiện bằng số liệu đã làm tròn theo quy định thuế: <code>cột 5 = cột 1 × cột 3 × cột 4</code>.</li>
+<li><code>cột 6 = cột 1 × cột 2</code>.</li>
+<li><code>cột 7 = cột 5 + cột 6</code>.</li>
+<li>Cột 8 bằng lượng nhân mức thuế môi trường.</li>
+<li>Cột 9 và 10 bằng lượng nhân giá tính thuế nhân thuế suất.</li>
+<li>Cuối sổ có <strong>Tổng cộng</strong>.</li>
+</ul>
+<blockquote>
+<p><strong>Ví dụ</strong></p>
+<ul>
+<li>Có 100 đơn vị hàng chịu thuế, giá tính thuế 50.000 đồng/đơn vị, thuế suất 10% và mức tuyệt đối 2.000 đồng/đơn vị.</li>
+<li>Cột 5: <code>100 × 50.000 × 10% = 500.000 đồng</code>.</li>
+<li>Cột 6: <code>100 × 2.000 = 200.000 đồng</code>.</li>
+<li>Cột 7: 700.000 đồng.</li>
+<li>Không cộng cột 5 và 6 lần nữa vào cột 8–10 nếu giao dịch không phát sinh thuế môi trường, tài nguyên hoặc sử dụng đất.</li>
+</ul>
+</blockquote>
+<h2 id="section-37-6">37.6. Bảng kê</h2>
+<h3 id="section-37-6-1">37.6.1. Bảng kê Hoạt động kinh doanh: Mẫu số 01-2/BK-HĐKD</h3>
+<h4>Mục đích và đối tượng sử dụng</h4>
+<p>Mẫu số <strong>01-2/BK-HĐKD</strong> là bảng kê hoạt động kinh doanh trong kỳ của hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai. Người nộp thuế hoặc tổ chức, cá nhân được ủy quyền khai thay dùng bảng kê để trình bày hai nhóm số liệu:</p>
+<ul>
+<li>Tình hình vật liệu, dụng cụ, sản phẩm và hàng hóa trong kỳ.</li>
+<li>Chi phí quản lý phát sinh trong kỳ.</li>
+</ul>
+<p>Bảng kê được lập theo tháng hoặc quý, có thể là lần đầu hoặc lần bổ sung. Việc tạo, lưu hoặc xuất bảng kê không tự nộp hồ sơ thuế và không tạo thêm giao dịch bán hàng, thu chi hay nhập xuất kho.</p>
+<h4>Hình mẫu/wireframe</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Mẫu số: 01-2/BK-HĐKD</strong><br><em>(Ban hành kèm theo Thông tư số 40/2021/TT-BTC ngày 01 tháng 6 năm 2021 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Phụ lục</strong></td>
+<td><strong>BẢNG KÊ HOẠT ĐỘNG KINH DOANH TRONG KỲ CỦA HỘ KINH DOANH, CÁ NHÂN KINH DOANH</strong><br><em>(Kèm theo Tờ khai 01/CNKD áp dụng đối với hộ kinh doanh, cá nhân kinh doanh nộp thuế theo phương pháp kê khai)</em></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Thông tin kỳ kê khai</strong></th>
+<th><strong>Giá trị</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[01] Kỳ tính thuế</td>
+<td>[01a] Tháng … năm … hoặc [01b] Quý … năm …</td>
+</tr>
+<tr>
+<td>[02] Lần đầu</td>
+<td>□</td>
+</tr>
+<tr>
+<td>[03] Bổ sung lần thứ</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[04] Tên người nộp thuế</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[05] Mã số thuế</td>
+<td>…</td>
+</tr>
+</tbody></table></div>
+<p><strong>I. VẬT LIỆU, DỤNG CỤ, SẢN PHẨM, HÀNG HÓA</strong></p>
+<p><em>Đơn vị tiền: Đồng Việt Nam</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Vật liệu, dụng cụ, sản phẩm, hàng hóa/nhóm hàng hóa [06]</th>
+<th>Đơn vị tính [07]</th>
+<th align="right">Đầu kỳ<br>Số lượng [08]</th>
+<th align="right">Đầu kỳ<br>Thành tiền [09]</th>
+<th align="right">Nhập trong kỳ<br>Số lượng [10]</th>
+<th align="right">Nhập trong kỳ<br>Thành tiền [11]</th>
+<th align="right">Xuất trong kỳ<br>Số lượng [12]</th>
+<th align="right">Xuất trong kỳ<br>Thành tiền [13]</th>
+<th align="right">Cuối kỳ<br>Số lượng [14]</th>
+<th align="right">Cuối kỳ<br>Thành tiền [15]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hàng hóa/nhóm hàng hóa …</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Sản phẩm/nhóm sản phẩm …</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td><strong>Tổng cộng</strong></td>
+<td></td>
+<td align="right"><strong>[16]</strong></td>
+<td align="right"><strong>[17]</strong></td>
+<td align="right"><strong>[18]</strong></td>
+<td align="right"><strong>[19]</strong></td>
+<td align="right"><strong>[20]</strong></td>
+<td align="right"><strong>[21]</strong></td>
+<td align="right"><strong>[22]</strong></td>
+<td align="right"><strong>[23]</strong></td>
+</tr>
+</tbody></table></div>
+<p><strong>II. CHI PHÍ QUẢN LÝ</strong></p>
+<p><em>Đơn vị tiền: Đồng Việt Nam</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chỉ tiêu</th>
+<th>Mã chỉ tiêu</th>
+<th align="right">Số tiền</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chi phí nhân công</td>
+<td>[24]</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Chi phí điện</td>
+<td>[25]</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Chi phí nước</td>
+<td>[26]</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Chi phí viễn thông</td>
+<td>[27]</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Chi phí thuê kho bãi, mặt bằng kinh doanh</td>
+<td>[28]</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Chi phí quản lý: văn phòng phẩm, công cụ, dụng cụ và nội dung tương tự</td>
+<td>[29]</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Chi phí khác: hội nghị, công tác phí, thanh lý, nhượng bán tài sản cố định, thuê ngoài khác và nội dung tương tự</td>
+<td>[30]</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td><strong>Tổng cộng</strong></td>
+<td><strong>[31]</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NHÂN VIÊN ĐẠI LÝ THUẾ</strong><br>Họ và tên: …<br>Chứng chỉ hành nghề số: …</th>
+<th>…, ngày … tháng … năm …<br><strong>NGƯỜI NỘP THUẾ HOẶC ĐẠI DIỆN HỢP PHÁP CỦA NGƯỜI NỘP THUẾ</strong><br><em>(Ký, ghi rõ họ tên; chức vụ và đóng dấu nếu có/ký điện tử)</em></th>
+</tr>
+</thead>
+</table></div>
+<h4>Điều kiện lập và bộ lọc</h4>
+<p>Người dùng chọn:</p>
+<ul>
+<li>Tháng hoặc quý cần lập.</li>
+<li>Lần đầu hoặc số lần bổ sung.</li>
+<li>Chi nhánh trong phạm vi được phép xem.</li>
+<li>Ngày đầu và ngày cuối tương ứng với kỳ đã chọn.</li>
+</ul>
+<p>Hệ thống chỉ đưa vào phần hàng hóa các phiếu nhập, phiếu xuất đã hoàn thành trong phạm vi kỳ. Phiếu nháp, phiếu đã hủy và phần xuất âm chưa xác định đầy đủ nguồn lô không được coi là giá trị xuất đã xác định. Chi phí chỉ được lấy khi đề nghị chi đã được duyệt và ngày ghi nhận nằm trong kỳ.</p>
+<p>Thông tin [04] lấy từ tên chi nhánh được chọn; [05] lấy từ mã số thuế của chi nhánh. Các ô [01], [02] và [03] do người dùng xác định theo hồ sơ đang lập.</p>
+<h4>Cách tải phần vật liệu, dụng cụ, sản phẩm và hàng hóa</h4>
+<p>Mỗi sản phẩm hoặc nhóm hàng được trình bày trên một dòng. Hệ thống tải:</p>
+<ul>
+<li>[06]: tên sản phẩm, vật liệu, dụng cụ, hàng hóa hoặc tên nhóm.</li>
+<li>[07]: đơn vị tính cơ bản.</li>
+<li>[08]: số lượng tồn tại đầu ngày bắt đầu kỳ.</li>
+<li>[10]: tổng số lượng nhập của các phiếu đã hoàn thành trong kỳ.</li>
+<li>[12]: tổng số lượng xuất của các phiếu đã hoàn thành trong kỳ.</li>
+<li>[14]: số lượng cuối kỳ, bằng [08] + [10] - [12].</li>
+</ul>
+<p>Khi ngày đầu hoặc ngày cuối không trùng ranh giới kỳ kế toán, hệ thống dựng số đầu và số cuối từ số tồn gần nhất rồi cộng nhập, trừ xuất đã hoàn thành đến đúng mốc ngày. Khi khoảng xem đi qua nhiều kỳ kế toán, số phát sinh là tổng của phần đầu kỳ thứ nhất, các kỳ trọn vẹn ở giữa và phần cuối kỳ cuối cùng; một phiếu chỉ được cộng một lần.</p>
+<p>Giá trị tiền dùng đơn giá bán của sản phẩm tại phạm vi lập bảng kê:</p>
+<ul>
+<li>[09] = [08] × đơn giá.</li>
+<li>[11] = [10] × đơn giá.</li>
+<li>[13] = [12] × đơn giá.</li>
+<li>[15] = [14] × đơn giá.</li>
+<li>[16]–[23] là tổng các cột tương ứng.</li>
+</ul>
+<p>Nếu một sản phẩm đổi đơn vị tính, hệ thống quy đổi toàn bộ số lượng về đơn vị cơ bản trước khi cộng. Nếu thiếu tỷ lệ quy đổi hoặc thiếu đơn giá cần thiết, dòng được đánh dấu chưa đủ dữ liệu và không được âm thầm lấy giá trị của sản phẩm khác.</p>
+<h4>Cách tải phần chi phí quản lý</h4>
+<p>Các khoản chi đã được duyệt được phân vào đúng bản chất chi phí:</p>
+<ul>
+<li>[24] gồm lương, phụ cấp, các khoản trích theo lương và chi phí nhân công trực tiếp hoặc quản lý.</li>
+<li>[25] gồm chi phí điện.</li>
+<li>[26] gồm chi phí nước.</li>
+<li>[27] gồm chi phí viễn thông.</li>
+<li>[28] gồm thuê kho, thuê mặt bằng và thuê nhà xưởng dùng cho hoạt động kinh doanh.</li>
+<li>[29] gồm văn phòng phẩm, công cụ, dụng cụ và chi phí quản lý tương tự.</li>
+<li>[30] gồm hội nghị, công tác phí, thanh lý, nhượng bán tài sản cố định, thuê ngoài và khoản chi khác chưa thuộc các nhóm trên.</li>
+<li>[31] = [24] + [25] + [26] + [27] + [28] + [29] + [30].</li>
+</ul>
+<p>Một khoản chi chỉ được phân vào một chỉ tiêu. Khoản bị hủy hoặc chưa duyệt không được cộng. Khoản hoàn lại làm giảm đúng nhóm chi phí đã ghi nhận, theo ngày và trạng thái của chứng từ hoàn.</p>
+<h4>Luồng xử lý</h4>
+<figure class="business-diagram"><div class="diagram-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 610" role="img" aria-labelledby="title-tax-declaration-flow-30 desc-tax-declaration-flow-30" style="display:block;width:100%;min-width:680px;font-family:Arial,sans-serif"><title id="title-tax-declaration-flow-30">Lập, kiểm tra và xuất một tờ khai</title><desc id="desc-tax-declaration-flow-30">CHỌN MẪU &amp; KỲ. Tháng · quý · năm · bán niên. Chi nhánh nếu mẫu hỗ trợ; TẢI SỐ LIỆU. Doanh thu · chi phí · kho. Thuế theo từng mục; BỔ SUNG THÔNG TIN. Số được trừ · nộp thừa. Người ký · hỗ trợ nộp; KIỂM TRA. Kỳ · tổng · tỷ lệ. Dòng bắt buộc · chữ ký; LƯU NHÁP / HOÀN TẤT. Xuất Excel hoặc XML. Không tự nộp bên ngoài</desc><defs><marker id="arrow-tax-declaration-flow-30" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#667c76"/></marker></defs><path d="M480 86 V118 H480 V145" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-declaration-flow-30)"/><path d="M480 238 V294 H220 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-declaration-flow-30)"/><path d="M480 238 V294 H740 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-declaration-flow-30)"/><path d="M220 450 V400 H740 V345" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-declaration-flow-30)"/><path d="M740 450 V485 H480 V515" fill="none" stroke="#667c76" stroke-width="2" marker-end="url(#arrow-tax-declaration-flow-30)"/><g><rect x="300" y="14" width="360" height="72" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="34" font-weight="700">CHỌN MẪU &amp; KỲ</tspan><tspan x="480" y="56">Tháng · quý · năm · bán niên</tspan><tspan x="480" y="78">Chi nhánh nếu mẫu hỗ trợ</tspan></text></g><g><rect x="300" y="150" width="360" height="88" rx="10" fill="#183d36" stroke="#708c82"/><text x="480" fill="#fff" text-anchor="middle" font-size="16"><tspan x="480" y="178" font-weight="700">TẢI SỐ LIỆU</tspan><tspan x="480" y="200">Doanh thu · chi phí · kho</tspan><tspan x="480" y="222">Thuế theo từng mục</tspan></text></g><g><rect x="45" y="350" width="350" height="100" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="220" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="220" y="384" font-weight="700">BỔ SUNG THÔNG TIN</tspan><tspan x="220" y="406">Số được trừ · nộp thừa</tspan><tspan x="220" y="428">Người ký · hỗ trợ nộp</tspan></text></g><g><rect x="565" y="350" width="350" height="100" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="740" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="740" y="384" font-weight="700">KIỂM TRA</tspan><tspan x="740" y="406">Kỳ · tổng · tỷ lệ</tspan><tspan x="740" y="428">Dòng bắt buộc · chữ ký</tspan></text></g><g><rect x="300" y="520" width="360" height="72" rx="10" fill="#edf5f2" stroke="#708c82"/><text x="480" fill="#183d36" text-anchor="middle" font-size="16"><tspan x="480" y="540" font-weight="700">LƯU NHÁP / HOÀN TẤT</tspan><tspan x="480" y="562">Xuất Excel hoặc XML</tspan><tspan x="480" y="584">Không tự nộp bên ngoài</tspan></text></g></svg></div><figcaption><strong>Lập, kiểm tra và xuất một tờ khai.</strong> Tờ khai kết hợp số liệu tự động từ nghiệp vụ đã chốt với phần thông tin người dùng chịu trách nhiệm nhập. Xuất tệp không đồng nghĩa đã nộp.</figcaption></figure>
+
+<ol>
+<li>Người dùng chọn kỳ, lần kê khai và chi nhánh.</li>
+<li>Hệ thống kiểm tra quyền và xác định khoảng ngày.</li>
+<li>Hệ thống tải số đầu kỳ, nhập, xuất, tồn và các khoản chi đủ điều kiện.</li>
+<li>Hệ thống tính thành tiền, tổng từng phần và hiển thị các dòng thiếu thông tin.</li>
+<li>Người dùng kiểm tra thông tin người nộp thuế, số liệu và phần ký.</li>
+<li>Người dùng lưu bản làm việc hoặc xuất biểu mẫu.</li>
+</ol>
+<p>Nếu giao dịch nguồn thay đổi khi bảng kê chưa khóa, người dùng tải lại để cập nhật số liệu tự động. Nếu bản đã khóa, dữ liệu cũ được giữ nguyên; hệ thống ghi nhận chênh lệch và yêu cầu xử lý theo lần bổ sung thay vì sửa âm thầm bản đã lập.</p>
+<h4>Ví dụ</h4>
+<p>Giả sử một mặt hàng có:</p>
+<ul>
+<li>Tồn đầu kỳ: 10 sản phẩm.</li>
+<li>Nhập trong kỳ: 8 sản phẩm.</li>
+<li>Xuất trong kỳ: 12 sản phẩm.</li>
+<li>Đơn giá dùng để lập bảng kê: 50.000 đồng.</li>
+</ul>
+<p>Kết quả:</p>
+<ul>
+<li>[08] = 10.</li>
+<li>[09] = 500.000 đồng.</li>
+<li>[10] = 8.</li>
+<li>[11] = 400.000 đồng.</li>
+<li>[12] = 12.</li>
+<li>[13] = 600.000 đồng.</li>
+<li>[14] = 10 + 8 - 12 = 6.</li>
+<li>[15] = 300.000 đồng.</li>
+</ul>
+<h3 id="section-37-6-2">37.6.2. Bảng kê thu mua hàng hóa, dịch vụ không có hóa đơn: Mẫu số 02/TNDN</h3>
+<h4>Mục đích và phạm vi</h4>
+<p>Mẫu số <strong>02/TNDN</strong> ghi nhận theo trình tự thời gian các lần doanh nghiệp mua hàng hóa, dịch vụ không có hóa đơn nhưng thuộc trường hợp được phép lập bảng kê. Bảng kê hỗ trợ hồ sơ mua hàng; bản thân bảng kê không làm cho mọi giao dịch thiếu hóa đơn trở thành chi phí hợp lệ và không thay thế hồ sơ giao nhận, thanh toán hoặc căn cứ chứng minh nguồn mua.</p>
+<p>Các nhóm giao dịch có thể được lựa chọn gồm:</p>
+<ul>
+<li>Nông, lâm, thủy sản mua trực tiếp từ người sản xuất hoặc người đánh bắt.</li>
+<li>Sản phẩm thủ công làm từ nguyên liệu nông nghiệp mua trực tiếp từ người sản xuất thủ công.</li>
+<li>Đất, đá, cát, sỏi mua trực tiếp từ hộ hoặc cá nhân tự khai thác theo trường hợp được phép.</li>
+<li>Phế liệu mua trực tiếp từ người thu nhặt.</li>
+<li>Đồ dùng, tài sản và dịch vụ do hộ gia đình hoặc cá nhân không kinh doanh trực tiếp bán.</li>
+<li>Hàng hóa, dịch vụ của hộ hoặc cá nhân kinh doanh thuộc trường hợp được lập bảng kê theo quy định áp dụng.</li>
+</ul>
+<p>Người dùng phải xác định căn cứ cho từng giao dịch. Không dùng một lý do chung để hợp thức hóa toàn bộ giao dịch của một người bán.</p>
+<h4>Hình mẫu/wireframe</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>Mẫu số: 02/TNDN</strong><br><em>(Ban hành kèm theo Thông tư số 20/2026/TT-BTC của Bộ trưởng Bộ Tài chính)</em></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><strong>BẢNG KÊ THU MUA HÀNG HÓA, DỊCH VỤ KHÔNG CÓ HÓA ĐƠN</strong><br><em>(Ngày … tháng … năm …)</em></td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>Tên doanh nghiệp: …</li>
+<li>Mã số thuế: …</li>
+<li>Địa chỉ: …</li>
+<li>Số điện thoại: …</li>
+<li>Địa chỉ nơi tổ chức thu mua: …</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Ngày tháng năm mua hàng</th>
+<th>Tên người bán</th>
+<th>Địa chỉ</th>
+<th>Số căn cước</th>
+<th>Số điện thoại nếu có</th>
+<th>Tên hàng hóa, dịch vụ</th>
+<th align="right">Số lượng, trọng lượng</th>
+<th align="right">Đơn giá</th>
+<th align="right">Tổng giá thanh toán</th>
+<th>Ghi chú</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">9</td>
+<td>10</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td>…</td>
+</tr>
+</tbody></table></div>
+<p><strong>Tổng giá trị hàng hóa, dịch vụ mua vào:</strong> …<br><strong>Số tiền bằng chữ:</strong> …</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><strong>NGƯỜI LẬP BẢNG KÊ</strong><br><em>(Ký, ghi rõ họ tên)</em></th>
+<th>Ngày … tháng … năm …<br><strong>NGƯỜI ĐẠI DIỆN HOẶC NGƯỜI ĐƯỢC ỦY QUYỀN CỦA DOANH NGHIỆP</strong><br><em>(Ký tên, đóng dấu)</em></th>
+</tr>
+</thead>
+</table></div>
+<h4>Điều kiện chọn giao dịch</h4>
+<p>Người dùng chọn ngày lập, tháng tổng hợp, địa điểm thu mua và phạm vi đơn vị. Hệ thống chỉ đưa vào bảng kê giao dịch đáp ứng đồng thời:</p>
+<ul>
+<li>Là mua hàng ngoài hoặc mua dịch vụ đã hoàn thành.</li>
+<li>Không có hóa đơn.</li>
+<li>Có người bán xác định được.</li>
+<li>Có căn cứ thuộc phạm vi lập bảng kê.</li>
+<li>Có ngày mua, tên hàng hóa hoặc dịch vụ và tổng giá thanh toán.</li>
+<li>Chưa được đưa vào một bảng kê còn hiệu lực khác của cùng kỳ.</li>
+</ul>
+<p>Giao dịch có hóa đơn hợp lệ không được đưa vào chỉ để gom chung chi phí. Giao dịch nháp, đã hủy hoặc đã bị trả toàn bộ không được tải. Nếu chỉ trả một phần, số lượng và giá trị còn giữ được trình bày sau khi trừ phần trả.</p>
+<h4>Cách tải từng cột</h4>
+<ul>
+<li>Cột 1 lấy ngày mua hoặc ngày hoàn thành giao nhận.</li>
+<li>Cột 2 lấy họ tên hoặc tên người bán được lưu tại thời điểm mua.</li>
+<li>Cột 3 lấy địa chỉ người bán.</li>
+<li>Cột 4 lấy số căn cước của người bán.</li>
+<li>Cột 5 lấy số điện thoại nếu có.</li>
+<li>Cột 6 lấy tên hàng hóa hoặc dịch vụ trên chứng từ mua.</li>
+<li>Cột 7 lấy số lượng hoặc trọng lượng sau khi quy đổi về đơn vị thể hiện trên chứng từ.</li>
+<li>Cột 8 lấy đơn giá mua.</li>
+<li>Cột 9 là tổng giá thanh toán của dòng; với dòng có số lượng và đơn giá, giá trị bằng số lượng nhân đơn giá sau điều chỉnh hợp lệ.</li>
+<li>Cột 10 ghi thông tin cần thiết để nhận diện căn cứ áp dụng, chứng từ nguồn hoặc tình trạng đặc biệt của giao dịch.</li>
+</ul>
+<p>Một người bán có nhiều mặt hàng trong cùng ngày được trình bày thành nhiều dòng. Thông tin người bán được lặp hoặc thể hiện theo bố cục gộp của tệp xuất nhưng mọi dòng vẫn phải truy ngược được về giao dịch nguồn.</p>
+<p>Tổng giá trị hàng hóa, dịch vụ mua vào bằng tổng cột 9 của các dòng còn hiệu lực. Số tiền bằng chữ được sinh từ tổng này. Bảng kê được sắp xếp tăng dần theo ngày mua; nếu cùng ngày thì theo thời điểm hoàn thành và mã giao dịch.</p>
+<h4>Kiểm tra thanh toán và công nợ</h4>
+<p>Khi hoàn thành nghiệp vụ mua:</p>
+<ul>
+<li>Thanh toán đủ: tạo phiếu chi bằng toàn bộ số tiền cần thanh toán và không tạo công nợ.</li>
+<li>Thanh toán một phần: tạo phiếu chi cho phần đã trả và tạo công nợ cho phần còn lại.</li>
+<li>Thanh toán 0 đồng: không tạo phiếu chi và tạo công nợ bằng toàn bộ số tiền phải trả.</li>
+</ul>
+<p>Bảng kê chỉ đọc kết quả thanh toán đã phát sinh; việc lập hoặc tải lại bảng kê không tự tạo, sửa hay xóa phiếu chi và công nợ.</p>
+<p>Đối với tổng giá trị mua trong cùng ngày của cùng một hộ hoặc cá nhân từ <strong>5.000.000 đồng trở lên</strong>, hệ thống cảnh báo yêu cầu kiểm tra điều kiện thanh toán không dùng tiền mặt. Tổng được cộng theo người bán và ngày, không theo số lượng phiếu, nên việc tách một giao dịch thành nhiều phiếu không làm mất cảnh báo.</p>
+<h4>Trạm và địa điểm thu mua</h4>
+<p>Nếu doanh nghiệp tổ chức nhiều trạm thu mua:</p>
+<ul>
+<li>Mỗi trạm lập một bảng kê riêng theo giao dịch phát sinh tại trạm.</li>
+<li>Địa chỉ nơi tổ chức thu mua phải phản ánh đúng trạm.</li>
+<li>Doanh nghiệp có thể lập bản tổng hợp chung từ các bảng kê của từng trạm.</li>
+<li>Một dòng của trạm chỉ được cộng một lần vào bản tổng hợp.</li>
+<li>Tổng bản tổng hợp phải bằng tổng các bảng kê trạm còn hiệu lực thuộc cùng phạm vi thời gian.</li>
+</ul>
+<h4>Kiểm tra trước khi khóa</h4>
+<p>Hệ thống không cho khóa bảng kê khi còn một trong các lỗi:</p>
+<ul>
+<li>Thiếu ngày mua.</li>
+<li>Thiếu tên hoặc địa chỉ người bán.</li>
+<li>Thiếu số căn cước khi mẫu yêu cầu.</li>
+<li>Thiếu tên hàng hóa, dịch vụ.</li>
+<li>Số lượng, đơn giá hoặc tổng giá thanh toán không hợp lệ.</li>
+<li>Thiếu căn cứ áp dụng cho giao dịch không có hóa đơn.</li>
+<li>Một giao dịch đã có trong bảng kê khác còn hiệu lực.</li>
+<li>Tổng dòng không khớp tổng giá trị mua vào.</li>
+</ul>
+<p>Bảng kê nháp được tải lại khi giao dịch mua, người bán, số lượng, đơn giá, trả hàng hoặc thanh toán thay đổi. Bảng kê đã khóa không bị viết lại âm thầm; thay đổi phát sinh sau đó được ghi nhận để người dùng lập bản điều chỉnh hoặc thay thế theo quy trình quản lý hồ sơ.</p>
+<h4>Ví dụ</h4>
+<p>Ngày 12/08, doanh nghiệp mua 100 kg nguyên liệu của một cá nhân với đơn giá 30.000 đồng/kg và chưa thanh toán.</p>
+<p>Dòng bảng kê được thể hiện:</p>
+<ul>
+<li>Ngày mua: 12/08.</li>
+<li>Tên, địa chỉ, số căn cước của người bán: lấy từ hồ sơ giao dịch.</li>
+<li>Tên hàng hóa: tên nguyên liệu đã mua.</li>
+<li>Số lượng: 100 kg.</li>
+<li>Đơn giá: 30.000 đồng.</li>
+<li>Tổng giá thanh toán: 3.000.000 đồng.</li>
+<li>Phiếu chi: không phát sinh.</li>
+<li>Công nợ: 3.000.000 đồng.</li>
+</ul>
+<h2 id="section-37-7">37.7. Tờ khai</h2>
+<h3 id="section-37-7-1">37.7.1. Tờ khai thuế đối với hộ kinh doanh, cá nhân kinh doanh: Mẫu số 01/CNKD</h3>
+<h4>Mục đích và kỳ kê khai</h4>
+<p>Mẫu số <strong>01/CNKD</strong> dùng để kê khai nghĩa vụ thuế của hộ kinh doanh, cá nhân kinh doanh theo tháng, quý hoặc từng lần phát sinh. Hồ sơ có thể là lần đầu hoặc lần bổ sung.</p>
+<p>Người dùng xác định:</p>
+<ul>
+<li>[01a] tháng và năm; hoặc</li>
+<li>[01b] quý và năm; hoặc</li>
+<li>[01c] lần phát sinh;</li>
+<li>[02] lần đầu; hoặc</li>
+<li>[03] số lần bổ sung.</li>
+</ul>
+<p>Việc lưu hoặc xuất tờ khai không tự gửi hồ sơ đến cơ quan thuế, không tạo phiếu chi và không đánh dấu nghĩa vụ là đã nộp.</p>
+<h4>Hình mẫu/wireframe phần đầu</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Mẫu số: 01/CNKD</strong><br><em>(Kèm theo Thông tư số 50/2026/TT-BTC ngày 13 tháng 5 năm 2026 của Bộ trưởng Bộ Tài chính)</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><strong>TỜ KHAI THUẾ ĐỐI VỚI HỘ KINH DOANH, CÁ NHÂN KINH DOANH</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chỉ tiêu</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[01] Kỳ tính thuế</td>
+<td>Tháng … năm … / Quý … năm … / Lần phát sinh …</td>
+</tr>
+<tr>
+<td>[02] Lần đầu</td>
+<td>□</td>
+</tr>
+<tr>
+<td>[03] Bổ sung lần thứ</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[04] Người nộp thuế</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[05] Mã số thuế</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[06] Tổ chức/cá nhân khai, nộp thay theo ủy quyền</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[07] Tên đại lý thuế</td>
+<td>…</td>
+</tr>
+</tbody></table></div>
+<p>[04] lấy từ tên doanh nghiệp hoặc hộ kinh doanh; [05] lấy từ mã số thuế. [01], [02], [03], [06] và [07] do người dùng nhập theo hồ sơ kê khai.</p>
+<h4>Phần A — kê khai thuế GTGT và TNCN</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Nhóm ngành nghề</th>
+<th>Mã chỉ tiêu</th>
+<th align="right">Tổng doanh thu</th>
+<th align="right">Doanh thu không chịu GTGT</th>
+<th align="right">Doanh thu thuế suất 0%</th>
+<th align="right">Thuế GTGT phải nộp</th>
+<th align="right">Doanh thu chịu TNCN</th>
+<th align="right">Doanh thu được trừ</th>
+<th align="right">Thuế TNCN phải nộp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I</td>
+<td>Hoạt động có địa điểm kinh doanh cố định</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>1.1–1.6</td>
+<td>Sáu nhóm ngành nghề tại trụ sở</td>
+<td>[08]–[17]</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Hoạt động trên nền tảng số không có chức năng đặt hàng và thanh toán trực tuyến</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>2.1–2.6</td>
+<td>Sáu nhóm ngành nghề theo địa điểm</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>III</td>
+<td>Hoạt động đã được cấp hóa đơn điện tử có mã theo từng lần phát sinh</td>
+<td></td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>IV</td>
+<td><strong>Tổng cộng</strong></td>
+<td>[18]</td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td>VI</td>
+<td>Số thuế được miễn</td>
+<td>[19]</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>VII</td>
+<td><strong>Số thuế còn phải nộp</strong></td>
+<td>[20]</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<p>Sáu nhóm ngành nghề gồm:</p>
+<ol>
+<li>Phân phối, cung cấp hàng hóa.</li>
+<li>Dịch vụ, xây dựng không bao thầu nguyên vật liệu.</li>
+<li>Cho thuê tài sản, trừ bất động sản.</li>
+<li>Sản xuất, vận tải, dịch vụ gắn với hàng hóa và xây dựng có bao thầu nguyên vật liệu.</li>
+<li>Sản phẩm nội dung thông tin số.</li>
+<li>Hoạt động kinh doanh khác.</li>
+</ol>
+<p>Đối với hoạt động tại địa điểm cố định:</p>
+<ul>
+<li>Hệ thống lấy đơn hàng của kênh bán tại cửa hàng và các khoản thu khác ngoài bán hàng.</li>
+<li>Trụ sở được trình bày trước, sau đó đến từng chi nhánh.</li>
+<li>Mỗi địa điểm ghi mã và tên địa điểm kinh doanh.</li>
+<li>Doanh thu được phân theo địa điểm và nhóm ngành nghề.</li>
+</ul>
+<p>Đối với hoạt động trên nền tảng số:</p>
+<ul>
+<li>Hệ thống lấy đơn hàng thuộc kênh thương mại điện tử phù hợp.</li>
+<li>Dữ liệu vẫn được tách theo địa điểm và sáu nhóm ngành nghề.</li>
+<li>Một đơn chỉ được ghi vào một nhóm hoạt động theo kênh tạo doanh thu của đơn.</li>
+</ul>
+<p>Hoạt động đã được cấp hóa đơn điện tử có mã theo từng lần phát sinh không được tự tải nếu hệ thống không quản lý trực tiếp quy trình xin cấp hóa đơn từng lần. Các ô của phần này để người dùng tự khai khi phát sinh.</p>
+<p>Cách tính từng dòng:</p>
+<ul>
+<li>Tổng doanh thu là doanh thu thực tế còn hiệu lực trong kỳ.</li>
+<li>Doanh thu không chịu GTGT là phần doanh thu của sản phẩm được xác định không chịu thuế.</li>
+<li>Doanh thu chịu thuế suất 0% là phần doanh thu của sản phẩm áp dụng mức 0%.</li>
+<li>Thuế GTGT phải nộp được tính từ phần doanh thu chịu thuế theo tỷ lệ của nhóm ngành nghề.</li>
+<li>Doanh thu chịu TNCN bằng doanh thu dùng để tính TNCN của dòng.</li>
+<li>Doanh thu được trừ do người dùng phân bổ theo quy định áp dụng.</li>
+<li>Thuế TNCN phải nộp bằng phần doanh thu chịu TNCN còn lại sau giảm trừ nhân tỷ lệ TNCN của nhóm; nếu kết quả âm thì ghi 0.</li>
+<li>[18] là tổng các nhóm hoạt động.</li>
+<li>[19] ghi số thuế được miễn theo hồ sơ.</li>
+<li>[20] bằng số phải nộp tại [18] trừ số được miễn tại [19], không nhỏ hơn 0.</li>
+</ul>
+<p>Người dùng tự chịu trách nhiệm về phần doanh thu được trừ. Hệ thống hiển thị tổng đã phân bổ trong năm và cảnh báo khi vượt hạn mức áp dụng, nhưng không tự chuyển phần giảm trừ từ ngành nghề hoặc địa điểm này sang ngành nghề hoặc địa điểm khác.</p>
+<p>Đơn bị từ chối, đã hủy hoặc đã xóa không tạo doanh thu. Trả hàng làm giảm doanh thu của đúng địa điểm, kênh bán và nhóm ngành nghề theo ngày ghi nhận hợp lệ.</p>
+<h4>Phần B — kê khai thuế tiêu thụ đặc biệt</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Hàng hóa, dịch vụ chịu thuế TTĐB</th>
+<th>Mã chỉ tiêu</th>
+<th>Đơn vị tính</th>
+<th align="right">Doanh thu tính thuế</th>
+<th align="right">Thuế suất</th>
+<th align="right">Số thuế phải nộp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I</td>
+<td>Trụ sở kinh doanh</td>
+<td></td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Hàng hóa, dịch vụ …</td>
+<td>[21a]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hàng hóa, dịch vụ …</td>
+<td>[21b]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Tổng cộng</strong></td>
+<td>[22]</td>
+<td></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>Số thuế được miễn</td>
+<td>[23]</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Số thuế còn phải nộp</strong></td>
+<td>[24]</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<p>Hệ thống lập một nhóm cho trụ sở và một nhóm cho từng chi nhánh. Trong mỗi nhóm:</p>
+<ul>
+<li>Chỉ liệt kê sản phẩm hoặc dịch vụ có thuế TTĐB.</li>
+<li>Tên và đơn vị tính lấy theo giao dịch.</li>
+<li>Doanh thu tính thuế là doanh thu còn hiệu lực của sản phẩm hoặc dịch vụ trong kỳ tại địa điểm.</li>
+<li>Thuế suất lấy theo cấu hình có hiệu lực tại thời điểm giao dịch.</li>
+<li>Số thuế dòng = doanh thu tính thuế × thuế suất.</li>
+<li>Tổng cộng bằng tổng các dòng.</li>
+<li>Số được miễn và số còn phải nộp là phần người dùng nhập, kiểm tra và chịu trách nhiệm.</li>
+</ul>
+<h4>Phần C — thuế tài nguyên, bảo vệ môi trường và phí bảo vệ môi trường</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Tài nguyên, hàng hóa, sản phẩm</th>
+<th>Mã/tên địa điểm</th>
+<th>Mã chỉ tiêu</th>
+<th>Đơn vị tính</th>
+<th align="right">Sản lượng/số lượng</th>
+<th align="right">Giá tính thuế/mức thuế hoặc phí</th>
+<th align="right">Thuế suất/hệ số K</th>
+<th align="right">Số thuế/phí phải nộp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I</td>
+<td>Khai thuế tài nguyên</td>
+<td>…</td>
+<td>[25…]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Khai thuế bảo vệ môi trường</td>
+<td>…</td>
+<td>[26…]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>III</td>
+<td>Khai phí bảo vệ môi trường</td>
+<td>…</td>
+<td>[27…]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Tổng cộng/số được miễn/số còn phải nộp</strong></td>
+<td></td>
+<td>[28]–[36]</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<p>Các nội dung phần này do người dùng nhập khi có phát sinh. Hệ thống kiểm tra định dạng số, địa điểm, đơn vị tính và tổng; không tự suy ra một sắc thuế chỉ từ tên sản phẩm.</p>
+<h4>Phần D — hỗ trợ thông tin nộp ngân sách</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Mã địa điểm kinh doanh</th>
+<th>Nội dung khoản nộp</th>
+<th align="right">Số tiền</th>
+<th>Chương</th>
+<th>Tiểu mục</th>
+<th>Địa bàn hành chính</th>
+<th>Cơ quan thu</th>
+<th>Cơ quan thuế</th>
+<th>Hạn nộp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[37]</td>
+<td>[38]</td>
+<td>[39]</td>
+<td align="right">[40]</td>
+<td>[41]</td>
+<td>[42]</td>
+<td>[43]</td>
+<td>[44]</td>
+<td>[45]</td>
+<td>[46]</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng cộng</strong></td>
+<td align="right"><strong>[47]</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p>Người dùng thêm, sửa hoặc xóa từng dòng hỗ trợ. [47] bằng tổng số tiền của các dòng. Các dòng này phục vụ lập hồ sơ, không xác nhận khoản tiền đã nộp.</p>
+<h4>Luồng lập tờ khai</h4>
+<ol>
+<li>Người dùng tạo hồ sơ, chọn kỳ và lần kê khai.</li>
+<li>Hệ thống tải thông tin người nộp thuế.</li>
+<li>Hệ thống tổng hợp doanh thu theo kênh, địa điểm và nhóm ngành nghề.</li>
+<li>Hệ thống tính phần thuế tự động và lập các dòng TTĐB nếu có.</li>
+<li>Người dùng nhập phần giảm trừ, miễn thuế và các phần không có nguồn tự động.</li>
+<li>Hệ thống kiểm tra tổng, giá trị âm, kỳ và thông tin bắt buộc.</li>
+<li>Người dùng lưu nháp, hoàn tất hoặc xuất tệp.</li>
+</ol>
+<p>Tải lại dữ liệu tự động không được xóa phần người dùng đã nhập mà không cảnh báo. Nếu dữ liệu nguồn thay đổi sau khi hồ sơ đã hoàn tất, hệ thống giữ bản đã lập và cho người dùng tạo lần bổ sung.</p>
+<h4>Ví dụ tính một dòng ngành nghề</h4>
+<p>Một nhóm ngành có:</p>
+<ul>
+<li>Doanh thu chịu TNCN: 300.000.000 đồng.</li>
+<li>Doanh thu được trừ do người dùng phân bổ: 100.000.000 đồng.</li>
+<li>Tỷ lệ TNCN: 0,5%.</li>
+</ul>
+<p>Kết quả:</p>
+<ul>
+<li>Doanh thu còn tính thuế = 300.000.000 - 100.000.000 = 200.000.000 đồng.</li>
+<li>Thuế TNCN phải nộp = 200.000.000 × 0,5% = 1.000.000 đồng.</li>
+</ul>
+<h3 id="section-37-7-2">37.7.2. Thông báo doanh thu / Tờ khai thuế năm: Mẫu số 01/TKN-CNKD</h3>
+<h4>Mục đích và phạm vi</h4>
+<p>Mẫu số <strong>01/TKN-CNKD</strong> dùng để thông báo doanh thu hoặc lập tờ khai thuế năm của hộ kinh doanh, cá nhân kinh doanh theo phạm vi thời gian được chọn. Hồ sơ hỗ trợ năm, sáu tháng đầu năm hoặc sáu tháng cuối năm và có thể là lần đầu hoặc lần bổ sung.</p>
+<p>Mẫu tổng hợp dữ liệu của toàn đơn vị theo các nhóm hoạt động; số liệu chi tiết vẫn phải giữ được nguồn địa điểm và nhóm ngành nghề để giải trình.</p>
+<h4>Hình mẫu/wireframe phần đầu</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Mẫu số: 01/TKN-CNKD</strong><br><em>(Kèm theo Thông tư số 50/2026/TT-BTC)</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><strong>THÔNG BÁO DOANH THU/TỜ KHAI THUẾ NĂM</strong></td>
+</tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Chỉ tiêu</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[01] Kỳ tính thuế</td>
+<td>Năm … / Sáu tháng đầu năm … / Sáu tháng cuối năm …</td>
+</tr>
+<tr>
+<td>[02] Lần đầu</td>
+<td>□</td>
+</tr>
+<tr>
+<td>[03] Bổ sung lần thứ</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[04] Người nộp thuế</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[05] Mã số thuế</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[06] Tổ chức/cá nhân kê khai, nộp thay theo ủy quyền</td>
+<td>…</td>
+</tr>
+<tr>
+<td>[07] Tên đại lý thuế</td>
+<td>…</td>
+</tr>
+</tbody></table></div>
+<p>[04] lấy từ tên doanh nghiệp hoặc hộ kinh doanh; [05] lấy từ mã số thuế. Kỳ, lần kê khai, thông tin khai thay và đại lý thuế do người dùng nhập.</p>
+<h4>Phần A — xác định nghĩa vụ thuế GTGT và TNCN</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Nhóm hoạt động</th>
+<th>Nhóm ngành</th>
+<th align="right">Tổng doanh thu</th>
+<th align="right">Doanh thu không chịu GTGT</th>
+<th align="right">Doanh thu thuế suất 0%</th>
+<th align="right">Thuế GTGT</th>
+<th align="right">Doanh thu chịu TNCN</th>
+<th align="right">Doanh thu được trừ</th>
+<th align="right">Thuế TNCN</th>
+<th align="right">Đã nộp/khấu trừ/nộp thay</th>
+<th align="right">Phải nộp thêm</th>
+<th align="right">Nộp thừa</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hoạt động có địa điểm cố định [08]</td>
+<td>1.1–1.6</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Hoạt động trên nền tảng số [09]</td>
+<td>2.1–2.6</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>Hoạt động đại lý xổ số, bảo hiểm, bán hàng đa cấp [10]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td><strong>Tổng cộng [11]</strong></td>
+<td></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td>Số thuế được miễn [12]</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td><strong>Số thuế còn phải nộp [13]</strong></td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody></table></div>
+<p>Mỗi nhóm hoạt động có sáu dòng ngành nghề:</p>
+<ol>
+<li>Phân phối, cung cấp hàng hóa.</li>
+<li>Dịch vụ, xây dựng không bao thầu nguyên vật liệu.</li>
+<li>Cho thuê tài sản.</li>
+<li>Sản xuất, vận tải, dịch vụ gắn với hàng hóa và xây dựng có bao thầu nguyên vật liệu.</li>
+<li>Sản phẩm nội dung thông tin số.</li>
+<li>Hoạt động kinh doanh khác.</li>
+</ol>
+<p>Cách tải và tính:</p>
+<ul>
+<li>Hoạt động có địa điểm cố định lấy đơn hàng kênh tại cửa hàng và khoản thu khác ngoài bán hàng.</li>
+<li>Hoạt động trên nền tảng số lấy đơn hàng thuộc kênh thương mại điện tử phù hợp.</li>
+<li>Tổng doanh thu là doanh thu thực tế còn hiệu lực trong kỳ.</li>
+<li>Doanh thu không chịu GTGT lấy phần sản phẩm được xác định không chịu thuế.</li>
+<li>Doanh thu thuế suất 0% lấy phần sản phẩm áp dụng mức 0%.</li>
+<li>Thuế GTGT phải nộp được tính theo phần doanh thu chịu thuế và tỷ lệ ngành nghề.</li>
+<li>Doanh thu chịu TNCN là doanh thu dùng để tính TNCN.</li>
+<li>Doanh thu được trừ do người dùng nhập và phân bổ.</li>
+<li>Thuế TNCN bằng phần doanh thu còn lại sau giảm trừ nhân tỷ lệ của ngành nghề; kết quả âm được ghi 0.</li>
+<li>Các cột số đã nộp trực tiếp, số đã khấu trừ hoặc nộp thay, số phải nộp thêm và số nộp thừa do người dùng nhập theo hồ sơ chứng minh.</li>
+<li>[11] là tổng các nhóm hoạt động.</li>
+<li>[12] là số thuế được miễn.</li>
+<li>[13] bằng [11] trừ [12] theo từng sắc thuế, không nhỏ hơn 0.</li>
+</ul>
+<p>Đơn bị từ chối, đã hủy hoặc đã xóa không được cộng. Trả hàng làm giảm đúng doanh thu nguồn. Một đơn không được đồng thời tính vào hai nhóm hoạt động.</p>
+<h4>Phần B — kê khai thuế tiêu thụ đặc biệt</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Hàng hóa, dịch vụ chịu thuế TTĐB</th>
+<th>Mã chỉ tiêu</th>
+<th>Đơn vị tính</th>
+<th align="right">Doanh thu tính thuế</th>
+<th align="right">Thuế suất</th>
+<th align="right">Số thuế phải nộp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I</td>
+<td>Trụ sở kinh doanh</td>
+<td></td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Hàng hóa, dịch vụ …</td>
+<td>[14a]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hàng hóa, dịch vụ …</td>
+<td>[14b]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Tổng cộng</strong></td>
+<td>[15]</td>
+<td></td>
+<td align="right"><strong>…</strong></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>Số thuế được miễn</td>
+<td>[16]</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Số thuế còn phải nộp</strong></td>
+<td>[17]</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<p>Hệ thống nhóm theo trụ sở và từng chi nhánh. Mỗi sản phẩm hoặc dịch vụ chịu TTĐB được trình bày theo tên, đơn vị, doanh thu, thuế suất và số thuế. Số thuế dòng bằng doanh thu tính thuế nhân thuế suất. Tổng cộng bằng tổng các dòng; phần miễn và số còn phải nộp do người dùng kiểm tra, nhập theo hồ sơ.</p>
+<h4>Phần C — thuế tài nguyên, bảo vệ môi trường và phí bảo vệ môi trường</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Tài nguyên, hàng hóa, sản phẩm</th>
+<th>Mã/tên địa điểm</th>
+<th>Mã chỉ tiêu</th>
+<th>Đơn vị tính</th>
+<th align="right">Sản lượng/số lượng</th>
+<th align="right">Giá tính thuế/mức thuế hoặc phí</th>
+<th align="right">Thuế suất/hệ số K</th>
+<th align="right">Số thuế/phí phải nộp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I</td>
+<td>Khai thuế tài nguyên</td>
+<td>…</td>
+<td>[18a…]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Khai thuế bảo vệ môi trường</td>
+<td>…</td>
+<td>[19…]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td>III</td>
+<td>Khai phí bảo vệ môi trường</td>
+<td>…</td>
+<td>[20…]</td>
+<td>…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+<td align="right">…</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Tổng cộng/số được miễn/số còn phải nộp</strong></td>
+<td></td>
+<td>[21]–[29]</td>
+<td></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"><strong>…</strong></td>
+</tr>
+</tbody></table></div>
+<p>Phần này do người dùng nhập khi có phát sinh. Hệ thống kiểm tra giá trị số, đơn vị, địa điểm và phép cộng; không tự tạo dòng chỉ vì tên hàng hóa có từ khóa tương tự một loại tài nguyên.</p>
+<h4>Phần D — hỗ trợ thông tin nộp thuế</h4>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Mã địa điểm kinh doanh</th>
+<th>Nội dung khoản nộp ngân sách</th>
+<th align="right">Số tiền</th>
+<th>Chương</th>
+<th>Tiểu mục</th>
+<th>Địa bàn hành chính</th>
+<th>Cơ quan thu</th>
+<th>Cơ quan thuế</th>
+<th>Hạn nộp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[30]</td>
+<td>[31]</td>
+<td>[32]</td>
+<td align="right">[33]</td>
+<td>[34]</td>
+<td>[35]</td>
+<td>[36]</td>
+<td>[37]</td>
+<td>[38]</td>
+<td>[39]</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>Tổng cộng</strong></td>
+<td align="right"><strong>[40]</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table></div>
+<p>Người dùng nhập các dòng theo thông báo hoặc nghĩa vụ thực tế. [40] bằng tổng số tiền. Phần này không tự sinh giao dịch tiền và không được hiểu là đã thanh toán.</p>
+<h4>Phần E — đề nghị xử lý khoản nộp thừa</h4>
+<p>Người dùng nhập số đề nghị hoàn và chọn hình thức nhận:</p>
+<ul>
+<li>Chuyển khoản: nhập chủ tài khoản, số tài khoản và ngân hàng hoặc Kho bạc Nhà nước.</li>
+<li>Tiền mặt: nhập người nhận, giấy tờ định danh, ngày cấp, nơi cấp và nơi nhận tiền.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Mã số thuế</th>
+<th>Tên người nộp thuế</th>
+<th>Mã định danh khoản phải nộp</th>
+<th>Nội dung khoản nợ/phát sinh</th>
+<th>Chương</th>
+<th>Tiểu mục</th>
+<th>Cơ quan thu</th>
+<th>Địa bàn</th>
+<th>Hạn nộp</th>
+<th align="right">Số tiền còn phải nộp</th>
+<th align="right">Đề nghị bù trừ</th>
+<th align="right">Còn phải nộp sau bù trừ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[45]</td>
+<td>[46]</td>
+<td>[47]</td>
+<td>[48]</td>
+<td>[49]</td>
+<td>[50]</td>
+<td>[51]</td>
+<td>[52]</td>
+<td>[53]</td>
+<td>[54]</td>
+<td align="right">[55]</td>
+<td align="right">[56]</td>
+<td align="right">[57]</td>
+</tr>
+</tbody></table></div>
+<p>Quy tắc:</p>
+<ul>
+<li>[56] không được âm.</li>
+<li>[56] không được lớn hơn [55] của cùng dòng.</li>
+<li>[57] = [55] - [56].</li>
+<li>Tổng đề nghị hoàn và bù trừ không được vượt khoản nộp thừa mà người dùng khai trong hồ sơ.</li>
+<li>Chọn chuyển khoản thì thông tin tài khoản là bắt buộc.</li>
+<li>Chọn tiền mặt thì thông tin người nhận và giấy tờ định danh là bắt buộc.</li>
+</ul>
+<h4>Luồng lập hồ sơ</h4>
+<ol>
+<li>Người dùng chọn năm hoặc nửa năm và xác định lần kê khai.</li>
+<li>Hệ thống tải thông tin người nộp thuế.</li>
+<li>Hệ thống tổng hợp doanh thu theo nhóm hoạt động và ngành nghề.</li>
+<li>Hệ thống tính thuế tự động cho phần có đủ dữ liệu.</li>
+<li>Người dùng nhập số đã nộp, giảm trừ, miễn, khoản nộp thừa và các phần không có nguồn tự động.</li>
+<li>Hệ thống kiểm tra tổng, giới hạn bù trừ, thông tin hoàn trả và các trường bắt buộc.</li>
+<li>Người dùng lưu nháp, hoàn tất hoặc xuất tệp.</li>
+</ol>
+<p>Khi dữ liệu nguồn đổi trong lúc hồ sơ còn nháp, người dùng tải lại số tự động. Hệ thống phải cho biết phần nào thay đổi và giữ phần nhập tay còn phù hợp. Hồ sơ đã hoàn tất không bị sửa âm thầm; trường hợp cần thay đổi được lập theo lần bổ sung.</p>
+<h4>Ví dụ bù trừ khoản nộp thừa</h4>
+<p>Một dòng có:</p>
+<ul>
+<li>Số tiền còn phải nộp [55]: 8.000.000 đồng.</li>
+<li>Số đề nghị bù trừ [56]: 3.000.000 đồng.</li>
+</ul>
+<p>Kết quả:</p>
+<ul>
+<li>Số còn phải nộp sau bù trừ [57] = 8.000.000 - 3.000.000 = 5.000.000 đồng.</li>
+<li>Nếu người dùng nhập [56] lớn hơn 8.000.000 đồng, hệ thống không cho hoàn tất hồ sơ và yêu cầu điều chỉnh.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="36-cau-hinh-thue-ke-toan.html">← 36. Nền tảng cấu hình Thuế - Kế toán</a><a href="38-kien-truc-du-lieu-thue.html">38. Thông tư 58 — Hộ kinh doanh và doanh nghiệp siêu nhỏ →</a></nav></div></body></html>

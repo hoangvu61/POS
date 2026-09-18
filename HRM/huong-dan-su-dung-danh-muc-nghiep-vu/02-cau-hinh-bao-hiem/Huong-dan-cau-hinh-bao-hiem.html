@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn cấu hình bảo hiểm | VIN-HRM</title><style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  background: #fff;
+  color: #1f2937;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.42;
+}
+.cover {
+  min-height: 245mm;
+  position: relative;
+  page-break-after: always;
+  break-after: page;
+}
+.cover-head { text-align: center; }
+.cover-kicker {
+  margin: 0 0 18pt;
+  color: #1f2937;
+  font-size: 12pt;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+.cover-title {
+  margin: 0 0 5pt;
+  padding: 0;
+  border: 0;
+  color: #1f2937;
+  font-size: 29pt;
+  font-weight: 700;
+  line-height: 1.12;
+  text-align: center;
+}
+.cover-sub {
+  margin: 0;
+  color: #4b5563;
+  font-size: 13.5pt;
+  line-height: 1.35;
+  text-align: center;
+}
+.cover-meta {
+  margin-top: 31mm;
+  font-size: 10.5pt;
+  line-height: 1.38;
+}
+.cover-meta p { margin: 2pt 0; }
+.cover-meta strong { font-weight: 700; }
+.cover-toc { margin-top: 38mm; }
+.cover-toc h2 {
+  margin: 0 0 10pt;
+  padding: 0 0 5pt;
+  border-bottom: 1px solid #111827;
+  color: #111827;
+  font-size: 18pt;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 {
+  margin: 0 0 8pt;
+  padding: 0 0 5pt;
+  border-bottom: 1px solid #111827;
+  color: #111827;
+  font-size: 18pt;
+  font-weight: 700;
+  line-height: 1.2;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+h2 {
+  margin: 18pt 0 3pt;
+  padding: 0;
+  border: 0;
+  color: #111827;
+  font-size: 13.5pt;
+  font-weight: 700;
+  line-height: 1.25;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+h3 {
+  margin: 14pt 0 3pt;
+  color: #111827;
+  font-size: 11.5pt;
+  font-weight: 700;
+  line-height: 1.3;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 2pt; }
+.lead {
+  margin: 0 0 12pt;
+  padding: 9pt 11pt;
+  border: 1px solid #9ca3af;
+  background: #eef4f8;
+  color: #1f2937;
+  font-size: 10.5pt;
+}
+.route {
+  display: inline;
+  padding: 1pt 3pt;
+  border: 0;
+  border-radius: 0;
+  background: #edf2f7;
+  color: #111827;
+  font-weight: 700;
+}
+table {
+  width: 100%;
+  margin: 8pt 0 12pt;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; break-inside: avoid; }
+th {
+  padding: 6pt;
+  border: 1px solid #9ca3af;
+  background: #d9e7f2;
+  color: #111827;
+  font-size: 9.5pt;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: left;
+  vertical-align: middle;
+}
+td {
+  padding: 6pt;
+  border: 1px solid #b8c0ca;
+  background: #fff;
+  color: #1f2937;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  text-align: left;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.steps {
+  counter-reset: none;
+  list-style: decimal;
+  margin: 6pt 0 11pt 24pt;
+  padding-left: 15pt;
+}
+.steps li {
+  position: static;
+  margin: 0 0 4pt;
+  padding: 0;
+  border: 0;
+}
+.steps li::before { content: none; }
+.callout-anchor {
+  margin: 0 !important;
+  padding: 0;
+  font-size: 1pt;
+  line-height: 1pt;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+.callout {
+  width: 100%;
+  margin: 10pt 0;
+  padding: 0;
+  border: 1px solid #9ca3af;
+  border-radius: 0;
+  border-collapse: separate;
+  background: #eef4f8;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.callout td {
+  padding: 9pt 11pt;
+  border: 0;
+  background: transparent !important;
+  color: #1f2937;
+  font-size: 10.5pt;
+  line-height: 1.35;
+  vertical-align: top;
+}
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.info { background: #eef4f8; border-color: #9ca3af; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+.success { background: #edf7f0; border-color: #7eaa8b; }
+figure {
+  margin: 12pt 0 14pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #9ca3af;
+  border-radius: 0;
+}
+figcaption {
+  margin-top: 4pt;
+  color: #4b5563;
+  font-size: 9pt;
+  font-style: italic;
+  line-height: 1.3;
+  text-align: center;
+}
+.page-break { page-break-before: always; break-before: page; }
+.checklist { columns: 1; }
+.checklist li { break-inside: avoid; }
+.small { color: #4b5563; font-size: 9pt; }
+.footer-note {
+  margin-top: 18pt;
+  padding-top: 7pt;
+  border-top: 1px solid #9ca3af;
+  color: #4b5563;
+  font-size: 8.8pt;
+}
+@media screen {
+  body { background: #eef1f4; }
+  .cover, .doc {
+    width: 210mm;
+    margin: 12mm auto;
+    padding: 25.4mm;
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(17, 24, 39, .10);
+  }
+  .cover { min-height: 297mm; }
+  .doc { min-height: 297mm; }
+}
+</style></head><body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN CẤU HÌNH BẢO HIỂM</p>
+    <p class="cover-sub">Thiết lập Nhóm bảo hiểm, tỷ lệ đóng và thời gian áp dụng</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn cấu hình bảo hiểm</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 14/08/2026</p>
+    <p><strong>Đối tượng:</strong> quản trị viên nhân sự, tiền lương và người được phân quyền</p>
+    <p><strong>Nguồn:</strong> VIN-HRM - Tài liệu nghiệp vụ và phần mềm thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol><li>Truy cập và lọc danh sách</li><li>Ý nghĩa năm loại bảo hiểm và hai tỷ lệ đóng</li><li>Tạo mới, sửa, ngừng áp dụng và xóa</li><li>Cách nhóm bảo hiểm đi vào hồ sơ nhân viên và bảng lương</li></ol>
+  </div>
+</section>
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích và phạm vi</h1>
+<p class="lead">Nhóm bảo hiểm là bộ tỷ lệ đóng theo từng thành phần bảo hiểm, có khoảng thời gian áp dụng và trạng thái. Nhóm được gán cho nhân viên; khi tính lương, hệ thống lấy các tỷ lệ của nhóm đang hoạt động và có hiệu lực trong kỳ.</p>
+
+<h2>2. Truy cập</h2><p>Mở <span class="route">Nhân viên → Nhóm bảo hiểm</span>. Màn hình cần quyền quản lý tổ chức.</p>
+<figure><img src="images/01-danh-sach-nhom-bao-hiem.png" alt="Hình 1. Danh sách nhóm bảo hiểm và các tỷ lệ đang cấu hình."><figcaption>Hình 1. Danh sách nhóm bảo hiểm và các tỷ lệ đang cấu hình.</figcaption></figure>
+<h2>3. Thành phần trên danh sách</h2>
+<table><colgroup><col style="width:25%"><col style="width:75%"></colgroup><thead><tr><th>Thành phần</th><th>Ý nghĩa</th></tr></thead><tbody><tr><td>Tìm theo tên nhóm</td><td>Lọc nhanh theo một phần tên.</td></tr><tr><td>Trạng thái</td><td>Tất cả, Hoạt động hoặc Ngừng hoạt động.</td></tr><tr><td>Thời gian áp dụng</td><td>Khoảng hiệu lực của bộ tỷ lệ. Thiếu ngày đầu hoặc ngày cuối được hiểu là không giới hạn về phía đó.</td></tr><tr><td>Loại bảo hiểm</td><td>Hiển thị từng loại cùng tỷ lệ NLĐ và DN.</td></tr><tr><td>Công tắc</td><td>Bật hoặc ngừng cả nhóm.</td></tr><tr><td>Bút chì/Thùng rác</td><td>Sửa hoặc xóa bản ghi.</td></tr></tbody></table>
+<h2>4. Tạo nhóm bảo hiểm</h2>
+<figure><img src="images/02-them-nhom-bao-hiem.png" alt="Hình 2. Biểu mẫu tạo nhóm bảo hiểm với năm loại chuẩn."><figcaption>Hình 2. Biểu mẫu tạo nhóm bảo hiểm với năm loại chuẩn.</figcaption></figure>
+<ol class="steps"><li>Chọn <b>Tạo mới</b>.</li><li>Nhập tên dễ nhận biết, ví dụ theo giai đoạn áp dụng hoặc chính sách.</li><li>Chọn trạng thái và khoảng ngày hiệu lực.</li><li>Kiểm tra từng loại bảo hiểm, nhập tỷ lệ người lao động và doanh nghiệp đóng.</li><li>Xóa dòng không dùng hoặc thêm lại bằng nút <b>Thêm loại</b>; không được trùng loại trong cùng nhóm.</li><li>Chọn <b>Lưu</b> và kiểm tra lại trên danh sách.</li></ol>
+<p style="page-break-before: always;"></p>
+<table><colgroup><col style="width:27%"><col style="width:31%"><col style="width:42%"></colgroup><thead><tr><th>Trường</th><th>Quy tắc</th><th>Ý nghĩa</th></tr></thead><tbody><tr><td>Tên nhóm bảo hiểm</td><td>Bắt buộc, tối đa 255 ký tự, duy nhất</td><td>Tên của trọn bộ tỷ lệ.</td></tr><tr><td>Trạng thái</td><td>Hoạt động/Ngừng hoạt động</td><td>Chỉ nhóm hoạt động mới được gán mới và được bộ tính lương sử dụng.</td></tr><tr><td>Ngày bắt đầu áp dụng</td><td>Không bắt buộc</td><td>Ngày đầu bộ tỷ lệ có hiệu lực. Bỏ trống nghĩa là không giới hạn từ trước.</td></tr><tr><td>Ngày kết thúc</td><td>Không bắt buộc; không trước ngày bắt đầu</td><td>Ngày cuối còn hiệu lực. Bỏ trống nghĩa là chưa xác định ngày kết thúc.</td></tr><tr><td>NLĐ đóng (%)</td><td>Từ 0 đến 100</td><td>Phần tỷ lệ khấu trừ thuộc người lao động.</td></tr><tr><td>DN đóng (%)</td><td>Từ 0 đến 100</td><td>Phần tỷ lệ doanh nghiệp chịu.</td></tr></tbody></table>
+<h3>Ý nghĩa từng loại bảo hiểm</h3>
+<table><colgroup><col style="width:35%"><col style="width:65%"></colgroup><thead><tr><th>Lựa chọn</th><th>Ý nghĩa sử dụng</th></tr></thead><tbody><tr><td>BHXH – Hưu trí, tử tuất</td><td>Tách riêng tỷ lệ dành cho quỹ hưu trí và tử tuất.</td></tr><tr><td>BHXH – Ốm đau, thai sản</td><td>Tách riêng tỷ lệ dành cho chế độ ốm đau và thai sản.</td></tr><tr><td>BHXH – TNLĐ, BNN</td><td>Tỷ lệ cho tai nạn lao động và bệnh nghề nghiệp.</td></tr><tr><td>BHTN</td><td>Bảo hiểm thất nghiệp.</td></tr><tr><td>BHYT</td><td>Bảo hiểm y tế.</td></tr></tbody></table>
+<p class="callout-anchor">&#160;</p><table class="callout danger"><tbody><tr><td><strong>Không sao chép tỷ lệ từ dữ liệu minh họa</strong><p>Tỷ lệ trên ảnh là dữ liệu của môi trường chạy thử, không phải khuyến nghị pháp lý. Hãy nhập theo quy định hiện hành và chính sách đã được phê duyệt của doanh nghiệp.</p></td></tr></tbody></table>
+<h2>5. Quy tắc hiệu lực và chống trùng</h2>
+<ul><li>Mỗi nhóm phải có ít nhất một loại bảo hiểm.</li><li>Mỗi loại chỉ xuất hiện một lần trong cùng nhóm.</li><li>Tỷ lệ mỗi bên phải trong khoảng 0–100.</li><li>Hai nhóm <b>đang hoạt động</b> không được có khoảng ngày áp dụng giao nhau. Muốn tạo bộ tỷ lệ kế tiếp, hãy chốt ngày kết thúc nhóm cũ hoặc ngừng nhóm cũ trước.</li></ul>
+<h2>6. Gán cho nhân viên và sử dụng khi tính lương</h2>
+<p>Vào hồ sơ nhân viên, phần Bảo hiểm, chọn nhóm và nhập khoảng thời gian nhân viên tham gia. Nhóm ngừng hoạt động không thể gán mới. Một nhân viên không được có hai khoảng gán bảo hiểm chồng lấn.</p>
+<p>Khi chạy lương, một loại tỷ lệ chỉ được lấy nếu đồng thời thỏa ba điều kiện: nhóm đang hoạt động; khoảng hiệu lực của nhóm giao với kỳ lương; và khoảng gán của nhân viên cũng giao với kỳ lương. Hệ thống dùng cột NLĐ đóng và DN đóng cho hai phần tương ứng.</p>
+<p class="callout-anchor">&#160;</p><table class="callout info"><tbody><tr><td><strong>Cấu hình liên quan</strong><p>Không có khóa riêng tại Hệ thống → Cấu hình điều khiển trực tiếp nhóm bảo hiểm. Các tỷ lệ, trạng thái và ngày hiệu lực tại đây là cấu hình chính; phụ cấp có cờ Tính bảo hiểm cũng tham gia vào căn cứ bảo hiểm của nhân viên.</p></td></tr></tbody></table>
+<h2>7. Sửa, ngừng áp dụng và xóa</h2>
+<ol class="steps"><li>Chọn bút chì để sửa tên, thời gian, tỷ lệ hoặc trạng thái.</li><li>Nếu chuẩn bị áp dụng bộ tỷ lệ mới, kết thúc hiệu lực nhóm cũ trước để không trùng khoảng ngày.</li><li>Dùng công tắc để ngừng áp dụng nhưng vẫn giữ lịch sử.</li><li>Chỉ xóa nhóm chưa từng được gán; hệ thống chặn xóa nhóm đã gán cho nhân viên.</li></ol>
+<h2>8. Lỗi thường gặp</h2>
+<table><colgroup><col style="width:38%"><col style="width:62%"></colgroup><thead><tr><th>Thông báo</th><th>Cách xử lý</th></tr></thead><tbody><tr><td>Khoảng ngày áp dụng ... bị trùng</td><td>Kiểm tra nhóm hoạt động khác; sửa ngày hoặc ngừng nhóm cũ.</td></tr><tr><td>Nhóm phải có ít nhất một loại</td><td>Thêm tối thiểu một dòng loại bảo hiểm.</td></tr><tr><td>Không được chọn trùng loại</td><td>Giữ một dòng cho mỗi loại.</td></tr><tr><td>Tỷ lệ phải từ 0 đến 100</td><td>Nhập lại số phần trăm hợp lệ.</td></tr><tr><td>Không thể xóa nhóm đã được gán</td><td>Ngừng hoạt động hoặc gỡ gán khỏi hồ sơ phù hợp; không xóa dữ liệu lịch sử.</td></tr></tbody></table>
+<h2>9. Danh sách kiểm tra</h2><ul class="checklist"><li>Tên nhóm mô tả đúng giai đoạn.</li><li>Ngày hiệu lực không trùng.</li><li>Đủ các loại cần thiết.</li><li>Tỷ lệ NLĐ/DN đã được duyệt.</li><li>Đã gán thử cho nhân viên.</li><li>Đã đối chiếu bảng lương thử.</li></ul>
+
+
+</main></body></html>

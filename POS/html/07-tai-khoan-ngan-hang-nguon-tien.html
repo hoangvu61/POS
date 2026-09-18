@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7. Tài khoản ngân hàng và nguồn tiền — Đặc tả POS</title><meta name="description" content="Tài khoản ngân hàng và nguồn tiền"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần II · Chương 7</p><article class="spec"><h1>CHƯƠNG 7. TÀI KHOẢN NGÂN HÀNG VÀ NGUỒN TIỀN</h1><details class="section-toc"><summary>Nội dung chương · 16 mục</summary><ol><li><a href="#section-7-1">7.1. Mục tiêu và phạm vi</a></li><li><a href="#section-7-2">7.2. Khái niệm nghiệp vụ</a></li><li><a href="#section-7-3">7.3. Phạm vi sở hữu và sử dụng</a></li><li><a href="#section-7-4">7.4. Trạng thái và vòng đời</a></li><li><a href="#section-7-5">7.5. Kiểm tra an toàn</a></li><li><a href="#section-7-6">7.6. Quyền và phạm vi dữ liệu</a></li><li><a href="#section-7-7">7.7. Thêm tài khoản ngân hàng</a></li><li><a href="#section-7-8">7.8. Chỉnh sửa tài khoản</a></li><li><a href="#section-7-9">7.9. Phân bổ tài khoản cho chi nhánh</a></li><li><a href="#section-7-10">7.10. Ngừng sử dụng và xóa</a></li><li><a href="#section-7-11">7.11. Giao diện quản lý</a></li><li><a href="#section-7-12">7.12. Sử dụng trong bán hàng và thanh toán</a></li><li><a href="#section-7-13">7.13. Sử dụng trong Thu Chi, công nợ và chuyển tiền</a></li><li><a href="#section-7-14">7.14. Kết ca, báo cáo và đối soát</a></li><li><a href="#section-7-15">7.15. Bảo toàn lịch sử và hoàn tác</a></li><li><a href="#section-7-16">7.16. Thông báo nghiệp vụ</a></li></ol></details>
+<h2 id="section-7-1">7.1. Mục tiêu và phạm vi</h2>
+<p>Chức năng quản lý tài khoản ngân hàng cho phép doanh nghiệp khai báo tập trung các tài khoản được phép sử dụng, sau đó phân bổ chúng cho từng chi nhánh. Thông tin này được dùng để nhận và chi tiền bằng chuyển khoản, cấu hình thanh toán, thu hoặc trả công nợ, chuyển tiền nội bộ, kết ca và đối soát.</p>
+<p>Tài khoản ngân hàng chỉ xác định nơi tiền được nhận hoặc chi. Số dư thực tế được hình thành từ các giao dịch tiền đã hoàn tất; người dùng không tự nhập hoặc sửa số dư tại màn hình quản lý tài khoản.</p>
+<p>Chương này bao gồm:</p>
+<ul>
+<li>Danh mục ngân hàng được phép lựa chọn.</li>
+<li>Hồ sơ tài khoản ngân hàng của doanh nghiệp.</li>
+<li>Phạm vi chi nhánh được quyền sử dụng từng tài khoản.</li>
+<li>Trạng thái sử dụng và kiểm tra tính hợp lệ.</li>
+<li>Thêm, sửa, phân bổ, gỡ, ngừng sử dụng và xóa tài khoản.</li>
+<li>Cách tài khoản tham gia thanh toán, Thu Chi, công nợ, chuyển tiền, kết ca và báo cáo.</li>
+<li>Quyền thao tác, kiểm tra lỗi và bảo toàn lịch sử.</li>
+</ul>
+<h2 id="section-7-2">7.2. Khái niệm nghiệp vụ</h2>
+<h3 id="section-7-2-1">7.2.1. Ngân hàng</h3>
+<p>Ngân hàng là tổ chức phát hành tài khoản. Người dùng chọn ngân hàng từ danh mục có sẵn, không nhập tự do tên ngân hàng. Cách này bảo đảm một ngân hàng luôn được nhận diện thống nhất trong thanh toán, báo cáo và tích hợp.</p>
+<p>Nếu ngân hàng cần sử dụng chưa có trong danh mục, việc bổ sung phải được thực hiện qua chức năng quản trị danh mục hệ thống.</p>
+<h3 id="section-7-2-2">7.2.2. Tài khoản ngân hàng của doanh nghiệp</h3>
+<p>Đây là tài khoản do doanh nghiệp quản lý và cho phép hệ thống sử dụng trong các nghiệp vụ tiền.</p>
+<p>Một hồ sơ tài khoản gồm:</p>
+<ul>
+<li>Ngân hàng.</li>
+<li>Số tài khoản.</li>
+<li>Tên chủ tài khoản hoặc tên hiển thị.</li>
+<li>Trạng thái.</li>
+<li>Danh sách chi nhánh được sử dụng.</li>
+</ul>
+<p>Ngân hàng và số tài khoản là thông tin bắt buộc. Tên chủ tài khoản không bắt buộc nhưng nên được khai báo để người thao tác có thể kiểm tra trước khi thu hoặc chi tiền.</p>
+<h3 id="section-7-2-3">7.2.3. Nguồn tiền</h3>
+<p>Nguồn tiền là nơi hệ thống ghi nhận tiền tăng hoặc giảm, chẳng hạn tiền mặt tại quỹ hoặc một tài khoản ngân hàng. Tài khoản ngân hàng là một loại nguồn tiền khi được sử dụng trong giao dịch tài chính.</p>
+<p>Một nghiệp vụ chỉ được coi là làm biến động tiền khi giao dịch tương ứng hoàn tất. Việc thêm tài khoản, đổi tên hiển thị hoặc phân bổ tài khoản cho chi nhánh không làm thay đổi số dư.</p>
+<h2 id="section-7-3">7.3. Phạm vi sở hữu và sử dụng</h2>
+<h3 id="section-7-3-1">7.3.1. Quản lý ở cấp doanh nghiệp</h3>
+<p>Mỗi tài khoản ngân hàng thuộc một doanh nghiệp. Chi nhánh không tự tạo tài khoản nằm ngoài danh sách của doanh nghiệp.</p>
+<p>Trong cùng doanh nghiệp, không được có hai tài khoản trùng cả ngân hàng và số tài khoản. Việc kiểm tra trùng được thực hiện khi tạo mới và khi sửa thông tin nhận diện.</p>
+<h3 id="section-7-3-2">7.3.2. Phân bổ cho chi nhánh</h3>
+<p>Một tài khoản có thể được sử dụng tại nhiều chi nhánh và một chi nhánh có thể sử dụng nhiều tài khoản. Người dùng chỉ được phân bổ tài khoản cho chi nhánh thuộc cùng doanh nghiệp.</p>
+<p>Tài khoản chỉ xuất hiện trong lựa chọn của một nghiệp vụ tại chi nhánh khi đáp ứng đồng thời:</p>
+<ul>
+<li>Thuộc doanh nghiệp của giao dịch.</li>
+<li>Đã được phân bổ cho chi nhánh phát sinh giao dịch.</li>
+<li>Đang ở trạng thái sử dụng.</li>
+<li>Vượt qua kiểm tra tính hợp lệ.</li>
+<li>Được phép dùng cho phương thức thanh toán hoặc loại nghiệp vụ đang thực hiện.</li>
+</ul>
+<p>Gỡ tài khoản khỏi chi nhánh chỉ ngăn sử dụng cho giao dịch mới. Các giao dịch cũ vẫn hiển thị tài khoản đã dùng tại thời điểm phát sinh.</p>
+<h2 id="section-7-4">7.4. Trạng thái và vòng đời</h2>
+<h3 id="section-7-4-1">7.4.1. Đang sử dụng</h3>
+<p>Tài khoản đang sử dụng có thể được phân bổ cho chi nhánh và có thể được chọn trong nghiệp vụ mới nếu thỏa các điều kiện phạm vi và tính hợp lệ.</p>
+<h3 id="section-7-4-2">7.4.2. Ngừng sử dụng</h3>
+<p>Tài khoản ngừng sử dụng không xuất hiện trong lựa chọn cho giao dịch mới và không được phân bổ thêm cho chi nhánh. Thông tin tài khoản vẫn được giữ để tra cứu lịch sử, báo cáo và đối soát.</p>
+<h3 id="section-7-4-3">7.4.3. Không hợp lệ</h3>
+<p>Tài khoản không hợp lệ là tài khoản không vượt qua cơ chế kiểm tra an toàn. Hệ thống không cho phép dùng tài khoản này để nhận hoặc chi tiền mới, không cho phân bổ thêm cho chi nhánh và hiển thị cảnh báo khi người dùng truy cập.</p>
+<p>Tình trạng không hợp lệ không làm mất hoặc thay đổi các giao dịch đã phát sinh trước đó.</p>
+<h3 id="section-7-4-4">7.4.4. Chuyển trạng thái</h3>
+<ul>
+<li>Tài khoản mới hợp lệ được đưa vào trạng thái sử dụng.</li>
+<li>Người có quyền có thể chuyển tài khoản đang sử dụng sang ngừng sử dụng.</li>
+<li>Tài khoản ngừng sử dụng có thể được kích hoạt lại sau khi thông tin đã được kiểm tra và các điều kiện sử dụng được đáp ứng.</li>
+<li>Nếu kiểm tra an toàn thất bại, hệ thống không cho tài khoản tham gia nghiệp vụ mới cho đến khi được xử lý hợp lệ.</li>
+<li>Tài khoản đã có lịch sử giao dịch không được thay thế bằng cách sửa ngân hàng hoặc số tài khoản; khi cần dùng tài khoản mới, doanh nghiệp tạo hồ sơ mới và ngừng sử dụng hồ sơ cũ.</li>
+</ul>
+<h2 id="section-7-5">7.5. Kiểm tra an toàn</h2>
+<p>Hệ thống tạo thông tin kiểm tra an toàn từ các thông tin nhận diện quan trọng của tài khoản. Mục đích là phát hiện việc ngân hàng hoặc số tài khoản bị thay đổi ngoài luồng quản lý hợp lệ.</p>
+<p>Thông tin kiểm tra được tạo lại khi thêm tài khoản hoặc khi ngân hàng, số tài khoản hay thông tin tham gia kiểm tra được thay đổi hợp lệ.</p>
+<p>Hệ thống kiểm tra tính hợp lệ trước các thao tác quan trọng, gồm:</p>
+<ul>
+<li>Hiển thị tài khoản để thanh toán chuyển khoản.</li>
+<li>Thiết lập phương thức nhận tiền qua ngân hàng.</li>
+<li>Lập phiếu thu hoặc phiếu chi qua ngân hàng.</li>
+<li>Thu nợ khách hàng hoặc trả nợ nhà cung cấp bằng chuyển khoản.</li>
+<li>Chuyển tiền giữa các nguồn tiền.</li>
+<li>Tổng hợp và đối soát chuyển khoản khi kết ca.</li>
+</ul>
+<p>Nếu kiểm tra thất bại, hệ thống từ chối thao tác mới và thông báo người dùng kiểm tra lại thông tin tài khoản.</p>
+<h2 id="section-7-6">7.6. Quyền và phạm vi dữ liệu</h2>
+<p>Người dùng phải có quyền quản lý tài khoản ngân hàng mới được thêm, sửa, phân bổ, gỡ, đổi trạng thái hoặc xóa. Quyền xem không mặc nhiên bao gồm quyền thay đổi.</p>
+<p>Mọi thao tác đều bị giới hạn trong doanh nghiệp của người dùng. Khi nghiệp vụ phát sinh tại một chi nhánh, hệ thống kiểm tra thêm phạm vi chi nhánh. Việc gửi trực tiếp một mã tài khoản không giúp người dùng bỏ qua các kiểm tra này.</p>
+<p>Các thay đổi quan trọng cần lưu vết người thực hiện, thời điểm và nội dung thay đổi, đặc biệt đối với trạng thái, thông tin nhận diện và phạm vi chi nhánh.</p>
+<h2 id="section-7-7">7.7. Thêm tài khoản ngân hàng</h2>
+<h3 id="section-7-7-1">7.7.1. Điều kiện tiên quyết</h3>
+<ul>
+<li>Người dùng có quyền quản lý tài khoản ngân hàng.</li>
+<li>Doanh nghiệp đang hoạt động.</li>
+<li>Ngân hàng được chọn có trong danh mục.</li>
+<li>Các chi nhánh được chọn đều thuộc doanh nghiệp.</li>
+</ul>
+<h3 id="section-7-7-2">7.7.2. Luồng chính</h3>
+<ol>
+<li>Người dùng mở danh sách tài khoản ngân hàng và chọn <strong>Thêm tài khoản</strong>.</li>
+<li>Hệ thống hiển thị biểu mẫu khai báo.</li>
+<li>Người dùng chọn ngân hàng, nhập số tài khoản và có thể nhập tên chủ tài khoản.</li>
+<li>Người dùng có thể chọn một hoặc nhiều chi nhánh được sử dụng tài khoản.</li>
+<li>Người dùng chọn <strong>Lưu</strong>.</li>
+<li>Hệ thống chuẩn hóa khoảng trắng, kiểm tra thông tin bắt buộc, kiểm tra ngân hàng và kiểm tra trùng trong doanh nghiệp.</li>
+<li>Hệ thống kiểm tra từng chi nhánh được chọn và loại trừ lựa chọn trùng.</li>
+<li>Hệ thống tạo thông tin kiểm tra an toàn.</li>
+<li>Tài khoản được lưu, phạm vi chi nhánh được thiết lập và danh sách được làm mới.</li>
+<li>Hệ thống thông báo lưu thành công.</li>
+</ol>
+<h3 id="section-7-7-3">7.7.3. Luồng lỗi</h3>
+<ul>
+<li>Chưa chọn ngân hàng: không lưu và yêu cầu chọn ngân hàng.</li>
+<li>Chưa nhập số tài khoản: không lưu và yêu cầu nhập số tài khoản.</li>
+<li>Ngân hàng không còn hợp lệ: không lưu và yêu cầu chọn lại.</li>
+<li>Ngân hàng và số tài khoản đã tồn tại trong doanh nghiệp: không tạo bản trùng.</li>
+<li>Có chi nhánh thuộc doanh nghiệp khác hoặc không còn tồn tại: từ chối toàn bộ yêu cầu phân bổ.</li>
+<li>Người dùng mất quyền trong lúc biểu mẫu đang mở: từ chối khi lưu.</li>
+<li>Xảy ra lỗi giữa lúc tạo tài khoản và phân bổ chi nhánh: không để lại tài khoản ở trạng thái tạo dở hoặc phạm vi chi nhánh không đầy đủ.</li>
+</ul>
+<h2 id="section-7-8">7.8. Chỉnh sửa tài khoản</h2>
+<h3 id="section-7-8-1">7.8.1. Tài khoản chưa phát sinh giao dịch</h3>
+<p>Người có quyền được sửa ngân hàng, số tài khoản, tên chủ tài khoản, trạng thái và phạm vi chi nhánh. Sau khi thay đổi thông tin nhận diện, hệ thống kiểm tra trùng và tạo lại thông tin kiểm tra an toàn.</p>
+<h3 id="section-7-8-2">7.8.2. Tài khoản đã phát sinh giao dịch</h3>
+<p>Khi tài khoản đã được sử dụng để nhận hoặc chi tiền:</p>
+<ul>
+<li>Không được sửa ngân hàng.</li>
+<li>Không được sửa số tài khoản.</li>
+<li>Không được xóa vật lý.</li>
+<li>Có thể thay đổi tên hiển thị nếu việc thay đổi không làm sai chứng từ lịch sử.</li>
+<li>Có thể thay đổi phạm vi chi nhánh cho giao dịch tương lai.</li>
+<li>Có thể chuyển sang ngừng sử dụng.</li>
+</ul>
+<p>Nếu ngân hàng cấp số tài khoản mới, doanh nghiệp tạo tài khoản mới và ngừng sử dụng tài khoản cũ.</p>
+<h3 id="section-7-8-3">7.8.3. Tính toàn vẹn khi cập nhật</h3>
+<p>Việc sửa tài khoản và phạm vi chi nhánh phải hoàn tất như một thao tác thống nhất. Nếu bất kỳ kiểm tra nào thất bại, hệ thống giữ nguyên thông tin trước khi sửa.</p>
+<h2 id="section-7-9">7.9. Phân bổ tài khoản cho chi nhánh</h2>
+<h3 id="section-7-9-1">7.9.1. Thực hiện từ tài khoản ngân hàng</h3>
+<ol>
+<li>Người dùng mở chi tiết tài khoản và chọn quản lý chi nhánh áp dụng.</li>
+<li>Hệ thống hiển thị các chi nhánh đang sử dụng tài khoản.</li>
+<li>Danh sách thêm mới chỉ gồm chi nhánh đang hoạt động, cùng doanh nghiệp và chưa được phân bổ tài khoản này.</li>
+<li>Người dùng chọn một hoặc nhiều chi nhánh.</li>
+<li>Hệ thống kiểm tra lại tài khoản, trạng thái, tính hợp lệ và phạm vi của từng chi nhánh.</li>
+<li>Nếu hợp lệ, hệ thống thêm toàn bộ phạm vi đã chọn và thông báo thành công.</li>
+</ol>
+<h3 id="section-7-9-2">7.9.2. Thực hiện từ chi nhánh</h3>
+<p>Tại khu vực thông tin ngân hàng của chi nhánh, người có quyền có thể chọn thêm tài khoản. Danh sách chỉ hiển thị tài khoản cùng doanh nghiệp, đang sử dụng, hợp lệ và chưa được phân bổ cho chi nhánh.</p>
+<h3 id="section-7-9-3">7.9.3. Gỡ khỏi chi nhánh</h3>
+<p>Trước khi gỡ, hệ thống hiển thị xác nhận và kiểm tra tài khoản có đang được dùng trong cấu hình thanh toán hoặc ràng buộc vận hành của chi nhánh hay không.</p>
+<p>Nếu còn phụ thuộc, hệ thống từ chối và yêu cầu xử lý cấu hình liên quan trước. Nếu không còn phụ thuộc, phạm vi sử dụng tại chi nhánh được gỡ. Tài khoản vẫn tồn tại ở cấp doanh nghiệp và các chi nhánh khác không bị ảnh hưởng.</p>
+<h2 id="section-7-10">7.10. Ngừng sử dụng và xóa</h2>
+<h3 id="section-7-10-1">7.10.1. Ngừng sử dụng</h3>
+<p>Ngừng sử dụng là lựa chọn bắt buộc khi tài khoản đã có lịch sử nhưng doanh nghiệp không muốn tiếp tục dùng. Sau khi ngừng:</p>
+<ul>
+<li>Không dùng cho giao dịch mới.</li>
+<li>Không phân bổ thêm cho chi nhánh.</li>
+<li>Không mất lịch sử thu, chi, thanh toán, công nợ hoặc đối soát.</li>
+<li>Vẫn có thể tìm thấy trong báo cáo lịch sử.</li>
+</ul>
+<h3 id="section-7-10-2">7.10.2. Xóa tài khoản</h3>
+<p>Tài khoản chỉ được xóa khi đồng thời:</p>
+<ul>
+<li>Chưa được sử dụng trong bất kỳ giao dịch tiền nào.</li>
+<li>Không còn được phân bổ cho chi nhánh nào.</li>
+<li>Không còn được tham chiếu trong cấu hình thanh toán hoặc cấu hình liên quan.</li>
+</ul>
+<p>Luồng xóa:</p>
+<ol>
+<li>Người dùng chọn <strong>Xóa</strong>.</li>
+<li>Hệ thống kiểm tra quyền, doanh nghiệp sở hữu, phạm vi chi nhánh và lịch sử sử dụng.</li>
+<li>Nếu bị ràng buộc, hệ thống từ chối và nêu nguyên nhân.</li>
+<li>Nếu đủ điều kiện, hệ thống yêu cầu xác nhận.</li>
+<li>Sau khi xác nhận, tài khoản được xóa và danh sách được làm mới.</li>
+</ol>
+<h2 id="section-7-11">7.11. Giao diện quản lý</h2>
+<h3 id="section-7-11-1">7.11.1. Danh sách tài khoản</h3>
+<p>Màn hình danh sách hỗ trợ:</p>
+<ul>
+<li>Tìm theo số tài khoản hoặc tên chủ tài khoản.</li>
+<li>Lọc theo ngân hàng, chi nhánh áp dụng và trạng thái.</li>
+<li>Xem ngân hàng, số tài khoản, tên chủ tài khoản, trạng thái và phạm vi chi nhánh.</li>
+<li>Thêm, xem, sửa, quản lý chi nhánh, đổi trạng thái hoặc xóa theo quyền và điều kiện.</li>
+</ul>
+<p>Nếu doanh nghiệp chưa khai báo tài khoản, hệ thống hiển thị trạng thái rỗng và hướng dẫn thêm tài khoản đầu tiên.</p>
+<h3 id="section-7-11-2">7.11.2. Biểu mẫu thêm và sửa</h3>
+<p>Biểu mẫu thể hiện rõ thông tin bắt buộc. Ở chế độ sửa, các nội dung không được phép thay đổi do đã có lịch sử phải ở trạng thái chỉ đọc.</p>
+<p>Khi chọn nhiều chi nhánh, người dùng phải nhìn thấy các chi nhánh đã chọn và có thể bỏ từng lựa chọn trước khi lưu.</p>
+<h3 id="section-7-11-3">7.11.3. Màn hình chi tiết doanh nghiệp và chi nhánh</h3>
+<p>Khu vực ngân hàng của doanh nghiệp hiển thị toàn bộ tài khoản thuộc doanh nghiệp. Khu vực ngân hàng của chi nhánh chỉ hiển thị tài khoản đã được phân bổ cho chi nhánh đó.</p>
+<p>Các màn hình sử dụng cùng một trạng thái hiện hành. Thay đổi tại một nơi phải được phản ánh ở nơi còn lại sau khi tải lại.</p>
+<h2 id="section-7-12">7.12. Sử dụng trong bán hàng và thanh toán</h2>
+<p>Khi khách thanh toán bằng chuyển khoản, hệ thống chỉ hiển thị tài khoản hợp lệ của chi nhánh nơi phát sinh đơn. Tài khoản được chọn gắn với lần thanh toán cụ thể.</p>
+<p>Nếu đơn có nhiều lần thanh toán, mỗi lần có thể sử dụng phương thức và tài khoản phù hợp riêng. Chọn tài khoản không làm thay đổi giá trị đơn; tiền chỉ được ghi nhận theo lần thanh toán đã hoàn tất.</p>
+<p>Đối với mã QR gắn với ngân hàng, tài khoản phải tiếp tục đáp ứng điều kiện sử dụng tại thời điểm tạo yêu cầu thanh toán và tại thời điểm xác nhận kết quả.</p>
+<h2 id="section-7-13">7.13. Sử dụng trong Thu Chi, công nợ và chuyển tiền</h2>
+<h3 id="section-7-13-1">7.13.1. Thu Chi</h3>
+<p>Phiếu thu qua ngân hàng làm tăng nguồn tiền của tài khoản khi phiếu hoàn tất. Phiếu chi qua ngân hàng làm giảm nguồn tiền khi phiếu hoàn tất. Hủy hoặc xóa hợp lệ phải hoàn tác đúng biến động đã tạo.</p>
+<h3 id="section-7-13-2">7.13.2. Công nợ</h3>
+<ul>
+<li>Thu nợ bằng chuyển khoản làm tăng tiền và giảm khoản khách còn nợ.</li>
+<li>Không tạo doanh thu bán hàng mới.</li>
+<li>Trả nợ nhà cung cấp làm giảm tiền và giảm khoản phải trả.</li>
+<li>Không tự tạo thêm chi phí mua hàng.</li>
+</ul>
+<h3 id="section-7-13-3">7.13.3. Chuyển tiền nội bộ</h3>
+<p>Chuyển tiền làm giảm nguồn đi và tăng nguồn đến với cùng giá trị được xác nhận. Giao dịch này không tạo doanh thu hoặc chi phí. Không được chọn cùng một nguồn làm cả nơi đi và nơi đến.</p>
+<p>Nếu một phía không thể hoàn tất, hệ thống không được để tiền chỉ giảm ở nguồn đi hoặc chỉ tăng ở nguồn đến.</p>
+<h2 id="section-7-14">7.14. Kết ca, báo cáo và đối soát</h2>
+<p>Kết ca có thể tổng hợp tiền chuyển khoản theo tài khoản và kênh bán. Báo cáo cho phép truy vết tài khoản đã nhận hoặc chi tiền, kể cả khi tài khoản hiện đã ngừng sử dụng hoặc không còn được phân bổ cho chi nhánh.</p>
+<p>Số liệu đối soát phải dựa trên giao dịch tiền đã hoàn tất. Không suy số dư từ trạng thái hiện tại của hồ sơ tài khoản và không loại giao dịch cũ chỉ vì tài khoản hiện không còn khả dụng.</p>
+<h2 id="section-7-15">7.15. Bảo toàn lịch sử và hoàn tác</h2>
+<ul>
+<li>Sửa tên hiển thị không làm đổi ngân hàng hoặc số tài khoản đã thể hiện trên chứng từ lịch sử nếu chứng từ đã chốt thông tin riêng.</li>
+<li>Gỡ tài khoản khỏi chi nhánh không thay đổi giao dịch cũ.</li>
+<li>Ngừng sử dụng không xóa lịch sử.</li>
+<li>Kiểm tra an toàn thất bại không làm mất giao dịch đã hoàn tất.</li>
+<li>Hủy một giao dịch tiền phải hoàn tác đúng nguồn tiền chịu tác động và không sửa các giao dịch khác cùng tài khoản.</li>
+<li>Nếu một quy trình nhiều bước thất bại giữa chừng, tài khoản và phạm vi chi nhánh phải trở về trạng thái trước khi thao tác bắt đầu.</li>
+</ul>
+<h2 id="section-7-16">7.16. Thông báo nghiệp vụ</h2>
+<p>Các thông báo cần ngắn gọn và nêu đúng nguyên nhân, gồm các trường hợp chính:</p>
+<ul>
+<li>Vui lòng chọn ngân hàng.</li>
+<li>Vui lòng nhập số tài khoản.</li>
+<li>Ngân hàng không hợp lệ.</li>
+<li>Tài khoản ngân hàng đã tồn tại trong doanh nghiệp.</li>
+<li>Tài khoản ngân hàng không hợp lệ; vui lòng kiểm tra lại thông tin.</li>
+<li>Chi nhánh không hợp lệ.</li>
+<li>Chi nhánh đã được áp dụng tài khoản này.</li>
+<li>Không thể gỡ tài khoản vì đang được sử dụng trong cấu hình của chi nhánh.</li>
+<li>Không thể xóa tài khoản đã phát sinh giao dịch hoặc còn được áp dụng tại chi nhánh.</li>
+<li>Lưu, phân bổ, gỡ hoặc xóa thành công.</li>
+</ul>
+</article></main>
+    <nav class="chapter-nav"><a href="06-cau-hinh-he-thong.html">← 6. Cấu hình hệ thống</a><a href="08-nhom-san-pham-san-pham.html">8. Nhóm sản phẩm và sản phẩm →</a></nav></div></body></html>

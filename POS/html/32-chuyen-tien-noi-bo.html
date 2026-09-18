@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>32. Chuyển tiền nội bộ — Đặc tả POS</title><meta name="description" content="Chuyển tiền nội bộ"><style>
+:root{color-scheme:light;--ink:#20231f;--forest:#183d36;--rust:#a24732;--paper:#fff;--wash:#f5f2ea;--line:#ddd6ca}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--wash);color:var(--ink);font-family:Arial,"Segoe UI",sans-serif;font-size:16px}
+a{color:inherit}.shell{min-height:100vh}.topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(245,242,234,.96);backdrop-filter:blur(8px)}
+.topbar-inner{max-width:1120px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:16px}.brand{font-family:Arial,"Segoe UI",sans-serif;font-weight:700;color:var(--forest);text-decoration:none}.actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.button{display:inline-block;border:1px solid #c7bfb1;border-radius:10px;padding:9px 13px;background:#fff;color:var(--forest);font:700 14px Arial,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}.button.primary{border-color:#a24732;background:#a24732;color:#fff}
+.reading{max-width:930px;margin:32px auto;padding:52px 68px;background:var(--paper);box-shadow:0 18px 50px rgba(25,36,31,.08)}.kicker{margin:0 0 14px;color:var(--rust);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.spec h1{margin:0 0 34px;color:var(--forest);font-family:Arial,"Segoe UI",sans-serif;font-size:clamp(34px,5vw,54px);line-height:1.08}.spec h2{margin:48px 0 16px;padding-top:8px;font-family:Arial,"Segoe UI",sans-serif;font-size:28px;line-height:1.25}.spec h3{margin:32px 0 10px;color:#27453d;font-family:Arial,"Segoe UI",sans-serif;font-size:21px}.spec h4{margin:24px 0 8px;font-size:17px}.spec p{margin:14px 0;line-height:1.78}.spec ul,.spec ol{padding-left:26px}.spec li{margin:7px 0;line-height:1.65}.spec li::marker{color:var(--rust);font-weight:700}.spec strong{color:#26332e}.spec code{border-radius:5px;background:#eee9de;padding:2px 5px;color:#8e3827}.spec blockquote{margin:24px 0;border-left:4px solid var(--rust);background:#f4eee5;padding:12px 18px;color:#4c504b}.table-wrap{max-width:100%;overflow:auto}.spec table{width:100%;margin:24px 0;border-collapse:collapse;font-size:14px}.spec th,.spec td{border:1px solid #d8d1c4;padding:10px 12px;text-align:left;vertical-align:top}.spec th{background:#eee9de;color:var(--forest)}
+.chapter-nav{max-width:930px;margin:0 auto 48px;display:flex;justify-content:space-between;gap:16px}.chapter-nav a{max-width:46%;color:var(--forest);font-weight:700;text-decoration:none}.chapter-nav a:last-child{text-align:right}
+.business-diagram{margin:28px 0;padding:16px 0}.diagram-scroll{overflow:auto}.business-diagram figcaption{font-size:14px;line-height:1.65;margin-top:12px;color:#48554f}.spec [id]{scroll-margin-top:88px}.section-toc{border:1px solid var(--line);padding:14px 18px;margin:20px 0 32px;background:#faf9f6}.section-toc summary{cursor:pointer;font-weight:700;color:var(--forest)}.section-toc ol{columns:2;column-gap:30px;list-style:none;padding:0}.section-toc li{break-inside:avoid;margin:6px 0;font-size:14px;line-height:1.5}.section-toc a{text-decoration:none}.section-toc a:hover{text-decoration:underline}
+@media(max-width:720px){.section-toc ol{columns:1}}
+@media print{.section-toc{display:none}.business-diagram{break-inside:avoid}.diagram-scroll{overflow:visible}.business-diagram svg{min-width:0!important}}
+@media(max-width:720px){.topbar-inner{padding:10px 14px}.reading{margin:0;padding:34px 20px;box-shadow:none}.actions .secondary{display:none}.spec h2{font-size:24px}.chapter-nav{padding:0 20px}}
+@media print{body{background:#fff;font-size:10.5pt}.topbar,.chapter-nav{display:none!important}.reading{max-width:none;margin:0;padding:0;box-shadow:none}.spec h1{font-size:26pt}.spec h2{break-after:avoid;font-size:17pt}.spec h3,.spec h4{break-after:avoid}.spec p,.spec li{orphans:3;widows:3}.spec tr,.spec blockquote{break-inside:avoid}.spec table{font-size:9pt}.spec thead{display:table-header-group}.spec a{color:inherit;text-decoration:none}}
+</style></head>
+<body><div class="shell"><header class="topbar"><div class="topbar-inner">
+    <a class="brand" href="root.html">Đặc tả toàn hệ thống POS</a><div class="actions">
+      <a class="button secondary" href="root.html">Mục lục</a><a class="button primary" href="print-all.html">Đọc toàn bộ sách</a><button class="button" type="button" onclick="window.print()">In chương này</button>
+    </div></div></header><main class="reading"><p class="kicker">Phần VII · Chương 32</p><article class="spec"><h1>CHƯƠNG 32. CHUYỂN TIỀN NỘI BỘ</h1><details class="section-toc"><summary>Nội dung chương · 23 mục</summary><ol><li><a href="#section-32-1">32.1. Mục đích và phạm vi</a></li><li><a href="#section-32-2">32.2. Các trường hợp sử dụng</a></li><li><a href="#section-32-3">32.3. Vai trò và quyền</a></li><li><a href="#section-32-4">32.4. Thành phần của một phiếu chuyển</a></li><li><a href="#section-32-5">32.5. Điều kiện tiên quyết</a></li><li><a href="#section-32-6">32.6. Trạng thái và hiệu lực</a></li><li><a href="#section-32-7">32.7. Tạo phiếu Nháp</a></li><li><a href="#section-32-8">32.8. Sửa và xóa phiếu Nháp</a></li><li><a href="#section-32-9">32.9. Hoàn tất phiếu</a></li><li><a href="#section-32-10">32.10. Kiểm tra số dư nguồn</a></li><li><a href="#section-32-11">32.11. Phiếu chi phía nguồn</a></li><li><a href="#section-32-12">32.12. Phiếu thu phía đích</a></li><li><a href="#section-32-13">32.13. Sổ tiền và nguyên tắc cân bằng</a></li><li><a href="#section-32-14">32.14. Sửa phiếu đã hoàn tất</a></li><li><a href="#section-32-15">32.15. Xóa phiếu đã hoàn tất</a></li><li><a href="#section-32-16">32.16. Tính lại số dư sau điều chỉnh</a></li><li><a href="#section-32-17">32.17. Danh sách và tìm kiếm</a></li><li><a href="#section-32-18">32.18. Chi tiết và hành động</a></li><li><a href="#section-32-19">32.19. Lịch sử thao tác</a></li><li><a href="#section-32-20">32.20. Ngoại lệ và thông báo</a></li><li><a href="#section-32-21">32.21. Đồng thời và chống trùng</a></li><li><a href="#section-32-22">32.22. Đối soát và báo cáo</a></li><li><a href="#section-32-23">32.23. Tình huống nghiệp vụ mẫu</a></li></ol></details>
+<h2 id="section-32-1">32.1. Mục đích và phạm vi</h2>
+<p>Chuyển tiền nội bộ ghi nhận việc điều chuyển tiền giữa hai nguồn tiền thuộc cùng doanh nghiệp, chẳng hạn từ quỹ tiền mặt vào ngân hàng, rút từ ngân hàng về quỹ, chuyển giữa hai tài khoản ngân hàng hoặc chuyển giữa các nguồn tiền thuộc hai chi nhánh được phép giao dịch với nhau.</p>
+<p>Nghiệp vụ không tạo doanh thu, chi phí hoặc công nợ. Tổng tiền toàn doanh nghiệp không thay đổi; chỉ số dư của nguồn chuyển đi giảm và số dư của nguồn nhận tăng.</p>
+<p>Phạm vi gồm:</p>
+<ul>
+<li>Xem danh sách và chi tiết phiếu chuyển tiền;</li>
+<li>Tạo, sửa và xóa phiếu Nháp;</li>
+<li>Hoàn tất để ghi nhận dòng tiền;</li>
+<li>Tự động tạo Phiếu chi cho nguồn và Phiếu thu cho đích;</li>
+<li>Sửa hoặc xóa phiếu đã Hoàn tất theo quyền;</li>
+<li>Tính lại số dư của các nguồn bị ảnh hưởng;</li>
+<li>Lưu lịch sử thay đổi để truy vết và đối soát.</li>
+</ul>
+<h2 id="section-32-2">32.2. Các trường hợp sử dụng</h2>
+<h3 id="section-32-2-1">32.2.1. Nộp tiền mặt vào ngân hàng</h3>
+<p>Quỹ tiền mặt là nguồn, tài khoản ngân hàng là đích. Khi hoàn tất, tiền mặt giảm và tiền gửi tăng cùng một số tiền. Phiếu chi giải thích tiền ra khỏi quỹ; Phiếu thu giải thích tiền vào ngân hàng.</p>
+<h3 id="section-32-2-2">32.2.2. Rút tiền ngân hàng về quỹ</h3>
+<p>Tài khoản ngân hàng là nguồn, quỹ tiền mặt là đích. Sổ tiền phản ánh giảm ngân hàng và tăng tiền mặt. Phí ngân hàng, nếu có, là một khoản chi riêng chứ không được làm hai vế chuyển tiền mất cân bằng.</p>
+<h3 id="section-32-2-3">32.2.3. Chuyển giữa hai tài khoản ngân hàng</h3>
+<p>Hai tài khoản phải khác nhau và đều đang hoạt động. Giao dịch giữ nguyên số tiền ở cả hai phía. Trường hợp ngân hàng trừ phí chuyển khoản, phí được lập bằng nghiệp vụ chi phù hợp.</p>
+<h3 id="section-32-2-4">32.2.4. Chuyển giữa các chi nhánh</h3>
+<p>Chỉ thực hiện khi cấu hình và quyền cho phép. Người dùng phải có phạm vi thao tác đối với cả nguồn và đích. Kết quả được thể hiện tại đúng chi nhánh của từng nguồn tiền nhưng vẫn là một phiếu chuyển duy nhất để không ghi nhận hai lần.</p>
+<h2 id="section-32-3">32.3. Vai trò và quyền</h2>
+<p>Người xem được tra cứu phiếu trong phạm vi được cấp. Người lập được tạo và thay đổi bản Nháp. Người hoàn tất được xác nhận dòng tiền. Người sửa hoặc xóa sau hoàn tất phải có quyền đặc biệt vì thao tác làm thay đổi cả hai nguồn tiền và các phiếu liên quan.</p>
+<p>Quyền được kiểm tra theo doanh nghiệp, chi nhánh, tài khoản và trạng thái. Có quyền tại nguồn nhưng không có quyền tại đích thì không đủ điều kiện tạo hoặc hoàn tất giao dịch. Quyền sửa sau hoàn tất và quyền xóa sau hoàn tất có thể được cấp chung hoặc tách riêng theo chính sách doanh nghiệp.</p>
+<h2 id="section-32-4">32.4. Thành phần của một phiếu chuyển</h2>
+<p>Mỗi phiếu đại diện cho đúng một lần điều chuyển và có các thông tin nghiệp vụ:</p>
+<ul>
+<li>Mã phiếu do hệ thống tạo;</li>
+<li>Ngày chuyển;</li>
+<li>Chi nhánh hoặc phạm vi thực hiện;</li>
+<li>Nguồn tiền chuyển đi;</li>
+<li>Nguồn tiền nhận;</li>
+<li>Số tiền;</li>
+<li>Nội dung hoặc ghi chú;</li>
+<li>Trạng thái;</li>
+<li>Người lập, người hoàn tất và thời điểm tương ứng.</li>
+</ul>
+<p>Nguồn và đích có thể là quỹ tiền mặt hoặc tài khoản ngân hàng đủ điều kiện. Hai bên không được trùng nhau. Số tiền phải lớn hơn không và dùng cùng đồng tiền; chuyển đổi ngoại tệ, chênh lệch tỷ giá hoặc phí chuyển khoản thuộc nghiệp vụ khác.</p>
+<h2 id="section-32-5">32.5. Điều kiện tiên quyết</h2>
+<p>Doanh nghiệp cần có ít nhất hai nguồn tiền có thể sử dụng. Tài khoản ngân hàng phải đang hoạt động và thuộc phạm vi cho phép. Quỹ tiền mặt được hiển thị theo cơ chế quản lý tiền mặt của doanh nghiệp; khi nghiệp vụ có chi nhánh, quyền tại chi nhánh vẫn phải được kiểm tra.</p>
+<p>Ngày chuyển phải hợp lệ theo quy tắc của chứng từ chuyển tiền. Nếu nguồn không được phép âm, số dư khả dụng phải đủ tại thời điểm hoàn tất. Nếu được phép âm, giao dịch vẫn phải tuân thủ hạn mức hoặc cơ chế phê duyệt được cấu hình.</p>
+<h2 id="section-32-6">32.6. Trạng thái và hiệu lực</h2>
+<p>Phiếu có hai trạng thái:</p>
+<ul>
+<li>Nháp: đã lưu thông tin nhưng chưa thay đổi số dư, chưa tạo Phiếu chi, Phiếu thu và chưa ghi Sổ tiền;</li>
+<li>Đã hoàn tất: hai biến động tiền đã có hiệu lực và các phiếu liên quan đã được tạo.</li>
+</ul>
+<p>Chỉ bản Nháp được hoàn tất. Một phiếu đã Hoàn tất không thể hoàn tất lần nữa. Nếu yêu cầu được gửi lặp do mạng chậm, hệ thống phải trả về kết quả đã có mà không tạo thêm chứng từ hoặc biến động tiền.</p>
+<h2 id="section-32-7">32.7. Tạo phiếu Nháp</h2>
+<p>Người dùng mở Tạo chuyển tiền nội bộ, chọn ngày, nguồn, đích, nhập số tiền và ghi chú. Hệ thống chỉ hiển thị các nguồn mà người dùng có quyền và đang hoạt động.</p>
+<p>Khi lưu, hệ thống kiểm tra:</p>
+<ul>
+<li>Ngày hợp lệ;</li>
+<li>Nguồn và đích đã được chọn;</li>
+<li>Nguồn khác đích;</li>
+<li>Số tiền lớn hơn không;</li>
+<li>Nguồn và đích dùng cùng đồng tiền;</li>
+<li>Phạm vi chi nhánh phù hợp;</li>
+<li>Người dùng có quyền lập phiếu.</li>
+</ul>
+<p>Nếu hợp lệ, hệ thống cấp mã và lưu Nháp. Chưa kiểm tra số dư tiền như một cam kết cuối cùng vì bản Nháp không giữ chỗ. Số dư phải được kiểm tra lại khi hoàn tất.</p>
+<h2 id="section-32-8">32.8. Sửa và xóa phiếu Nháp</h2>
+<p>Người dùng có thể sửa ngày, chi nhánh, nguồn, đích, số tiền và ghi chú của bản Nháp. Mọi điều kiện tạo mới được kiểm tra lại. Việc thay đổi phạm vi có thể làm một tài khoản đang chọn không còn hợp lệ; khi đó người dùng phải chọn lại.</p>
+<p>Xóa bản Nháp chỉ loại bỏ yêu cầu chưa có hiệu lực, không làm thay đổi tiền. Trước khi xóa, hệ thống yêu cầu xác nhận để tránh thao tác nhầm.</p>
+<p>Phiếu vừa được người khác hoàn tất hoặc xóa không thể tiếp tục sửa. Màn hình thông báo trạng thái mới và yêu cầu làm mới dữ liệu.</p>
+<h2 id="section-32-9">32.9. Hoàn tất phiếu</h2>
+<p>Khi người dùng xác nhận Hoàn tất, hệ thống kiểm tra lại trạng thái, quyền, ngày, hai nguồn tiền, số tiền và số dư khả dụng. Việc hoàn tất thực hiện đồng thời các kết quả:</p>
+<ol>
+<li>chuyển phiếu sang Đã hoàn tất;</li>
+<li>tạo Phiếu chi cho nguồn chuyển đi;</li>
+<li>ghi giảm nguồn trên Sổ tiền;</li>
+<li>tạo Phiếu thu cho nguồn nhận;</li>
+<li>ghi tăng đích trên Sổ tiền;</li>
+<li>lưu người hoàn tất và thời điểm;</li>
+<li>liên kết hai phiếu tiền với phiếu chuyển.</li>
+</ol>
+<p>Số tiền giảm và tăng phải bằng nhau. Tất cả kết quả thành công cùng nhau hoặc không kết quả nào có hiệu lực. Không được để tiền đã giảm ở nguồn nhưng chưa tăng ở đích.</p>
+<p>Phiếu chi và Phiếu thu mang loại nghiệp vụ chuyển tiền nội bộ, không được cộng vào chi phí hoặc doanh thu. Các báo cáo dòng tiền có thể trình bày riêng dòng chuyển nội bộ để người xem phân biệt với thu chi từ bên ngoài.</p>
+<h2 id="section-32-10">32.10. Kiểm tra số dư nguồn</h2>
+<p>Số dư được kiểm tra tại thời điểm hoàn tất, không chỉ tại lúc mở màn hình. Nếu doanh nghiệp không cho phép âm và nguồn không đủ tiền, hệ thống từ chối, nêu số dư khả dụng và yêu cầu giảm số tiền hoặc chọn nguồn khác.</p>
+<p>Khi nhiều người đồng thời sử dụng một nguồn, thao tác thành công trước được tính trước. Giao dịch sau phải kiểm tra trên số dư mới. Hệ thống bảo vệ phạm vi cập nhật để không có hai phiếu cùng vượt quá số tiền khả dụng.</p>
+<p>Nếu nguồn cho phép âm, việc hoàn tất có thể tạo số dư âm nhưng phải tuân thủ đúng quyền, hạn mức và cảnh báo. Quyền chuyển tiền không mặc nhiên cho phép vượt hạn mức.</p>
+<h2 id="section-32-11">32.11. Phiếu chi phía nguồn</h2>
+<p>Phiếu chi phía nguồn kế thừa ngày chuyển, số tiền, tài khoản nguồn, nội dung và người thực hiện. Chứng từ này chỉ được sinh bởi phiếu chuyển; người dùng không sửa độc lập để tránh một phía khác phiếu gốc.</p>
+<p>Từ Phiếu chi, người dùng có thể mở phiếu chuyển nếu có quyền. Khi phiếu chuyển bị sửa hoặc xóa theo quyền, Phiếu chi và biến động giảm tương ứng phải được xử lý đồng bộ.</p>
+<h2 id="section-32-12">32.12. Phiếu thu phía đích</h2>
+<p>Phiếu thu phía đích kế thừa ngày chuyển, số tiền, tài khoản nhận, nội dung và người thực hiện. Chứng từ được đánh dấu là thu do chuyển nội bộ, không phải doanh thu.</p>
+<p>Từ Phiếu thu, người dùng có thể mở phiếu chuyển. Phiếu không được sửa hoặc xóa độc lập. Mọi điều chỉnh phải bắt đầu từ nghiệp vụ chuyển tiền để luôn duy trì hai vế bằng nhau.</p>
+<h2 id="section-32-13">32.13. Sổ tiền và nguyên tắc cân bằng</h2>
+<p>Một phiếu Hoàn tất tạo đúng hai biến động:</p>
+<ul>
+<li>Một biến động âm bằng số tiền chuyển tại nguồn;</li>
+<li>Một biến động dương cùng số tiền tại đích.</li>
+</ul>
+<p>Tổng hai biến động bằng không. Tổng tiền doanh nghiệp trước và sau chuyển không đổi nếu hai nguồn dùng cùng đồng tiền. Báo cáo theo từng nguồn thể hiện thay đổi, trong khi báo cáo tổng hợp phải loại trừ tác động thu nhập hoặc chi phí.</p>
+<p>Ngày và mã tham chiếu của hai biến động phải giúp đối chiếu thành một cặp. Nếu một phía không tồn tại hoặc số tiền không bằng nhau, đó là sai lệch cần được cảnh báo trong kiểm tra toàn vẹn.</p>
+<h2 id="section-32-14">32.14. Sửa phiếu đã hoàn tất</h2>
+<p>Phiếu đã Hoàn tất mặc định chỉ xem. Người có quyền đặc biệt có thể sửa ngày, chi nhánh, nguồn, đích, số tiền và ghi chú. Hệ thống lưu nội dung trước và sau, người thực hiện, thời điểm và lý do nếu người dùng cung cấp hoặc chính sách yêu cầu.</p>
+<p>Quy trình sửa gồm:</p>
+<ol>
+<li>kiểm tra quyền và trạng thái hiện hành;</li>
+<li>kiểm tra nội dung mới như khi tạo;</li>
+<li>lưu nội dung cũ để truy vết;</li>
+<li>hoàn nguyên Phiếu chi, Phiếu thu và hai biến động cũ;</li>
+<li>tính lại số dư các nguồn cũ từ ngày giao dịch cũ;</li>
+<li>cập nhật phiếu theo nội dung mới;</li>
+<li>kiểm tra số dư nguồn mới tại ngày mới;</li>
+<li>tạo lại Phiếu chi, Phiếu thu và hai biến động mới;</li>
+<li>tính lại số dư các nguồn mới từ ngày bị ảnh hưởng;</li>
+<li>hoàn thiện lịch sử với nội dung sau sửa.</li>
+</ol>
+<p>Nếu nguồn hoặc đích thay đổi, cả nguồn cũ và nguồn mới đều thuộc phạm vi cần tính lại. Nếu ngày thay đổi, điểm bắt đầu là ngày sớm hơn giữa ngày cũ và ngày mới. Nếu bất kỳ bước nào lỗi, toàn bộ kết quả trở về trạng thái trước sửa.</p>
+<p>Nếu nguồn mới không đủ số dư tại thời điểm lịch sử được chọn và chính sách không cho âm, thao tác bị từ chối.</p>
+<h2 id="section-32-15">32.15. Xóa phiếu đã hoàn tất</h2>
+<p>Chỉ người có quyền đặc biệt được xóa phiếu Hoàn tất. Hệ thống cảnh báo rằng thao tác sẽ loại bỏ cả hai biến động tiền. Lý do xóa được lưu khi người dùng nhập hoặc khi chính sách doanh nghiệp yêu cầu.</p>
+<p>Khi xác nhận, hệ thống:</p>
+<ul>
+<li>Lưu toàn bộ nội dung phiếu cùng Phiếu chi, Phiếu thu và hai biến động trước khi xóa;</li>
+<li>Loại bỏ hiệu lực của biến động giảm tại nguồn;</li>
+<li>Loại bỏ hiệu lực của biến động tăng tại đích;</li>
+<li>Loại bỏ Phiếu chi và Phiếu thu do phiếu chuyển tạo;</li>
+<li>Loại bỏ phiếu chuyển khỏi danh sách vận hành;</li>
+<li>Tính lại số dư hai nguồn từ ngày giao dịch;</li>
+<li>Giữ lịch sử xóa để phục vụ kiểm tra nội bộ.</li>
+</ul>
+<p>Tất cả thao tác được thực hiện như một khối duy nhất. Gửi lại yêu cầu xóa không được đảo số dư thêm lần nữa. Nếu kết quả không thể được hoàn nguyên an toàn, hệ thống từ chối và giữ nguyên phiếu.</p>
+<h2 id="section-32-16">32.16. Tính lại số dư sau điều chỉnh</h2>
+<p>Khi sửa hoặc xóa phiếu trong quá khứ, số dư sau mỗi giao dịch của nguồn liên quan phải được tính lại. Hệ thống lấy số dư gần nhất trước ngày bắt đầu, rồi áp dụng lần lượt mọi biến động theo ngày tăng dần, thời điểm ghi nhận và thứ tự ổn định trong cùng thời điểm.</p>
+<p>Nếu không có số dư trước đó, điểm bắt đầu là số dư ban đầu được thiết lập cho nguồn hoặc bằng không theo cơ chế hiện hành. Kết quả được cập nhật đến giao dịch mới nhất.</p>
+<p>Sửa một phiếu có thể ảnh hưởng tối đa bốn nguồn: nguồn cũ, đích cũ, nguồn mới và đích mới. Nguồn trùng nhau chỉ cần tính một lần từ ngày sớm nhất bị ảnh hưởng. Báo cáo không được hiển thị số tổng hợp mới trong khi chi tiết còn số cũ.</p>
+<h2 id="section-32-17">32.17. Danh sách và tìm kiếm</h2>
+<p>Danh sách cho phép lọc theo mã phiếu, ngày chuyển, trạng thái, chi nhánh, nguồn, đích và người lập.</p>
+<p>Kết quả hiển thị tối thiểu:</p>
+<ul>
+<li>Mã.</li>
+<li>Ngày.</li>
+<li>Nguồn.</li>
+<li>Đích.</li>
+<li>Số tiền.</li>
+<li>Trạng thái.</li>
+<li>Người lập.</li>
+<li>Người hoàn tất.</li>
+</ul>
+<p>Người dùng chỉ thấy phiếu khi có phạm vi xem phù hợp. Với chuyển liên chi nhánh, chính sách có thể yêu cầu quyền xem ở cả hai phía; ít nhất thông tin nhạy cảm của phía không được cấp phải được bảo vệ.</p>
+<p>Tổng số tiền trên danh sách chỉ có ý nghĩa là quy mô điều chuyển, không phải tổng thu hoặc tổng chi. Không cộng số này vào doanh thu, chi phí hoặc dòng tiền thuần từ hoạt động kinh doanh.</p>
+<h2 id="section-32-18">32.18. Chi tiết và hành động</h2>
+<p>Màn hình chi tiết thể hiện nội dung phiếu, trạng thái, nguồn, đích, số tiền, người lập, người hoàn tất và liên kết đến Phiếu chi, Phiếu thu. Với phiếu đã điều chỉnh, người có quyền có thể xem lịch sử trước và sau.</p>
+<p>Các hành động theo trạng thái:</p>
+<ul>
+<li>Nháp: Sửa, Xóa, Hoàn tất;</li>
+<li>Đã hoàn tất: Xem; Sửa hoặc Xóa chỉ khi có quyền đặc biệt;</li>
+<li>Phiếu đã bị xóa: không nằm trong danh sách vận hành, chỉ xuất hiện trong lịch sử dành cho người có quyền.</li>
+</ul>
+<p>Hệ thống không hiển thị hành động không hợp lệ, nhưng vẫn phải kiểm tra lại quyền khi nhận yêu cầu.</p>
+<h2 id="section-32-19">32.19. Lịch sử thao tác</h2>
+<p>Lịch sử được ghi cho việc sửa hoặc xóa phiếu đã Hoàn tất, gồm:</p>
+<ul>
+<li>Mã phiếu.</li>
+<li>Trạng thái tại thời điểm thao tác.</li>
+<li>Người thực hiện.</li>
+<li>Thời điểm.</li>
+<li>Nội dung trước.</li>
+<li>Nội dung sau nếu sửa.</li>
+<li>Lý do nếu có.</li>
+</ul>
+<p>Lịch sử phục vụ truy vết nội bộ và không làm thay đổi luồng vận hành thông thường. Người dùng chỉ được xem khi có quyền kiểm tra phù hợp. Nội dung lịch sử không được sửa hoặc xóa cùng chứng từ vận hành.</p>
+<p>Đối với thay đổi bản Nháp, hệ thống có thể lưu dấu theo chính sách chung. Tuy nhiên, lịch sử bắt buộc phải bảo đảm đầy đủ cho mọi thay đổi đã tác động đến tiền.</p>
+<h2 id="section-32-20">32.20. Ngoại lệ và thông báo</h2>
+<p>Hệ thống từ chối và giải thích rõ khi:</p>
+<ul>
+<li>Nguồn hoặc đích chưa được chọn;</li>
+<li>Nguồn trùng đích;</li>
+<li>Số tiền không lớn hơn không;</li>
+<li>Nguồn hoặc đích ngừng hoạt động;</li>
+<li>Hai nguồn khác đồng tiền;</li>
+<li>Người dùng thiếu quyền tại một phía;</li>
+<li>Số dư nguồn không đủ theo chính sách;</li>
+<li>Phiếu không còn ở trạng thái Nháp khi hoàn tất;</li>
+<li>Phiếu đã được người khác sửa hoặc xóa;</li>
+<li>Yêu cầu sửa hoặc xóa sau hoàn tất thiếu quyền;</li>
+<li>Một chứng từ hoặc biến động liên quan không thể hoàn nguyên an toàn.</li>
+</ul>
+<p>Lỗi ở một phía làm toàn bộ thao tác thất bại. Không cho người dùng tiếp tục bằng cách bỏ qua Phiếu thu, Phiếu chi hoặc một biến động tiền.</p>
+<h2 id="section-32-21">32.21. Đồng thời và chống trùng</h2>
+<p>Hệ thống kiểm tra phiên bản hiện hành của phiếu trước khi sửa, hoàn tất hoặc xóa. Nếu nội dung đã thay đổi sau khi người dùng mở màn hình, thao tác bị dừng và người dùng được yêu cầu làm mới.</p>
+<p>Khi hoàn tất, nguồn tiền được bảo vệ khỏi các cập nhật cạnh tranh làm vượt số dư. Cùng một yêu cầu được gửi nhiều lần chỉ có một kết quả. Hai biến động, Phiếu thu và Phiếu chi đều dùng cùng dấu nhận diện nghiệp vụ để phát hiện và ngăn bản sao.</p>
+<h2 id="section-32-22">32.22. Đối soát và báo cáo</h2>
+<p>Đối soát chuyển tiền phải kiểm tra:</p>
+<ul>
+<li>Mỗi phiếu Hoàn tất có đúng một Phiếu chi và một Phiếu thu;</li>
+<li>Số tiền hai phiếu bằng số tiền chuyển;</li>
+<li>Nguồn của Phiếu chi và đích của Phiếu thu đúng với phiếu chuyển;</li>
+<li>Hai biến động Sổ tiền có giá trị đối nhau;</li>
+<li>Tổng tác động toàn doanh nghiệp bằng không;</li>
+<li>Phiếu Nháp không có biến động tiền;</li>
+<li>Phiếu đã xóa không còn tác động nhưng có lịch sử;</li>
+<li>Số dư chạy của từng nguồn khớp tổng biến động theo thời gian.</li>
+</ul>
+<p>Báo cáo cho phép xem theo ngày, chi nhánh, nguồn, đích, trạng thái và người thực hiện. Chuyển nội bộ được trình bày riêng hoặc loại trừ khỏi chỉ tiêu thu, chi kinh doanh để tránh phóng đại dòng tiền.</p>
+<h2 id="section-32-23">32.23. Tình huống nghiệp vụ mẫu</h2>
+<h3 id="section-32-23-1">32.23.1. Nộp tiền bán hàng vào ngân hàng</h3>
+<p>Quản lý chuyển 20 triệu đồng từ quỹ tiền mặt sang tài khoản ngân hàng. Khi Hoàn tất, quỹ giảm 20 triệu đồng, ngân hàng tăng 20 triệu đồng, tổng tiền không đổi. Hệ thống tạo một Phiếu chi cho quỹ và một Phiếu thu cho ngân hàng.</p>
+<h3 id="section-32-23-2">32.23.2. Sửa nhầm tài khoản nhận</h3>
+<p>Phiếu 50 triệu đồng đã Hoàn tất nhưng chọn nhầm tài khoản ngân hàng đích. Người có quyền sửa chọn tài khoản đúng. Hệ thống hoàn nguyên tăng ở tài khoản cũ, giữ nguyên hoặc tái tạo giảm ở nguồn theo quy trình toàn vẹn, tăng tài khoản mới và tính lại số dư các nguồn liên quan.</p>
+<h3 id="section-32-23-3">32.23.3. Xóa phiếu quá khứ</h3>
+<p>Một phiếu chuyển 5 triệu đồng của ngày trước được xác định là ghi trùng. Người có quyền xóa xác nhận thao tác. Hệ thống loại bỏ cả giảm ở nguồn và tăng ở đích, xóa hiệu lực hai phiếu tiền, tính lại số dư từ ngày đó và giữ lịch sử để giải trình.</p>
+</article></main>
+    <nav class="chapter-nav"><a href="31-cong-no.html">← 31. Công nợ</a><a href="33-von-chu-so-huu.html">33. Vốn chủ sở hữu →</a></nav></div></body></html>

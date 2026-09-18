@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hướng dẫn Phê duyệt đơn nghỉ phép | VIN-HRM</title>
+<style>
+@page { size: A4 portrait; margin: 25.4mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #fff; color: #1f2937; font-family: Roboto, Arial, sans-serif; font-size: 10.5pt; line-height: 1.42; }
+.cover { min-height: 245mm; position: relative; page-break-after: always; break-after: page; }
+.cover-head { text-align: center; }
+.cover-kicker { margin: 0 0 18pt; color: #1f2937; font-size: 12pt; font-weight: 700; text-align: center; text-transform: uppercase; }
+.cover-title { margin: 0 0 5pt; padding: 0; border: 0; color: #1f2937; font-size: 28pt; font-weight: 700; line-height: 1.12; text-align: center; }
+.cover-sub { margin: 0; color: #4b5563; font-size: 13.5pt; line-height: 1.35; text-align: center; }
+.cover-meta { margin-top: 25mm; font-size: 10.5pt; line-height: 1.38; }
+.cover-meta p { margin: 2pt 0; }
+.cover-toc { margin-top: 16mm; }
+.cover-toc h2 { margin: 0 0 10pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; text-transform: uppercase; }
+.cover-toc ol { margin: 0 0 0 22pt; padding: 0; }
+.cover-toc li { margin: 0; padding-left: 4pt; }
+.doc { width: 100%; }
+h1 { margin: 0 0 8pt; padding: 0 0 5pt; border-bottom: 1px solid #111827; color: #111827; font-size: 18pt; line-height: 1.2; page-break-after: avoid; }
+h2 { margin: 18pt 0 3pt; color: #111827; font-size: 13.5pt; line-height: 1.25; page-break-after: avoid; }
+h3 { margin: 14pt 0 3pt; color: #111827; font-size: 11.5pt; line-height: 1.3; page-break-after: avoid; }
+p { margin: 0 0 9pt; text-align: justify; }
+ul, ol { margin: 5pt 0 10pt 24pt; padding-left: 12pt; }
+li { margin: 0 0 3pt; }
+.lead { margin: 0 0 12pt; padding: 9pt 11pt; border: 1px solid #9ca3af; background: #eef4f8; }
+.route { padding: 1pt 3pt; background: #edf2f7; color: #111827; font-weight: 700; }
+table { width: 100%; margin: 8pt 0 12pt; border-collapse: collapse; table-layout: fixed; }
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; }
+th { padding: 6pt; border: 1px solid #9ca3af; background: #d9e7f2; color: #111827; font-size: 9.5pt; line-height: 1.3; text-align: left; vertical-align: middle; }
+td { padding: 6pt; border: 1px solid #b8c0ca; background: #fff; font-size: 9.5pt; line-height: 1.35; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+tbody tr:nth-child(even) td { background: #f7f9fb; }
+.flow { margin: 8pt 0 10pt; border: 0; border-collapse: separate; page-break-inside: avoid; }
+.flow td { padding: 0; border: 0; background: #fff !important; text-align: center; vertical-align: middle; }
+.flow .flow-node { padding: 6pt 9pt; border: 1px solid #7b8794; background: #eef4f8 !important; }
+.flow .flow-node strong { display: block; margin-bottom: 1pt; color: #111827; font-size: 10.5pt; }
+.flow .flow-node p { margin: 0; color: #374151; font-size: 8.8pt; text-align: center; }
+.flow .flow-arrow { height: 12pt; color: #4b5563; font-size: 13pt; font-weight: 700; line-height: 1; }
+.branch td { text-align: center; vertical-align: middle; }
+.branch .decision { background: #fff8e6; font-weight: 700; }
+.branch .yes { background: #eef8f1; }
+.branch .no { background: #fff0f0; }
+.callout { width: 100%; margin: 10pt 0; border: 1px solid #9ca3af; border-collapse: separate; background: #eef4f8; page-break-inside: avoid; }
+.callout td { padding: 9pt 11pt; border: 0; background: transparent !important; font-size: 10.5pt; line-height: 1.35; }
+.callout strong { display: block; margin-bottom: 3pt; color: #111827; }
+.callout p { margin: 0; }
+.warning { background: #fff8e6; border-color: #c9a75d; }
+.danger { background: #fff0f0; border-color: #c77c7c; }
+figure { margin: 12pt 0 14pt; page-break-inside: avoid; }
+figure img { display: block; width: 100%; height: auto; border: 1px solid #9ca3af; }
+figcaption { margin-top: 4pt; color: #4b5563; font-size: 9pt; font-style: italic; line-height: 1.3; text-align: center; }
+.steps { margin: 6pt 0 11pt 24pt; padding-left: 15pt; }
+.page-break { page-break-before: always; break-before: page; }
+.footer-note { margin-top: 18pt; padding-top: 7pt; border-top: 1px solid #9ca3af; color: #4b5563; font-size: 8.8pt; }
+@media screen { body { background: #eef1f4; } .cover, .doc { width: 210mm; margin: 12mm auto; padding: 25.4mm; background: #fff; box-shadow: 0 2px 16px rgba(17,24,39,.10); } .cover { min-height: 297mm; } .doc { min-height: 297mm; } }
+</style>
+</head>
+<body>
+<section class="cover">
+  <div class="cover-head">
+    <p class="cover-kicker">TÀI LIỆU HƯỚNG DẪN SỬ DỤNG</p>
+    <p class="cover-title">HƯỚNG DẪN<br>PHÊ DUYỆT ĐƠN NGHỈ PHÉP</p>
+    <p class="cover-sub">Kiểm tra hồ sơ, duyệt hoặc từ chối theo đúng bước và theo dõi kết quả xử lý</p>
+  </div>
+  <div class="cover-meta">
+    <p><strong>Tên tài liệu:</strong> Hướng dẫn Phê duyệt đơn nghỉ phép</p>
+    <p><strong>Phiên bản tài liệu:</strong> v1.0</p>
+    <p><strong>Ngày ban hành:</strong> 24/08/2026</p>
+    <p><strong>Đối tượng:</strong> người quản lý, người phê duyệt, cán bộ nhân sự và quản trị viên quy trình</p>
+    <p><strong>Nguồn:</strong> tài liệu nghiệp vụ “Nghỉ phép v1.1”, “Quản lý - Quy trình phê duyệt v1.2”, mã nguồn và phần mềm VIN-HRM thực tế</p>
+  </div>
+  <div class="cover-toc">
+    <h2>MỤC LỤC</h2>
+    <ol>
+      <li>Mục đích, phạm vi và luồng nghiệp vụ</li>
+      <li>Điều kiện và cấu hình quy trình liên quan</li>
+      <li>Mở danh sách Duyệt đơn nghỉ phép</li>
+      <li>Kiểm tra nội dung đơn trước khi xử lý</li>
+      <li>Phê duyệt đơn nghỉ phép</li>
+      <li>Từ chối đơn nghỉ phép</li>
+      <li>Kết quả sau bước duyệt cuối</li>
+      <li>Tình huống vận hành và danh sách kiểm tra</li>
+    </ol>
+  </div>
+</section>
+
+<main class="doc">
+<h1 style="page-break-before: always;">1. Mục đích và phạm vi</h1>
+<p class="lead">Phê duyệt đơn nghỉ phép là quá trình người có thẩm quyền kiểm tra nhu cầu nghỉ, lịch làm việc, loại nghỉ, số giờ/ngày nghỉ và tính phù hợp với hoạt động của đơn vị trước khi chấp thuận hoặc từ chối. Mỗi người chỉ xử lý bước đang được giao cho mình; đơn có thể đi qua nhiều bước trước khi có kết quả cuối cùng.</p>
+<p>Tài liệu hướng dẫn người duyệt mở danh sách công việc, đọc thông tin đơn, phê duyệt, từ chối, theo dõi lịch sử và hiểu các tác động sau bước cuối. Phần thiết kế quy trình được giải thích ở mức cấu hình có ảnh hưởng trực tiếp đến nghỉ phép; thao tác quản trị đầy đủ nằm trong tài liệu “Quản lý quy trình phê duyệt”.</p>
+
+<h2>1.1. Luồng phê duyệt tổng quát</h2>
+<table class="flow" aria-label="Luồng phê duyệt đơn nghỉ phép">
+  <tbody>
+    <tr><td class="flow-node"><strong>1. Nhân viên gửi đơn</strong><p>Đơn Bản nháp chuyển sang Chờ duyệt và tạo hồ sơ theo quy trình Duyệt nghỉ phép đã chọn.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>2. Hệ thống xác định bước đầu tiên</strong><p>Chỉ người được cấu hình tại bước đang hoạt động nhìn thấy đơn trong danh sách Chờ xử lý.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>3. Người duyệt kiểm tra đơn</strong><p>Đối chiếu nhân viên, ngày/ca nghỉ, loại nghỉ, số giờ, lý do, số dư và lịch sử quy trình.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>4. Quyết định: Phê duyệt hay Từ chối?</strong></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+  </tbody>
+</table>
+<table class="branch" aria-label="Nhánh quyết định phê duyệt hoặc từ chối">
+  <colgroup><col style="width:47%"><col style="width:6%"><col style="width:47%"></colgroup>
+  <tbody>
+    <tr><td class="yes"><b>PHÊ DUYỆT</b><br>↓<br>Còn bước tiếp theo?<br>↓ Có<br>Chuyển đến người duyệt kế tiếp<br>↓ Không<br>Hoàn tất và ghi nhận hiệu lực nghỉ</td><td style="border:0;background:#fff;">HOẶC</td><td class="no"><b>TỪ CHỐI</b><br>↓<br>Nhập lý do từ chối<br>↓<br>Hủy phần còn lại của quy trình<br>↓<br>Đơn chuyển Từ chối, không trừ phép</td></tr>
+  </tbody>
+</table>
+
+<h2>1.2. Ba khái niệm cần phân biệt</h2>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Khái niệm</th><th>Giải thích</th></tr></thead>
+  <tbody>
+    <tr><td>Trạng thái đơn</td><td>Trạng thái tổng thể của yêu cầu: Bản nháp, Chờ duyệt, Đã duyệt hoặc Từ chối.</td></tr>
+    <tr><td>Trạng thái xử lý của tôi</td><td><b>Chờ xử lý</b> khi bước hiện tại được giao cho tài khoản; <b>Đã xử lý</b> khi tài khoản đã duyệt/từ chối một bước hoặc nhiệm vụ không còn chờ thao tác.</td></tr>
+    <tr><td>Tiến độ phê duyệt</td><td>Cho biết đơn đang ở bước nào trong toàn bộ chuỗi, ví dụ bước 1/2 hoặc đã hoàn tất.</td></tr>
+  </tbody>
+</table>
+
+<h1>2. Điều kiện và cấu hình quy trình liên quan</h1>
+<h2>2.1. Điều kiện để người duyệt nhận được đơn</h2>
+<ol class="steps">
+  <li>Quy trình được chọn trên đơn có loại <b>Duyệt nghỉ phép</b> và trạng thái <b>Hoạt động</b>.</li>
+  <li>Quy trình có ít nhất một bước hoạt động, sắp xếp đúng thứ tự.</li>
+  <li>Bước hiện tại xác định được người duyệt hợp lệ và tài khoản người duyệt đang hoạt động.</li>
+  <li>Nhân viên/đơn vị của người đăng ký nằm trong phạm vi áp dụng của quy trình.</li>
+  <li>Người duyệt có quyền truy cập chức năng và phạm vi dữ liệu cần thiết.</li>
+</ol>
+
+<h2>2.2. Quy trình loại Duyệt nghỉ phép</h2>
+<p>Quản trị viên mở <span class="route">Hệ thống &gt; Quy trình phê duyệt</span> và lọc loại quy trình <b>Duyệt nghỉ phép</b>. Một doanh nghiệp có thể có nhiều quy trình cho các nhóm tổ chức khác nhau; nhân viên chọn quy trình phù hợp khi tạo đơn.</p>
+<figure>
+  <img src="images/02-quy-trinh-duyet-nghi-phep.png" alt="Danh sách quy trình phê duyệt có các quy trình loại Duyệt nghỉ phép.">
+  <figcaption>Hình 1. Danh sách quy trình cho phép kiểm tra loại, trạng thái và phạm vi trước khi sử dụng cho đơn nghỉ phép.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:26%"><col style="width:34%"><col style="width:40%"></colgroup>
+  <thead><tr><th>Cấu hình</th><th>Ý nghĩa</th><th>Ảnh hưởng</th></tr></thead>
+  <tbody>
+    <tr><td>Loại quy trình</td><td>Phải là Duyệt nghỉ phép.</td><td>Quy trình loại khác không xuất hiện hoặc không được chấp nhận trên biểu mẫu đơn nghỉ.</td></tr>
+    <tr><td>Trạng thái Hoạt động</td><td>Cho phép tạo hồ sơ phê duyệt mới.</td><td>Ngừng hoạt động giữ lịch sử cũ nhưng không nên dùng cho đơn mới.</td></tr>
+    <tr><td>Phạm vi áp dụng</td><td>Doanh nghiệp, chi nhánh, phòng ban hoặc nhóm nhân viên được phép dùng quy trình.</td><td>Nếu phạm vi không bao gồm người đăng ký, quy trình không xuất hiện hoặc không xác định được bước xử lý.</td></tr>
+    <tr><td>Thứ tự bước</td><td>Thứ tự người duyệt phải hoàn thành.</td><td>Bước sau chỉ nhận nhiệm vụ khi bước trước đã phê duyệt.</td></tr>
+    <tr><td>Người duyệt</td><td>Tài khoản, vai trò hoặc đối tượng được cấu hình để xử lý bước.</td><td>Chỉ người được xác định tại bước hiện tại mới có thể ra quyết định.</td></tr>
+    <tr><td>Khi từ chối</td><td>Cách quy trình phản ứng khi một bước từ chối.</td><td>Với lựa chọn <b>Hủy quy trình</b>, các bước sau không chạy và đơn chuyển Từ chối.</td></tr>
+  </tbody>
+</table>
+
+<h2>2.3. Các hành động bước có thể gặp</h2>
+<figure>
+  <img src="images/03-cac-buoc-quy-trinh-duyet-nghi-phep.png" alt="Chi tiết các bước của quy trình Duyệt nghỉ phép, gồm bước duyệt và bước tải tài liệu để ký.">
+  <figcaption>Hình 2. Chỉ bước ở trạng thái Hoạt động tham gia luồng; mỗi bước có hành động, cách xử lý khi từ chối và người chịu trách nhiệm.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:25%"><col style="width:34%"><col style="width:41%"></colgroup>
+  <thead><tr><th>Hành động</th><th>Ý nghĩa</th><th>Khi dùng</th></tr></thead>
+  <tbody>
+    <tr><td>Duyệt</td><td>Người xử lý chọn Phê duyệt hoặc Từ chối trực tiếp trên hồ sơ.</td><td>Là hành động thông dụng cho đơn nghỉ phép.</td></tr>
+    <tr><td>Tải tài liệu để ký</td><td>Bước yêu cầu đưa tài liệu đã ký lên hệ thống.</td><td>Chỉ dùng khi quy trình nghỉ phép nội bộ thực sự yêu cầu hồ sơ ký kèm; nếu không cần nên để bước ngừng hoạt động.</td></tr>
+    <tr><td>Hoạt động</td><td>Bước được đưa vào chuỗi xử lý.</td><td>Phải xác định được người duyệt hợp lệ.</td></tr>
+    <tr><td>Ngừng hoạt động</td><td>Bước được giữ trong cấu hình nhưng không tham gia luồng mới.</td><td>Dùng khi tạm bỏ một bước mà vẫn cần giữ lịch sử cấu hình.</td></tr>
+  </tbody>
+</table>
+<table class="callout warning"><tbody><tr><td><strong>Người duyệt ngừng hoạt động</strong><p>Nếu tài khoản/người duyệt của bước hiện tại không còn hoạt động, đơn có thể bị dừng. Quản trị viên cần dùng chức năng quản lý quy trình để phân công lại đúng thẩm quyền; không thay đổi dữ liệu đơn bằng cách thủ công.</p></td></tr></tbody></table>
+
+<h1>3. Mở danh sách Duyệt đơn nghỉ phép</h1>
+<p>Mở <span class="route">Nghỉ phép &gt; Duyệt đơn nghỉ phép</span>. Danh sách mặc định hiển thị các đơn nằm trong phạm vi và nhiệm vụ của tài khoản. Nếu không có đơn, màn hình vẫn hiển thị bộ lọc và cấu trúc cột; điều này không có nghĩa toàn hệ thống không có yêu cầu nghỉ.</p>
+<figure>
+  <img src="images/01-danh-sach-duyet-don-nghi-phep.png" alt="Màn hình Duyệt đơn nghỉ phép trên VIN-HRM ở giao diện rộng 1920 pixel.">
+  <figcaption>Hình 3. Danh sách duyệt được giới hạn theo người xử lý hiện tại; dùng bộ lọc để chuyển giữa Chờ xử lý và Đã xử lý.</figcaption>
+</figure>
+<table>
+  <colgroup><col style="width:27%"><col style="width:73%"></colgroup>
+  <thead><tr><th>Bộ lọc/cột</th><th>Cách hiểu</th></tr></thead>
+  <tbody>
+    <tr><td>Phòng ban</td><td>Giới hạn theo đơn vị của người đăng ký trong phạm vi được phép xem.</td></tr>
+    <tr><td>Trạng thái xử lý</td><td><b>Chờ xử lý</b>: cần thao tác; <b>Đã xử lý</b>: tài khoản đã xử lý hoặc nhiệm vụ đã kết thúc.</td></tr>
+    <tr><td>Loại nghỉ</td><td>Lọc Nghỉ có lương hoặc Nghỉ không lương.</td></tr>
+    <tr><td>Từ ngày/Đến ngày</td><td>Lọc theo khoảng ngày nghỉ cần xem.</td></tr>
+    <tr><td>Tiến độ phê duyệt</td><td>Cho biết bước hiện tại so với tổng số bước.</td></tr>
+    <tr><td>Trạng thái đơn</td><td>Chờ duyệt, Đã duyệt hoặc Từ chối.</td></tr>
+    <tr><td>Lý do từ chối</td><td>Hiển thị nội dung người xử lý nhập khi từ chối, nếu có.</td></tr>
+    <tr><td>Ngày gửi</td><td>Thời điểm đơn được gửi vào quy trình, dùng để theo dõi thời gian chờ.</td></tr>
+  </tbody>
+</table>
+
+<h1>4. Kiểm tra nội dung đơn trước khi xử lý</h1>
+<h2>4.1. Các bước kiểm tra</h2>
+<ol class="steps">
+  <li>Tại danh sách Chờ xử lý, mở đơn cần duyệt.</li>
+  <li>Xác nhận đúng nhân viên, phòng ban và thời gian gửi.</li>
+  <li>Kiểm tra loại nghỉ: có lương hay không lương.</li>
+  <li>Đọc lý do và ghi chú của người đăng ký.</li>
+  <li>Kiểm tra từng ngày, ca làm việc, giờ bắt đầu/kết thúc và tổng số giờ/ngày nghỉ.</li>
+  <li>Nếu nghỉ có lương, xem số dư và lưu ý khả năng số dư đã thay đổi sau khi nhân viên tạo đơn.</li>
+  <li>Xem lịch sử quy trình để biết các bước đã xử lý, ý kiến trước đó và bước hiện tại.</li>
+  <li>Đánh giá ảnh hưởng vận hành của đơn vị trước khi quyết định.</li>
+</ol>
+
+<h2>4.2. Bảng kiểm nghiệp vụ</h2>
+<table>
+  <colgroup><col style="width:29%"><col style="width:71%"></colgroup>
+  <thead><tr><th>Nội dung</th><th>Câu hỏi cần trả lời</th></tr></thead>
+  <tbody>
+    <tr><td>Lịch làm việc</td><td>Các ca được chọn có đúng lịch làm việc thường của nhân viên không? Có nghỉ một phần ca không?</td></tr>
+    <tr><td>Khoảng thời gian</td><td>Ngày, giờ bắt đầu và kết thúc có khớp nhu cầu và không gây nhầm lẫn giữa nhiều ca không?</td></tr>
+    <tr><td>Loại nghỉ</td><td>Nhân viên chọn có lương/không lương có phù hợp chính sách và hồ sơ không?</td></tr>
+    <tr><td>Số dư</td><td>Đối với nghỉ có lương, số dư hiện tại có đủ cho tổng số ngày quy đổi không?</td></tr>
+    <tr><td>Nguồn lực đơn vị</td><td>Đơn vị có phương án bố trí nhân sự trong thời gian nghỉ không?</td></tr>
+    <tr><td>Quy trình</td><td>Tài khoản đang xử lý đúng bước và đúng thẩm quyền không?</td></tr>
+  </tbody>
+</table>
+<table class="callout"><tbody><tr><td><strong>Không chỉ nhìn khoảng Từ ngày - Đến ngày</strong><p>Một đơn nhiều ngày có thể chỉ chọn một số ca trong khoảng đó, và một ca có thể chỉ nghỉ một phần. Quyết định phải dựa trên danh sách chi tiết ca và tổng số giờ, không chỉ dựa trên hai ngày bao quát.</p></td></tr></tbody></table>
+
+<h1>5. Phê duyệt đơn nghỉ phép</h1>
+<h2>5.1. Thao tác phê duyệt</h2>
+<ol class="steps">
+  <li>Mở đơn trong danh sách <b>Chờ xử lý</b>.</li>
+  <li>Hoàn thành bảng kiểm tại mục 4 và đọc ý kiến của các bước trước.</li>
+  <li>Chọn <b>Phê duyệt</b>.</li>
+  <li>Đọc nội dung xác nhận, nhập ý kiến nếu biểu mẫu có trường ghi chú, sau đó xác nhận.</li>
+  <li>Chờ thông báo thành công; không bấm lặp lại trong khi hệ thống đang xử lý.</li>
+  <li>Kiểm tra trạng thái mới hoặc chuyển sang bộ lọc <b>Đã xử lý</b>.</li>
+</ol>
+
+<h2>5.2. Điều gì xảy ra sau khi phê duyệt?</h2>
+<table>
+  <colgroup><col style="width:32%"><col style="width:68%"></colgroup>
+  <thead><tr><th>Tình huống</th><th>Kết quả</th></tr></thead>
+  <tbody>
+    <tr><td>Còn bước hoạt động phía sau</td><td>Bước hiện tại hoàn tất; hệ thống kích hoạt bước kế tiếp và giao cho người duyệt đã cấu hình. Đơn vẫn ở trạng thái Chờ duyệt.</td></tr>
+    <tr><td>Đây là bước cuối</td><td>Quy trình hoàn tất; đơn chuyển Đã duyệt và các tác động nghiệp vụ được thực hiện.</td></tr>
+    <tr><td>Dữ liệu đã thay đổi/xử lý trước đó</td><td>Hệ thống từ chối thao tác lặp hoặc thông báo trạng thái mới. Người dùng tải lại danh sách để tránh xử lý hai lần.</td></tr>
+    <tr><td>Nghỉ có lương nhưng số dư không đủ</td><td>Bước cuối không thể hoàn tất; cần phối hợp nhân sự/người đăng ký xử lý chính sách, số dư hoặc tạo đơn phù hợp.</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">6. Từ chối đơn nghỉ phép</h1>
+<h2>6.1. Thao tác từ chối</h2>
+<ol class="steps">
+  <li>Mở đơn trong danh sách Chờ xử lý và xác nhận đúng hồ sơ.</li>
+  <li>Chọn <b>Từ chối</b>.</li>
+  <li>Nhập lý do cụ thể, tối đa 500 ký tự. Nêu rõ nội dung cần điều chỉnh, ví dụ sai ca, thiếu phương án bàn giao hoặc chọn chưa đúng loại nghỉ.</li>
+  <li>Xác nhận từ chối.</li>
+  <li>Kiểm tra đơn chuyển sang <b>Từ chối</b> và xuất hiện trong danh sách Đã xử lý.</li>
+</ol>
+<table class="callout danger"><tbody><tr><td><strong>Từ chối kết thúc quy trình</strong><p>Với cấu hình “Khi từ chối: Hủy quy trình”, các bước phía sau không tiếp tục. Đơn không được sửa để gửi lại trong cùng hồ sơ; nhân viên xem lý do và tạo đơn mới nếu vẫn có nhu cầu.</p></td></tr></tbody></table>
+
+<h2>6.2. Cách viết lý do hữu ích</h2>
+<table>
+  <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+  <thead><tr><th>Nên viết</th><th>Không nên viết</th></tr></thead>
+  <tbody>
+    <tr><td>“Ca ngày 14/07 đang trùng lịch trực; vui lòng đổi sang ca chiều và tạo đơn mới.”</td><td>“Không được.”</td></tr>
+    <tr><td>“Đơn chọn Nghỉ có lương nhưng số dư chưa đủ; vui lòng trao đổi nhân sự về loại nghỉ.”</td><td>“Sai thông tin.”</td></tr>
+    <tr><td>“Chưa có phương án bàn giao khách hàng A; bổ sung người nhận bàn giao trước khi đăng ký lại.”</td><td>“Bận.”</td></tr>
+  </tbody>
+</table>
+
+<h1 class="page-break">7. Kết quả sau bước duyệt cuối</h1>
+<h2>7.1. Tác động nghiệp vụ</h2>
+<table class="flow" aria-label="Luồng sau khi duyệt cuối">
+  <tbody>
+    <tr><td class="flow-node"><strong>Bước cuối được phê duyệt</strong></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Đơn chuyển Đã duyệt</strong></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Nếu Nghỉ có lương: kiểm tra và khấu trừ số dư</strong><p>Ghi một dòng lịch sử giảm phép tương ứng với số ngày quy đổi.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Đánh dấu thời gian nghỉ trên lịch làm việc</strong><p>Các ca/phần ca đã duyệt được ghi nhận là nghỉ phép.</p></td></tr>
+    <tr><td class="flow-arrow">&#8595;</td></tr>
+    <tr><td class="flow-node"><strong>Đồng bộ dữ liệu chấm công</strong><p>Kết quả nghỉ được dùng cho tính công và các nghiệp vụ liên quan.</p></td></tr>
+  </tbody>
+</table>
+<p>Đối với Nghỉ không lương, hệ thống vẫn ghi hiệu lực nghỉ và đồng bộ lịch/chấm công nhưng không khấu trừ số dư ngày phép. Đối với đơn bị từ chối, không có các tác động trên.</p>
+
+<h2>7.2. Kiểm tra kết quả trong lịch sử</h2>
+<figure>
+  <img src="images/04-ket-qua-xu-ly-don-nghi-phep.png" alt="Lịch sử nghỉ phép có đơn chờ duyệt và đơn đã duyệt trên VIN-HRM.">
+  <figcaption>Hình 4. Màn hình Lịch sử nghỉ phép hỗ trợ đối chiếu kết quả sau xử lý theo nhân viên, đơn vị, trạng thái, loại nghỉ và tổng giờ nghỉ.</figcaption>
+</figure>
+<p>Nếu vừa xử lý mà trạng thái chưa đổi, tải lại danh sách sau khi nhận thông báo thành công. Khi cần đối soát sâu hơn, kiểm tra đồng thời lịch sử quy trình, lịch sử số dư ngày phép và lịch làm việc/chấm công của nhân viên.</p>
+
+<h1 class="page-break">8. Tình huống vận hành và danh sách kiểm tra</h1>
+<h2>8.1. Tình huống thường gặp</h2>
+<table>
+  <colgroup><col style="width:31%"><col style="width:31%"><col style="width:38%"></colgroup>
+  <thead><tr><th>Hiện tượng</th><th>Nguyên nhân thường gặp</th><th>Cách xử lý</th></tr></thead>
+  <tbody>
+    <tr><td>Không thấy đơn cần duyệt</td><td>Đơn chưa đến bước của tài khoản, bộ lọc đang sai hoặc người dùng không nằm trong phạm vi.</td><td>Chọn Chờ xử lý, xóa bộ lọc, kiểm tra lịch sử quy trình và cấu hình người duyệt.</td></tr>
+    <tr><td>Nút xử lý không hiển thị</td><td>Bước đã được xử lý, đơn bị thu hồi/từ chối hoặc tài khoản không còn là người duyệt hiện tại.</td><td>Tải lại dữ liệu và xem tiến độ; không cố xử lý bằng đường dẫn cũ.</td></tr>
+    <tr><td>Phê duyệt cuối báo thiếu số dư</td><td>Nhân viên đã dùng phép cho đơn khác hoặc số dư/chính sách thay đổi trong thời gian chờ.</td><td>Không bỏ qua kiểm tra. Phối hợp nhân sự và người đăng ký chọn cách xử lý phù hợp.</td></tr>
+    <tr><td>Quy trình dừng ở một bước</td><td>Người duyệt ngừng hoạt động hoặc cấu hình bước không xác định được người xử lý.</td><td>Quản trị viên phân công lại theo chức năng quản lý quy trình.</td></tr>
+    <tr><td>Trạng thái đã duyệt nhưng chấm công chưa cập nhật</td><td>Đồng bộ đang xử lý hoặc dữ liệu lịch có bất thường.</td><td>Kiểm tra chi tiết đơn, lịch làm việc và nhật ký/tác vụ liên quan; chuyển đội vận hành nếu vẫn không đồng bộ.</td></tr>
+    <tr><td>Người duyệt bấm lặp</td><td>Mạng chậm hoặc trang chưa tải trạng thái mới.</td><td>Chờ thông báo, tải lại trang; hệ thống phải ngăn xử lý trùng nhưng người dùng không nên gửi lệnh nhiều lần.</td></tr>
+  </tbody>
+</table>
+
+<h2>8.2. Danh sách kiểm tra trước khi quyết định</h2>
+<ul>
+  <li>□ Đơn đang ở bước của tôi và trạng thái Chờ xử lý.</li>
+  <li>□ Nhân viên, phòng ban và khoảng ngày chính xác.</li>
+  <li>□ Đã xem chi tiết từng ca/phần ca, không chỉ xem Từ ngày - Đến ngày.</li>
+  <li>□ Loại nghỉ có lương/không lương phù hợp.</li>
+  <li>□ Số dư hiện tại đủ nếu nghỉ có lương.</li>
+  <li>□ Lý do, phương án bàn giao và ảnh hưởng vận hành đã được xem xét.</li>
+  <li>□ Đã đọc lịch sử và ý kiến của bước trước.</li>
+  <li>□ Nếu từ chối, lý do đủ cụ thể để nhân viên biết cách điều chỉnh.</li>
+</ul>
+</main>
+</body>
+</html>
